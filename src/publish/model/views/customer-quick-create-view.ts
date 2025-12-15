@@ -260,18 +260,23 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  itemHeight: 320,
+                  itemHeight: 470,
                   labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'description',
                   editor: {
-                    editorHeight: 300,
+                    appDEACModeId: 'aichat',
+                    appDEDataSetId: 'fetch_default',
+                    appDataEntityId: 'plmweb.work_item',
+                    enableAC: true,
+                    editorHeight: 450,
                     editorParams: {
                       USERINSCRIPT:
                         'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
                       MAXHEIGHT: '450',
                       QUOTECODELISTMAP: '{"type":"plmweb.base__recent_visite"}',
+                      srfaiagent: 'TextAgent_Writing',
                       QUOTEFIELDMAP:
                         '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
                       QUOTEPARAMS: '{"sort":"update_time,desc"}',
@@ -287,6 +292,7 @@ export default {
                       USERFIELDMAP: '{"id":"user_id","name":"name"}',
                       INSERTKEYS:
                         '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                      ac: 'true',
                       QUOTEURL: '`recents/fetch_recent_access`',
                     },
                     editorStyle: 'COLLAPSE',

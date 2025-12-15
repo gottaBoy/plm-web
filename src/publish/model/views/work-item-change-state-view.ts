@@ -19,6 +19,19 @@ export default {
       id: 'engine',
     },
   ],
+  appViewLogics: [
+    {
+      eventNames: 'onMounted',
+      logicTrigger: 'VIEWEVENT',
+      logicType: 'SCRIPT',
+      ctrlName: 'form',
+      scriptCode:
+        "var old_work_item_type_id = view.params.work_item_type_id;\r\n\r\nvar first_value = old_work_item_type_id.split(',')[0];\r\n\r\nview.params.work_item_type_id = first_value;",
+      builtinLogic: true,
+      name: 'LOGIC',
+      id: 'logic',
+    },
+  ],
   appViewNavParams: [
     {
       key: 'project_id',

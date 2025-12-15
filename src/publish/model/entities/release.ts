@@ -989,7 +989,6 @@ export default {
       appDEMethodInput: {
         appDEMethodDTOId: 'release_dto',
         type: 'DTO',
-        output: true,
         id: '输入对象',
       },
       appDEMethodReturn: {
@@ -997,11 +996,10 @@ export default {
         type: 'DTO',
         id: '返回对象',
       },
-      requestMethod: 'PUT',
+      requestMethod: 'POST',
       requestParamType: 'ENTITY',
       requestPath: '/plan_work_item',
-      needResourceKey: true,
-      actionMode: 'UPDATE',
+      actionMode: 'GETDRAFT',
       actionType: 'REMOTE',
       dataSetType: 'REMOTE',
       id: 'plan_work_item',

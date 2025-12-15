@@ -3,8 +3,9 @@ export default {
   deviewCodeName: 'template_info_view',
   deviewId: '7c298ad33408e1b6ae5e3c571dc06bba',
   accUserMode: 2,
-  caption: '自动规则模板信息',
+  caption: '自动规则模板',
   codeName: 'psdelogictemplate_info_view',
+  height: 90,
   appDataEntityId: 'plmweb.psdelogic',
   viewLayoutPanel: {
     viewProxyMode: true,
@@ -44,6 +45,35 @@ export default {
             },
             id: 'view_captionbar',
           },
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                caption: '关系分页部件',
+                itemStyle: 'DEFAULT',
+                itemType: 'CTRLPOS',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'drtab',
+              },
+            ],
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              grow: 1,
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'view_tabexppanel',
+          },
         ],
         predefinedType: 'VIEWHEADER',
         layout: {
@@ -59,35 +89,7 @@ export default {
           shrink: 0,
           layout: 'FLEX',
         },
-        id: 'view_header',
-      },
-      {
-        actionGroupExtractMode: 'ITEM',
-        panelItems: [
-          {
-            caption: '关系分页部件',
-            itemStyle: 'DEFAULT',
-            itemType: 'CTRLPOS',
-            layoutPos: {
-              shrink: 1,
-              layout: 'FLEX',
-            },
-            showCaption: true,
-            id: 'drtab',
-          },
-        ],
-        layout: {
-          layout: 'FLEX',
-        },
-        dataRegionType: 'INHERIT',
-        caption: '容器',
-        itemStyle: 'DEFAULT',
-        itemType: 'CONTAINER',
-        layoutPos: {
-          shrink: 1,
-          layout: 'FLEX',
-        },
-        id: 'container2',
+        id: 'template_view_header',
       },
       {
         actionGroupExtractMode: 'ITEM',
@@ -122,6 +124,7 @@ export default {
                     itemStyle: 'DEFAULT',
                     itemType: 'RAWITEM',
                     layoutPos: {
+                      grow: 1,
                       shrink: 1,
                       layout: 'FLEX',
                     },
@@ -255,7 +258,7 @@ export default {
         id: 'flow_preview',
       },
       {
-        caption: '自动规则模板信息',
+        caption: '自动规则模板',
         codeName: 'template_info_view_captionbar',
         controlType: 'CAPTIONBAR',
         appDataEntityId: 'plmweb.psdelogic',
@@ -274,9 +277,10 @@ export default {
     name: 'layoutpanel',
     id: 'usr0328073006',
   },
-  title: '自动规则模板信息',
+  title: '自动规则模板',
   viewStyle: 'DEFAULT',
   viewType: 'DECUSTOMVIEW',
+  width: 90,
   enableDP: true,
   showCaptionBar: false,
   modelId: '00eacc5d4b957f6a3a67ea10749e7d1a',

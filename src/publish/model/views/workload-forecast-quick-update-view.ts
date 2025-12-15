@@ -152,6 +152,7 @@ export default {
                   deformItemUpdateId: 'duration_updateform',
                   editor: {
                     precision: 1,
+                    scale: 1,
                     editorParams: {
                       precision: '1',
                       minvalue: '0',

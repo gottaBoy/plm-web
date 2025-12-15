@@ -1,5 +1,4 @@
 export default {
-  gridRowActiveMode: 1,
   xdataControlName: 'grid',
   loadDefault: true,
   deviewCodeName: 'setup_grid_view',
@@ -201,12 +200,13 @@ export default {
                 tooltipLanguageRes: {
                   lanResTag: 'TBB.TOOLTIP.*.EDIT',
                 },
+                visibleScriptCode: 'data.is_system !== 1',
                 showIcon: true,
                 sysImage: {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u8ddb81b',
+                id: 'u33f8a30',
               },
               {
                 actionLevel: 100,
@@ -216,12 +216,13 @@ export default {
                 detailType: 'DEUIACTION',
                 uiactionId: 'remove@workload_type',
                 tooltip: '删除',
+                visibleScriptCode: 'data.is_system !== 1',
                 showIcon: true,
                 sysImage: {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u014f195',
+                id: 'u89b3689',
               },
             ],
             appDataEntityId: 'plmweb.workload_type',
@@ -262,7 +263,10 @@ export default {
       degridDataItems: [
         {
           appDEFieldId: 'name',
+          scriptCode:
+            'data.is_system === 1 ? data.name + \'<span style="border-radius: 18px;background-color: #f5f5f5;color: #666;height: 24px;line-height: 24px;padding-left: 12px;padding-right: 12px;font-size: .75rem;font-weight: 400;display: inline-flex;align-items: center;border: 1px solid transparent;margin-left: .5rem !important;">系统</span>\':data.name',
           valueType: 'SIMPLE',
+          customCode: true,
           dataType: 25,
           id: 'name',
         },
@@ -284,6 +288,12 @@ export default {
           valueType: 'SIMPLE',
           dataType: 6,
           id: 'sequence',
+        },
+        {
+          appDEFieldId: 'is_system',
+          valueType: 'SIMPLE',
+          dataType: 9,
+          id: 'is_system',
         },
         {
           appDEFieldId: 'id',

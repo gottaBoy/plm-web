@@ -91,8 +91,8 @@ export default {
         lanResTag: 'PAGE.TITLE.ROLE_MEMBER.EDITVIEW',
       },
       refAppViewId: 'plmweb.role_member_edit_view',
-      name: 'EDITDATA',
-      id: 'editdata',
+      name: 'NEWDATA',
+      id: 'newdata',
     },
     {
       realTitle: '系统角色成员编辑视图',
@@ -100,8 +100,8 @@ export default {
         lanResTag: 'PAGE.TITLE.ROLE_MEMBER.EDITVIEW',
       },
       refAppViewId: 'plmweb.role_member_edit_view',
-      name: 'NEWDATA',
-      id: 'newdata',
+      name: 'EDITDATA',
+      id: 'editdata',
     },
     {
       name: 'MPICKUPVIEW:ROLE',
@@ -298,7 +298,7 @@ export default {
           controlParam: {
             id: 'grid_batchtoolbar',
           },
-          modelId: '1680AA6D-A479-4B48-8669-DF8D0C3D66A2',
+          modelId: '1e6678d50b1aa634ed41b9d2027d7d30',
           modelType: 'PSDETOOLBAR',
           name: 'grid_batchtoolbar',
           id: 'grid_view_grid_batchtoolbar',
@@ -349,7 +349,7 @@ export default {
       controlParam: {
         id: 'toolbar',
       },
-      modelId: '78284ACE-F7C8-47E1-8032-A44E7FA5545F',
+      modelId: '46dce3fa5981265c846b877dfa39d7b4',
       modelType: 'PSDETOOLBAR',
       name: 'toolbar',
       id: 'grid_view_toolbar',

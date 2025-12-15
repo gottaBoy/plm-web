@@ -405,7 +405,7 @@ export default {
                     cssClass: 'fa fa-edit',
                     glyph: 'xf044@FontAwesome',
                   },
-                  id: 'uc47afc7',
+                  id: 'u4d528e5',
                 },
                 {
                   actionLevel: 100,
@@ -421,7 +421,7 @@ export default {
                     cssClass: 'fa fa-trash-o',
                     glyph: 'xf014@FontAwesome',
                   },
-                  id: 'u7841db0',
+                  id: 'u53a76af',
                 },
               ],
               appDataEntityId: 'plmweb.product_plan',

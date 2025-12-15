@@ -7,6 +7,7 @@ export default {
   accUserMode: 2,
   caption: '产品中心配置',
   codeName: 'product_config_tree_exp_view',
+  dynaSysMode: 1,
   appDataEntityId: 'plmweb.product',
   appViewEngines: [
     {
@@ -368,6 +369,7 @@ export default {
       ],
       codeName: 'config_tree_exp_view_treeexpbar',
       controlType: 'TREEEXPBAR',
+      dynaSysMode: 1,
       appDataEntityId: 'plmweb.product',
       controlParam: {
         id: 'treeexpbar',

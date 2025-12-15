@@ -1,0 +1,364 @@
+export default {
+  xdataControlName: 'list',
+  loadDefault: true,
+  deviewCodeName: 'copy_project_type_list_view',
+  deviewId: '346983dedc58bd5e01bdb0a2e1a670f7',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.DICTIONARY',
+  },
+  caption: '项目类型字典',
+  codeName: 'dictionary_data_copy_project_type_list_view',
+  appDataEntityId: 'plmweb.dictionary_data',
+  appViewEngines: [
+    {
+      engineCat: 'VIEW',
+      engineType: 'ListView',
+      id: 'engine',
+    },
+  ],
+  appViewLogics: [
+    {
+      eventNames: 'onLoadSuccess',
+      logicTrigger: 'CTRLEVENT',
+      logicType: 'SCRIPT',
+      ctrlName: 'list',
+      scriptCode:
+        "let list = view.layoutPanel.panelItems.list.control.state.items;\r\nlet select_list = view.layoutPanel.panelItems.list.control.state.selectedData;\r\n\r\nreturn (async function() { \r\n    // 获取所有临时数据\r\n    const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;\r\n    const service = await serviceUtil.getService(context, 'plmweb.project');\r\n    const data_list = service.local.getList();\r\n    // 遍历临时数据\r\n    data_list.forEach(item => {\r\n      list.forEach(it => {\r\n        if (it.id == item.type) {\r\n          view.layoutPanel.panelItems.list.control.state.selectedData.push(it);\r\n          view.evt.emit('onSelectionChange', { data });\r\n        }\r\n      });\r\n    })\r\n    } \r\n)();",
+      builtinLogic: true,
+      name: 'LOGIC',
+      id: 'logic',
+    },
+    {
+      logicTrigger: 'CUSTOM',
+      logicType: 'APPUILOGIC',
+      builtinAppUILogic: {
+        actionAfterWizard: 'DEFAULT',
+        newDataAppView: {
+          refAppViewId: 'plmweb.dictionary_data_edit_view',
+        },
+        appUILogicRefViews: [
+          {
+            refAppViewId: 'plmweb.dictionary_data_edit_view',
+          },
+        ],
+        builtinLogic: true,
+        logicType: 'PREDEFINED',
+        viewLogicType: 'APP_NEWDATA',
+        id: '新建数据',
+      },
+      builtinLogic: true,
+      id: 'newdata',
+    },
+    {
+      logicTrigger: 'CUSTOM',
+      logicType: 'APPUILOGIC',
+      builtinAppUILogic: {
+        openDataAppView: {
+          refAppViewId: 'plmweb.dictionary_data_edit_view',
+        },
+        editMode: true,
+        appUILogicRefViews: [
+          {
+            refAppViewId: 'plmweb.dictionary_data_edit_view',
+          },
+        ],
+        builtinLogic: true,
+        logicType: 'PREDEFINED',
+        viewLogicType: 'APP_OPENDATA',
+        id: '打开数据',
+      },
+      builtinLogic: true,
+      id: 'opendata',
+    },
+  ],
+  appViewRefs: [
+    {
+      realTitle: '数据字典编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.DICTIONARY.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.dictionary_data_edit_view',
+      name: 'NEWDATA',
+      id: 'newdata',
+    },
+    {
+      realTitle: '数据字典编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.DICTIONARY.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.dictionary_data_edit_view',
+      name: 'EDITDATA',
+      id: 'editdata',
+    },
+  ],
+  controls: [
+    {
+      groupMode: 'NONE',
+      groupStyle: 'DEFAULT',
+      itemLayoutPanel: {
+        layoutMode: 'TABLE_24COL',
+        layout: {
+          columnCount: 24,
+          layout: 'TABLE_24COL',
+        },
+        rootPanelItems: [
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                actionGroupExtractMode: 'ITEM',
+                panelItems: [
+                  {
+                    editor: {
+                      editorParams: {
+                        RAWCONTENT: 'TRUE',
+                        MAXCOUNT: '1',
+                      },
+                      editorType: 'PICTURE_ONE_RAW',
+                      valueType: 'SIMPLE',
+                      editable: true,
+                      id: 'icon',
+                    },
+                    viewFieldName: 'icon',
+                    allowEmpty: true,
+                    caption: '图片(动态)',
+                    itemStyle: 'DEFAULT',
+                    itemType: 'FIELD',
+                    layoutPos: {
+                      shrink: 1,
+                      layout: 'FLEX',
+                    },
+                    id: 'icon',
+                  },
+                  {
+                    actionGroupExtractMode: 'ITEM',
+                    panelItems: [
+                      {
+                        editor: {
+                          halign: 'LEFT',
+                          renderMode: 'TEXT_DYNAMIC',
+                          valign: 'MIDDLE',
+                          wrapMode: 'NOWRAP',
+                          editorType: 'SPAN',
+                          predefinedType: 'FIELD_TEXT_DYNAMIC',
+                          valueType: 'SIMPLE',
+                          editable: true,
+                          id: 'name',
+                        },
+                        viewFieldName: 'name',
+                        allowEmpty: true,
+                        caption: '文本(动态)',
+                        itemStyle: 'DEFAULT',
+                        itemType: 'FIELD',
+                        layoutPos: {
+                          shrink: 1,
+                          layout: 'FLEX',
+                        },
+                        id: 'name',
+                      },
+                      {
+                        editor: {
+                          halign: 'LEFT',
+                          renderMode: 'TEXT_DYNAMIC',
+                          valign: 'MIDDLE',
+                          wrapMode: 'NOWRAP',
+                          editorType: 'SPAN',
+                          predefinedType: 'FIELD_TEXT_DYNAMIC',
+                          valueType: 'SIMPLE',
+                          editable: true,
+                          id: 'description',
+                        },
+                        viewFieldName: 'description',
+                        allowEmpty: true,
+                        caption: '文本(动态)',
+                        itemStyle: 'DEFAULT',
+                        itemType: 'FIELD',
+                        layoutPos: {
+                          shrink: 1,
+                          layout: 'FLEX',
+                        },
+                        id: 'description',
+                      },
+                    ],
+                    layout: {
+                      layout: 'FLEX',
+                    },
+                    dataRegionType: 'INHERIT',
+                    caption: '容器',
+                    itemStyle: 'DEFAULT',
+                    itemType: 'CONTAINER',
+                    layoutPos: {
+                      shrink: 1,
+                      layout: 'FLEX',
+                    },
+                    id: 'container1',
+                  },
+                  {
+                    rawItem: {
+                      sysImage: {
+                        rawContent:
+                          '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1764323131253" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18687" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M512 2C230.5 2 2 230.5 2 512s228.5 510 510 510 510-228.5 510-510S793.5 2 512 2z m292.2 377.9l-330 330c-15.3 15.3-38.3 17.3-56.1 7.1-3.1-2-6.1-4.1-9.2-7.1L219.3 520.2c-17.8-17.9-17.8-47.4 0-65.3s47.4-17.9 65.3 0l157 157.1L739 314.6c17.8-17.8 47.4-17.8 65.3 0 18.3 17.9 18.3 46.9-0.1 65.3z" fill="#6698FF" p-id="18688" data-spm-anchor-id="a313x.search_index.0.i10.3aaf3a81j5Rhh2" class="selected"></path></svg>',
+                      },
+                      contentType: 'IMAGE',
+                      predefinedType: 'STATIC_IMAGE',
+                      id: 'static_image',
+                    },
+                    caption: '图片',
+                    itemStyle: 'DEFAULT',
+                    itemType: 'RAWITEM',
+                    layoutPos: {
+                      shrink: 1,
+                      layout: 'FLEX',
+                    },
+                    sysImage: {
+                      rawContent:
+                        '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1764323131253" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18687" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M512 2C230.5 2 2 230.5 2 512s228.5 510 510 510 510-228.5 510-510S793.5 2 512 2z m292.2 377.9l-330 330c-15.3 15.3-38.3 17.3-56.1 7.1-3.1-2-6.1-4.1-9.2-7.1L219.3 520.2c-17.8-17.9-17.8-47.4 0-65.3s47.4-17.9 65.3 0l157 157.1L739 314.6c17.8-17.8 47.4-17.8 65.3 0 18.3 17.9 18.3 46.9-0.1 65.3z" fill="#6698FF" p-id="18688" data-spm-anchor-id="a313x.search_index.0.i10.3aaf3a81j5Rhh2" class="selected"></path></svg>',
+                    },
+                    showCaption: true,
+                    id: 'static_image',
+                  },
+                ],
+                layout: {
+                  align: 'flex-start',
+                  dir: 'row',
+                  layout: 'FLEX',
+                  valign: 'center',
+                },
+                dataRegionType: 'INHERIT',
+                caption: '容器',
+                itemStyle: 'DEFAULT',
+                itemType: 'CONTAINER',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                id: 'container',
+              },
+            ],
+            layout: {
+              dir: 'column',
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              colMD: 24,
+              layout: 'TABLE_24COL',
+            },
+            id: 'page_container',
+          },
+        ],
+        codeName: 'usr1126428953',
+        controlType: 'PANEL',
+        logicName: 'List_列表项面板',
+        appDataEntityId: 'plmweb.dictionary_data',
+        controlParam: {},
+        modelId: '1665FCD4-327B-43F7-B603-9204B7099B0E',
+        modelType: 'PSSYSVIEWPANEL',
+        name: 'list_itempanel',
+        id: 'plmweb.dictionary_data.usr1126428953',
+      },
+      orderValueAppDEFieldId: 'sequence',
+      delistDataItems: [
+        {
+          appDEFieldId: 'id',
+          dataType: 25,
+          id: 'srfkey',
+        },
+        {
+          appDEFieldId: 'name',
+          dataType: 25,
+          id: 'srfmajortext',
+        },
+      ],
+      pagingSize: 1000,
+      showHeader: true,
+      singleSelect: true,
+      navViewPos: 'NONE',
+      createControlAction: {
+        appDEMethodId: 'create',
+        appDataEntityId: 'plmweb.dictionary_data',
+        id: 'create',
+      },
+      fetchControlAction: {
+        appDEMethodId: 'fetch_project_type',
+        appDataEntityId: 'plmweb.dictionary_data',
+        id: 'fetch',
+      },
+      getControlAction: {
+        appDEMethodId: 'get',
+        appDataEntityId: 'plmweb.dictionary_data',
+        id: 'load',
+      },
+      removeControlAction: {
+        appDEMethodId: 'remove',
+        appDataEntityId: 'plmweb.dictionary_data',
+        id: 'remove',
+      },
+      updateControlAction: {
+        appDEMethodId: 'update',
+        appDataEntityId: 'plmweb.dictionary_data',
+        id: 'update',
+      },
+      autoLoad: true,
+      showBusyIndicator: true,
+      codeName: 'project_type_list_view_list',
+      controlType: 'LIST',
+      logicName: 'List',
+      appDataEntityId: 'plmweb.dictionary_data',
+      controlParam: {
+        id: 'list',
+      },
+      modelId: 'D780A452-0D76-4D6C-AB26-E12D68E7FB18',
+      modelType: 'PSDELIST',
+      name: 'list',
+      id: 'plmweb.dictionary_data.project_type_list_view_list',
+    },
+    {
+      groupMode: 'SINGLE',
+      controlType: 'SEARCHBAR',
+      appDataEntityId: 'plmweb.dictionary_data',
+      controlParam: {
+        id: 'searchbar',
+      },
+      id: 'searchbar',
+    },
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.DICTIONARY',
+      },
+      caption: '项目类型字典',
+      codeName: 'copy_project_type_list_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.dictionary_data',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'copy_project_type_list_view_captionbar',
+    },
+  ],
+  sysCss: {
+    cssName: 'copy_project_type_style',
+  },
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDELISTVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.dictionary_data',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '项目类型字典',
+  viewStyle: 'DEFAULT',
+  viewType: 'DELISTVIEW',
+  enableDP: true,
+  showCaptionBar: false,
+  modelId: 'f414c00ab7e1a358538b83d5ce3efb14',
+  modelType: 'PSAPPDEVIEW',
+  name: 'dictionary_datacopy_project_type_list_view',
+  id: 'plmweb.dictionary_data_copy_project_type_list_view',
+};

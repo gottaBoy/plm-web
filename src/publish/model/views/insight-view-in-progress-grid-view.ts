@@ -168,7 +168,7 @@ export default {
                   cssClass: 'fa fa-sun-o',
                   glyph: 'xf185@FontAwesome',
                 },
-                id: 'u1bcd7e7',
+                id: 'u76734a1',
               },
               {
                 actionLevel: 100,
@@ -183,7 +183,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u3ae0772',
+                id: 'u35291be',
               },
             ],
             appDataEntityId: 'plmweb.insight_view',

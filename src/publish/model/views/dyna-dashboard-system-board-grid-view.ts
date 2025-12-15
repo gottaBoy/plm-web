@@ -252,7 +252,7 @@ export default {
                   cssClass: 'fa fa-gear',
                   glyph: 'xf013@FontAwesome',
                 },
-                id: 'u311c0fe',
+                id: 'ub1030f2',
               },
               {
                 actionLevel: 100,
@@ -266,7 +266,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u7176ed9',
+                id: 'u64bda9a',
               },
             ],
             appDataEntityId: 'plmweb.dyna_dashboard',

@@ -623,7 +623,7 @@ export default {
     ],
     appViewLogics: [
       {
-        eventNames: 'onViewMounted',
+        eventNames: 'onMounted',
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         ctrlName: 'form',
@@ -684,6 +684,24 @@ export default {
             showCaption: true,
             showIcon: true,
             id: 'items3',
+          },
+          {
+            actionLevel: 100,
+            buttonStyle: 'WARNING',
+            noPrivDisplayMode: 2,
+            uiactionId: 'ai@ai_agent_assignment',
+            uiactionTarget: 'SINGLEDATA',
+            valid: true,
+            caption: 'AI+',
+            itemType: 'DEUIACTION',
+            sysImage: {
+              cssClass: 'fa fa-star-half-full',
+              glyph: 'xf123@FontAwesome',
+            },
+            tooltip: 'AI+',
+            showCaption: true,
+            showIcon: true,
+            id: 'aiuiaction',
           },
           {
             actionLevel: 100,
@@ -1091,20 +1109,6 @@ export default {
         enableAutoSave: true,
         deformItemUpdates: [
           {
-            codeName: 'remaining_update',
-            defiupdateDetails: [
-              {
-                id: 'workload_schedule',
-              },
-            ],
-            scriptCode:
-              'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
-            customCode: true,
-            showBusyIndicator: false,
-            name: '剩余工时表单项更新',
-            id: 'remaining_update',
-          },
-          {
             codeName: 'estimated_update',
             defiupdateDetails: [
               {
@@ -1120,6 +1124,20 @@ export default {
             showBusyIndicator: false,
             name: '预估工时表单项更新',
             id: 'estimated_update',
+          },
+          {
+            codeName: 'remaining_update',
+            defiupdateDetails: [
+              {
+                id: 'workload_schedule',
+              },
+            ],
+            scriptCode:
+              'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
+            customCode: true,
+            showBusyIndicator: false,
+            name: '剩余工时表单项更新',
+            id: 'remaining_update',
           },
         ],
         deformItemVRs: [
@@ -1320,7 +1338,7 @@ export default {
                               cssClass: 'fa fa-user-md',
                               glyph: 'xf0f0@FontAwesome',
                             },
-                            id: 'uc5eeb4c',
+                            id: 'uc0c6a4c',
                           },
                         ],
                         appDataEntityId: 'plmweb.project_member',
@@ -1491,6 +1509,7 @@ export default {
                     id: 'end_at',
                   },
                   {
+                    dataRelationTag: 'relation_version_dr',
                     deformTabPages: [
                       {
                         layout: {
@@ -1514,7 +1533,7 @@ export default {
                                 editor: {
                                   appDEACModeId: 'aichat',
                                   appDEDataSetId: 'fetch_default',
-                                  appDataEntityId: 'plmweb.ticket',
+                                  appDataEntityId: 'plmweb.work_item',
                                   enableAC: true,
                                   editorParams: {
                                     USERINSCRIPT:
@@ -1590,13 +1609,15 @@ export default {
                                   caption: '添加附件',
                                   detailType: 'DEUIACTION',
                                   uiactionId: 'add_attachments@work_item',
+                                  visibleScriptCode:
+                                    'context.srfreadonly != true',
                                   showCaption: true,
                                   showIcon: true,
                                   sysImage: {
                                     cssClass: 'fa fa-plus',
                                     glyph: 'xf067@FontAwesome',
                                   },
-                                  id: 'uaa6fcf7',
+                                  id: 'u73e1a5a',
                                 },
                               ],
                               appDataEntityId: 'plmweb.work_item',
@@ -1695,7 +1716,7 @@ export default {
                                               cssClass: 'fa fa-download',
                                               glyph: 'xf019@FontAwesome',
                                             },
-                                            id: 'u73b8ba5',
+                                            id: 'uf162678',
                                           },
                                           {
                                             actionLevel: 100,
@@ -1706,13 +1727,15 @@ export default {
                                             detailType: 'DEUIACTION',
                                             uiactionId: 'delete@attachment',
                                             tooltip: '删除',
+                                            visibleScriptCode:
+                                              'context.srfreadonly != true',
                                             showCaption: true,
                                             showIcon: true,
                                             sysImage: {
                                               cssClass: 'fa fa-trash-o',
                                               glyph: 'xf014@FontAwesome',
                                             },
-                                            id: 'u44d00e2',
+                                            id: 'ubdc1b19',
                                           },
                                         ],
                                         appDataEntityId: 'plmweb.attachment',
@@ -2048,7 +2071,6 @@ export default {
                         caption: '产品需求',
                         codeName: 'tabpanel1_product_idea',
                         counterId: 'work_item_re_idea',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2092,7 +2114,6 @@ export default {
                         caption: '子工作项',
                         codeName: 'tabpanel1_child',
                         counterId: 'work_item_re_children',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2132,7 +2153,6 @@ export default {
                         caption: '依赖',
                         codeName: 'tabpanel1_dependency',
                         counterId: 'dependency',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2206,7 +2226,6 @@ export default {
                         caption: '关联',
                         codeName: 'tabpanel1_relation',
                         counterId: 'work_item_re_work_item',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2239,7 +2258,6 @@ export default {
                         caption: '交付物',
                         codeName: 'tabpanel1_deliverable',
                         counterId: 'work_item_deliverable',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2301,7 +2319,6 @@ export default {
                         caption: '工单',
                         codeName: 'tabpanel1_ticket',
                         counterId: 'work_item_re_ticket',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2363,7 +2380,6 @@ export default {
                         caption: '测试',
                         codeName: 'tabpanel1_test_case',
                         counterId: 'work_item_re_test_case',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2424,7 +2440,6 @@ export default {
                         caption: '版本记录',
                         codeName: 'tabpanel1_version',
                         counterId: 'work_item_version',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '80c6a87f18f8c72574d69d7391fa7db1',
@@ -2908,6 +2923,7 @@ export default {
                                     defdname: 'project_type',
                                     value: 'kanban',
                                     logicType: 'SINGLE',
+                                    id: 'project_type等于(=) kanban',
                                   },
                                 ],
                                 logicType: 'GROUP',
@@ -3056,6 +3072,7 @@ export default {
                                     defdname: 'work_item_type_group',
                                     value: 'requirement',
                                     logicType: 'SINGLE',
+                                    id: 'work_item_type_group等于(=) requirement',
                                   },
                                 ],
                                 logicType: 'GROUP',
@@ -3118,6 +3135,7 @@ export default {
                                     defdname: 'work_item_type_group',
                                     value: 'task',
                                     logicType: 'SINGLE',
+                                    id: 'work_item_type_group等于(=) task',
                                   },
                                 ],
                                 logicType: 'GROUP',
@@ -3208,6 +3226,7 @@ export default {
                                     defdname: 'work_item_type_group',
                                     value: 'bug',
                                     logicType: 'SINGLE',
+                                    id: 'work_item_type_group等于(=) bug',
                                   },
                                 ],
                                 logicType: 'GROUP',
@@ -3461,6 +3480,7 @@ export default {
                                 defdname: 'project_type',
                                 value: 'scrum',
                                 logicType: 'SINGLE',
+                                id: 'project_type等于(=) scrum',
                               },
                             ],
                             logicType: 'GROUP',
@@ -3574,6 +3594,7 @@ export default {
                             deformItemUpdateId: 'estimated_update',
                             editor: {
                               precision: 1,
+                              scale: 1,
                               editorParams: {
                                 precision: '1',
                                 minvalue: '0',
@@ -3665,6 +3686,7 @@ export default {
                             appDEFieldId: 'actual_workload',
                             editor: {
                               precision: 1,
+                              scale: 1,
                               editorParams: {
                                 precision: '1',
                                 minvalue: '0',
@@ -3739,12 +3761,14 @@ export default {
                                         defdname: 'is_archived',
                                         value: '0',
                                         logicType: 'SINGLE',
+                                        id: 'is_archived等于(=) 0',
                                       },
                                       {
                                         condOP: 'EQ',
                                         defdname: 'is_deleted',
                                         value: '0',
                                         logicType: 'SINGLE',
+                                        id: 'is_deleted等于(=) 0',
                                       },
                                     ],
                                     logicType: 'GROUP',
@@ -3782,6 +3806,7 @@ export default {
                             deformItemUpdateId: 'remaining_update',
                             editor: {
                               precision: 1,
+                              scale: 1,
                               editorParams: {
                                 precision: '1',
                                 minvalue: '0',
@@ -3814,6 +3839,7 @@ export default {
                             editor: {
                               stepValue: 1,
                               precision: 1,
+                              scale: 1,
                               editorParams: {
                                 showText: 'true',
                               },
@@ -4088,6 +4114,7 @@ export default {
                             defdname: 'workload_schedule',
                             value: '-1',
                             logicType: 'SINGLE',
+                            id: 'workload_schedule等于(=) -1',
                           },
                         ],
                         logicType: 'GROUP',
@@ -4145,6 +4172,7 @@ export default {
                             defdname: 'workload_schedule',
                             value: '-1',
                             logicType: 'SINGLE',
+                            id: 'workload_schedule等于(=) -1',
                           },
                         ],
                         logicType: 'GROUP',
@@ -4201,6 +4229,8 @@ export default {
                             condOP: 'ISNULL',
                             defdname: 'id',
                             logicType: 'SINGLE',
+                            name: 'id值为空(Nil)',
+                            id: 'id值为空(nil)',
                           },
                         ],
                         logicType: 'GROUP',
@@ -4248,7 +4278,6 @@ export default {
               counterType: 'DEDR',
               getAppDEActionId: 'work_item_re_counters',
               appDataEntityId: 'plmweb.work_item',
-              timer: 60000,
               uniqueTag: 'work_item_re_counters',
               name: '工作项关联分页计数器',
               id: 'plmweb.work_item_re_counters',

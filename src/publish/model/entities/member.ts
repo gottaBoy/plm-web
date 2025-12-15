@@ -494,6 +494,16 @@ export default {
           id: 'n_position_name_like',
         },
         {
+          codeName: 'n_report_flag_eq',
+          logicName: '统计标识',
+          appDEFieldId: 'report_flag',
+          sourceType: 'DEFSEARCHMODE',
+          stdDataType: 9,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'n_report_flag_eq',
+        },
+        {
           codeName: 'n_role_id_eq',
           logicName: '角色',
           appDEFieldId: 'role_id',

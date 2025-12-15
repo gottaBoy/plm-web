@@ -211,7 +211,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u806005d',
+                id: 'uef0dc98',
               },
             ],
             appDataEntityId: 'plmweb.insight_member',

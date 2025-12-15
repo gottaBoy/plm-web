@@ -168,7 +168,7 @@ export default {
                   cssClass: 'fa fa-lightbulb-o',
                   glyph: 'xf0eb@FontAwesome',
                 },
-                id: 'u5574ccd',
+                id: 'u3e75e85',
               },
               {
                 actionLevel: 100,
@@ -183,7 +183,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u4a506d8',
+                id: 'u41f95a1',
               },
             ],
             appDataEntityId: 'plmweb.discuss_topic',

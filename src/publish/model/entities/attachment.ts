@@ -930,6 +930,7 @@ export default {
         {
           dstAppDEUIActionId: 'upload_attachment@attachment',
           dstAppDataEntityId: 'plmweb.attachment',
+          retDEUILogicParamId: 'files',
           codeName: 'DEUIACTION1',
           dstDEUILogicParamId: 'files',
           leftPos: 500,
@@ -1021,7 +1022,7 @@ export default {
           id: 'begin',
         },
         {
-          code: 'const url = window.location;\r\nvar file_name = uiLogic.default.name;\r\nvar file_id = uiLogic.default.id;\r\nvar file_preview_address = ibiz.env.customParams.file_preview_address;\r\n\r\nif (file_preview_address !== null && file_preview_address !== undefined && file_preview_address !== \'\') {\r\n    const windowInfo = getCurrentWindowInfo(url);\r\n\r\n    let uploadUrl = `${ibiz.env.baseUrl}/${ibiz.env.appId}${ibiz.env.downloadFileUrl}`;\r\n    const app = ibiz.hub.getApp(context.srfappid);\r\n    const OSSCat = app.model.userParam?.DefaultOSSCat;\r\n    uploadUrl = uploadUrl.replace(\'/{cat}\', OSSCat ? `/${OSSCat}` : \'\');\r\n\r\n    var filedownloadurl = windowInfo + uploadUrl + \'/\'+file_id+\'?fullfilename=\'+file_name;\r\n\r\n    var b64Encoded = ibiz.util.base64.encode(filedownloadurl);\r\n    var previewUrl = file_preview_address + \'/onlinePreview?url=\'+encodeURIComponent(b64Encoded);\r\n\r\n    window.open(previewUrl);\r\n} else {\r\n  util.message.error(\'无附件预览服务，请联系管理员添加!\');\r\n}\r\n\r\nfunction getCurrentWindowInfo(url) {\r\n    const protocol = url.protocol;\r\n    const host = url.hostname; \r\n    const port = url.port || (protocol === "https:" ? "443" : "80"); \r\n    const isIPAddress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(host);\r\n    if (isIPAddress) {\r\n        return  protocol +"//" + host + ":" + port ;\r\n    } else {\r\n        return  protocol +"//" + host + ":" + port ;\r\n    }\r\n}',
+          code: 'const url = window.location;\r\nvar file_name = uiLogic.default.name;\r\nvar file_id = uiLogic.default.file_id;\r\nvar file_preview_address = ibiz.env.customParams.file_preview_address;\r\n\r\nif (file_preview_address !== null && file_preview_address !== undefined && file_preview_address !== \'\') {\r\n    const windowInfo = getCurrentWindowInfo(url);\r\n\r\n    let uploadUrl = `${ibiz.env.baseUrl}/${ibiz.env.appId}${ibiz.env.downloadFileUrl}`;\r\n    const app = ibiz.hub.getApp(context.srfappid);\r\n    const OSSCat = app.model.userParam?.DefaultOSSCat;\r\n    uploadUrl = uploadUrl.replace(\'/{cat}\', OSSCat ? `/${OSSCat}` : \'\');\r\n\r\n    var filedownloadurl = windowInfo + uploadUrl + \'/\'+file_id+\'?fullfilename=\'+file_name;\r\n\r\n    var b64Encoded = ibiz.util.base64.encode(filedownloadurl);\r\n    var previewUrl = file_preview_address + \'/onlinePreview?url=\'+encodeURIComponent(b64Encoded);\r\n\r\n    window.open(previewUrl);\r\n} else {\r\n  util.message.error(\'无附件预览服务，请联系管理员添加!\');\r\n}\r\n\r\nfunction getCurrentWindowInfo(url) {\r\n    const protocol = url.protocol;\r\n    const host = url.hostname; \r\n    const port = url.port || (protocol === "https:" ? "443" : "80"); \r\n    const isIPAddress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(host);\r\n    if (isIPAddress) {\r\n        return  protocol +"//" + host + ":" + port ;\r\n    } else {\r\n        return  protocol +"//" + host + ":" + port ;\r\n    }\r\n}',
           codeName: 'RAWJSCODE1',
           leftPos: 507,
           logicNodeType: 'RAWJSCODE',
@@ -1032,7 +1033,7 @@ export default {
               id: '连接名称',
             },
           ],
-          topPos: 208,
+          topPos: 198,
           name: '注入脚本代码',
           id: 'rawjscode1',
         },
@@ -1041,6 +1042,7 @@ export default {
           leftPos: 942,
           logicNodeType: 'END',
           topPos: 200,
+          parallelOutput: true,
           name: '结束',
           id: 'end1',
         },
@@ -1080,105 +1082,12 @@ export default {
           id: 'begin',
         },
         {
-          codeName: 'END1',
-          leftPos: 390,
-          logicNodeType: 'END',
-          topPos: 650,
-          name: '结束',
-          id: 'end1',
-        },
-        {
-          codeName: 'PREPAREJSPARAM3',
-          leftPos: 200,
-          logicNodeType: 'PREPAREJSPARAM',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'end1',
-              srcDEUILogicNodeId: 'preparejsparam3',
-              id: '连接名称',
-            },
-          ],
-          deuilogicNodeParams: [
-            {
-              dstFieldName: 'state.keepAlive',
-              dstDEUILogicParamId: 'grid',
-              paramAction: 'SETPARAMVALUE',
-              srcValue: 'true',
-              srcValueType: 'SRCVALUE',
-              name: '直接值[true] ==> grid[state.keepAlive]',
-              id: '直接值[true] ==> grid[state.keepalive]',
-            },
-            {
-              dstFieldName: 'state.visible',
-              dstDEUILogicParamId: 'grid',
-              paramAction: 'SETPARAMVALUE',
-              srcValue: 'false',
-              srcValueType: 'SRCVALUE',
-              id: '直接值[false] ==> grid[state.visible]',
-            },
-          ],
-          topPos: 440,
-          name: '设置表格隐藏',
-          id: 'preparejsparam3',
-        },
-        {
-          codeName: 'PREPAREJSPARAM2',
-          leftPos: 530,
-          logicNodeType: 'PREPAREJSPARAM',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'rawjscode1',
-              srcDEUILogicNodeId: 'preparejsparam2',
-              id: '连接名称',
-            },
-          ],
-          deuilogicNodeParams: [
-            {
-              dstFieldName: 'state.keepAlive',
-              dstDEUILogicParamId: 'grid',
-              paramAction: 'SETPARAMVALUE',
-              srcValue: 'true',
-              srcValueType: 'SRCVALUE',
-              name: '直接值[true] ==> grid[state.keepAlive]',
-              id: '直接值[true] ==> grid[state.keepalive]',
-            },
-            {
-              dstFieldName: 'state.visible',
-              dstDEUILogicParamId: 'grid',
-              paramAction: 'SETPARAMVALUE',
-              srcFieldName: 'true',
-              srcValue: 'true',
-              srcValueType: 'SRCVALUE',
-              id: '直接值[true] ==> grid[state.visible]',
-            },
-          ],
-          topPos: 440,
-          name: '设置表格显示',
-          id: 'preparejsparam2',
-        },
-        {
-          code: "const rows = uiLogic.grid.mdController.state.rows;\r\nconst srfreadonly = context.srfreadonly;\r\nif (rows && rows.length > 0) {\r\n\trows.forEach(row => {\r\n        // 删除附件行为禁用\r\n\t\tconst uiActionId = row.uaColStates.uagridcolumn1.u44d00e2;\r\n        if(srfreadonly == true && uiActionId.hasOwnProperty('disabled')){\r\n            uiActionId.disabled = true;\r\n        }    \r\n\t})\r\n}\t\r\n",
-          codeName: 'RAWJSCODE1',
-          leftPos: 460,
-          logicNodeType: 'RAWJSCODE',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'end1',
-              srcDEUILogicNodeId: 'rawjscode1',
-              id: '连接名称',
-            },
-          ],
-          topPos: 550,
-          name: '上下文中srfreadonly禁用删除附件行为',
-          id: 'rawjscode1',
-        },
-        {
           codeName: 'PREPAREJSPARAM1',
           leftPos: 350,
           logicNodeType: 'PREPAREJSPARAM',
           deuilogicLinks: [
             {
-              dstDEUILogicNodeId: 'preparejsparam2',
+              dstDEUILogicNodeId: 'rawjscode3',
               deuilogicLinkGroupCond: {
                 groupOP: 'AND',
                 deuilogicLinkConds: [
@@ -1197,7 +1106,7 @@ export default {
               id: '表格存在数据',
             },
             {
-              dstDEUILogicNodeId: 'preparejsparam3',
+              dstDEUILogicNodeId: 'rawjscode2',
               deuilogicLinkGroupCond: {
                 groupOP: 'AND',
                 deuilogicLinkConds: [
@@ -1230,19 +1139,75 @@ export default {
           name: '获取重复器表格',
           id: 'preparejsparam1',
         },
+        {
+          code: 'uiLogic.grid.state.keepAlive = true;\r\nuiLogic.grid.state.visible = true;',
+          codeName: 'RAWJSCODE3',
+          leftPos: 540,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'rawjscode1',
+              srcDEUILogicNodeId: 'rawjscode3',
+              id: '连接名称',
+            },
+          ],
+          topPos: 440,
+          name: '设置表格显示',
+          id: 'rawjscode3',
+        },
+        {
+          code: 'uiLogic.grid.state.keepAlive = true;\r\nuiLogic.grid.state.visible = false;',
+          codeName: 'RAWJSCODE2',
+          leftPos: 170,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'end1',
+              srcDEUILogicNodeId: 'rawjscode2',
+              id: '连接名称',
+            },
+          ],
+          topPos: 440,
+          name: '设置表格隐藏',
+          id: 'rawjscode2',
+        },
+        {
+          codeName: 'END1',
+          leftPos: 390,
+          logicNodeType: 'END',
+          topPos: 650,
+          name: '结束',
+          id: 'end1',
+        },
+        {
+          code: "const rows = uiLogic.grid.mdController.state.rows;\r\nconst srfreadonly = context.srfreadonly;\r\nif (rows && rows.length > 0) {\r\n\trows.forEach(row => {\r\n        // 删除附件行为禁用\r\n\t\tconst uiActionId = row.uaColStates.uagridcolumn1.u44d00e2;\r\n        if(srfreadonly == true && uiActionId.hasOwnProperty('disabled')){\r\n            uiActionId.disabled = true;\r\n        }    \r\n\t})\r\n}\t\r\n",
+          codeName: 'RAWJSCODE1',
+          leftPos: 460,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'end1',
+              srcDEUILogicNodeId: 'rawjscode1',
+              id: '连接名称',
+            },
+          ],
+          topPos: 550,
+          name: '上下文中srfreadonly禁用删除附件行为',
+          id: 'rawjscode1',
+        },
       ],
       deuilogicParams: [
-        {
-          codeName: 'grid',
-          entityParam: true,
-          name: '重复器表格',
-          id: 'grid',
-        },
         {
           codeName: 'form',
           ctrlParam: true,
           name: '表单',
           id: 'form',
+        },
+        {
+          codeName: 'grid',
+          entityParam: true,
+          name: '重复器表格',
+          id: 'grid',
         },
         {
           codeName: 'Default',
@@ -1267,7 +1232,7 @@ export default {
           logicNodeType: 'BEGIN',
           deuilogicLinks: [
             {
-              dstDEUILogicNodeId: 'preparejsparam1',
+              dstDEUILogicNodeId: 'rawjscode2',
               srcDEUILogicNodeId: 'begin',
               id: '连接名称',
             },
@@ -1276,78 +1241,6 @@ export default {
           parallelOutput: true,
           name: '开始',
           id: 'begin',
-        },
-        {
-          codeName: 'PREPAREJSPARAM2',
-          leftPos: 1220,
-          logicNodeType: 'PREPAREJSPARAM',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'viewctrlinvoke2',
-              srcDEUILogicNodeId: 'preparejsparam2',
-              id: '连接名称',
-            },
-          ],
-          deuilogicNodeParams: [
-            {
-              dstFieldName: 'silent',
-              dstDEUILogicParamId: 'default',
-              paramAction: 'SETPARAMVALUE',
-              srcValue: 'true',
-              srcValueType: 'SRCVALUE',
-              name: '直接值[true] ==> Default[silent]',
-              id: '直接值[true] ==> default[silent]',
-            },
-          ],
-          topPos: 390,
-          name: '设置表单静默保存',
-          id: 'preparejsparam2',
-        },
-        {
-          codeName: 'PREPAREJSPARAM1',
-          leftPos: 406,
-          logicNodeType: 'PREPAREJSPARAM',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'rawjscode1',
-              srcDEUILogicNodeId: 'preparejsparam1',
-              id: '连接名称',
-            },
-          ],
-          deuilogicNodeParams: [
-            {
-              dstDEUILogicParamId: 'grid',
-              paramAction: 'SETPARAMVALUE',
-              srcFieldName:
-                "getController('form').details.attachments.mdController",
-              srcDEUILogicParamId: 'view',
-              srcValueType: 'SRCDLPARAM',
-              name: "view[getController('form').details.attachments.mdController] ==> grid",
-              id: "view[getcontroller('form').details.attachments.mdcontroller] ==> grid",
-            },
-            {
-              dstFieldName: 'id',
-              dstDEUILogicParamId: 'params',
-              paramAction: 'SETPARAMVALUE',
-              srcFieldName: 'id',
-              srcDEUILogicParamId: 'default',
-              srcValueType: 'SRCDLPARAM',
-              name: 'Default[id] ==> params[id]',
-              id: 'default[id] ==> params[id]',
-            },
-            {
-              dstDEUILogicParamId: 'form',
-              paramAction: 'SETPARAMVALUE',
-              srcFieldName: 'layoutPanel.panelItems.form.control',
-              srcDEUILogicParamId: 'view',
-              srcValueType: 'SRCDLPARAM',
-              name: 'view[layoutPanel.panelItems.form.control] ==> form',
-              id: 'view[layoutpanel.panelitems.form.control] ==> form',
-            },
-          ],
-          topPos: 208,
-          name: '获取表格部件',
-          id: 'preparejsparam1',
         },
         {
           dstAppDEActionId: 'remove',
@@ -1368,32 +1261,6 @@ export default {
           id: 'deaction1',
         },
         {
-          codeName: 'END1',
-          leftPos: 1768,
-          logicNodeType: 'END',
-          topPos: 200,
-          name: '结束',
-          id: 'end1',
-        },
-        {
-          invokeCtrlId: 'form',
-          invokeMethod: 'save',
-          invokeParamId: 'default',
-          codeName: 'VIEWCTRLINVOKE2',
-          leftPos: 1520,
-          logicNodeType: 'VIEWCTRLINVOKE',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'end1',
-              srcDEUILogicNodeId: 'viewctrlinvoke2',
-              id: '连接名称',
-            },
-          ],
-          topPos: 390,
-          name: '视图部件调用',
-          id: 'viewctrlinvoke2',
-        },
-        {
           code: 'uiLogic.attach = { data: uiLogic.default, silent: true };',
           codeName: 'RAWJSCODE1',
           leftPos: 662,
@@ -1408,6 +1275,46 @@ export default {
           topPos: 208,
           name: '设置附件数据',
           id: 'rawjscode1',
+        },
+        {
+          code: "del = await ibiz.confirm.error({\r\n    title: ibiz.i18n.t('runtime.controller.common.control.dataDeletion'),\r\n    desc: ibiz.i18n.t(\r\n    '确认删除文件？',\r\n    ),\r\n});\r\n\r\nif (del) {\r\n    uiLogic.default.is_delete = true;\r\n}",
+          codeName: 'RAWJSCODE2',
+          leftPos: 256,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'preparejsparam1',
+              deuilogicLinkGroupCond: {
+                groupOP: 'AND',
+                deuilogicLinkConds: [
+                  {
+                    condOP: 'EQ',
+                    dstFieldName: 'is_delete',
+                    dstLogicParamId: 'default',
+                    paramValue: 'true',
+                    value: 'true',
+                    logicType: 'SINGLE',
+                    name: 'Default[is_delete] 等于(=) true',
+                    id: 'default[is_delete] 等于(=) true',
+                  },
+                ],
+                logicType: 'GROUP',
+              },
+              srcDEUILogicNodeId: 'rawjscode2',
+              id: '连接名称',
+            },
+          ],
+          topPos: 64,
+          name: '注入脚本代码',
+          id: 'rawjscode2',
+        },
+        {
+          codeName: 'END1',
+          leftPos: 1768,
+          logicNodeType: 'END',
+          topPos: 200,
+          name: '结束',
+          id: 'end1',
         },
         {
           invokeCtrlId: 'grid',
@@ -1462,19 +1369,116 @@ export default {
           name: '表格行删除',
           id: 'viewctrlinvoke1',
         },
+        {
+          invokeCtrlId: 'form',
+          invokeMethod: 'save',
+          invokeParamId: 'default',
+          codeName: 'VIEWCTRLINVOKE2',
+          leftPos: 1520,
+          logicNodeType: 'VIEWCTRLINVOKE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'end1',
+              srcDEUILogicNodeId: 'viewctrlinvoke2',
+              id: '连接名称',
+            },
+          ],
+          topPos: 390,
+          name: '视图部件调用',
+          id: 'viewctrlinvoke2',
+        },
+        {
+          codeName: 'PREPAREJSPARAM1',
+          leftPos: 406,
+          logicNodeType: 'PREPAREJSPARAM',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'rawjscode1',
+              srcDEUILogicNodeId: 'preparejsparam1',
+              id: '连接名称',
+            },
+          ],
+          deuilogicNodeParams: [
+            {
+              dstDEUILogicParamId: 'grid',
+              paramAction: 'SETPARAMVALUE',
+              srcFieldName:
+                "getController('form').details.attachments.mdController",
+              srcDEUILogicParamId: 'view',
+              srcValueType: 'SRCDLPARAM',
+              name: "view[getController('form').details.attachments.mdController] ==> grid",
+              id: "view[getcontroller('form').details.attachments.mdcontroller] ==> grid",
+            },
+            {
+              dstFieldName: 'id',
+              dstDEUILogicParamId: 'params',
+              paramAction: 'SETPARAMVALUE',
+              srcFieldName: 'id',
+              srcDEUILogicParamId: 'default',
+              srcValueType: 'SRCDLPARAM',
+              name: 'Default[id] ==> params[id]',
+              id: 'default[id] ==> params[id]',
+            },
+            {
+              dstDEUILogicParamId: 'form',
+              paramAction: 'SETPARAMVALUE',
+              srcFieldName: 'layoutPanel.panelItems.form.control',
+              srcDEUILogicParamId: 'view',
+              srcValueType: 'SRCDLPARAM',
+              name: 'view[layoutPanel.panelItems.form.control] ==> form',
+              id: 'view[layoutpanel.panelitems.form.control] ==> form',
+            },
+          ],
+          topPos: 208,
+          name: '获取表格部件',
+          id: 'preparejsparam1',
+        },
+        {
+          codeName: 'PREPAREJSPARAM2',
+          leftPos: 1220,
+          logicNodeType: 'PREPAREJSPARAM',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'viewctrlinvoke2',
+              srcDEUILogicNodeId: 'preparejsparam2',
+              id: '连接名称',
+            },
+          ],
+          deuilogicNodeParams: [
+            {
+              dstFieldName: 'silent',
+              dstDEUILogicParamId: 'default',
+              paramAction: 'SETPARAMVALUE',
+              srcValue: 'true',
+              srcValueType: 'SRCVALUE',
+              name: '直接值[true] ==> Default[silent]',
+              id: '直接值[true] ==> default[silent]',
+            },
+          ],
+          topPos: 390,
+          name: '设置表单静默保存',
+          id: 'preparejsparam2',
+        },
       ],
       deuilogicParams: [
         {
-          codeName: 'form',
+          codeName: 'grid',
           ctrlParam: true,
-          name: '主表单对象',
-          id: 'form',
+          name: '表格',
+          id: 'grid',
         },
         {
           codeName: 'params',
           viewNavDataParam: true,
           name: '视图参数',
           id: 'params',
+        },
+        {
+          codeName: 'Default',
+          default: true,
+          entityParam: true,
+          name: '传入变量',
+          id: 'default',
         },
         {
           codeName: 'attach',
@@ -1489,17 +1493,10 @@ export default {
           id: 'view',
         },
         {
-          codeName: 'Default',
-          default: true,
-          entityParam: true,
-          name: '传入变量',
-          id: 'default',
-        },
-        {
-          codeName: 'grid',
+          codeName: 'form',
           ctrlParam: true,
-          name: '表格',
-          id: 'grid',
+          name: '主表单对象',
+          id: 'form',
         },
       ],
       startDEUILogicNodeId: 'begin',
@@ -1517,7 +1514,7 @@ export default {
           logicNodeType: 'BEGIN',
           deuilogicLinks: [
             {
-              dstDEUILogicNodeId: 'preparejsparam1',
+              dstDEUILogicNodeId: 'rawjscode2',
               srcDEUILogicNodeId: 'begin',
               id: '连接名称',
             },
@@ -1526,6 +1523,38 @@ export default {
           parallelOutput: true,
           name: '开始',
           id: 'begin',
+        },
+        {
+          code: "del = await ibiz.confirm.error({\r\n    title: ibiz.i18n.t('runtime.controller.common.control.dataDeletion'),\r\n    desc: ibiz.i18n.t(\r\n    '确认删除文件？',\r\n    ),\r\n});\r\n\r\nif (del) {\r\n    uiLogic.default.is_delete = true;\r\n}",
+          codeName: 'RAWJSCODE2',
+          leftPos: 270,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'preparejsparam1',
+              deuilogicLinkGroupCond: {
+                groupOP: 'AND',
+                deuilogicLinkConds: [
+                  {
+                    condOP: 'EQ',
+                    dstFieldName: 'is_delete',
+                    dstLogicParamId: 'default',
+                    paramValue: 'true',
+                    value: 'true',
+                    logicType: 'SINGLE',
+                    name: 'Default[is_delete] 等于(=) true',
+                    id: 'default[is_delete] 等于(=) true',
+                  },
+                ],
+                logicType: 'GROUP',
+              },
+              srcDEUILogicNodeId: 'rawjscode2',
+              id: '连接名称',
+            },
+          ],
+          topPos: 74,
+          name: '注入脚本代码',
+          id: 'rawjscode2',
         },
         {
           invokeCtrlId: 'grid',
@@ -1544,30 +1573,6 @@ export default {
           topPos: 208,
           name: '表格行删除',
           id: 'viewctrlinvoke1',
-        },
-        {
-          code: 'uiLogic.attach = { data: data, silent: true };',
-          codeName: 'RAWJSCODE1',
-          leftPos: 662,
-          logicNodeType: 'RAWJSCODE',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'viewctrlinvoke1',
-              srcDEUILogicNodeId: 'rawjscode1',
-              id: '连接名称',
-            },
-          ],
-          topPos: 208,
-          name: '设置附件数据',
-          id: 'rawjscode1',
-        },
-        {
-          codeName: 'END1',
-          leftPos: 1268,
-          logicNodeType: 'END',
-          topPos: 200,
-          name: '结束',
-          id: 'end1',
         },
         {
           codeName: 'PREPAREJSPARAM1',
@@ -1605,6 +1610,30 @@ export default {
           name: '获取表格部件',
           id: 'preparejsparam1',
         },
+        {
+          codeName: 'END1',
+          leftPos: 1268,
+          logicNodeType: 'END',
+          topPos: 200,
+          name: '结束',
+          id: 'end1',
+        },
+        {
+          code: 'uiLogic.attach = { data: data, silent: true };',
+          codeName: 'RAWJSCODE1',
+          leftPos: 662,
+          logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'viewctrlinvoke1',
+              srcDEUILogicNodeId: 'rawjscode1',
+              id: '连接名称',
+            },
+          ],
+          topPos: 208,
+          name: '设置附件数据',
+          id: 'rawjscode1',
+        },
       ],
       deuilogicParams: [
         {
@@ -1621,12 +1650,6 @@ export default {
           id: 'default',
         },
         {
-          codeName: 'params',
-          viewNavDataParam: true,
-          name: '视图参数',
-          id: 'params',
-        },
-        {
           codeName: 'view',
           activeViewParam: true,
           name: '当前视图对象',
@@ -1637,6 +1660,12 @@ export default {
           ctrlParam: true,
           name: '表格',
           id: 'grid',
+        },
+        {
+          codeName: 'params',
+          viewNavDataParam: true,
+          name: '视图参数',
+          id: 'params',
         },
       ],
       startDEUILogicNodeId: 'begin',

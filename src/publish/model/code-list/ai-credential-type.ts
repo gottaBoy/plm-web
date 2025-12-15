@@ -1,0 +1,45 @@
+export default {
+  codeListTag: 'ai__credential_type',
+  codeListType: 'STATIC',
+  codeName: 'ai__credential_type',
+  emptyText: '未定义',
+  codeItems: [
+    {
+      codeName: 'api_key',
+      text: 'API Key',
+      userData: 'SECRET_TEXT',
+      value: 'api_key',
+      id: 'api_key',
+    },
+    {
+      codeName: 'bearer_token',
+      text: 'Bearer Token',
+      userData: 'BEARER_TOKEN',
+      value: 'bearer_token',
+      id: 'bearer_token',
+    },
+    {
+      codeName: 'access_key_secret',
+      text: 'Access Key/Secret',
+      userData: 'ACCESS_KEY',
+      value: 'access_key_secret',
+      id: 'access_key_secret',
+    },
+    {
+      codeName: 'oauth2_client',
+      text: 'OAuth2 Client',
+      userData: 'USERNAME_PASSWORD',
+      value: 'oauth2_client',
+      id: 'oauth2_client',
+    },
+    {
+      codeName: 'custom',
+      text: 'Custom',
+      value: 'custom',
+      id: 'custom',
+    },
+  ],
+  enableCache: true,
+  name: '凭证类型',
+  id: 'plmweb.ai__credential_type',
+};

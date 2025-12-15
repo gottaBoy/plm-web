@@ -1,7 +1,7 @@
 export default {
   id: 'plmweb.work_item_pick_up_view',
   codeName: 'work_item_pick_up_view',
-  openMode: 'INDEXVIEWTAB',
+  openMode: 'POPUPMODAL',
   viewType: 'DEPICKUPVIEW',
   width: 0,
   height: 0,

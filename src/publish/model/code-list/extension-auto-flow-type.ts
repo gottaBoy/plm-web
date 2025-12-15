@@ -6,6 +6,12 @@ export default {
   appDataEntityId: 'plmweb.psdelogic',
   codeItems: [
     {
+      codeName: 'timertask',
+      text: '定时作业',
+      value: 'TIMERTASK',
+      id: 'timertask',
+    },
+    {
       codeName: 'eventhook',
       text: '事件处理',
       value: 'EVENTHOOK',
@@ -22,6 +28,12 @@ export default {
       text: '收到WebHook',
       value: 'WEBHOOK',
       id: 'webhook',
+    },
+    {
+      codeName: 'mcptool',
+      text: '提供MCP工具',
+      value: 'MCPTOOL',
+      id: 'mcptool',
     },
   ],
   enableCache: true,

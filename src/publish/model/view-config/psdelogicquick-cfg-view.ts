@@ -4,7 +4,7 @@ export default {
   openMode: 'POPUPMODAL',
   viewType: 'DEOPTVIEW',
   width: 600,
-  height: 500,
+  height: 550,
   appDataEntityId: 'plmweb.psdelogic',
   redirectView: false,
   modalOption: {},

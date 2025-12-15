@@ -561,6 +561,20 @@ export default {
               },
               {
                 childDETreeNodeId: 'node_3',
+                navigateParams: [
+                  {
+                    key: 'n_owner_subtype_eq',
+                    value: 'idea',
+                    rawValue: true,
+                    id: 'n_owner_subtype_eq',
+                  },
+                  {
+                    key: 'n_owner_type_eq',
+                    value: 'product',
+                    rawValue: true,
+                    id: 'n_owner_type_eq',
+                  },
+                ],
                 parentFilter: 'owner_id',
                 parentDETreeNodeId: 'node',
                 parentValueLevel: 1,
@@ -813,7 +827,7 @@ export default {
                 colMD: 24,
                 layout: 'TABLE_24COL',
               },
-              id: '6c989f2e6134f88eb4344bfc5c68a867',
+              id: 'fd637ea683b66f5a2438f904bc6eab1e',
             },
           ],
           codeName: 'usr0306299894',

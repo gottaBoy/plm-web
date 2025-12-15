@@ -282,7 +282,7 @@ export default {
                   cssClass: 'fa fa-send-o',
                   glyph: 'xf1d9@FontAwesome',
                 },
-                id: 'u7ad4217',
+                id: 'u00e965c',
               },
               {
                 actionLevel: 200,
@@ -297,7 +297,7 @@ export default {
                   cssClass: 'fa fa-mail-reply',
                   glyph: 'xf112@FontAwesome',
                 },
-                id: 'uf2e6622',
+                id: 'u33d1e5c',
               },
               {
                 actionLevel: 50,
@@ -313,7 +313,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'ud3d7e2f',
+                id: 'ueb6875e',
               },
               {
                 actionLevel: 50,
@@ -329,7 +329,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u41b27be',
+                id: 'ucaeff48',
               },
               {
                 actionLevel: 100,
@@ -345,7 +345,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u3479786',
+                id: 'u8341cf2',
               },
             ],
             appDataEntityId: 'plmweb.review',

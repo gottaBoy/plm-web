@@ -5,7 +5,7 @@ export default {
   loadDefault: true,
   openMode: 'POPUPMODAL',
   deviewCodeName: 'idea_dictionary_create_view',
-  deviewId: '152F1BD3-B21F-41E0-A182-2DB2D1ED444D',
+  deviewId: 'd82ec5546741cb908d6b2a9831f41cfb',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.DICTIONARY',
@@ -343,7 +343,7 @@ export default {
       controlParam: {
         id: 'form',
       },
-      modelId: 'EDBCB6A6-3D09-40F1-987B-0ADF2517324B',
+      modelId: '0b405be05cca9c73f07cea3e45600294',
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
       id: 'plmweb.dictionary_data.idea_create_form',
@@ -388,7 +388,7 @@ export default {
   width: 660,
   enableDP: true,
   showCaptionBar: true,
-  modelId: '146cd494d1c71606c5bac7a1b2c66e78',
+  modelId: '92bc15607d247a24c2b42aae0f1d5a7d',
   modelType: 'PSAPPDEVIEW',
   name: 'dictionary_dataidea_dictionary_create_view',
   id: 'plmweb.dictionary_data_idea_dictionary_create_view',

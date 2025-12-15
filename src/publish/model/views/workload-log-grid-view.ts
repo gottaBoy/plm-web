@@ -12,6 +12,14 @@ export default {
   caption: '工时',
   codeName: 'workload_log_grid_view',
   appDataEntityId: 'plmweb.workload',
+  appViewNavContexts: [
+    {
+      rawValue: true,
+      key: 'WORKLOAD',
+      name: 'WORKLOAD',
+      id: 'workload',
+    },
+  ],
   sysCss: {
     cssName: 'workload_log_head',
   },
@@ -56,6 +64,17 @@ export default {
                 },
                 id: 'view_searchform',
               },
+              {
+                caption: '搜索栏',
+                itemStyle: 'DEFAULT',
+                itemType: 'CTRLPOS',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'searchbar',
+              },
             ],
             layout: {
               dir: 'row',
@@ -70,7 +89,6 @@ export default {
               shrink: 1,
               heightMode: 'FULL',
               layout: 'FLEX',
-              widthMode: 'FULL',
             },
             id: 'view_header_right',
           },
@@ -241,13 +259,6 @@ export default {
     ],
     appViewRefs: [
       {
-        realOpenMode: 'POPUPMODAL',
-        realTitle: '修改实际工时视图',
-        refAppViewId: 'plmweb.workload_update_view',
-        name: 'EDITDATA',
-        id: 'editdata',
-      },
-      {
         realTitle: '工时编辑视图',
         realTitleLanguageRes: {
           lanResTag: 'PAGE.TITLE.WORKLOAD.EDITVIEW',
@@ -255,6 +266,13 @@ export default {
         refAppViewId: 'plmweb.workload_edit_view',
         name: 'NEWDATA',
         id: 'newdata',
+      },
+      {
+        realOpenMode: 'POPUPMODAL',
+        realTitle: '修改实际工时视图',
+        refAppViewId: 'plmweb.workload_update_view',
+        name: 'EDITDATA',
+        id: 'editdata',
       },
     ],
     controls: [
@@ -337,7 +355,7 @@ export default {
             codeName: 'duration',
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,
-            width: 200,
+            width: 150,
             widthUnit: 'PX',
             enableSort: true,
             id: 'duration',
@@ -393,7 +411,7 @@ export default {
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,
             width: 200,
-            widthUnit: 'PX',
+            widthUnit: 'STAR',
             id: 'description',
           },
           {
@@ -759,39 +777,59 @@ export default {
         detoolbarItems: [
           {
             actionLevel: 100,
-            noPrivDisplayMode: 2,
-            uiactionId: 'gridview_exportaction',
+            buttonStyle: 'STYLE2',
+            detoolbarItems: [
+              {
+                actionLevel: 100,
+                noPrivDisplayMode: 2,
+                uiactionId: 'gridview_exportaction',
+                valid: true,
+                capLanguageRes: {
+                  lanResTag: 'TBB.TEXT.*.EXPORT',
+                },
+                caption: '导出',
+                itemType: 'DEUIACTION',
+                sysImage: {
+                  cssClass: 'fa fa-file-excel-o',
+                  glyph: 'xf1c3@FontAwesome',
+                },
+                tooltip: '导出',
+                tooltipLanguageRes: {
+                  lanResTag: 'TBB.TOOLTIP.*.EXPORT',
+                },
+                showCaption: true,
+                showIcon: true,
+                id: 'deuiaction1',
+              },
+            ],
             valid: true,
-            capLanguageRes: {
-              lanResTag: 'TBB.TEXT.*.EXPORT',
-            },
-            caption: '导出',
-            itemType: 'DEUIACTION',
+            caption: '更多',
+            itemType: 'ITEMS',
             sysImage: {
-              cssClass: 'fa fa-file-excel-o',
-              glyph: 'xf1c3@FontAwesome',
+              cssClass: 'fa fa-list-ul',
+              glyph: 'xf0ca@FontAwesome',
             },
-            tooltip: '导出',
-            tooltipLanguageRes: {
-              lanResTag: 'TBB.TOOLTIP.*.EXPORT',
-            },
-            showCaption: true,
+            tooltip: '更多',
             showIcon: true,
-            id: 'deuiaction1',
+            id: 'items1',
           },
         ],
+        toolbarStyle: 'USER',
         xdataControlName: 'grid',
-        codeName: 'log_grid_view_toolbar',
+        codeName: 'log_grid_view_tab_toolbar',
         controlType: 'TOOLBAR',
         logicName: '工时日历_工具栏',
         appDataEntityId: 'plmweb.workload',
         controlParam: {
-          id: 'toolbar',
+          ctrlParams: {
+            TELEPORTFLAG: 'true',
+          },
+          id: 'tab_toolbar',
         },
         modelId: '1caa28e37cd29023f9d644f5b0378f0f',
         modelType: 'PSDETOOLBAR',
-        name: 'toolbar',
-        id: 'log_grid_view_toolbar',
+        name: 'tab_toolbar',
+        id: 'log_grid_view_tab_toolbar',
       },
       {
         groupMode: 'SINGLE',

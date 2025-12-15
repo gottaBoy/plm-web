@@ -61,7 +61,7 @@ export default {
     },
     {
       createControlAction: {
-        appDEMethodId: 'create',
+        appDEMethodId: 'ai_add_estimated_workload',
         appDataEntityId: 'plmweb.workload',
         id: 'create',
       },

@@ -617,7 +617,7 @@ export default {
                     cssClass: 'fa fa-mail-reply',
                     glyph: 'xf112@FontAwesome',
                   },
-                  id: 'ucb9925e',
+                  id: 'u873b2b6',
                 },
                 {
                   actionLevel: 200,
@@ -633,7 +633,7 @@ export default {
                     cssClass: 'fa fa-exchange',
                     glyph: 'xf0ec@FontAwesome',
                   },
-                  id: 'u2d8231b',
+                  id: 'ufd8545c',
                 },
               ],
               appDataEntityId: 'plmweb.review_content',

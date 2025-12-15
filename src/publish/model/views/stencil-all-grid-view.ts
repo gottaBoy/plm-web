@@ -214,7 +214,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'ubaae24f',
+                id: 'ud35219b',
               },
               {
                 actionLevel: 100,
@@ -229,7 +229,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u6fac85a',
+                id: 'u6a81dae',
               },
             ],
             appDataEntityId: 'plmweb.stencil',

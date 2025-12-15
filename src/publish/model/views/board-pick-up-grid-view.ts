@@ -86,7 +86,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u88f921c',
+                id: 'u478d09b',
               },
             ],
             appDataEntityId: 'plmweb.board',

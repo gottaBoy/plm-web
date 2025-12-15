@@ -6,7 +6,7 @@ export default {
   capLanguageRes: {
     lanResTag: 'DE.LNAME.WORK_ITEM',
   },
-  caption: '工作项',
+  caption: '选择工作项',
   codeName: 'work_item_plan_work_item_mpick_up_view',
   appDataEntityId: 'plmweb.work_item',
   appViewNavContexts: [
@@ -814,7 +814,7 @@ export default {
         capLanguageRes: {
           lanResTag: 'DE.LNAME.WORK_ITEM',
         },
-        caption: '工作项',
+        caption: '选择工作项',
         codeName: 'plan_work_item_mpick_up_view_captionbar',
         controlType: 'CAPTIONBAR',
         appDataEntityId: 'plmweb.work_item',

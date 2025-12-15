@@ -64,9 +64,10 @@ export default {
   ],
   appViewNavParams: [
     {
-      key: 'n_deploy_system_id_eq',
-      value: 'srfdcsystemid',
-      id: 'n_deploy_system_id_eq',
+      rawValue: true,
+      key: 'n_system_display_name_like',
+      value: 'plm',
+      id: 'n_system_display_name_like',
     },
   ],
   appViewRefs: [
@@ -76,8 +77,8 @@ export default {
         lanResTag: 'PAGE.TITLE.ROLE.EDITVIEW',
       },
       refAppViewId: 'plmweb.role_edit_view',
-      name: 'EDITDATA',
-      id: 'editdata',
+      name: 'NEWDATA',
+      id: 'newdata',
     },
     {
       realTitle: '角色编辑视图',
@@ -85,8 +86,8 @@ export default {
         lanResTag: 'PAGE.TITLE.ROLE.EDITVIEW',
       },
       refAppViewId: 'plmweb.role_edit_view',
-      name: 'NEWDATA',
-      id: 'newdata',
+      name: 'EDITDATA',
+      id: 'editdata',
     },
   ],
   controls: [
@@ -168,7 +169,7 @@ export default {
                   cssClass: 'fa fa-gear',
                   glyph: 'xf013@FontAwesome',
                 },
-                id: 'udd5dfbe',
+                id: 'u3a54039',
               },
             ],
             appDataEntityId: 'plmweb.role',

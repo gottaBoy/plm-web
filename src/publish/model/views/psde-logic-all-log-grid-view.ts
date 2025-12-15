@@ -290,7 +290,7 @@ export default {
                   uiactionId: 'open_info_view@extend_log',
                   showCaption: true,
                   showIcon: true,
-                  id: 'u0c56ad6',
+                  id: 'u89a207e',
                 },
               ],
               appDataEntityId: 'plmweb.extend_log',

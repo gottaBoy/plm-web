@@ -238,6 +238,7 @@ export default {
                   editor: {
                     maxValue: 24,
                     precision: 1,
+                    scale: 1,
                     editorParams: {
                       precision: '1',
                       minvalue: '0',

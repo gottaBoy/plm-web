@@ -579,7 +579,7 @@ export default {
     ],
     appViewLogics: [
       {
-        eventNames: 'onViewMounted',
+        eventNames: 'onMounted',
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         scriptCode:
@@ -641,7 +641,7 @@ export default {
                       uiactionId: 'open_re_run@run',
                       showCaption: true,
                       showIcon: true,
-                      id: 'u77de18c',
+                      id: 'u7a1cb94',
                     },
                   ],
                   appDataEntityId: 'plmweb.run',
@@ -844,6 +844,7 @@ export default {
                     id: 'level',
                   },
                   {
+                    dataRelationTag: 'Default_relation',
                     deformTabPages: [
                       {
                         layout: {
@@ -938,7 +939,7 @@ export default {
                                   uiactionId: 'all_pass@run',
                                   showCaption: true,
                                   showIcon: true,
-                                  id: 'u2565776',
+                                  id: 'u7a372f8',
                                 },
                               ],
                               appDataEntityId: 'plmweb.run',
@@ -1472,7 +1473,6 @@ export default {
                         caption: '需求',
                         codeName: 'tabpanel1_idea',
                         counterId: 'run_re_idea',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '6a9257dc240f07a00c06dd57012c580e',
@@ -1534,7 +1534,6 @@ export default {
                         caption: '工作项',
                         codeName: 'tabpanel1_work_item',
                         counterId: 'run_re_work_item',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '6a9257dc240f07a00c06dd57012c580e',
@@ -1613,7 +1612,6 @@ export default {
                         caption: '缺陷',
                         codeName: 'tabpanel1_bug',
                         counterId: 'run_re_bug',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '6a9257dc240f07a00c06dd57012c580e',
@@ -1646,7 +1644,6 @@ export default {
                         caption: '结果附件',
                         codeName: 'tabpanel1_attachment',
                         counterId: 'run_re_attachment',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '6a9257dc240f07a00c06dd57012c580e',
@@ -1680,7 +1677,6 @@ export default {
                         caption: '执行结果',
                         codeName: 'tabpanel1_result',
                         counterId: 'run_re_run_history',
-                        counterMode: 1,
                         detailStyle: 'DEFAULT',
                         detailType: 'TABPAGE',
                         appCounterRefId: '6a9257dc240f07a00c06dd57012c580e',
@@ -1724,7 +1720,7 @@ export default {
                       uiactionId: 'open_re_run@run',
                       showCaption: true,
                       showIcon: true,
-                      id: 'u77de18c',
+                      id: 'u7a1cb94',
                     },
                   ],
                   appDataEntityId: 'plmweb.run',
@@ -1853,7 +1849,7 @@ export default {
                                           cssClass: 'fa fa-user-md',
                                           glyph: 'xf0f0@FontAwesome',
                                         },
-                                        id: 'u23c0102',
+                                        id: 'u7b4a0f4',
                                       },
                                     ],
                                     appDataEntityId: 'plmweb.library_member',
@@ -2361,6 +2357,7 @@ export default {
                                 editor: {
                                   stepValue: 1,
                                   precision: 1,
+                                  scale: 1,
                                   editorParams: {
                                     showText: 'true',
                                   },

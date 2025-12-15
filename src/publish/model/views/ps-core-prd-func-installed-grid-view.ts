@@ -352,7 +352,7 @@ export default {
                   sysCss: {
                     cssName: 'red-span',
                   },
-                  id: 'u5867a98',
+                  id: 'u2ae2f73',
                 },
                 {
                   actionLevel: 100,
@@ -364,7 +364,7 @@ export default {
                   uiactionId: 'open_app_detail_view_logic@pscoreprdfunc',
                   showCaption: true,
                   showIcon: true,
-                  id: 'u069baac',
+                  id: 'u9695a6f',
                 },
               ],
               appDataEntityId: 'plmweb.pscoreprdfunc',

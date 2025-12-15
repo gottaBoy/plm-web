@@ -473,7 +473,7 @@ export default {
                     cssClass: 'fa fa-user-md',
                     glyph: 'xf0f0@FontAwesome',
                   },
-                  id: 'u4befff7',
+                  id: 'udd2bf0b',
                 },
               ],
               appDataEntityId: 'plmweb.product_member',

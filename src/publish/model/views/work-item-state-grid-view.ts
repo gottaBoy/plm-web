@@ -82,14 +82,6 @@ export default {
     {
       openMode: 'POPUPMODAL',
       realOpenMode: 'POPUPMODAL',
-      realTitle: '新建工作项状态',
-      refAppViewId: 'plmweb.work_item_state_quick_create_view',
-      name: 'NEWDATA',
-      id: 'newdata',
-    },
-    {
-      openMode: 'POPUPMODAL',
-      realOpenMode: 'POPUPMODAL',
       realTitle: '编辑工作项状态',
       refAppViewId: 'plmweb.work_item_state_update_view',
       name: 'OPENDATA',
@@ -102,6 +94,14 @@ export default {
       refAppViewId: 'plmweb.work_item_state_update_view',
       name: 'EDITDATA',
       id: 'editdata',
+    },
+    {
+      openMode: 'POPUPMODAL',
+      realOpenMode: 'POPUPMODAL',
+      realTitle: '新建工作项状态',
+      refAppViewId: 'plmweb.work_item_state_quick_create_view',
+      name: 'NEWDATA',
+      id: 'newdata',
     },
   ],
   controls: [
@@ -185,7 +185,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u5be759c',
+                id: 'u5ede1d3',
               },
               {
                 actionLevel: 100,
@@ -200,7 +200,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u80cdbba',
+                id: 'ude16354',
               },
             ],
             appDataEntityId: 'plmweb.work_item_state',

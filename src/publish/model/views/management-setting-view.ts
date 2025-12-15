@@ -166,6 +166,11 @@ export default {
             name: '产品',
             id: 'usrdrgroup0514569929',
           },
+          {
+            caption: '高级',
+            name: '高级',
+            id: 'advance',
+          },
         ],
         showTitle: true,
         dataRelationTag: 'config_tab_exp_view_DR',
@@ -253,6 +258,16 @@ export default {
               glyph: 'xf086@FontAwesome',
             },
             id: 'discuss',
+          },
+          {
+            dedrbarGroupId: 'advance',
+            caption: '计划作业',
+            appViewId: 'plmweb.extend_scheduled_task_tab_exp_view',
+            sysImage: {
+              cssClass: 'fa fa-tasks',
+              glyph: 'xf0ae@FontAwesome',
+            },
+            id: 'scheduled_task',
           },
         ],
         uniqueTag: 'management_setting_view__drbar',

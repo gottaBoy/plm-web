@@ -5,7 +5,7 @@ export default {
   xdataControlName: 'grid',
   loadDefault: true,
   deviewCodeName: 'not_add_pick_up_grid_view_review',
-  deviewId: 'B565AC24-31C8-438C-B88B-05BCD77A51CF',
+  deviewId: '40aa0d1f18b76814e483b1979a30b4a3',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.PAGE',
@@ -316,7 +316,7 @@ export default {
   viewType: 'DEPICKUPGRIDVIEW',
   enableDP: true,
   showCaptionBar: true,
-  modelId: '41bc1f589679ca7e1d3868d55e3de45d',
+  modelId: 'ec96dc0a485f3eeca5cd599352b7164d',
   modelType: 'PSAPPDEVIEW',
   name: 'article_pagenot_add_pick_up_grid_view_review',
   id: 'plmweb.article_page_not_add_pick_up_grid_view_review',

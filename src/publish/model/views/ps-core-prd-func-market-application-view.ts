@@ -551,7 +551,7 @@ export default {
                                       logicTag: 'itemlayoutpanel',
                                       logicType: 'SCRIPT',
                                       scriptCode:
-                                        'data.funcstate == 0 || data.funcstate == 2',
+                                        'data.funcstate == 0 || data.funcstate == 2 || data.funcstate == 4',
                                       triggerType: 'ITEMVISIBLE',
                                       id: 'logic2',
                                     },
@@ -593,7 +593,7 @@ export default {
                                         detailType: 'DEUIACTION',
                                         uiactionId: 'uninstall@pscoreprdfunc',
                                         showCaption: true,
-                                        id: 'u01c1392',
+                                        id: 'u053177c',
                                       },
                                       {
                                         actionLevel: 100,
@@ -606,7 +606,7 @@ export default {
                                           'install_specific_ver_test@pscoreprdfunc',
                                         showCaption: true,
                                         showIcon: true,
-                                        id: 'u82d5972',
+                                        id: 'u61a7cdb',
                                       },
                                     ],
                                     appDataEntityId: 'plmweb.pscoreprdfunc',
@@ -622,7 +622,8 @@ export default {
                                       itemName: 'disabled',
                                       logicTag: 'itemlayoutpanel',
                                       logicType: 'SCRIPT',
-                                      scriptCode: 'data.funcstate == 1',
+                                      scriptCode:
+                                        'data.funcstate == 1 || data.funcstate == 3',
                                       triggerType: 'ITEMVISIBLE',
                                       id: 'logic3',
                                     },
@@ -676,6 +677,34 @@ export default {
                                   ],
                                   showCaption: true,
                                   id: 'update_func',
+                                },
+                                {
+                                  actionType: 'NONE',
+                                  buttonStyle: 'DEFAULT',
+                                  buttonType: 'PANELBUTTON',
+                                  renderMode: 'BUTTON',
+                                  tooltip: '重新加载',
+                                  uiactionTarget: 'NONE',
+                                  caption: '重新加载',
+                                  itemStyle: 'DEFAULT',
+                                  itemType: 'BUTTON',
+                                  controlLogics: [
+                                    {
+                                      itemName: 'reload',
+                                      logicTag: 'itemlayoutpanel',
+                                      logicType: 'SCRIPT',
+                                      scriptCode:
+                                        'data.funcstate == 3 || data.funcstate == 4',
+                                      triggerType: 'ITEMVISIBLE',
+                                      id: 'logic1',
+                                    },
+                                  ],
+                                  layoutPos: {
+                                    shrink: 1,
+                                    layout: 'FLEX',
+                                  },
+                                  showCaption: true,
+                                  id: 'reload',
                                 },
                               ],
                               layout: {

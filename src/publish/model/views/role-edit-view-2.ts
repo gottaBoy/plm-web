@@ -638,7 +638,7 @@ export default {
     logicName: 'EditView2实体编辑视图（左右关系）布局面板布局面板',
     appDataEntityId: 'plmweb.role',
     controlParam: {},
-    modelId: '0D1BDD9E-A842-4190-8F7C-3A535F3B74FD',
+    modelId: '1a6396470af3379f3a52cb571c07cc46',
     modelType: 'PSSYSVIEWLAYOUTPANEL',
     name: 'layoutpanel',
     id: 'usr0207234062',

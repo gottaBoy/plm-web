@@ -401,7 +401,6 @@ export default {
       appDEMethodInput: {
         appDEMethodDTOId: 'activity_dto',
         type: 'DTO',
-        output: true,
         id: '输入对象',
       },
       appDEMethodReturn: {
@@ -410,11 +409,10 @@ export default {
         id: '返回对象',
       },
       requestField: 'ID',
-      requestMethod: 'PUT',
+      requestMethod: 'POST',
       requestParamType: 'FIELD',
       requestPath: '/get_activity_obj_detail',
-      needResourceKey: true,
-      actionMode: 'UPDATE',
+      actionMode: 'GETDRAFT',
       actionType: 'REMOTE',
       dataSetType: 'REMOTE',
       id: 'get_activity_obj_detail',

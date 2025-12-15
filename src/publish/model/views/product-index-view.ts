@@ -5,6 +5,7 @@ export default {
   accUserMode: 2,
   caption: '产品',
   codeName: 'product_index_view',
+  dynaSysMode: 1,
   appDataEntityId: 'plmweb.product',
   appViewNavContexts: [
     {
@@ -549,6 +550,7 @@ export default {
         codeName: 'product',
         controlStyle: 'DRBAR_EX',
         controlType: 'DRBAR',
+        dynaSysMode: 1,
         appDataEntityId: 'plmweb.product',
         controlParam: {
           id: 'drbar',

@@ -290,17 +290,17 @@ export default {
     appViewRefs: [
       {
         realOpenMode: 'POPUPMODAL',
-        realTitle: '设置成员信息',
-        refAppViewId: 'plmweb.user_main_view',
-        name: 'EDITDATA',
-        id: 'editdata',
-      },
-      {
-        realOpenMode: 'POPUPMODAL',
         realTitle: '添加成员',
         refAppViewId: 'plmweb.user_quick_create_view',
         name: 'NEWDATA',
         id: 'newdata',
+      },
+      {
+        realOpenMode: 'POPUPMODAL',
+        realTitle: '设置成员信息',
+        refAppViewId: 'plmweb.user_main_view',
+        name: 'EDITDATA',
+        id: 'editdata',
       },
     ],
     controls: [
@@ -334,7 +334,7 @@ export default {
                     cssClass: 'fa fa-edit',
                     glyph: 'xf044@FontAwesome',
                   },
-                  id: 'u19948a7',
+                  id: 'ub178c8c',
                 },
                 {
                   actionLevel: 100,
@@ -350,7 +350,7 @@ export default {
                     cssClass: 'fa fa-pinterest',
                     glyph: 'xf0d2@FontAwesome',
                   },
-                  id: 'u8343a9b',
+                  id: 'u200f1ff',
                 },
                 {
                   actionLevel: 100,
@@ -366,7 +366,7 @@ export default {
                     cssClass: 'fa fa-yelp',
                     glyph: 'xf1e9@FontAwesome',
                   },
-                  id: 'ucf189b8',
+                  id: 'uf1cb1a2',
                 },
               ],
               appDataEntityId: 'plmweb.user',
@@ -900,7 +900,7 @@ export default {
           },
           id: 'tabtoolbar',
         },
-        modelId: '16F7E132-0ADE-4494-9197-81578476EE84',
+        modelId: '84ed6e4bdf6837f0cf24ef85ebad3275',
         modelType: 'PSDETOOLBAR',
         name: 'tabtoolbar',
         id: 'valid_grid_view_tabtoolbar',

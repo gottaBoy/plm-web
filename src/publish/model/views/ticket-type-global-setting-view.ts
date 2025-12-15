@@ -195,7 +195,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'uc771d16',
+                id: 'ud72a4d2',
               },
               {
                 actionLevel: 100,
@@ -210,7 +210,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u9370fb6',
+                id: 'ua0bdfdd',
               },
             ],
             appDataEntityId: 'plmweb.ticket_type',

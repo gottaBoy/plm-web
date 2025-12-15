@@ -687,6 +687,24 @@ export default {
         detoolbarItems: [
           {
             actionLevel: 100,
+            buttonStyle: 'WARNING',
+            noPrivDisplayMode: 2,
+            uiactionId: 'ai@ai_agent_assignment',
+            uiactionTarget: 'SINGLEDATA',
+            valid: true,
+            caption: 'AI+',
+            itemType: 'DEUIACTION',
+            sysImage: {
+              cssClass: 'fa fa-star-half-full',
+              glyph: 'xf123@FontAwesome',
+            },
+            tooltip: 'AI+',
+            showCaption: true,
+            showIcon: true,
+            id: 'deuiaction5',
+          },
+          {
+            actionLevel: 100,
             detoolbarItems: [
               {
                 actionLevel: 100,
@@ -904,33 +922,37 @@ export default {
                         noPrivDisplayMode: 1,
                         appDEFieldId: 'content',
                         editor: {
+                          appDEACModeId: 'aichat',
+                          appDEDataSetId: 'fetch_default',
+                          appDataEntityId: 'plmweb.work_item',
                           enableAC: true,
                           editorParams: {
-                            USERINSCRIPT:
-                              'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                            LINKVIEWID: 'plmweb.recent_custom_redirect_view',
-                            MAXHEIGHT: '450',
-                            QUOTECODELISTMAP:
-                              '{"type":"plmweb.base__recent_visite"}',
-                            enableEdit: 'true',
-                            QUOTEFIELDMAP:
-                              '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                            QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                            enableFullScreen: 'true',
-                            MODE: 'default',
-                            AC: 'true',
-                            QUOTEINSCRIPT:
-                              'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                            USERSCRIPT:
-                              '`@{"id":"${data.id}","name":"${data.name}"}`',
-                            QUOTESCRIPT:
-                              '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                            USERURL:
-                              "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                            USERFIELDMAP: '{"id":"user_id","name":"name"}',
                             INSERTKEYS:
                               '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                            LINKVIEWID: 'plmweb.recent_custom_redirect_view',
+                            USERURL:
+                              "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
+                            enableFullScreen: 'true',
+                            USERSCRIPT:
+                              '`@{"id":"${data.id}","name":"${data.name}"}`',
+                            USERINSCRIPT:
+                              'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
+                            QUOTEINSCRIPT:
+                              'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
                             QUOTEURL: '`recents/fetch_recent_access`',
+                            srfaiagent: 'TextAgent_Writing',
+                            QUOTEPARAMS: '{"sort":"update_time,desc"}',
+                            QUOTESCRIPT:
+                              '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
+                            QUOTECODELISTMAP:
+                              '{"type":"plmweb.base__recent_visite"}',
+                            USERFIELDMAP: '{"id":"user_id","name":"name"}',
+                            QUOTEFIELDMAP:
+                              '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
+                            enableEdit: 'true',
+                            MODE: 'default',
+                            ac: 'true',
+                            MAXHEIGHT: '450',
                           },
                           editorStyle: 'COLLAPSE',
                           editorType: 'HTMLEDITOR',
@@ -990,6 +1012,7 @@ export default {
                                     defdname: 'comment_count',
                                     value: '0',
                                     logicType: 'SINGLE',
+                                    id: 'comment_count不等于(<>) 0',
                                   },
                                 ],
                                 logicType: 'GROUP',
@@ -1076,6 +1099,7 @@ export default {
                                 defdname: 'comment_count',
                                 value: '-1',
                                 logicType: 'SINGLE',
+                                id: 'comment_count等于(=) -1',
                               },
                             ],
                             logicType: 'GROUP',

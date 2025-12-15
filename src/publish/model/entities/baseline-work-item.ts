@@ -149,6 +149,7 @@ export default {
       logicName: '预估工时',
       precision: 1,
       predefinedType: 'NONE',
+      scale: 1,
       stdDataType: 6,
       name: 'ESTIMATED_WORKLOAD',
       id: 'estimated_workload',
@@ -158,6 +159,7 @@ export default {
       logicName: '剩余工时',
       precision: 1,
       predefinedType: 'NONE',
+      scale: 1,
       stdDataType: 6,
       name: 'REMAINING_WORKLOAD',
       id: 'remaining_workload',
@@ -167,6 +169,7 @@ export default {
       logicName: '实际工时',
       precision: 1,
       predefinedType: 'NONE',
+      scale: 1,
       stdDataType: 6,
       name: 'ACTUAL_WORKLOAD',
       id: 'actual_workload',
@@ -1696,15 +1699,20 @@ export default {
   deopprivs: [
     {
       logicName: '建立',
-      name: 'CREATE',
-      id: 'create',
-    },
-    {
-      logicName: '建立',
       mapDEName: 'BASELINE',
       mapDEOPPrivName: 'CREATE',
       name: 'CREATE',
       id: 'principal_baseline__create',
+    },
+    {
+      logicName: '建立',
+      name: 'CREATE',
+      id: 'create',
+    },
+    {
+      logicName: '删除',
+      name: 'DELETE',
+      id: 'delete',
     },
     {
       logicName: '删除',
@@ -1712,11 +1720,6 @@ export default {
       mapDEOPPrivName: 'DELETE',
       name: 'DELETE',
       id: 'principal_baseline__delete',
-    },
-    {
-      logicName: '删除',
-      name: 'DELETE',
-      id: 'delete',
     },
     {
       logicName: '读取',
@@ -1732,15 +1735,15 @@ export default {
     },
     {
       logicName: '更新',
-      name: 'UPDATE',
-      id: 'update',
-    },
-    {
-      logicName: '更新',
       mapDEName: 'BASELINE',
       mapDEOPPrivName: 'UPDATE',
       name: 'UPDATE',
       id: 'principal_baseline__update',
+    },
+    {
+      logicName: '更新',
+      name: 'UPDATE',
+      id: 'update',
     },
   ],
   codeName: 'baseline_work_item',

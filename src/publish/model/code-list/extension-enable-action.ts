@@ -2,6 +2,7 @@ export default {
   codeListTag: 'extension__enable_action',
   codeListType: 'STATIC',
   codeName: 'extension__enable_action',
+  dynaSysMode: 1,
   emptyText: '未定义',
   appDataEntityId: 'plmweb.psdelogic',
   codeItems: [

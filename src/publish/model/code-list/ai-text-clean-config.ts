@@ -1,0 +1,53 @@
+export default {
+  codeListTag: 'ai__text_clean_config',
+  codeListType: 'STATIC',
+  codeName: 'ai__text_clean_config',
+  emptyText: '未定义',
+  codeItems: [
+    {
+      codeName: 'remove_extra_whitespace',
+      text: '合并多个空格/换行为单个',
+      value: 'remove_extra_whitespace',
+      id: 'remove_extra_whitespace',
+    },
+    {
+      codeName: 'remove_html_tags',
+      text: '剥离 HTML 标签（保留文本）',
+      value: 'remove_html_tags',
+      id: 'remove_html_tags',
+    },
+    {
+      codeName: 'remove_js_css',
+      text: '移除 <script> <style> 内容',
+      value: 'remove_js_css',
+      id: 'remove_js_css',
+    },
+    {
+      codeName: 'remove_emails_url',
+      text: '移除电子邮箱及Url',
+      value: 'remove_emails_url',
+      id: 'remove_emails_url',
+    },
+    {
+      codeName: 'normalize_punctuation',
+      text: '统一中英文标点（如 “” → "")',
+      value: 'normalize_punctuation',
+      id: 'normalize_punctuation',
+    },
+    {
+      codeName: 'remove_header_footer',
+      text: '尝试移除页眉页脚（PDF 场景）',
+      value: 'remove_header_footer',
+      id: 'remove_header_footer',
+    },
+    {
+      codeName: 'remove_watermark',
+      text: '启用 OCR 后处理识别水印并过滤',
+      value: 'remove_watermark',
+      id: 'remove_watermark',
+    },
+  ],
+  enableCache: true,
+  name: '通用文本清洗配置',
+  id: 'plmweb.ai__text_clean_config',
+};

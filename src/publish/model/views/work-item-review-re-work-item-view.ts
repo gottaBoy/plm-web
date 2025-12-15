@@ -1,7 +1,7 @@
 export default {
   openMode: 'POPUPMODAL',
   deviewCodeName: 'review_re_work_item_view',
-  deviewId: '91FD7F51-648F-4B91-91C0-50B9985FC7FE',
+  deviewId: 'e2c2d5021143cfb55090549ac93c0fb2',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.WORK_ITEM',
@@ -199,14 +199,12 @@ export default {
       autoLoad: true,
       showBusyIndicator: true,
       codeName: 'simplelist',
-      controlStyle: 'SAMPLE_LIST',
       controlType: 'LIST',
       logicName: 'simplelist',
       appDataEntityId: 'plmweb.work_item',
       controlParam: {
         id: 'simplelist',
       },
-      sysPFPluginId: 'sample_list',
       modelId: '72fb01720c50ba7b395ba836e796456d',
       modelType: 'PSDELIST',
       name: 'simplelist',
@@ -453,7 +451,7 @@ export default {
       controlParam: {
         id: 'treeexpbar',
       },
-      modelId: '731fbf392b5ffd97ec73e8331d7352be_treeexpbar',
+      modelId: '9c41e6c8948cbbf2b5a393f6f703a21a_treeexpbar',
       modelType: 'PSEXPBAR',
       name: 'treeexpbar',
       id: 'review_re_work_item_view_treeexpbar',
@@ -487,7 +485,7 @@ export default {
   viewType: 'DEMPICKUPVIEW2',
   enableDP: true,
   showCaptionBar: false,
-  modelId: '731fbf392b5ffd97ec73e8331d7352be',
+  modelId: '9c41e6c8948cbbf2b5a393f6f703a21a',
   modelType: 'PSAPPDEVIEW',
   name: 'work_itemreview_re_work_item_view',
   id: 'plmweb.work_item_review_re_work_item_view',

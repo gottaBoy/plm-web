@@ -218,7 +218,7 @@ export default {
                   cssClass: 'fa fa-mail-reply',
                   glyph: 'xf112@FontAwesome',
                 },
-                id: 'u2ab25a1',
+                id: 'u3d0b22e',
               },
               {
                 actionLevel: 100,
@@ -234,7 +234,7 @@ export default {
                   cssClass: 'fa fa-copy',
                   glyph: 'xf0c5@FontAwesome',
                 },
-                id: 'u578ed85',
+                id: 'ub029931',
               },
               {
                 actionLevel: 100,
@@ -250,7 +250,7 @@ export default {
                   cssClass: 'fa fa-arrows',
                   glyph: 'xf047@FontAwesome',
                 },
-                id: 'u55f7735',
+                id: 'u83bcd4d',
               },
               {
                 actionLevel: 100,
@@ -266,7 +266,7 @@ export default {
                   cssClass: 'fa fa-archive',
                   glyph: 'xf187@FontAwesome',
                 },
-                id: 'ue66c072',
+                id: 'u5f0eaf3',
               },
               {
                 actionLevel: 100,
@@ -282,7 +282,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u7a298e4',
+                id: 'u6d03031',
               },
               {
                 actionLevel: 100,
@@ -297,7 +297,7 @@ export default {
                 sysImage: {
                   cssClass: 'key',
                 },
-                id: 'u4b4723e',
+                id: 'ufddeb79',
               },
               {
                 actionLevel: 100,
@@ -312,7 +312,7 @@ export default {
                 sysImage: {
                   cssClass: 'git-branch',
                 },
-                id: 'u71eae0d',
+                id: 'u5966044',
               },
               {
                 actionLevel: 100,
@@ -328,7 +328,7 @@ export default {
                   cssClass: 'fa fa-link',
                   glyph: 'xf0c1@FontAwesome',
                 },
-                id: 'u729f254',
+                id: 'uaf08fb2',
               },
             ],
             appDataEntityId: 'plmweb.work_item',
@@ -801,7 +801,7 @@ export default {
                     cssClass: 'fa fa-user-md',
                     glyph: 'xf0f0@FontAwesome',
                   },
-                  id: 'uc5eeb4c',
+                  id: 'uc0c6a4c',
                 },
               ],
               appDataEntityId: 'plmweb.project_member',

@@ -1288,6 +1288,40 @@ export default {
       id: 'plmweb.work_item.resource',
     },
     {
+      detoolbarItems: [
+        {
+          actionLevel: 100,
+          buttonStyle: 'WARNING',
+          noPrivDisplayMode: 2,
+          uiactionId: 'ai_nodata@ai_agent_assignment',
+          uiactionTarget: 'NONE',
+          valid: true,
+          caption: 'AI+',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-star-half-full',
+            glyph: 'xf123@FontAwesome',
+          },
+          tooltip: 'AI+',
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction1',
+        },
+      ],
+      xdataControlName: 'gantt',
+      codeName: 'resource_gantt_view_toolbar',
+      controlType: 'TOOLBAR',
+      logicName: 'AI通用工具栏',
+      appDataEntityId: 'plmweb.ai_agent_session',
+      controlParam: {
+        id: 'toolbar',
+      },
+      modelId: '514893fb34893a7093696d54919e7f54',
+      modelType: 'PSDETOOLBAR',
+      name: 'toolbar',
+      id: 'resource_gantt_view_toolbar',
+    },
+    {
       capLanguageRes: {
         lanResTag: 'DE.LNAME.WORK_ITEM',
       },
@@ -1349,7 +1383,7 @@ export default {
                               cssClass: 'fa fa-plus',
                               glyph: 'xf067@FontAwesome',
                             },
-                            id: 'u43b8ddd',
+                            id: 'u34c6429',
                           },
                           {
                             actionLevel: 100,
@@ -1365,7 +1399,7 @@ export default {
                               cssClass: 'fa fa-sun-o',
                               glyph: 'xf185@FontAwesome',
                             },
-                            id: 'u793ef1d',
+                            id: 'ua7730a9',
                           },
                         ],
                         appDataEntityId: 'plmweb.addon_resource',

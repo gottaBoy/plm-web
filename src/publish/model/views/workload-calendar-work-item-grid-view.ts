@@ -178,6 +178,28 @@ export default {
         },
         id: 'view_content',
       },
+      {
+        caption: '工具栏',
+        itemStyle: 'DEFAULT',
+        itemType: 'CTRLPOS',
+        layoutPos: {
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        showCaption: true,
+        id: 'usr11267619toolbar',
+      },
+      {
+        caption: '工具栏',
+        itemStyle: 'DEFAULT',
+        itemType: 'CTRLPOS',
+        layoutPos: {
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        showCaption: true,
+        id: 'calendar_toolbar',
+      },
     ],
     layoutPanel: true,
     appViewEngines: [
@@ -865,44 +887,6 @@ export default {
         modelType: 'PSSYSSEARCHBAR',
         name: 'searchbar',
         id: 'plmweb.workload.work_item_calendar_searchbar',
-      },
-      {
-        detoolbarItems: [
-          {
-            actionLevel: 100,
-            noPrivDisplayMode: 2,
-            uiactionId: 'gridview_exportaction',
-            valid: true,
-            capLanguageRes: {
-              lanResTag: 'TBB.TEXT.*.EXPORT',
-            },
-            caption: '导出',
-            itemType: 'DEUIACTION',
-            sysImage: {
-              cssClass: 'fa fa-file-excel-o',
-              glyph: 'xf1c3@FontAwesome',
-            },
-            tooltip: '导出',
-            tooltipLanguageRes: {
-              lanResTag: 'TBB.TOOLTIP.*.EXPORT',
-            },
-            showCaption: true,
-            showIcon: true,
-            id: 'deuiaction1',
-          },
-        ],
-        xdataControlName: 'grid',
-        codeName: 'calendar_work_item_grid_view_toolbar',
-        controlType: 'TOOLBAR',
-        logicName: '工时日历_工具栏',
-        appDataEntityId: 'plmweb.workload',
-        controlParam: {
-          id: 'toolbar',
-        },
-        modelId: '1caa28e37cd29023f9d644f5b0378f0f',
-        modelType: 'PSDETOOLBAR',
-        name: 'toolbar',
-        id: 'calendar_work_item_grid_view_toolbar',
       },
       {
         capLanguageRes: {

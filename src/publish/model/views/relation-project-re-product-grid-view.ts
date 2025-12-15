@@ -248,7 +248,7 @@ export default {
                   cssClass: 'fa fa-unlink',
                   glyph: 'xf127@FontAwesome',
                 },
-                id: 'ua71fcf1',
+                id: 'u0f749a7',
               },
             ],
             appDataEntityId: 'plmweb.relation',

@@ -17,10 +17,10 @@ export default {
       data: '{"is_dropdown_list": false,"allow_empty":"true"}',
       codeItems: [
         {
-          codeName: 'projmgmt_work_item_descript',
+          codeName: 'projmgmt_work_item_description',
           text: '描述',
-          value: 'ProjMgmt.work_item.descript',
-          id: 'projmgmt_work_item_descript',
+          value: 'ProjMgmt.work_item.description',
+          id: 'projmgmt_work_item_description',
         },
       ],
       text: '变更工作项属性',

@@ -3360,6 +3360,13 @@ export default {
     },
     {
       logicName: '读取',
+      mapDEName: 'PROJECT',
+      mapDEOPPrivName: 'READ',
+      name: 'READ',
+      id: 'project__read',
+    },
+    {
+      logicName: '读取',
       mapDEName: 'LIBRARY',
       mapDEOPPrivName: 'READ',
       name: 'READ',
@@ -3369,13 +3376,6 @@ export default {
       logicName: '读取',
       name: 'READ',
       id: 'read',
-    },
-    {
-      logicName: '读取',
-      mapDEName: 'PROJECT',
-      mapDEOPPrivName: 'READ',
-      name: 'READ',
-      id: 'project__read',
     },
     {
       logicName: '更新',

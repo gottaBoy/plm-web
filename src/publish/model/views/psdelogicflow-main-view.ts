@@ -17,6 +17,17 @@ export default {
       id: 'engine',
     },
   ],
+  appViewLogics: [
+    {
+      eventNames: 'onCloseView',
+      logicTrigger: 'VIEWEVENT',
+      logicType: 'SCRIPT',
+      scriptCode: "ibiz.mc.command.create.send({ srfdecodename: 'PSDELogic'})",
+      builtinLogic: true,
+      name: 'LOGIC',
+      id: 'logic',
+    },
+  ],
   controls: [
     {
       dedrtabPages: [

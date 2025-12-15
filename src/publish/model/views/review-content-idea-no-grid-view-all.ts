@@ -429,6 +429,15 @@ export default {
     ],
     appViewRefs: [
       {
+        realTitle: '评审内容编辑视图',
+        realTitleLanguageRes: {
+          lanResTag: 'PAGE.TITLE.REVIEW_CONTENT.EDITVIEW',
+        },
+        refAppViewId: 'plmweb.review_content_edit_view',
+        name: 'NEWDATA',
+        id: 'newdata',
+      },
+      {
         openMode: 'POPUPMODAL',
         navigateContexts: [
           {
@@ -446,15 +455,6 @@ export default {
         refAppViewId: 'plmweb.idea_main_view',
         name: 'EDITDATA',
         id: 'editdata',
-      },
-      {
-        realTitle: '评审内容编辑视图',
-        realTitleLanguageRes: {
-          lanResTag: 'PAGE.TITLE.REVIEW_CONTENT.EDITVIEW',
-        },
-        refAppViewId: 'plmweb.review_content_edit_view',
-        name: 'NEWDATA',
-        id: 'newdata',
       },
       {
         realOpenMode: 'POPUPMODAL',
@@ -620,7 +620,7 @@ export default {
                     cssClass: 'fa fa-mail-reply',
                     glyph: 'xf112@FontAwesome',
                   },
-                  id: 'ucb9925e',
+                  id: 'u873b2b6',
                 },
                 {
                   actionLevel: 200,
@@ -636,7 +636,7 @@ export default {
                     cssClass: 'fa fa-exchange',
                     glyph: 'xf0ec@FontAwesome',
                   },
-                  id: 'u2d8231b',
+                  id: 'ufd8545c',
                 },
               ],
               appDataEntityId: 'plmweb.review_content',

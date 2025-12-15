@@ -66,6 +66,13 @@ export default {
   appViewMsgGroupId: 'usrvmgroup1107155954',
   appViewRefs: [
     {
+      realOpenMode: 'POPUPMODAL',
+      realTitle: '项目状态选项操作视图',
+      refAppViewId: 'plmweb.project_state_quick_create_option_view',
+      name: 'NEWDATA',
+      id: 'newdata',
+    },
+    {
       realTitle: '项目状态数据重定向视图',
       realTitleLanguageRes: {
         lanResTag: 'PAGE.TITLE.PROJECT_STATE.REDIRECTVIEW',
@@ -73,13 +80,6 @@ export default {
       refAppViewId: 'plmweb.project_state_redirect_view',
       name: 'EDITDATA',
       id: 'editdata',
-    },
-    {
-      realOpenMode: 'POPUPMODAL',
-      realTitle: '项目状态选项操作视图',
-      refAppViewId: 'plmweb.project_state_quick_create_option_view',
-      name: 'NEWDATA',
-      id: 'newdata',
     },
   ],
   controls: [
@@ -147,7 +147,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'uf478b96',
+                id: 'u1a3ff6e',
               },
               {
                 actionLevel: 100,
@@ -162,7 +162,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u8479c1e',
+                id: 'u6ed909f',
               },
             ],
             appDataEntityId: 'plmweb.project_state',

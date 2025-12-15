@@ -5,12 +5,30 @@ export default {
   capLanguageRes: {
     lanResTag: 'DE.LNAME.INSIGHT_REPORT',
   },
-  caption: 'BI报表呈现态面板视图',
+  caption: 'BI报表',
   codeName: 'insight_report_bi_report_content_panel_view',
   appDataEntityId: 'plmweb.insight_report',
   controls: [
     {
       detoolbarItems: [
+        {
+          actionLevel: 100,
+          buttonStyle: 'WARNING',
+          noPrivDisplayMode: 2,
+          uiactionId: 'ai@ai_agent_assignment',
+          uiactionTarget: 'SINGLEDATA',
+          valid: true,
+          caption: 'AI+',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-star-half-full',
+            glyph: 'xf123@FontAwesome',
+          },
+          tooltip: 'AI+',
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction2',
+        },
         {
           actionLevel: 100,
           noPrivDisplayMode: 2,
@@ -49,7 +67,7 @@ export default {
                 uiactionId: 'export_table@insight_report',
                 showCaption: true,
                 showIcon: true,
-                id: 'ud71c507',
+                id: 'u9a10645',
               },
               {
                 actionLevel: 100,
@@ -61,7 +79,7 @@ export default {
                 uiactionId: 'export_pdf@insight_report',
                 showCaption: true,
                 showIcon: true,
-                id: 'u9cf49f9',
+                id: 'u4272a7e',
               },
             ],
             appDataEntityId: 'plmweb.insight_report',
@@ -96,7 +114,7 @@ export default {
       capLanguageRes: {
         lanResTag: 'DE.LNAME.INSIGHT_REPORT',
       },
-      caption: 'BI报表呈现态面板视图',
+      caption: 'BI报表',
       codeName: 'bi_report_content_panel_view_captionbar',
       controlType: 'CAPTIONBAR',
       appDataEntityId: 'plmweb.insight_report',

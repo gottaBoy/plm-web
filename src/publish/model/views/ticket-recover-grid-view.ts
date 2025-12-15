@@ -111,7 +111,7 @@ export default {
                   cssClass: 'fa fa-refresh',
                   glyph: 'xf021@FontAwesome',
                 },
-                id: 'u24ed628',
+                id: 'uaa4e88b',
               },
             ],
             appDataEntityId: 'plmweb.ticket',

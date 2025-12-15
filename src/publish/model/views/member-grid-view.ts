@@ -284,7 +284,7 @@ export default {
                   cssClass: 'fa fa-sun-o',
                   glyph: 'xf185@FontAwesome',
                 },
-                id: 'u4016a74',
+                id: 'uea743f7',
               },
               {
                 actionLevel: 100,
@@ -302,7 +302,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'ue13dbbe',
+                id: 'u5527876',
               },
             ],
             appDataEntityId: 'plmweb.member',

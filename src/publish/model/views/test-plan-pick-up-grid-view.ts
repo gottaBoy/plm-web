@@ -48,7 +48,7 @@ export default {
                   cssClass: 'fa fa-play-circle-o',
                   glyph: 'xf01d@FontAwesome',
                 },
-                id: 'u6d3152c',
+                id: 'u5b646f7',
               },
               {
                 actionLevel: 200,
@@ -63,7 +63,7 @@ export default {
                   cssClass: 'fa fa-dot-circle-o',
                   glyph: 'xf192@FontAwesome',
                 },
-                id: 'u8dd3442',
+                id: 'u8a57f86',
               },
               {
                 actionLevel: 100,
@@ -79,7 +79,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'uf8d2086',
+                id: 'u3c1213f',
               },
               {
                 actionLevel: 100,
@@ -95,7 +95,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u405a462',
+                id: 'ufa6303a',
               },
             ],
             appDataEntityId: 'plmweb.test_plan',

@@ -724,8 +724,10 @@ export default {
             id: 'srfmajortext',
           },
         ],
-        pagingSize: 1000,
+        pagingMode: 1,
+        pagingSize: 10,
         appendDEItems: true,
+        enablePagingBar: true,
         singleSelect: true,
         navViewPos: 'NONE',
         createControlAction: {
@@ -771,6 +773,7 @@ export default {
         controlParam: {
           ctrlParams: {
             'SRFNAVPARAM.SIZE': '8',
+            SHOWMODE: 'ONLYDATA',
           },
           id: 'dataview',
         },

@@ -489,14 +489,9 @@ export default {
       minorSortAppDEFieldId: 'update_time',
       delistDataItems: [
         {
-          appDEFieldId: 'audit_info',
-          dataType: 21,
-          id: 'auditinfo',
-        },
-        {
-          appDEFieldId: 'object_type',
+          appDEFieldId: 'audit_type',
           dataType: 25,
-          id: 'objecttype',
+          id: 'audittype',
         },
         {
           appDEFieldId: 'update_time',
@@ -505,19 +500,24 @@ export default {
           id: 'update_time',
         },
         {
+          appDEFieldId: 'object_type',
+          dataType: 25,
+          id: 'objecttype',
+        },
+        {
           appDEFieldId: 'op_person_name',
           dataType: 25,
           id: 'oppersonname',
         },
         {
-          appDEFieldId: 'audit_type',
-          dataType: 25,
-          id: 'audittype',
-        },
-        {
           appDEFieldId: 'op_person_id',
           dataType: 25,
           id: 'oppersonid',
+        },
+        {
+          appDEFieldId: 'audit_info',
+          dataType: 21,
+          id: 'auditinfo',
         },
         {
           appDEFieldId: 'id',

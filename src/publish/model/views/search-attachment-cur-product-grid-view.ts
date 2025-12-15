@@ -109,7 +109,7 @@ export default {
                   cssClass: 'fa fa-download',
                   glyph: 'xf019@FontAwesome',
                 },
-                id: 'u1bd9b6a',
+                id: 'uc0b4609',
               },
             ],
             appDataEntityId: 'plmweb.search_attachment',

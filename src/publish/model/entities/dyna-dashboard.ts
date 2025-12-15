@@ -32,7 +32,7 @@ export default {
               cssClass: 'fa fa-plus',
               glyph: 'xf067@FontAwesome',
             },
-            id: 'u2596525',
+            id: 'u41dcccc',
           },
           {
             actionLevel: 100,
@@ -48,7 +48,7 @@ export default {
               cssClass: 'fa fa-gear',
               glyph: 'xf013@FontAwesome',
             },
-            id: 'uccbab55',
+            id: 'u791f6c0',
           },
         ],
         appDataEntityId: 'plmweb.dyna_dashboard',

@@ -192,7 +192,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'uf0c2d11',
+                id: 'ubeb14c7',
               },
               {
                 actionLevel: 100,
@@ -207,7 +207,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'ucbb1fc3',
+                id: 'uf0dd297',
               },
             ],
             appDataEntityId: 'plmweb.dictionary_data',
@@ -390,7 +390,7 @@ export default {
       controlParam: {
         id: 'grid',
       },
-      modelId: 'CEE66AF2-50CC-419B-8BF1-5803A848A3A7',
+      modelId: 'ff569835d296aa10db816d6c740c4491',
       modelType: 'PSDEGRID',
       name: 'grid',
       id: 'plmweb.dictionary_data.idea_dictionary_grid',

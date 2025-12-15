@@ -329,7 +329,7 @@ export default {
                   cssClass: 'fa fa-exchange',
                   glyph: 'xf0ec@FontAwesome',
                 },
-                id: 'uc03fdf9',
+                id: 'u450e961',
               },
             ],
             appDataEntityId: 'plmweb.baseline_idea',

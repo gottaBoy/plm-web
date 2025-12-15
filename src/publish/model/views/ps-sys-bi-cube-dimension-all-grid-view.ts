@@ -197,7 +197,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'ub4e923b',
+                id: 'ud1fd956',
               },
               {
                 actionLevel: 200,
@@ -211,7 +211,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'ubb79d39',
+                id: 'ucf1a653',
               },
             ],
             appDataEntityId: 'plmweb.pssysbicubedimension',

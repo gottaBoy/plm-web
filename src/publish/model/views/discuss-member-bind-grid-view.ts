@@ -213,7 +213,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u4a84543',
+                id: 'u2905a9e',
               },
             ],
             appDataEntityId: 'plmweb.discuss_member',

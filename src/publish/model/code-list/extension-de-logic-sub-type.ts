@@ -32,9 +32,15 @@ export default {
     },
     {
       codeName: 'webhook',
-      text: 'WebHook',
+      text: '收到WebHook',
       value: 'WEBHOOK',
       id: 'webhook',
+    },
+    {
+      codeName: 'mcptool',
+      text: '提供MCP工具',
+      value: 'MCPTOOL',
+      id: 'mcptool',
     },
     {
       codeName: 'eventhook',

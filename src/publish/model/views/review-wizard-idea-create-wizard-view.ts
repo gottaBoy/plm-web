@@ -148,6 +148,10 @@ export default {
                           noPrivDisplayMode: 1,
                           appDEFieldId: 'description',
                           editor: {
+                            appDEACModeId: 'aichat',
+                            appDEDataSetId: 'fetch_default',
+                            appDataEntityId: 'plmweb.work_item',
+                            enableAC: true,
                             editorHeight: 450,
                             editorParams: {
                               USERINSCRIPT:
@@ -155,6 +159,7 @@ export default {
                               MAXHEIGHT: '450',
                               QUOTECODELISTMAP:
                                 '{"type":"plmweb.base__recent_visite"}',
+                              srfaiagent: 'TextAgent_Writing',
                               QUOTEFIELDMAP:
                                 '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
                               QUOTEPARAMS: '{"sort":"update_time,desc"}',
@@ -170,6 +175,7 @@ export default {
                               USERFIELDMAP: '{"id":"user_id","name":"name"}',
                               INSERTKEYS:
                                 '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                              ac: 'true',
                               QUOTEURL: '`recents/fetch_recent_access`',
                             },
                             editorStyle: 'COLLAPSE',
@@ -764,6 +770,8 @@ export default {
                               condOP: 'ISNOTNULL',
                               defdname: 'type',
                               logicType: 'SINGLE',
+                              name: 'type值不为空(NotNil)',
+                              id: 'type值不为空(notnil)',
                             },
                           ],
                           logicType: 'GROUP',
@@ -1158,7 +1166,7 @@ export default {
           controlParam: {
             id: 'wizardpanel_form_review_connect',
           },
-          modelId: 'f0902d087f7a34c1ea65d7526bc7253a',
+          modelId: '14869b40be553eae899f2aca3f62324c',
           modelType: 'PSDEFORM_EDITFORM',
           name: 'wizardpanel_form_review_connect',
           id: 'plmweb.review_wizard.create_common_form',
@@ -1215,7 +1223,7 @@ export default {
       controlParam: {
         id: 'wizardpanel',
       },
-      modelId: '6cea2502ead9164766a587d0ff705246',
+      modelId: '154c1847b2bf9e78802e042850d2cfb3',
       modelType: 'PSDEWIZARDPANEL',
       name: 'wizardpanel',
       id: 'plmweb.review_wizard.idea_create_wizard',

@@ -14,6 +14,14 @@ export async function registerCodeList(
   };
   setCodeList(await import('./code-list/base-auth-code').then(m => m.default));
   setCodeList(
+    await import('./code-list/base-task-status').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/base-ai-agent-context-scopes').then(
+      m => m.default,
+    ),
+  );
+  setCodeList(
     await import('./code-list/base-attention-type').then(m => m.default),
   );
   setCodeList(
@@ -45,6 +53,12 @@ export async function registerCodeList(
   );
   setCodeList(
     await import('./code-list/base-dictionary-type').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/base-executor-subtype').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/base-executor-type').then(m => m.default),
   );
   setCodeList(await import('./code-list/base-index-type').then(m => m.default));
   setCodeList(
@@ -86,10 +100,14 @@ export async function registerCodeList(
     await import('./code-list/base-workload-category').then(m => m.default),
   );
   setCodeList(
+    await import('./code-list/base-workload-kind').then(m => m.default),
+  );
+  setCodeList(
     await import('./code-list/base-workload-type').then(m => m.default),
   );
   setCodeList(await import('./code-list/base-wxwork').then(m => m.default));
   setCodeList(await import('./code-list/code-list-46').then(m => m.default));
+  setCodeList(await import('./code-list/code-list-50').then(m => m.default));
   setCodeList(await import('./code-list/code-list-54').then(m => m.default));
   setCodeList(await import('./code-list/ftr-search-menu').then(m => m.default));
   setCodeList(
@@ -394,9 +412,9 @@ export async function registerCodeList(
     await import('./code-list/test-mgmt-case-template').then(m => m.default),
   );
   setCodeList(
-    await import(
-      './code-list/test-mgmt-complete-review-state-passordenial'
-    ).then(m => m.default),
+    await import('./code-list/test-mgmt-complete-review-state-passordenial').then(
+      m => m.default,
+    ),
   );
   setCodeList(
     await import('./code-list/test-mgmt-cur-library-member').then(
@@ -532,6 +550,71 @@ export async function registerCodeList(
   );
   setCodeList(await import('./code-list/yes-no').then(m => m.default));
   setCodeList(
+    await import('./code-list/ai-kb-sync-frequency').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-ai-agent-context-dynamic').then(
+      m => m.default,
+    ),
+  );
+  setCodeList(
+    await import('./code-list/ai-ai-conversation-status').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-ai-kb-document-type').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-ai-message-role').then(m => m.default),
+  );
+  setCodeList(await import('./code-list/ai-ai-mode').then(m => m.default));
+  setCodeList(
+    await import('./code-list/ai-ai-model-provider').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-api-auth-type-codelist').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-api-method-codelist').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-chunkingstrategy').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-credential-type').then(m => m.default),
+  );
+  setCodeList(await import('./code-list/ai-custom-chunk').then(m => m.default));
+  setCodeList(
+    await import('./code-list/ai-import-method').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-knowledge-source').then(m => m.default),
+  );
+  setCodeList(await import('./code-list/ai-memory-mode').then(m => m.default));
+  setCodeList(
+    await import('./code-list/ai-model-capability').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-model-category').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-msg-sender-type').then(m => m.default),
+  );
+  setCodeList(await import('./code-list/ai-slice-status').then(m => m.default));
+  setCodeList(
+    await import('./code-list/ai-text-clean-config').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-tool-type-codelist').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ai-trimming-strategy').then(m => m.default),
+  );
+  setCodeList(
+    await import('./code-list/ebsx-ebsx-code-list-todo-state').then(
+      m => m.default,
+    ),
+  );
+  setCodeList(
     await import('./code-list/extension-bi-dimension-type').then(
       m => m.default,
     ),
@@ -556,6 +639,11 @@ export async function registerCodeList(
   );
   setCodeList(
     await import('./code-list/extension-de-logic-sub-type').then(
+      m => m.default,
+    ),
+  );
+  setCodeList(
+    await import('./code-list/extension-de-logic-sys-ai-chat-agent-type').then(
       m => m.default,
     ),
   );
@@ -630,6 +718,7 @@ export async function registerCodeList(
     await import('./code-list/field-data-type-simple').then(m => m.default),
   );
   setCodeList(await import('./code-list/field-type').then(m => m.default));
+  setCodeList(await import('./code-list/filetype').then(m => m.default));
   setCodeList(
     await import('./code-list/test-case-dictionary').then(m => m.default),
   );
@@ -640,6 +729,7 @@ export async function registerCodeList(
   setCodeList(
     await import('./code-list/work-item-dictionary').then(m => m.default),
   );
+  setCodeList(await import('./code-list/workflow-type').then(m => m.default));
 }
 
 export async function getAppDataEntityModel(
@@ -652,6 +742,16 @@ export async function getAppDataEntityModel(
       return import('./entities/workspace').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_knowledge_source':
+    case 'ai_knowledge_source':
+      return import('./entities/ai-knowledge-source').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.extend_scheduled_task':
+    case 'extend_scheduled_task':
+      return import('./entities/extend-scheduled-task').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.library_member':
     case 'library_member':
       return import('./entities/library-member').then(
@@ -660,6 +760,11 @@ export async function getAppDataEntityModel(
     case 'plmweb.baseline':
     case 'baseline':
       return import('./entities/baseline').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_kb_document_sync':
+    case 'ai_kb_document_sync':
+      return import('./entities/ai-kb-document-sync').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.dictionary_data':
@@ -762,6 +867,11 @@ export async function getAppDataEntityModel(
       return import('./entities/run-attachment').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.extend_scheduled_task_his':
+    case 'extend_scheduled_task_his':
+      return import('./entities/extend-scheduled-task-his').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.ticket':
     case 'ticket':
       return import('./entities/ticket').then(
@@ -842,6 +952,11 @@ export async function getAppDataEntityModel(
       return import('./entities/ps-sys-bi-cube-dimension').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_kb_document_wizard':
+    case 'ai_kb_document_wizard':
+      return import('./entities/ai-kb-document-wizard').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.idea_template':
     case 'idea_template':
       return import('./entities/idea-template').then(
@@ -862,14 +977,34 @@ export async function getAppDataEntityModel(
       return import('./entities/ps-core-prd').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_agent_context':
+    case 'ai_agent_context':
+      return import('./entities/ai-agent-context').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_agent':
+    case 'ai_agent':
+      return import('./entities/ai-agent').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.insight_view':
     case 'insight_view':
       return import('./entities/insight-view').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_agent_session':
+    case 'ai_agent_session':
+      return import('./entities/ai-agent-session').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.psdelogicnode':
     case 'psdelogicnode':
       return import('./entities/psde-logic-node').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.openuser':
+    case 'openuser':
+      return import('./entities/openuser').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.role':
@@ -927,6 +1062,11 @@ export async function getAppDataEntityModel(
       return import('./entities/ps-sys-bi-cube-measure').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_kb_document':
+    case 'ai_kb_document':
+      return import('./entities/ai-kb-document').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.baseline_idea':
     case 'baseline_idea':
       return import('./entities/baseline-idea').then(
@@ -967,6 +1107,11 @@ export async function getAppDataEntityModel(
       return import('./entities/login-log').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_agent_message':
+    case 'ai_agent_message':
+      return import('./entities/ai-agent-message').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.comment':
     case 'comment':
       return import('./entities/comment').then(
@@ -982,6 +1127,11 @@ export async function getAppDataEntityModel(
       return import('./entities/library').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_agent_knowledge_rel':
+    case 'ai_agent_knowledge_rel':
+      return import('./entities/ai-agent-knowledge-rel').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.extend_log':
     case 'extend_log':
       return import('./entities/extend-log').then(
@@ -990,6 +1140,11 @@ export async function getAppDataEntityModel(
     case 'plmweb.page_version':
     case 'page_version':
       return import('./entities/page-version').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_kb_chunking_strategy':
+    case 'ai_kb_chunking_strategy':
+      return import('./entities/ai-kb-chunking-strategy').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.notify_setting':
@@ -1015,6 +1170,11 @@ export async function getAppDataEntityModel(
     case 'plmweb.board':
     case 'board':
       return import('./entities/board').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_tool':
+    case 'ai_tool':
+      return import('./entities/ai-tool').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.addon_resource':
@@ -1057,6 +1217,11 @@ export async function getAppDataEntityModel(
       return import('./entities/ps-sys-bi-report-item').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.ai_agent_conversation':
+    case 'ai_agent_conversation':
+      return import('./entities/ai-agent-conversation').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.systodo':
     case 'systodo':
       return import('./entities/sys-todo').then(
@@ -1075,6 +1240,11 @@ export async function getAppDataEntityModel(
     case 'plmweb.insight':
     case 'insight':
       return import('./entities/insight').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.dependency':
+    case 'dependency':
+      return import('./entities/dependency').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.space_member':
@@ -1112,6 +1282,11 @@ export async function getAppDataEntityModel(
       return import('./entities/article-page').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.psdelogicparam':
+    case 'psdelogicparam':
+      return import('./entities/psde-logic-param').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.product_tag':
     case 'product_tag':
       return import('./entities/product-tag').then(
@@ -1130,6 +1305,16 @@ export async function getAppDataEntityModel(
     case 'plmweb.customer':
     case 'customer':
       return import('./entities/customer').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_knowledge_base':
+    case 'ai_knowledge_base':
+      return import('./entities/ai-knowledge-base').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_agent_assignment':
+    case 'ai_agent_assignment':
+      return import('./entities/ai-agent-assignment').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.psdemslogic':
@@ -1155,6 +1340,11 @@ export async function getAppDataEntityModel(
     case 'plmweb.auth_log_admin':
     case 'auth_log_admin':
       return import('./entities/auth-log-admin').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.pswfversion':
+    case 'pswfversion':
+      return import('./entities/pswf-version').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.msvalueproxy':
@@ -1187,9 +1377,9 @@ export async function getAppDataEntityModel(
       return import('./entities/dyna-appmenu').then(
         m => m.default as unknown as IAppDataEntity,
       );
-    case 'plmweb.openuser':
-    case 'openuser':
-      return import('./entities/openuser').then(
+    case 'plmweb.ai_agent_tool_rel':
+    case 'ai_agent_tool_rel':
+      return import('./entities/ai-agent-tool-rel').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.review_content':
@@ -1217,6 +1407,11 @@ export async function getAppDataEntityModel(
       return import('./entities/work').then(
         m => m.default as unknown as IAppDataEntity,
       );
+    case 'plmweb.extend_task_type':
+    case 'extend_task_type':
+      return import('./entities/extend-task-type').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
     case 'plmweb.pssysbireport':
     case 'pssysbireport':
       return import('./entities/ps-sys-bi-report').then(
@@ -1235,6 +1430,21 @@ export async function getAppDataEntityModel(
     case 'plmweb.psdenotify':
     case 'psdenotify':
       return import('./entities/psde-notify').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_credential':
+    case 'ai_credential':
+      return import('./entities/ai-credential').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_model':
+    case 'ai_model':
+      return import('./entities/ai-model').then(
+        m => m.default as unknown as IAppDataEntity,
+      );
+    case 'plmweb.ai_kb_chunk':
+    case 'ai_kb_chunk':
+      return import('./entities/ai-kb-chunk').then(
         m => m.default as unknown as IAppDataEntity,
       );
     case 'plmweb.template_flow':
@@ -1307,11 +1517,6 @@ export async function getAppDataEntityModel(
       return import('./entities/test-case').then(
         m => m.default as unknown as IAppDataEntity,
       );
-    case 'plmweb.dependency':
-    case 'dependency':
-      return import('./entities/dependency').then(
-        m => m.default as unknown as IAppDataEntity,
-      );
     default:
       throw new Error(`无法找到实体模型：${name}`);
   }
@@ -1339,10 +1544,14 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/psdelogictemplate-info-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'extend_scheduled_task_his_edit_view':
+      return import('./views/extend-scheduled-task-his-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_scrum_defect_total_trend_report_view':
-      return import(
-        './views/work-item-scrum-defect-total-trend-report-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-scrum-defect-total-trend-report-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_case_not_add_pick_up_grid_view':
       return import('./views/test-case-not-add-pick-up-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1357,6 +1566,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'relation_idea_re_customer_list_view':
       return import('./views/relation-idea-re-customer-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_context_quick_create_view':
+      return import('./views/ai-agent-context-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'article_page_recycle_grid_view':
@@ -1436,9 +1649,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'test_case_test_plan_re_test_case_prickup_view':
-      return import(
-        './views/test-case-test-plan-re-test-case-prickup-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/test-case-test-plan-re-test-case-prickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'ps_sys_bi_cube_dimension_edit_view':
       return import('./views/ps-sys-bi-cube-dimension-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -1491,14 +1704,18 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/relation-work-item-re-test-case-list-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_kb_document_wizard_create_wizard_view':
+      return import('./views/ai-kb-document-wizard-create-wizard-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'baseline_work_item_realtion_version_list_view':
-      return import(
-        './views/baseline-work-item-realtion-version-list-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/baseline-work-item-realtion-version-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_calendar_work_item_management_grid_view':
-      return import(
-        './views/workload-calendar-work-item-management-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/workload-calendar-work-item-management-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_plan_work_item_mpick_up_grid_view':
       return import('./views/work-item-plan-work-item-mpick-up-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1543,6 +1760,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/project-drill-detail-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_context_my_view':
+      return import('./views/ai-agent-context-my-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'project_deleted_grid_view':
       return import('./views/project-deleted-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1577,6 +1798,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'search_comment_edit_view':
       return import('./views/search-comment-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_model_pickup_grid_view':
+      return import('./views/ai-model-pickup-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'run_redirect_view':
@@ -1628,9 +1853,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_kanban_backlog_daily_trend_report_view':
-      return import(
-        './views/work-item-kanban-backlog-daily-trend-report-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-kanban-backlog-daily-trend-report-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_plan_quick_create_view':
       return import('./views/test-plan-quick-create-view').then(
         m => m.default as unknown as IAppView,
@@ -1671,10 +1896,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/project-choose-project-option-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'dictionary_data_idea_dictionary_create_view':
-      return import('./views/dictionary-data-idea-dictionary-create-view').then(
-        m => m.default as unknown as IAppView,
-      );
     case 'work_item_scrum_print_user_stat_report_view':
       return import('./views/work-item-scrum-print-user-stat-report-view').then(
         m => m.default as unknown as IAppView,
@@ -1688,11 +1909,15 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_kanban_defect_property_report_view':
-      return import(
-        './views/work-item-kanban-defect-property-report-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-kanban-defect-property-report-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'project_tag_option_view':
       return import('./views/project-tag-option-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_knowledge_rel_grid_view':
+      return import('./views/ai-agent-knowledge-rel-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'test_case_nosuite_test_case_grid_view':
@@ -1707,8 +1932,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/product-index-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_knowledge_source_pickup_grid_view':
+      return import('./views/ai-knowledge-source-pickup-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'article_page_draft_show_edit_view':
       return import('./views/article-page-draft-show-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_edit_view':
+      return import('./views/ai-knowledge-base-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_scrum_bug_state_report_view':
@@ -1780,9 +2013,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'baseline_product_categories_pick_up_tree_view':
-      return import(
-        './views/baseline-product-categories-pick-up-tree-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/baseline-product-categories-pick-up-tree-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'project_show_edit_view':
       return import('./views/project-show-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -1792,17 +2025,17 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'psde_field_test_case_extend_transmit_grid_view':
-      return import(
-        './views/psde-field-test-case-extend-transmit-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/psde-field-test-case-extend-transmit-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_tree_grid_ex_view':
       return import('./views/work-tree-grid-ex-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_type_global_setting_view_waterfall':
-      return import(
-        './views/work-item-type-global-setting-view-waterfall'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-type-global-setting-view-waterfall').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'ticket_progress_grid_view':
       return import('./views/ticket-progress-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1812,9 +2045,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'psde_field_work_item_extend_transmit_grid_view':
-      return import(
-        './views/psde-field-work-item-extend-transmit-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/psde-field-work-item-extend-transmit-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'discuss_post_my_attention_grid_view':
       return import('./views/discuss-post-my-attention-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1895,6 +2128,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-reply-latest-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'article_page_review_re_page_view':
+      return import('./views/article-page-review-re-page-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'ps_core_prd_func_api_show_html_view':
       return import('./views/ps-core-prd-func-api-show-html-view').then(
         m => m.default as unknown as IAppView,
@@ -1919,6 +2156,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/project-kanban-flow-setting-tab-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'work_item_pick_up_grid_view_workload':
+      return import('./views/work-item-pick-up-grid-view-workload').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_case_all_grid_view':
       return import('./views/test-case-all-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1936,9 +2177,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'baseline_library_categories_pick_up_tree_view':
-      return import(
-        './views/baseline-library-categories-pick-up-tree-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/baseline-library-categories-pick-up-tree-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_product_grid_view':
       return import('./views/workload-product-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -1949,6 +2190,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'baseline_project_create_view':
       return import('./views/baseline-project-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_kb_document_sync_grid_view':
+      return import('./views/ai-kb-document-sync-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'product_tag_product_tag_confirm_remove_view':
@@ -1999,6 +2244,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/release-pick-up-around-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_knowledge_source_edit_view':
+      return import('./views/ai-knowledge-source-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'space_person_grid_view':
       return import('./views/space-person-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -2035,6 +2284,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/work-item-type-edit-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'work_item_not_add_pick_up_grid_view_review':
+      return import('./views/work-item-not-add-pick-up-grid-view-review').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'deliverable_edit_view':
       return import('./views/deliverable-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -2063,6 +2316,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/review-content-under-review-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_pickup_view':
+      return import('./views/ai-agent-pickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'review_content_work_item_grid_view_all':
       return import('./views/review-content-work-item-grid-view-all').then(
         m => m.default as unknown as IAppView,
@@ -2079,6 +2336,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-topic-is-archived-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'extend_scheduled_task_edit_view':
+      return import('./views/extend-scheduled-task-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_plan_redirect_view':
       return import('./views/test-plan-redirect-view').then(
         m => m.default as unknown as IAppView,
@@ -2087,8 +2348,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ticket-advanced-search-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_conversation_grid_view':
+      return import('./views/ai-agent-conversation-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'relation_product_re_project_grid_view':
       return import('./views/relation-product-re-project-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'article_page_nested_doc_grid_view':
+      return import('./views/article-page-nested-doc-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'review_page_main_view':
@@ -2105,10 +2374,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'space_category_grid_view':
       return import('./views/space-category-grid-view').then(
-        m => m.default as unknown as IAppView,
-      );
-    case 'work_item_dyna_quick_create_bug_view':
-      return import('./views/work-item-dyna-quick-create-bug-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'space_member_redirect_view':
@@ -2140,11 +2405,15 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'dictionary_data_test_case_dictionary_create_view':
-      return import(
-        './views/dictionary-data-test-case-dictionary-create-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/dictionary-data-test-case-dictionary-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_update_view':
       return import('./views/workload-update-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_message_edit_view':
+      return import('./views/ai-agent-message-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'project_move_choose_pick_up_grid_view':
@@ -2173,6 +2442,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'search_attachment_cur_product_grid_view':
       return import('./views/search-attachment-cur-product-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_model_grid_view':
+      return import('./views/ai-model-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'product_ticket_type_quick_create_view':
@@ -2225,6 +2498,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'test_case_my_test_case_grid_view':
       return import('./views/test-case-my-test-case-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_credential_grid_view':
+      return import('./views/ai-credential-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'customer_add_category_option_view':
@@ -2335,6 +2612,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/recent-custom-redirect-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'dictionary_data_delete_confirm_option_view':
+      return import('./views/dictionary-data-delete-confirm-option-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'idea_idea_re_plan_option_view':
       return import('./views/idea-idea-re-plan-option-view').then(
         m => m.default as unknown as IAppView,
@@ -2371,30 +2652,38 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/insight-report-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'article_page_not_add_pick_up_grid_view_review':
-      return import(
-        './views/article-page-not-add-pick-up-grid-view-review'
-      ).then(m => m.default as unknown as IAppView);
     case 'space_create_wizard_view':
       return import('./views/space-create-wizard-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'baseline_project_categories_pick_up_tree_view':
-      return import(
-        './views/baseline-project-categories-pick-up-tree-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/baseline-project-categories-pick-up-tree-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'idea_change_state_view':
       return import('./views/idea-change-state-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_tree_exp_view':
+      return import('./views/ai-agent-tree-exp-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'relation_idea_re_ticket_list_view':
       return import('./views/relation-idea-re-ticket-list-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_credential_quick_create_view':
+      return import('./views/ai-credential-quick-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'dictionary_data_work_item_dictionary_create_view':
-      return import(
-        './views/dictionary-data-work-item-dictionary-create-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/dictionary-data-work-item-dictionary-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_pickup_grid_view':
+      return import('./views/ai-knowledge-base-pickup-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_recycle_bin_grid_view':
       return import('./views/work-item-recycle-bin-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -2425,6 +2714,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'user_grid_view':
       return import('./views/user-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_tool_rel_grid_view':
+      return import('./views/ai-agent-tool-rel-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'test_case_recycle_grid_view':
@@ -2516,9 +2809,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_scrum_property_distribution_report_view':
-      return import(
-        './views/work-item-scrum-property-distribution-report-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-scrum-property-distribution-report-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'role_edit_view2':
       return import('./views/role-edit-view-2').then(
         m => m.default as unknown as IAppView,
@@ -2543,18 +2836,14 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-post-tree-exp-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'review_idea_main_view':
-      return import('./views/review-idea-main-view').then(
-        m => m.default as unknown as IAppView,
-      );
     case 'insight_report_edit_view':
       return import('./views/insight-report-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'portfolio_member_project_bind_member_grid_view':
-      return import(
-        './views/portfolio-member-project-bind-member-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/portfolio-member-project-bind-member-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_global_setting_view':
       return import('./views/work-item-global-setting-view').then(
         m => m.default as unknown as IAppView,
@@ -2631,6 +2920,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/workload-type-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_pickup_grid_view':
+      return import('./views/ai-agent-pickup-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'baseline_snapshot_management_gird_view':
       return import('./views/baseline-snapshot-management-gird-view').then(
         m => m.default as unknown as IAppView,
@@ -2659,6 +2952,14 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/work-item-scrum-defect-age-report-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'dictionary_data_idea_dictionary_grid_view':
+      return import('./views/dictionary-data-idea-dictionary-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_kb_document_pickup_grid_view':
+      return import('./views/ai-kb-document-pickup-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_log_management_view':
       return import('./views/workload-log-management-view').then(
         m => m.default as unknown as IAppView,
@@ -2676,9 +2977,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'dictionary_data_ticket_dictionary_create_view':
-      return import(
-        './views/dictionary-data-ticket-dictionary-create-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/dictionary-data-ticket-dictionary-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'baseline_idea_edit_view':
       return import('./views/baseline-idea-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -2695,8 +2996,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-post-discuss-post-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_credential_edit_view':
+      return import('./views/ai-credential-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'insight_view_show_edit_view':
       return import('./views/insight-view-show-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_m_pickup_view':
+      return import('./views/ai-knowledge-base-m-pickup-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'role_edit_view':
@@ -2707,8 +3016,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/work-item-type-global-setting-mixed').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_tool_edit_view':
+      return import('./views/ai-tool-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'library_show_edit_view':
       return import('./views/library-show-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_tool_pickup_grid_view':
+      return import('./views/ai-tool-pickup-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'idea_my_assign_grid_view':
@@ -2751,8 +3068,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-post-redirect-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_context_info_view':
+      return import('./views/ai-agent-context-info-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'idea_baseline_mpick_up_grid_view':
       return import('./views/idea-baseline-mpick-up-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_quick_create_view':
+      return import('./views/ai-knowledge-base-quick-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_tool_m_pickup_view':
+      return import('./views/ai-tool-m-pickup-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'member_edit_view':
@@ -2763,14 +3092,18 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ticket-archived-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_tool_main_view':
+      return import('./views/ai-tool-main-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_plan_release_relation_grid_view':
       return import('./views/test-plan-release-relation-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'dictionary_data_test_case_dictionary_grid_view':
-      return import(
-        './views/dictionary-data-test-case-dictionary-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/dictionary-data-test-case-dictionary-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'user_account_tab_exp_view':
       return import('./views/user-account-tab-exp-view').then(
         m => m.default as unknown as IAppView,
@@ -2781,10 +3114,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'discuss_post_recent_grid_view':
       return import('./views/discuss-post-recent-grid-view').then(
-        m => m.default as unknown as IAppView,
-      );
-    case 'dictionary_data_idea_dictionary_grid_view':
-      return import('./views/dictionary-data-idea-dictionary-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_scrum_defect_property_report_view':
@@ -2931,12 +3260,12 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/product-member-assigned-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'baseline_page_relation_grid_view':
-      return import('./views/baseline-page-relation-grid-view').then(
+    case 'ai_agent_context_main_view':
+      return import('./views/ai-agent-context-main-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'work_item_pick_up_grid_view':
-      return import('./views/work-item-pick-up-grid-view').then(
+    case 'baseline_page_relation_grid_view':
+      return import('./views/baseline-page-relation-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_my_assignee_gird_view':
@@ -2960,9 +3289,13 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'workload_calendar_test_case_management_grid_view':
-      return import(
-        './views/workload-calendar-test-case-management-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/workload-calendar-test-case-management-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_grid_view':
+      return import('./views/ai-agent-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'discuss_topic_tab_exp_view':
       return import('./views/discuss-topic-tab-exp-view').then(
         m => m.default as unknown as IAppView,
@@ -2999,6 +3332,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/user-choose-pick-up-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'article_page_version_comparison_view':
+      return import('./views/article-page-version-comparison-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'run_tree_exp_view':
       return import('./views/run-tree-exp-view').then(
         m => m.default as unknown as IAppView,
@@ -3009,6 +3346,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'review_content_idea_set_result_edit_view':
       return import('./views/review-content-idea-set-result-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_source_pickup_view':
+      return import('./views/ai-knowledge-source-pickup-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'user_pick_up_view':
@@ -3081,6 +3422,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'group_tree_exp_view':
       return import('./views/group-tree-exp-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'extend_scheduled_task_his_grid_view':
+      return import('./views/extend-scheduled-task-his-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'ticket_drill_detail_grid_view':
@@ -3159,16 +3504,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/space-in-progress-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_context_grid_view':
+      return import('./views/ai-agent-context-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'review_baseline_grid_view':
       return import('./views/review-baseline-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'library_index_view':
       return import('./views/library-index-view').then(
-        m => m.default as unknown as IAppView,
-      );
-    case 'work_item_review_re_work_item_view':
-      return import('./views/work-item-review-re-work-item-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'space_project_re_tree_exp_view':
@@ -3205,6 +3550,14 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'relation_test_case_re_bug_grid_view':
       return import('./views/relation-test-case-re-bug-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_tool_rel_edit_view':
+      return import('./views/ai-agent-tool-rel-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_source_quick_create_view':
+      return import('./views/ai-knowledge-source-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'role_grid_view':
@@ -3255,6 +3608,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/product-ticket-configuration-tab-exp-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_conversation_edit_view':
+      return import('./views/ai-agent-conversation-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'idea_drill_detail_grid_view':
       return import('./views/idea-drill-detail-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3285,6 +3642,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'discuss_post_all_grid_view':
       return import('./views/discuss-post-all-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_main_view':
+      return import('./views/ai-knowledge-base-main-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'insight_member_assigned_grid_view':
@@ -3363,6 +3724,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/library-archived-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_tool_grid_view':
+      return import('./views/ai-tool-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'psde_logic_test_auto_rules_edit_view':
       return import('./views/psde-logic-test-auto-rules-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -3383,10 +3748,14 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/addon-product-setting-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_kb_chunk_tree_view':
+      return import('./views/ai-kb-chunk-tree-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'baseline_test_case_relation_version_list_view':
-      return import(
-        './views/baseline-test-case-relation-version-list-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/baseline-test-case-relation-version-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'insight_report_all_report_grid_view':
       return import('./views/insight-report-all-report-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3428,9 +3797,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'workload_management_member_calendar_grid_view':
-      return import(
-        './views/workload-management-member-calendar-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/workload-management-member-calendar-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'run_daily_tendencies_option_view':
       return import('./views/run-daily-tendencies-option-view').then(
         m => m.default as unknown as IAppView,
@@ -3456,9 +3825,13 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_kanban_backlog_property_report_view':
-      return import(
-        './views/work-item-kanban-backlog-property-report-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-kanban-backlog-property-report-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_message_grid_view':
+      return import('./views/ai-agent-message-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_my_attention_grid_view':
       return import('./views/work-item-my-attention-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3496,13 +3869,13 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_wizard_detail_change_confirm_grid_view':
-      return import(
-        './views/work-item-wizard-detail-change-confirm-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-wizard-detail-change-confirm-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_wizard_detail_target_state_grid_view':
-      return import(
-        './views/work-item-wizard-detail-target-state-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-wizard-detail-target-state-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_plan_my_part_grid_view':
       return import('./views/test-plan-my-part-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3519,16 +3892,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/relation-work-item-re-self-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'dictionary_data_delete_confirm_option_view':
-      return import('./views/dictionary-data-delete-confirm-option-view').then(
-        m => m.default as unknown as IAppView,
-      );
     case 'project_pick_up_grid_view':
       return import('./views/project-pick-up-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'baseline_product_grid_view':
       return import('./views/baseline-product-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_assignment_bind':
+      return import('./views/ai-agent-assignment-bind').then(
         m => m.default as unknown as IAppView,
       );
     case 'review_complete_review_option_view':
@@ -3615,6 +3988,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-member-redirect-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_edit_view':
+      return import('./views/ai-agent-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'ps_core_prd_func_info_view':
       return import('./views/ps-core-prd-func-info-view').then(
         m => m.default as unknown as IAppView,
@@ -3639,6 +4016,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/version-test-case-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'dictionary_data_idea_dictionary_create_view':
+      return import('./views/dictionary-data-idea-dictionary-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_work_type_grid_view':
       return import('./views/workload-work-type-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3659,8 +4040,8 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/discuss-post-main-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'idea_not_add_pick_up_grid_view_review':
-      return import('./views/idea-not-add-pick-up-grid-view-review').then(
+    case 'ai_kb_chunk_edit_view':
+      return import('./views/ai-kb-chunk-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_burn_out_custom_view':
@@ -3693,10 +4074,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'release_program_pickup_grid_view':
       return import('./views/release-program-pickup-grid-view').then(
-        m => m.default as unknown as IAppView,
-      );
-    case 'article_page_review_re_page_view':
-      return import('./views/article-page-review-re-page-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'review_content_page_no_grid_view_all':
@@ -3771,6 +4148,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/run-main-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_model_pickup_view':
+      return import('./views/ai-model-pickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'user_unassigned_dept_grid_view':
       return import('./views/user-unassigned-dept-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3787,8 +4168,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/work-item-my-todo-gird-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'work_item_review_re_work_item_view':
+      return import('./views/work-item-review-re-work-item-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'workload_list_view':
       return import('./views/workload-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_source_grid_view':
+      return import('./views/ai-knowledge-source-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'library_is_archived_grid_view':
@@ -3923,6 +4312,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/space-tab-exp-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_credential_pickup_view':
+      return import('./views/ai-credential-pickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'discuss_member_config_grid_view':
       return import('./views/discuss-member-config-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -3983,6 +4376,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/review-all-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_assignment_selector':
+      return import('./views/ai-agent-assignment-selector').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_change_state_view':
       return import('./views/work-item-change-state-view').then(
         m => m.default as unknown as IAppView,
@@ -3993,6 +4390,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'project_is_archived_grid_view':
       return import('./views/project-is-archived-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'work_item_dyna_quick_create_bug_view':
+      return import('./views/work-item-dyna-quick-create-bug-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'discuss_post_edit_view':
@@ -4083,6 +4484,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/project-scrum-main-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_quick_create_view':
+      return import('./views/ai-agent-quick-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'ticket_type_editor_view':
       return import('./views/ticket-type-editor-view').then(
         m => m.default as unknown as IAppView,
@@ -4131,10 +4536,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/baseline-space-categories-pick-up-tree-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'user_main_view':
-      return import('./views/user-main-view').then(
-        m => m.default as unknown as IAppView,
-      );
     case 'work_item_baseline_mpick_up_grid_view':
       return import('./views/work-item-baseline-mpick-up-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -4153,6 +4554,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'test_suite_pick_up_view':
       return import('./views/test-suite-pick-up-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'test_case_pick_up_grid_view':
+      return import('./views/test-case-pick-up-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'position_tree_exp_view':
@@ -4207,6 +4612,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ps-core-prd-func-tree-exp-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_agent_knowledge_rel_edit_view':
+      return import('./views/ai-agent-knowledge-rel-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'article_page_tree_exp_view':
       return import('./views/article-page-tree-exp-view').then(
         m => m.default as unknown as IAppView,
@@ -4247,6 +4656,18 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/review-redirect-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'idea_not_add_pick_up_grid_view_review':
+      return import('./views/idea-not-add-pick-up-grid-view-review').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'article_page_ai_kb_doc_page_pick_up_tree_view':
+      return import('./views/article-page-ai-kb-doc-page-pick-up-tree-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_kb_document_nested_grid_view':
+      return import('./views/ai-kb-document-nested-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_all_scrum_grid_view':
       return import('./views/work-item-all-scrum-grid-view').then(
         m => m.default as unknown as IAppView,
@@ -4263,6 +4684,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/work-item-scrum-backlog-state-report-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_tool_quick_create_view':
+      return import('./views/ai-tool-quick-create-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'article_page_redirect_view':
       return import('./views/article-page-redirect-view').then(
         m => m.default as unknown as IAppView,
@@ -4276,9 +4701,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'dictionary_data_work_item_dictionary_grid_view':
-      return import(
-        './views/dictionary-data-work-item-dictionary-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/dictionary-data-work-item-dictionary-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'relation_work_item_re_ticket_list_view':
       return import('./views/relation-work-item-re-ticket-list-view').then(
         m => m.default as unknown as IAppView,
@@ -4315,12 +4740,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/idea-app-data-upload-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_credential_main_view':
+      return import('./views/ai-credential-main-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'portfolio_deleted_grid_view':
       return import('./views/portfolio-deleted-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'idea_template_global_edit_view':
       return import('./views/idea-template-global-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_model_main_view':
+      return import('./views/ai-model-main-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'run_priority_distributions_report_view':
@@ -4467,8 +4900,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ps-core-prd-market-application-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'test_case_pick_up_view':
+      return import('./views/test-case-pick-up-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'recent_my_assignee_item_tap_exp_view':
       return import('./views/recent-my-assignee-item-tap-exp-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'extend_task_type_edit_view':
+      return import('./views/extend-task-type-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_model_quick_create_view':
+      return import('./views/ai-model-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_quick_create_bug_view':
@@ -4477,6 +4922,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'article_page_copy_page_option_view':
       return import('./views/article-page-copy-page-option-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_model_edit_view':
+      return import('./views/ai-model-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'article_page_document_edit_view':
@@ -4623,12 +5072,24 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/project-state-edit-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'review_idea_main_view':
+      return import('./views/review-idea-main-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'discuss_topic_is_deleted_grid_view':
       return import('./views/discuss-topic-is-deleted-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_knowledge_base_grid_view':
+      return import('./views/ai-knowledge-base-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'user_info_custom_view':
       return import('./views/user-info-custom-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_knowledge_base_chunking_strategy_edit_view':
+      return import('./views/ai-knowledge-base-chunking-strategy-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'library_member_choose_position_option_view':
@@ -4687,12 +5148,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ps-sys-bi-cube-measure-edit-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'dictionary_data_project_type_list_view':
+      return import('./views/dictionary-data-project-type-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'library_in_progress_grid_view':
       return import('./views/library-in-progress-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'work_item_not_add_pick_up_grid_view_review':
-      return import('./views/work-item-not-add-pick-up-grid-view-review').then(
+    case 'ai_kb_document_edit_view':
+      return import('./views/ai-kb-document-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'test_plan_main_view':
@@ -4719,12 +5184,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/workload-calendar-idea-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'portfolio_mpick_up_view':
-      return import('./views/portfolio-mpick-up-view').then(
+    case 'extend_scheduled_task_grid_view':
+      return import('./views/extend-scheduled-task-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'user_quick_create_view':
-      return import('./views/user-quick-create-view').then(
+    case 'ai_knowledge_base_pickup_view':
+      return import('./views/ai-knowledge-base-pickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_kb_document_pickup_view':
+      return import('./views/ai-kb-document-pickup-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'portfolio_mpick_up_view':
+      return import('./views/portfolio-mpick-up-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'dyna_dashboard_info_edit_view':
@@ -4735,12 +5208,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/recent-recent-test-case-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'idea_prickup_grid_view':
+      return import('./views/idea-prickup-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'test_case_program_analyze_report_view':
       return import('./views/test-case-program-analyze-report-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'recent_redirect_view':
       return import('./views/recent-redirect-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'extend_scheduled_task_tab_exp_view':
+      return import('./views/extend-scheduled-task-tab-exp-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'ticket_type_global_setting_view':
@@ -4753,6 +5234,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'work_item_scrum_require_tree_grid_view':
       return import('./views/work-item-scrum-require-tree-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_context_edit_view':
+      return import('./views/ai-agent-context-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_redirect_view':
@@ -4783,8 +5268,16 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/guideline-all-grid-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'ai_knowledge_source_main_view':
+      return import('./views/ai-knowledge-source-main-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'project_property_edit_view':
       return import('./views/project-property-edit-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_agent_main_view':
+      return import('./views/ai-agent-main-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'idea_template_edit_view':
@@ -4845,6 +5338,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'test_plan_sprint_relation_grid_view':
       return import('./views/test-plan-sprint-relation-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'article_page_usr12022062_edit_view':
+      return import('./views/article-page-usr-12022062-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'relation_edit_view':
@@ -4951,12 +5448,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/test-plan-report-dashboard-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'workload_quick_create_view_workbench':
+      return import('./views/workload-quick-create-view-workbench').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'space_archived_grid_view':
       return import('./views/space-archived-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'ps_sys_bi_cube_dimension_redirect_view':
       return import('./views/ps-sys-bi-cube-dimension-redirect-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'article_page_not_add_pick_up_grid_view_review':
+      return import('./views/article-page-not-add-pick-up-grid-view-review').then(
         m => m.default as unknown as IAppView,
       );
     case 'work_item_completed_drill_detail_grid_view':
@@ -4971,6 +5476,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/idea-update-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'user_main_view':
+      return import('./views/user-main-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'review_idea_pick_up_tree_view':
       return import('./views/review-idea-pick-up-tree-view').then(
         m => m.default as unknown as IAppView,
@@ -4983,6 +5492,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/test-plan-conclude-edit-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'extend_task_type_grid_view':
+      return import('./views/extend-task-type-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'relation_work_item_re_idea_list_view':
       return import('./views/relation-work-item-re-idea-list-view').then(
         m => m.default as unknown as IAppView,
@@ -4992,9 +5505,9 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
         m => m.default as unknown as IAppView,
       );
     case 'work_item_wizard_detail_target_type_grid_view':
-      return import(
-        './views/work-item-wizard-detail-target-type-grid-view'
-      ).then(m => m.default as unknown as IAppView);
+      return import('./views/work-item-wizard-detail-target-type-grid-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'dictionary_data_edit_view':
       return import('./views/dictionary-data-edit-view').then(
         m => m.default as unknown as IAppView,
@@ -5009,6 +5522,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'ticket_type_config_tab_exp_view':
       return import('./views/ticket-type-config-tab-exp-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'user_quick_create_view':
+      return import('./views/user-quick-create-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'workload_drill_detail_grid_view':
@@ -5047,8 +5564,20 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/ps-core-prd-info-view').then(
         m => m.default as unknown as IAppView,
       );
+    case 'dictionary_data_copy_project_type_list_view':
+      return import('./views/dictionary-data-copy-project-type-list-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'idea_pick_up_view':
+      return import('./views/idea-pick-up-view').then(
+        m => m.default as unknown as IAppView,
+      );
     case 'work_item_wizard_change_view':
       return import('./views/work-item-wizard-change-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_credential_pickup_grid_view':
+      return import('./views/ai-credential-pickup-grid-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'recent_custom_dashboard_view':
@@ -5175,10 +5704,6 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       return import('./views/psde-field-global-ticket-grid-view').then(
         m => m.default as unknown as IAppView,
       );
-    case 'article_page_version_comparison_view':
-      return import('./views/article-page-version-comparison-view').then(
-        m => m.default as unknown as IAppView,
-      );
     case 'review_stage_list_view':
       return import('./views/review-stage-list-view').then(
         m => m.default as unknown as IAppView,
@@ -5193,6 +5718,10 @@ export async function getAppViewModel(name: string): Promise<IAppView> {
       );
     case 'library_filter_tab_exp_view':
       return import('./views/library-filter-tab-exp-view').then(
+        m => m.default as unknown as IAppView,
+      );
+    case 'ai_kb_document_sync_edit_view':
+      return import('./views/ai-kb-document-sync-edit-view').then(
         m => m.default as unknown as IAppView,
       );
     case 'library_pick_up_grid_view':
@@ -5224,6 +5753,8 @@ export async function getAppModel(): Promise<IApplication> {
   ibiz.hub.defaultAppIndexViewName = 'app_index_view';
   return import('./app/app').then(m => {
     const app = m.default as IData;
+    // 设置应用原始模型到hub中
+    ibiz.hub.setAppSourceModel(app.appId, app);
     app.appUtils?.forEach((util: IData) => {
       util.appId = app.appId;
     });

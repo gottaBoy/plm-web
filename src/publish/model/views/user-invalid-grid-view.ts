@@ -320,7 +320,7 @@ export default {
                     cssClass: 'fa fa-edit',
                     glyph: 'xf044@FontAwesome',
                   },
-                  id: 'udd3138e',
+                  id: 'uc852ed6',
                 },
                 {
                   actionLevel: 100,
@@ -336,7 +336,7 @@ export default {
                     cssClass: 'fa fa-lightbulb-o',
                     glyph: 'xf0eb@FontAwesome',
                   },
-                  id: 'u17b6433',
+                  id: 'ub35b830',
                 },
               ],
               appDataEntityId: 'plmweb.user',

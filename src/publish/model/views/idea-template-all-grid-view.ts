@@ -211,7 +211,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'uc69d69d',
+                id: 'u8affdde',
               },
               {
                 actionLevel: 200,
@@ -226,7 +226,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u60fa50d',
+                id: 'uffd7fa6',
               },
             ],
             appDataEntityId: 'plmweb.idea_template',

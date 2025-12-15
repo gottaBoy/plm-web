@@ -178,6 +178,28 @@ export default {
         },
         id: 'view_content',
       },
+      {
+        caption: '工具栏',
+        itemStyle: 'DEFAULT',
+        itemType: 'CTRLPOS',
+        layoutPos: {
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        showCaption: true,
+        id: 'usr11267619toolbar',
+      },
+      {
+        caption: '工具栏',
+        itemStyle: 'DEFAULT',
+        itemType: 'CTRLPOS',
+        layoutPos: {
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        showCaption: true,
+        id: 'calendar_toolbar',
+      },
     ],
     layoutPanel: true,
     appViewEngines: [
@@ -994,12 +1016,12 @@ export default {
         xdataControlName: 'grid',
         codeName: 'calendar_work_item_management_grid_view_toolbar',
         controlType: 'TOOLBAR',
-        logicName: '工时日历_工具栏',
+        logicName: '工时管理工具栏',
         appDataEntityId: 'plmweb.workload',
         controlParam: {
           id: 'toolbar',
         },
-        modelId: '1caa28e37cd29023f9d644f5b0378f0f',
+        modelId: '2069ac496c0fa376e7de57aab55bb10a',
         modelType: 'PSDETOOLBAR',
         name: 'toolbar',
         id: 'calendar_work_item_management_grid_view_toolbar',

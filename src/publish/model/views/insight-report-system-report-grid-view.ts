@@ -133,7 +133,7 @@ export default {
                   cssClass: 'fa fa-wrench',
                   glyph: 'xf0ad@FontAwesome',
                 },
-                id: 'uc366f1d',
+                id: 'u334b793',
               },
               {
                 actionLevel: 100,
@@ -149,7 +149,7 @@ export default {
                   cssClass: 'fa fa-remove',
                   glyph: 'xf00d@FontAwesome',
                 },
-                id: 'ue435e32',
+                id: 'u147a403',
               },
             ],
             appDataEntityId: 'plmweb.insight_report',

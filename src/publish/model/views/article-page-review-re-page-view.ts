@@ -1,7 +1,7 @@
 export default {
   openMode: 'POPUPMODAL',
   deviewCodeName: 'review_re_page_view',
-  deviewId: '8011AD5C-B184-4C44-9BBF-B45D9F5118C6',
+  deviewId: '1a2126ce5187b351eef6d8956d2d32cf',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.PAGE',
@@ -150,7 +150,7 @@ export default {
       controlParam: {
         id: 'treeexpbar',
       },
-      modelId: '9767caf28ba99dcec81d4b48c866a5dd_treeexpbar',
+      modelId: '22c25240e7ab2df2b0f1d3acde0981b9_treeexpbar',
       modelType: 'PSEXPBAR',
       name: 'treeexpbar',
       id: 'review_re_page_view_treeexpbar',
@@ -211,7 +211,7 @@ export default {
         logicName: 'simplelist_列表项面板',
         appDataEntityId: 'plmweb.article_page',
         controlParam: {},
-        modelId: '3123DE30-F6C3-4EBB-92E6-C3E86908F061',
+        modelId: 'b2c30447428332875cc6dc067e616696',
         modelType: 'PSSYSVIEWPANEL',
         name: 'simplelist_itempanel',
         id: 'plmweb.article_page.usr0804340234',
@@ -219,14 +219,14 @@ export default {
       orderValueAppDEFieldId: 'sequence',
       delistDataItems: [
         {
-          appDEFieldId: 'id',
-          dataType: 25,
-          id: 'id',
-        },
-        {
           appDEFieldId: 'name',
           dataType: 25,
           id: 'name',
+        },
+        {
+          appDEFieldId: 'id',
+          dataType: 25,
+          id: 'id',
         },
         {
           appDEFieldId: 'id',
@@ -286,7 +286,7 @@ export default {
       controlParam: {
         id: 'simplelist',
       },
-      modelId: '8E60B740-2DE4-4130-80BF-C53DBC9B5A23',
+      modelId: 'e66ba5a41f1290eda13ede5f9a7578fc',
       modelType: 'PSDELIST',
       name: 'simplelist',
       id: 'plmweb.article_page.simplelist',
@@ -320,7 +320,7 @@ export default {
   viewType: 'DEMPICKUPVIEW2',
   enableDP: true,
   showCaptionBar: false,
-  modelId: '9767caf28ba99dcec81d4b48c866a5dd',
+  modelId: '22c25240e7ab2df2b0f1d3acde0981b9',
   modelType: 'PSAPPDEVIEW',
   name: 'article_pagereview_re_page_view',
   id: 'plmweb.article_page_review_re_page_view',

@@ -6,7 +6,7 @@
     :model-data="model"
   >
     <template #simplelist="slotProps">
-      <i-biz-control-shell v-bind="slotProps" />
+      <i-biz-list-control v-bind="slotProps" />
     </template>
     <template #pickupviewpanel="slotProps">
       <i-biz-pickup-view-panel-control v-bind="slotProps" />

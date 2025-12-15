@@ -657,6 +657,7 @@ export default {
             caption: '活跃率',
             catalogField: 'AUTHTIME',
             echartsType: 'line',
+            groupMode: 'DAY',
             chartCoordinateSystemId: '0',
             chartDataSetId: '0',
             chartSeriesEncode: {
@@ -682,6 +683,7 @@ export default {
             caption: '活跃成员数',
             catalogField: 'AUTHTIME',
             echartsType: 'bar',
+            groupMode: 'DAY',
             chartCoordinateSystemId: '0',
             chartDataSetId: '1',
             chartSeriesEncode: {
@@ -723,6 +725,7 @@ export default {
           {
             chartDataSetFields: [
               {
+                groupMode: 'DAY',
                 groupField: true,
                 name: 'AUTHTIME',
                 id: '0',
@@ -739,6 +742,7 @@ export default {
           {
             chartDataSetFields: [
               {
+                groupMode: 'DAY',
                 groupField: true,
                 name: 'AUTHTIME',
                 id: '0',

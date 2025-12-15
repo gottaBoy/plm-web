@@ -66,7 +66,7 @@ export default {
               cssClass: 'fa fa-plus',
               glyph: 'xf067@FontAwesome',
             },
-            id: 'u243d7d9',
+            id: 'uedc92c6',
           },
           {
             actionLevel: 100,
@@ -83,7 +83,7 @@ export default {
               cssClass: 'fa fa-sun-o',
               glyph: 'xf185@FontAwesome',
             },
-            id: 'u49ac520',
+            id: 'uab5231f',
           },
         ],
         appDataEntityId: 'plmweb.board',
@@ -1053,6 +1053,7 @@ export default {
         {
           dstAppDEUIActionId: 'open_default_board@board',
           dstAppDataEntityId: 'plmweb.board',
+          retDEUILogicParamId: 'default',
           codeName: 'DEUIACTION1',
           dstDEUILogicParamId: 'data',
           leftPos: -197,
@@ -1133,6 +1134,7 @@ export default {
         {
           dstAppDEUIActionId: 'remove',
           dstAppDataEntityId: 'plmweb.board',
+          retDEUILogicParamId: 'default',
           codeName: 'DEUIACTION2',
           dstDEUILogicParamId: 'default',
           leftPos: -197,

@@ -573,20 +573,14 @@ export default {
       },
       delistDataItems: [
         {
-          appDEFieldId: 'id',
-          dataType: 25,
-          id: 'id',
-        },
-        {
           appDEFieldId: 'content',
           dataType: 21,
           id: 'content',
         },
         {
-          appDEFieldId: 'create_man',
-          frontCodeListId: 'plmweb.sysoperator',
+          appDEFieldId: 'id',
           dataType: 25,
-          id: 'create_man',
+          id: 'id',
         },
         {
           appDEFieldId: 'create_time',
@@ -598,6 +592,12 @@ export default {
           appDEFieldId: 'comments',
           dataType: 21,
           id: 'comments',
+        },
+        {
+          appDEFieldId: 'create_man',
+          frontCodeListId: 'plmweb.sysoperator',
+          dataType: 25,
+          id: 'create_man',
         },
         {
           appDEFieldId: 'post_id',

@@ -81,6 +81,15 @@ export default {
       id: 'ctrl_id',
     },
     {
+      codeName: 'app_tag',
+      logicName: '应用标记',
+      predefinedType: 'NONE',
+      stdDataType: 25,
+      stringLength: 100,
+      name: 'APP_TAG',
+      id: 'app_tag',
+    },
+    {
       codeName: 'id',
       lnlanguageRes: {
         lanResTag: 'DEF.LNAME.ID',
@@ -298,6 +307,16 @@ export default {
           type: 'SIMPLE',
           allowEmpty: true,
           id: 'ctrl_id',
+        },
+        {
+          codeName: 'app_tag',
+          logicName: '应用标记',
+          appDEFieldId: 'app_tag',
+          sourceType: 'DEFIELD',
+          stdDataType: 25,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'app_tag',
         },
         {
           codeName: 'create_man',

@@ -1159,7 +1159,7 @@ export default {
           controlParam: {
             id: 'wizardpanel_form_review_connect',
           },
-          modelId: 'f0902d087f7a34c1ea65d7526bc7253a',
+          modelId: '14869b40be553eae899f2aca3f62324c',
           modelType: 'PSDEFORM_EDITFORM',
           name: 'wizardpanel_form_review_connect',
           id: 'plmweb.review_wizard.create_common_form',

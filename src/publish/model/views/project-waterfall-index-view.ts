@@ -5,6 +5,7 @@ export default {
   accUserMode: 2,
   caption: '项目',
   codeName: 'project_waterfall_index_view',
+  dynaSysMode: 1,
   appDataEntityId: 'plmweb.project',
   appViewNavContexts: [
     {
@@ -629,6 +630,7 @@ export default {
         codeName: 'waterfall',
         controlStyle: 'DRBAR_EX',
         controlType: 'DRBAR',
+        dynaSysMode: 1,
         appDataEntityId: 'plmweb.project',
         controlParam: {
           id: 'drbar',

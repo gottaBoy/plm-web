@@ -800,7 +800,7 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
-                    'toolbar_idea_tree_exp_view_node10_cm_deuiaction1_click@review',
+                    'toolbar_idea_tree_exp_view_node8_cm_deuiaction1_click@review',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
                   caption: '编辑',
@@ -808,7 +808,7 @@ export default {
                   controlLogics: [
                     {
                       itemName: 'deuiaction1',
-                      logicTag: 'node_10_cm',
+                      logicTag: 'node_8_cm',
                       logicType: 'SCRIPT',
                       scriptCode: '!context.srfreadonly',
                       triggerType: 'ITEMVISIBLE',
@@ -828,7 +828,7 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
-                    'toolbar_idea_tree_exp_view_node10_cm_deuiaction2_click@review',
+                    'toolbar_idea_tree_exp_view_node8_cm_deuiaction2_click@review',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
                   caption: '删除',
@@ -836,7 +836,7 @@ export default {
                   controlLogics: [
                     {
                       itemName: 'deuiaction2',
-                      logicTag: 'node_10_cm',
+                      logicTag: 'node_8_cm',
                       logicType: 'SCRIPT',
                       scriptCode: '!context.srfreadonly',
                       triggerType: 'ITEMVISIBLE',
@@ -853,17 +853,17 @@ export default {
                   id: 'deuiaction2',
                 },
               ],
-              codeName: 'idea_tree_exp_view_node10_cm',
+              codeName: 'idea_tree_exp_view_node8_cm',
               controlType: 'CONTEXTMENU',
               logicName: '树节点上下文菜单',
               appDataEntityId: 'plmweb.review',
               controlParam: {
-                id: 'node_10_cm',
+                id: 'node_8_cm',
               },
               modelId: '380703d8ba3fc64b19010873bd74948d',
               modelType: 'PSDETOOLBAR',
-              name: 'node_10_cm',
-              id: 'idea_tree_exp_view_node10_cm',
+              name: 'node_8_cm',
+              id: 'idea_tree_exp_view_node8_cm',
             },
             {
               detoolbarItems: [
@@ -942,7 +942,7 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
-                    'toolbar_idea_tree_exp_view_node8_cm_deuiaction1_click@review',
+                    'toolbar_idea_tree_exp_view_node10_cm_deuiaction1_click@review',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
                   caption: '编辑',
@@ -950,7 +950,7 @@ export default {
                   controlLogics: [
                     {
                       itemName: 'deuiaction1',
-                      logicTag: 'node_8_cm',
+                      logicTag: 'node_10_cm',
                       logicType: 'SCRIPT',
                       scriptCode: '!context.srfreadonly',
                       triggerType: 'ITEMVISIBLE',
@@ -970,7 +970,7 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
-                    'toolbar_idea_tree_exp_view_node8_cm_deuiaction2_click@review',
+                    'toolbar_idea_tree_exp_view_node10_cm_deuiaction2_click@review',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
                   caption: '删除',
@@ -978,7 +978,7 @@ export default {
                   controlLogics: [
                     {
                       itemName: 'deuiaction2',
-                      logicTag: 'node_8_cm',
+                      logicTag: 'node_10_cm',
                       logicType: 'SCRIPT',
                       scriptCode: '!context.srfreadonly',
                       triggerType: 'ITEMVISIBLE',
@@ -995,17 +995,17 @@ export default {
                   id: 'deuiaction2',
                 },
               ],
-              codeName: 'idea_tree_exp_view_node8_cm',
+              codeName: 'idea_tree_exp_view_node10_cm',
               controlType: 'CONTEXTMENU',
               logicName: '树节点上下文菜单',
               appDataEntityId: 'plmweb.review',
               controlParam: {
-                id: 'node_8_cm',
+                id: 'node_10_cm',
               },
               modelId: '380703d8ba3fc64b19010873bd74948d',
               modelType: 'PSDETOOLBAR',
-              name: 'node_8_cm',
-              id: 'idea_tree_exp_view_node8_cm',
+              name: 'node_10_cm',
+              id: 'idea_tree_exp_view_node10_cm',
             },
           ],
           codeName: 'idea_tree_exp_view_tree_view',

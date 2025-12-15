@@ -5,7 +5,7 @@ export default {
   loadDefault: true,
   openMode: 'POPUPMODAL',
   deviewCodeName: 'delete_confirm_option_view',
-  deviewId: '09B142C0-3EC9-4A3D-AE58-BFD66A29EB94',
+  deviewId: 'a1189d8590c7d9a16f39341fbc39ad90',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.DICTIONARY',
@@ -291,7 +291,7 @@ export default {
       sysCss: {
         cssName: 'confirm-remove-view',
       },
-      modelId: 'AFFA498F-4DDB-463C-8700-CBF9E801FCC5',
+      modelId: 'bf9bfd653f42e8a21fd95e362a1f201f',
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
       id: 'plmweb.dictionary_data.usr04280472_form',
@@ -336,7 +336,7 @@ export default {
   width: 650,
   enableDP: true,
   showCaptionBar: true,
-  modelId: '8b8cf7871aa4269f56e530d98d66659a',
+  modelId: '3ff6c5c46e40c2988d15ce2a9eb4aaf5',
   modelType: 'PSAPPDEVIEW',
   name: 'dictionary_datadelete_confirm_option_view',
   id: 'plmweb.dictionary_data_delete_confirm_option_view',

@@ -479,9 +479,14 @@ export default {
             codeName: 'assignee_name',
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,
+            sysPFPluginId: 'personal_info_column',
             width: 150,
             widthUnit: 'PX',
             enableSort: true,
+            userParam: {
+              datasource: 'ROWDATA',
+              placeholder: '',
+            },
             id: 'assignee_name',
           },
           {

@@ -127,7 +127,7 @@ export default {
                   cssClass: 'fa fa-refresh',
                   glyph: 'xf021@FontAwesome',
                 },
-                id: 'u508b77e',
+                id: 'u83020ce',
               },
             ],
             appDataEntityId: 'plmweb.discuss_post',

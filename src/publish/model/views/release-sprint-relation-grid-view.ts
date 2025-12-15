@@ -107,7 +107,7 @@ export default {
                   cssClass: 'fa fa-unlink',
                   glyph: 'xf127@FontAwesome',
                 },
-                id: 'u410785d',
+                id: 'u184067d',
               },
             ],
             appDataEntityId: 'plmweb.release',

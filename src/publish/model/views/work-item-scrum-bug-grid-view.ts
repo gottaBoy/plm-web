@@ -306,7 +306,7 @@ export default {
                   cssClass: 'fa fa-copy',
                   glyph: 'xf0c5@FontAwesome',
                 },
-                id: 'uf11d057',
+                id: 'uc42edb8',
               },
               {
                 actionLevel: 100,
@@ -322,7 +322,7 @@ export default {
                   cssClass: 'fa fa-arrows',
                   glyph: 'xf047@FontAwesome',
                 },
-                id: 'u2cec520',
+                id: 'u3d63df3',
               },
               {
                 actionLevel: 100,
@@ -338,7 +338,7 @@ export default {
                   cssClass: 'fa fa-archive',
                   glyph: 'xf187@FontAwesome',
                 },
-                id: 'u4fdad0f',
+                id: 'u1a1e7d6',
               },
               {
                 actionLevel: 100,
@@ -354,7 +354,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u774a363',
+                id: 'u11c79e1',
               },
               {
                 actionLevel: 100,
@@ -369,7 +369,7 @@ export default {
                 sysImage: {
                   cssClass: 'key',
                 },
-                id: 'u6aa52c1',
+                id: 'ue5c9638',
               },
               {
                 actionLevel: 100,
@@ -384,7 +384,7 @@ export default {
                 sysImage: {
                   cssClass: 'git-branch',
                 },
-                id: 'ua2ab7cd',
+                id: 'u4e4ab15',
               },
               {
                 actionLevel: 100,
@@ -400,7 +400,7 @@ export default {
                   cssClass: 'fa fa-link',
                   glyph: 'xf0c1@FontAwesome',
                 },
-                id: 'ud5a51ef',
+                id: 'u156a119',
               },
               {
                 actionLevel: 100,
@@ -416,7 +416,7 @@ export default {
                   cssClass: 'fa fa-send-o',
                   glyph: 'xf1d9@FontAwesome',
                 },
-                id: 'u6586895',
+                id: 'u0c3a661',
               },
               {
                 actionLevel: 100,
@@ -432,7 +432,7 @@ export default {
                   cssClass: 'fa fa-send-o',
                   glyph: 'xf1d9@FontAwesome',
                 },
-                id: 'ud7b3a0b',
+                id: 'u9e17e19',
               },
               {
                 actionLevel: 100,
@@ -444,7 +444,7 @@ export default {
                 uiactionId: 'get_editor_column',
                 showCaption: true,
                 showIcon: true,
-                id: 'u951f751',
+                id: 'u1f4a54d',
               },
             ],
             appDataEntityId: 'plmweb.work_item',
@@ -1149,7 +1149,7 @@ export default {
                     cssClass: 'fa fa-user-md',
                     glyph: 'xf0f0@FontAwesome',
                   },
-                  id: 'uc5eeb4c',
+                  id: 'uc0c6a4c',
                 },
               ],
               appDataEntityId: 'plmweb.project_member',

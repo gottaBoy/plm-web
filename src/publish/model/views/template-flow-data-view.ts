@@ -266,7 +266,7 @@ export default {
     appViewRefs: [
       {
         realOpenMode: 'POPUPMODAL',
-        realTitle: '自动规则模板信息',
+        realTitle: '自动规则模板',
         refAppViewId: 'plmweb.psdelogictemplate_info_view',
         name: 'EDITDATA',
         id: 'editdata',
@@ -376,11 +376,12 @@ export default {
                                   groupOP: 'AND',
                                   panelItemLogics: [
                                     {
-                                      condOp: 'EQ',
+                                      condOp: 'NOTEQ',
                                       dstModelField: 'type',
-                                      value: 'EVENTHOOK',
+                                      value: 'TIMERTASK',
                                       logicType: 'SINGLE',
-                                      id: '逻辑项',
+                                      name: 'type 不等于(<>) TIMERTASK',
+                                      id: 'type 不等于(<>) timertask',
                                     },
                                   ],
                                   logicType: 'GROUP',

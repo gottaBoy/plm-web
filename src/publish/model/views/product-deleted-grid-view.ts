@@ -162,7 +162,7 @@ export default {
                   cssClass: 'fa fa-refresh',
                   glyph: 'xf021@FontAwesome',
                 },
-                id: 'u8eeeee5',
+                id: 'u726fa75',
               },
             ],
             appDataEntityId: 'plmweb.product',

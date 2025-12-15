@@ -1414,13 +1414,6 @@ export default {
   deopprivs: [
     {
       logicName: '建立',
-      mapDEName: 'IDEA',
-      mapDEOPPrivName: 'CREATE',
-      name: 'CREATE',
-      id: 'idea__create',
-    },
-    {
-      logicName: '建立',
       mapDEName: 'TEST_CASE',
       mapDEOPPrivName: 'CREATE',
       name: 'CREATE',
@@ -1428,15 +1421,10 @@ export default {
     },
     {
       logicName: '建立',
-      mapDEName: 'PAGE',
+      mapDEName: 'IDEA',
       mapDEOPPrivName: 'CREATE',
       name: 'CREATE',
-      id: 'page__create',
-    },
-    {
-      logicName: '建立',
-      name: 'CREATE',
-      id: 'create',
+      id: 'idea__create',
     },
     {
       logicName: '建立',
@@ -1446,18 +1434,16 @@ export default {
       id: 'work_item__create',
     },
     {
-      logicName: '删除',
-      mapDEName: 'IDEA',
-      mapDEOPPrivName: 'DELETE',
-      name: 'DELETE',
-      id: 'idea__delete',
+      logicName: '建立',
+      name: 'CREATE',
+      id: 'create',
     },
     {
-      logicName: '删除',
+      logicName: '建立',
       mapDEName: 'PAGE',
-      mapDEOPPrivName: 'DELETE',
-      name: 'DELETE',
-      id: 'page__delete',
+      mapDEOPPrivName: 'CREATE',
+      name: 'CREATE',
+      id: 'page__create',
     },
     {
       logicName: '删除',
@@ -1468,6 +1454,13 @@ export default {
     },
     {
       logicName: '删除',
+      mapDEName: 'PAGE',
+      mapDEOPPrivName: 'DELETE',
+      name: 'DELETE',
+      id: 'page__delete',
+    },
+    {
+      logicName: '删除',
       mapDEName: 'WORK_ITEM',
       mapDEOPPrivName: 'DELETE',
       name: 'DELETE',
@@ -1475,8 +1468,20 @@ export default {
     },
     {
       logicName: '删除',
+      mapDEName: 'IDEA',
+      mapDEOPPrivName: 'DELETE',
+      name: 'DELETE',
+      id: 'idea__delete',
+    },
+    {
+      logicName: '删除',
       name: 'DELETE',
       id: 'delete',
+    },
+    {
+      logicName: '读取',
+      name: 'READ',
+      id: 'read',
     },
     {
       logicName: '读取',
@@ -1487,6 +1492,13 @@ export default {
     },
     {
       logicName: '读取',
+      mapDEName: 'WORK_ITEM',
+      mapDEOPPrivName: 'READ',
+      name: 'READ',
+      id: 'work_item__read',
+    },
+    {
+      logicName: '读取',
       mapDEName: 'IDEA',
       mapDEOPPrivName: 'READ',
       name: 'READ',
@@ -1494,36 +1506,10 @@ export default {
     },
     {
       logicName: '读取',
-      name: 'READ',
-      id: 'read',
-    },
-    {
-      logicName: '读取',
       mapDEName: 'TEST_CASE',
       mapDEOPPrivName: 'READ',
       name: 'READ',
       id: 'test_case__read',
-    },
-    {
-      logicName: '读取',
-      mapDEName: 'WORK_ITEM',
-      mapDEOPPrivName: 'READ',
-      name: 'READ',
-      id: 'work_item__read',
-    },
-    {
-      logicName: '更新',
-      mapDEName: 'IDEA',
-      mapDEOPPrivName: 'UPDATE',
-      name: 'UPDATE',
-      id: 'idea__update',
-    },
-    {
-      logicName: '更新',
-      mapDEName: 'TEST_CASE',
-      mapDEOPPrivName: 'UPDATE',
-      name: 'UPDATE',
-      id: 'test_case__update',
     },
     {
       logicName: '更新',
@@ -1534,15 +1520,29 @@ export default {
     },
     {
       logicName: '更新',
+      mapDEName: 'PAGE',
+      mapDEOPPrivName: 'UPDATE',
+      name: 'UPDATE',
+      id: 'page__update',
+    },
+    {
+      logicName: '更新',
+      mapDEName: 'TEST_CASE',
+      mapDEOPPrivName: 'UPDATE',
+      name: 'UPDATE',
+      id: 'test_case__update',
+    },
+    {
+      logicName: '更新',
       name: 'UPDATE',
       id: 'update',
     },
     {
       logicName: '更新',
-      mapDEName: 'PAGE',
+      mapDEName: 'IDEA',
       mapDEOPPrivName: 'UPDATE',
       name: 'UPDATE',
-      id: 'page__update',
+      id: 'idea__update',
     },
   ],
   codeName: 'version',

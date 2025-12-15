@@ -1,0 +1,57 @@
+export default {
+  codeListTag: 'ai__knowledge_source',
+  codeListType: 'STATIC',
+  codeName: 'ai__knowledge_source',
+  emptyText: '未定义',
+  codeItems: [
+    {
+      codeName: 'ragflow',
+      text: 'RAGFlow',
+      value: 'ragflow',
+      id: 'ragflow',
+    },
+    {
+      codeName: 'dify_kb',
+      text: 'Dify 知识库',
+      value: 'dify_kb',
+      disableSelect: true,
+      id: 'dify_kb',
+    },
+    {
+      codeName: 'langchain',
+      text: 'LangChain',
+      value: 'langchain',
+      disableSelect: true,
+      id: 'langchain',
+    },
+    {
+      codeName: 'elasticsearch',
+      text: 'Elasticsearch',
+      value: 'elasticsearch',
+      disableSelect: true,
+      id: 'elasticsearch',
+    },
+    {
+      codeName: 'yuque',
+      text: '语雀',
+      value: 'yuque',
+      disableSelect: true,
+      id: 'yuque',
+    },
+    {
+      codeName: 'custom_api',
+      text: '自定义 API',
+      value: 'custom_api',
+      id: 'custom_api',
+    },
+    {
+      codeName: 'local',
+      text: '本地模式',
+      value: 'local',
+      id: 'local',
+    },
+  ],
+  enableCache: true,
+  name: '知识库源类型',
+  id: 'plmweb.ai__knowledge_source',
+};

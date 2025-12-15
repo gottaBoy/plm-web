@@ -297,7 +297,7 @@ export default {
     logicName: 'management_view分页导航视图布局面板',
     appDataEntityId: 'plmweb.workload',
     controlParam: {},
-    modelId: '25836932-F2AA-4AEB-B40E-EC0A91D75DFF',
+    modelId: '238ae0888f270165210b62117f35c16a',
     modelType: 'PSSYSVIEWLAYOUTPANEL',
     name: 'layoutpanel',
     id: 'usr0523155476',

@@ -5,7 +5,7 @@ export default {
   loadDefault: true,
   openMode: 'POPUPMODAL',
   deviewCodeName: 'main_view',
-  deviewId: '20CCF3DB-B622-49A3-BD68-20C2A8BF794E',
+  deviewId: '062a9e86d57eb5bf36c7ae77d9dcee3d',
   accUserMode: 2,
   capLanguageRes: {
     lanResTag: 'DE.LNAME.USER',
@@ -616,7 +616,7 @@ export default {
       controlParam: {
         id: 'form',
       },
-      modelId: 'AD4DE4EF-692D-4642-868D-4E8361136BA0',
+      modelId: '062a9e86d57eb5bf36c7ae77d9dcee3d',
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
       id: 'plmweb.user.main_view',
@@ -661,7 +661,7 @@ export default {
   width: 800,
   enableDP: true,
   showCaptionBar: true,
-  modelId: 'b3f5613909080396acb1d22ade9812d1',
+  modelId: 'ede00a9be1582cf7eaafe0d15944ef6d',
   modelType: 'PSAPPDEVIEW',
   name: 'usermain_view',
   id: 'plmweb.user_main_view',

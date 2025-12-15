@@ -165,7 +165,7 @@ export default {
                   cssClass: 'fa fa-lightbulb-o',
                   glyph: 'xf0eb@FontAwesome',
                 },
-                id: 'udab4e80',
+                id: 'u468905c',
               },
               {
                 actionLevel: 100,
@@ -180,7 +180,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u3c4ca85',
+                id: 'u60e2367',
               },
             ],
             appDataEntityId: 'plmweb.library',

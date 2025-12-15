@@ -402,7 +402,7 @@ export default {
                     cssClass: 'fa fa-download',
                     glyph: 'xf019@FontAwesome',
                   },
-                  id: 'u6e442fa',
+                  id: 'ucf5d693',
                 },
                 {
                   actionLevel: 100,
@@ -418,7 +418,7 @@ export default {
                     cssClass: 'fa fa-trash-o',
                     glyph: 'xf014@FontAwesome',
                   },
-                  id: 'u9c2c6bc',
+                  id: 'u331e6c3',
                 },
               ],
               appDataEntityId: 'plmweb.run_attachment',

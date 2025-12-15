@@ -703,6 +703,16 @@ export default {
           id: 'n_principal_type_eq',
         },
         {
+          codeName: 'n_relation_type_eq',
+          logicName: '关联类型',
+          appDEFieldId: 'relation_type',
+          sourceType: 'DEFSEARCHMODE',
+          stdDataType: 25,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'n_relation_type_eq',
+        },
+        {
           codeName: 'n_target_id_eq',
           logicName: '目标主体标识',
           appDEFieldId: 'target_id',
@@ -2165,7 +2175,7 @@ export default {
     {
       codeName: 'add_dependency',
       defaultParamName: 'Default',
-      logicName: '工作项添加依赖关系',
+      logicName: '工作项添加依赖关系值变更',
       deuilogicNodes: [
         {
           codeName: 'Begin',
@@ -2183,7 +2193,34 @@ export default {
           id: 'begin',
         },
         {
-          code: "let choose = uiLogic.default.choose_relation_data;\r\nlet choose_type = uiLogic.ctrl.panelItems.choose_data.data.choose_type;\r\nif (choose != null && choose != '') {\r\n    uiLogic.dto.srfactionparam = JSON.parse(choose);\r\n    uiLogic.dto.principal_id = view.context.principal_id;\r\n}\r\n// 依赖类型\r\nif (choose_type != null && choose_type != '') {\r\n    uiLogic.dto.relation_type = choose_type;\r\n}",
+          invokeCtrlId: 'list',
+          invokeMethod: 'refresh',
+          invokeParamId: 'default',
+          codeName: 'VIEWCTRLINVOKE1',
+          leftPos: 590,
+          logicNodeType: 'VIEWCTRLINVOKE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'rawjscode3',
+              srcDEUILogicNodeId: 'viewctrlinvoke1',
+              id: '连接名称',
+            },
+          ],
+          topPos: 750,
+          name: '列表刷新',
+          id: 'viewctrlinvoke1',
+        },
+        {
+          code: 'ibiz.mc.command.update.send({ srfdecodename: context.principal_type})',
+          codeName: 'RAWJSCODE3',
+          leftPos: 590,
+          logicNodeType: 'RAWJSCODE',
+          topPos: 920,
+          name: '触发计数器刷新',
+          id: 'rawjscode3',
+        },
+        {
+          code: "let choose = uiLogic.default.choose_relation_data;\r\nlet choose_type = uiLogic.ctrl.panelItems.choose_data.data.choose_type;\r\nif (choose != null && choose != '') {\r\n    const srfactionparam = JSON.parse(choose);\r\n    // 将 owner_id 替换为 target_id\r\n    if (srfactionparam && Array.isArray(srfactionparam)) {\r\n        srfactionparam.forEach(item => {\r\n            item.target_id = item.owner_id\r\n            delete item.owner_id\r\n        })\r\n    }\r\n    uiLogic.dto.srfactionparam = srfactionparam;\r\n    uiLogic.dto.principal_id = view.context.principal_id;\r\n}\r\n// 依赖类型\r\nif (choose_type != null && choose_type != '') {\r\n    uiLogic.dto.relation_type = choose_type;\r\n}",
           codeName: 'RAWJSCODE2',
           leftPos: 590,
           logicNodeType: 'RAWJSCODE',
@@ -2230,24 +2267,6 @@ export default {
           topPos: 380,
           name: '获取选中列表',
           id: 'rawjscode2',
-        },
-        {
-          dstAppDEActionId: 'add_dependency',
-          dstAppDataEntityId: 'plmweb.relation',
-          codeName: 'DEACTION1',
-          dstDEUILogicParamId: 'dto',
-          leftPos: 890,
-          logicNodeType: 'DEACTION',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'rawjscode1',
-              srcDEUILogicNodeId: 'deaction1',
-              id: '连接名称',
-            },
-          ],
-          topPos: 380,
-          name: '进行关联操作',
-          id: 'deaction1',
         },
         {
           codeName: 'PREPAREJSPARAM1',
@@ -2306,34 +2325,31 @@ export default {
           id: 'rawjscode1',
         },
         {
-          code: 'ibiz.mc.command.update.send({ srfdecodename: context.principal_type})',
-          codeName: 'RAWJSCODE3',
-          leftPos: 590,
-          logicNodeType: 'RAWJSCODE',
-          topPos: 920,
-          name: '触发计数器刷新',
-          id: 'rawjscode3',
-        },
-        {
-          invokeCtrlId: 'list',
-          invokeMethod: 'refresh',
-          invokeParamId: 'default',
-          codeName: 'VIEWCTRLINVOKE1',
-          leftPos: 590,
-          logicNodeType: 'VIEWCTRLINVOKE',
+          dstAppDEActionId: 'add_dependency',
+          dstAppDataEntityId: 'plmweb.relation',
+          codeName: 'DEACTION1',
+          dstDEUILogicParamId: 'dto',
+          leftPos: 890,
+          logicNodeType: 'DEACTION',
           deuilogicLinks: [
             {
-              dstDEUILogicNodeId: 'rawjscode3',
-              srcDEUILogicNodeId: 'viewctrlinvoke1',
+              dstDEUILogicNodeId: 'rawjscode1',
+              srcDEUILogicNodeId: 'deaction1',
               id: '连接名称',
             },
           ],
-          topPos: 750,
-          name: '列表刷新',
-          id: 'viewctrlinvoke1',
+          topPos: 380,
+          name: '进行关联操作',
+          id: 'deaction1',
         },
       ],
       deuilogicParams: [
+        {
+          codeName: 'list',
+          ctrlParam: true,
+          name: '列表对象',
+          id: 'list',
+        },
         {
           codeName: 'dto',
           entityParam: true,
@@ -2347,16 +2363,15 @@ export default {
           id: 'view',
         },
         {
+          codeName: 'viewctx',
+          navContextParam: true,
+          id: 'viewctx',
+        },
+        {
           codeName: 'ctrl',
           activeCtrlParam: true,
           ctrlParam: true,
           id: 'ctrl',
-        },
-        {
-          codeName: 'list',
-          ctrlParam: true,
-          name: '列表对象',
-          id: 'list',
         },
         {
           codeName: 'Default',
@@ -2365,14 +2380,9 @@ export default {
           name: '传入变量',
           id: 'default',
         },
-        {
-          codeName: 'viewctx',
-          navContextParam: true,
-          id: 'viewctx',
-        },
       ],
       startDEUILogicNodeId: 'begin',
-      name: '工作项添加依赖关系',
+      name: '工作项添加依赖关系值变更',
       id: 'add_dependency',
     },
     {
@@ -3349,7 +3359,7 @@ export default {
       deuilogicNodes: [
         {
           codeName: 'Begin',
-          leftPos: 200,
+          leftPos: 190,
           logicNodeType: 'BEGIN',
           deuilogicLinks: [
             {
@@ -3358,7 +3368,7 @@ export default {
               id: '连接名称',
             },
           ],
-          topPos: 200,
+          topPos: 210,
           parallelOutput: true,
           name: '开始',
           id: 'begin',

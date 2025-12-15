@@ -87,6 +87,52 @@ export default {
             },
             id: 'view_tabexppanel',
           },
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                caption: '工具栏',
+                itemStyle: 'DEFAULT',
+                itemType: 'CTRLPOS',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'toolbar',
+              },
+              {
+                rawItem: {
+                  predefinedType: 'TELEPORT_PLACEHOLDER',
+                  id: 'tab_toolbar',
+                },
+                caption: '传送部件占位',
+                itemStyle: 'DEFAULT',
+                itemType: 'RAWITEM',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'tab_toolbar',
+              },
+            ],
+            layout: {
+              align: 'flex-start',
+              dir: 'row',
+              layout: 'FLEX',
+              valign: 'center',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'container2',
+          },
         ],
         predefinedType: 'VIEWHEADER',
         layout: {
@@ -238,6 +284,38 @@ export default {
     ],
     controls: [
       {
+        detoolbarItems: [
+          {
+            actionLevel: 100,
+            noPrivDisplayMode: 2,
+            uiactionId: 'record_working_hours@workload',
+            uiactionTarget: 'NONE',
+            valid: true,
+            caption: '登记工时',
+            itemType: 'DEUIACTION',
+            sysImage: {
+              cssClass: 'fa fa-plus',
+              glyph: 'xf067@FontAwesome',
+            },
+            tooltip: '登记工时',
+            showCaption: true,
+            showIcon: true,
+            id: 'deuiaction1',
+          },
+        ],
+        codeName: 'tab_exp_view_toolbar',
+        controlType: 'TOOLBAR',
+        logicName: '工作台工具栏',
+        appDataEntityId: 'plmweb.workload',
+        controlParam: {
+          id: 'toolbar',
+        },
+        modelId: '51CCC697-BEEA-44B7-A467-02F169DAC552',
+        modelType: 'PSDETOOLBAR',
+        name: 'toolbar',
+        id: 'tab_exp_view_toolbar',
+      },
+      {
         tabExpPageIds: ['calendar', 'log'],
         tabLayout: 'TOP',
         uniqueTag: 'workload_tab_exp_view__tabexppanel',
@@ -312,7 +390,7 @@ export default {
     logicName: 'tab_exp_view分页导航视图布局面板',
     appDataEntityId: 'plmweb.workload',
     controlParam: {},
-    modelId: '14718489-64B7-4DE1-A62C-5369D9D475CF',
+    modelId: 'd955eb98e0e3deaed73224331d20c284',
     modelType: 'PSSYSVIEWLAYOUTPANEL',
     name: 'layoutpanel',
     id: 'usr0523312624',

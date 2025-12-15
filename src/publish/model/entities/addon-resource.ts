@@ -32,7 +32,7 @@ export default {
               cssClass: 'fa fa-plus',
               glyph: 'xf067@FontAwesome',
             },
-            id: 'u43b8ddd',
+            id: 'u34c6429',
           },
           {
             actionLevel: 100,
@@ -48,7 +48,7 @@ export default {
               cssClass: 'fa fa-sun-o',
               glyph: 'xf185@FontAwesome',
             },
-            id: 'u793ef1d',
+            id: 'ua7730a9',
           },
         ],
         appDataEntityId: 'plmweb.addon_resource',

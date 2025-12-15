@@ -170,7 +170,7 @@ export default {
           codeName: 'duration',
           columnType: 'DEFGRIDCOLUMN',
           noPrivDisplayMode: 1,
-          width: 200,
+          width: 150,
           widthUnit: 'PX',
           enableSort: true,
           id: 'duration',
@@ -226,7 +226,7 @@ export default {
           columnType: 'DEFGRIDCOLUMN',
           noPrivDisplayMode: 1,
           width: 200,
-          widthUnit: 'PX',
+          widthUnit: 'STAR',
           id: 'description',
         },
         {

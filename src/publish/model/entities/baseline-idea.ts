@@ -1317,15 +1317,15 @@ export default {
   deopprivs: [
     {
       logicName: '建立',
+      name: 'CREATE',
+      id: 'create',
+    },
+    {
+      logicName: '建立',
       mapDEName: 'BASELINE',
       mapDEOPPrivName: 'CREATE',
       name: 'CREATE',
       id: 'baseline_principal_idea__create',
-    },
-    {
-      logicName: '建立',
-      name: 'CREATE',
-      id: 'create',
     },
     {
       logicName: '删除',

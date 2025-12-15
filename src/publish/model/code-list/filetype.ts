@@ -1,0 +1,77 @@
+export default {
+  codeListTag: 'filetype',
+  codeListType: 'STATIC',
+  codeName: 'filetype',
+  emptyText: '未定义',
+  codeItems: [
+    {
+      codeName: 'xls',
+      text: 'XLS',
+      value: 'xls',
+      id: 'xls',
+    },
+    {
+      codeName: 'png',
+      text: 'PNG',
+      value: 'png',
+      id: 'png',
+    },
+    {
+      codeName: 'pdf',
+      text: 'PDF',
+      value: 'pdf',
+      id: 'pdf',
+    },
+    {
+      codeName: 'docx',
+      text: 'DOCX',
+      value: 'docx',
+      id: 'docx',
+    },
+    {
+      codeName: 'xlsx',
+      text: 'XLSX​',
+      value: 'xlsx',
+      id: 'xlsx',
+    },
+    {
+      codeName: 'pptx',
+      text: 'PPTX',
+      value: 'pptx',
+      id: 'pptx',
+    },
+    {
+      codeName: 'txt',
+      text: 'TXT​',
+      value: 'txt',
+      id: 'txt',
+    },
+    {
+      codeName: 'sql',
+      text: 'SQL',
+      value: 'sql',
+      id: 'sql',
+    },
+    {
+      codeName: 'js',
+      text: 'JS',
+      value: 'js',
+      id: 'js',
+    },
+    {
+      codeName: 'html',
+      text: 'HTML',
+      value: 'html',
+      id: 'html',
+    },
+    {
+      codeName: 'java',
+      text: 'JAVA',
+      value: 'java',
+      id: 'java',
+    },
+  ],
+  enableCache: true,
+  name: '文件类型',
+  id: 'plmweb.filetype',
+};

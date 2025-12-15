@@ -70,20 +70,20 @@ export default {
   ],
   appViewRefs: [
     {
-      openMode: 'POPUPMODAL',
-      realOpenMode: 'POPUPMODAL',
-      realTitle: '新建用例',
-      refAppViewId: 'plmweb.test_case_quick_create_view',
-      name: 'NEWDATA',
-      id: 'newdata',
-    },
-    {
       openMode: 'INDEXVIEWTAB_POPUPMODAL',
       realOpenMode: 'INDEXVIEWTAB_POPUPMODAL',
       realTitle: '用例',
       refAppViewId: 'plmweb.test_case_main_view',
       name: 'EDITDATA',
       id: 'editdata',
+    },
+    {
+      openMode: 'POPUPMODAL',
+      realOpenMode: 'POPUPMODAL',
+      realTitle: '新建用例',
+      refAppViewId: 'plmweb.test_case_quick_create_view',
+      name: 'NEWDATA',
+      id: 'newdata',
     },
   ],
   controls: [
@@ -259,7 +259,7 @@ export default {
                   cssClass: 'fa fa-send-o',
                   glyph: 'xf1d9@FontAwesome',
                 },
-                id: 'uf6b66e1',
+                id: 'u700ac2c',
               },
               {
                 actionLevel: 100,
@@ -275,7 +275,7 @@ export default {
                   cssClass: 'fa fa-copy',
                   glyph: 'xf0c5@FontAwesome',
                 },
-                id: 'uc5b9282',
+                id: 'ued2f91c',
               },
               {
                 actionLevel: 100,
@@ -291,7 +291,7 @@ export default {
                   cssClass: 'fa fa-arrows',
                   glyph: 'xf047@FontAwesome',
                 },
-                id: 'ue6692cd',
+                id: 'uddc4985',
               },
               {
                 actionLevel: 100,
@@ -307,7 +307,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u87a0321',
+                id: 'u9f95b5d',
               },
               {
                 actionLevel: 100,
@@ -319,7 +319,7 @@ export default {
                 uiactionId: 'get_editor_column',
                 showCaption: true,
                 showIcon: true,
-                id: 'u06706db',
+                id: 'uf5b917d',
               },
             ],
             appDataEntityId: 'plmweb.test_case',
@@ -751,7 +751,7 @@ export default {
                     cssClass: 'fa fa-user-md',
                     glyph: 'xf0f0@FontAwesome',
                   },
-                  id: 'u23c0102',
+                  id: 'u7b4a0f4',
                 },
               ],
               appDataEntityId: 'plmweb.library_member',

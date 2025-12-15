@@ -203,21 +203,6 @@ export default {
       },
       {
         actionGroupExtractMode: 'ITEM',
-        layout: {
-          dir: 'column',
-          layout: 'FLEX',
-        },
-        dataRegionType: 'INHERIT',
-        itemStyle: 'DEFAULT',
-        itemType: 'CONTAINER',
-        layoutPos: {
-          shrink: 0,
-          layout: 'FLEX',
-        },
-        id: 'view_searchform',
-      },
-      {
-        actionGroupExtractMode: 'ITEM',
         panelItems: [
           {
             caption: '表格',
@@ -238,7 +223,7 @@ export default {
                 editor: {
                   enablePickupView: true,
                   singleSelect: true,
-                  pickupAppViewId: 'plmweb.idea_product_plan_re_idea_view',
+                  pickupAppViewId: 'plmweb.idea_ticket_re_mpick_up_view',
                   appDEACModeId: 'create_idea',
                   appDEDataSetId: 'fetch_recent_idea',
                   appDataEntityId: 'plmweb.recent',
@@ -258,7 +243,7 @@ export default {
                           cssClass: 'fa fa-plus',
                           glyph: 'xf067@FontAwesome',
                         },
-                        id: 'uc95d0ba',
+                        id: 'u068bb2d',
                       },
                     ],
                     appDataEntityId: 'plmweb.recent',
@@ -274,7 +259,6 @@ export default {
                     'srfnavparam.size': '20',
                     lastlabel: '更多需求',
                     AC: 'TRUE',
-                    'srfnavparam.N_RECENT_PARENT_EQ': '%product%',
                     toplabel: '最近浏览',
                     PICKUPVIEW: 'TRUE',
                   },
@@ -297,11 +281,6 @@ export default {
                       value: '20',
                       rawValue: true,
                       id: 'size',
-                    },
-                    {
-                      key: 'n_recent_parent_eq',
-                      value: 'product',
-                      id: 'n_recent_parent_eq',
                     },
                   ],
                   id: 'choose_relation_data',
@@ -403,7 +382,7 @@ export default {
     ],
     appViewLogics: [
       {
-        eventNames: 'onViewMounted',
+        eventNames: 'onMounted',
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         scriptCode:
@@ -417,7 +396,7 @@ export default {
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         scriptCode:
-          "view.layoutPanel.panelItems.choose_data.state.visible = view.context.srfshowchoose || false;\n\n// 初始化默认隐藏表格\nview.layoutPanel.panelItems.grid.state.keepAlive = true;\nview.layoutPanel.panelItems.grid.state.visible = false;\nconst form = view.getController('form');\nif (form) {\n    form.evt.on('onFormDetailEvent', event =>{\n        const panelItems = view.layoutPanel.panelItems;\n        if (!panelItems.comment) {\n            return;\n        }\n        if (event.formDetailName === 'tabpage1') {\n            panelItems.comment.state.visible = true;\n        } else {\n            panelItems.comment.state.visible = false;\n        }\n    });\n}\n\n// 初始化隐藏发送和清空按钮\nview.layoutPanel.panelItems.button_calluilogic1.state.visible = false\nview.layoutPanel.panelItems.button_calluilogic.state.visible = false",
+          "console.log(\"VIEWMOUNTED\");\nconst choose_data = view.layoutPanel.panelItems.choose_data;\nif(choose_data){\n  \tchoose_data.state.visible = view.context.srfshowchoose || false;\n}\n// 初始化默认隐藏表格\nview.layoutPanel.panelItems.grid.state.keepAlive = true;\nview.layoutPanel.panelItems.grid.state.visible = false;\nconst form = view.getController('form');\nif (form) {\n    form.evt.on('onFormDetailEvent', event =>{\n        const panelItems = view.layoutPanel.panelItems;\n        if (!panelItems.comment) {\n            return;\n        }\n        if (event.formDetailName === 'tabpage1') {\n            panelItems.comment.state.visible = true;\n        } else {\n            panelItems.comment.state.visible = false;\n        }\n    });\n}\n// 初始化隐藏发送和清空按钮\nconst  button_calluilogic1 = view.layoutPanel.panelItems.button_calluilogic1;\nif(button_calluilogic1){\n  button_calluilogic1.state.visible = false;\n}\nconst button_calluilogic = view.layoutPanel.panelItems.button_calluilogic;\nif(button_calluilogic){\n  button_calluilogic.state.visible = false;\n}",
         builtinLogic: true,
         id: 'viewmounted',
       },
@@ -710,7 +689,7 @@ export default {
                     cssClass: 'fa fa-unlink',
                     glyph: 'xf127@FontAwesome',
                   },
-                  id: 'ua71fcf1',
+                  id: 'u0f749a7',
                 },
               ],
               appDataEntityId: 'plmweb.relation',

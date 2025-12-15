@@ -516,15 +516,15 @@ export default {
   deopprivs: [
     {
       logicName: '建立',
+      name: 'CREATE',
+      id: 'create',
+    },
+    {
+      logicName: '建立',
       mapDEName: 'ROLE',
       mapDEOPPrivName: 'CREATE',
       name: 'CREATE',
       id: 'role__create',
-    },
-    {
-      logicName: '建立',
-      name: 'CREATE',
-      id: 'create',
     },
     {
       logicName: '删除',

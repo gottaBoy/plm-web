@@ -423,58 +423,6 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
-                    'toolbar_tree_exp_view_node_cm_deuiaction1_click@group',
-                  uiactionTarget: 'SINGLEDATA',
-                  valid: true,
-                  caption: '编辑',
-                  itemType: 'DEUIACTION',
-                  sysImage: {
-                    cssClass: 'fa fa-edit',
-                    glyph: 'xf044@FontAwesome',
-                  },
-                  tooltip: '编辑',
-                  showCaption: true,
-                  showIcon: true,
-                  id: 'deuiaction1',
-                },
-                {
-                  actionLevel: 100,
-                  noPrivDisplayMode: 2,
-                  uiactionId:
-                    'toolbar_tree_exp_view_node_cm_deuiaction2_click@group',
-                  uiactionTarget: 'SINGLEDATA',
-                  valid: true,
-                  caption: '删除',
-                  itemType: 'DEUIACTION',
-                  sysImage: {
-                    cssClass: 'fa fa-trash-o',
-                    glyph: 'xf014@FontAwesome',
-                  },
-                  tooltip: '删除',
-                  showCaption: true,
-                  showIcon: true,
-                  id: 'deuiaction2',
-                },
-              ],
-              toolbarStyle: 'CONTEXTMENU',
-              codeName: 'tree_exp_view_node_cm',
-              controlType: 'CONTEXTMENU',
-              logicName: '编辑或删除团队',
-              appDataEntityId: 'plmweb.group',
-              controlParam: {
-                id: 'node_cm',
-              },
-              modelId: '189b1d11a126950630040aeb22a9daff',
-              modelType: 'PSDETOOLBAR',
-              name: 'node_cm',
-              id: 'tree_exp_view_node_cm',
-            },
-            {
-              detoolbarItems: [
-                {
-                  actionLevel: 100,
-                  noPrivDisplayMode: 2,
-                  uiactionId:
                     'toolbar_tree_exp_view_node2_cm_deuiaction1_click@group',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
@@ -520,6 +468,58 @@ export default {
               modelType: 'PSDETOOLBAR',
               name: 'node_2_cm',
               id: 'tree_exp_view_node2_cm',
+            },
+            {
+              detoolbarItems: [
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
+                    'toolbar_tree_exp_view_node_cm_deuiaction1_click@group',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '编辑',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-edit',
+                    glyph: 'xf044@FontAwesome',
+                  },
+                  tooltip: '编辑',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction1',
+                },
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
+                    'toolbar_tree_exp_view_node_cm_deuiaction2_click@group',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '删除',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-trash-o',
+                    glyph: 'xf014@FontAwesome',
+                  },
+                  tooltip: '删除',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction2',
+                },
+              ],
+              toolbarStyle: 'CONTEXTMENU',
+              codeName: 'tree_exp_view_node_cm',
+              controlType: 'CONTEXTMENU',
+              logicName: '编辑或删除团队',
+              appDataEntityId: 'plmweb.group',
+              controlParam: {
+                id: 'node_cm',
+              },
+              modelId: '189b1d11a126950630040aeb22a9daff',
+              modelType: 'PSDETOOLBAR',
+              name: 'node_cm',
+              id: 'tree_exp_view_node_cm',
             },
             {
               detoolbarItems: [

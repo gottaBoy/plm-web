@@ -267,7 +267,7 @@ export default {
                 controlParam: {
                   id: 'dept_cm',
                 },
-                modelId: '938A03C2-4414-4300-BDD3-A3D4D3E57795',
+                modelId: 'c4d4eced9cb95f03417018e3f8fd3d99',
                 modelType: 'PSDETOOLBAR',
                 name: 'dept_cm',
                 id: 'tree_exp_view_dept_cm',
@@ -368,7 +368,7 @@ export default {
                 controlParam: {
                   id: 'node_cm',
                 },
-                modelId: '938A03C2-4414-4300-BDD3-A3D4D3E57795',
+                modelId: 'c4d4eced9cb95f03417018e3f8fd3d99',
                 modelType: 'PSDETOOLBAR',
                 name: 'node_cm',
                 id: 'tree_exp_view_node_cm',
@@ -448,7 +448,7 @@ export default {
                 controlParam: {
                   id: 'node_1_cm',
                 },
-                modelId: '6E42478F-4B19-4141-BFCC-28D37B3A72B4',
+                modelId: '725a0db169f6f701334ab99085014162',
                 modelType: 'PSDETOOLBAR',
                 name: 'node_1_cm',
                 id: 'tree_exp_view_node1_cm',
@@ -569,10 +569,61 @@ export default {
               controlParam: {
                 id: 'dept_cm',
               },
-              modelId: '938A03C2-4414-4300-BDD3-A3D4D3E57795',
+              modelId: 'c4d4eced9cb95f03417018e3f8fd3d99',
               modelType: 'PSDETOOLBAR',
               name: 'dept_cm',
               id: 'tree_exp_view_dept_cm',
+            },
+            {
+              detoolbarItems: [
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
+                    'toolbar_tree_exp_view_node1_cm_deuiaction1_click@user',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '新建下级部门',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-folder-o',
+                    glyph: 'xf114@FontAwesome',
+                  },
+                  tooltip: '新建下级部门',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction1',
+                },
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
+                    'toolbar_tree_exp_view_node1_cm_deuiaction2_click@user',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '编辑组织',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-edit',
+                    glyph: 'xf044@FontAwesome',
+                  },
+                  tooltip: '编辑组织',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction2',
+                },
+              ],
+              codeName: 'tree_exp_view_node1_cm',
+              controlType: 'CONTEXTMENU',
+              logicName: '组织快速操作_工具栏',
+              appDataEntityId: 'plmweb.user',
+              controlParam: {
+                id: 'node_1_cm',
+              },
+              modelId: '725a0db169f6f701334ab99085014162',
+              modelType: 'PSDETOOLBAR',
+              name: 'node_1_cm',
+              id: 'tree_exp_view_node1_cm',
             },
             {
               detoolbarItems: [
@@ -638,61 +689,10 @@ export default {
               controlParam: {
                 id: 'node_cm',
               },
-              modelId: '938A03C2-4414-4300-BDD3-A3D4D3E57795',
+              modelId: 'c4d4eced9cb95f03417018e3f8fd3d99',
               modelType: 'PSDETOOLBAR',
               name: 'node_cm',
               id: 'tree_exp_view_node_cm',
-            },
-            {
-              detoolbarItems: [
-                {
-                  actionLevel: 100,
-                  noPrivDisplayMode: 2,
-                  uiactionId:
-                    'toolbar_tree_exp_view_node1_cm_deuiaction1_click@user',
-                  uiactionTarget: 'SINGLEDATA',
-                  valid: true,
-                  caption: '新建下级部门',
-                  itemType: 'DEUIACTION',
-                  sysImage: {
-                    cssClass: 'fa fa-folder-o',
-                    glyph: 'xf114@FontAwesome',
-                  },
-                  tooltip: '新建下级部门',
-                  showCaption: true,
-                  showIcon: true,
-                  id: 'deuiaction1',
-                },
-                {
-                  actionLevel: 100,
-                  noPrivDisplayMode: 2,
-                  uiactionId:
-                    'toolbar_tree_exp_view_node1_cm_deuiaction2_click@user',
-                  uiactionTarget: 'SINGLEDATA',
-                  valid: true,
-                  caption: '编辑组织',
-                  itemType: 'DEUIACTION',
-                  sysImage: {
-                    cssClass: 'fa fa-edit',
-                    glyph: 'xf044@FontAwesome',
-                  },
-                  tooltip: '编辑组织',
-                  showCaption: true,
-                  showIcon: true,
-                  id: 'deuiaction2',
-                },
-              ],
-              codeName: 'tree_exp_view_node1_cm',
-              controlType: 'CONTEXTMENU',
-              logicName: '组织快速操作_工具栏',
-              appDataEntityId: 'plmweb.user',
-              controlParam: {
-                id: 'node_1_cm',
-              },
-              modelId: '6E42478F-4B19-4141-BFCC-28D37B3A72B4',
-              modelType: 'PSDETOOLBAR',
-              name: 'node_1_cm',
-              id: 'tree_exp_view_node1_cm',
             },
           ],
           codeName: 'main',

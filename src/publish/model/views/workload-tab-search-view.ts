@@ -85,19 +85,6 @@ export default {
             panelItems: [
               {
                 actionGroupExtractMode: 'ITEM',
-                panelItems: [
-                  {
-                    caption: '工具栏',
-                    itemStyle: 'DEFAULT',
-                    itemType: 'CTRLPOS',
-                    layoutPos: {
-                      shrink: 1,
-                      layout: 'FLEX',
-                    },
-                    showCaption: true,
-                    id: 'toolbar',
-                  },
-                ],
                 layout: {
                   align: 'center',
                   layout: 'FLEX',
@@ -285,6 +272,17 @@ export default {
         },
         id: 'view_content',
       },
+      {
+        caption: '工具栏',
+        itemStyle: 'DEFAULT',
+        itemType: 'CTRLPOS',
+        layoutPos: {
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        showCaption: true,
+        id: 'tab_toolbar',
+      },
     ],
     layoutPanel: true,
     controls: [
@@ -386,6 +384,72 @@ export default {
         modelType: 'PSDEDRTAB',
         name: 'tabexppanel',
         id: 'tab_search_view_dr',
+      },
+      {
+        detoolbarItems: [
+          {
+            actionLevel: 100,
+            buttonStyle: 'STYLE2',
+            detoolbarItems: [
+              {
+                actionLevel: 100,
+                noPrivDisplayMode: 2,
+                uiactionId: 'custom_export@workload',
+                uiactionTarget: 'NONE',
+                valid: true,
+                caption: '导出',
+                itemType: 'DEUIACTION',
+                sysImage: {
+                  cssClass: 'fa fa-file-excel-o',
+                  glyph: 'xf1c3@FontAwesome',
+                },
+                tooltip: '导出',
+                showCaption: true,
+                showIcon: true,
+                id: 'deuiaction1',
+              },
+              {
+                actionLevel: 100,
+                noPrivDisplayMode: 2,
+                uiactionId: 'ai_add_estimated_workload@workload',
+                uiactionTarget: 'SINGLEDATA',
+                hiddenItem: true,
+                valid: true,
+                caption: 'AI登记预估工时',
+                itemType: 'DEUIACTION',
+                tooltip: 'AI登记预估工时',
+                showCaption: true,
+                showIcon: true,
+                id: 'deuiaction2',
+              },
+            ],
+            valid: true,
+            caption: '更多',
+            itemType: 'ITEMS',
+            sysImage: {
+              cssClass: 'fa fa-list-ul',
+              glyph: 'xf0ca@FontAwesome',
+            },
+            tooltip: '更多',
+            showIcon: true,
+            id: 'items1',
+          },
+        ],
+        toolbarStyle: 'USER',
+        codeName: 'tab_search_view_tab_toolbar',
+        controlType: 'TOOLBAR',
+        logicName: '自定义导出工具栏',
+        appDataEntityId: 'plmweb.workload',
+        controlParam: {
+          ctrlParams: {
+            TELEPORTFLAG: 'true',
+          },
+          id: 'tab_toolbar',
+        },
+        modelId: '88BF572A-0E77-4583-A68D-13C60D10388E',
+        modelType: 'PSDETOOLBAR',
+        name: 'tab_toolbar',
+        id: 'tab_search_view_tab_toolbar',
       },
       {
         capLanguageRes: {

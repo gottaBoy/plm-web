@@ -3503,6 +3503,13 @@ export default {
       id: 'read',
     },
     {
+      logicName: '读取（产品）',
+      mapDEName: 'PRODUCT',
+      mapDEOPPrivName: 'READ',
+      name: 'READ',
+      id: 'product__read',
+    },
+    {
       logicName: '读取（空间）',
       mapDEName: 'SPACE',
       mapDEOPPrivName: 'READ',
@@ -3515,13 +3522,6 @@ export default {
       mapDEOPPrivName: 'READ',
       name: 'READ',
       id: 'project__read',
-    },
-    {
-      logicName: '读取（产品）',
-      mapDEName: 'PRODUCT',
-      mapDEOPPrivName: 'READ',
-      name: 'READ',
-      id: 'product__read',
     },
     {
       logicName: '更新（产品）',

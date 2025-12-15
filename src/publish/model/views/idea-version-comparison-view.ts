@@ -164,7 +164,7 @@ export default {
                         cssClass: 'fa fa-user-md',
                         glyph: 'xf0f0@FontAwesome',
                       },
-                      id: 'u4befff7',
+                      id: 'udd2bf0b',
                     },
                   ],
                   appDataEntityId: 'plmweb.product_member',
@@ -508,6 +508,7 @@ export default {
                   appDEFieldId: 'estimated_workload',
                   editor: {
                     precision: 1,
+                    scale: 1,
                     editorType: 'TEXTBOX',
                     valueType: 'SIMPLE',
                     editable: true,
@@ -567,6 +568,7 @@ export default {
                   appDEFieldId: 'remaining_workload',
                   editor: {
                     precision: 1,
+                    scale: 1,
                     editorType: 'TEXTBOX',
                     valueType: 'SIMPLE',
                     editable: true,

@@ -82,13 +82,6 @@ export default {
   ],
   appViewRefs: [
     {
-      realOpenMode: 'POPUPMODAL',
-      realTitle: '项目基线快速建立视图',
-      refAppViewId: 'plmweb.baseline_project_create_view',
-      name: 'NEWDATA',
-      id: 'newdata',
-    },
-    {
       navigateContexts: [
         {
           key: 'BASELINE_STATUS',
@@ -101,6 +94,13 @@ export default {
       refAppViewId: 'plmweb.baseline_project_main_view',
       name: 'EDITDATA',
       id: 'editdata',
+    },
+    {
+      realOpenMode: 'POPUPMODAL',
+      realTitle: '项目基线快速建立视图',
+      refAppViewId: 'plmweb.baseline_project_create_view',
+      name: 'NEWDATA',
+      id: 'newdata',
     },
   ],
   controls: [
@@ -220,7 +220,7 @@ export default {
                   cssClass: 'fa fa-dot-circle-o',
                   glyph: 'xf192@FontAwesome',
                 },
-                id: 'ueedd749',
+                id: 'ub4649a8',
               },
               {
                 actionLevel: 100,
@@ -236,7 +236,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u111d742',
+                id: 'u800c9c9',
               },
               {
                 actionLevel: 100,
@@ -252,7 +252,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'ue448a22',
+                id: 'u76da19c',
               },
             ],
             appDataEntityId: 'plmweb.baseline',

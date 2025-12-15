@@ -1,6 +1,7 @@
 export default {
   gridRowActiveMode: 1,
   enableRowEdit: true,
+  rowEditDefault: true,
   xdataControlName: 'grid',
   loadDefault: true,
   deviewCodeName: 'all_grid_view',
@@ -554,8 +555,11 @@ export default {
             clconvertMode: 'NONE',
             dataItemName: 'category_name',
             excelCaption: '模块',
+            linkAppViewId: 'plmweb.category_redirect_view',
+            linkValueItem: 'category_id',
             appDEFieldId: 'category_name',
             valueType: 'SIMPLE',
+            enableLinkView: true,
             aggMode: 'NONE',
             align: 'LEFT',
             capLanguageRes: {
@@ -964,7 +968,7 @@ export default {
                       cssClass: 'fa fa-user-md',
                       glyph: 'xf0f0@FontAwesome',
                     },
-                    id: 'u4befff7',
+                    id: 'udd2bf0b',
                   },
                 ],
                 appDataEntityId: 'plmweb.product_member',

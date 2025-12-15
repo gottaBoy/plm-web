@@ -274,7 +274,7 @@ export default {
     layoutPanel: true,
     appViewLogics: [
       {
-        eventNames: 'onViewMounted',
+        eventNames: 'onMounted',
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         ctrlName: 'searchbar',

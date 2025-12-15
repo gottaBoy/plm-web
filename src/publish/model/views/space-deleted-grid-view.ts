@@ -185,7 +185,7 @@ export default {
                   cssClass: 'fa fa-refresh',
                   glyph: 'xf021@FontAwesome',
                 },
-                id: 'ub9bb800',
+                id: 'u3fc7ad2',
               },
             ],
             appDataEntityId: 'plmweb.space',

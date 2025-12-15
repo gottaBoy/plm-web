@@ -735,6 +735,7 @@ export default {
         {
           dstAppDEUIActionId: 'upload_attachment@run_attachment',
           dstAppDataEntityId: 'plmweb.run_attachment',
+          retDEUILogicParamId: 'files',
           codeName: 'DEUIACTION1',
           dstDEUILogicParamId: 'files',
           leftPos: 160,

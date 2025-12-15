@@ -220,7 +220,7 @@ export default {
                   cssClass: 'fa fa-dot-circle-o',
                   glyph: 'xf192@FontAwesome',
                 },
-                id: 'u40b8828',
+                id: 'uf00c5f8',
               },
               {
                 actionLevel: 100,
@@ -236,7 +236,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u33fd879',
+                id: 'u7381603',
               },
               {
                 actionLevel: 100,
@@ -252,7 +252,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u9c2bd5f',
+                id: 'u8d5e330',
               },
             ],
             appDataEntityId: 'plmweb.baseline',

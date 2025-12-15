@@ -176,7 +176,7 @@ export default {
                 uiactionId: 'open_snapshot_gantt_view@baseline',
                 showCaption: true,
                 showIcon: true,
-                id: 'u191401b',
+                id: 'u75a0d9e',
               },
               {
                 actionLevel: 100,
@@ -188,7 +188,7 @@ export default {
                 uiactionId: 'edit_snapshot@baseline',
                 showCaption: true,
                 showIcon: true,
-                id: 'u3fe42b9',
+                id: 'uf738b2b',
               },
               {
                 actionLevel: 100,
@@ -200,7 +200,7 @@ export default {
                 uiactionId: 'del_snapshot@baseline',
                 showCaption: true,
                 showIcon: true,
-                id: 'u75c69e4',
+                id: 'ud3fcfbf',
               },
             ],
             appDataEntityId: 'plmweb.baseline',

@@ -243,15 +243,6 @@ export default {
     ],
     appViewRefs: [
       {
-        realTitle: '工时数据重定向视图',
-        realTitleLanguageRes: {
-          lanResTag: 'PAGE.TITLE.WORKLOAD.REDIRECTVIEW',
-        },
-        refAppViewId: 'plmweb.workload_redirect_view',
-        name: 'EDITDATA',
-        id: 'editdata',
-      },
-      {
         realTitle: '工时编辑视图',
         realTitleLanguageRes: {
           lanResTag: 'PAGE.TITLE.WORKLOAD.EDITVIEW',
@@ -259,6 +250,15 @@ export default {
         refAppViewId: 'plmweb.workload_edit_view',
         name: 'NEWDATA',
         id: 'newdata',
+      },
+      {
+        realTitle: '工时数据重定向视图',
+        realTitleLanguageRes: {
+          lanResTag: 'PAGE.TITLE.WORKLOAD.REDIRECTVIEW',
+        },
+        refAppViewId: 'plmweb.workload_redirect_view',
+        name: 'EDITDATA',
+        id: 'editdata',
       },
     ],
     controls: [
@@ -695,12 +695,12 @@ export default {
         xdataControlName: 'grid',
         codeName: 'management_work_type_grid_view_toolbar',
         controlType: 'TOOLBAR',
-        logicName: '工时日历_工具栏',
+        logicName: '工时管理工具栏',
         appDataEntityId: 'plmweb.workload',
         controlParam: {
           id: 'toolbar',
         },
-        modelId: '1caa28e37cd29023f9d644f5b0378f0f',
+        modelId: '2069ac496c0fa376e7de57aab55bb10a',
         modelType: 'PSDETOOLBAR',
         name: 'toolbar',
         id: 'management_work_type_grid_view_toolbar',

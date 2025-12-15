@@ -1213,16 +1213,6 @@ export default {
             id: 'id',
           },
           {
-            appDEFieldId: 'relation_type',
-            dataType: 25,
-            id: 'relation_type',
-          },
-          {
-            appDEFieldId: 'principal_id',
-            dataType: 25,
-            id: 'principal_id',
-          },
-          {
             appDEFieldId: 'work_item',
             dataType: 21,
             id: 'work_item',
@@ -1233,9 +1223,19 @@ export default {
             id: 'target_id',
           },
           {
+            appDEFieldId: 'principal_id',
+            dataType: 25,
+            id: 'principal_id',
+          },
+          {
             appDEFieldId: 'principal_work_item',
             dataType: 21,
             id: 'principal_work_item',
+          },
+          {
+            appDEFieldId: 'relation_type',
+            dataType: 25,
+            id: 'relation_type',
           },
           {
             appDEFieldId: 'id',

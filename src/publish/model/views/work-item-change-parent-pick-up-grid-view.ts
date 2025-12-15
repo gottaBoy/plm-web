@@ -325,7 +325,7 @@ export default {
               appDEFieldId: 'identifier',
               editor: {
                 editorType: 'TEXTBOX',
-                placeHolder: '请输入查询编号',
+                placeHolder: '编号',
                 valueType: 'SIMPLE',
                 editable: true,
                 id: 'n_identifier_like',

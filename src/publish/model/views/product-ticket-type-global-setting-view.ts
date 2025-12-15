@@ -228,7 +228,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'uef14982',
+                id: 'u70dfe61',
               },
             ],
             appDataEntityId: 'plmweb.product_ticket_type',

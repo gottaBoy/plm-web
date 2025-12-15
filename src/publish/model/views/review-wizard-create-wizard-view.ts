@@ -90,10 +90,10 @@ export default {
               appDEMethodId: 'fill_guideline',
               defiupdateDetails: [
                 {
-                  id: 'review_stage',
+                  id: 'review_guideline_id',
                 },
                 {
-                  id: 'review_guideline_id',
+                  id: 'review_stage',
                 },
               ],
               showBusyIndicator: true,
@@ -157,6 +157,10 @@ export default {
                           noPrivDisplayMode: 1,
                           appDEFieldId: 'description',
                           editor: {
+                            appDEACModeId: 'aichat',
+                            appDEDataSetId: 'fetch_default',
+                            appDataEntityId: 'plmweb.work_item',
+                            enableAC: true,
                             editorHeight: 450,
                             editorParams: {
                               USERINSCRIPT:
@@ -164,6 +168,7 @@ export default {
                               MAXHEIGHT: '450',
                               QUOTECODELISTMAP:
                                 '{"type":"plmweb.base__recent_visite"}',
+                              srfaiagent: 'TextAgent_Writing',
                               QUOTEFIELDMAP:
                                 '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
                               QUOTEPARAMS: '{"sort":"update_time,desc"}',
@@ -179,6 +184,7 @@ export default {
                               USERFIELDMAP: '{"id":"user_id","name":"name"}',
                               INSERTKEYS:
                                 '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                              ac: 'true',
                               QUOTEURL: '`recents/fetch_recent_access`',
                             },
                             editorStyle: 'COLLAPSE',
@@ -830,6 +836,8 @@ export default {
                               condOP: 'ISNOTNULL',
                               defdname: 'type',
                               logicType: 'SINGLE',
+                              name: 'type值不为空(NotNil)',
+                              id: 'type值不为空(notnil)',
                             },
                           ],
                           logicType: 'GROUP',
@@ -1281,7 +1289,7 @@ export default {
       controlParam: {
         id: 'wizardpanel',
       },
-      modelId: 'f0ea1b38fdb4d8e2e94b4d26362047c7',
+      modelId: '506337074e8b727b75e07eec8dd92b80',
       modelType: 'PSDEWIZARDPANEL',
       name: 'wizardpanel',
       id: 'plmweb.review_wizard.create_wizard',

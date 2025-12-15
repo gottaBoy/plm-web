@@ -177,6 +177,7 @@ export default {
       groupStyle: 'DEFAULT',
       minorSortDir: 'ASC',
       minorSortAppDEFieldId: 'createdate',
+      orderValueAppDEFieldId: 'ordervalue',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -264,7 +265,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u89c4513',
+                id: 'ubc841e4',
               },
               {
                 actionLevel: 100,
@@ -279,7 +280,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u6f86502',
+                id: 'u163ae92',
               },
             ],
             appDataEntityId: 'plmweb.psdefield',

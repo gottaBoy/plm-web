@@ -219,6 +219,16 @@ export default {
       codeName: 'role_filter_dto',
       appDEMethodDTOFields: [
         {
+          codeName: 'n_dcsystemid_like',
+          logicName: '租户系统标识',
+          appDEFieldId: 'dc_system_id',
+          sourceType: 'DEFSEARCHMODE',
+          stdDataType: 25,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'n_dcsystemid_like',
+        },
+        {
           codeName: 'n_id_eq',
           logicName: '标识',
           appDEFieldId: 'id',

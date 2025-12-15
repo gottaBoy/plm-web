@@ -92,7 +92,7 @@ export default {
                             cssClass: 'fa fa-user-md',
                             glyph: 'xf0f0@FontAwesome',
                           },
-                          id: 'u23c0102',
+                          id: 'u7b4a0f4',
                         },
                       ],
                       appDataEntityId: 'plmweb.library_member',

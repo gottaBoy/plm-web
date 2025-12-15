@@ -893,15 +893,15 @@ export default {
     },
     {
       logicName: '删除',
+      name: 'DELETE',
+      id: 'delete',
+    },
+    {
+      logicName: '删除',
       mapDEName: 'BASELINE',
       mapDEOPPrivName: 'DELETE',
       name: 'DELETE',
       id: 'baseline_principal_page__delete',
-    },
-    {
-      logicName: '删除',
-      name: 'DELETE',
-      id: 'delete',
     },
     {
       logicName: '读取',

@@ -185,7 +185,7 @@ export default {
                   cssClass: 'fa fa-upload',
                   glyph: 'xf093@FontAwesome',
                 },
-                id: 'ubeb5c67',
+                id: 'u66d27dc',
               },
               {
                 actionLevel: 100,
@@ -201,7 +201,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'u73b6741',
+                id: 'u151a4bf',
               },
               {
                 actionLevel: 100,
@@ -217,7 +217,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u87b84dd',
+                id: 'ua72ad99',
               },
             ],
             appDataEntityId: 'plmweb.deliverable',
@@ -409,6 +409,12 @@ export default {
           valueType: 'SIMPLE',
           dataType: 25,
           id: 'id',
+        },
+        {
+          appDEFieldId: 'owner_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'owner_id',
         },
         {
           appDEFieldId: 'id',

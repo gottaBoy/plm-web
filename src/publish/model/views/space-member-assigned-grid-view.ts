@@ -202,7 +202,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'uafbf3eb',
+                id: 'u1050551',
               },
             ],
             appDataEntityId: 'plmweb.space_member',

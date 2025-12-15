@@ -549,6 +549,7 @@ export default {
             autoLoad: true,
             showBusyIndicator: true,
             codeName: 'baseline_mpick_up_view_tree_view',
+            controlStyle: 'GROUP_TREE',
             controlType: 'TREEVIEW',
             logicName: '基线规划页面多项选择视图_树视图',
             appDataEntityId: 'plmweb.article_page',
@@ -571,6 +572,7 @@ export default {
             controlParam: {
               id: 'treeexpbar_tree',
             },
+            sysPFPluginId: 'group_tree',
             modelId: 'a105ecb1b8647979d41220a55b7f8976',
             modelType: 'PSDETREEVIEW',
             name: 'treeexpbar_tree',

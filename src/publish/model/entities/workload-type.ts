@@ -35,6 +35,14 @@ export default {
       id: 'sequence',
     },
     {
+      codeName: 'is_system',
+      logicName: '是否系统默认',
+      predefinedType: 'NONE',
+      stdDataType: 9,
+      name: 'IS_SYSTEM',
+      id: 'is_system',
+    },
+    {
       codeName: 'id',
       lnlanguageRes: {
         lanResTag: 'DEF.LNAME.ID',
@@ -155,6 +163,16 @@ export default {
           type: 'SIMPLE',
           allowEmpty: true,
           id: 'sequence',
+        },
+        {
+          codeName: 'is_system',
+          logicName: '是否系统默认',
+          appDEFieldId: 'is_system',
+          sourceType: 'DEFIELD',
+          stdDataType: 9,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'is_system',
         },
         {
           codeName: 'create_man',

@@ -5,27 +5,6 @@
     :modal="props.modal"
     :model-data="model"
   >
-    <template #form="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_bug="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_epic="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_feature="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_issue="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_story="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
-    <template #_form_kanban_task="slotProps">
-      <i-biz-edit-form-control v-bind="slotProps" />
-    </template>
   </i-biz-view>
 </template>
 <script setup lang="ts">

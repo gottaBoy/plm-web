@@ -100,13 +100,6 @@ export default {
               searchMode: 3,
               id: '规则 - 计划规则',
             },
-            {
-              childDETreeNodeId: 'immediately',
-              parentDETreeNodeId: 'node',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '规则 - 即时规则',
-            },
           ],
           detreeNodes: [
             {

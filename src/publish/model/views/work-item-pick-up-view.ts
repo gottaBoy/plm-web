@@ -1,5 +1,6 @@
 export default {
   funcViewMode: 'PICKUPVIEW',
+  openMode: 'POPUPMODAL',
   deviewCodeName: 'pick_up_view',
   deviewId: 'c2154189502871c764f6202a131c481d',
   accUserMode: 2,
@@ -18,7 +19,7 @@ export default {
   ],
   controls: [
     {
-      embeddedAppDEViewId: 'plmweb.work_item_pick_up_grid_view',
+      embeddedAppDEViewId: 'plmweb.work_item_pick_up_grid_view_workload',
       codeName: 'pick_up_view_pickupviewpanel',
       controlType: 'PICKUPVIEWPANEL',
       appDataEntityId: 'plmweb.work_item',
@@ -62,6 +63,6 @@ export default {
   showCaptionBar: false,
   modelId: '176a7fd64e5eed8369339cbd463e3c6c',
   modelType: 'PSAPPDEVIEW',
-  name: 'work_itemPickupView',
+  name: 'work_itempick_up_view',
   id: 'plmweb.work_item_pick_up_view',
 };

@@ -41,6 +41,7 @@ export default {
       logicName: '预估工时',
       precision: 1,
       predefinedType: 'NONE',
+      scale: 1,
       stdDataType: 6,
       name: 'ESTIMATED_WORKLOAD',
       id: 'estimated_workload',

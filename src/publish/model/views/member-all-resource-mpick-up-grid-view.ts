@@ -232,7 +232,8 @@ export default {
               detailStyle: 'DEFAULT',
               detailType: 'FORMITEM',
               layoutPos: {
-                colMD: 24,
+                colLG: 8,
+                colMD: 8,
                 layout: 'TABLE_24COL',
               },
               id: 'n_name_like',

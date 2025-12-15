@@ -251,7 +251,7 @@ export default {
                   cssClass: 'fa fa-exchange',
                   glyph: 'xf0ec@FontAwesome',
                 },
-                id: 'ue0b520e',
+                id: 'u5c34a7c',
               },
             ],
             appDataEntityId: 'plmweb.baseline_page',

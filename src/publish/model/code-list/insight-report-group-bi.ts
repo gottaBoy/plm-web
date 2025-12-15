@@ -2,6 +2,7 @@ export default {
   codeListTag: 'Insight__report_group_bi',
   codeListType: 'STATIC',
   codeName: 'Insight__report_group_bi',
+  dynaSysMode: 1,
   emptyText: '未定义',
   appDataEntityId: 'plmweb.insight_report',
   codeItems: [

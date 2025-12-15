@@ -203,7 +203,7 @@ export default {
                   cssClass: 'fa fa-sun-o',
                   glyph: 'xf185@FontAwesome',
                 },
-                id: 'uad3db1c',
+                id: 'uea3ec3f',
               },
             ],
             appDataEntityId: 'plmweb.guideline',

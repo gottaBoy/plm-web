@@ -506,7 +506,7 @@ export default {
                                   rawContent:
                                     '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747741120326" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4339" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M576 452.266667v422.4h-85.333333v-422.4l-89.6 89.6L341.333333 477.866667l192-192 192 192-59.733333 59.733333-89.6-85.333333z m213.333333-217.6h-512v-85.333334h512v85.333334z" fill="#444444" p-id="4340"></path></svg>',
                                 },
-                                id: 'u97e6419',
+                                id: 'ue90f623',
                               },
                               {
                                 actionLevel: 100,
@@ -523,7 +523,7 @@ export default {
                                   rawContent:
                                     '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747741189924" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8698" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M228.43 433.23l70.893 63.016-47.261 39.385-78.77-63.016 55.139-39.384z m141.785-118.153L512 196.923l330.83 267.815-78.768 63.016-196.924-165.416v141.785L456.862 393.846v-23.63l-15.754 7.876-70.893-63.015z m196.923 441.108V1024H456.862V653.785l110.276 102.4zM39.385 86.646V0h945.23v86.646H39.385zM102.4 252.062l63.015-70.893 748.308 716.8-63.015 70.893-748.308-716.8z" p-id="8699"></path></svg>',
                                 },
-                                id: 'uaa719ea',
+                                id: 'ufe397ef',
                               },
                               {
                                 actionLevel: 100,
@@ -541,7 +541,7 @@ export default {
                                   cssClass: 'fa fa-trash-o',
                                   glyph: 'xf014@FontAwesome',
                                 },
-                                id: 'ue61f196',
+                                id: 'u3493a9e',
                               },
                             ],
                             appDataEntityId: 'plmweb.comment',
@@ -582,7 +582,7 @@ export default {
                               logicTag: 'list_itempanel',
                               logicType: 'SCRIPT',
                               scriptCode:
-                                'data.create_man === context.srfuserid',
+                                "data.create_man === context.srfuserid&&data.format_type!=='MD'",
                               triggerType: 'ITEMVISIBLE',
                               id: 'logic',
                             },
@@ -646,15 +646,16 @@ export default {
                       panelItemGroupLogics: [
                         {
                           logicCat: 'PANELVISIBLE',
-                          relatedItemNames: ['field_text_dynamic2'],
+                          relatedItemNames: ['html_content'],
                           groupOP: 'AND',
                           panelItemLogics: [
                             {
                               condOp: 'NOTEQ',
-                              dstModelField: 'FIELD_TEXT_DYNAMIC2',
+                              dstModelField: 'HTML_CONTENT',
                               value: '<p><del>该评论已删除</del></p>',
                               logicType: 'SINGLE',
-                              id: '逻辑项',
+                              name: 'HTML_CONTENT 不等于(<>) <p><del>该评论已删除</del></p>',
+                              id: 'del><',
                             },
                           ],
                           logicType: 'GROUP',
@@ -697,7 +698,7 @@ export default {
                         predefinedType: 'FIELD_TEXT_DYNAMIC',
                         valueType: 'SIMPLE',
                         editable: true,
-                        id: 'field_text_dynamic2',
+                        id: 'html_content',
                       },
                       viewFieldName: 'CONTENT',
                       allowEmpty: true,
@@ -708,7 +709,70 @@ export default {
                         shrink: 1,
                         layout: 'FLEX',
                       },
-                      id: 'field_text_dynamic2',
+                      panelItemGroupLogics: [
+                        {
+                          logicCat: 'PANELVISIBLE',
+                          relatedItemNames: ['format_type'],
+                          groupOP: 'AND',
+                          panelItemLogics: [
+                            {
+                              condOp: 'NOTEQ',
+                              dstModelField: 'FORMAT_TYPE',
+                              value: 'MD',
+                              logicType: 'SINGLE',
+                              name: 'FORMAT_TYPE 不等于(<>) MD',
+                              id: 'format_type 不等于(<>) md',
+                            },
+                          ],
+                          logicType: 'GROUP',
+                        },
+                      ],
+                      id: 'html_content',
+                    },
+                    {
+                      fieldStates: 3,
+                      editor: {
+                        mode: 'EDIT',
+                        showMaxLength: true,
+                        editorParams: {
+                          disabledirectory: 'true',
+                          READONLY: 'TRUE',
+                        },
+                        editorType: 'MARKDOWN',
+                        predefinedType: 'FIELD_TEXT_DYNAMIC',
+                        valueType: 'SIMPLE',
+                        editable: true,
+                        readOnly: true,
+                        id: 'md_content',
+                      },
+                      viewFieldName: 'CONTENT',
+                      allowEmpty: true,
+                      caption: '文本(动态)',
+                      itemStyle: 'DEFAULT',
+                      itemType: 'FIELD',
+                      layoutPos: {
+                        shrink: 1,
+                        layout: 'FLEX',
+                      },
+                      panelItemGroupLogics: [
+                        {
+                          logicCat: 'PANELVISIBLE',
+                          relatedItemNames: ['format_type'],
+                          groupOP: 'AND',
+                          panelItemLogics: [
+                            {
+                              condOp: 'EQ',
+                              dstModelField: 'FORMAT_TYPE',
+                              value: 'MD',
+                              logicType: 'SINGLE',
+                              name: 'FORMAT_TYPE 等于(=) MD',
+                              id: 'format_type 等于(=) md',
+                            },
+                          ],
+                          logicType: 'GROUP',
+                        },
+                      ],
+                      id: 'md_content',
                     },
                     {
                       actionGroupExtractMode: 'ITEM',
@@ -853,6 +917,25 @@ export default {
               },
               id: 'page_container',
             },
+            {
+              editor: {
+                editorType: 'HIDDEN',
+                predefinedType: 'FIELD_TEXT_DYNAMIC',
+                valueType: 'SIMPLE',
+                editable: true,
+                id: 'format_type',
+              },
+              viewFieldName: 'FORMAT_TYPE',
+              allowEmpty: true,
+              hidden: true,
+              caption: '文本(动态)',
+              itemType: 'FIELD',
+              layoutPos: {
+                colMD: 24,
+                layout: 'TABLE_24COL',
+              },
+              id: 'format_type',
+            },
           ],
           codeName: 'usr0103471499',
           controlType: 'PANEL',
@@ -872,9 +955,10 @@ export default {
             id: 'create_time',
           },
           {
-            appDEFieldId: 'content',
-            dataType: 21,
-            id: 'content',
+            appDEFieldId: 'pcreate_man',
+            frontCodeListId: 'plmweb.sysoperator',
+            dataType: 25,
+            id: 'pcreate_man',
           },
           {
             appDEFieldId: 'create_man',
@@ -883,25 +967,29 @@ export default {
             id: 'create_man',
           },
           {
-            appDEFieldId: 'id',
-            dataType: 25,
-            id: 'id',
-          },
-          {
-            appDEFieldId: 'pcreate_man',
-            frontCodeListId: 'plmweb.sysoperator',
-            dataType: 25,
-            id: 'pcreate_man',
-          },
-          {
             appDEFieldId: 'pid',
             dataType: 25,
             id: 'pid',
           },
           {
+            appDEFieldId: 'id',
+            dataType: 25,
+            id: 'id',
+          },
+          {
+            appDEFieldId: 'format_type',
+            dataType: 25,
+            id: 'format_type',
+          },
+          {
             appDEFieldId: 'pcontent',
             dataType: 21,
             id: 'pcontent',
+          },
+          {
+            appDEFieldId: 'content',
+            dataType: 21,
+            id: 'content',
           },
           {
             appDEFieldId: 'id',

@@ -839,10 +839,10 @@ export default {
   deopprivs: [
     {
       logicName: '建立',
-      mapDEName: 'PRODUCT',
+      mapDEName: 'SPACE',
       mapDEOPPrivName: 'SUBDATA',
       name: 'CREATE',
-      id: 'product__create',
+      id: 'space__create',
     },
     {
       logicName: '建立',
@@ -853,17 +853,17 @@ export default {
     },
     {
       logicName: '建立',
-      mapDEName: 'SPACE',
-      mapDEOPPrivName: 'SUBDATA',
-      name: 'CREATE',
-      id: 'space__create',
-    },
-    {
-      logicName: '建立',
       mapDEName: 'PROJECT',
       mapDEOPPrivName: 'SUBDATA',
       name: 'CREATE',
       id: 'project__create',
+    },
+    {
+      logicName: '建立',
+      mapDEName: 'PRODUCT',
+      mapDEOPPrivName: 'SUBDATA',
+      name: 'CREATE',
+      id: 'product__create',
     },
     {
       logicName: '建立',
@@ -886,6 +886,13 @@ export default {
     },
     {
       logicName: '删除',
+      mapDEName: 'PROJECT',
+      mapDEOPPrivName: 'SUBDATA',
+      name: 'DELETE',
+      id: 'project__delete',
+    },
+    {
+      logicName: '删除',
       mapDEName: 'PRODUCT',
       mapDEOPPrivName: 'SUBDATA',
       name: 'DELETE',
@@ -895,13 +902,6 @@ export default {
       logicName: '删除',
       name: 'DELETE',
       id: 'delete',
-    },
-    {
-      logicName: '删除',
-      mapDEName: 'PROJECT',
-      mapDEOPPrivName: 'SUBDATA',
-      name: 'DELETE',
-      id: 'project__delete',
     },
     {
       logicName: '读取',
@@ -917,10 +917,10 @@ export default {
     },
     {
       logicName: '读取',
-      mapDEName: 'PROJECT',
+      mapDEName: 'SPACE',
       mapDEOPPrivName: 'READ',
       name: 'READ',
-      id: 'project__read',
+      id: 'space__read',
     },
     {
       logicName: '读取',
@@ -931,10 +931,17 @@ export default {
     },
     {
       logicName: '读取',
-      mapDEName: 'SPACE',
+      mapDEName: 'PROJECT',
       mapDEOPPrivName: 'READ',
       name: 'READ',
-      id: 'space__read',
+      id: 'project__read',
+    },
+    {
+      logicName: '更新',
+      mapDEName: 'PRODUCT',
+      mapDEOPPrivName: 'SUBDATA',
+      name: 'UPDATE',
+      id: 'product__update',
     },
     {
       logicName: '更新',
@@ -952,22 +959,15 @@ export default {
     },
     {
       logicName: '更新',
+      name: 'UPDATE',
+      id: 'update',
+    },
+    {
+      logicName: '更新',
       mapDEName: 'SPACE',
       mapDEOPPrivName: 'SUBDATA',
       name: 'UPDATE',
       id: 'space__update',
-    },
-    {
-      logicName: '更新',
-      mapDEName: 'PRODUCT',
-      mapDEOPPrivName: 'SUBDATA',
-      name: 'UPDATE',
-      id: 'product__update',
-    },
-    {
-      logicName: '更新',
-      name: 'UPDATE',
-      id: 'update',
     },
   ],
   codeName: 'guideline',

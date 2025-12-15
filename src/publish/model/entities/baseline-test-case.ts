@@ -1379,15 +1379,15 @@ export default {
     },
     {
       logicName: '读取',
-      name: 'READ',
-      id: 'read',
-    },
-    {
-      logicName: '读取',
       mapDEName: 'BASELINE',
       mapDEOPPrivName: 'READ',
       name: 'READ',
       id: 'baseline_principal_test_case__read',
+    },
+    {
+      logicName: '读取',
+      name: 'READ',
+      id: 'read',
     },
     {
       logicName: '更新',

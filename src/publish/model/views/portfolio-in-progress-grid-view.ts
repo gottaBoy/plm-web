@@ -173,7 +173,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u1975dc7',
+                id: 'uc5a0db6',
               },
             ],
             appDataEntityId: 'plmweb.portfolio',
