@@ -1,0 +1,60 @@
+export default {
+  codeListTag: 'base_extend__print_type',
+  codeListType: 'STATIC',
+  codeName: 'base_extend__print_type',
+  emptyText: '未定义',
+  codeItems: [
+    {
+      codeName: 'poi_tl',
+      text: 'POI模板引擎',
+      value: 'POI_TL',
+      id: 'poi_tl',
+    },
+    {
+      codeName: 'jr',
+      text: 'JasperReport',
+      value: 'JR',
+      id: 'jr',
+    },
+    {
+      codeName: 'freemarker',
+      text: 'FreeMarker',
+      value: 'FREEMARKER',
+      id: 'freemarker',
+    },
+    {
+      codeName: 'chatresource',
+      text: '聊天资源',
+      value: 'CHATRESOURCE',
+      id: 'chatresource',
+    },
+    {
+      codeName: 'user',
+      text: '用户自定义',
+      value: 'USER',
+      id: 'user',
+    },
+    {
+      codeName: 'user2',
+      text: '用户自定义2',
+      value: 'USER2',
+      id: 'user2',
+    },
+    {
+      codeName: 'user3',
+      text: '用户自定义3',
+      value: 'USER3',
+      id: 'user3',
+    },
+    {
+      codeName: 'user4',
+      text: '用户自定义4',
+      value: 'USER4',
+      id: 'user4',
+    },
+  ],
+  enableCache: true,
+  userTag2: 'ReportType',
+  name: '打印格式',
+  id: 'plmweb.base_extend__print_type',
+};

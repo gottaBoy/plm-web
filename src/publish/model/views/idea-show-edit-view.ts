@@ -219,29 +219,14 @@ export default {
                                     actionGroupExtractMode: 'ITEM',
                                     panelItems: [
                                       {
-                                        editor: {
-                                          editorType: 'HIDDEN',
-                                          predefinedType: 'FIELD_TEXT_DYNAMIC',
-                                          valueType: 'SIMPLE',
-                                          editable: true,
-                                          id: 'srfreadonly',
-                                        },
-                                        viewFieldName: 'srfreadonly',
-                                        allowEmpty: true,
-                                        hidden: true,
-                                        caption: '文本(动态)',
-                                        itemType: 'FIELD',
-                                        layoutPos: {
-                                          shrink: 1,
-                                          layout: 'FLEX',
-                                        },
-                                        id: 'srfreadonly',
-                                      },
-                                      {
                                         actionGroupExtractMode: 'ITEM',
                                         panelItems: [
                                           {
                                             editor: {
+                                              appDEACModeId: 'aichat',
+                                              appDEDataSetId: 'fetch_default',
+                                              appDataEntityId: 'plmweb.ticket',
+                                              enableAC: true,
                                               editorParams: {
                                                 USERINSCRIPT:
                                                   'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
@@ -253,6 +238,7 @@ export default {
                                                   '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
                                                 QUOTEPARAMS:
                                                   '{"sort":"update_time,desc"}',
+                                                AC: 'TRUE',
                                                 QUOTEINSCRIPT:
                                                   'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
                                                 USERSCRIPT:
@@ -268,9 +254,10 @@ export default {
                                                 QUOTEURL:
                                                   '`recents/fetch_recent_access`',
                                               },
-                                              editorStyle: 'COMMENT_PRODUCT',
+                                              editorStyle:
+                                                'VDITOR_COMMENT_PRODUCT',
                                               editorType: 'HTMLEDITOR',
-                                              sysPFPluginId: 'comment',
+                                              sysPFPluginId: 'vditor',
                                               predefinedType:
                                                 'FIELD_TEXT_DYNAMIC',
                                               valueType: 'SIMPLE',
@@ -378,25 +365,25 @@ export default {
                                               dynaClass:
                                                 "['ibiz-panel-button--comment__icon']",
                                               sysCss: {
-                                                cssName: 'comment_icon',
+                                                cssName: 'right_comment_icon',
                                               },
                                               predefinedType: 'STATIC_IMAGE',
-                                              rawItemHeight: 48,
+                                              rawItemHeight: 30,
                                               id: 'comment_icon',
                                             },
                                             caption: '图片',
-                                            contentHeight: 48,
-                                            height: 48,
+                                            contentHeight: 30,
+                                            height: 30,
                                             itemStyle: 'DEFAULT',
                                             itemType: 'RAWITEM',
                                             layoutPos: {
                                               shrink: 0,
-                                              height: 48,
+                                              height: 30,
                                               heightMode: 'PX',
                                               layout: 'FLEX',
                                             },
                                             sysCss: {
-                                              cssName: 'comment_icon',
+                                              cssName: 'right_comment_icon',
                                             },
                                             sysImage: {
                                               cssClass:
@@ -410,7 +397,7 @@ export default {
                                         layout: {
                                           dir: 'row',
                                           layout: 'FLEX',
-                                          valign: 'flex-end',
+                                          valign: 'center',
                                         },
                                         dataRegionType: 'INHERIT',
                                         caption: '容器',
@@ -420,6 +407,8 @@ export default {
                                           shrink: 1,
                                           heightMode: 'FULL',
                                           layout: 'FLEX',
+                                          spacingLeft: 'INNERSMALL',
+                                          spacingTop: 'OUTERSMALL',
                                           widthMode: 'FULL',
                                         },
                                         id: 'container_comment',
@@ -440,6 +429,25 @@ export default {
                                       layout: 'FLEX',
                                     },
                                     id: 'container_singledata',
+                                  },
+                                  {
+                                    editor: {
+                                      editorType: 'HIDDEN',
+                                      predefinedType: 'FIELD_TEXT_DYNAMIC',
+                                      valueType: 'SIMPLE',
+                                      editable: true,
+                                      id: 'srfreadonly',
+                                    },
+                                    viewFieldName: 'srfreadonly',
+                                    allowEmpty: true,
+                                    hidden: true,
+                                    caption: '文本(动态)',
+                                    itemType: 'FIELD',
+                                    layoutPos: {
+                                      shrink: 1,
+                                      layout: 'FLEX',
+                                    },
+                                    id: 'srfreadonly',
                                   },
                                 ],
                                 layout: {
@@ -560,6 +568,7 @@ export default {
                         layoutPos: {
                           shrink: 0,
                           layout: 'FLEX',
+                          spacingLeft: 'OUTERSMALL',
                         },
                         id: 'container',
                       },
@@ -671,13 +680,31 @@ export default {
               },
             ],
             sysImage: {
-              cssClass: 'fa fa-pencil',
-              glyph: 'xf040@FontAwesome',
+              rawContent:
+                '<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false" fill="CurrentColor"><g id="ajpaction/edit" stroke-width="1" fill-rule="evenodd"><path d="M2 8.34L10.71 0 15 4.17 6.538 13H2V8.34zm1.2.512V11.8h2.826l7.283-7.6-2.606-2.533L3.2 8.852zM0 16v-1.2h16V16H0z" id="ajp编辑"></path></g></svg>',
             },
             tooltip: '编辑',
             showCaption: true,
             showIcon: true,
             id: 'deuiaction1',
+          },
+          {
+            actionLevel: 100,
+            buttonStyle: 'WARNING',
+            noPrivDisplayMode: 2,
+            uiactionId: 'ai@ai_agent_assignment',
+            uiactionTarget: 'SINGLEDATA',
+            valid: true,
+            caption: 'AI+',
+            itemType: 'DEUIACTION',
+            sysImage: {
+              cssClass: 'fa fa-star-half-full',
+              glyph: 'xf123@FontAwesome',
+            },
+            tooltip: 'AI+',
+            showCaption: true,
+            showIcon: true,
+            id: 'deuiaction5',
           },
           {
             itemType: 'SEPERATOR',
@@ -948,7 +975,9 @@ export default {
                           maxLength: 1048576,
                           showMaxLength: true,
                           editorHeight: 1,
+                          editorStyle: 'PREVIEW',
                           editorType: 'MARKDOWN',
+                          sysPFPluginId: 'preview',
                           valueType: 'SIMPLE',
                           editable: true,
                           id: 'formitem',
@@ -1572,7 +1601,7 @@ export default {
                 id: 'left_grouppanel',
               },
               {
-                createDV: 'HTML',
+                createDV: 'MD',
                 dataType: 25,
                 enableCond: 3,
                 labelPos: 'LEFT',
@@ -1585,7 +1614,7 @@ export default {
                   editable: true,
                   id: 'format_type',
                 },
-                updateDV: 'HTML',
+                updateDV: 'MD',
                 allowEmpty: true,
                 hidden: true,
                 caption: '内容格式',
@@ -1728,6 +1757,45 @@ export default {
                           id: 'time',
                         },
                         {
+                          rawItem: {
+                            caption: '置顶',
+                            halign: 'LEFT',
+                            renderMode: 'TEXT',
+                            valign: 'MIDDLE',
+                            wrapMode: 'NOWRAP',
+                            contentType: 'RAW',
+                            predefinedType: 'STATIC_TEXT',
+                            id: 'top_text',
+                          },
+                          caption: '置顶',
+                          itemStyle: 'DEFAULT',
+                          itemType: 'RAWITEM',
+                          layoutPos: {
+                            shrink: 1,
+                            layout: 'FLEX',
+                            spacingLeft: 'OUTERSMALL',
+                          },
+                          panelItemGroupLogics: [
+                            {
+                              logicCat: 'PANELVISIBLE',
+                              relatedItemNames: ['is_top'],
+                              groupOP: 'AND',
+                              panelItemLogics: [
+                                {
+                                  condOp: 'EQ',
+                                  dstModelField: 'IS_TOP',
+                                  value: '1',
+                                  logicType: 'SINGLE',
+                                  id: '逻辑项',
+                                },
+                              ],
+                              logicType: 'GROUP',
+                            },
+                          ],
+                          showCaption: true,
+                          id: 'top_text',
+                        },
+                        {
                           editor: {
                             editorType: 'HIDDEN',
                             predefinedType: 'FIELD_TEXT_DYNAMIC',
@@ -1765,6 +1833,24 @@ export default {
                           },
                           id: 'pid',
                         },
+                        {
+                          editor: {
+                            editorType: 'HIDDEN',
+                            valueType: 'SIMPLE',
+                            editable: true,
+                            id: 'is_top',
+                          },
+                          viewFieldName: 'IS_TOP',
+                          allowEmpty: true,
+                          hidden: true,
+                          caption: '文本(动态)',
+                          itemType: 'FIELD',
+                          layoutPos: {
+                            shrink: 1,
+                            layout: 'FLEX',
+                          },
+                          id: 'is_top',
+                        },
                       ],
                       layout: {
                         align: 'flex-start',
@@ -1780,42 +1866,91 @@ export default {
                         shrink: 1,
                         layout: 'FLEX',
                       },
+                      sysCss: {
+                        cssName: 'top_style',
+                      },
                       id: 'container1',
                     },
                     {
                       actionGroupExtractMode: 'ITEM',
                       panelItems: [
                         {
-                          actionType: 'UIACTION',
-                          buttonStyle: 'STYLE2',
-                          buttonType: 'PANELBUTTON',
-                          uiactionId: 'delete_comment_space@comment',
-                          renderMode: 'BUTTON',
-                          tooltip: '删除',
-                          uiactionTarget: 'SINGLEKEY',
-                          caption: '删除',
+                          actionGroupExtractMode: 'ITEMS',
+                          buttonListType: 'UIACTIONGROUP',
+                          uiactionGroup: {
+                            uiactionGroupDetails: [
+                              {
+                                actionLevel: 100,
+                                afterItemType: 'NONE',
+                                beforeItemType: 'NONE',
+                                buttonStyle: 'DEFAULT',
+                                caption: '置顶',
+                                detailType: 'DEUIACTION',
+                                uiactionId: 'top@comment',
+                                visibleScriptCode: 'data.is_top!=1',
+                                showCaption: true,
+                                showIcon: true,
+                                sysImage: {
+                                  rawContent:
+                                    '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747741120326" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4339" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M576 452.266667v422.4h-85.333333v-422.4l-89.6 89.6L341.333333 477.866667l192-192 192 192-59.733333 59.733333-89.6-85.333333z m213.333333-217.6h-512v-85.333334h512v85.333334z" fill="#444444" p-id="4340"></path></svg>',
+                                },
+                                id: 'u8988d21',
+                              },
+                              {
+                                actionLevel: 100,
+                                afterItemType: 'NONE',
+                                beforeItemType: 'NONE',
+                                buttonStyle: 'DEFAULT',
+                                caption: '取消置顶',
+                                detailType: 'DEUIACTION',
+                                uiactionId: 'no_top@comment',
+                                visibleScriptCode: 'data.is_top==1',
+                                showCaption: true,
+                                showIcon: true,
+                                sysImage: {
+                                  rawContent:
+                                    '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747741189924" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8698" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M228.43 433.23l70.893 63.016-47.261 39.385-78.77-63.016 55.139-39.384z m141.785-118.153L512 196.923l330.83 267.815-78.768 63.016-196.924-165.416v141.785L456.862 393.846v-23.63l-15.754 7.876-70.893-63.015z m196.923 441.108V1024H456.862V653.785l110.276 102.4zM39.385 86.646V0h945.23v86.646H39.385zM102.4 252.062l63.015-70.893 748.308 716.8-63.015 70.893-748.308-716.8z" p-id="8699"></path></svg>',
+                                },
+                                id: 'ue61a87a',
+                              },
+                              {
+                                actionLevel: 100,
+                                afterItemType: 'NONE',
+                                beforeItemType: 'NONE',
+                                buttonStyle: 'DEFAULT',
+                                caption: '删除',
+                                detailType: 'DEUIACTION',
+                                uiactionId: 'del_comment@comment',
+                                visibleScriptCode:
+                                  'data.create_man === context.srfuserid',
+                                showCaption: true,
+                                showIcon: true,
+                                sysImage: {
+                                  cssClass: 'fa fa-trash-o',
+                                  glyph: 'xf014@FontAwesome',
+                                },
+                                id: 'uefb364c',
+                              },
+                            ],
+                            appDataEntityId: 'plmweb.comment',
+                            uniqueTag: 'comment__Usr0519465800',
+                            name: '评论列表行为组',
+                            id: 'usr0519465800',
+                          },
                           itemStyle: 'STYLE2',
-                          itemType: 'BUTTON',
-                          controlLogics: [
-                            {
-                              itemName: 'BUTTON_CALLUILOGIC',
-                              logicTag: 'list_itempanel',
-                              logicType: 'SCRIPT',
-                              scriptCode:
-                                'data.create_man === context.srfuserid',
-                              triggerType: 'ITEMVISIBLE',
-                              id: 'logic1',
-                            },
-                          ],
+                          itemType: 'BUTTONLIST',
                           layoutPos: {
                             shrink: 1,
                             layout: 'FLEX',
                           },
-                          sysImage: {
-                            cssClass: 'fa fa-trash',
-                            glyph: 'xf1f8@FontAwesome',
+                          sysCss: {
+                            cssName: 'comment_btn_style',
                           },
-                          id: 'button_calluilogic',
+                          sysImage: {
+                            cssClass: 'fa fa-ellipsis-v',
+                            glyph: 'xf142@FontAwesome',
+                          },
+                          id: 'top',
                         },
                         {
                           actionType: 'UIACTION',
@@ -1835,7 +1970,7 @@ export default {
                               logicTag: 'list_itempanel',
                               logicType: 'SCRIPT',
                               scriptCode:
-                                "data.create_man === context.srfuserid&&data.format_type!=='MD'",
+                                'data.create_man === context.srfuserid',
                               triggerType: 'ITEMVISIBLE',
                               id: 'logic',
                             },
@@ -1845,8 +1980,8 @@ export default {
                             layout: 'FLEX',
                           },
                           sysImage: {
-                            cssClass: 'fa fa-edit',
-                            glyph: 'xf044@FontAwesome',
+                            rawContent:
+                              '<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false" fill="CurrentColor"><g id="ajpaction/edit" stroke-width="1" fill-rule="evenodd"><path d="M2 8.34L10.71 0 15 4.17 6.538 13H2V8.34zm1.2.512V11.8h2.826l7.283-7.6-2.606-2.533L3.2 8.852zM0 16v-1.2h16V16H0z" id="ajp编辑"></path></g></svg>',
                           },
                           id: 'button_calluilogic1',
                         },
@@ -1867,8 +2002,8 @@ export default {
                             layout: 'FLEX',
                           },
                           sysImage: {
-                            cssClass: 'fa fa-comment-o',
-                            glyph: 'xf0e5@FontAwesome',
+                            rawContent:
+                              '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1767511208333" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17379" width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M512.13274 64C229.33274 64 0.13274 250.2 0.13274 480c0 95.2 39.8 182.4 105.8 252.6C76.13274 811.4 14.13274 878.2 13.13274 879c-13.2 14-16.8 34.4-9.2 52S28.93274 960 48.13274 960c123 0 220-51.4 278.2-92.6C384.13274 885.6 446.53274 896 512.13274 896c282.8 0 512-186.2 512-416S794.93274 64 512.13274 64z m0 736c-53.4 0-106.2-8.2-156.8-24.2l-45.4-14.4-39 27.6c-28.6 20.2-67.8 42.8-115 58 14.6-24.2 28.8-51.4 39.8-80.4l21.2-56.2-41.2-43.6C139.53274 628.2 96.13274 564.4 96.13274 480c0-176.4 186.6-320 416-320s416 143.6 416 320-186.6 320-416 320z" p-id="17380" fill="#999999"></path></svg>',
                           },
                           id: 'button_calluilogic2',
                         },
@@ -1888,7 +2023,8 @@ export default {
                           logicType: 'SCRIPT',
                           scriptCode: 'context.srfreadonly != true',
                           triggerType: 'ITEMVISIBLE',
-                          id: 'logic_readonly',
+                          name: 'readOnly',
+                          id: 'readonly',
                         },
                       ],
                       layoutPos: {
@@ -1898,15 +2034,15 @@ export default {
                       panelItemGroupLogics: [
                         {
                           logicCat: 'PANELVISIBLE',
-                          relatedItemNames: ['html_content'],
+                          relatedItemNames: ['content'],
                           groupOP: 'AND',
                           panelItemLogics: [
                             {
                               condOp: 'NOTEQ',
-                              dstModelField: 'HTML_CONTENT',
+                              dstModelField: 'CONTENT',
                               value: '<p><del>该评论已删除</del></p>',
                               logicType: 'SINGLE',
-                              name: 'HTML_CONTENT 不等于(<>) <p><del>该评论已删除</del></p>',
+                              name: 'CONTENT 不等于(<>) <p><del>该评论已删除</del></p>',
                               id: 'del><',
                             },
                           ],
@@ -1936,66 +2072,20 @@ export default {
                   panelItems: [
                     {
                       editor: {
-                        contentType: 'HTML',
                         editorParams: {
-                          contenttype: 'HTML',
                           LINKVIEWID: 'plmweb.recent_custom_redirect_view',
-                          SCRIPTCODE:
-                            'data.content?.replace(/@{[^,]*,"name":"(.*?)"}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/@{[^,]*,name=(.*?)}/g,"<span class=\'comment-tag\'>@$1</span>").replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g, (x, value, icon) => {const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1).trim(); } return controller.parseCommentTag({icon, ...item});}).replaceAll(/\\{\\"\\emoji\\":\\"(.+?)\\"\\}/g,(x, emoji) => {const tempVal = decodeURIComponent(atob(emoji)); return `<span class="emoji-tag">${tempVal}</span>`})',
-                          TRANSLATEOBJ: '{"&reg":"&amp;reg"}',
+                          QUOTECODELISTMAP:
+                            '{"type":"plmweb.base__recent_visite"}',
+                          READONLY: 'true',
                         },
-                        editorStyle: 'COMMENT_ITEM',
-                        editorType: 'RAW',
-                        sysPFPluginId: 'comment_item',
-                        predefinedType: 'FIELD_TEXT_DYNAMIC',
-                        valueType: 'SIMPLE',
-                        editable: true,
-                        id: 'html_content',
-                      },
-                      viewFieldName: 'CONTENT',
-                      allowEmpty: true,
-                      caption: '文本(动态)',
-                      itemStyle: 'DEFAULT',
-                      itemType: 'FIELD',
-                      layoutPos: {
-                        shrink: 1,
-                        layout: 'FLEX',
-                      },
-                      panelItemGroupLogics: [
-                        {
-                          logicCat: 'PANELVISIBLE',
-                          relatedItemNames: ['format_type'],
-                          groupOP: 'AND',
-                          panelItemLogics: [
-                            {
-                              condOp: 'NOTEQ',
-                              dstModelField: 'FORMAT_TYPE',
-                              value: 'MD',
-                              logicType: 'SINGLE',
-                              name: 'FORMAT_TYPE 不等于(<>) MD',
-                              id: 'format_type 不等于(<>) md',
-                            },
-                          ],
-                          logicType: 'GROUP',
-                        },
-                      ],
-                      id: 'html_content',
-                    },
-                    {
-                      fieldStates: 3,
-                      editor: {
-                        mode: 'EDIT',
-                        showMaxLength: true,
-                        editorParams: {
-                          disabledirectory: 'true',
-                          READONLY: 'TRUE',
-                        },
-                        editorType: 'MARKDOWN',
+                        editorStyle: 'VDITOR',
+                        editorType: 'HTMLEDITOR',
+                        sysPFPluginId: 'vditor',
                         predefinedType: 'FIELD_TEXT_DYNAMIC',
                         valueType: 'SIMPLE',
                         editable: true,
                         readOnly: true,
-                        id: 'md_content',
+                        id: 'content',
                       },
                       viewFieldName: 'CONTENT',
                       allowEmpty: true,
@@ -2006,25 +2096,7 @@ export default {
                         shrink: 1,
                         layout: 'FLEX',
                       },
-                      panelItemGroupLogics: [
-                        {
-                          logicCat: 'PANELVISIBLE',
-                          relatedItemNames: ['format_type'],
-                          groupOP: 'AND',
-                          panelItemLogics: [
-                            {
-                              condOp: 'EQ',
-                              dstModelField: 'FORMAT_TYPE',
-                              value: 'MD',
-                              logicType: 'SINGLE',
-                              name: 'FORMAT_TYPE 等于(=) MD',
-                              id: 'format_type 等于(=) md',
-                            },
-                          ],
-                          logicType: 'GROUP',
-                        },
-                      ],
-                      id: 'md_content',
+                      id: 'content',
                     },
                     {
                       actionGroupExtractMode: 'ITEM',
@@ -2080,8 +2152,13 @@ export default {
                             contentType: 'HTML',
                             editorParams: {
                               contenttype: 'HTML',
+                              SCRIPTCODE:
+                                'data.content?.replace(/@{[^,]*,"name":"(.*?)"}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/@{[^,]*,name=(.*?)}/g,"<span class=\'comment-tag\'>@$1</span>").replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g, (x, value, icon) => {const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1).trim(); } return controller.parseCommentTag({icon, ...item});}).replaceAll(/\\{\\"\\emoji\\":\\"(.+?)\\"\\}/g,(x, emoji) => {const tempVal = decodeURIComponent(atob(emoji)); return `<span class="emoji-tag">${tempVal}</span>`})',
+                              TRANSLATEOBJ: '{"&reg":"&amp;reg"}',
                             },
+                            editorStyle: 'COMMENT_ITEM',
                             editorType: 'RAW',
+                            sysPFPluginId: 'comment_item',
                             predefinedType: 'FIELD_TEXT_DYNAMIC',
                             valueType: 'SIMPLE',
                             editable: true,
@@ -2092,18 +2169,13 @@ export default {
                           caption: '文本(动态)',
                           itemStyle: 'DEFAULT',
                           itemType: 'FIELD',
-                          controlRenders: [
-                            {
-                              layoutPanelModel:
-                                'data.pcontent?.replace(/@{[^,]*,"name":"(.*?)"}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/@{[^,]*,name=(.*?)}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/#{"id":"(.+?)","name":"(.+?)","identifier":"(.+?)","icon":"((.|[\\t\\r\\f\\n\\s])+?)"}/g, "<span class=\'comment-tag\'>$4 $3 $2</span>").replace(/#{id=(.+?),name=(.+?),identifier=(.+?),icon=((.|[\\t\\r\\f\\n\\s])+?)}/g, "<span class=\'comment-tag\'>$4 $3 $2</span>").replaceAll(/<span data-w-e-type="emoji" class=\'emoji\'>(.+?)<\\/span>/g,(x, emoji) => {const tempVal = decodeURIComponent(atob(emoji));return `<span data-w-e-type="emoji" class=\'emoji\'>${tempVal}</span>`;}).replaceAll(/{"emoji":"(.+?)"}/g, (x, emoji) => {const tempVal = decodeURIComponent(atob(emoji));return `<span data-w-e-type="emoji" class=\'emoji\'>${tempVal}</span>`;})',
-                              renderType: 'LAYOUTPANEL_MODEL',
-                              id: 'logic3',
-                            },
-                          ],
                           layoutPos: {
                             grow: 1,
                             shrink: 1,
                             layout: 'FLEX',
+                          },
+                          sysCss: {
+                            cssName: 'normal-rich-text',
                           },
                           id: 'pcontent',
                         },
@@ -2155,6 +2227,9 @@ export default {
                     shrink: 1,
                     layout: 'FLEX',
                   },
+                  sysCss: {
+                    cssName: 'vditor-comment-item',
+                  },
                   id: 'container4',
                 },
               ],
@@ -2170,39 +2245,21 @@ export default {
               },
               id: 'page_container',
             },
-            {
-              editor: {
-                editorType: 'HIDDEN',
-                predefinedType: 'FIELD_TEXT_DYNAMIC',
-                valueType: 'SIMPLE',
-                editable: true,
-                id: 'format_type',
-              },
-              viewFieldName: 'FORMAT_TYPE',
-              allowEmpty: true,
-              hidden: true,
-              caption: '文本(动态)',
-              itemType: 'FIELD',
-              layoutPos: {
-                shrink: 1,
-                layout: 'FLEX',
-              },
-              id: 'format_type',
-            },
           ],
           layoutPanel: true,
           codeName: 'usr0228764297',
           controlType: 'PANEL',
           logicName: 'list_wiki列表',
-          appDataEntityId: 'plmweb.idea',
+          appDataEntityId: 'plmweb.comment',
           controlParam: {},
+          sysCss: {
+            cssName: 'right_comment_list',
+          },
           modelId: '4725f20a53b325233aa91c848c3b2a19',
           modelType: 'PSSYSVIEWPANEL',
           name: 'list_itempanel',
-          id: 'plmweb.idea.usr0228764297',
+          id: 'plmweb.comment.usr0228764297',
         },
-        minorSortDir: 'ASC',
-        minorSortAppDEFieldId: 'create_time',
         delistDataItems: [
           {
             appDEFieldId: 'content',
@@ -2259,6 +2316,7 @@ export default {
           },
         ],
         pagingSize: 1000,
+        noSort: true,
         showHeader: true,
         singleSelect: true,
         navViewPos: 'NONE',
@@ -2344,7 +2402,7 @@ export default {
         itemName: 'FIELD_TEXTBOX',
         logicTag: 'layoutpanel',
         logicType: 'APPDEUILOGIC',
-        appDEUILogicId: 'comment_icon_hidden',
+        appDEUILogicId: 'comment_icon_hidden_wiki',
         appDataEntityId: 'plmweb.comment',
         triggerType: 'CTRLEVENT',
         name: 'onBlur',
@@ -2355,7 +2413,7 @@ export default {
         itemName: 'FIELD_TEXTBOX',
         logicTag: 'layoutpanel',
         logicType: 'APPDEUILOGIC',
-        appDEUILogicId: 'comment_icon_show',
+        appDEUILogicId: 'comment_icon_show_wiki',
         appDataEntityId: 'plmweb.comment',
         triggerType: 'CTRLEVENT',
         name: 'onFocus',

@@ -81,10 +81,10 @@ export default {
               appDEMethodId: 'fill_guideline',
               defiupdateDetails: [
                 {
-                  id: 'review_guideline_id',
+                  id: 'review_stage',
                 },
                 {
-                  id: 'review_stage',
+                  id: 'review_guideline_id',
                 },
               ],
               showBusyIndicator: true,
@@ -529,6 +529,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer_name',
                               labelPos: 'NONE',
                               noPrivDisplayMode: 1,
                               editor: {
@@ -591,6 +592,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -616,6 +618,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'stage_state',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -641,6 +644,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'guideline_id',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -666,6 +670,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'id',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -691,6 +696,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'order',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -716,6 +722,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer_type',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -764,6 +771,8 @@ export default {
                               condOP: 'ISNOTNULL',
                               defdname: 'type',
                               logicType: 'SINGLE',
+                              name: 'type值不为空(NotNil)',
+                              id: 'type值不为空(notnil)',
                             },
                           ],
                           logicType: 'GROUP',

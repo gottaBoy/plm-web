@@ -1,0 +1,71 @@
+export default {
+  redirectAppViewRefs: [
+    {
+      realTitle: '产品需求评审内容编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.REVIEW_CONTENT_IDEA.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.review_content_idea_edit_view',
+      name: 'REVIEW_CONTENT_IDEA:EDITVIEW',
+      id: 'review_content_idea:editview',
+    },
+    {
+      realTitle: '产品需求评审内容编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.REVIEW_CONTENT_IDEA.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.review_content_idea_edit_view',
+      name: 'EDITVIEW',
+      id: 'editview',
+    },
+  ],
+  enableWorkflow: true,
+  funcViewMode: 'REDIRECTVIEW',
+  deviewCodeName: 'RedirectView',
+  deviewId: '52ebbc0d6df3aaba41b5c5ef9cfeabbc',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.REVIEW_CONTENT_IDEA',
+  },
+  caption: '产品需求评审内容',
+  codeName: 'review_content_idea_redirect_view',
+  appDataEntityId: 'plmweb.review_content_idea',
+  controls: [
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.REVIEW_CONTENT_IDEA',
+      },
+      caption: '产品需求评审内容',
+      codeName: 'redirect_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.review_content_idea',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'redirect_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDEREDIRECTVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.review_content_idea',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '产品需求评审内容数据重定向视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.REVIEW_CONTENT_IDEA.REDIRECTVIEW',
+  },
+  viewStyle: 'DEFAULT',
+  viewType: 'DEREDIRECTVIEW',
+  enableDP: true,
+  redirectView: true,
+  showCaptionBar: true,
+  modelId: 'a3cf6d3e0d12d19c0e5655a003b797c7',
+  modelType: 'PSAPPDEVIEW',
+  name: 'review_content_ideaRedirectView',
+  id: 'plmweb.review_content_idea_redirect_view',
+};

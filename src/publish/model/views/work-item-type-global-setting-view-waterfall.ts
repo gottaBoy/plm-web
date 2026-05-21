@@ -61,7 +61,7 @@ export default {
       id: 'opendata',
     },
   ],
-  appViewMsgGroupId: 'usrvmgroup1229617041',
+  appViewMsgGroupId: 'usrvmgroup0419025627',
   appViewRefs: [
     {
       realTitle: '工作项类型编辑视图',
@@ -83,6 +83,42 @@ export default {
     },
   ],
   controls: [
+    {
+      detoolbarItems: [
+        {
+          actionLevel: 100,
+          noPrivDisplayMode: 2,
+          uiactionId: 'open_quick_create_view@work_item_type',
+          uiactionTarget: 'NONE',
+          valid: true,
+          caption: '新建工作项类型',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-plus',
+            glyph: 'xf067@FontAwesome',
+          },
+          tooltip: '新建工作项类型',
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction1',
+        },
+      ],
+      xdataControlName: 'list',
+      codeName: 'global_setting_view_waterfall_tabtoolbar',
+      controlType: 'TOOLBAR',
+      logicName: '配置中心工作项类型列表视图工具栏',
+      appDataEntityId: 'plmweb.work_item_type',
+      controlParam: {
+        ctrlParams: {
+          TELEPORTFLAG: 'true',
+        },
+        id: 'tabtoolbar',
+      },
+      modelId: 'e9297fed9c1af472fc05711acc08ff89',
+      modelType: 'PSDETOOLBAR',
+      name: 'tabtoolbar',
+      id: 'global_setting_view_waterfall_tabtoolbar',
+    },
     {
       searchButtonStyle: 'DEFAULT',
       deformPages: [
@@ -211,6 +247,25 @@ export default {
                           layout: 'FLEX',
                         },
                         id: 'id',
+                      },
+                      {
+                        editor: {
+                          editorType: 'HIDDEN',
+                          predefinedType: 'FIELD_TEXT_DYNAMIC',
+                          valueType: 'SIMPLE',
+                          editable: true,
+                          id: 'is_system',
+                        },
+                        viewFieldName: 'IS_SYSTEM',
+                        allowEmpty: true,
+                        hidden: true,
+                        caption: '文本(动态)',
+                        itemType: 'FIELD',
+                        layoutPos: {
+                          shrink: 1,
+                          layout: 'FLEX',
+                        },
+                        id: 'is_system',
                       },
                       {
                         actionGroupExtractMode: 'ITEM',
@@ -1172,6 +1227,46 @@ export default {
                         id: 'container_grid4',
                       },
                     ],
+                    uiactionGroup: {
+                      uiactionGroupDetails: [
+                        {
+                          actionLevel: 100,
+                          afterItemType: 'NONE',
+                          beforeItemType: 'NONE',
+                          buttonStyle: 'DEFAULT',
+                          detailType: 'DEUIACTION',
+                          uiactionId: 'edit_work_item_type@work_item_type',
+                          tooltip: '编辑',
+                          visibleScriptCode: 'data.is_system ==0',
+                          showIcon: true,
+                          sysImage: {
+                            cssClass: 'fa fa-edit',
+                            glyph: 'xf044@FontAwesome',
+                          },
+                          id: 'u865c589',
+                        },
+                        {
+                          actionLevel: 100,
+                          afterItemType: 'NONE',
+                          beforeItemType: 'NONE',
+                          buttonStyle: 'DEFAULT',
+                          detailType: 'DEUIACTION',
+                          uiactionId: 'remove_extend_model@work_item_type',
+                          tooltip: '移除',
+                          visibleScriptCode: 'data.is_system ==0',
+                          showIcon: true,
+                          sysImage: {
+                            cssClass: 'fa fa-trash-o',
+                            glyph: 'xf014@FontAwesome',
+                          },
+                          id: 'u3d28be2',
+                        },
+                      ],
+                      appDataEntityId: 'plmweb.work_item_type',
+                      uniqueTag: 'work_item_type__global_type',
+                      name: '全局工作项类型列表',
+                      id: 'global_type',
+                    },
                     predefinedType: 'CONTAINER_GROUP',
                     titleBarCloseMode: 2,
                     layout: {
@@ -1216,9 +1311,6 @@ export default {
               colMD: 24,
               layout: 'TABLE_24COL',
             },
-            sysCss: {
-              cssName: 'work_item_type_global_style',
-            },
             id: 'page_container',
           },
         ],
@@ -1232,7 +1324,10 @@ export default {
         name: 'list_itempanel',
         id: 'plmweb.work_item_type.usr1229905828',
       },
+      minorSortDir: 'ASC',
+      minorSortAppDEFieldId: 'sequence',
       mobListStyle: 'EXTVIEW1',
+      orderValueAppDEFieldId: 'sequence',
       delistDataItems: [
         {
           dataType: 25,
@@ -1241,6 +1336,11 @@ export default {
         {
           dataType: 25,
           id: 'name',
+        },
+        {
+          frontCodeListId: 'plmweb.yesno',
+          dataType: 9,
+          id: 'is_system',
         },
         {
           dataType: 21,
@@ -1263,7 +1363,10 @@ export default {
         },
       ],
       pagingSize: 1000,
+      enableRowEdit: true,
+      enableRowEditOrder: true,
       showHeader: true,
+      singleSelect: true,
       navViewPos: 'NONE',
       createControlAction: {
         appDEMethodId: 'create',
@@ -1279,6 +1382,11 @@ export default {
         appDEMethodId: 'get',
         appDataEntityId: 'plmweb.work_item_type',
         id: 'load',
+      },
+      moveControlAction: {
+        appDEMethodId: 'move',
+        appDataEntityId: 'plmweb.work_item_type',
+        id: 'move',
       },
       removeControlAction: {
         appDEMethodId: 'remove',

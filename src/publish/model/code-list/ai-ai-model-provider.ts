@@ -34,6 +34,12 @@ export default {
       value: 'ernie',
       id: 'ernie',
     },
+    {
+      codeName: 'BAAI',
+      text: '北京智源',
+      value: 'BAAI',
+      id: 'baai',
+    },
   ],
   enableCache: true,
   name: 'AI模型提供商',

@@ -49,6 +49,7 @@ export default {
                 layoutPos: {
                   shrink: 0,
                   layout: 'FLEX',
+                  widthMode: 'FULL',
                 },
                 id: 'view_searchform',
               },

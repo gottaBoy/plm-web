@@ -23,6 +23,21 @@ export default {
   caption: '项目',
   codeName: 'project_redirect_view',
   appDataEntityId: 'plmweb.project',
+  appViewNavContexts: [
+    {
+      rawValue: true,
+      key: 'PORTFOLIO',
+      name: 'PORTFOLIO',
+      id: 'portfolio',
+    },
+  ],
+  appViewNavParams: [
+    {
+      rawValue: true,
+      key: 'project_portfolio',
+      id: 'project_portfolio',
+    },
+  ],
   appViewRefs: [
     {
       realTitle: '主数据视图scrum',

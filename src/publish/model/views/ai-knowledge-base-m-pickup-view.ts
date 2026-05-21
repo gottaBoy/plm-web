@@ -38,6 +38,21 @@ export default {
           dataType: 25,
           id: 'source_id',
         },
+        {
+          appDEFieldId: 'rerank_model_id',
+          dataType: 25,
+          id: 'rerank_model_id',
+        },
+        {
+          appDEFieldId: 'embedding_model_id',
+          dataType: 25,
+          id: 'embedding_model_id',
+        },
+        {
+          appDEFieldId: 'chat_model_id',
+          dataType: 25,
+          id: 'chat_model_id',
+        },
       ],
       pagingSize: 1000,
       showHeader: true,
@@ -117,6 +132,9 @@ export default {
     id: 'layoutpanel',
   },
   title: '知识库数据多项选择视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.MPICKUPVIEW',
+  },
   viewStyle: 'DEFAULT',
   viewType: 'DEMPICKUPVIEW',
   width: 1200,

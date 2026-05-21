@@ -104,6 +104,9 @@ export default {
     {
       realOpenMode: 'POPUPMODAL',
       realTitle: '知识库数据多项选择视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.MPICKUPVIEW',
+      },
       refAppViewId: 'plmweb.ai_knowledge_base_m_pickup_view',
       name: 'MPICKUPVIEW:AI_KNOWLEDGE_BASE',
       id: 'mpickupview:ai_knowledge_base',

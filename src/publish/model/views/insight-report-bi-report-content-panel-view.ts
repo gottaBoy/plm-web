@@ -145,12 +145,15 @@ export default {
                     actionGroupExtractMode: 'ITEM',
                     panelItems: [
                       {
+                        caption: '页面标题',
                         itemStyle: 'DEFAULT',
                         itemType: 'CTRLPOS',
                         layoutPos: {
                           shrink: 1,
                           layout: 'FLEX',
                         },
+                        sysPFPluginId: 'data_info_title',
+                        showCaption: true,
                         id: 'captionbar',
                       },
                     ],

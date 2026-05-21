@@ -19,6 +19,16 @@ export default {
   ],
   appViewLogics: [
     {
+      eventNames: 'onCreated',
+      logicTrigger: 'VIEWEVENT',
+      logicType: 'SCRIPT',
+      scriptCode:
+        "if (view && viewParam.reportcaption) {\n    view.model.caption = viewParam.reportcaption;\n    view.evt.on('onViewInfoChange', {});\n}",
+      builtinLogic: true,
+      name: 'onCreated',
+      id: 'oncreated',
+    },
+    {
       eventNames: 'onSelectionChange',
       logicTrigger: 'CTRLEVENT',
       logicType: 'APPDEUIACTION',

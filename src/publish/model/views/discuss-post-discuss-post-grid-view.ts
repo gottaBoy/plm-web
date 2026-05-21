@@ -412,7 +412,7 @@ export default {
           {
             clconvertMode: 'NONE',
             dataItemName: 'name',
-            excelCaption: '讨论名称',
+            excelCaption: '标题',
             appDEFieldId: 'name',
             valueType: 'SIMPLE',
             aggMode: 'NONE',
@@ -420,7 +420,7 @@ export default {
             capLanguageRes: {
               lanResTag: 'DEF.LNAME.NAME',
             },
-            caption: '讨论名称',
+            caption: '标题',
             codeName: 'name',
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,

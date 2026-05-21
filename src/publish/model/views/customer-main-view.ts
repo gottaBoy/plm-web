@@ -230,9 +230,9 @@ export default {
                                       '`products/${context.product}/product_members/fetch_default`',
                                     QUOTEURL: '`recents/fetch_recent_access`',
                                   },
-                                  editorStyle: 'COMMENT_PRODUCT',
+                                  editorStyle: 'VDITOR_COMMENT_PRODUCT',
                                   editorType: 'HTMLEDITOR',
-                                  sysPFPluginId: 'comment',
+                                  sysPFPluginId: 'vditor',
                                   predefinedType: 'FIELD_TEXT_DYNAMIC',
                                   valueType: 'SIMPLE',
                                   editable: true,
@@ -804,41 +804,17 @@ export default {
                                 editor: {
                                   appDEACModeId: 'aichat',
                                   appDEDataSetId: 'fetch_default',
-                                  appDataEntityId: 'plmweb.work_item',
+                                  appDataEntityId: 'plmweb.customer',
                                   enableAC: true,
                                   editorParams: {
-                                    INSERTKEYS:
-                                      '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                    LINKVIEWID:
-                                      'plmweb.recent_custom_redirect_view',
-                                    USERURL:
-                                      "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                    enableFullScreen: 'true',
-                                    USERSCRIPT:
-                                      '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                    USERINSCRIPT:
-                                      'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                    QUOTEINSCRIPT:
-                                      'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                    QUOTEURL: '`recents/fetch_recent_access`',
-                                    srfaiagent: 'TextAgent_Writing',
-                                    QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                                    QUOTESCRIPT:
-                                      '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                    QUOTECODELISTMAP:
-                                      '{"type":"plmweb.base__recent_visite"}',
-                                    USERFIELDMAP:
-                                      '{"id":"user_id","name":"name"}',
-                                    QUOTEFIELDMAP:
-                                      '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                    enableEdit: 'true',
-                                    MODE: 'default',
+                                    hiddenswitch: 'true',
+                                    defaulttype: 'MD',
+                                    includes: '["HTMLEDITOR_VDITOR"]',
                                     ac: 'true',
-                                    MAXHEIGHT: '450',
+                                    codelistid: 'plmweb.formattype_view',
+                                    srfaiagent: 'TextAgent_Writing',
                                   },
-                                  editorStyle: 'COLLAPSE',
                                   editorType: 'HTMLEDITOR',
-                                  sysPFPluginId: 'comment',
                                   valueType: 'SIMPLE',
                                   editable: true,
                                   id: 'description',
@@ -852,6 +828,7 @@ export default {
                                   colMD: 24,
                                   layout: 'TABLE_24COL',
                                 },
+                                sysPFPluginId: 'composite_form_item_ex',
                                 id: 'description',
                               },
                             ],

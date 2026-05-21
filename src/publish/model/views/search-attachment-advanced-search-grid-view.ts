@@ -1,5 +1,4 @@
 export default {
-  gridRowActiveMode: 1,
   xdataControlName: 'grid',
   loadDefault: true,
   deviewCodeName: 'advanced_search_grid_view',
@@ -20,17 +19,6 @@ export default {
   ],
   appViewLogics: [
     {
-      eventNames: 'onActive',
-      logicTrigger: 'CTRLEVENT',
-      logicType: 'APPDEUILOGIC',
-      appDEUILogicId: 'open_main_view',
-      appDataEntityId: 'plmweb.search_attachment',
-      ctrlName: 'grid',
-      builtinLogic: true,
-      name: 'OPENDATA',
-      id: 'opendata',
-    },
-    {
       logicTrigger: 'CUSTOM',
       logicType: 'APPUILOGIC',
       builtinAppUILogic: {
@@ -50,6 +38,27 @@ export default {
       },
       builtinLogic: true,
       id: 'newdata',
+    },
+    {
+      logicTrigger: 'CUSTOM',
+      logicType: 'APPUILOGIC',
+      builtinAppUILogic: {
+        openDataAppView: {
+          refAppViewId: 'plmweb.search_attachment_edit_view',
+        },
+        editMode: true,
+        appUILogicRefViews: [
+          {
+            refAppViewId: 'plmweb.search_attachment_edit_view',
+          },
+        ],
+        builtinLogic: true,
+        logicType: 'PREDEFINED',
+        viewLogicType: 'APP_OPENDATA',
+        id: '打开数据',
+      },
+      builtinLogic: true,
+      id: 'opendata',
     },
   ],
   appViewRefs: [
@@ -85,6 +94,7 @@ export default {
           dataItemName: 'name',
           excelCaption: '附件名称',
           appDEFieldId: 'name',
+          deuiactionId: 'open_main_view_pop_up@search_attachment',
           valueType: 'SIMPLE',
           aggMode: 'NONE',
           align: 'LEFT',

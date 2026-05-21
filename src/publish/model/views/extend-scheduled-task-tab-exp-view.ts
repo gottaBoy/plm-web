@@ -278,13 +278,8 @@ export default {
         dedrtabPages: [
           {
             caption: '计划任务',
-            appViewId: 'plmweb.extend_scheduled_task_grid_view',
+            appViewId: 'plmweb.extend_scheduled_task_tree_exp_view',
             id: 'task',
-          },
-          {
-            caption: '作业历史',
-            appViewId: 'plmweb.extend_scheduled_task_his_grid_view',
-            id: 'task_his',
           },
           {
             caption: '任务类型',

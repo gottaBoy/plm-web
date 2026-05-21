@@ -153,6 +153,8 @@ export default {
                   id: 'visibility',
                 },
                 {
+                  createDV: 'section_name',
+                  createDVT: 'APPDATA',
                   dataType: 25,
                   enableCond: 3,
                   labelPos: 'TOP',
@@ -195,11 +197,28 @@ export default {
                     ],
                     id: 'section_name',
                   },
+                  updateDV: 'section_name',
+                  updateDVT: 'APPDATA',
                   allowEmpty: true,
                   caption: '所属分组',
                   codeName: 'section_name',
                   detailStyle: 'DEFAULT',
                   detailType: 'FORMITEM',
+                  defdgroupLogics: [
+                    {
+                      logicCat: 'ITEMENABLE',
+                      relatedDetailNames: ['section_name'],
+                      groupOP: 'AND',
+                      defdlogics: [
+                        {
+                          condOP: 'ISNULL',
+                          defdname: 'section_name',
+                          logicType: 'SINGLE',
+                        },
+                      ],
+                      logicType: 'GROUP',
+                    },
+                  ],
                   layoutPos: {
                     colMD: 24,
                     layout: 'TABLE_24COL',

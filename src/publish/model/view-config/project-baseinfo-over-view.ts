@@ -3,7 +3,7 @@ export default {
   codeName: 'project_baseinfo_over_view',
   openMode: 'INDEXVIEWTAB',
   viewType: 'DEEDITVIEW',
-  width: 0,
+  width: undefined,
   height: 345,
   appDataEntityId: 'plmweb.project',
   redirectView: false,

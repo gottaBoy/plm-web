@@ -629,6 +629,28 @@ export default {
       id: 'update',
     },
     {
+      codeName: 'fetch_ai_kb_doc_import_method',
+      methodType: 'FETCH',
+      appDEMethodInput: {
+        appDEMethodDTOId: 'dictionary_data_filter_dto',
+        type: 'DTO',
+        id: '输入对象',
+      },
+      appDEMethodReturn: {
+        appDEMethodDTOId: 'dictionary_data_dto',
+        type: 'PAGE',
+        id: '返回对象',
+      },
+      requestMethod: 'POST',
+      requestParamType: 'ENTITY',
+      requestPath: '/fetch_ai_kb_doc_import_method',
+      actionType: 'REMOTE',
+      dataSetName: 'ai_kb_doc_import_method',
+      dataSetTag: 'ai_kb_doc_import_method',
+      dataSetType: 'REMOTE',
+      id: 'fetch_ai_kb_doc_import_method',
+    },
+    {
       codeName: 'fetch_default',
       methodType: 'FETCH',
       appDEMethodInput: {

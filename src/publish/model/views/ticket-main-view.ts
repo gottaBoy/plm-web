@@ -31,6 +31,12 @@ export default {
       name: 'PRINCIPAL_TYPE',
       id: 'principal_type',
     },
+    {
+      rawValue: true,
+      key: 'SRFDEFAULTTOROUTEDEPTH',
+      name: 'SRFDEFAULTTOROUTEDEPTH',
+      id: 'srfdefaulttoroutedepth',
+    },
   ],
   appViewNavParams: [
     {
@@ -43,6 +49,14 @@ export default {
       key: 'srfparentkey',
       value: 'product',
       id: 'srfparentkey',
+    },
+  ],
+  appViewParams: [
+    {
+      key: 'SRFRENEWSESSION',
+      value: 'true',
+      name: 'SRFRENEWSESSION',
+      id: 'srfrenewsession',
     },
   ],
   sysCss: {
@@ -283,9 +297,9 @@ export default {
                                         QUOTEURL:
                                           '`recents/fetch_recent_access`',
                                       },
-                                      editorStyle: 'COMMENT_PRODUCT',
+                                      editorStyle: 'VDITOR_COMMENT_PRODUCT',
                                       editorType: 'HTMLEDITOR',
-                                      sysPFPluginId: 'comment',
+                                      sysPFPluginId: 'vditor',
                                       predefinedType: 'FIELD_TEXT_DYNAMIC',
                                       valueType: 'SIMPLE',
                                       editable: true,
@@ -1011,8 +1025,8 @@ export default {
                   },
                 ],
                 sysImage: {
-                  cssClass: 'fa fa-archive',
-                  glyph: 'xf187@FontAwesome',
+                  rawContent:
+                    '<svg xmlns="http://www.w3.org/2000/svg" class="icon design-iconfont" viewBox="0 0 1024 1024" width="16" height="16" fill="CurrentColor">\n  <path d="M820 120.016C815.888 98.784 794.928 64 764 64H232c-30.928 0-50.768 35.536-56 56.016L64 596.272V876A84 84 0 0 0 148 960h728A84 84 0 0 0 960 876V596.272L820 120.016zM271.344 144h456.16c14.832 0 26.832 11.584 26.832 25.904L864.016 544H673.84c-28.288 0-26.832 40.384-26.832 40.384v77.712c0 14.32-12 25.904-26.832 25.904H405.504c-14.816 0-26.832-11.584-26.832-25.904v-77.712S378.672 544 351.84 544H160l84.512-374.096c0-14.32 12-25.904 26.832-25.904z m44.64 480v84c0 30.896 25.088 60 56.016 60h280c30.928 0 56-29.104 56-60V624H880v208c0 30.896-33.072 48-64 48H208c-30.928 0-64-17.104-64-48V624h172zM512 199.2a36.72 36.72 0 0 1 36.736 36.72l-0.016 224.064 80.96-80.944a36.736 36.736 0 0 1 49.824-1.952l2.112 1.952c14.336 14.352 14.336 37.6 0 51.936l-143.648 143.632a36.704 36.704 0 0 1-51.936 0L342.4 430.976a36.72 36.72 0 1 1 51.936-51.936l80.928 80.928V235.92c0-19.44 15.12-35.344 34.24-36.64z"></path>\n</svg>',
                 },
                 tooltip: '归档',
                 showCaption: true,
@@ -1487,49 +1501,25 @@ export default {
                                       {
                                         dataType: 21,
                                         enableCond: 3,
-                                        labelPos: 'NONE',
+                                        labelPos: 'TOP',
+                                        labelWidth: 130,
                                         noPrivDisplayMode: 1,
                                         appDEFieldId: 'description',
                                         editor: {
                                           appDEACModeId: 'aichat',
                                           appDEDataSetId: 'fetch_default',
-                                          appDataEntityId: 'plmweb.work_item',
+                                          appDataEntityId: 'plmweb.ticket',
                                           enableAC: true,
                                           editorParams: {
-                                            INSERTKEYS:
-                                              '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                            LINKVIEWID:
-                                              'plmweb.recent_custom_redirect_view',
-                                            USERURL:
-                                              "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                            enableFullScreen: 'true',
-                                            USERSCRIPT:
-                                              '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                            USERINSCRIPT:
-                                              'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                            QUOTEINSCRIPT:
-                                              'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                            QUOTEURL:
-                                              '`recents/fetch_recent_access`',
-                                            srfaiagent: 'TextAgent_Writing',
-                                            QUOTEPARAMS:
-                                              '{"sort":"update_time,desc"}',
-                                            QUOTESCRIPT:
-                                              '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                            QUOTECODELISTMAP:
-                                              '{"type":"plmweb.base__recent_visite"}',
-                                            USERFIELDMAP:
-                                              '{"id":"user_id","name":"name"}',
-                                            QUOTEFIELDMAP:
-                                              '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                            enableEdit: 'true',
-                                            MODE: 'default',
+                                            hiddenswitch: 'true',
+                                            defaulttype: 'MD',
+                                            includes: '["HTMLEDITOR_VDITOR"]',
                                             ac: 'true',
-                                            MAXHEIGHT: '450',
+                                            codelistid:
+                                              'plmweb.formattype_view',
+                                            srfaiagent: 'TextAgent_Writing',
                                           },
-                                          editorStyle: 'COLLAPSE',
                                           editorType: 'HTMLEDITOR',
-                                          sysPFPluginId: 'comment',
                                           placeHolder: '输入描述',
                                           valueType: 'SIMPLE',
                                           editable: true,
@@ -1544,6 +1534,8 @@ export default {
                                           colMD: 24,
                                           layout: 'TABLE_24COL',
                                         },
+                                        sysPFPluginId: 'composite_form_item_ex',
+                                        showCaption: true,
                                         id: 'description',
                                       },
                                     ],
@@ -1578,43 +1570,24 @@ export default {
                                     },
                                     deformDetails: [
                                       {
-                                        dataType: 25,
+                                        dataType: 21,
                                         enableCond: 3,
-                                        labelPos: 'NONE',
+                                        labelPos: 'TOP',
+                                        labelWidth: 130,
                                         noPrivDisplayMode: 1,
                                         appDEFieldId: 'solution_way',
                                         editor: {
+                                          enableAC: true,
                                           editorParams: {
-                                            USERINSCRIPT:
-                                              'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                            MAXHEIGHT: '450',
-                                            QUOTECODELISTMAP:
-                                              '{"type":"plmweb.base__recent_visite"}',
-                                            enableEdit: 'true',
-                                            QUOTEFIELDMAP:
-                                              '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                            QUOTEPARAMS:
-                                              '{"sort":"update_time,desc"}',
-                                            enableFullScreen: 'true',
-                                            MODE: 'default',
-                                            QUOTEINSCRIPT:
-                                              'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                            USERSCRIPT:
-                                              '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                            QUOTESCRIPT:
-                                              '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                            USERURL:
-                                              "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                            USERFIELDMAP:
-                                              '{"id":"user_id","name":"name"}',
-                                            INSERTKEYS:
-                                              '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                            QUOTEURL:
-                                              '`recents/fetch_recent_access`',
+                                            hiddenswitch: 'true',
+                                            defaulttype: 'MD',
+                                            includes: '["HTMLEDITOR_VDITOR"]',
+                                            ac: 'true',
+                                            codelistid:
+                                              'plmweb.formattype_view',
+                                            srfaiagent: 'TextAgent_Writing',
                                           },
-                                          editorStyle: 'COLLAPSE',
                                           editorType: 'HTMLEDITOR',
-                                          sysPFPluginId: 'comment',
                                           placeHolder: '输入解决办法',
                                           valueType: 'SIMPLE',
                                           editable: true,
@@ -1629,6 +1602,8 @@ export default {
                                           colMD: 24,
                                           layout: 'TABLE_24COL',
                                         },
+                                        sysPFPluginId: 'composite_form_item_ex',
+                                        showCaption: true,
                                         id: 'solution_way',
                                       },
                                     ],
@@ -1809,7 +1784,7 @@ export default {
                                               cssClass: 'fa fa-download',
                                               glyph: 'xf019@FontAwesome',
                                             },
-                                            id: 'uf162678',
+                                            id: 'u73b8ba5',
                                           },
                                           {
                                             actionLevel: 100,
@@ -1818,17 +1793,17 @@ export default {
                                             buttonStyle: 'DEFAULT',
                                             caption: '删除',
                                             detailType: 'DEUIACTION',
+                                            enableScriptCode:
+                                              'context.srfreadonly != true',
                                             uiactionId: 'delete@attachment',
                                             tooltip: '删除',
-                                            visibleScriptCode:
-                                              'context.srfreadonly != true',
                                             showCaption: true,
                                             showIcon: true,
                                             sysImage: {
                                               cssClass: 'fa fa-trash-o',
                                               glyph: 'xf014@FontAwesome',
                                             },
-                                            id: 'ubdc1b19',
+                                            id: 'u44d00e2',
                                           },
                                         ],
                                         appDataEntityId: 'plmweb.attachment',
@@ -2734,9 +2709,36 @@ export default {
                           linkAppViewId: 'plmweb.product_index_view',
                           valign: 'MIDDLE',
                           wrapMode: 'NOWRAP',
-                          editorType: 'SPAN',
+                          enableLinkView: true,
+                          editorParams: {
+                            'SRFNAVCTX.principal_id': '',
+                            'SRFNAVCTX.principal_type': '',
+                            'SRFNAVCTX.ticket': '',
+                            LINKVIEW: 'TRUE',
+                          },
+                          editorType: 'SPAN_LINK',
                           valueType: 'SIMPLE',
                           editable: true,
+                          navigateContexts: [
+                            {
+                              key: 'PRINCIPAL_ID',
+                              rawValue: true,
+                              name: 'PRINCIPAL_ID',
+                              id: 'principal_id',
+                            },
+                            {
+                              key: 'PRINCIPAL_TYPE',
+                              rawValue: true,
+                              name: 'PRINCIPAL_TYPE',
+                              id: 'principal_type',
+                            },
+                            {
+                              key: 'TICKET',
+                              rawValue: true,
+                              name: 'TICKET',
+                              id: 'ticket',
+                            },
+                          ],
                           id: 'product_name',
                         },
                         allowEmpty: true,

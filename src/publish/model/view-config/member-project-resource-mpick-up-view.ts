@@ -4,7 +4,7 @@ export default {
   openMode: 'POPUPMODAL',
   viewType: 'DEMPICKUPVIEW2',
   width: 60,
-  height: 0,
+  height: undefined,
   appDataEntityId: 'plmweb.member',
   redirectView: false,
   modalOption: {},

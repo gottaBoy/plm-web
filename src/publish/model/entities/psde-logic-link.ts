@@ -1067,18 +1067,6 @@ export default {
     },
     {
       actionRSMode: 1,
-      codeName: 'PSDELogic',
-      majorAppDataEntityId: 'plmweb.psdelogic',
-      parentAppDEFieldId: 'psdelogicid',
-      parentTextAppDEFieldId: 'psdelogicname',
-      rsmode: 1,
-      rstype: 'DER1N',
-      removeActionType: 1,
-      name: 'DER1N_PSDELOGICLINK_PSDELOGIC_PSDELOGICID',
-      id: 'psdelogic',
-    },
-    {
-      actionRSMode: 1,
       codeName: 'SrcPSDELogicNode',
       majorAppDataEntityId: 'plmweb.psdelogicnode',
       nestedAppDEDataSetId: 'fetchcuritembysrcnode',

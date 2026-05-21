@@ -276,6 +276,12 @@ export default {
                               id: 'srfdatatype',
                             },
                             {
+                              key: 'SRFNAVCTRLID',
+                              rawValue: true,
+                              name: 'SRFNAVCTRLID',
+                              id: 'srfnavctrlid',
+                            },
+                            {
                               key: 'PROJECT',
                               value: 'project_id',
                               name: 'PROJECT',
@@ -307,6 +313,12 @@ export default {
                                 value: 'work_item_type_id',
                                 name: 'SRFDATATYPE',
                                 id: 'srfdatatype',
+                              },
+                              {
+                                key: 'SRFNAVCTRLID',
+                                rawValue: true,
+                                name: 'SRFNAVCTRLID',
+                                id: 'srfnavctrlid',
                               },
                               {
                                 key: 'PROJECT',
@@ -353,6 +365,12 @@ export default {
                               id: 'srfdatatype',
                             },
                             {
+                              key: 'SRFNAVCTRLID',
+                              rawValue: true,
+                              name: 'SRFNAVCTRLID',
+                              id: 'srfnavctrlid',
+                            },
+                            {
                               key: 'PROJECT',
                               value: 'project_id',
                               name: 'PROJECT',
@@ -383,6 +401,12 @@ export default {
                                 value: 'work_item_type_id',
                                 name: 'SRFDATATYPE',
                                 id: 'srfdatatype',
+                              },
+                              {
+                                key: 'SRFNAVCTRLID',
+                                rawValue: true,
+                                name: 'SRFNAVCTRLID',
+                                id: 'srfnavctrlid',
                               },
                               {
                                 key: 'PROJECT',
@@ -425,6 +449,9 @@ export default {
                       SHOWMODE: 'daterange',
                     },
                     id: 'calendar',
+                  },
+                  sysCss: {
+                    cssName: 'calendar_style',
                   },
                   modelId: '0ce99aef6f6f851a642d204e3d68efa6',
                   modelType: 'PSSYSCALENDAR',
@@ -2000,8 +2027,8 @@ export default {
                             detailStyle: 'DEFAULT',
                             detailType: 'FORMITEM',
                             layoutPos: {
-                              colLG: 3,
-                              colMD: 3,
+                              colLG: 5,
+                              colMD: 5,
                               layout: 'TABLE_24COL',
                             },
                             id: 'n_show_identifier_like',
@@ -2025,8 +2052,8 @@ export default {
                             detailStyle: 'DEFAULT',
                             detailType: 'FORMITEM',
                             layoutPos: {
-                              colLG: 3,
-                              colMD: 3,
+                              colLG: 5,
+                              colMD: 5,
                               layout: 'TABLE_24COL',
                             },
                             id: 'n_title_like',
@@ -2053,8 +2080,8 @@ export default {
                             detailStyle: 'DEFAULT',
                             detailType: 'FORMITEM',
                             layoutPos: {
-                              colLG: 3,
-                              colMD: 3,
+                              colLG: 5,
+                              colMD: 5,
                               layout: 'TABLE_24COL',
                             },
                             id: 'n_state_eq',
@@ -2097,8 +2124,8 @@ export default {
                             detailStyle: 'DEFAULT',
                             detailType: 'FORMITEM',
                             layoutPos: {
-                              colLG: 3,
-                              colMD: 3,
+                              colLG: 5,
+                              colMD: 5,
                               layout: 'TABLE_24COL',
                             },
                             id: 'n_project_name_eq',
@@ -2121,8 +2148,8 @@ export default {
                             detailStyle: 'DEFAULT',
                             detailType: 'FORMITEM',
                             layoutPos: {
-                              colLG: 3,
-                              colMD: 3,
+                              colLG: 5,
+                              colMD: 5,
                               layout: 'TABLE_24COL',
                             },
                             id: 'n_project_id_eq',

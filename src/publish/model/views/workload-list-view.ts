@@ -444,7 +444,7 @@ export default {
         {
           actionLevel: 100,
           noPrivDisplayMode: 2,
-          uiactionId: 'delere@workload',
+          uiactionId: 'delete@workload',
           uiactionTarget: 'SINGLEKEY',
           valid: true,
           caption: '删除',
@@ -459,6 +459,10 @@ export default {
               id: 'action2',
             },
           ],
+          sysImage: {
+            cssClass: 'fa fa-trash-o',
+            glyph: 'xf014@FontAwesome',
+          },
           tooltip: '删除',
           showCaption: true,
           showIcon: true,

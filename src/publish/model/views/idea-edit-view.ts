@@ -107,20 +107,6 @@ export default {
       },
       deformItemUpdates: [
         {
-          codeName: 'remaining_update',
-          defiupdateDetails: [
-            {
-              id: 'workload_schedule',
-            },
-          ],
-          scriptCode:
-            'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
-          customCode: true,
-          showBusyIndicator: false,
-          name: '剩余工时表单项更新',
-          id: 'remaining_update',
-        },
-        {
           codeName: 'estimated_update',
           defiupdateDetails: [
             {
@@ -136,6 +122,20 @@ export default {
           showBusyIndicator: false,
           name: '预估工时表单项更新',
           id: 'estimated_update',
+        },
+        {
+          codeName: 'remaining_update',
+          defiupdateDetails: [
+            {
+              id: 'workload_schedule',
+            },
+          ],
+          scriptCode:
+            'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
+          customCode: true,
+          showBusyIndicator: false,
+          name: '剩余工时表单项更新',
+          id: 'remaining_update',
         },
       ],
       deformPages: [
@@ -437,7 +437,7 @@ export default {
                   id: 'is_deleted',
                 },
                 {
-                  createDV: 'HTML',
+                  createDV: 'MD',
                   dataType: 25,
                   enableCond: 3,
                   labelPos: 'TOP',
@@ -450,7 +450,7 @@ export default {
                     editable: true,
                     id: 'format_type',
                   },
-                  updateDV: 'HTML',
+                  updateDV: 'MD',
                   allowEmpty: true,
                   hidden: true,
                   caption: '内容格式',
@@ -482,248 +482,46 @@ export default {
                             {
                               dataType: 21,
                               enableCond: 3,
-                              ignoreInput: 4,
                               labelPos: 'NONE',
                               noPrivDisplayMode: 1,
                               appDEFieldId: 'description',
                               editor: {
                                 appDEACModeId: 'aichat',
                                 appDEDataSetId: 'fetch_default',
-                                appDataEntityId: 'plmweb.work_item',
+                                appDataEntityId: 'plmweb.idea',
                                 enableAC: true,
                                 editorParams: {
-                                  INSERTKEYS:
-                                    '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                  LINKVIEWID:
-                                    'plmweb.recent_custom_redirect_view',
-                                  USERURL:
-                                    "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                  enableFullScreen: 'true',
-                                  USERSCRIPT:
-                                    '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                  USERINSCRIPT:
-                                    'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                  QUOTEINSCRIPT:
-                                    'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                  QUOTEURL: '`recents/fetch_recent_access`',
-                                  srfaiagent: 'TextAgent_Writing',
-                                  QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                                  QUOTESCRIPT:
-                                    '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                  QUOTECODELISTMAP:
-                                    '{"type":"plmweb.base__recent_visite"}',
-                                  USERFIELDMAP:
-                                    '{"id":"user_id","name":"name"}',
-                                  QUOTEFIELDMAP:
-                                    '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                  enableEdit: 'true',
-                                  MODE: 'default',
+                                  hiddenswitch: 'true',
+                                  defaulttype: 'MD',
+                                  includes: '["HTMLEDITOR_VDITOR"]',
                                   ac: 'true',
-                                  MAXHEIGHT: '450',
+                                  codelistid: 'plmweb.formattype_view',
+                                  srfaiagent: 'TextAgent_Writing',
                                 },
-                                editorStyle: 'COLLAPSE',
                                 editorType: 'HTMLEDITOR',
-                                sysPFPluginId: 'comment',
+                                editorItems: [
+                                  {
+                                    id: 'format_type',
+                                  },
+                                ],
                                 valueType: 'SIMPLE',
                                 editable: true,
                                 id: 'description',
                               },
                               allowEmpty: true,
                               capLanguageRes: {
-                                lanResTag:
-                                  'CONTROL.DEFORM.IDEA.MAIN.FORMITEM.DESCRIPTION',
+                                lanResTag: 'DEF.LNAME.DESCRIPTION',
                               },
                               caption: '描述',
                               codeName: 'description',
                               detailStyle: 'DEFAULT',
                               detailType: 'FORMITEM',
-                              defdgroupLogics: [
-                                {
-                                  logicCat: 'PANELVISIBLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'HTML',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) HTML',
-                                      id: 'format_type等于(=) html',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                                {
-                                  logicCat: 'ITEMENABLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'HTML',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) HTML',
-                                      id: 'format_type等于(=) html',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                              ],
                               layoutPos: {
                                 colMD: 24,
                                 layout: 'TABLE_24COL',
                               },
+                              sysPFPluginId: 'composite_form_item_ex',
                               id: 'description',
-                            },
-                            {
-                              dataType: 21,
-                              enableCond: 3,
-                              ignoreInput: 4,
-                              itemHeight: 450,
-                              labelPos: 'NONE',
-                              noPrivDisplayMode: 1,
-                              appDEFieldId: 'description',
-                              editor: {
-                                mode: 'EDIT',
-                                appDEACModeId: 'aichat',
-                                appDEDataSetId: 'fetch_default',
-                                appDataEntityId: 'plmweb.work_item',
-                                enableAC: true,
-                                maxLength: 1048576,
-                                showMaxLength: true,
-                                editorHeight: 450,
-                                editorParams: {
-                                  ac: 'true',
-                                  showmode: 'manual',
-                                  srfaiagent: 'TextAgent_Writing',
-                                },
-                                editorType: 'MARKDOWN',
-                                valueType: 'SIMPLE',
-                                editable: true,
-                                id: 'formitem1',
-                              },
-                              allowEmpty: true,
-                              capLanguageRes: {
-                                lanResTag: 'DEF.LNAME.DESCRIPTION',
-                              },
-                              caption: '描述',
-                              codeName: 'formitem1',
-                              detailStyle: 'DEFAULT',
-                              detailType: 'FORMITEM',
-                              defdgroupLogics: [
-                                {
-                                  logicCat: 'PANELVISIBLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'MD',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) MD',
-                                      id: 'format_type等于(=) md',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                                {
-                                  logicCat: 'ITEMENABLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'MD',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) MD',
-                                      id: 'format_type等于(=) md',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                              ],
-                              layoutPos: {
-                                colMD: 24,
-                                layout: 'TABLE_24COL',
-                              },
-                              id: 'formitem1',
-                            },
-                            {
-                              dataType: 21,
-                              enableCond: 3,
-                              ignoreInput: 4,
-                              itemHeight: 600,
-                              labelPos: 'NONE',
-                              noPrivDisplayMode: 1,
-                              appDEFieldId: 'description',
-                              editor: {
-                                enableAC: true,
-                                maxLength: 1048576,
-                                showMaxLength: true,
-                                editorHeight: 600,
-                                editorParams: {
-                                  ac: 'true',
-                                  showmode: 'manual',
-                                  srfaiagent: 'TextAgent_Writing',
-                                },
-                                editorStyle: 'LUCKYSHEET',
-                                editorType: 'TEXTAREA',
-                                sysPFPluginId: 'luckysheet',
-                                valueType: 'SIMPLE',
-                                editable: true,
-                                id: 'formitem',
-                              },
-                              allowEmpty: true,
-                              capLanguageRes: {
-                                lanResTag: 'DEF.LNAME.DESCRIPTION',
-                              },
-                              caption: '描述',
-                              codeName: 'formitem',
-                              detailStyle: 'DEFAULT',
-                              detailType: 'FORMITEM',
-                              defdgroupLogics: [
-                                {
-                                  logicCat: 'PANELVISIBLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'EXCEL',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) EXCEL',
-                                      id: 'format_type等于(=) excel',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                                {
-                                  logicCat: 'ITEMENABLE',
-                                  relatedDetailNames: ['format_type'],
-                                  groupOP: 'AND',
-                                  defdlogics: [
-                                    {
-                                      condOP: 'EQ',
-                                      defdname: 'format_type',
-                                      value: 'EXCEL',
-                                      logicType: 'SINGLE',
-                                      name: 'format_type等于(=) EXCEL',
-                                      id: 'format_type等于(=) excel',
-                                    },
-                                  ],
-                                  logicType: 'GROUP',
-                                },
-                              ],
-                              layoutPos: {
-                                colMD: 24,
-                                layout: 'TABLE_24COL',
-                              },
-                              id: 'formitem',
                             },
                           ],
                           capLanguageRes: {
@@ -753,13 +551,15 @@ export default {
                                 caption: '添加附件',
                                 detailType: 'DEUIACTION',
                                 uiactionId: 'add_attachments@idea',
+                                visibleScriptCode:
+                                  'context.srfreadonly != true',
                                 showCaption: true,
                                 showIcon: true,
                                 sysImage: {
                                   cssClass: 'fa fa-plus',
                                   glyph: 'xf067@FontAwesome',
                                 },
-                                id: 'uf020542',
+                                id: 'u3a6466f',
                               },
                             ],
                             appDataEntityId: 'plmweb.idea',
@@ -858,7 +658,7 @@ export default {
                                             cssClass: 'fa fa-download',
                                             glyph: 'xf019@FontAwesome',
                                           },
-                                          id: 'uf162678',
+                                          id: 'u73b8ba5',
                                         },
                                         {
                                           actionLevel: 100,
@@ -867,17 +667,17 @@ export default {
                                           buttonStyle: 'DEFAULT',
                                           caption: '删除',
                                           detailType: 'DEUIACTION',
+                                          enableScriptCode:
+                                            'context.srfreadonly != true',
                                           uiactionId: 'delete@attachment',
                                           tooltip: '删除',
-                                          visibleScriptCode:
-                                            'context.srfreadonly != true',
                                           showCaption: true,
                                           showIcon: true,
                                           sysImage: {
                                             cssClass: 'fa fa-trash-o',
                                             glyph: 'xf014@FontAwesome',
                                           },
-                                          id: 'ubdc1b19',
+                                          id: 'u44d00e2',
                                         },
                                       ],
                                       appDataEntityId: 'plmweb.attachment',
@@ -1498,66 +1298,6 @@ export default {
                       showCaption: true,
                       id: 'tabpanel1_test_case',
                     },
-                    {
-                      layout: {
-                        columnCount: 24,
-                        layout: 'TABLE_24COL',
-                      },
-                      deformDetails: [
-                        {
-                          appViewId: 'plmweb.version_idea_grid_view',
-                          navigateContexts: [
-                            {
-                              key: 'OWNER_TYPE',
-                              value: 'IDEA',
-                              rawValue: true,
-                              name: 'OWNER_TYPE',
-                              id: 'owner_type',
-                            },
-                            {
-                              key: 'COMPARE_VERSION',
-                              value: 'cur_version_id',
-                              name: 'COMPARE_VERSION',
-                              id: 'compare_version',
-                            },
-                            {
-                              key: 'OWNER_ID',
-                              value: 'idea',
-                              name: 'OWNER_ID',
-                              id: 'owner_id',
-                            },
-                          ],
-                          navigateParams: [
-                            {
-                              key: 'n_owner_id_eq',
-                              value: 'idea',
-                              id: 'n_owner_id_eq',
-                            },
-                          ],
-                          parentDataJO: {
-                            srfparentdename: 'IDEA',
-                            SRFPARENTTYPE: 'CUSTOM',
-                          },
-                          codeName: 'tabpanel1_version_druipart',
-                          detailStyle: 'DEFAULT',
-                          detailType: 'DRUIPART',
-                          layoutPos: {
-                            colMD: 24,
-                            layout: 'TABLE_24COL',
-                          },
-                          showCaption: true,
-                          id: 'tabpanel1_version_druipart',
-                        },
-                      ],
-                      caption: '版本记录',
-                      codeName: 'tabpanel1_version',
-                      counterId: 'idea_version',
-                      detailStyle: 'DEFAULT',
-                      detailType: 'TABPAGE',
-                      appCounterRefId: 'e7055521eeb711936d36f027b585c5d3',
-                      showCaption: true,
-                      id: 'tabpanel1_version',
-                    },
                   ],
                   codeName: 'tabpanel1',
                   detailStyle: 'DEFAULT',
@@ -1892,11 +1632,49 @@ export default {
                           detailStyle: 'DEFAULT',
                           detailType: 'FORMITEM',
                           layoutPos: {
-                            colMD: 24,
+                            colLG: 21,
+                            colMD: 21,
                             layout: 'TABLE_24COL',
                           },
                           showCaption: true,
                           id: 'cur_version_name',
+                        },
+                        {
+                          layout: {
+                            columnCount: 24,
+                            layout: 'TABLE_24COL',
+                          },
+                          deformDetails: [
+                            {
+                              actionType: 'UIACTION',
+                              buttonStyle: 'STYLE2',
+                              uiactionId: 'check_version@idea',
+                              tooltip: '查看版本',
+                              uiactionTarget: 'NONE',
+                              caption: '查看版本',
+                              codeName: 'button8',
+                              detailStyle: 'STYLE2',
+                              detailType: 'BUTTON',
+                              layoutPos: {
+                                colMD: 24,
+                                layout: 'TABLE_24COL',
+                              },
+                              sysImage: {
+                                cssClass: 'fa fa-arrow-circle-o-right',
+                                glyph: 'xf18e@FontAwesome',
+                              },
+                              id: 'button8',
+                            },
+                          ],
+                          codeName: 'grouppanel18',
+                          detailStyle: 'DEFAULT',
+                          detailType: 'GROUPPANEL',
+                          layoutPos: {
+                            colLG: 3,
+                            colMD: 3,
+                            layout: 'TABLE_24COL',
+                          },
+                          id: 'grouppanel18',
                         },
                         {
                           dataType: 25,
@@ -2614,9 +2392,36 @@ export default {
                             linkAppViewId: 'plmweb.product_index_view',
                             valign: 'MIDDLE',
                             wrapMode: 'NOWRAP',
-                            editorType: 'SPAN',
+                            enableLinkView: true,
+                            editorParams: {
+                              'SRFNAVCTX.principal_id': '',
+                              'SRFNAVCTX.principal_type': '',
+                              LINKVIEW: 'TRUE',
+                              'SRFNAVCTX.idea': '',
+                            },
+                            editorType: 'SPAN_LINK',
                             valueType: 'SIMPLE',
                             editable: true,
+                            navigateContexts: [
+                              {
+                                key: 'PRINCIPAL_ID',
+                                rawValue: true,
+                                name: 'PRINCIPAL_ID',
+                                id: 'principal_id',
+                              },
+                              {
+                                key: 'PRINCIPAL_TYPE',
+                                rawValue: true,
+                                name: 'PRINCIPAL_TYPE',
+                                id: 'principal_type',
+                              },
+                              {
+                                key: 'IDEA',
+                                rawValue: true,
+                                name: 'IDEA',
+                                id: 'idea',
+                              },
+                            ],
                             id: 'product_name',
                           },
                           allowEmpty: true,
@@ -3164,6 +2969,84 @@ export default {
                     layout: 'TABLE_24COL',
                   },
                   id: 'grouppanel15',
+                },
+                {
+                  layout: {
+                    columnCount: 24,
+                    layout: 'TABLE_24COL',
+                  },
+                  deformDetails: [
+                    {
+                      appViewId: 'plmweb.version_idea_list_view',
+                      navigateContexts: [
+                        {
+                          key: 'OWNER_TYPE',
+                          value: 'IDEA',
+                          rawValue: true,
+                          name: 'OWNER_TYPE',
+                          id: 'owner_type',
+                        },
+                        {
+                          key: 'COMPARE_VERSION',
+                          value: 'cur_version_id',
+                          name: 'COMPARE_VERSION',
+                          id: 'compare_version',
+                        },
+                        {
+                          key: 'OWNER_ID',
+                          value: 'idea',
+                          name: 'OWNER_ID',
+                          id: 'owner_id',
+                        },
+                      ],
+                      navigateParams: [
+                        {
+                          key: 'n_owner_id_eq',
+                          value: 'idea',
+                          id: 'n_owner_id_eq',
+                        },
+                      ],
+                      parentDataJO: {
+                        srfparentdename: 'IDEA',
+                        SRFPARENTTYPE: 'CUSTOM',
+                      },
+                      codeName: 'druipart10',
+                      detailStyle: 'DEFAULT',
+                      detailType: 'DRUIPART',
+                      layoutPos: {
+                        colMD: 24,
+                        layout: 'TABLE_24COL',
+                      },
+                      showCaption: true,
+                      id: 'druipart10',
+                    },
+                  ],
+                  caption: '版本',
+                  codeName: 'version',
+                  detailStyle: 'DEFAULT',
+                  detailType: 'GROUPPANEL',
+                  defdgroupLogics: [
+                    {
+                      logicCat: 'PANELVISIBLE',
+                      relatedDetailNames: ['id'],
+                      groupOP: 'AND',
+                      defdlogics: [
+                        {
+                          condOP: 'ISNULL',
+                          defdname: 'id',
+                          logicType: 'SINGLE',
+                          name: 'id值为空(Nil)',
+                          id: 'id值为空(nil)',
+                        },
+                      ],
+                      logicType: 'GROUP',
+                    },
+                  ],
+                  layoutPos: {
+                    colMD: 24,
+                    layout: 'TABLE_24COL',
+                  },
+                  id: 'version',
                 },
               ],
               codeName: 'right_grouppanel',

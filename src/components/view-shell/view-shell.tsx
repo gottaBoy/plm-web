@@ -1,13 +1,23 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable vue/no-mutating-props */
 import {
+  CTX,
   EventBase,
   IModal,
   IViewProvider,
   IViewShellHooks,
   RedrawViewEvent,
 } from '@ibiz-template/runtime';
-import { defineComponent, h, PropType, ref, Component, Ref, watch } from 'vue';
+import {
+  defineComponent,
+  h,
+  PropType,
+  ref,
+  Component,
+  Ref,
+  watch,
+  provide,
+} from 'vue';
 import { IAppView } from '@ibiz/model-core';
 import './view-shell.scss';
 import { useNamespace } from '@ibiz-template/vue3-util';
@@ -20,6 +30,8 @@ export const IBizViewShell = defineComponent({
     params: { type: Object as PropType<IParams> },
     modelData: { type: Object as PropType<IAppView> },
     viewId: { type: String },
+    // 解决打开浮动容器（模态、抽屉、弹出框）ctx丢失问题
+    ctx: { type: Object as PropType<CTX> },
     viewShellHooks: { type: Object as PropType<IViewShellHooks> },
   },
   setup(props, { attrs }) {
@@ -29,7 +41,9 @@ export const IBizViewShell = defineComponent({
     const provider = ref<IViewProvider>();
     const viewComponent = ref<Component>();
     const viewModel = ref<IModel>();
-
+    if (props.ctx) {
+      provide('ctx', props.ctx);
+    }
     // 当前视图上下文
     const context: Ref<IContext> = ref(props.context);
     // 当前视图参数

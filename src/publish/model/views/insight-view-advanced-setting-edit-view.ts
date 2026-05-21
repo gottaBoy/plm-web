@@ -142,7 +142,7 @@ export default {
                 {
                   actionType: 'UIACTION',
                   buttonStyle: 'DEFAULT',
-                  uiactionId: 'delete@insight_view',
+                  uiactionId: 'delete_to_home@insight_view',
                   tooltip: '删除视图',
                   uiactionTarget: 'SINGLEKEY',
                   caption: '删除视图',

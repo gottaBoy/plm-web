@@ -178,7 +178,7 @@ export default {
       singleSelect: true,
       navViewPos: 'NONE',
       fetchControlAction: {
-        appDEMethodId: 'fetch_normal',
+        appDEMethodId: 'fetch_only_page',
         appDataEntityId: 'plmweb.article_page',
         id: 'fetch',
       },
@@ -238,20 +238,6 @@ export default {
       modelType: 'PSDEFORM_SEARCHFORM',
       name: 'searchform',
       id: 'plmweb.article_page.default',
-    },
-    {
-      xdataControlName: 'grid',
-      codeName: 'nested_doc_grid_view_toolbar',
-      controlType: 'TOOLBAR',
-      logicName: '工具栏模板（默认表格界面）',
-      appDataEntityId: 'plmweb.article_page',
-      controlParam: {
-        id: 'toolbar',
-      },
-      modelId: 'ec6fbb681f5e3e6783c2af57e5eefaaa',
-      modelType: 'PSDETOOLBAR',
-      name: 'toolbar',
-      id: 'nested_doc_grid_view_toolbar',
     },
     {
       groupMode: 'SINGLE',

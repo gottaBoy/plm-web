@@ -200,6 +200,16 @@ export default {
             id: 'workload',
           },
           {
+            dedrbarGroupId: 'usrdrgroup0514095082',
+            caption: '实体打印',
+            appViewId: 'plmweb.extend_print_templ_grid_view',
+            sysImage: {
+              cssClass: 'fa fa-print',
+              glyph: 'xf02f@FontAwesome',
+            },
+            id: 'print',
+          },
+          {
             dedrbarGroupId: 'usrdrgroup0514569929',
             caption: '产品管理',
             appViewId: 'plmweb.product_config_tree_exp_view',
@@ -269,6 +279,16 @@ export default {
             },
             id: 'scheduled_task',
           },
+          {
+            dedrbarGroupId: 'usrdrgroup0514569929',
+            caption: '智能协同',
+            appViewId: 'plmweb.ai_knowledge_base_config_tree_exp_view2',
+            sysImage: {
+              cssClass: 'fa fa-connectdevelop',
+              glyph: 'xf20e@FontAwesome',
+            },
+            id: 'ai_knowledge_base',
+          },
         ],
         uniqueTag: 'management_setting_view__drbar',
         hideEditItem: true,
@@ -282,7 +302,7 @@ export default {
           ctrlParams: {
             SINGLEITEMGROUP: 'true',
             ROUTE_ITEMS:
-              '["product", "project", "library", "space", "insight_view","discuss"]',
+              '["product", "project", "library", "space", "insight_view","discuss","apsimp","ai_knowledge_base"]',
           },
           id: 'drbar',
         },

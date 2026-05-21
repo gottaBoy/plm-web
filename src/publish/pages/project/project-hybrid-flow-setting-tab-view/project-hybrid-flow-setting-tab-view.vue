@@ -3,11 +3,8 @@
     :context="props.context"
     :params="props.params"
     :modal="props.modal"
-    :model-data="model"
+    :model-data="viewModel"
   >
-    <template #tabexppanel="slotProps">
-      <i-biz-dr-tab-control v-bind="slotProps" />
-    </template>
   </i-biz-view>
 </template>
 <script setup lang="ts">
@@ -21,4 +18,6 @@ interface Props {
   modal?: IModal;
 }
 const props = withDefaults(defineProps<Props>(), {});
+
+const viewModel = props.model;
 </script>

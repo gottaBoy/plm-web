@@ -1079,6 +1079,10 @@ export default {
       codeName: 'back',
       frontProcessType: 'OTHER',
       fullCodeName: 'baseline_test_case_back',
+      sysImage: {
+        cssClass: 'fa fa-mail-reply',
+        glyph: 'xf112@FontAwesome',
+      },
       scriptCode: 'history.back()',
       tooltip: '返回',
       uiactionMode: 'FRONT',

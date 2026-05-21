@@ -1,5 +1,4 @@
 export default {
-  gridRowActiveMode: 1,
   expandSearchForm: true,
   xdataControlName: 'grid',
   loadDefault: true,
@@ -21,17 +20,6 @@ export default {
   ],
   appViewLogics: [
     {
-      eventNames: 'onActive',
-      logicTrigger: 'CTRLEVENT',
-      logicType: 'APPDEUILOGIC',
-      appDEUILogicId: 'open_main_view',
-      appDataEntityId: 'plmweb.search_comment',
-      ctrlName: 'grid',
-      builtinLogic: true,
-      name: 'OPENDATA',
-      id: 'opendata',
-    },
-    {
       logicTrigger: 'CUSTOM',
       logicType: 'APPUILOGIC',
       builtinAppUILogic: {
@@ -51,6 +39,27 @@ export default {
       },
       builtinLogic: true,
       id: 'newdata',
+    },
+    {
+      logicTrigger: 'CUSTOM',
+      logicType: 'APPUILOGIC',
+      builtinAppUILogic: {
+        openDataAppView: {
+          refAppViewId: 'plmweb.search_comment_edit_view',
+        },
+        editMode: true,
+        appUILogicRefViews: [
+          {
+            refAppViewId: 'plmweb.search_comment_edit_view',
+          },
+        ],
+        builtinLogic: true,
+        logicType: 'PREDEFINED',
+        viewLogicType: 'APP_OPENDATA',
+        id: '打开数据',
+      },
+      builtinLogic: true,
+      id: 'opendata',
     },
   ],
   appViewRefs: [
@@ -86,12 +95,13 @@ export default {
           dataItemName: 'content',
           excelCaption: '内容',
           appDEFieldId: 'content',
+          deuiactionId: 'open_main_view_pop_up@search_comment',
           valueType: 'SIMPLE',
           aggMode: 'NONE',
           align: 'LEFT',
           caption: '内容',
           cellSysCss: {
-            cssName: 'normal-rich-text',
+            cssName: 'normal-rich-linktext',
           },
           codeName: 'content',
           columnType: 'DEFGRIDCOLUMN',

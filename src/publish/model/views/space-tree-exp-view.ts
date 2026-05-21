@@ -155,6 +155,13 @@ export default {
               id: '默认根节点 - 空间',
             },
             {
+              childDETreeNodeId: 'node_15',
+              parentDETreeNodeId: 'node_16',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_16）-归档空间（node_15）',
+            },
+            {
               childDETreeNodeId: 'filter',
               parentDETreeNodeId: 'work',
               parentValueLevel: 1,
@@ -252,6 +259,13 @@ export default {
               id: '页面 - 与我共享',
             },
             {
+              childDETreeNodeId: 'work',
+              parentDETreeNodeId: 'root',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '默认根节点 - 工作',
+            },
+            {
               childDETreeNodeId: 'node_5',
               parentDETreeNodeId: 'node',
               parentValueLevel: 1,
@@ -259,18 +273,18 @@ export default {
               id: '空间 - 团队空间',
             },
             {
+              childDETreeNodeId: 'node_2',
+              parentDETreeNodeId: 'node_16',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_16）-配置中心（node_2）',
+            },
+            {
               childDETreeNodeId: 'node_9',
               parentDETreeNodeId: 'node_1',
               parentValueLevel: 1,
               searchMode: 3,
               id: '页面 - 我的收藏',
-            },
-            {
-              childDETreeNodeId: 'work',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 工作',
             },
             {
               childDETreeNodeId: 'node_6',
@@ -301,18 +315,12 @@ export default {
               id: '默认根节点 - 星标',
             },
             {
-              childDETreeNodeId: 'node_15',
+              childDETreeNodeId: 'node_16',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '默认根节点 - 归档空间',
-            },
-            {
-              childDETreeNodeId: 'node_2',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 配置中心',
+              name: '默认根节点（ROOT）-更多（node_16）',
+              id: '默认根节点（root）-更多（node_16）',
             },
           ],
           detreeNodes: [
@@ -488,6 +496,15 @@ export default {
               treeNodeType: 'STATIC',
               name: '归档空间',
               id: 'node_15',
+            },
+            {
+              text: '更多',
+              nodeType: 'node_16',
+              treeNodeType: 'STATIC',
+              hasDETreeNodeRSs: true,
+              expanded: true,
+              name: '更多',
+              id: 'node_16',
             },
             {
               text: '配置中心',

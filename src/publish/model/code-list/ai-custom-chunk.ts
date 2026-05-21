@@ -20,6 +20,7 @@ export default {
       id: 'item_1',
     },
   ],
+  codeItemValueNumber: true,
   enableCache: true,
   name: '自定义切片',
   id: 'plmweb.ai__custom_chunk',

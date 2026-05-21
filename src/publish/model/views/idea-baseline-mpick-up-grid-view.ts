@@ -405,7 +405,8 @@ export default {
       id: 'plmweb.idea.baseline_mpick_up_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

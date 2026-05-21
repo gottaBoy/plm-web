@@ -596,8 +596,8 @@ export default {
                             layout: 'FLEX',
                           },
                           sysImage: {
-                            cssClass: 'fa fa-comment-o',
-                            glyph: 'xf0e5@FontAwesome',
+                            rawContent:
+                              '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1767511208333" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17379" width="16" height="16" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M512.13274 64C229.33274 64 0.13274 250.2 0.13274 480c0 95.2 39.8 182.4 105.8 252.6C76.13274 811.4 14.13274 878.2 13.13274 879c-13.2 14-16.8 34.4-9.2 52S28.93274 960 48.13274 960c123 0 220-51.4 278.2-92.6C384.13274 885.6 446.53274 896 512.13274 896c282.8 0 512-186.2 512-416S794.93274 64 512.13274 64z m0 736c-53.4 0-106.2-8.2-156.8-24.2l-45.4-14.4-39 27.6c-28.6 20.2-67.8 42.8-115 58 14.6-24.2 28.8-51.4 39.8-80.4l21.2-56.2-41.2-43.6C139.53274 628.2 96.13274 564.4 96.13274 480c0-176.4 186.6-320 416-320s416 143.6 416 320-186.6 320-416 320z" p-id="17380" fill="#999999"></path></svg>',
                           },
                           id: 'button_calluilogic2',
                         },
@@ -629,8 +629,8 @@ export default {
                             layout: 'FLEX',
                           },
                           sysImage: {
-                            cssClass: 'fa fa-edit',
-                            glyph: 'xf044@FontAwesome',
+                            rawContent:
+                              '<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false" fill="CurrentColor"><g id="ajpaction/edit" stroke-width="1" fill-rule="evenodd"><path d="M2 8.34L10.71 0 15 4.17 6.538 13H2V8.34zm1.2.512V11.8h2.826l7.283-7.6-2.606-2.533L3.2 8.852zM0 16v-1.2h16V16H0z" id="ajp编辑"></path></g></svg>',
                           },
                           id: 'button_calluilogic1',
                         },
@@ -661,8 +661,8 @@ export default {
                             layout: 'FLEX',
                           },
                           sysImage: {
-                            cssClass: 'fa fa-trash',
-                            glyph: 'xf1f8@FontAwesome',
+                            cssClass: 'fa fa-trash-o',
+                            glyph: 'xf014@FontAwesome',
                           },
                           id: 'button_calluilogic',
                         },
@@ -692,15 +692,16 @@ export default {
                       panelItemGroupLogics: [
                         {
                           logicCat: 'PANELVISIBLE',
-                          relatedItemNames: ['field_text_dynamic2'],
+                          relatedItemNames: ['content'],
                           groupOP: 'AND',
                           panelItemLogics: [
                             {
                               condOp: 'NOTEQ',
-                              dstModelField: 'FIELD_TEXT_DYNAMIC2',
+                              dstModelField: 'CONTENT',
                               value: '<p><del>该评论已删除</del></p>',
                               logicType: 'SINGLE',
-                              id: '逻辑项',
+                              name: 'CONTENT 不等于(<>) <p><del>该评论已删除</del></p>',
+                              id: 'del><',
                             },
                           ],
                           logicType: 'GROUP',
@@ -729,21 +730,20 @@ export default {
                   panelItems: [
                     {
                       editor: {
-                        contentType: 'HTML',
                         editorParams: {
-                          contenttype: 'HTML',
                           LINKVIEWID: 'plmweb.recent_custom_redirect_view',
-                          SCRIPTCODE:
-                            'data.content?.replace(/@{[^,]*,"name":"(.*?)"}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/@{[^,]*,name=(.*?)}/g,"<span class=\'comment-tag\'>@$1</span>").replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g, (x, value, icon) => {const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1).trim(); } return controller.parseCommentTag({icon, ...item});}).replaceAll(/\\{\\"\\emoji\\":\\"(.+?)\\"\\}/g,(x, emoji) => {const tempVal = decodeURIComponent(atob(emoji)); return `<span class="emoji-tag">${tempVal}</span>`})',
-                          TRANSLATEOBJ: '{"&reg":"&amp;reg"}',
+                          QUOTECODELISTMAP:
+                            '{"type":"plmweb.base__recent_visite"}',
+                          READONLY: 'true',
                         },
-                        editorStyle: 'COMMENT_ITEM',
-                        editorType: 'RAW',
-                        sysPFPluginId: 'comment_item',
+                        editorStyle: 'VDITOR',
+                        editorType: 'HTMLEDITOR',
+                        sysPFPluginId: 'vditor',
                         predefinedType: 'FIELD_TEXT_DYNAMIC',
                         valueType: 'SIMPLE',
                         editable: true,
-                        id: 'field_text_dynamic2',
+                        readOnly: true,
+                        id: 'content',
                       },
                       viewFieldName: 'CONTENT',
                       allowEmpty: true,
@@ -754,7 +754,7 @@ export default {
                         shrink: 1,
                         layout: 'FLEX',
                       },
-                      id: 'field_text_dynamic2',
+                      id: 'content',
                     },
                     {
                       actionGroupExtractMode: 'ITEM',
@@ -810,8 +810,13 @@ export default {
                             contentType: 'HTML',
                             editorParams: {
                               contenttype: 'HTML',
+                              SCRIPTCODE:
+                                'data.content?.replace(/@{[^,]*,"name":"(.*?)"}/g,"<span class=\'comment-tag\'>@$1</span>").replace(/@{[^,]*,name=(.*?)}/g,"<span class=\'comment-tag\'>@$1</span>").replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g, (x, value, icon) => {const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1).trim(); } return controller.parseCommentTag({icon, ...item});}).replaceAll(/\\{\\"\\emoji\\":\\"(.+?)\\"\\}/g,(x, emoji) => {const tempVal = decodeURIComponent(atob(emoji)); return `<span class="emoji-tag">${tempVal}</span>`})',
+                              TRANSLATEOBJ: '{"&reg":"&amp;reg"}',
                             },
+                            editorStyle: 'COMMENT_ITEM',
                             editorType: 'RAW',
+                            sysPFPluginId: 'comment_item',
                             predefinedType: 'FIELD_TEXT_DYNAMIC',
                             valueType: 'SIMPLE',
                             editable: true,
@@ -834,6 +839,9 @@ export default {
                             grow: 1,
                             shrink: 1,
                             layout: 'FLEX',
+                          },
+                          sysCss: {
+                            cssName: 'normal-rich-text',
                           },
                           id: 'pcontent',
                         },
@@ -885,6 +893,9 @@ export default {
                   layoutPos: {
                     shrink: 1,
                     layout: 'FLEX',
+                  },
+                  sysCss: {
+                    cssName: 'vditor-comment-item',
                   },
                   id: 'container4',
                 },

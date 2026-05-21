@@ -29,6 +29,12 @@ export default {
       id: 'remove_emails_url',
     },
     {
+      codeName: 'remove_img_url',
+      text: '移除Md格式中的图片与链接',
+      value: 'remove_img_url',
+      id: 'remove_img_url',
+    },
+    {
       codeName: 'normalize_punctuation',
       text: '统一中英文标点（如 “” → "")',
       value: 'normalize_punctuation',

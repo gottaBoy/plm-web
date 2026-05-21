@@ -17,6 +17,13 @@ export default {
       value: 'mcp',
       id: 'mcp',
     },
+    {
+      codeName: 'mcp_built_in_extension',
+      text: '内置MCP扩展服务',
+      tooltip: '用于提供逻辑扩展中的mcp服务',
+      value: 'mcp_built_in_extension',
+      id: 'mcp_built_in_extension',
+    },
   ],
   enableCache: true,
   name: 'Tool类型',

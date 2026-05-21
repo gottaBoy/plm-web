@@ -1,0 +1,121 @@
+export default {
+  tabLayout: 'TOP',
+  loadDefault: true,
+  showDataInfoBar: true,
+  openMode: 'INDEXVIEWTAB_POPUPMODAL',
+  deviewCodeName: 'project_dyna_tab_exp_view',
+  deviewId: 'b1dd8a1de998025e2732bf2b67733489',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.WORK_ITEM',
+  },
+  caption: '工作项',
+  codeName: 'work_item_project_dyna_tab_exp_view',
+  height: 90,
+  appDataEntityId: 'plmweb.work_item',
+  appViewEngines: [
+    {
+      engineCat: 'VIEW',
+      engineType: 'TabExpView',
+      id: 'engine',
+    },
+  ],
+  controls: [
+    {
+      dedrtabPages: [
+        {
+          caption: '显示视图配置',
+          appViewId: 'plmweb.psdeformdesign_modal',
+          navigateContexts: [
+            {
+              key: 'PSDEFORM',
+              value:
+                'FIELD__PROJECT_ID__${project}@ProjMgmt.work_item.${type_id}',
+              name: 'PSDEFORM',
+              id: 'psdeform',
+            },
+            {
+              key: 'PSDATAENTITY',
+              value: 'FIELD__PROJECT_ID__${project}@ProjMgmt.work_item',
+              name: 'PSDATAENTITY',
+              id: 'psdataentity',
+            },
+          ],
+          id: 'show_view',
+        },
+        {
+          caption: '新建视图配置',
+          appViewId: 'plmweb.psdeformdesign_modal',
+          navigateContexts: [
+            {
+              key: 'PSDEFORM',
+              value:
+                'FIELD__PROJECT_ID__${project}@ProjMgmt.work_item.new_${type_id}',
+              name: 'PSDEFORM',
+              id: 'psdeform',
+            },
+            {
+              key: 'PSDATAENTITY',
+              value: 'FIELD__PROJECT_ID__${project}@ProjMgmt.work_item',
+              name: 'PSDATAENTITY',
+              id: 'psdataentity',
+            },
+          ],
+          id: 'new_view',
+        },
+      ],
+      dataRelationTag: 'project_dyna_tab_exp_view_DR',
+      editItemCapLanguageRes: {
+        lanResTag: 'DE.LNAME.WORK_ITEM',
+      },
+      editItemCaption: '工作项',
+      uniqueTag: 'work_item_project_dyna_tab_exp_view__tabexppanel',
+      hideEditItem: true,
+      autoLoad: true,
+      showBusyIndicator: true,
+      codeName: 'project_dyna_tab_exp_view_dr',
+      controlType: 'DRTAB',
+      appDataEntityId: 'plmweb.work_item',
+      controlParam: {
+        id: 'tabexppanel',
+      },
+      modelId: '5640ae8330aefc6768b757ef0255a828',
+      modelType: 'PSDEDRTAB',
+      name: 'tabexppanel',
+      id: 'project_dyna_tab_exp_view_dr',
+    },
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.WORK_ITEM',
+      },
+      caption: '工作项',
+      codeName: 'project_dyna_tab_exp_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.work_item',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'project_dyna_tab_exp_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDETABEXPVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.work_item',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '工作项动态设计分页（项目）',
+  viewStyle: 'DEFAULT',
+  viewType: 'DETABEXPVIEW',
+  width: 90,
+  enableDP: true,
+  showCaptionBar: false,
+  modelId: '6dd7806460c9d240f99f95df768ff945',
+  modelType: 'PSAPPDEVIEW',
+  name: 'work_itemproject_dyna_tab_exp_view',
+  id: 'plmweb.work_item_project_dyna_tab_exp_view',
+};

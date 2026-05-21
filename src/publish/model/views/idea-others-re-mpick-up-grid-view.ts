@@ -301,7 +301,8 @@ export default {
       id: 'plmweb.idea.others_relation_view_pickup_grid_view_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

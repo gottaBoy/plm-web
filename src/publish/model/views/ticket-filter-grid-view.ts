@@ -427,9 +427,14 @@ export default {
             codeName: 'assignee_name',
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,
+            sysPFPluginId: 'personal_info_column',
             width: 200,
             widthUnit: 'PX',
             enableSort: true,
+            userParam: {
+              datasource: 'ROWDATA',
+              placeholder: '',
+            },
             id: 'assignee_name',
           },
           {
@@ -461,9 +466,15 @@ export default {
             codeName: 'submitter_name',
             columnType: 'DEFGRIDCOLUMN',
             noPrivDisplayMode: 1,
+            sysPFPluginId: 'personal_info_column',
             width: 200,
             widthUnit: 'PX',
             enableSort: true,
+            userParam: {
+              USERFILTERMAP: '{"id":"submitter_id","name":"submitter_name"}',
+              datasource: 'ROWDATA',
+              placeholder: '',
+            },
             id: 'submitter_name',
           },
           {

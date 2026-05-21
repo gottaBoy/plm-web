@@ -129,6 +129,10 @@ export default {
                     colMD: 2,
                     layout: 'TABLE_24COL',
                   },
+                  sysImage: {
+                    cssClass: 'fa fa-share-alt',
+                    glyph: 'xf1e0@FontAwesome',
+                  },
                   showCaption: true,
                   id: 'button2',
                 },
@@ -178,6 +182,10 @@ export default {
                     colLG: 2,
                     colMD: 2,
                     layout: 'TABLE_24COL',
+                  },
+                  sysImage: {
+                    cssClass: 'fa fa-gear',
+                    glyph: 'xf013@FontAwesome',
                   },
                   showCaption: true,
                   id: 'button1',

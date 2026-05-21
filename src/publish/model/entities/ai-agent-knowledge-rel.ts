@@ -625,6 +625,7 @@ export default {
       parentTextAppDEFieldId: 'ai_knowledge_base_name',
       rsmode: 1,
       rstype: 'DER1N',
+      removeActionType: 1,
       name: 'DER1N_AI_AGENT_KNOWLEDGE_REL_AI_KNOWLEDGE_BASE_AI_KNOWLEDGE_BASE_ID',
       id: 'ai_knowledge_base',
     },

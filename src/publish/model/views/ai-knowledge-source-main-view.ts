@@ -203,6 +203,7 @@ export default {
                       ISAUTO: 'true',
                     },
                     editorType: 'TEXTAREA',
+                    placeHolder: '知识库源名称',
                     valueType: 'SIMPLE',
                     editable: true,
                     id: 'name',

@@ -135,6 +135,28 @@ export default {
                     actionLevel: 100,
                     noPrivDisplayMode: 2,
                     uiactionId:
+                      'toolbar_tree_exp_view_node_cm_deuiaction3_click@category',
+                    uiactionTarget: 'SINGLEDATA',
+                    valid: true,
+                    caption: '新建职位',
+                    itemType: 'DEUIACTION',
+                    sysImage: {
+                      cssClass: 'fa fa-plus',
+                      glyph: 'xf067@FontAwesome',
+                    },
+                    tooltip: '新建职位',
+                    showCaption: true,
+                    showIcon: true,
+                    id: 'deuiaction3',
+                  },
+                  {
+                    itemType: 'SEPERATOR',
+                    id: 'seperator1',
+                  },
+                  {
+                    actionLevel: 100,
+                    noPrivDisplayMode: 2,
+                    uiactionId:
                       'toolbar_tree_exp_view_node_cm_deuiaction1_click@category',
                     uiactionTarget: 'SINGLEDATA',
                     valid: true,
@@ -190,6 +212,8 @@ export default {
               allowDrop: true,
               allowEditText: true,
               disableSelect: true,
+              expandFirstOnly: true,
+              expanded: true,
               name: '分组',
               id: 'node',
             },
@@ -385,6 +409,28 @@ export default {
           controls: [
             {
               detoolbarItems: [
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
+                    'toolbar_tree_exp_view_node_cm_deuiaction3_click@category',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '新建职位',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-plus',
+                    glyph: 'xf067@FontAwesome',
+                  },
+                  tooltip: '新建职位',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction3',
+                },
+                {
+                  itemType: 'SEPERATOR',
+                  id: 'seperator1',
+                },
                 {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,

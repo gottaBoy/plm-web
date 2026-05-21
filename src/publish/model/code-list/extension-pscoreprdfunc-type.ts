@@ -18,6 +18,12 @@ export default {
       id: 'extension',
     },
     {
+      codeName: 'mergence',
+      text: '合并',
+      value: 'MERGENCE',
+      id: 'mergence',
+    },
+    {
       codeName: 'component',
       text: '组件',
       value: 'COMPONENT',

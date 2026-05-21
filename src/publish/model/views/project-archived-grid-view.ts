@@ -83,6 +83,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'update_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -170,7 +172,7 @@ export default {
                 beforeItemType: 'NONE',
                 buttonStyle: 'DEFAULT',
                 detailType: 'DEUIACTION',
-                uiactionId: 'archived_delete@project',
+                uiactionId: 'delete@project',
                 tooltip: '删除',
                 showIcon: true,
                 sysImage: {

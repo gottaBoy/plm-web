@@ -62,16 +62,14 @@ export default {
             {
               dataType: 21,
               enableCond: 3,
-              itemHeight: 1,
               labelPos: 'NONE',
               noPrivDisplayMode: 1,
               appDEFieldId: 'summary',
               editor: {
-                editorHeight: 1,
                 editorParams: {
                   USERINSCRIPT:
                     'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                  MAXHEIGHT: '450',
+                  MAXHEIGHT: '600',
                   QUOTECODELISTMAP: '{"type":"plmweb.base__recent_visite"}',
                   enableEdit: 'true',
                   QUOTEFIELDMAP:

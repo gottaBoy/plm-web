@@ -12,7 +12,7 @@ export default {
   },
   caption: '新建客户',
   codeName: 'customer_quick_create_view',
-  height: 80,
+  height: 90,
   appDataEntityId: 'plmweb.customer',
   appViewEngines: [
     {
@@ -139,7 +139,9 @@ export default {
                     editable: true,
                     id: 'scale',
                   },
+                  unitName: '人',
                   allowEmpty: true,
+                  enableUnitName: true,
                   caption: '规模',
                   codeName: 'scale',
                   detailStyle: 'DEFAULT',
@@ -260,7 +262,6 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  itemHeight: 470,
                   labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
@@ -268,36 +269,18 @@ export default {
                   editor: {
                     appDEACModeId: 'aichat',
                     appDEDataSetId: 'fetch_default',
-                    appDataEntityId: 'plmweb.work_item',
+                    appDataEntityId: 'plmweb.customer',
                     enableAC: true,
-                    editorHeight: 450,
                     editorParams: {
-                      USERINSCRIPT:
-                        'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                      MAXHEIGHT: '450',
-                      QUOTECODELISTMAP: '{"type":"plmweb.base__recent_visite"}',
-                      srfaiagent: 'TextAgent_Writing',
-                      QUOTEFIELDMAP:
-                        '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                      QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                      MODE: 'default',
-                      QUOTEINSCRIPT:
-                        'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                      USERSCRIPT:
-                        '`@{"id":"${data.id}","name":"${data.name}"}`',
-                      QUOTESCRIPT:
-                        '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                      USERURL:
-                        "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                      USERFIELDMAP: '{"id":"user_id","name":"name"}',
-                      INSERTKEYS:
-                        '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                      editorHeight: '450',
+                      hiddenswitch: 'true',
+                      defaulttype: 'MD',
+                      includes: '["HTMLEDITOR_VDITOR"]',
                       ac: 'true',
-                      QUOTEURL: '`recents/fetch_recent_access`',
+                      codelistid: 'plmweb.formattype_chg',
+                      srfaiagent: 'TextAgent_Writing',
                     },
-                    editorStyle: 'COLLAPSE',
                     editorType: 'HTMLEDITOR',
-                    sysPFPluginId: 'comment',
                     placeHolder: '输入客户介绍',
                     valueType: 'SIMPLE',
                     editable: true,
@@ -313,6 +296,7 @@ export default {
                     colMD: 24,
                     layout: 'TABLE_24COL',
                   },
+                  sysPFPluginId: 'composite_form_item_ex',
                   showCaption: true,
                   id: 'description',
                 },

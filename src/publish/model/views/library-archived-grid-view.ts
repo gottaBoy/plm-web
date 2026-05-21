@@ -86,6 +86,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'update_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -165,7 +167,7 @@ export default {
                   cssClass: 'fa fa-lightbulb-o',
                   glyph: 'xf0eb@FontAwesome',
                 },
-                id: 'u468905c',
+                id: 'ue7d808c',
               },
               {
                 actionLevel: 100,
@@ -180,7 +182,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u60e2367',
+                id: 'ua9bc4ab',
               },
             ],
             appDataEntityId: 'plmweb.library',

@@ -111,6 +111,7 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      orderValueAppDEFieldId: 'sequence',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -291,6 +292,7 @@ export default {
       pagingSize: 100,
       sortMode: 'REMOTE',
       enableCustomized: true,
+      enableRowEditOrder: true,
       forceFit: true,
       singleSelect: true,
       navViewPos: 'NONE',
@@ -298,6 +300,11 @@ export default {
         appDEMethodId: 'fetch_default',
         appDataEntityId: 'plmweb.work_item_state',
         id: 'fetch',
+      },
+      moveControlAction: {
+        appDEMethodId: 'move_order',
+        appDataEntityId: 'plmweb.work_item_state',
+        id: 'move',
       },
       removeControlAction: {
         appDEMethodId: 'remove',

@@ -89,6 +89,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'update_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -133,24 +135,24 @@ export default {
         },
         {
           clconvertMode: 'NONE',
-          dataItemName: 'create_time',
-          excelCaption: '创建时间',
-          appDEFieldId: 'create_time',
+          dataItemName: 'update_time',
+          excelCaption: '删除时间',
+          appDEFieldId: 'update_time',
           valueFormat: 'YYYY-MM-DD HH:mm:ss',
           valueType: 'SIMPLE',
           aggMode: 'NONE',
           align: 'LEFT',
           capLanguageRes: {
-            lanResTag: 'DEF.LNAME.CREATE_TIME',
+            lanResTag: 'DEF.LNAME.UPDATE_TIME',
           },
-          caption: '创建时间',
-          codeName: 'create_time',
+          caption: '删除时间',
+          codeName: 'update_time',
           columnType: 'DEFGRIDCOLUMN',
           noPrivDisplayMode: 1,
           width: 200,
           widthUnit: 'PX',
           enableSort: true,
-          id: 'create_time',
+          id: 'update_time',
         },
         {
           deuiactionGroup: {
@@ -202,10 +204,10 @@ export default {
         },
         {
           format: 'YYYY-MM-DD HH:mm:ss',
-          appDEFieldId: 'create_time',
+          appDEFieldId: 'update_time',
           valueType: 'SIMPLE',
           dataType: 5,
-          id: 'create_time',
+          id: 'update_time',
         },
         {
           appDEFieldId: 'id',

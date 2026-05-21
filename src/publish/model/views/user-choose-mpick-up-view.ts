@@ -101,7 +101,7 @@ export default {
           id: 'srfkey',
         },
         {
-          appDEFieldId: 'name',
+          appDEFieldId: 'display_name',
           dataType: 25,
           id: 'srfmajortext',
         },

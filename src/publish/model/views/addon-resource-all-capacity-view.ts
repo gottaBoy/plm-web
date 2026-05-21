@@ -202,6 +202,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
+                      fieldName: 'name',
                       labelPos: 'NONE',
                       noPrivDisplayMode: 1,
                       editor: {
@@ -240,6 +241,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
+                      fieldName: 'weekday',
                       labelPos: 'NONE',
                       noPrivDisplayMode: 1,
                       editor: {
@@ -295,6 +297,7 @@ export default {
                         {
                           dataType: 25,
                           enableCond: 3,
+                          fieldName: 'work_item_count',
                           labelPos: 'NONE',
                           noPrivDisplayMode: 1,
                           editor: {
@@ -324,6 +327,7 @@ export default {
                         {
                           dataType: 25,
                           enableCond: 3,
+                          fieldName: 'estimated_workload',
                           labelPos: 'NONE',
                           noPrivDisplayMode: 1,
                           editor: {
@@ -353,6 +357,7 @@ export default {
                         {
                           dataType: 25,
                           enableCond: 3,
+                          fieldName: 'remaining_workload',
                           labelPos: 'NONE',
                           noPrivDisplayMode: 1,
                           editor: {
@@ -420,6 +425,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
+                      fieldName: 'user_id',
                       labelPos: 'NONE',
                       noPrivDisplayMode: 1,
                       editor: {
@@ -445,6 +451,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
+                      fieldName: 'id',
                       labelPos: 'NONE',
                       noPrivDisplayMode: 1,
                       editor: {

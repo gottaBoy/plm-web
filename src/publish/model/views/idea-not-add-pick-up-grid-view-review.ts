@@ -24,7 +24,7 @@ export default {
     {
       rawValue: true,
       key: 'add_tag',
-      value: 'IDEA',
+      value: 'idea',
       id: 'add_tag',
     },
     {
@@ -35,7 +35,8 @@ export default {
   ],
   controls: [
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

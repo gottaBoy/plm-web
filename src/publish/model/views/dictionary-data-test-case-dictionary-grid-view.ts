@@ -91,6 +91,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'ASC',
+      minorSortAppDEFieldId: 'sequence',
       orderValueAppDEFieldId: 'sequence',
       degridColumns: [
         {

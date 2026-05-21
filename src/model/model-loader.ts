@@ -411,7 +411,9 @@ export class ModelLoader implements ModelLoaderProvider {
    */
   async getAppDataEntity(appId: string, id: string): Promise<IAppDataEntity> {
     if (!appId || appId === ibiz.env.appId) {
-      return getAppDataEntityModel(id);
+      const appDataEntity = await getAppDataEntityModel(id);
+      this.deepFillSubAppId(appDataEntity, ibiz.env.appId);
+      return appDataEntity;
     }
     const microAppConfig = ibiz.hub.microAppConfigCenter.getMicroApp(appId);
     const module = await System.import(

@@ -503,6 +503,10 @@ export default {
                 navAppViewId: 'plmweb.article_page_baseline_mpick_up_view',
                 nodeType: 'node',
                 appDataEntityId: 'plmweb.space',
+                sysImage: {
+                  rawContent:
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="design-iconfont" width="20" height="20">\n  <path d="M17.5,15 L5,15 C4.53976667,15 4.16666667,15.3730833 4.16666667,15.8333333 C4.16666667,16.2935833 4.53976667,16.6666667 5,16.6666667 L17.5,16.6666667 L17.5,18.3333333 L5,18.3333333 C3.61929167,18.3333333 2.5,17.2140833 2.5,15.8333333 L2.5,3.33333333 C2.5,2.41285833 3.24619167,1.66666667 4.16666667,1.66666667 L17.5,1.66666667 L17.5,15 Z M13.3333333,7.5 L13.3333333,5.83333333 L6.66666667,5.83333333 L6.66666667,7.5 L13.3333333,7.5 Z" fill="#56ABFB" fill-rule="nonzero"></path>\n</svg>',
+                },
                 treeNodeType: 'DE',
                 hasDETreeNodeRSs: true,
                 disableSelect: true,
@@ -515,6 +519,10 @@ export default {
                 text: '全部',
                 navAppViewId: 'plmweb.article_page_baseline_mpick_up_view',
                 nodeType: 'node_1',
+                sysImage: {
+                  cssClass: 'fa fa-list-ul',
+                  glyph: 'xf0ca@FontAwesome',
+                },
                 treeNodeType: 'STATIC',
                 name: '全部',
                 id: 'node_1',

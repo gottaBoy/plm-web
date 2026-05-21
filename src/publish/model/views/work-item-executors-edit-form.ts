@@ -461,12 +461,22 @@ export default {
                         detailType: 'FORMITEM',
                         defdgroupLogics: [
                           {
+                            logicCat: 'SCRIPTCODE_BLUR',
+                            groupOP: 'AND',
+                            defdlogics: [
+                              {
+                                logicType: 'SINGLE',
+                              },
+                            ],
+                            logicType: 'GROUP',
+                          },
+                          {
                             logicCat: 'SCRIPTCODE_CHANGE',
                             groupOP: 'AND',
                             defdlogics: [
                               {
                                 value:
-                                  'var executors = view.layoutPanel.panelItems.form.control.state.data.executors;\r\nfor (var i = 0; i < executors.length; i++) {\r\n    if (executors[i].user_id != data.user_id) {\r\n        executors[i].is_assignee = 0;\r\n    }\r\n}',
+                                  'var executors = view.layoutPanel.panelItems.form.control.state.data.executors;\r\nfor (var i = 0; i < executors.length; i++) {\r\n    if (executors[i].user_id != data.user_id) {\r\n        executors[i].is_assignee = 0;\r\n    }\r\n}\r\nif (data.$origin) {\r\n    data.$origin.is_assignee = data.is_assignee;\r\n}',
                                 logicType: 'SINGLE',
                               },
                             ],

@@ -61,6 +61,7 @@ export default {
       id: 'opendata',
     },
   ],
+  appViewMsgGroupId: 'vmgroup',
   appViewRefs: [
     {
       realTitle: '工作项类型编辑视图',
@@ -1230,6 +1231,7 @@ export default {
         id: 'plmweb.work_item_type.usr12299058218',
       },
       mobListStyle: 'EXTVIEW1',
+      orderValueAppDEFieldId: 'sequence',
       delistDataItems: [
         {
           dataType: 21,
@@ -1324,6 +1326,9 @@ export default {
       id: 'setting_view_scrum_captionbar',
     },
   ],
+  sysCss: {
+    cssName: 'flow_display_style',
+  },
   viewLayoutPanel: {
     layoutBodyOnly: true,
     useDefaultLayout: true,

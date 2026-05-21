@@ -570,6 +570,10 @@ export default {
                 navAppViewId: 'plmweb.test_case_all_grid_view',
                 nodeType: 'node_2',
                 appDataEntityId: 'plmweb.test_suite',
+                sysImage: {
+                  cssClass: 'fa fa-th',
+                  glyph: 'xf00a@FontAwesome',
+                },
                 treeNodeType: 'DE',
                 hasDETreeNodeRSs: true,
                 name: '主模块',
@@ -597,6 +601,10 @@ export default {
                 navAppViewId: 'plmweb.test_case_nosuite_test_case_grid_view',
                 nodeType: 'node_4',
                 appDataEntityId: 'plmweb.test_case',
+                sysImage: {
+                  cssClass: 'fa fa-reorder',
+                  glyph: 'xf0c9@FontAwesome',
+                },
                 treeNodeType: 'STATIC',
                 name: '无模块用例',
                 id: 'node_4',

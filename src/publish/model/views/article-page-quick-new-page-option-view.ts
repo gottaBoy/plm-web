@@ -127,7 +127,7 @@ export default {
               appDEFieldId: 'format_type',
               editor: {
                 singleSelect: true,
-                appCodeListId: 'plmweb.codelist54',
+                appCodeListId: 'plmweb.formattype_chg',
                 editorType: 'DROPDOWNLIST',
                 valueType: 'SIMPLE',
                 editable: true,
@@ -257,6 +257,8 @@ export default {
                       condOP: 'ISNOTNULL',
                       defdname: 'space_name',
                       logicType: 'SINGLE',
+                      name: 'space_name值不为空(NotNil)',
+                      id: 'space_name值不为空(notnil)',
                     },
                   ],
                   logicType: 'GROUP',

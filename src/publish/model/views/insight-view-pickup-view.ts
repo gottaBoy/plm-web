@@ -1,0 +1,67 @@
+export default {
+  funcViewMode: 'PICKUPVIEW',
+  deviewCodeName: 'PickupView',
+  deviewId: 'd1b37d91a270561b7af232124fbcc441',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.INSIGHT_VIEW',
+  },
+  caption: '效能视图',
+  codeName: 'insight_view_pickup_view',
+  appDataEntityId: 'plmweb.insight_view',
+  appViewEngines: [
+    {
+      engineCat: 'VIEW',
+      engineType: 'PickupView',
+      id: 'engine',
+    },
+  ],
+  controls: [
+    {
+      embeddedAppDEViewId: 'plmweb.insight_view_pickup_grid_view',
+      codeName: 'pickup_view_pickupviewpanel',
+      controlType: 'PICKUPVIEWPANEL',
+      appDataEntityId: 'plmweb.insight_view',
+      controlParam: {
+        id: 'pickupviewpanel',
+      },
+      name: 'pickupviewpanel',
+      id: 'pickup_view_pickupviewpanel',
+    },
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.INSIGHT_VIEW',
+      },
+      caption: '效能视图',
+      codeName: 'pickup_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.insight_view',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'pickup_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDEPICKUPVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.insight_view',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '效能视图数据选择视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.INSIGHT_VIEW.PICKUPVIEW',
+  },
+  viewStyle: 'DEFAULT',
+  viewType: 'DEPICKUPVIEW',
+  enableDP: true,
+  showCaptionBar: false,
+  modelId: 'fcc04da4925744b934f7a34642bfd606',
+  modelType: 'PSAPPDEVIEW',
+  name: 'insight_viewPickupView',
+  id: 'plmweb.insight_view_pickup_view',
+};

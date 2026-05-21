@@ -148,6 +148,13 @@ export default {
         showBusyIndicator: true,
         appViewRefs: [
           {
+            realOpenMode: 'POPUPMODAL',
+            realTitle: '自定义安装',
+            refAppViewId: 'plmweb.ps_core_prd_func_custom_install_view',
+            name: 'EXPITEM:installCustom',
+            id: 'expitem:installcustom',
+          },
+          {
             realTitle: '已安装应用',
             refAppViewId: 'plmweb.ps_core_prd_func_installed_grid_view',
             name: 'EXPITEM:installedApp',
@@ -189,6 +196,13 @@ export default {
                 id: '默认根节点 - 发现',
               },
               {
+                childDETreeNodeId: 'market',
+                parentDETreeNodeId: 'node',
+                parentValueLevel: 1,
+                searchMode: 3,
+                id: '发现 - 应用市场',
+              },
+              {
                 childDETreeNodeId: 'node_3',
                 navigateParams: [
                   {
@@ -217,18 +231,19 @@ export default {
                 id: '产品子目录 - 产品子目录',
               },
               {
-                childDETreeNodeId: 'market',
-                parentDETreeNodeId: 'node',
-                parentValueLevel: 1,
-                searchMode: 3,
-                id: '发现 - 应用市场',
-              },
-              {
                 childDETreeNodeId: 'installedapp',
                 parentDETreeNodeId: 'node',
                 parentValueLevel: 1,
                 searchMode: 3,
                 id: '发现 - 已安装应用',
+              },
+              {
+                childDETreeNodeId: 'installcustom',
+                parentDETreeNodeId: 'node',
+                parentValueLevel: 1,
+                searchMode: 3,
+                name: '发现（node）-自定义安装（installCustom）',
+                id: '发现（node）-自定义安装（installcustom）',
               },
             ],
             detreeNodes: [
@@ -241,6 +256,14 @@ export default {
                 rootNode: true,
                 name: '默认根节点',
                 id: 'root',
+              },
+              {
+                text: '自定义安装',
+                navAppViewId: 'plmweb.ps_core_prd_func_custom_install_view',
+                nodeType: 'installCustom',
+                treeNodeType: 'STATIC',
+                name: '自定义安装',
+                id: 'installcustom',
               },
               {
                 text: '已安装应用',

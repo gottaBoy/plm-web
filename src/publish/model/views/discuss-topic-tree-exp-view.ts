@@ -173,13 +173,6 @@ export default {
               id: '话题 - 全部话题',
             },
             {
-              childDETreeNodeId: 'node_1',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 星标',
-            },
-            {
               childDETreeNodeId: 'node_4',
               parentDETreeNodeId: 'node_13',
               parentValueLevel: 1,
@@ -201,11 +194,11 @@ export default {
               id: '话题 - 组织话题',
             },
             {
-              childDETreeNodeId: 'node_2',
+              childDETreeNodeId: 'node_1',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '默认根节点 - 话题',
+              id: '默认根节点 - 星标',
             },
             {
               childDETreeNodeId: 'node_7',
@@ -222,18 +215,26 @@ export default {
               id: '话题 - 团队话题',
             },
             {
-              childDETreeNodeId: 'node_13',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 更多',
-            },
-            {
               childDETreeNodeId: 'node_8',
               parentDETreeNodeId: 'node',
               parentValueLevel: 1,
               searchMode: 3,
               id: '讨论 - 我关注的',
+            },
+            {
+              childDETreeNodeId: 'node_2',
+              parentDETreeNodeId: 'root',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '默认根节点 - 话题',
+            },
+            {
+              childDETreeNodeId: 'node_13',
+              parentDETreeNodeId: 'root',
+              parentValueLevel: 1,
+              searchMode: 3,
+              name: '默认根节点（ROOT）-更多（node_13）',
+              id: '默认根节点（root）-更多（node_13）',
             },
           ],
           detreeNodes: [

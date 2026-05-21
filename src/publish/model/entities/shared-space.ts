@@ -939,8 +939,8 @@ export default {
       frontProcessType: 'WIZARD',
       fullCodeName: 'shared_space_space_shared_setting_center',
       sysImage: {
-        cssClass: 'fa fa-edit',
-        glyph: 'xf044@FontAwesome',
+        cssClass: 'fa fa-gear',
+        glyph: 'xf013@FontAwesome',
       },
       refreshMode: 1,
       tooltip: '共享设置',

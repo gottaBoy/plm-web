@@ -6,16 +6,16 @@ export default {
   appDataEntityId: 'plmweb.ai_kb_document',
   codeItems: [
     {
-      codeName: 'file',
-      text: '文件',
-      value: 'file',
-      id: 'file',
-    },
-    {
       codeName: 'space',
       text: '空间',
       value: 'space',
       id: 'space',
+    },
+    {
+      codeName: 'file',
+      text: '文件',
+      value: 'file',
+      id: 'file',
     },
   ],
   enableCache: true,

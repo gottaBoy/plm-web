@@ -483,8 +483,11 @@ export default {
                           editorHeight: 1,
                           editorParams: {
                             tocpos: 'fixed',
+                            LINKVIEWID: 'plmweb.recent_custom_redirect_view',
                           },
+                          editorStyle: 'PREVIEW',
                           editorType: 'MARKDOWN',
+                          sysPFPluginId: 'preview',
                           valueType: 'SIMPLE',
                           editable: true,
                           id: 'formitem1',

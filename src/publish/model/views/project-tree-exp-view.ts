@@ -147,6 +147,13 @@ export default {
               id: '项目 - 全部项目',
             },
             {
+              childDETreeNodeId: 'node_2',
+              parentDETreeNodeId: 'node_3',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_3）-归档项目（node_2）',
+            },
+            {
               childDETreeNodeId: 'node',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -189,6 +196,13 @@ export default {
               id: '项目 - 团队项目',
             },
             {
+              childDETreeNodeId: 'node_1',
+              parentDETreeNodeId: 'star',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '星标 - 星标项目集',
+            },
+            {
               childDETreeNodeId: 'work',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -196,11 +210,11 @@ export default {
               id: '默认根节点 - 工作',
             },
             {
-              childDETreeNodeId: 'node_1',
-              parentDETreeNodeId: 'star',
+              childDETreeNodeId: 'config',
+              parentDETreeNodeId: 'node_3',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '星标 - 星标项目集',
+              id: '更多（node_3）-配置中心（config）',
             },
             {
               childDETreeNodeId: 'star',
@@ -210,18 +224,12 @@ export default {
               id: '默认根节点 - 星标',
             },
             {
-              childDETreeNodeId: 'node_2',
+              childDETreeNodeId: 'node_3',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '默认根节点 - 归档项目',
-            },
-            {
-              childDETreeNodeId: 'config',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 配置中心',
+              name: '默认根节点（ROOT）-更多（node_3）',
+              id: '默认根节点（root）-更多（node_3）',
             },
           ],
           detreeNodes: [
@@ -396,6 +404,15 @@ export default {
               treeNodeType: 'STATIC',
               name: '归档项目',
               id: 'node_2',
+            },
+            {
+              text: '更多',
+              nodeType: 'node_3',
+              treeNodeType: 'STATIC',
+              hasDETreeNodeRSs: true,
+              expanded: true,
+              name: '更多',
+              id: 'node_3',
             },
             {
               dataSourceType: 'DEDATASET',

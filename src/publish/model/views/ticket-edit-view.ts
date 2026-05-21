@@ -375,49 +375,24 @@ export default {
                                     {
                                       dataType: 21,
                                       enableCond: 3,
-                                      labelPos: 'NONE',
+                                      labelPos: 'TOP',
+                                      labelWidth: 130,
                                       noPrivDisplayMode: 1,
                                       appDEFieldId: 'description',
                                       editor: {
                                         appDEACModeId: 'aichat',
                                         appDEDataSetId: 'fetch_default',
-                                        appDataEntityId: 'plmweb.work_item',
+                                        appDataEntityId: 'plmweb.ticket',
                                         enableAC: true,
                                         editorParams: {
-                                          INSERTKEYS:
-                                            '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                          LINKVIEWID:
-                                            'plmweb.recent_custom_redirect_view',
-                                          USERURL:
-                                            "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                          enableFullScreen: 'true',
-                                          USERSCRIPT:
-                                            '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                          USERINSCRIPT:
-                                            'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                          QUOTEINSCRIPT:
-                                            'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                          QUOTEURL:
-                                            '`recents/fetch_recent_access`',
-                                          srfaiagent: 'TextAgent_Writing',
-                                          QUOTEPARAMS:
-                                            '{"sort":"update_time,desc"}',
-                                          QUOTESCRIPT:
-                                            '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                          QUOTECODELISTMAP:
-                                            '{"type":"plmweb.base__recent_visite"}',
-                                          USERFIELDMAP:
-                                            '{"id":"user_id","name":"name"}',
-                                          QUOTEFIELDMAP:
-                                            '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                          enableEdit: 'true',
-                                          MODE: 'default',
+                                          hiddenswitch: 'true',
+                                          defaulttype: 'MD',
+                                          includes: '["HTMLEDITOR_VDITOR"]',
                                           ac: 'true',
-                                          MAXHEIGHT: '450',
+                                          codelistid: 'plmweb.formattype_view',
+                                          srfaiagent: 'TextAgent_Writing',
                                         },
-                                        editorStyle: 'COLLAPSE',
                                         editorType: 'HTMLEDITOR',
-                                        sysPFPluginId: 'comment',
                                         placeHolder: '输入描述',
                                         valueType: 'SIMPLE',
                                         editable: true,
@@ -432,6 +407,8 @@ export default {
                                         colMD: 24,
                                         layout: 'TABLE_24COL',
                                       },
+                                      sysPFPluginId: 'composite_form_item_ex',
+                                      showCaption: true,
                                       id: 'description',
                                     },
                                   ],
@@ -466,43 +443,23 @@ export default {
                                   },
                                   deformDetails: [
                                     {
-                                      dataType: 25,
+                                      dataType: 21,
                                       enableCond: 3,
-                                      labelPos: 'NONE',
+                                      labelPos: 'TOP',
+                                      labelWidth: 130,
                                       noPrivDisplayMode: 1,
                                       appDEFieldId: 'solution_way',
                                       editor: {
+                                        enableAC: true,
                                         editorParams: {
-                                          USERINSCRIPT:
-                                            'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                          MAXHEIGHT: '450',
-                                          QUOTECODELISTMAP:
-                                            '{"type":"plmweb.base__recent_visite"}',
-                                          enableEdit: 'true',
-                                          QUOTEFIELDMAP:
-                                            '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                          QUOTEPARAMS:
-                                            '{"sort":"update_time,desc"}',
-                                          enableFullScreen: 'true',
-                                          MODE: 'default',
-                                          QUOTEINSCRIPT:
-                                            'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                          USERSCRIPT:
-                                            '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                          QUOTESCRIPT:
-                                            '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                                          USERURL:
-                                            "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                          USERFIELDMAP:
-                                            '{"id":"user_id","name":"name"}',
-                                          INSERTKEYS:
-                                            '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
-                                          QUOTEURL:
-                                            '`recents/fetch_recent_access`',
+                                          hiddenswitch: 'true',
+                                          defaulttype: 'MD',
+                                          includes: '["HTMLEDITOR_VDITOR"]',
+                                          ac: 'true',
+                                          codelistid: 'plmweb.formattype_view',
+                                          srfaiagent: 'TextAgent_Writing',
                                         },
-                                        editorStyle: 'COLLAPSE',
                                         editorType: 'HTMLEDITOR',
-                                        sysPFPluginId: 'comment',
                                         placeHolder: '输入解决办法',
                                         valueType: 'SIMPLE',
                                         editable: true,
@@ -517,6 +474,8 @@ export default {
                                         colMD: 24,
                                         layout: 'TABLE_24COL',
                                       },
+                                      sysPFPluginId: 'composite_form_item_ex',
+                                      showCaption: true,
                                       id: 'solution_way',
                                     },
                                   ],
@@ -697,7 +656,7 @@ export default {
                                             cssClass: 'fa fa-download',
                                             glyph: 'xf019@FontAwesome',
                                           },
-                                          id: 'uf162678',
+                                          id: 'u73b8ba5',
                                         },
                                         {
                                           actionLevel: 100,
@@ -706,17 +665,17 @@ export default {
                                           buttonStyle: 'DEFAULT',
                                           caption: '删除',
                                           detailType: 'DEUIACTION',
+                                          enableScriptCode:
+                                            'context.srfreadonly != true',
                                           uiactionId: 'delete@attachment',
                                           tooltip: '删除',
-                                          visibleScriptCode:
-                                            'context.srfreadonly != true',
                                           showCaption: true,
                                           showIcon: true,
                                           sysImage: {
                                             cssClass: 'fa fa-trash-o',
                                             glyph: 'xf014@FontAwesome',
                                           },
-                                          id: 'ubdc1b19',
+                                          id: 'u44d00e2',
                                         },
                                       ],
                                       appDataEntityId: 'plmweb.attachment',
@@ -1618,9 +1577,36 @@ export default {
                         linkAppViewId: 'plmweb.product_index_view',
                         valign: 'MIDDLE',
                         wrapMode: 'NOWRAP',
-                        editorType: 'SPAN',
+                        enableLinkView: true,
+                        editorParams: {
+                          'SRFNAVCTX.principal_id': '',
+                          'SRFNAVCTX.principal_type': '',
+                          'SRFNAVCTX.ticket': '',
+                          LINKVIEW: 'TRUE',
+                        },
+                        editorType: 'SPAN_LINK',
                         valueType: 'SIMPLE',
                         editable: true,
+                        navigateContexts: [
+                          {
+                            key: 'PRINCIPAL_ID',
+                            rawValue: true,
+                            name: 'PRINCIPAL_ID',
+                            id: 'principal_id',
+                          },
+                          {
+                            key: 'PRINCIPAL_TYPE',
+                            rawValue: true,
+                            name: 'PRINCIPAL_TYPE',
+                            id: 'principal_type',
+                          },
+                          {
+                            key: 'TICKET',
+                            rawValue: true,
+                            name: 'TICKET',
+                            id: 'ticket',
+                          },
+                        ],
                         id: 'product_name',
                       },
                       allowEmpty: true,

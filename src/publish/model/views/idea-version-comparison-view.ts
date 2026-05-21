@@ -333,6 +333,13 @@ export default {
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'description',
                   editor: {
+                    editorParams: {
+                      hiddenswitch: 'true',
+                      enableEdit: 'false',
+                      enableFullScreen: 'false',
+                      includes: '["HTMLEDITOR_VDITOR"]',
+                      codelistid: 'plmweb.formattype_view',
+                    },
                     editorType: 'HTMLEDITOR',
                     valueType: 'SIMPLE',
                     editable: true,
@@ -350,6 +357,7 @@ export default {
                     colMD: 24,
                     layout: 'TABLE_24COL',
                   },
+                  sysPFPluginId: 'composite_form_item_ex',
                   showCaption: true,
                   id: 'description',
                 },
@@ -617,6 +625,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
+                      fieldName: 'name',
                       labelPos: 'NONE',
                       noPrivDisplayMode: 1,
                       editor: {

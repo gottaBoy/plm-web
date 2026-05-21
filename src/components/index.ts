@@ -6,7 +6,7 @@ export { IBizViewShell };
 
 export default {
   install(v: App): void {
-    v.component(IBizViewShell.name, IBizViewShell);
-    v.component(IBizSpecialView.name, IBizSpecialView);
+    v.component(IBizViewShell.name!, IBizViewShell);
+    v.component(IBizSpecialView.name!, IBizSpecialView);
   },
 };

@@ -120,6 +120,13 @@ export default {
         {
           detreeNodeRSs: [
             {
+              childDETreeNodeId: 'node_11',
+              parentDETreeNodeId: 'node_12',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_12）-归档测试库（node_11）',
+            },
+            {
               childDETreeNodeId: 'node_1',
               parentDETreeNodeId: 'node',
               parentValueLevel: 1,
@@ -205,6 +212,13 @@ export default {
               id: '待办 - 进行中的',
             },
             {
+              childDETreeNodeId: 'node_8',
+              parentDETreeNodeId: 'node_12',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_12）-配置中心（node_8）',
+            },
+            {
               childDETreeNodeId: 'work',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -226,18 +240,12 @@ export default {
               id: '默认根节点 - 星标',
             },
             {
-              childDETreeNodeId: 'node_11',
+              childDETreeNodeId: 'node_12',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '默认根节点 - 归档测试库',
-            },
-            {
-              childDETreeNodeId: 'node_8',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 配置中心',
+              name: '默认根节点（ROOT）-更多（node_12）',
+              id: '默认根节点（root）-更多（node_12）',
             },
           ],
           detreeNodes: [
@@ -360,6 +368,15 @@ export default {
               treeNodeType: 'STATIC',
               name: '归档测试库',
               id: 'node_11',
+            },
+            {
+              text: '更多',
+              nodeType: 'node_12',
+              treeNodeType: 'STATIC',
+              hasDETreeNodeRSs: true,
+              expanded: true,
+              name: '更多',
+              id: 'node_12',
             },
             {
               text: '组织测试库',

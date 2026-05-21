@@ -192,8 +192,8 @@ export default {
                 tooltip: '共享设置',
                 showIcon: true,
                 sysImage: {
-                  cssClass: 'fa fa-edit',
-                  glyph: 'xf044@FontAwesome',
+                  cssClass: 'fa fa-gear',
+                  glyph: 'xf013@FontAwesome',
                 },
                 id: 'uf29f313',
               },

@@ -133,7 +133,7 @@ export default {
                 },
                 {
                   dataType: 25,
-                  enableCond: 3,
+                  enableCond: 1,
                   labelPos: 'LEFT',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
@@ -282,7 +282,7 @@ export default {
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'icon',
                   editor: {
-                    maxLength: 100,
+                    maxLength: 16777215,
                     editorType: 'TEXTBOX',
                     valueType: 'SIMPLE',
                     editable: true,

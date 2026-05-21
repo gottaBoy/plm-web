@@ -8,6 +8,9 @@ export default {
   caption: '瀑布项目',
   codeName: 'project_waterfall_flow_setting_tab_view',
   appDataEntityId: 'plmweb.project',
+  sysCss: {
+    cssName: 'flow_setting_style',
+  },
   viewLayoutPanel: {
     viewProxyMode: true,
     layoutMode: 'FLEX',
@@ -81,9 +84,9 @@ export default {
               {
                 rawItem: {
                   predefinedType: 'TELEPORT_PLACEHOLDER',
-                  id: 'tabsearchbar',
+                  id: 'tabtoolbar',
                 },
-                caption: '传送部件占位',
+                caption: '传送占位',
                 itemStyle: 'DEFAULT',
                 itemType: 'RAWITEM',
                 layoutPos: {
@@ -91,7 +94,7 @@ export default {
                   layout: 'FLEX',
                 },
                 showCaption: true,
-                id: 'tabsearchbar',
+                id: 'tabtoolbar',
               },
             ],
             layout: {
@@ -99,7 +102,6 @@ export default {
             },
             dataRegionType: 'INHERIT',
             caption: '容器',
-            cssStyle: 'margin-right:7px',
             itemStyle: 'DEFAULT',
             itemType: 'CONTAINER',
             layoutPos: {

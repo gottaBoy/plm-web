@@ -68,7 +68,8 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'NONE',
+                  labelPos: 'TOP',
+                  labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'name',
                   editor: {
@@ -94,12 +95,13 @@ export default {
                     colMD: 24,
                     layout: 'TABLE_24COL',
                   },
+                  showCaption: true,
                   id: 'name',
                 },
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'code_name',
@@ -124,7 +126,7 @@ export default {
                 {
                   dataType: 9,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'active',
@@ -149,7 +151,7 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'provider',
@@ -178,7 +180,7 @@ export default {
                   createDV: 'api_key',
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'credential_type',
@@ -206,7 +208,7 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'description',
@@ -242,7 +244,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'api_key',
@@ -303,7 +305,7 @@ export default {
                     {
                       dataType: 21,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'access_key',
@@ -332,7 +334,7 @@ export default {
                     {
                       dataType: 21,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'secret_key',
@@ -390,7 +392,7 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'region',
@@ -454,7 +456,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'client_id',
@@ -481,7 +483,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'token_url',
@@ -512,7 +514,7 @@ export default {
                     {
                       dataType: 21,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'client_secret',
@@ -541,7 +543,7 @@ export default {
                     {
                       dataType: 25,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'scope',
@@ -602,7 +604,7 @@ export default {
                     {
                       dataType: 21,
                       enableCond: 3,
-                      labelPos: 'LEFT',
+                      labelPos: 'TOP',
                       labelWidth: 130,
                       noPrivDisplayMode: 1,
                       appDEFieldId: 'bearer_token',
@@ -719,17 +721,17 @@ export default {
       noTabHeader: true,
       autoLoad: true,
       showBusyIndicator: true,
-      codeName: 'main',
+      codeName: 'quick_create',
       controlType: 'FORM',
-      logicName: '主编辑表单',
+      logicName: '快速新建表单',
       appDataEntityId: 'plmweb.ai_credential',
       controlParam: {
         id: 'form',
       },
-      modelId: '8aae80a3e5006731c1d9ba07f3bf4811',
+      modelId: '87a5c6b5efe2dfb1961b806fab13e2c2',
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
-      id: 'plmweb.ai_credential.main',
+      id: 'plmweb.ai_credential.quick_create',
     },
     {
       detoolbarItems: [

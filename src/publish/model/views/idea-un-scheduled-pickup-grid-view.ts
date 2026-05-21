@@ -300,7 +300,8 @@ export default {
       id: 'plmweb.idea.not_re_pickup_grid_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

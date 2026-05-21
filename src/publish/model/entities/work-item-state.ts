@@ -29,7 +29,7 @@ export default {
     {
       codeName: 'sequence',
       logicName: '序号',
-      predefinedType: 'NONE',
+      predefinedType: 'ORDERVALUE',
       stdDataType: 6,
       name: 'SEQUENCE',
       id: 'sequence',
@@ -455,6 +455,28 @@ export default {
       dataSetType: 'REMOTE',
       name: 'GetDraft',
       id: 'get_draft',
+    },
+    {
+      codeName: 'move_order',
+      methodType: 'DEACTION',
+      appDEMethodInput: {
+        appDEMethodDTOId: 'work_item_state_dto',
+        type: 'DTO',
+        id: '输入对象',
+      },
+      appDEMethodReturn: {
+        appDEMethodDTOId: 'work_item_state_dto',
+        type: 'DTOS',
+        id: '返回对象',
+      },
+      requestMethod: 'POST',
+      requestParamType: 'ENTITY',
+      requestPath: '/move_order',
+      needResourceKey: true,
+      actionMode: 'MOVEORDER',
+      actionType: 'REMOTE',
+      dataSetType: 'REMOTE',
+      id: 'move_order',
     },
     {
       codeName: 'nothing',

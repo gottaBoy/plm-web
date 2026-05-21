@@ -113,6 +113,15 @@ export default {
       id: 'psdename',
     },
     {
+      codeName: 'DataType',
+      logicName: '表单数据类型',
+      predefinedType: 'NONE',
+      stdDataType: 25,
+      stringLength: 50,
+      name: 'DATATYPE',
+      id: 'datatype',
+    },
+    {
       codeName: 'extension_tag',
       logicName: '扩展标记',
       predefinedType: 'NONE',
@@ -194,6 +203,17 @@ export default {
           type: 'SIMPLE',
           name: 'CreateMan',
           id: 'createman',
+        },
+        {
+          codeName: 'DataType',
+          logicName: '表单数据类型',
+          appDEFieldId: 'datatype',
+          sourceType: 'DEFIELD',
+          stdDataType: 25,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          name: 'DataType',
+          id: 'datatype',
         },
         {
           codeName: 'FormType',

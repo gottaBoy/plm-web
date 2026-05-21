@@ -241,6 +241,27 @@ export default {
                   {
                     actionLevel: 100,
                     noPrivDisplayMode: 2,
+                    uiactionId: 'create_group@group',
+                    uiactionTarget: 'NONE',
+                    valid: true,
+                    caption: '新建团队',
+                    itemType: 'DEUIACTION',
+                    sysImage: {
+                      cssClass: 'fa fa-plus',
+                      glyph: 'xf067@FontAwesome',
+                    },
+                    tooltip: '新建团队',
+                    showCaption: true,
+                    showIcon: true,
+                    id: 'deuiaction3',
+                  },
+                  {
+                    itemType: 'SEPERATOR',
+                    id: 'seperator1',
+                  },
+                  {
+                    actionLevel: 100,
+                    noPrivDisplayMode: 2,
                     uiactionId:
                       'toolbar_tree_exp_view_node1_cm_deuiaction1_click@group',
                     uiactionTarget: 'SINGLEDATA',
@@ -526,6 +547,27 @@ export default {
                 {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
+                  uiactionId: 'create_group@group',
+                  uiactionTarget: 'NONE',
+                  valid: true,
+                  caption: '新建团队',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-plus',
+                    glyph: 'xf067@FontAwesome',
+                  },
+                  tooltip: '新建团队',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction3',
+                },
+                {
+                  itemType: 'SEPERATOR',
+                  id: 'seperator1',
+                },
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
                   uiactionId:
                     'toolbar_tree_exp_view_node1_cm_deuiaction1_click@group',
                   uiactionTarget: 'SINGLEDATA',
@@ -612,7 +654,7 @@ export default {
                 {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
-                  uiactionId: 'create_group@group',
+                  uiactionId: 'create@group',
                   uiactionTarget: 'NONE',
                   valid: true,
                   caption: '新建团队',

@@ -576,6 +576,10 @@ export default {
                     id: 'suite_id',
                   },
                 ],
+                sysImage: {
+                  cssClass: 'fa fa-reorder',
+                  glyph: 'xf0c9@FontAwesome',
+                },
                 treeNodeType: 'DE',
                 hasDETreeNodeRSs: true,
                 name: '主模块',

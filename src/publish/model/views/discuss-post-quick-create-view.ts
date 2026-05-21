@@ -282,7 +282,7 @@ export default {
                                     cssClass: 'fa fa-download',
                                     glyph: 'xf019@FontAwesome',
                                   },
-                                  id: 'uf162678',
+                                  id: 'u73b8ba5',
                                 },
                                 {
                                   actionLevel: 100,
@@ -291,17 +291,17 @@ export default {
                                   buttonStyle: 'DEFAULT',
                                   caption: '删除',
                                   detailType: 'DEUIACTION',
+                                  enableScriptCode:
+                                    'context.srfreadonly != true',
                                   uiactionId: 'delete@attachment',
                                   tooltip: '删除',
-                                  visibleScriptCode:
-                                    'context.srfreadonly != true',
                                   showCaption: true,
                                   showIcon: true,
                                   sysImage: {
                                     cssClass: 'fa fa-trash-o',
                                     glyph: 'xf014@FontAwesome',
                                   },
-                                  id: 'ubdc1b19',
+                                  id: 'u44d00e2',
                                 },
                               ],
                               appDataEntityId: 'plmweb.attachment',
@@ -652,10 +652,10 @@ export default {
             },
           ],
           caption: '基本信息',
-          codeName: 'formpage1',
+          codeName: 'formpage',
           detailStyle: 'DEFAULT',
           detailType: 'FORMPAGE',
-          id: 'formpage1',
+          id: 'formpage',
         },
       ],
       layout: {

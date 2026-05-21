@@ -573,6 +573,25 @@ export default {
         id: 'engine',
       },
     ],
+    appViewLogics: [
+      {
+        eventNames: 'onCloseView',
+        logicTrigger: 'VIEWEVENT',
+        logicType: 'SCRIPT',
+        scriptCode: "ibiz.mc.command.create.send({ srfdecodename: 'review'});",
+        builtinLogic: true,
+        id: 'close_view_logic',
+      },
+      {
+        eventNames: 'onMounted',
+        logicTrigger: 'VIEWEVENT',
+        logicType: 'SCRIPT',
+        scriptCode:
+          "const form = view.getController('form');\r\nif (form) {\r\n    form.evt.on('onFormDetailEvent', event =>{\r\n        const panelItems = view.layoutPanel.panelItems;\r\n        if (!panelItems.container_comment) {\r\n            return;\r\n        }\r\n        if (form.details.tabpanel3) {\r\n            const activeTab = form.details.tabpanel3.state.activeTab;\r\n            panelItems.container_comment.state.visible = activeTab === 'tabpage3';\r\n        }\r\n    });\r\n}",
+        builtinLogic: true,
+        id: 'mounted_view_logic',
+      },
+    ],
     controls: [
       {
         detoolbarItems: [
@@ -782,11 +801,12 @@ export default {
                     appDEFieldId: 'name',
                     editor: {
                       maxLength: 200,
+                      showMaxLength: true,
                       editorParams: {
                         SHOWLIMIT: 'true',
                         ISAUTO: 'true',
                       },
-                      editorType: 'TEXTBOX',
+                      editorType: 'TEXTAREA',
                       valueType: 'SIMPLE',
                       editable: true,
                       id: 'title',
@@ -1291,6 +1311,48 @@ export default {
                             showCaption: true,
                             id: 'druipart5',
                           },
+                          {
+                            deformTabPages: [
+                              {
+                                layout: {
+                                  columnCount: 24,
+                                  layout: 'TABLE_24COL',
+                                },
+                                deformDetails: [
+                                  {
+                                    appViewId: 'plmweb.comment_list_view',
+                                    parentDataJO: {
+                                      srfparentdename: 'REVIEW',
+                                      SRFPARENTTYPE: 'CUSTOM',
+                                    },
+                                    codeName: 'druipart1',
+                                    detailStyle: 'DEFAULT',
+                                    detailType: 'DRUIPART',
+                                    layoutPos: {
+                                      colMD: 24,
+                                      layout: 'TABLE_24COL',
+                                    },
+                                    showCaption: true,
+                                    id: 'druipart1',
+                                  },
+                                ],
+                                caption: '评论',
+                                codeName: 'tabpage1',
+                                detailStyle: 'DEFAULT',
+                                detailType: 'TABPAGE',
+                                showCaption: true,
+                                id: 'tabpage1',
+                              },
+                            ],
+                            codeName: 'tabpanel2',
+                            detailStyle: 'DEFAULT',
+                            detailType: 'TABPANEL',
+                            layoutPos: {
+                              colMD: 24,
+                              layout: 'TABLE_24COL',
+                            },
+                            id: 'tabpanel2',
+                          },
                         ],
                         caption: '评审内容',
                         codeName: 'tabpage3',
@@ -1320,7 +1382,7 @@ export default {
                                 editor: {
                                   appDEACModeId: 'aichat',
                                   appDEDataSetId: 'fetch_default',
-                                  appDataEntityId: 'plmweb.work_item',
+                                  appDataEntityId: 'plmweb.review',
                                   enableAC: true,
                                   editorParams: {
                                     USERINSCRIPT:
@@ -1506,7 +1568,7 @@ export default {
                                               cssClass: 'fa fa-download',
                                               glyph: 'xf019@FontAwesome',
                                             },
-                                            id: 'uf162678',
+                                            id: 'u73b8ba5',
                                           },
                                           {
                                             actionLevel: 100,
@@ -1515,17 +1577,17 @@ export default {
                                             buttonStyle: 'DEFAULT',
                                             caption: '删除',
                                             detailType: 'DEUIACTION',
+                                            enableScriptCode:
+                                              'context.srfreadonly != true',
                                             uiactionId: 'delete@attachment',
                                             tooltip: '删除',
-                                            visibleScriptCode:
-                                              'context.srfreadonly != true',
                                             showCaption: true,
                                             showIcon: true,
                                             sysImage: {
                                               cssClass: 'fa fa-trash-o',
                                               glyph: 'xf014@FontAwesome',
                                             },
-                                            id: 'ubdc1b19',
+                                            id: 'u44d00e2',
                                           },
                                         ],
                                         appDataEntityId: 'plmweb.attachment',
@@ -1692,48 +1754,6 @@ export default {
                             },
                             showCaption: true,
                             id: 'grouppanel2',
-                          },
-                          {
-                            deformTabPages: [
-                              {
-                                layout: {
-                                  columnCount: 24,
-                                  layout: 'TABLE_24COL',
-                                },
-                                deformDetails: [
-                                  {
-                                    appViewId: 'plmweb.comment_list_view',
-                                    parentDataJO: {
-                                      srfparentdename: 'REVIEW',
-                                      SRFPARENTTYPE: 'CUSTOM',
-                                    },
-                                    codeName: 'druipart1',
-                                    detailStyle: 'DEFAULT',
-                                    detailType: 'DRUIPART',
-                                    layoutPos: {
-                                      colMD: 24,
-                                      layout: 'TABLE_24COL',
-                                    },
-                                    showCaption: true,
-                                    id: 'druipart1',
-                                  },
-                                ],
-                                caption: '评论',
-                                codeName: 'tabpage1',
-                                detailStyle: 'DEFAULT',
-                                detailType: 'TABPAGE',
-                                showCaption: true,
-                                id: 'tabpage1',
-                              },
-                            ],
-                            codeName: 'tabpanel2',
-                            detailStyle: 'DEFAULT',
-                            detailType: 'TABPANEL',
-                            layoutPos: {
-                              colMD: 24,
-                              layout: 'TABLE_24COL',
-                            },
-                            id: 'tabpanel2',
                           },
                         ],
                         caption: '评审说明',

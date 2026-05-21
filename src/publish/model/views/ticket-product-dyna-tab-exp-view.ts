@@ -1,0 +1,108 @@
+export default {
+  tabLayout: 'TOP',
+  loadDefault: true,
+  showDataInfoBar: true,
+  openMode: 'INDEXVIEWTAB_POPUPMODAL',
+  deviewCodeName: 'product_dyna_tab_exp_view',
+  deviewId: 'ea3b89307ec5d8572b00fd9e877ab079',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.TICKET',
+  },
+  caption: '工单',
+  codeName: 'ticket_product_dyna_tab_exp_view',
+  height: 90,
+  appDataEntityId: 'plmweb.ticket',
+  appViewEngines: [
+    {
+      engineCat: 'VIEW',
+      engineType: 'TabExpView',
+      id: 'engine',
+    },
+  ],
+  controls: [
+    {
+      dedrtabPages: [
+        {
+          caption: '显示视图配置',
+          appViewId: 'plmweb.psdeformdesign_modal',
+          navigateContexts: [
+            {
+              key: 'PSDEFORM',
+              value: 'FIELD__PRODUCT_ID__${product}@ProdMgmt.ticket.Main',
+              name: 'PSDEFORM',
+              id: 'psdeform',
+            },
+          ],
+          id: 'show_view',
+        },
+        {
+          caption: '新建视图配置',
+          appViewId: 'plmweb.psdeformdesign_modal',
+          navigateContexts: [
+            {
+              key: 'PSDEFORM',
+              value:
+                'FIELD__PRODUCT_ID__${product}@ProdMgmt.ticket.quick_create',
+              name: 'PSDEFORM',
+              id: 'psdeform',
+            },
+          ],
+          id: 'new_view',
+        },
+      ],
+      dataRelationTag: 'product_dyna_tab_exp_view_DR',
+      editItemCapLanguageRes: {
+        lanResTag: 'DE.LNAME.TICKET',
+      },
+      editItemCaption: '工单',
+      uniqueTag: 'ticket_product_dyna_tab_exp_view__tabexppanel',
+      hideEditItem: true,
+      autoLoad: true,
+      showBusyIndicator: true,
+      codeName: 'product_dyna_tab_exp_view_dr',
+      controlType: 'DRTAB',
+      appDataEntityId: 'plmweb.ticket',
+      controlParam: {
+        id: 'tabexppanel',
+      },
+      modelId: 'b388149c23cb9f5ebe8df7f84aa7f737',
+      modelType: 'PSDEDRTAB',
+      name: 'tabexppanel',
+      id: 'product_dyna_tab_exp_view_dr',
+    },
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.TICKET',
+      },
+      caption: '工单',
+      codeName: 'product_dyna_tab_exp_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.ticket',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'product_dyna_tab_exp_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDETABEXPVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.ticket',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '工单动态设计',
+  viewStyle: 'DEFAULT',
+  viewType: 'DETABEXPVIEW',
+  width: 90,
+  enableDP: true,
+  showCaptionBar: false,
+  modelId: '6be411356b22fe648e80a547e60413c5',
+  modelType: 'PSAPPDEVIEW',
+  name: 'ticketproduct_dyna_tab_exp_view',
+  id: 'plmweb.ticket_product_dyna_tab_exp_view',
+};

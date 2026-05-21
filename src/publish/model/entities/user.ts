@@ -99,15 +99,6 @@ export default {
       id: 'report_flag',
     },
     {
-      codeName: 'user_id',
-      logicName: '用户ID',
-      predefinedType: 'NONE',
-      stdDataType: 25,
-      stringLength: 100,
-      name: 'USER_ID',
-      id: 'user_id',
-    },
-    {
       codeName: 'title',
       logicName: '职位',
       predefinedType: 'NONE',
@@ -136,19 +127,6 @@ export default {
       stringLength: 100,
       name: 'ID',
       id: 'id',
-    },
-    {
-      codeName: 'name',
-      lnlanguageRes: {
-        lanResTag: 'DEF.LNAME.NAME',
-      },
-      logicName: '登录名',
-      predefinedType: 'NONE',
-      stdDataType: 25,
-      stringLength: 200,
-      enableQuickSearch: true,
-      name: 'NAME',
-      id: 'name',
     },
     {
       codeName: 'create_man',
@@ -197,6 +175,19 @@ export default {
       valueFormat: 'YYYY-MM-DD HH:mm:ss',
       name: 'UPDATE_TIME',
       id: 'update_time',
+    },
+    {
+      codeName: 'name',
+      lnlanguageRes: {
+        lanResTag: 'DEF.LNAME.NAME',
+      },
+      logicName: '登录名',
+      predefinedType: 'NONE',
+      stdDataType: 25,
+      stringLength: 200,
+      enableQuickSearch: true,
+      name: 'NAME',
+      id: 'name',
     },
     {
       codeName: 'department_id',
@@ -334,16 +325,6 @@ export default {
           type: 'SIMPLE',
           allowEmpty: true,
           id: 'report_flag',
-        },
-        {
-          codeName: 'user_id',
-          logicName: '用户ID',
-          appDEFieldId: 'user_id',
-          sourceType: 'DEFIELD',
-          stdDataType: 25,
-          type: 'SIMPLE',
-          allowEmpty: true,
-          id: 'user_id',
         },
         {
           codeName: 'title',
@@ -657,16 +638,6 @@ export default {
           type: 'SIMPLE',
           allowEmpty: true,
           id: 'n_title_eq',
-        },
-        {
-          codeName: 'n_user_id_noteq',
-          logicName: '用户ID',
-          appDEFieldId: 'user_id',
-          sourceType: 'DEFSEARCHMODE',
-          stdDataType: 25,
-          type: 'SIMPLE',
-          allowEmpty: true,
-          id: 'n_user_id_noteq',
         },
       ],
       sourceType: 'DE',
@@ -2537,7 +2508,7 @@ export default {
     lanResTag: 'DE.LNAME.USER',
   },
   logicName: '企业用户',
-  majorAppDEFieldId: 'name',
+  majorAppDEFieldId: 'display_name',
   minorAppDERSs: [
     {
       actionRSMode: 1,

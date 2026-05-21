@@ -91,47 +91,6 @@ export default {
   ],
   controls: [
     {
-      detoolbarItems: [
-        {
-          actionLevel: 100,
-          noPrivDisplayMode: 2,
-          uiactionId: 'gridview_newaction',
-          valid: true,
-          capLanguageRes: {
-            lanResTag: 'TBB.TEXT.*.NEW',
-          },
-          caption: '新建',
-          itemType: 'DEUIACTION',
-          sysImage: {
-            cssClass: 'fa fa-file-text-o',
-            glyph: 'xf0f6@FontAwesome',
-          },
-          tooltip: '新建',
-          tooltipLanguageRes: {
-            lanResTag: 'TBB.TOOLTIP.*.NEW',
-          },
-          showCaption: true,
-          showIcon: true,
-          id: 'deuiaction1',
-        },
-      ],
-      xdataControlName: 'grid',
-      codeName: 'grid_view_tab_toolbar',
-      controlType: 'TOOLBAR',
-      logicName: '工具栏模板（表格界面，只有一个新建按钮）',
-      appDataEntityId: 'plmweb.extend_task_type',
-      controlParam: {
-        ctrlParams: {
-          TELEPORTFLAG: 'true',
-        },
-        id: 'tab_toolbar',
-      },
-      modelId: 'cd9eb7eb8c0facf6084ba1508d888eea',
-      modelType: 'PSDETOOLBAR',
-      name: 'tab_toolbar',
-      id: 'grid_view_tab_toolbar',
-    },
-    {
       aggMode: 'NONE',
       columnEnableFilter: 2,
       columnEnableLink: 2,
@@ -313,6 +272,7 @@ export default {
       sortMode: 'REMOTE',
       enableCustomized: true,
       enablePagingBar: true,
+      singleSelect: true,
       navViewPos: 'NONE',
       fetchControlAction: {
         appDEMethodId: 'fetch_default',
@@ -337,6 +297,47 @@ export default {
       modelType: 'PSDEGRID',
       name: 'grid',
       id: 'plmweb.extend_task_type.main',
+    },
+    {
+      detoolbarItems: [
+        {
+          actionLevel: 100,
+          noPrivDisplayMode: 2,
+          uiactionId: 'gridview_newaction',
+          valid: true,
+          capLanguageRes: {
+            lanResTag: 'TBB.TEXT.*.NEW',
+          },
+          caption: '新建',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-file-text-o',
+            glyph: 'xf0f6@FontAwesome',
+          },
+          tooltip: '新建',
+          tooltipLanguageRes: {
+            lanResTag: 'TBB.TOOLTIP.*.NEW',
+          },
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction1',
+        },
+      ],
+      xdataControlName: 'grid',
+      codeName: 'grid_view_tab_toolbar',
+      controlType: 'TOOLBAR',
+      logicName: '工具栏模板（表格界面，只有一个新建按钮）',
+      appDataEntityId: 'plmweb.extend_task_type',
+      controlParam: {
+        ctrlParams: {
+          TELEPORTFLAG: 'true',
+        },
+        id: 'tab_toolbar',
+      },
+      modelId: 'cd9eb7eb8c0facf6084ba1508d888eea',
+      modelType: 'PSDETOOLBAR',
+      name: 'tab_toolbar',
+      id: 'grid_view_tab_toolbar',
     },
     {
       searchButtonStyle: 'DEFAULT',

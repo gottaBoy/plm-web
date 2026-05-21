@@ -142,10 +142,8 @@ export default {
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'id',
                   editor: {
-                    halign: 'LEFT',
-                    valign: 'MIDDLE',
-                    wrapMode: 'NOWRAP',
-                    editorType: 'SPAN',
+                    maxLength: 100,
+                    editorType: 'TEXTBOX',
                     valueType: 'SIMPLE',
                     editable: true,
                     id: 'id',

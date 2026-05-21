@@ -209,6 +209,12 @@ export default {
                   id: 'srfdatatype',
                 },
                 {
+                  key: 'SRFNAVCTRLID',
+                  rawValue: true,
+                  name: 'SRFNAVCTRLID',
+                  id: 'srfnavctrlid',
+                },
+                {
                   key: 'PROJECT',
                   value: 'project_id',
                   name: 'PROJECT',
@@ -240,6 +246,12 @@ export default {
                     value: 'work_item_type_id',
                     name: 'SRFDATATYPE',
                     id: 'srfdatatype',
+                  },
+                  {
+                    key: 'SRFNAVCTRLID',
+                    rawValue: true,
+                    name: 'SRFNAVCTRLID',
+                    id: 'srfnavctrlid',
                   },
                   {
                     key: 'PROJECT',
@@ -286,6 +298,12 @@ export default {
                   id: 'srfdatatype',
                 },
                 {
+                  key: 'SRFNAVCTRLID',
+                  rawValue: true,
+                  name: 'SRFNAVCTRLID',
+                  id: 'srfnavctrlid',
+                },
+                {
                   key: 'PROJECT',
                   value: 'project_id',
                   name: 'PROJECT',
@@ -316,6 +334,12 @@ export default {
                     value: 'work_item_type_id',
                     name: 'SRFDATATYPE',
                     id: 'srfdatatype',
+                  },
+                  {
+                    key: 'SRFNAVCTRLID',
+                    rawValue: true,
+                    name: 'SRFNAVCTRLID',
+                    id: 'srfnavctrlid',
                   },
                   {
                     key: 'PROJECT',
@@ -358,6 +382,9 @@ export default {
           SHOWMODE: 'daterange',
         },
         id: 'calendar',
+      },
+      sysCss: {
+        cssName: 'calendar_style',
       },
       modelId: '0ce99aef6f6f851a642d204e3d68efa6',
       modelType: 'PSSYSCALENDAR',

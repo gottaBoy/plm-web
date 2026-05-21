@@ -132,6 +132,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'update_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -352,6 +354,18 @@ export default {
           valueType: 'SIMPLE',
           dataType: 25,
           id: 'ai_agent_id',
+        },
+        {
+          appDEFieldId: 'rerank_model_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'rerank_model_id',
+        },
+        {
+          appDEFieldId: 'spec_kb_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'spec_kb_id',
         },
         {
           appDEFieldId: 'name',

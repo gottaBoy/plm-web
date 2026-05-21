@@ -1,4 +1,28 @@
 export default {
+  appDEACModes: [
+    {
+      actype: 'AUTOCOMPLETE',
+      codeName: 'tag_ac',
+      logicName: 'tag_ac',
+      deacmodeDataItems: [
+        {
+          appDEFieldId: 'tool_tag',
+          dataType: 25,
+          id: 'value',
+        },
+        {
+          appDEFieldId: 'name',
+          dataType: 25,
+          id: 'text',
+        },
+      ],
+      pagingSize: 50,
+      appDataEntityId: 'plmweb.ai_tool',
+      textAppDEFieldId: 'name',
+      valueAppDEFieldId: 'tool_tag',
+      id: 'tag_ac',
+    },
+  ],
   appDEFields: [
     {
       codeName: 'id',
@@ -74,6 +98,14 @@ export default {
       id: 'update_time',
     },
     {
+      codeName: 'active',
+      logicName: '启用',
+      predefinedType: 'NONE',
+      stdDataType: 9,
+      name: 'ACTIVE',
+      id: 'active',
+    },
+    {
       codeName: 'api_key',
       logicName: 'api密钥',
       predefinedType: 'NONE',
@@ -81,6 +113,15 @@ export default {
       stringLength: 200,
       name: 'API_KEY',
       id: 'api_key',
+    },
+    {
+      codeName: 'expiration_date',
+      logicName: '过期时间',
+      predefinedType: 'NONE',
+      stdDataType: 5,
+      valueFormat: 'YYYY-MM-DD HH:mm:ss',
+      name: 'EXPIRATION_DATE',
+      id: 'expiration_date',
     },
     {
       codeName: 'tool_tag',
@@ -270,6 +311,15 @@ export default {
           id: 'update_time',
         },
         {
+          codeName: 'active',
+          logicName: '启用',
+          appDEFieldId: 'active',
+          sourceType: 'DEFIELD',
+          stdDataType: 9,
+          type: 'SIMPLE',
+          id: 'active',
+        },
+        {
           codeName: 'api_key',
           logicName: 'api密钥',
           appDEFieldId: 'api_key',
@@ -278,6 +328,17 @@ export default {
           type: 'SIMPLE',
           allowEmpty: true,
           id: 'api_key',
+        },
+        {
+          codeName: 'expiration_date',
+          jsonFormat: 'yyyy-MM-dd HH:mm:ss',
+          logicName: '过期时间',
+          appDEFieldId: 'expiration_date',
+          sourceType: 'DEFIELD',
+          stdDataType: 5,
+          type: 'SIMPLE',
+          allowEmpty: true,
+          id: 'expiration_date',
         },
         {
           codeName: 'tool_tag',
@@ -376,6 +437,7 @@ export default {
           sourceType: 'DEFIELD',
           stdDataType: 21,
           type: 'SIMPLE',
+          allowEmpty: true,
           id: 'input_schema',
         },
         {
@@ -643,6 +705,28 @@ export default {
       dataSetTag: 'Default',
       dataSetType: 'REMOTE',
       id: 'fetch_default',
+    },
+    {
+      codeName: 'fetch_extension_mcp_server',
+      methodType: 'FETCH',
+      appDEMethodInput: {
+        appDEMethodDTOId: 'ai_tool_filter_dto',
+        type: 'DTO',
+        id: '输入对象',
+      },
+      appDEMethodReturn: {
+        appDEMethodDTOId: 'ai_tool_dto',
+        type: 'PAGE',
+        id: '返回对象',
+      },
+      requestMethod: 'POST',
+      requestParamType: 'ENTITY',
+      requestPath: '/fetch_extension_mcp_server',
+      actionType: 'REMOTE',
+      dataSetName: 'extension_mcp_server',
+      dataSetTag: 'extension_mcp_server',
+      dataSetType: 'REMOTE',
+      id: 'fetch_extension_mcp_server',
     },
     {
       codeName: 'FilterCreate',

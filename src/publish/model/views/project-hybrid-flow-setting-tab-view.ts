@@ -8,92 +8,330 @@ export default {
   caption: '混合项目',
   codeName: 'project_hybrid_flow_setting_tab_view',
   appDataEntityId: 'plmweb.project',
-  appViewEngines: [
-    {
-      engineCat: 'VIEW',
-      engineType: 'TabExpView',
-      id: 'engine',
-    },
-  ],
-  controls: [
-    {
-      dedrtabPages: [
-        {
-          caption: '工作项类型',
-          appViewId: 'plmweb.work_item_type_global_setting_mixed',
-          navigateParams: [
-            {
-              key: 'n_project_type_eq',
-              value: 'hybrid',
-              rawValue: true,
-              id: 'n_project_type_eq',
-            },
-          ],
-          id: 'work_item_type',
-        },
-        {
-          caption: '组件设置',
-          appViewId: 'plmweb.addon_no_name_setting_grid_view',
-          navigateParams: [
-            {
-              key: 'n_owner_subtype_eq',
-              value: 'hybrid',
-              rawValue: true,
-              id: 'n_owner_subtype_eq',
-            },
-            {
-              key: 'n_owner_type_eq',
-              value: 'project',
-              rawValue: true,
-              id: 'n_owner_type_eq',
-            },
-            {
-              key: 'n_owner_id_isnull',
-              value: '1',
-              rawValue: true,
-              id: 'n_owner_id_isnull',
-            },
-          ],
-          id: 'addon_setting',
-        },
-      ],
-      dataRelationTag: 'mixed_flow_setting_tab_view_DR',
-      editItemCaption: '项目',
-      uniqueTag: 'project_hybrid_flow_setting_tab_view__tabexppanel',
-      hideEditItem: true,
-      autoLoad: true,
-      showBusyIndicator: true,
-      codeName: 'mixed_flow_setting_tab_view_dr',
-      controlType: 'DRTAB',
-      appDataEntityId: 'plmweb.project',
-      controlParam: {
-        id: 'tabexppanel',
-      },
-      modelId: 'b7e628c5617a22f725579c0f56e68f11',
-      modelType: 'PSDEDRTAB',
-      name: 'tabexppanel',
-      id: 'mixed_flow_setting_tab_view_dr',
-    },
-    {
-      caption: '混合项目',
-      codeName: 'hybrid_flow_setting_tab_view_captionbar',
-      controlType: 'CAPTIONBAR',
-      appDataEntityId: 'plmweb.project',
-      controlParam: {},
-      name: 'captionbar',
-      id: 'hybrid_flow_setting_tab_view_captionbar',
-    },
-  ],
+  sysCss: {
+    cssName: 'flow_setting_style',
+  },
   viewLayoutPanel: {
     layoutBodyOnly: true,
-    useDefaultLayout: true,
+    viewProxyMode: true,
+    layoutMode: 'FLEX',
+    layout: {
+      layout: 'FLEX',
+    },
+    rootPanelItems: [
+      {
+        actionGroupExtractMode: 'ITEM',
+        panelItems: [
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                caption: '标题栏',
+                itemStyle: 'DEFAULT',
+                itemType: 'CTRLPOS',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'captionbar',
+              },
+            ],
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'view_captionbar',
+          },
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                caption: '分页导航',
+                itemStyle: 'DEFAULT',
+                itemType: 'CTRLPOS',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'tabexppanel',
+              },
+            ],
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              grow: 1,
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'view_tabexppanel',
+          },
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                rawItem: {
+                  predefinedType: 'TELEPORT_PLACEHOLDER',
+                  id: 'tabtoolbar',
+                },
+                caption: '传送占位',
+                itemStyle: 'DEFAULT',
+                itemType: 'RAWITEM',
+                layoutPos: {
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                showCaption: true,
+                id: 'tabtoolbar',
+              },
+            ],
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'container2',
+          },
+        ],
+        predefinedType: 'VIEWHEADER',
+        layout: {
+          dir: 'row',
+          layout: 'FLEX',
+          valign: 'center',
+        },
+        dataRegionType: 'INHERIT',
+        caption: '容器',
+        itemStyle: 'DEFAULT',
+        itemType: 'CONTAINER',
+        layoutPos: {
+          shrink: 0,
+          layout: 'FLEX',
+        },
+        id: 'view_header',
+      },
+      {
+        actionGroupExtractMode: 'ITEM',
+        panelItems: [
+          {
+            actionGroupExtractMode: 'ITEM',
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              shrink: 0,
+              layout: 'FLEX',
+            },
+            id: 'view_tabexppanel_left',
+          },
+          {
+            actionGroupExtractMode: 'ITEM',
+            panelItems: [
+              {
+                actionGroupExtractMode: 'ITEM',
+                panelItems: [
+                  {
+                    rawItem: {
+                      predefinedType: 'NAV_POS',
+                      id: 'nav_pos',
+                    },
+                    caption: '导航区占位',
+                    itemStyle: 'DEFAULT',
+                    itemType: 'RAWITEM',
+                    layoutPos: {
+                      grow: 1,
+                      shrink: 1,
+                      layout: 'FLEX',
+                    },
+                    showCaption: true,
+                    id: 'nav_pos',
+                  },
+                ],
+                predefinedType: 'VIEWCONTENT',
+                layout: {
+                  layout: 'FLEX',
+                },
+                dataRegionType: 'INHERIT',
+                caption: '容器',
+                itemStyle: 'DEFAULT',
+                itemType: 'CONTAINER',
+                layoutPos: {
+                  grow: 1,
+                  shrink: 1,
+                  layout: 'FLEX',
+                },
+                id: 'view_content',
+              },
+              {
+                actionGroupExtractMode: 'ITEM',
+                layout: {
+                  layout: 'FLEX',
+                },
+                dataRegionType: 'INHERIT',
+                caption: '容器',
+                itemStyle: 'DEFAULT',
+                itemType: 'CONTAINER',
+                layoutPos: {
+                  shrink: 0,
+                  layout: 'FLEX',
+                },
+                id: 'view_tabexppanel_bottom',
+              },
+            ],
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              grow: 1,
+              shrink: 1,
+              layout: 'FLEX',
+            },
+            id: 'container1',
+          },
+          {
+            actionGroupExtractMode: 'ITEM',
+            layout: {
+              layout: 'FLEX',
+            },
+            dataRegionType: 'INHERIT',
+            caption: '容器',
+            itemStyle: 'DEFAULT',
+            itemType: 'CONTAINER',
+            layoutPos: {
+              shrink: 0,
+              layout: 'FLEX',
+            },
+            id: 'view_tabexppanel_right',
+          },
+        ],
+        layout: {
+          dir: 'row',
+          layout: 'FLEX',
+        },
+        dataRegionType: 'INHERIT',
+        caption: '容器',
+        itemStyle: 'DEFAULT',
+        itemType: 'CONTAINER',
+        layoutPos: {
+          grow: 1,
+          shrink: 1,
+          layout: 'FLEX',
+        },
+        id: 'container',
+      },
+    ],
     layoutPanel: true,
-    codeName: 'layoutpanel',
-    controlStyle: 'APPDETABEXPVIEW',
+    appViewEngines: [
+      {
+        engineCat: 'VIEW',
+        engineType: 'TabExpView',
+        id: 'engine',
+      },
+    ],
+    controls: [
+      {
+        dedrtabPages: [
+          {
+            caption: '工作项类型',
+            appViewId: 'plmweb.work_item_type_global_setting_mixed',
+            navigateParams: [
+              {
+                key: 'n_project_type_eq',
+                value: 'hybrid',
+                rawValue: true,
+                id: 'n_project_type_eq',
+              },
+            ],
+            id: 'work_item_type',
+          },
+          {
+            caption: '组件设置',
+            appViewId: 'plmweb.addon_no_name_setting_grid_view',
+            navigateParams: [
+              {
+                key: 'n_owner_subtype_eq',
+                value: 'hybrid',
+                rawValue: true,
+                id: 'n_owner_subtype_eq',
+              },
+              {
+                key: 'n_owner_type_eq',
+                value: 'project',
+                rawValue: true,
+                id: 'n_owner_type_eq',
+              },
+              {
+                key: 'n_owner_id_isnull',
+                value: '1',
+                rawValue: true,
+                id: 'n_owner_id_isnull',
+              },
+            ],
+            id: 'addon_setting',
+          },
+        ],
+        dataRelationTag: 'mixed_flow_setting_tab_view_DR',
+        editItemCaption: '项目',
+        uniqueTag: 'project_hybrid_flow_setting_tab_view__tabexppanel',
+        hideEditItem: true,
+        autoLoad: true,
+        showBusyIndicator: true,
+        codeName: 'mixed_flow_setting_tab_view_dr',
+        controlType: 'DRTAB',
+        appDataEntityId: 'plmweb.project',
+        controlParam: {
+          id: 'tabexppanel',
+        },
+        modelId: 'b7e628c5617a22f725579c0f56e68f11',
+        modelType: 'PSDEDRTAB',
+        name: 'tabexppanel',
+        id: 'mixed_flow_setting_tab_view_dr',
+      },
+      {
+        caption: '混合项目',
+        codeName: 'hybrid_flow_setting_tab_view_captionbar',
+        controlType: 'CAPTIONBAR',
+        appDataEntityId: 'plmweb.project',
+        controlParam: {},
+        name: 'captionbar',
+        id: 'hybrid_flow_setting_tab_view_captionbar',
+      },
+    ],
+    codeName: 'a0214bc89d0107e94d4',
     controlType: 'VIEWLAYOUTPANEL',
+    logicName: 'hybrid_flow_setting_tab_view分页导航视图布局面板',
     appDataEntityId: 'plmweb.project',
     controlParam: {},
-    id: 'layoutpanel',
+    modelId: '80881f1aedd2d99e322cf3453b3f3fbc',
+    modelType: 'PSSYSVIEWLAYOUTPANEL',
+    name: 'layoutpanel',
+    id: 'a0214bc89d0107e94d4',
   },
   title: '混合项目流程全局配置分页视图',
   viewStyle: 'DEFAULT',

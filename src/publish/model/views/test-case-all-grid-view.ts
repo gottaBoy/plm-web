@@ -259,7 +259,7 @@ export default {
                   cssClass: 'fa fa-send-o',
                   glyph: 'xf1d9@FontAwesome',
                 },
-                id: 'u700ac2c',
+                id: 'u4923e3f',
               },
               {
                 actionLevel: 100,
@@ -275,7 +275,7 @@ export default {
                   cssClass: 'fa fa-copy',
                   glyph: 'xf0c5@FontAwesome',
                 },
-                id: 'ued2f91c',
+                id: 'ud732bef',
               },
               {
                 actionLevel: 100,
@@ -288,10 +288,10 @@ export default {
                 showCaption: true,
                 showIcon: true,
                 sysImage: {
-                  cssClass: 'fa fa-arrows',
-                  glyph: 'xf047@FontAwesome',
+                  rawContent:
+                    '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1772181217654" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7589" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" fill="CurrentColor"><path d="M78.1312 490.24h412.1088V78.1312L378.9056 189.4656a21.76 21.76 0 1 1-30.7712-30.7712l148.48-148.48a21.76 21.76 0 0 1 30.7712 0l148.48 148.48a21.76 21.76 0 0 1-30.7712 30.7712L533.76 78.1312v412.1088h412.1088l-111.3344-111.3344a21.76 21.76 0 0 1 30.7712-30.7712l148.48 148.48a21.76 21.76 0 0 1 0 30.7712l-148.48 148.48a21.76 21.76 0 0 1-30.7712-30.7712l111.3344-111.3344h-412.1088v412.1088l111.3344-111.3344a21.76 21.76 0 0 1 30.7712 30.7712l-148.48 148.48a21.76 21.76 0 0 1-30.7712 0l-148.48-148.48a21.76 21.76 0 0 1 30.7712-30.7712L490.24 945.8688v-412.1088H78.1312l111.3344 111.3344a21.76 21.76 0 0 1-30.7712 30.7712l-148.48-148.48a21.76 21.76 0 0 1 0-30.7712l148.48-148.48a21.76 21.76 0 1 1 30.7712 30.7712L78.1312 490.24z"  p-id="7590"></path></svg>',
                 },
-                id: 'uddc4985',
+                id: 'u9b73d15',
               },
               {
                 actionLevel: 100,
@@ -307,7 +307,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u9f95b5d',
+                id: 'ucc52953',
               },
               {
                 actionLevel: 100,
@@ -319,7 +319,7 @@ export default {
                 uiactionId: 'get_editor_column',
                 showCaption: true,
                 showIcon: true,
-                id: 'uf5b917d',
+                id: 'u26b3834',
               },
             ],
             appDataEntityId: 'plmweb.test_case',

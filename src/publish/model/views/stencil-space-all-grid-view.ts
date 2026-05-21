@@ -48,13 +48,13 @@ export default {
       builtinAppUILogic: {
         openDataAppView: {
           openMode: 'POPUPMODAL',
-          refAppViewId: 'plmweb.stencil_show_edit_view',
+          refAppViewId: 'plmweb.stencil_model_edit_view',
         },
         editMode: true,
         appUILogicRefViews: [
           {
             openMode: 'POPUPMODAL',
-            refAppViewId: 'plmweb.stencil_show_edit_view',
+            refAppViewId: 'plmweb.stencil_model_edit_view',
           },
         ],
         builtinLogic: true,
@@ -85,8 +85,8 @@ export default {
     {
       openMode: 'POPUPMODAL',
       realOpenMode: 'POPUPMODAL',
-      realTitle: '页面模板编辑视图_展示',
-      refAppViewId: 'plmweb.stencil_show_edit_view',
+      realTitle: '页面模板编辑视图',
+      refAppViewId: 'plmweb.stencil_model_edit_view',
       name: 'EDITDATA',
       id: 'editdata',
     },
@@ -218,7 +218,7 @@ export default {
                   cssClass: 'fa fa-edit',
                   glyph: 'xf044@FontAwesome',
                 },
-                id: 'ud35219b',
+                id: 'u36a4224',
               },
               {
                 actionLevel: 100,
@@ -233,7 +233,7 @@ export default {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u6a81dae',
+                id: 'u127a5da',
               },
             ],
             appDataEntityId: 'plmweb.stencil',

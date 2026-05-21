@@ -117,6 +117,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'shared_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',

@@ -674,7 +674,8 @@ export default {
       id: 'plmweb.idea.main_plan',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

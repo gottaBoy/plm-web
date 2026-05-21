@@ -83,11 +83,11 @@ export default {
           id: 'expitem:node',
         },
         {
-          realTitle: '用例评审表格',
+          realTitle: '全部评审表格',
           realTitleLanguageRes: {
             lanResTag: 'PAGE.TITLE.REVIEW.ALL_GRID_VIEW',
           },
-          refAppViewId: 'plmweb.review_test_case_grid_view',
+          refAppViewId: 'plmweb.review_all_grid_view',
           name: 'EXPITEM:node_1',
           id: 'expitem:node_1',
         },
@@ -101,29 +101,29 @@ export default {
           id: 'expitem:node_10',
         },
         {
-          realTitle: '基线评审表格',
+          realTitle: '全部评审表格',
           realTitleLanguageRes: {
             lanResTag: 'PAGE.TITLE.REVIEW.ALL_GRID_VIEW',
           },
-          refAppViewId: 'plmweb.review_baseline_grid_view',
+          refAppViewId: 'plmweb.review_all_grid_view',
           name: 'EXPITEM:node_2',
           id: 'expitem:node_2',
         },
         {
-          realTitle: '我创建的评审表格',
+          realTitle: '全部评审表格',
           realTitleLanguageRes: {
             lanResTag: 'PAGE.TITLE.REVIEW.ALL_GRID_VIEW',
           },
-          refAppViewId: 'plmweb.review_my_created_grid_view',
+          refAppViewId: 'plmweb.review_all_grid_view',
           name: 'EXPITEM:node_3',
           id: 'expitem:node_3',
         },
         {
-          realTitle: '我评审的表格',
+          realTitle: '全部评审表格',
           realTitleLanguageRes: {
             lanResTag: 'PAGE.TITLE.REVIEW.ALL_GRID_VIEW',
           },
-          refAppViewId: 'plmweb.review_my_reviewed_grid_view',
+          refAppViewId: 'plmweb.review_all_grid_view',
           name: 'EXPITEM:node_4',
           id: 'expitem:node_4',
         },
@@ -217,13 +217,6 @@ export default {
               id: '评审 - 需求评审',
             },
             {
-              childDETreeNodeId: 'node_2',
-              parentDETreeNodeId: 'node_7',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '评审 - 基线评审',
-            },
-            {
               childDETreeNodeId: 'node_6',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -275,7 +268,7 @@ export default {
               ],
               sysImage: {
                 rawContent:
-                  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" class="design-iconfont" width="14" height="14">\n  <path d="M1,8.16 L7.28571429,8.16 L7.28571429,2 L1,2 L1,8.16 Z M2.14285714,3.12 L6.14285714,3.12 L6.14285714,7.04 L2.14285714,7.04 L2.14285714,3.12 Z M1,16 L7.28571429,16 L7.28571429,9.84 L1,9.84 L1,16 Z M2.14285714,10.96 L6.14285714,10.96 L6.14285714,14.88 L2.14285714,14.88 L2.14285714,10.96 Z M9.26514286,3.68 L16.4285714,3.68 C16.7441627,3.68 17,3.42927946 17,3.12 C17,2.81072054 16.7441627,2.56 16.4285714,2.56 L9.26514286,2.56 C8.94955157,2.56 8.69371429,2.81072054 8.69371429,3.12 C8.69371429,3.42927946 8.94955157,3.68 9.26514286,3.68 Z M16.4285714,10.4 L9.26514286,10.4 C8.94955157,10.4 8.69371429,10.6507205 8.69371429,10.96 C8.69371429,11.2692795 8.94955157,11.52 9.26514286,11.52 L16.4285714,11.52 C16.7441627,11.52 17,11.2692795 17,10.96 C17,10.6507205 16.7441627,10.4 16.4285714,10.4 Z M16.4285714,6.48 L9.26514286,6.48 C8.94955157,6.48 8.69371429,6.73072054 8.69371429,7.04 C8.69371429,7.34927946 8.94955157,7.6 9.26514286,7.6 L16.4285714,7.6 C16.7441627,7.6 17,7.34927946 17,7.04 C17,6.73072054 16.7441627,6.48 16.4285714,6.48 Z M16.4285714,14.32 L9.26514286,14.32 C8.94955157,14.32 8.69371429,14.5707205 8.69371429,14.88 C8.69371429,15.1892795 8.94955157,15.44 9.26514286,15.44 L16.4285714,15.44 C16.7441627,15.44 17,15.1892795 17,14.88 C17,14.5707205 16.7441627,14.32 16.4285714,14.32 Z" stroke="#1D1F23" stroke-width=".3" fill="#1D1F23" fill-rule="nonzero"></path>\n</svg>',
+                  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" class="design-iconfont" width="14" height="14" fill="currentColor">\n  <path d="M1,8.16 L7.28571429,8.16 L7.28571429,2 L1,2 L1,8.16 Z M2.14285714,3.12 L6.14285714,3.12 L6.14285714,7.04 L2.14285714,7.04 L2.14285714,3.12 Z M1,16 L7.28571429,16 L7.28571429,9.84 L1,9.84 L1,16 Z M2.14285714,10.96 L6.14285714,10.96 L6.14285714,14.88 L2.14285714,14.88 L2.14285714,10.96 Z M9.26514286,3.68 L16.4285714,3.68 C16.7441627,3.68 17,3.42927946 17,3.12 C17,2.81072054 16.7441627,2.56 16.4285714,2.56 L9.26514286,2.56 C8.94955157,2.56 8.69371429,2.81072054 8.69371429,3.12 C8.69371429,3.42927946 8.94955157,3.68 9.26514286,3.68 Z M16.4285714,10.4 L9.26514286,10.4 C8.94955157,10.4 8.69371429,10.6507205 8.69371429,10.96 C8.69371429,11.2692795 8.94955157,11.52 9.26514286,11.52 L16.4285714,11.52 C16.7441627,11.52 17,11.2692795 17,10.96 C17,10.6507205 16.7441627,10.4 16.4285714,10.4 Z M16.4285714,6.48 L9.26514286,6.48 C8.94955157,6.48 8.69371429,6.73072054 8.69371429,7.04 C8.69371429,7.34927946 8.94955157,7.6 9.26514286,7.6 L16.4285714,7.6 C16.7441627,7.6 17,7.34927946 17,7.04 C17,6.73072054 16.7441627,6.48 16.4285714,6.48 Z M16.4285714,14.32 L9.26514286,14.32 C8.94955157,14.32 8.69371429,14.5707205 8.69371429,14.88 C8.69371429,15.1892795 8.94955157,15.44 9.26514286,15.44 L16.4285714,15.44 C16.7441627,15.44 17,15.1892795 17,14.88 C17,14.5707205 16.7441627,14.32 16.4285714,14.32 Z" stroke="#1D1F23" stroke-width=".3"  fill-rule="nonzero"></path>\n</svg>',
               },
               treeNodeType: 'STATIC',
               name: '全部评审',
@@ -283,7 +276,7 @@ export default {
             },
             {
               text: '需求评审',
-              navAppViewId: 'plmweb.review_test_case_grid_view',
+              navAppViewId: 'plmweb.review_all_grid_view',
               nodeType: 'node_1',
               navigateParams: [
                 {
@@ -424,7 +417,7 @@ export default {
             },
             {
               text: '基线评审',
-              navAppViewId: 'plmweb.review_baseline_grid_view',
+              navAppViewId: 'plmweb.review_all_grid_view',
               nodeType: 'node_2',
               navigateParams: [
                 {
@@ -455,7 +448,7 @@ export default {
             },
             {
               text: '我创建的',
-              navAppViewId: 'plmweb.review_my_created_grid_view',
+              navAppViewId: 'plmweb.review_all_grid_view',
               nodeType: 'node_3',
               navigateParams: [
                 {
@@ -485,7 +478,7 @@ export default {
             },
             {
               text: '我评审的',
-              navAppViewId: 'plmweb.review_my_reviewed_grid_view',
+              navAppViewId: 'plmweb.review_all_grid_view',
               nodeType: 'node_4',
               navigateParams: [
                 {
@@ -493,6 +486,11 @@ export default {
                   value: 'product',
                   rawValue: true,
                   id: 'n_principal_type_eq',
+                },
+                {
+                  key: 'n_stage_like',
+                  value: 'srfuserid',
+                  id: 'n_stage_like',
                 },
                 {
                   key: 'n_principal_id_eq',
@@ -568,6 +566,28 @@ export default {
                     actionLevel: 100,
                     noPrivDisplayMode: 2,
                     uiactionId:
+                      'toolbar_idea_tree_exp_view_node8_cm_deuiaction3_click@review',
+                    uiactionTarget: 'SINGLEDATA',
+                    valid: true,
+                    caption: '新建类别',
+                    itemType: 'DEUIACTION',
+                    sysImage: {
+                      cssClass: 'fa fa-plus',
+                      glyph: 'xf067@FontAwesome',
+                    },
+                    tooltip: '新建类别',
+                    showCaption: true,
+                    showIcon: true,
+                    id: 'deuiaction3',
+                  },
+                  {
+                    itemType: 'SEPERATOR',
+                    id: 'seperator1',
+                  },
+                  {
+                    actionLevel: 100,
+                    noPrivDisplayMode: 2,
+                    uiactionId:
                       'toolbar_idea_tree_exp_view_node8_cm_deuiaction1_click@review',
                     uiactionTarget: 'SINGLEDATA',
                     valid: true,
@@ -623,12 +643,12 @@ export default {
                 ],
                 codeName: 'idea_tree_exp_view_node8_cm',
                 controlType: 'CONTEXTMENU',
-                logicName: '树节点上下文菜单',
+                logicName: '树节点上下文菜单（分组）',
                 appDataEntityId: 'plmweb.review',
                 controlParam: {
                   id: 'node_8_cm',
                 },
-                modelId: '380703d8ba3fc64b19010873bd74948d',
+                modelId: '669f43f99a51c14fbf11c8c04843db36',
                 modelType: 'PSDETOOLBAR',
                 name: 'node_8_cm',
                 id: 'idea_tree_exp_view_node8_cm',
@@ -800,6 +820,28 @@ export default {
                   actionLevel: 100,
                   noPrivDisplayMode: 2,
                   uiactionId:
+                    'toolbar_idea_tree_exp_view_node8_cm_deuiaction3_click@review',
+                  uiactionTarget: 'SINGLEDATA',
+                  valid: true,
+                  caption: '新建类别',
+                  itemType: 'DEUIACTION',
+                  sysImage: {
+                    cssClass: 'fa fa-plus',
+                    glyph: 'xf067@FontAwesome',
+                  },
+                  tooltip: '新建类别',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction3',
+                },
+                {
+                  itemType: 'SEPERATOR',
+                  id: 'seperator1',
+                },
+                {
+                  actionLevel: 100,
+                  noPrivDisplayMode: 2,
+                  uiactionId:
                     'toolbar_idea_tree_exp_view_node8_cm_deuiaction1_click@review',
                   uiactionTarget: 'SINGLEDATA',
                   valid: true,
@@ -855,12 +897,12 @@ export default {
               ],
               codeName: 'idea_tree_exp_view_node8_cm',
               controlType: 'CONTEXTMENU',
-              logicName: '树节点上下文菜单',
+              logicName: '树节点上下文菜单（分组）',
               appDataEntityId: 'plmweb.review',
               controlParam: {
                 id: 'node_8_cm',
               },
-              modelId: '380703d8ba3fc64b19010873bd74948d',
+              modelId: '669f43f99a51c14fbf11c8c04843db36',
               modelType: 'PSDETOOLBAR',
               name: 'node_8_cm',
               id: 'idea_tree_exp_view_node8_cm',

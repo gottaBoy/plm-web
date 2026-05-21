@@ -491,7 +491,8 @@ export default {
         id: 'plmweb.article_page.statistical_grid_view_grid',
       },
       {
-        searchButtonStyle: 'DEFAULT',
+        searchButtonStyle: 'NONE',
+        enableAutoSearch: true,
         deformPages: [
           {
             layout: {

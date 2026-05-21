@@ -1,0 +1,88 @@
+export default {
+  getDataAppDEActionId: 'get',
+  redirectAppViewRefs: [
+    {
+      realTitle: '类别编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.CATEGORY.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.category_edit_view',
+      name: 'CATEGORY:EDITVIEW',
+      id: 'category:editview',
+    },
+    {
+      realTitle: '类别编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.CATEGORY.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.category_edit_view',
+      name: 'EDITVIEW',
+      id: 'editview',
+    },
+  ],
+  typeAppDEFieldId: 'owner_subtype',
+  enableCustomGetDataAction: true,
+  enableWorkflow: true,
+  funcViewMode: 'REDIRECTVIEW',
+  deviewCodeName: 'RedirectView',
+  deviewId: '7cb6f5c1e42d1b91deb339a6ca0f6138',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.CATEGORY',
+  },
+  caption: '类别',
+  codeName: 'category_redirect_view',
+  appDataEntityId: 'plmweb.category',
+  appViewRefs: [
+    {
+      realTitle: '零件审批单',
+      refAppViewId: 'plmweb.sys_todo_approval_grid_view_part',
+      name: 'PART',
+      id: 'part',
+    },
+    {
+      realTitle: '文档审批单',
+      refAppViewId: 'plmweb.sys_todo_approval_grid_view',
+      name: 'DOCUMENT',
+      id: 'document',
+    },
+  ],
+  controls: [
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.CATEGORY',
+      },
+      caption: '类别',
+      codeName: 'redirect_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.category',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'redirect_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDEREDIRECTVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.category',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '类别数据重定向视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.CATEGORY.REDIRECTVIEW',
+  },
+  viewStyle: 'DEFAULT',
+  viewType: 'DEREDIRECTVIEW',
+  enableDP: true,
+  redirectView: true,
+  showCaptionBar: true,
+  modelId: 'e8d83b9397ad1dc62a26bc48eaf98714',
+  modelType: 'PSAPPDEVIEW',
+  name: 'categoryRedirectView',
+  id: 'plmweb.category_redirect_view',
+};

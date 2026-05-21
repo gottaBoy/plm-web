@@ -53,6 +53,9 @@ export default {
     id: 'layoutpanel',
   },
   title: '知识库数据选择视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.PICKUPVIEW',
+  },
   viewStyle: 'DEFAULT',
   viewType: 'DEPICKUPVIEW',
   enableDP: true,

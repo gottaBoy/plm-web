@@ -91,73 +91,12 @@ export default {
   ],
   controls: [
     {
-      detoolbarItems: [
-        {
-          actionLevel: 100,
-          noPrivDisplayMode: 2,
-          uiactionId: 'gridview_newaction',
-          valid: true,
-          capLanguageRes: {
-            lanResTag: 'TBB.TEXT.*.NEW',
-          },
-          caption: '新建',
-          itemType: 'DEUIACTION',
-          sysImage: {
-            cssClass: 'fa fa-file-text-o',
-            glyph: 'xf0f6@FontAwesome',
-          },
-          tooltip: '新建',
-          tooltipLanguageRes: {
-            lanResTag: 'TBB.TOOLTIP.*.NEW',
-          },
-          showCaption: true,
-          showIcon: true,
-          id: 'deuiaction1',
-        },
-      ],
-      xdataControlName: 'grid',
-      codeName: 'grid_view_tab_toolbar',
-      controlType: 'TOOLBAR',
-      logicName: '工具栏模板（表格界面，只有一个新建按钮）',
-      appDataEntityId: 'plmweb.extend_scheduled_task',
-      controlParam: {
-        ctrlParams: {
-          TELEPORTFLAG: 'true',
-        },
-        id: 'tab_toolbar',
-      },
-      modelId: 'cd9eb7eb8c0facf6084ba1508d888eea',
-      modelType: 'PSDETOOLBAR',
-      name: 'tab_toolbar',
-      id: 'grid_view_tab_toolbar',
-    },
-    {
       aggMode: 'NONE',
       columnEnableFilter: 2,
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
       degridColumns: [
-        {
-          clconvertMode: 'NONE',
-          dataItemName: 'name',
-          excelCaption: '名称',
-          appDEFieldId: 'name',
-          valueType: 'SIMPLE',
-          aggMode: 'NONE',
-          align: 'LEFT',
-          capLanguageRes: {
-            lanResTag: 'DEF.LNAME.EXTEND_SCHEDULED_TASK.NAME',
-          },
-          caption: '名称',
-          codeName: 'name',
-          columnType: 'DEFGRIDCOLUMN',
-          noPrivDisplayMode: 1,
-          width: 250,
-          widthUnit: 'PX',
-          enableSort: true,
-          id: 'name',
-        },
         {
           clconvertMode: 'NONE',
           dataItemName: 'task_type_name',
@@ -265,12 +204,6 @@ export default {
       ],
       degridDataItems: [
         {
-          appDEFieldId: 'name',
-          valueType: 'SIMPLE',
-          dataType: 25,
-          id: 'name',
-        },
-        {
           appDEFieldId: 'task_type_name',
           valueType: 'SIMPLE',
           dataType: 25,
@@ -301,6 +234,12 @@ export default {
           valueType: 'SIMPLE',
           dataType: 5,
           id: 'update_time',
+        },
+        {
+          appDEFieldId: 'name',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'name',
         },
         {
           appDEFieldId: 'id',
@@ -354,6 +293,7 @@ export default {
       sortMode: 'REMOTE',
       enableCustomized: true,
       enablePagingBar: true,
+      singleSelect: true,
       navViewPos: 'NONE',
       fetchControlAction: {
         appDEMethodId: 'fetch_default',
@@ -378,6 +318,47 @@ export default {
       modelType: 'PSDEGRID',
       name: 'grid',
       id: 'plmweb.extend_scheduled_task.main',
+    },
+    {
+      detoolbarItems: [
+        {
+          actionLevel: 100,
+          noPrivDisplayMode: 2,
+          uiactionId: 'gridview_newaction',
+          valid: true,
+          capLanguageRes: {
+            lanResTag: 'TBB.TEXT.*.NEW',
+          },
+          caption: '新建',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-file-text-o',
+            glyph: 'xf0f6@FontAwesome',
+          },
+          tooltip: '新建',
+          tooltipLanguageRes: {
+            lanResTag: 'TBB.TOOLTIP.*.NEW',
+          },
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction1',
+        },
+      ],
+      xdataControlName: 'grid',
+      codeName: 'grid_view_tab_toolbar',
+      controlType: 'TOOLBAR',
+      logicName: '工具栏模板（表格界面，只有一个新建按钮）',
+      appDataEntityId: 'plmweb.extend_scheduled_task',
+      controlParam: {
+        ctrlParams: {
+          TELEPORTFLAG: 'true',
+        },
+        id: 'tab_toolbar',
+      },
+      modelId: 'cd9eb7eb8c0facf6084ba1508d888eea',
+      modelType: 'PSDETOOLBAR',
+      name: 'tab_toolbar',
+      id: 'grid_view_tab_toolbar',
     },
     {
       searchButtonStyle: 'DEFAULT',

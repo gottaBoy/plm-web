@@ -4,7 +4,7 @@ export default {
   openMode: 'INDEXVIEWTAB_POPUPMODAL',
   viewType: 'DEEDITVIEW',
   width: 80,
-  height: 0,
+  height: undefined,
   appDataEntityId: 'plmweb.pscoreprd',
   redirectView: false,
   modalOption: {},

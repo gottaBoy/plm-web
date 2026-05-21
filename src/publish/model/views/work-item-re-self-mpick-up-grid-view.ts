@@ -258,6 +258,7 @@ export default {
               'srfnavparam.state': '%state%',
               'srfnavparam.project_id': '%project_id%',
               'srfnavparam.work_item_type_id': '%work_item_type_id%',
+              'srfnavparam.id': '%id%',
               type: 'round',
               alwaysLoad: 'true',
             },
@@ -283,6 +284,11 @@ export default {
                     value: 'work_item_type_id',
                     id: 'work_item_type_id',
                   },
+                  {
+                    key: 'id',
+                    value: 'id',
+                    id: 'id',
+                  },
                 ],
                 id: 'state',
               },
@@ -304,6 +310,11 @@ export default {
                 key: 'work_item_type_id',
                 value: 'work_item_type_id',
                 id: 'work_item_type_id',
+              },
+              {
+                key: 'id',
+                value: 'id',
+                id: 'id',
               },
             ],
             id: 'state',
@@ -359,7 +370,8 @@ export default {
       id: 'plmweb.work_item.re_self_mpickup_view_pickup_grid_view_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

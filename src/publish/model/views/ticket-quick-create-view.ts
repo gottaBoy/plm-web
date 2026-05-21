@@ -29,13 +29,47 @@ export default {
       logicType: 'SCRIPT',
       ctrlName: 'form',
       scriptCode:
-        "ctrl.evt.on('onFormDataChange', evt => {\r\n    const { name, value } = evt;\r\n    if (name === 'product_id') {\r\n        view.redrawView({\r\n            context: { product: value, dynamicnew: true },\r\n            params: {},\r\n            isReloadModel: true,\r\n        });\r\n    }\r\n});",
+        "ctrl.evt.on('onFormDataChange', evt => {\r\n    const { name, value } = evt;\r\n    if (name === 'product_id') {\r\n        view.redrawView({\r\n            context: { product: value, dynamicnew: true },\r\n            params: {\r\n                srfdefdata: evt.data[0]\r\n            },\r\n            isReloadModel: true,\r\n        });\r\n    }\r\n});",
       builtinLogic: true,
       name: 'LOGIC',
       id: 'logic',
     },
   ],
   controls: [
+    {
+      detoolbarItems: [
+        {
+          actionLevel: 100,
+          buttonStyle: 'WARNING',
+          noPrivDisplayMode: 2,
+          uiactionId: 'ai_nodata@ai_agent_assignment',
+          uiactionTarget: 'NONE',
+          valid: true,
+          caption: 'AI+',
+          itemType: 'DEUIACTION',
+          sysImage: {
+            cssClass: 'fa fa-star-half-full',
+            glyph: 'xf123@FontAwesome',
+          },
+          tooltip: 'AI+',
+          showCaption: true,
+          showIcon: true,
+          id: 'deuiaction1',
+        },
+      ],
+      xdataControlName: 'form',
+      codeName: 'quick_create_view_toolbar',
+      controlType: 'TOOLBAR',
+      logicName: 'AI通用工具栏',
+      appDataEntityId: 'plmweb.ai_agent_session',
+      controlParam: {
+        id: 'toolbar',
+      },
+      modelId: '514893fb34893a7093696d54919e7f54',
+      modelType: 'PSDETOOLBAR',
+      name: 'toolbar',
+      id: 'quick_create_view_toolbar',
+    },
     {
       createControlAction: {
         appDEMethodId: 'create',
@@ -113,7 +147,6 @@ export default {
                 {
                   dataType: 21,
                   enableCond: 3,
-                  itemHeight: 470,
                   labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
@@ -121,37 +154,17 @@ export default {
                   editor: {
                     appDEACModeId: 'aichat',
                     appDEDataSetId: 'fetch_default',
-                    appDataEntityId: 'plmweb.work_item',
+                    appDataEntityId: 'plmweb.ticket',
                     enableAC: true,
-                    editorHeight: 450,
                     editorParams: {
-                      USERINSCRIPT:
-                        'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                      LINKVIEWID: 'plmweb.recent_custom_redirect_view',
-                      MAXHEIGHT: '450',
-                      QUOTECODELISTMAP: '{"type":"plmweb.base__recent_visite"}',
-                      srfaiagent: 'TextAgent_Writing',
-                      QUOTEFIELDMAP:
-                        '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                      QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                      MODE: 'default',
-                      QUOTEINSCRIPT:
-                        'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                      USERSCRIPT:
-                        '`@{"id":"${data.id}","name":"${data.name}"}`',
-                      QUOTESCRIPT:
-                        '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
-                      USERURL:
-                        "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                      USERFIELDMAP: '{"id":"user_id","name":"name"}',
-                      INSERTKEYS:
-                        '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                      hiddenswitch: 'true',
+                      defaulttype: 'MD',
+                      includes: '["HTMLEDITOR_VDITOR"]',
                       ac: 'true',
-                      QUOTEURL: '`recents/fetch_recent_access`',
+                      codelistid: 'plmweb.formattype_chg',
+                      srfaiagent: 'TextAgent_Writing',
                     },
-                    editorStyle: 'COLLAPSE',
                     editorType: 'HTMLEDITOR',
-                    sysPFPluginId: 'comment',
                     placeHolder: '输入描述',
                     valueType: 'SIMPLE',
                     editable: true,
@@ -166,6 +179,7 @@ export default {
                     colMD: 24,
                     layout: 'TABLE_24COL',
                   },
+                  sysPFPluginId: 'composite_form_item_ex',
                   showCaption: true,
                   id: 'description',
                 },
@@ -285,7 +299,7 @@ export default {
                                     cssClass: 'fa fa-download',
                                     glyph: 'xf019@FontAwesome',
                                   },
-                                  id: 'uf162678',
+                                  id: 'u73b8ba5',
                                 },
                                 {
                                   actionLevel: 100,
@@ -294,17 +308,17 @@ export default {
                                   buttonStyle: 'DEFAULT',
                                   caption: '删除',
                                   detailType: 'DEUIACTION',
+                                  enableScriptCode:
+                                    'context.srfreadonly != true',
                                   uiactionId: 'delete@attachment',
                                   tooltip: '删除',
-                                  visibleScriptCode:
-                                    'context.srfreadonly != true',
                                   showCaption: true,
                                   showIcon: true,
                                   sysImage: {
                                     cssClass: 'fa fa-trash-o',
                                     glyph: 'xf014@FontAwesome',
                                   },
-                                  id: 'ubdc1b19',
+                                  id: 'u44d00e2',
                                 },
                               ],
                               appDataEntityId: 'plmweb.attachment',
@@ -1073,40 +1087,6 @@ export default {
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
       id: 'plmweb.ticket.quick_create',
-    },
-    {
-      detoolbarItems: [
-        {
-          actionLevel: 100,
-          buttonStyle: 'WARNING',
-          noPrivDisplayMode: 2,
-          uiactionId: 'ai_nodata@ai_agent_assignment',
-          uiactionTarget: 'NONE',
-          valid: true,
-          caption: 'AI+',
-          itemType: 'DEUIACTION',
-          sysImage: {
-            cssClass: 'fa fa-star-half-full',
-            glyph: 'xf123@FontAwesome',
-          },
-          tooltip: 'AI+',
-          showCaption: true,
-          showIcon: true,
-          id: 'deuiaction1',
-        },
-      ],
-      xdataControlName: 'form',
-      codeName: 'quick_create_view_toolbar',
-      controlType: 'TOOLBAR',
-      logicName: 'AI通用工具栏',
-      appDataEntityId: 'plmweb.ai_agent_session',
-      controlParam: {
-        id: 'toolbar',
-      },
-      modelId: '514893fb34893a7093696d54919e7f54',
-      modelType: 'PSDETOOLBAR',
-      name: 'toolbar',
-      id: 'quick_create_view_toolbar',
     },
     {
       codeName: 'quick_create_view_datainfobar',

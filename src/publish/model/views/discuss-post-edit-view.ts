@@ -120,11 +120,10 @@ export default {
                     editable: true,
                     id: 'title',
                   },
-                  allowEmpty: true,
                   capLanguageRes: {
                     lanResTag: 'DEF.LNAME.NAME',
                   },
-                  caption: '名称',
+                  caption: '标题',
                   codeName: 'title',
                   detailStyle: 'DEFAULT',
                   detailType: 'FORMITEM',

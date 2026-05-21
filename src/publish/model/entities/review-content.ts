@@ -1230,6 +1230,10 @@ export default {
       codeName: 'back',
       frontProcessType: 'OTHER',
       fullCodeName: 'review_content_back',
+      sysImage: {
+        cssClass: 'fa fa-mail-reply',
+        glyph: 'xf112@FontAwesome',
+      },
       tooltip: '返回',
       uiactionMode: 'FRONT',
       uiactionTag: 'back',
@@ -1637,12 +1641,34 @@ export default {
           codeName: 'RAWJSCODE1',
           leftPos: 160,
           logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'rawjscode2',
+              srcDEUILogicNodeId: 'rawjscode1',
+              id: '连接名称',
+            },
+          ],
           topPos: 520,
           name: '切换显示组件',
           id: 'rawjscode1',
         },
+        {
+          code: 'view.parentView.layoutPanel.panelItems.form.control.state.modified=false;',
+          codeName: 'RAWJSCODE2',
+          leftPos: 160,
+          logicNodeType: 'RAWJSCODE',
+          topPos: 632,
+          name: '注入脚本代码',
+          id: 'rawjscode2',
+        },
       ],
       deuilogicParams: [
+        {
+          codeName: 'parentView',
+          entityParam: true,
+          name: 'parentView',
+          id: 'parentview',
+        },
         {
           codeName: 'Default',
           default: true,
@@ -1655,12 +1681,6 @@ export default {
           entityParam: true,
           name: '父表单',
           id: 'parent_form',
-        },
-        {
-          codeName: 'parentView',
-          entityParam: true,
-          name: 'parentView',
-          id: 'parentview',
         },
         {
           codeName: 'view',
@@ -2466,11 +2486,11 @@ export default {
       deuilogicNodes: [
         {
           codeName: 'Begin',
-          leftPos: -370,
+          leftPos: -190,
           logicNodeType: 'BEGIN',
           deuilogicLinks: [
             {
-              dstDEUILogicNodeId: 'debugparam1',
+              dstDEUILogicNodeId: 'preparejsparam1',
               srcDEUILogicNodeId: 'begin',
               id: '连接名称',
             },
@@ -2485,13 +2505,20 @@ export default {
           codeName: 'RAWJSCODE2',
           leftPos: 283,
           logicNodeType: 'RAWJSCODE',
+          deuilogicLinks: [
+            {
+              dstDEUILogicNodeId: 'rawjscode3',
+              srcDEUILogicNodeId: 'rawjscode2',
+              id: '连接名称',
+            },
+          ],
           topPos: 208,
           name: '注入脚本代码',
           id: 'rawjscode2',
         },
         {
           codeName: 'PREPAREJSPARAM1',
-          leftPos: -86,
+          leftPos: 14,
           logicNodeType: 'PREPAREJSPARAM',
           deuilogicLinks: [
             {
@@ -2525,20 +2552,13 @@ export default {
           id: 'preparejsparam1',
         },
         {
-          codeName: 'DEBUGPARAM1',
-          dstDEUILogicParamId: 'cur_container',
-          leftPos: -270,
-          logicNodeType: 'DEBUGPARAM',
-          deuilogicLinks: [
-            {
-              dstDEUILogicNodeId: 'preparejsparam1',
-              srcDEUILogicNodeId: 'debugparam1',
-              id: '连接名称',
-            },
-          ],
-          topPos: 210,
-          name: '调试逻辑参数',
-          id: 'debugparam1',
+          code: 'view.parentView.layoutPanel.panelItems.form.control.state.modified=false;',
+          codeName: 'RAWJSCODE3',
+          leftPos: 569,
+          logicNodeType: 'RAWJSCODE',
+          topPos: 208,
+          name: '注入脚本代码',
+          id: 'rawjscode3',
         },
       ],
       deuilogicParams: [
@@ -2550,16 +2570,10 @@ export default {
           id: 'default',
         },
         {
-          codeName: 'parent_view',
-          entityParam: true,
-          name: '父视图',
-          id: 'parent_view',
-        },
-        {
-          codeName: 'choosed_content',
-          entityParam: true,
-          name: '选择的内容',
-          id: 'choosed_content',
+          codeName: 'cur_container',
+          activeContainerParam: true,
+          name: '当前容器对象',
+          id: 'cur_container',
         },
         {
           codeName: 'view',
@@ -2574,10 +2588,16 @@ export default {
           id: 'ctx',
         },
         {
-          codeName: 'cur_container',
-          activeContainerParam: true,
-          name: '当前容器对象',
-          id: 'cur_container',
+          codeName: 'choosed_content',
+          entityParam: true,
+          name: '选择的内容',
+          id: 'choosed_content',
+        },
+        {
+          codeName: 'parent_view',
+          entityParam: true,
+          name: '父视图',
+          id: 'parent_view',
         },
         {
           codeName: 'parent_form',

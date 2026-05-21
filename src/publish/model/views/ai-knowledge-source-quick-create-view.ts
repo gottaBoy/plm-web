@@ -68,7 +68,8 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'NONE',
+                  labelPos: 'TOP',
+                  labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'name',
                   editor: {
@@ -93,12 +94,13 @@ export default {
                     colMD: 24,
                     layout: 'TABLE_24COL',
                   },
+                  showCaption: true,
                   id: 'name',
                 },
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'type',
@@ -127,7 +129,7 @@ export default {
                 {
                   dataType: 25,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'base_url',
@@ -171,7 +173,7 @@ export default {
                 {
                   dataType: 21,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'api_key',
@@ -218,7 +220,7 @@ export default {
                 {
                   dataType: 9,
                   enableCond: 3,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'active',
@@ -243,7 +245,7 @@ export default {
                 {
                   dataType: 5,
                   itemWidth: 290,
-                  labelPos: 'LEFT',
+                  labelPos: 'TOP',
                   labelWidth: 130,
                   noPrivDisplayMode: 1,
                   appDEFieldId: 'last_sync_time',
@@ -335,17 +337,17 @@ export default {
       noTabHeader: true,
       autoLoad: true,
       showBusyIndicator: true,
-      codeName: 'main',
+      codeName: 'quick_create',
       controlType: 'FORM',
-      logicName: '主编辑表单',
+      logicName: '快速新建表单',
       appDataEntityId: 'plmweb.ai_knowledge_source',
       controlParam: {
         id: 'form',
       },
-      modelId: '0efb499fd53e1181a1c6ba15b28d5d6a',
+      modelId: '6225454b30f1e3c89557a10fb22528ec',
       modelType: 'PSDEFORM_EDITFORM',
       name: 'form',
-      id: 'plmweb.ai_knowledge_source.main',
+      id: 'plmweb.ai_knowledge_source.quick_create',
     },
     {
       detoolbarItems: [

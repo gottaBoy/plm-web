@@ -100,6 +100,20 @@ export default {
         {
           detreeNodeRSs: [
             {
+              childDETreeNodeId: 'node_7',
+              parentDETreeNodeId: 'node_8',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_8）-归档产品（node_7）',
+            },
+            {
+              childDETreeNodeId: 'node',
+              parentDETreeNodeId: 'root',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '默认根节点 - 产品',
+            },
+            {
               childDETreeNodeId: 'node_2',
               parentDETreeNodeId: 'node',
               parentValueLevel: 1,
@@ -112,13 +126,6 @@ export default {
               parentValueLevel: 1,
               searchMode: 3,
               id: '工作 - 筛选器',
-            },
-            {
-              childDETreeNodeId: 'node',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 产品',
             },
             {
               childDETreeNodeId: 'node_6',
@@ -149,6 +156,13 @@ export default {
               id: '默认根节点 - 工作',
             },
             {
+              childDETreeNodeId: 'node_1',
+              parentDETreeNodeId: 'node_8',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_8）-配置中心（node_1）',
+            },
+            {
               childDETreeNodeId: 'node_5',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -156,18 +170,12 @@ export default {
               id: '默认根节点 - 星标',
             },
             {
-              childDETreeNodeId: 'node_7',
+              childDETreeNodeId: 'node_8',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
               searchMode: 3,
-              id: '默认根节点 - 归档产品',
-            },
-            {
-              childDETreeNodeId: 'node_1',
-              parentDETreeNodeId: 'root',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '默认根节点 - 配置中心',
+              name: '默认根节点（ROOT）-更多（node_8）',
+              id: '默认根节点（root）-更多（node_8）',
             },
           ],
           detreeNodes: [
@@ -391,6 +399,15 @@ export default {
               treeNodeType: 'STATIC',
               name: '归档产品',
               id: 'node_7',
+            },
+            {
+              text: '更多',
+              nodeType: 'node_8',
+              treeNodeType: 'STATIC',
+              hasDETreeNodeRSs: true,
+              expanded: true,
+              name: '更多',
+              id: 'node_8',
             },
             {
               text: '工作',

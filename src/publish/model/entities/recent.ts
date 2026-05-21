@@ -2634,7 +2634,7 @@ export default {
       id: 'fetch_mob_home_recent_access',
     },
     {
-      codeName: 'fetch_only_ten_access_use',
+      codeName: 'fetch_only_eight_access_use',
       methodType: 'FETCH',
       appDEMethodInput: {
         appDEMethodDTOId: 'recent_filter_dto',
@@ -2648,12 +2648,12 @@ export default {
       },
       requestMethod: 'POST',
       requestParamType: 'ENTITY',
-      requestPath: '/fetch_only_ten_access_use',
+      requestPath: '/fetch_only_eight_access_use',
       actionType: 'REMOTE',
-      dataSetName: 'only_ten_access_use',
-      dataSetTag: 'only_ten_access_use',
+      dataSetName: 'only_eight_access_use',
+      dataSetTag: 'only_eight_access_use',
       dataSetType: 'REMOTE',
-      id: 'fetch_only_ten_access_use',
+      id: 'fetch_only_eight_access_use',
     },
     {
       codeName: 'fetch_recent_access',

@@ -311,7 +311,8 @@ export default {
       id: 'plmweb.test_case.not_add_test_case_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

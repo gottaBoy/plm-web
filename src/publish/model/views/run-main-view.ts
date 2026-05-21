@@ -588,6 +588,15 @@ export default {
         name: 'LOGIC',
         id: 'logic',
       },
+      {
+        eventNames: 'onCloseView',
+        logicTrigger: 'VIEWEVENT',
+        logicType: 'SCRIPT',
+        scriptCode: "ibiz.mc.command.create.send({ srfdecodename: 'run'});",
+        builtinLogic: true,
+        name: 'LOGIC1',
+        id: 'logic1',
+      },
     ],
     controls: [
       {
@@ -1793,126 +1802,364 @@ export default {
                                 id: 'plan_name',
                               },
                               {
-                                dataType: 25,
-                                enableCond: 3,
-                                labelPos: 'LEFT',
-                                labelWidth: 130,
-                                noPrivDisplayMode: 1,
-                                appDEFieldId: 'executor_id',
-                                editor: {
-                                  editorType: 'HIDDEN',
-                                  valueType: 'SIMPLE',
-                                  editable: true,
-                                  id: 'executor_id',
+                                layout: {
+                                  align: 'flex-start',
+                                  dir: 'column',
+                                  layout: 'FLEX',
                                 },
-                                allowEmpty: true,
-                                hidden: true,
-                                caption: '执行人标识',
-                                codeName: 'executor_id',
-                                detailStyle: 'DEFAULT',
-                                detailType: 'FORMITEM',
-                                layoutPos: {
-                                  colMD: 24,
-                                  layout: 'TABLE_24COL',
-                                },
-                                id: 'executor_id',
-                              },
-                              {
-                                dataType: 25,
-                                enableCond: 3,
-                                itemWidth: 450,
-                                labelPos: 'LEFT',
-                                labelWidth: 130,
-                                noPrivDisplayMode: 1,
-                                appDEFieldId: 'executor_name',
-                                editor: {
-                                  singleSelect: true,
-                                  handlerType: 'PickupText',
-                                  appDEACModeId: 'member_select',
-                                  appDEDataSetId: 'fetch_default',
-                                  appDataEntityId: 'plmweb.library_member',
-                                  uiactionGroup: {
-                                    uiactionGroupDetails: [
+                                deformDetails: [
+                                  {
+                                    layout: {
+                                      align: 'flex-start',
+                                      dir: 'row',
+                                      layout: 'FLEX',
+                                      valign: 'center',
+                                    },
+                                    deformDetails: [
                                       {
-                                        actionLevel: 100,
-                                        afterItemType: 'NONE',
-                                        beforeItemType: 'NONE',
-                                        buttonStyle: 'DEFAULT',
-                                        caption: '跳转至成员设置',
-                                        detailType: 'DEUIACTION',
-                                        uiactionId:
-                                          'jump_to_member_set@library_member',
-                                        tooltip: '跳转至成员设置',
-                                        showCaption: true,
-                                        showIcon: true,
-                                        sysImage: {
-                                          cssClass: 'fa fa-user-md',
-                                          glyph: 'xf0f0@FontAwesome',
+                                        createDV: '0',
+                                        dataType: 9,
+                                        enableCond: 3,
+                                        ignoreInput: 2,
+                                        labelPos: 'LEFT',
+                                        labelWidth: 130,
+                                        noPrivDisplayMode: 1,
+                                        appDEFieldId: 'multiple_people',
+                                        editor: {
+                                          editorType: 'CHECKBOX',
+                                          valueType: 'SIMPLE',
+                                          editable: true,
+                                          id: 'multiple_people',
                                         },
-                                        id: 'u7b4a0f4',
+                                        updateDV: '0',
+                                        allowEmpty: true,
+                                        caption: '执行人',
+                                        codeName: 'multiple_people',
+                                        detailStyle: 'DEFAULT',
+                                        detailType: 'FORMITEM',
+                                        defdgroupLogics: [
+                                          {
+                                            logicCat: 'SCRIPTCODE_CHANGE',
+                                            groupOP: 'AND',
+                                            defdlogics: [
+                                              {
+                                                logicType: 'SINGLE',
+                                              },
+                                            ],
+                                            logicType: 'GROUP',
+                                          },
+                                        ],
+                                        layoutPos: {
+                                          shrink: 1,
+                                          layout: 'FLEX',
+                                        },
+                                        showCaption: true,
+                                        id: 'multiple_people',
+                                      },
+                                      {
+                                        rawItem: {
+                                          caption: '多人执行',
+                                          halign: 'LEFT',
+                                          valign: 'MIDDLE',
+                                          wrapMode: 'NOWRAP',
+                                          contentType: 'RAW',
+                                          id: 'rawitem1',
+                                        },
+                                        codeName: 'rawitem1',
+                                        detailStyle: 'DEFAULT',
+                                        detailType: 'RAWITEM',
+                                        layoutPos: {
+                                          shrink: 1,
+                                          layout: 'FLEX',
+                                        },
+                                        showCaption: true,
+                                        id: 'rawitem1',
+                                      },
+                                      {
+                                        actionType: 'UIACTION',
+                                        buttonStyle: 'STYLE2',
+                                        uiactionId: 'open_executors@run',
+                                        tooltip: '设置执行人',
+                                        uiactionTarget: 'NONE',
+                                        caption: '设置执行人',
+                                        codeName: 'setting_executors',
+                                        detailStyle: 'STYLE2',
+                                        detailType: 'BUTTON',
+                                        dynaClass:
+                                          "{'custom_executors_btn': data.multiple_people == '1'}",
+                                        defdgroupLogics: [
+                                          {
+                                            logicCat: 'PANELVISIBLE',
+                                            relatedDetailNames: [
+                                              'multiple_people',
+                                            ],
+                                            groupOP: 'AND',
+                                            defdlogics: [
+                                              {
+                                                condOP: 'EQ',
+                                                defdname: 'multiple_people',
+                                                value: '1',
+                                                logicType: 'SINGLE',
+                                              },
+                                            ],
+                                            logicType: 'GROUP',
+                                          },
+                                        ],
+                                        layoutPos: {
+                                          shrink: 1,
+                                          layout: 'FLEX',
+                                        },
+                                        sysImage: {
+                                          rawContent:
+                                            '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1730778465735" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4600" width="12" height="12" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M659.571499 538.985608c-2.12643 11.784394-13.334703 19.539009-24.991184 17.396205-11.67183-2.12643-19.442818-13.382798-17.300015-25.102724 1.375324-7.499811 1.998517-13.606903 1.998517-19.283182 0-59.544141-48.143487-107.927081-107.287515-107.927081-59.175751 0-107.271142 48.38294-107.271142 107.927081 0 59.560514 48.095391 107.943454 107.271142 107.943454 5.628184 0 11.719926-0.639566 19.186991-1.983167 11.67183-2.222621 22.816658 5.628184 24.926716 17.427928 2.142803 11.751648-5.611811 22.992667-17.284665 25.13547-10.041704 1.838881-18.547425 2.669806-26.830065 2.669806-82.887802 0-150.250002-67.825758-150.250002-151.193491 0-83.35136 67.3622-151.177118 150.250002-151.177118 82.839707 0 150.266375 67.825758 150.266375 151.177118C662.257677 520.341992 661.41038 528.943904 659.571499 538.985608L659.571499 538.985608zM955.179077 597.138052c-1.614777 8.442276-7.978718 15.110139-16.309454 17.028838-47.151903 10.889001-86.278016 39.957037-110.277616 81.768305-23.967878 41.811268-29.388331 90.418312-15.31787 136.883577 2.494821 8.170077-0.048095 17.028838-6.475482 22.657023-43.218314 37.57478-92.577488 66.275449-146.636708 85.158519-8.058536 2.814092-16.996093 0.639566-22.768563-5.659907-32.93818-35.55989-77.467349-55.067176-125.403105-55.067176-47.919383 0-92.449575 19.507286-125.386732 55.067176-4.173043 4.493338-9.897418 6.875594-15.733333 6.875594-2.39863 0-4.716418-0.367367-7.066953-1.215688-54.107315-18.962887-103.418394-47.583738-146.620335-85.221964-6.460132-5.564739-9.018398-14.470573-6.491855-22.64065 14.102183-46.416146 8.634658-95.02319-15.33322-136.835482-23.951505-41.811268-63.141062-70.832232-110.22952-81.768305-8.330736-1.918699-14.693654-8.586562-16.309454-17.028838-5.420453-28.764114-8.18645-57.416687-8.18645-85.143169 0-27.709085 2.765997-56.361659 8.18645-85.126796 1.614777-8.425903 7.978718-15.110139 16.309454-17.028838 47.088458-10.937097 86.22992-39.957037 110.22952-81.784678 23.967878-41.779545 29.436426-90.338495 15.33322-136.803759-2.526543-8.18645 0.031722-17.092283 6.460132-22.672372 43.234687-37.606503 92.545766-66.307172 146.653081-85.221964 8.058536-2.814092 16.96437-0.623193 22.800285 5.692652 32.93818 35.528168 77.467349 55.050804 125.386732 55.050804 47.935756 0 92.464925-19.522636 125.403105-55.050804 5.77247-6.315846 14.741749-8.506744 22.768563-5.692652 54.139038 18.914792 103.450117 47.615461 146.636708 85.173868 6.427386 5.628184 9.033747 14.485923 6.507204 22.720468-14.102183 46.416146-8.68173 95.02319 15.286148 136.803759 23.9996 41.827641 63.125713 70.847581 110.277616 81.784678 8.330736 1.918699 14.693654 8.601912 16.309454 17.028838 5.40408 28.812209 8.18645 57.481156 8.18645 85.126796C963.365526 539.67327 960.583157 568.325843 955.179077 597.138052L955.179077 597.138052zM915.253762 448.230628c-52.077076-15.844873-96.670713-51.148937-123.851772-98.55769-27.197432-47.344285-35.304064-103.817484-22.944572-157.029406-33.129538-26.973328-69.952188-48.38294-109.845781-63.812351-39.925315 37.830607-91.441619 58.504462-146.620335 58.504462-54.331419 0-106.999966-21.153786-146.636708-58.504462-39.860846 15.429411-76.68452 36.839023-109.829408 63.812351 12.359492 53.243645 4.221138 109.717867-22.976294 157.029406-27.133987 47.40773-71.77572 82.711793-123.771955 98.55769-3.437286 21.617343-5.164626 42.97886-5.164626 63.765279 0 20.786419 1.727341 42.164309 5.164626 63.765279 52.04433 15.844873 96.638991 51.181683 123.836423 98.573039 27.549449 48.095391 35.528168 103.370299 22.912849 157.014056 33.145911 26.989701 69.968561 48.38294 109.829408 63.828724 39.701211-37.350676 92.305289-58.504462 146.636708-58.504462 55.178717 0 106.696044 20.673855 146.620335 58.504462 39.829124-15.445784 76.668147-36.839023 109.797685-63.828724-12.311397-53.1802-4.157693-109.717867 22.992667-157.014056 27.117614-47.39238 71.77572-82.728166 123.851772-98.573039 3.405563-21.665439 5.132904-43.026956 5.132904-63.765279C920.386666 491.273956 918.659325 469.912439 915.253762 448.230628L915.253762 448.230628z" p-id="4601"></path></svg>',
+                                        },
+                                        id: 'setting_executors',
                                       },
                                     ],
-                                    appDataEntityId: 'plmweb.library_member',
-                                    uniqueTag: 'library_member__Usr0311619181',
-                                    name: '跳转至成员设置',
-                                    id: 'usr0311619181',
+                                    codeName: 'grouppanel11',
+                                    detailStyle: 'DEFAULT',
+                                    detailType: 'GROUPPANEL',
+                                    layoutPos: {
+                                      shrink: 1,
+                                      layout: 'FLEX',
+                                    },
+                                    id: 'grouppanel11',
                                   },
-                                  enableAC: true,
-                                  forceSelection: true,
-                                  showTrigger: true,
-                                  valueItemName: 'executor_id',
-                                  editorParams: {
-                                    'SRFNAVPARAM.n_department_id_eq':
-                                      '%srforgsectorid%',
-                                    AC: 'TRUE',
-                                    'SRFNAVPARAM.n_status_eq': '1',
-                                    TRIGGER: 'TRUE',
-                                    URL: 'libraries/${context.library}/library_members/fetch_default',
-                                    PICKUPVIEW: 'FALSE',
-                                    USERMETHOD: 'post',
-                                    USERMAP: '{"id":"user_id","name":"name"}',
-                                    DEPTMAP:
-                                      '{"id":"id","name":"display_name"}',
-                                    DEPTMETHOD: 'get',
-                                    DEPTURL: '/users/fetch_default',
+                                  {
+                                    layout: {
+                                      layout: 'FLEX',
+                                    },
+                                    deformDetails: [
+                                      {
+                                        dataType: 25,
+                                        enableCond: 3,
+                                        labelPos: 'NONE',
+                                        noPrivDisplayMode: 1,
+                                        appDEFieldId: 'executor_name',
+                                        editor: {
+                                          singleSelect: true,
+                                          handlerType: 'PickupText',
+                                          appDEACModeId: 'member_select',
+                                          appDEDataSetId: 'fetch_default',
+                                          appDataEntityId:
+                                            'plmweb.library_member',
+                                          uiactionGroup: {
+                                            uiactionGroupDetails: [
+                                              {
+                                                actionLevel: 100,
+                                                afterItemType: 'NONE',
+                                                beforeItemType: 'NONE',
+                                                buttonStyle: 'DEFAULT',
+                                                caption: '跳转至成员设置',
+                                                detailType: 'DEUIACTION',
+                                                uiactionId:
+                                                  'jump_to_member_set@library_member',
+                                                tooltip: '跳转至成员设置',
+                                                showCaption: true,
+                                                showIcon: true,
+                                                sysImage: {
+                                                  cssClass: 'fa fa-user-md',
+                                                  glyph: 'xf0f0@FontAwesome',
+                                                },
+                                                id: 'u7b4a0f4',
+                                              },
+                                            ],
+                                            appDataEntityId:
+                                              'plmweb.library_member',
+                                            uniqueTag:
+                                              'library_member__Usr0311619181',
+                                            name: '跳转至成员设置',
+                                            id: 'usr0311619181',
+                                          },
+                                          enableAC: true,
+                                          forceSelection: true,
+                                          showTrigger: true,
+                                          valueItemName: 'executor_id',
+                                          editorParams: {
+                                            'SRFNAVPARAM.n_department_id_eq':
+                                              '%srforgsectorid%',
+                                            AC: 'TRUE',
+                                            'SRFNAVPARAM.n_status_eq': '1',
+                                            TRIGGER: 'TRUE',
+                                            URL: 'libraries/${context.library}/library_members/fetch_default',
+                                            PICKUPVIEW: 'FALSE',
+                                            USERMETHOD: 'post',
+                                            USERMAP:
+                                              '{"id":"user_id","name":"name"}',
+                                            DEPTMAP:
+                                              '{"id":"id","name":"display_name"}',
+                                            DEPTMETHOD: 'get',
+                                            DEPTURL: '/users/fetch_default',
+                                          },
+                                          editorStyle:
+                                            'PERSONEL_SELECT_LIBRARY',
+                                          editorType: 'PICKEREX_TRIGGER',
+                                          editorItems: [
+                                            {
+                                              id: 'executor_id',
+                                            },
+                                          ],
+                                          sysPFPluginId: 'person_select',
+                                          valueType: 'SIMPLE',
+                                          editable: true,
+                                          navigateParams: [
+                                            {
+                                              key: 'n_department_id_eq',
+                                              value: 'srforgsectorid',
+                                              id: 'n_department_id_eq',
+                                            },
+                                            {
+                                              key: 'n_status_eq',
+                                              value: '1',
+                                              rawValue: true,
+                                              id: 'n_status_eq',
+                                            },
+                                          ],
+                                          id: 'executor_name',
+                                        },
+                                        allowEmpty: true,
+                                        caption: '执行人',
+                                        codeName: 'executor_name',
+                                        detailStyle: 'DEFAULT',
+                                        detailType: 'FORMITEM',
+                                        defdgroupLogics: [
+                                          {
+                                            logicCat: 'PANELVISIBLE',
+                                            relatedDetailNames: [
+                                              'multiple_people',
+                                            ],
+                                            groupOP: 'AND',
+                                            defdlogics: [
+                                              {
+                                                groupOP: 'OR',
+                                                defdlogics: [
+                                                  {
+                                                    condOP: 'ISNULL',
+                                                    defdname: 'multiple_people',
+                                                    logicType: 'SINGLE',
+                                                  },
+                                                  {
+                                                    condOP: 'EQ',
+                                                    defdname: 'multiple_people',
+                                                    value: '0',
+                                                    logicType: 'SINGLE',
+                                                  },
+                                                ],
+                                                logicType: 'GROUP',
+                                              },
+                                            ],
+                                            logicType: 'GROUP',
+                                          },
+                                        ],
+                                        layoutPos: {
+                                          shrink: 1,
+                                          layout: 'FLEX',
+                                        },
+                                        id: 'executor_name',
+                                      },
+                                      {
+                                        dataType: 21,
+                                        enableCond: 3,
+                                        labelPos: 'NONE',
+                                        noPrivDisplayMode: 1,
+                                        appDEFieldId: 'executors',
+                                        editor: {
+                                          singleSelect: true,
+                                          handlerType: 'PickupText',
+                                          enableAC: true,
+                                          forceSelection: true,
+                                          showTrigger: true,
+                                          editorParams: {
+                                            ENABLEBOTTOMBUTTON: 'true',
+                                            MULTIPLE: 'true',
+                                            'SRFNAVPARAM.n_department_id_eq':
+                                              '%srforgsectorid%',
+                                            AC: 'TRUE',
+                                            'SRFNAVPARAM.n_status_eq': '1',
+                                            TRIGGER: 'TRUE',
+                                            SELFFILLMAP:
+                                              '{"user_id":"user_id","user_name":"user_name"}',
+                                            URL: 'libraries/${context.library}/library_members/fetch_default',
+                                            PICKUPVIEW: 'FALSE',
+                                            USERMETHOD: 'post',
+                                            USERMAP:
+                                              '{"id":"user_id","name":"name"}',
+                                            DEPTMAP:
+                                              '{"id":"id","name":"display_name"}',
+                                            DEPTMETHOD: 'get',
+                                            DEPTURL: '/users/fetch_default',
+                                          },
+                                          editorStyle:
+                                            'PERSONEL_SELECT_LIBRARY',
+                                          editorType: 'PICKEREX_TRIGGER',
+                                          objectIdField: 'id',
+                                          objectNameField: 'name',
+                                          sysPFPluginId: 'person_select',
+                                          valueType: 'OBJECTS',
+                                          editable: true,
+                                          navigateParams: [
+                                            {
+                                              key: 'n_department_id_eq',
+                                              value: 'srforgsectorid',
+                                              id: 'n_department_id_eq',
+                                            },
+                                            {
+                                              key: 'n_status_eq',
+                                              value: '1',
+                                              rawValue: true,
+                                              id: 'n_status_eq',
+                                            },
+                                          ],
+                                          id: 'executors',
+                                        },
+                                        allowEmpty: true,
+                                        caption: '执行人',
+                                        codeName: 'executors',
+                                        detailStyle: 'DEFAULT',
+                                        detailType: 'FORMITEM',
+                                        defdgroupLogics: [
+                                          {
+                                            logicCat: 'PANELVISIBLE',
+                                            relatedDetailNames: [
+                                              'multiple_people',
+                                            ],
+                                            groupOP: 'AND',
+                                            defdlogics: [
+                                              {
+                                                condOP: 'EQ',
+                                                defdname: 'multiple_people',
+                                                value: '1',
+                                                logicType: 'SINGLE',
+                                              },
+                                            ],
+                                            logicType: 'GROUP',
+                                          },
+                                        ],
+                                        layoutPos: {
+                                          shrink: 1,
+                                          layout: 'FLEX',
+                                        },
+                                        id: 'executors',
+                                      },
+                                    ],
+                                    codeName: 'grouppanel6',
+                                    detailStyle: 'DEFAULT',
+                                    detailType: 'GROUPPANEL',
+                                    layoutPos: {
+                                      shrink: 1,
+                                      layout: 'FLEX',
+                                    },
+                                    id: 'grouppanel6',
                                   },
-                                  editorStyle: 'PERSONEL_SELECT_LIBRARY',
-                                  editorType: 'PICKEREX_TRIGGER',
-                                  editorWidth: 320,
-                                  editorItems: [
-                                    {
-                                      id: 'executor_id',
-                                    },
-                                  ],
-                                  sysPFPluginId: 'person_select',
-                                  valueType: 'SIMPLE',
-                                  editable: true,
-                                  navigateParams: [
-                                    {
-                                      key: 'n_department_id_eq',
-                                      value: 'srforgsectorid',
-                                      id: 'n_department_id_eq',
-                                    },
-                                    {
-                                      key: 'n_status_eq',
-                                      value: '1',
-                                      rawValue: true,
-                                      id: 'n_status_eq',
-                                    },
-                                  ],
-                                  id: 'executor_name',
-                                },
-                                allowEmpty: true,
-                                caption: '执行人',
-                                codeName: 'executor_name',
+                                ],
+                                codeName: 'executors_container',
                                 detailStyle: 'DEFAULT',
-                                detailType: 'FORMITEM',
+                                detailType: 'GROUPPANEL',
                                 layoutPos: {
                                   colMD: 24,
                                   layout: 'TABLE_24COL',
                                 },
-                                showCaption: true,
-                                id: 'executor_name',
+                                id: 'executors_container',
                               },
                               {
                                 dataType: 25,
@@ -2820,6 +3067,31 @@ export default {
                 id: 'case_id',
               },
               {
+                dataType: 25,
+                enableCond: 3,
+                labelPos: 'LEFT',
+                labelWidth: 130,
+                noPrivDisplayMode: 1,
+                appDEFieldId: 'executor_id',
+                editor: {
+                  editorType: 'HIDDEN',
+                  valueType: 'SIMPLE',
+                  editable: true,
+                  id: 'executor_id',
+                },
+                allowEmpty: true,
+                hidden: true,
+                caption: '执行人标识',
+                codeName: 'executor_id',
+                detailStyle: 'DEFAULT',
+                detailType: 'FORMITEM',
+                layoutPos: {
+                  colMD: 24,
+                  layout: 'TABLE_24COL',
+                },
+                id: 'executor_id',
+              },
+              {
                 createDV: 'srfreadonly',
                 createDVT: 'APPDATA',
                 dataType: 25,
@@ -2949,6 +3221,16 @@ export default {
             appDataEntityId: 'plmweb.run',
             triggerType: 'CTRLEVENT',
             id: 'logic',
+          },
+          {
+            eventNames: 'onChange',
+            itemName: 'executors',
+            logicTag: 'form',
+            logicType: 'SCRIPT',
+            scriptCode:
+              'var executor_id = ctrl.details.executor_id;\r\nvar executor_name = ctrl.details.executor_name;\r\nvar executors = ctrl.details.executors.value;\r\nif(executors != null && executors != undefined && executors.length > 0){\r\n    // 默认取第一个执行人作为主执行人\r\n    var first_executor = executors[0];\r\n    first_executor.is_assignee = 1;\r\n    if(first_executor.user_id != null){\r\n        executor_id.setDataValue(first_executor.user_id)\r\n    }\r\n    if(first_executor.user_name != null){\r\n        executor_name.setDataValue(first_executor.user_name)\r\n    }\r\n    for (var i = 0; i < executors.length; i++) {\r\n        if(executors[i].is_assignee != null && executors[i].is_assignee != undefined && executors[i].is_assignee == 1) {\r\n            // 根据重复器中的是否主执行人按钮，进行设置。只会有一个\r\n            executor_id.setDataValue(executors[i].user_id)\r\n            executor_name.setDataValue(executors[i].user_name)\r\n        }\r\n    }\r\n} else {\r\n    executor_id.setDataValue(null)\r\n    executor_name.setDataValue(null)\r\n}',
+            triggerType: 'CTRLEVENT',
+            id: 'executors_onchange',
           },
           {
             logicTag: 'form',

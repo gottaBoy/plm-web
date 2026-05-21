@@ -411,7 +411,7 @@ export default {
           id: 'organization_id',
         },
         {
-          appDEFieldId: 'name',
+          appDEFieldId: 'display_name',
           valueType: 'SIMPLE',
           dataType: 25,
           id: 'srfmajortext',

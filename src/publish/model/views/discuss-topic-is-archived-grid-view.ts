@@ -89,6 +89,8 @@ export default {
       columnEnableLink: 2,
       groupMode: 'NONE',
       groupStyle: 'DEFAULT',
+      minorSortDir: 'DESC',
+      minorSortAppDEFieldId: 'update_time',
       degridColumns: [
         {
           clconvertMode: 'NONE',
@@ -168,7 +170,7 @@ export default {
                   cssClass: 'fa fa-lightbulb-o',
                   glyph: 'xf0eb@FontAwesome',
                 },
-                id: 'u3e75e85',
+                id: 'u5b3591f',
               },
               {
                 actionLevel: 100,
@@ -176,14 +178,14 @@ export default {
                 beforeItemType: 'NONE',
                 buttonStyle: 'DEFAULT',
                 detailType: 'DEUIACTION',
-                uiactionId: 'archived_delete@discuss_topic',
+                uiactionId: 'delete@discuss_topic',
                 tooltip: '删除',
                 showIcon: true,
                 sysImage: {
                   cssClass: 'fa fa-trash-o',
                   glyph: 'xf014@FontAwesome',
                 },
-                id: 'u41f95a1',
+                id: 'uc9e8583',
               },
             ],
             appDataEntityId: 'plmweb.discuss_topic',

@@ -590,7 +590,7 @@ export default {
       },
       {
         cardHeight: 120,
-        cardWidth: 150,
+        cardWidth: 220,
         groupMode: 'NONE',
         groupStyle: 'DEFAULT',
         itemLayoutPanel: {
@@ -725,7 +725,7 @@ export default {
           },
         ],
         pagingMode: 1,
-        pagingSize: 10,
+        pagingSize: 8,
         appendDEItems: true,
         enablePagingBar: true,
         singleSelect: true,
@@ -745,14 +745,6 @@ export default {
           appDataEntityId: 'plmweb.recent',
           id: 'load',
         },
-        controlNavParams: [
-          {
-            key: 'size',
-            value: '8',
-            rawValue: true,
-            id: 'size',
-          },
-        ],
         removeControlAction: {
           appDEMethodId: 'remove',
           appDataEntityId: 'plmweb.recent',
@@ -772,7 +764,6 @@ export default {
         appDataEntityId: 'plmweb.recent',
         controlParam: {
           ctrlParams: {
-            'SRFNAVPARAM.SIZE': '8',
             SHOWMODE: 'ONLYDATA',
           },
           id: 'dataview',

@@ -150,7 +150,7 @@ export default {
                           editor: {
                             appDEACModeId: 'aichat',
                             appDEDataSetId: 'fetch_default',
-                            appDataEntityId: 'plmweb.work_item',
+                            appDataEntityId: 'plmweb.review_wizard',
                             enableAC: true,
                             editorHeight: 450,
                             editorParams: {
@@ -535,6 +535,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer_name',
                               labelPos: 'NONE',
                               noPrivDisplayMode: 1,
                               editor: {
@@ -597,6 +598,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -622,6 +624,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'stage_state',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -647,6 +650,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'guideline_id',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -672,6 +676,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'id',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -697,6 +702,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'order',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,
@@ -722,6 +728,7 @@ export default {
                             {
                               dataType: 25,
                               enableCond: 3,
+                              fieldName: 'reviewer_type',
                               labelPos: 'LEFT',
                               labelWidth: 130,
                               noPrivDisplayMode: 1,

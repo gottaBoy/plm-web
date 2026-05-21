@@ -40,6 +40,12 @@ export default {
       value: 'stt',
       id: 'stt',
     },
+    {
+      codeName: 'text_ranking',
+      text: '文本排序',
+      value: 'text_ranking',
+      id: 'text_ranking',
+    },
   ],
   enableCache: true,
   name: '模型类别',

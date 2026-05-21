@@ -91,6 +91,20 @@ export default {
       },
       deformItemUpdates: [
         {
+          codeName: 'remaining_update',
+          defiupdateDetails: [
+            {
+              id: 'workload_schedule',
+            },
+          ],
+          scriptCode:
+            'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
+          customCode: true,
+          showBusyIndicator: false,
+          name: '剩余工时表单项更新',
+          id: 'remaining_update',
+        },
+        {
           codeName: 'estimated_update',
           defiupdateDetails: [
             {
@@ -106,20 +120,6 @@ export default {
           showBusyIndicator: false,
           name: '预估工时表单项更新',
           id: 'estimated_update',
-        },
-        {
-          codeName: 'remaining_update',
-          defiupdateDetails: [
-            {
-              id: 'workload_schedule',
-            },
-          ],
-          scriptCode:
-            'var form_data = view.layoutPanel.panelItems.form.control.data;\r\nvar actual_workload = form_data.actual_workload;\r\nvar estimated_workload = form_data.estimated_workload; \r\nvar remaining_workload = form_data.remaining_workload;  \r\nvar estimated = 0; // 预估工时\r\nif(estimated_workload){\r\n\testimated = Number(estimated_workload);\r\n}\r\nvar actual = 0; // 已登记的实际工时\r\nif(actual_workload){\r\n\tactual = Number(actual_workload);\r\n}\r\nvar remaining = 0;\r\nif(remaining_workload){\r\n\tremaining = Number(remaining_workload);\r\n}\r\n// 计算工时进度\r\nif((actual + remaining) != 0){\r\n\tvar schedule = ((actual / (actual + remaining)) * 100).toFixed(1);\r\n\tform_data.workload_schedule = schedule;\r\n}\r\n',
-          customCode: true,
-          showBusyIndicator: false,
-          name: '剩余工时表单项更新',
-          id: 'remaining_update',
         },
       ],
       deformPages: [
@@ -427,41 +427,28 @@ export default {
                               editor: {
                                 appDEACModeId: 'aichat',
                                 appDEDataSetId: 'fetch_default',
-                                appDataEntityId: 'plmweb.work_item',
+                                appDataEntityId: 'plmweb.test_case',
                                 enableAC: true,
                                 editorParams: {
-                                  INSERTKEYS:
-                                    '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                                  MAXHEIGHT: '450',
                                   LINKVIEWID:
                                     'plmweb.recent_custom_redirect_view',
-                                  USERURL:
-                                    "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                  enableFullScreen: 'true',
-                                  USERSCRIPT:
-                                    '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                  USERINSCRIPT:
-                                    'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                  QUOTEINSCRIPT:
-                                    'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                  QUOTEURL: '`recents/fetch_recent_access`',
-                                  srfaiagent: 'TextAgent_Writing',
-                                  QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                                  QUOTESCRIPT:
-                                    '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
                                   QUOTECODELISTMAP:
                                     '{"type":"plmweb.base__recent_visite"}',
+                                  enableEdit: 'true',
+                                  srfaiagent: 'TextAgent_Writing',
+                                  QUOTEPARAMS: '{"sort":"update_time,desc"}',
+                                  enableFullScreen: 'true',
                                   USERFIELDMAP:
                                     '{"id":"user_id","name":"name"}',
-                                  QUOTEFIELDMAP:
-                                    '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                  enableEdit: 'true',
-                                  MODE: 'default',
+                                  USERURL:
+                                    "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
                                   ac: 'true',
-                                  MAXHEIGHT: '450',
+                                  QUOTEURL: '`recents/fetch_recent_access`',
                                 },
-                                editorStyle: 'COLLAPSE',
+                                editorStyle: 'VDITOR',
                                 editorType: 'HTMLEDITOR',
-                                sysPFPluginId: 'comment',
+                                sysPFPluginId: 'vditor',
                                 valueType: 'SIMPLE',
                                 editable: true,
                                 id: 'precondition',
@@ -750,41 +737,28 @@ export default {
                               editor: {
                                 appDEACModeId: 'aichat',
                                 appDEDataSetId: 'fetch_default',
-                                appDataEntityId: 'plmweb.work_item',
+                                appDataEntityId: 'plmweb.test_case',
                                 enableAC: true,
                                 editorParams: {
-                                  INSERTKEYS:
-                                    '[{"index":66,"keys":["marker"]},{"index":5,"keys":["paintformat"]}]',
+                                  MAXHEIGHT: '450',
                                   LINKVIEWID:
                                     'plmweb.recent_custom_redirect_view',
-                                  USERURL:
-                                    "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
-                                  enableFullScreen: 'true',
-                                  USERSCRIPT:
-                                    '`@{"id":"${data.id}","name":"${data.name}"}`',
-                                  USERINSCRIPT:
-                                    'value.replaceAll(/\\@\\{\\"(user)?id\\":\\"(.+?)\\",\\"name\\":\\"(.+?)\\"\\}/g,(x, user, id, name) => {return controller.getNodeInfo({ id, name })}).replaceAll(/\\@\\{userid=(.+?),name=(.+?)\\}/g,(x, id, name) => {return controller.getNodeInfo({ id, name })})',
-                                  QUOTEINSCRIPT:
-                                    'value.replaceAll(/\\#\\{(\\".+?\\":\\".+?\\")(,\\"icon\\":\\"((.|[\\t\\r\\f\\n\\s])+?)\\")*\\}/g,(x, value, icon) => { const item = JSON.parse("{" + value + "}"); if (icon) { icon = icon.slice(8).slice(1, -1); } return controller.getNodeInfo({ icon, ...item })})',
-                                  QUOTEURL: '`recents/fetch_recent_access`',
-                                  srfaiagent: 'TextAgent_Writing',
-                                  QUOTEPARAMS: '{"sort":"update_time,desc"}',
-                                  QUOTESCRIPT:
-                                    '`#{"id":"${data.id}","name":"${data.name}","identifier":"${data.identifier}","owner_id":"${data.owner_id}","owner_type":"${data.owner_type}","owner_subtype":"${data.owner_subtype}","recent_parent":"${data.recent_parent}"}`',
                                   QUOTECODELISTMAP:
                                     '{"type":"plmweb.base__recent_visite"}',
+                                  enableEdit: 'true',
+                                  srfaiagent: 'TextAgent_Writing',
+                                  QUOTEPARAMS: '{"sort":"update_time,desc"}',
+                                  enableFullScreen: 'true',
                                   USERFIELDMAP:
                                     '{"id":"user_id","name":"name"}',
-                                  QUOTEFIELDMAP:
-                                    '{"identifier":"show_identifier","name":"name","id":"id","owner_subtype":"owner_subtype","owner_id":"owner_id","owner_type":"owner_type","recent_parent":"recent_parent"}',
-                                  enableEdit: 'true',
-                                  MODE: 'default',
+                                  USERURL:
+                                    "`${context.library ? `libraries/${context.library}/library_members/fetch_default` : context.product ? `products/${context.product}/product_members/fetch_default` : context.project ? `projects/${context.project}/project_members/fetch_default` : context.discuss_topic? `discuss_topics/${context.discuss_topic}/discuss_members/fetch_default` : ''}`",
                                   ac: 'true',
-                                  MAXHEIGHT: '450',
+                                  QUOTEURL: '`recents/fetch_recent_access`',
                                 },
-                                editorStyle: 'COLLAPSE',
+                                editorStyle: 'VDITOR',
                                 editorType: 'HTMLEDITOR',
-                                sysPFPluginId: 'comment',
+                                sysPFPluginId: 'vditor',
                                 valueType: 'SIMPLE',
                                 editable: true,
                                 id: 'case_description',
@@ -824,13 +798,15 @@ export default {
                                 caption: '添加附件',
                                 detailType: 'DEUIACTION',
                                 uiactionId: 'add_attachments@test_case',
+                                visibleScriptCode:
+                                  'context.srfreadonly != true',
                                 showCaption: true,
                                 showIcon: true,
                                 sysImage: {
                                   cssClass: 'fa fa-plus',
                                   glyph: 'xf067@FontAwesome',
                                 },
-                                id: 'ubeba57d',
+                                id: 'u69bc7c7',
                               },
                             ],
                             appDataEntityId: 'plmweb.test_case',
@@ -929,7 +905,7 @@ export default {
                                             cssClass: 'fa fa-download',
                                             glyph: 'xf019@FontAwesome',
                                           },
-                                          id: 'uf162678',
+                                          id: 'u73b8ba5',
                                         },
                                         {
                                           actionLevel: 100,
@@ -938,17 +914,17 @@ export default {
                                           buttonStyle: 'DEFAULT',
                                           caption: '删除',
                                           detailType: 'DEUIACTION',
+                                          enableScriptCode:
+                                            'context.srfreadonly != true',
                                           uiactionId: 'delete@attachment',
                                           tooltip: '删除',
-                                          visibleScriptCode:
-                                            'context.srfreadonly != true',
                                           showCaption: true,
                                           showIcon: true,
                                           sysImage: {
                                             cssClass: 'fa fa-trash-o',
                                             glyph: 'xf014@FontAwesome',
                                           },
-                                          id: 'ubdc1b19',
+                                          id: 'u44d00e2',
                                         },
                                       ],
                                       appDataEntityId: 'plmweb.attachment',
@@ -1412,66 +1388,6 @@ export default {
                       showCaption: true,
                       id: 'tabpanel1_comment_history',
                     },
-                    {
-                      layout: {
-                        columnCount: 24,
-                        layout: 'TABLE_24COL',
-                      },
-                      deformDetails: [
-                        {
-                          appViewId: 'plmweb.version_test_case_grid_view',
-                          navigateContexts: [
-                            {
-                              key: 'OWNER_TYPE',
-                              value: 'TEST_CASE',
-                              rawValue: true,
-                              name: 'OWNER_TYPE',
-                              id: 'owner_type',
-                            },
-                            {
-                              key: 'COMPARE_VERSION',
-                              value: 'cur_version_id',
-                              name: 'COMPARE_VERSION',
-                              id: 'compare_version',
-                            },
-                            {
-                              key: 'OWNER_ID',
-                              value: 'test_case',
-                              name: 'OWNER_ID',
-                              id: 'owner_id',
-                            },
-                          ],
-                          navigateParams: [
-                            {
-                              key: 'n_owner_id_eq',
-                              value: 'test_case',
-                              id: 'n_owner_id_eq',
-                            },
-                          ],
-                          parentDataJO: {
-                            srfparentdename: 'TEST_CASE',
-                            SRFPARENTTYPE: 'CUSTOM',
-                          },
-                          codeName: 'tabpanel1_version_druipart',
-                          detailStyle: 'DEFAULT',
-                          detailType: 'DRUIPART',
-                          layoutPos: {
-                            colMD: 24,
-                            layout: 'TABLE_24COL',
-                          },
-                          showCaption: true,
-                          id: 'tabpanel1_version_druipart',
-                        },
-                      ],
-                      caption: '版本记录',
-                      codeName: 'tabpanel1_version',
-                      counterId: 'test_case_version',
-                      detailStyle: 'DEFAULT',
-                      detailType: 'TABPAGE',
-                      appCounterRefId: '2e738c8baf09274f2233bd1b89455aee',
-                      showCaption: true,
-                      id: 'tabpanel1_version',
-                    },
                   ],
                   codeName: 'tabpanel1',
                   detailStyle: 'DEFAULT',
@@ -1668,11 +1584,49 @@ export default {
                           detailStyle: 'DEFAULT',
                           detailType: 'FORMITEM',
                           layoutPos: {
-                            colMD: 24,
+                            colLG: 21,
+                            colMD: 21,
                             layout: 'TABLE_24COL',
                           },
                           showCaption: true,
                           id: 'cur_version_name',
+                        },
+                        {
+                          layout: {
+                            columnCount: 24,
+                            layout: 'TABLE_24COL',
+                          },
+                          deformDetails: [
+                            {
+                              actionType: 'UIACTION',
+                              buttonStyle: 'STYLE2',
+                              uiactionId: 'check_version@test_case',
+                              tooltip: '查看版本',
+                              uiactionTarget: 'NONE',
+                              caption: '查看版本',
+                              codeName: 'button7',
+                              detailStyle: 'STYLE2',
+                              detailType: 'BUTTON',
+                              layoutPos: {
+                                colMD: 24,
+                                layout: 'TABLE_24COL',
+                              },
+                              sysImage: {
+                                cssClass: 'fa fa-arrow-circle-o-right',
+                                glyph: 'xf18e@FontAwesome',
+                              },
+                              id: 'button7',
+                            },
+                          ],
+                          codeName: 'grouppanel16',
+                          detailStyle: 'DEFAULT',
+                          detailType: 'GROUPPANEL',
+                          layoutPos: {
+                            colLG: 3,
+                            colMD: 3,
+                            layout: 'TABLE_24COL',
+                          },
+                          id: 'grouppanel16',
                         },
                         {
                           createDVT: 'UNIQUEID',
@@ -2340,11 +2294,39 @@ export default {
                           appDEFieldId: 'test_library_name',
                           editor: {
                             halign: 'LEFT',
+                            linkAppViewId: 'plmweb.library_redirect_view',
                             valign: 'MIDDLE',
                             wrapMode: 'NOWRAP',
-                            editorType: 'SPAN',
+                            enableLinkView: true,
+                            editorParams: {
+                              'SRFNAVCTX.principal_id': '',
+                              'SRFNAVCTX.test_case': '',
+                              'SRFNAVCTX.principal_type': '',
+                              LINKVIEW: 'TRUE',
+                            },
+                            editorType: 'SPAN_LINK',
                             valueType: 'SIMPLE',
                             editable: true,
+                            navigateContexts: [
+                              {
+                                key: 'PRINCIPAL_ID',
+                                rawValue: true,
+                                name: 'PRINCIPAL_ID',
+                                id: 'principal_id',
+                              },
+                              {
+                                key: 'TEST_CASE',
+                                rawValue: true,
+                                name: 'TEST_CASE',
+                                id: 'test_case',
+                              },
+                              {
+                                key: 'PRINCIPAL_TYPE',
+                                rawValue: true,
+                                name: 'PRINCIPAL_TYPE',
+                                id: 'principal_type',
+                              },
+                            ],
                             id: 'test_library_name',
                           },
                           allowEmpty: true,
@@ -2762,6 +2744,84 @@ export default {
                     layout: 'TABLE_24COL',
                   },
                   id: 'grouppanel11',
+                },
+                {
+                  layout: {
+                    columnCount: 24,
+                    layout: 'TABLE_24COL',
+                  },
+                  deformDetails: [
+                    {
+                      appViewId: 'plmweb.version_test_case_list_view',
+                      navigateContexts: [
+                        {
+                          key: 'OWNER_TYPE',
+                          value: 'TEST_CASE',
+                          rawValue: true,
+                          name: 'OWNER_TYPE',
+                          id: 'owner_type',
+                        },
+                        {
+                          key: 'COMPARE_VERSION',
+                          value: 'cur_version_id',
+                          name: 'COMPARE_VERSION',
+                          id: 'compare_version',
+                        },
+                        {
+                          key: 'OWNER_ID',
+                          value: 'test_case',
+                          name: 'OWNER_ID',
+                          id: 'owner_id',
+                        },
+                      ],
+                      navigateParams: [
+                        {
+                          key: 'n_owner_id_eq',
+                          value: 'test_case',
+                          id: 'n_owner_id_eq',
+                        },
+                      ],
+                      parentDataJO: {
+                        srfparentdename: 'TEST_CASE',
+                        SRFPARENTTYPE: 'CUSTOM',
+                      },
+                      caption: '用例版本',
+                      codeName: 'druipart7',
+                      detailStyle: 'DEFAULT',
+                      detailType: 'DRUIPART',
+                      layoutPos: {
+                        colMD: 24,
+                        layout: 'TABLE_24COL',
+                      },
+                      showCaption: true,
+                      id: 'druipart7',
+                    },
+                  ],
+                  codeName: 'version',
+                  detailStyle: 'DEFAULT',
+                  detailType: 'GROUPPANEL',
+                  defdgroupLogics: [
+                    {
+                      logicCat: 'PANELVISIBLE',
+                      relatedDetailNames: ['id'],
+                      groupOP: 'AND',
+                      defdlogics: [
+                        {
+                          condOP: 'ISNULL',
+                          defdname: 'id',
+                          logicType: 'SINGLE',
+                          name: 'id值为空(Nil)',
+                          id: 'id值为空(nil)',
+                        },
+                      ],
+                      logicType: 'GROUP',
+                    },
+                  ],
+                  layoutPos: {
+                    colMD: 24,
+                    layout: 'TABLE_24COL',
+                  },
+                  id: 'version',
                 },
               ],
               codeName: 'right_grouppanel',

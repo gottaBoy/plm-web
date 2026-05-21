@@ -1,0 +1,71 @@
+export default {
+  redirectAppViewRefs: [
+    {
+      realTitle: '迭代变更编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.SPRINT_ALTERATION.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.sprint_alteration_edit_view',
+      name: 'SPRINT_ALTERATION:EDITVIEW',
+      id: 'sprint_alteration:editview',
+    },
+    {
+      realTitle: '迭代变更编辑视图',
+      realTitleLanguageRes: {
+        lanResTag: 'PAGE.TITLE.SPRINT_ALTERATION.EDITVIEW',
+      },
+      refAppViewId: 'plmweb.sprint_alteration_edit_view',
+      name: 'EDITVIEW',
+      id: 'editview',
+    },
+  ],
+  enableWorkflow: true,
+  funcViewMode: 'REDIRECTVIEW',
+  deviewCodeName: 'RedirectView',
+  deviewId: '88f711a8a38ebaa7ffbae76cb843c109',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'DE.LNAME.SPRINT_ALTERATION',
+  },
+  caption: '迭代变更',
+  codeName: 'sprint_alteration_redirect_view',
+  appDataEntityId: 'plmweb.sprint_alteration',
+  controls: [
+    {
+      capLanguageRes: {
+        lanResTag: 'DE.LNAME.SPRINT_ALTERATION',
+      },
+      caption: '迭代变更',
+      codeName: 'redirect_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.sprint_alteration',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'redirect_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDEREDIRECTVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.sprint_alteration',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '迭代变更数据重定向视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.SPRINT_ALTERATION.REDIRECTVIEW',
+  },
+  viewStyle: 'DEFAULT',
+  viewType: 'DEREDIRECTVIEW',
+  enableDP: true,
+  redirectView: true,
+  showCaptionBar: true,
+  modelId: '22cad5d7e7a24e01612e8c7595137ef9',
+  modelType: 'PSAPPDEVIEW',
+  name: 'sprint_alterationRedirectView',
+  id: 'plmweb.sprint_alteration_redirect_view',
+};

@@ -309,7 +309,8 @@ export default {
       id: 'plmweb.work_item.parent_pick_up_view_pickup_grid_view_grid',
     },
     {
-      searchButtonStyle: 'DEFAULT',
+      searchButtonStyle: 'NONE',
+      enableAutoSearch: true,
       deformPages: [
         {
           layout: {

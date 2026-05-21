@@ -77,6 +77,24 @@ export default {
           id: 'source_id',
         },
         {
+          appDEFieldId: 'rerank_model_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'rerank_model_id',
+        },
+        {
+          appDEFieldId: 'embedding_model_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'embedding_model_id',
+        },
+        {
+          appDEFieldId: 'chat_model_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'chat_model_id',
+        },
+        {
           appDEFieldId: 'name',
           valueType: 'SIMPLE',
           dataType: 25,
@@ -153,7 +171,8 @@ export default {
               },
               allowEmpty: true,
               capLanguageRes: {
-                lanResTag: 'CONTROL.DEFSFITEM.AI_KNOWLEDGE_BASE.N_NAME_LIKE',
+                lanResTag:
+                  'CONTROL.DEFORM.AI_KNOWLEDGE_BASE.DEFAULT.FORMITEM.N_NAME_LIKE',
               },
               caption: '知识库名称',
               codeName: 'n_name_like',
@@ -232,6 +251,9 @@ export default {
     id: 'layoutpanel',
   },
   title: '知识库选择表格视图',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.PICKUPGRIDVIEW',
+  },
   viewStyle: 'DEFAULT',
   viewType: 'DEPICKUPGRIDVIEW',
   enableDP: true,

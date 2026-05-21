@@ -299,6 +299,12 @@ export default {
           id: 'ai_model_id',
         },
         {
+          appDEFieldId: 'rerank_model_id',
+          valueType: 'SIMPLE',
+          dataType: 25,
+          id: 'rerank_model_id',
+        },
+        {
           appDEFieldId: 'name',
           valueType: 'SIMPLE',
           dataType: 25,

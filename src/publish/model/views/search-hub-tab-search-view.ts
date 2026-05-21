@@ -2,7 +2,7 @@ export default {
   tabLayout: 'TOP',
   loadDefault: true,
   showDataInfoBar: true,
-  openMode: 'POPUPMODAL',
+  openMode: 'INDEXVIEWTAB_POPUPMODAL',
   deviewCodeName: 'tab_search_view',
   deviewId: '5ec712936ad61d2e636d12db50e60a39',
   accUserMode: 2,
@@ -289,7 +289,7 @@ export default {
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         scriptCode:
-          "view.ctx.evt.on('onRegister', (name, c) => {\r\n    if(name==='tabexppanel'){\r\n        c.state.expViewParams={query: viewParam.srfquery}\r\n    }\r\n});",
+          "delete context.library;\r\ndelete context.test_case;\r\ndelete context.project;\r\ndelete context.work_item;\r\ndelete context.product;\r\ndelete context.idea;\r\ndelete context.ticket;\r\ndelete context.space;\r\ndelete context.article_page;\r\n\r\nview.ctx.evt.on('onRegister', (name, c) => {\r\n    if(name==='tabexppanel'){\r\n        c.state.expViewParams={query: viewParam.srfquery}\r\n    }\r\n});",
         builtinLogic: true,
         name: 'VIEW_CREATED',
         id: 'view_created',

@@ -451,6 +451,27 @@ export default {
       id: 'filterupdate',
     },
   ],
+  appDEUIActions: [
+    {
+      actionLevel: 100,
+      actionTarget: 'NONE',
+      buttonStyle: 'DEFAULT',
+      caption: '确定',
+      codeName: 'panel_auto40195056_button_okaction_click',
+      fullCodeName: 'search_hub_panel_auto40195056_button_okaction_click',
+      scriptCode:
+        "console.log(\"\");\r\nconst srfpickupdata =  view.state.srfpickupdata;\r\nconst transformedList = srfpickupdata.map(item => ({\r\n  id: item.id,\r\n  type: 'deprint',\r\n  data: {\r\n    id: item.id,\r\n    // print_id: 'chat_resource',\r\n    print_id: item.srfdename+'@dynamic_chat_resource',\r\n    // print_id: 'dynamic_chat_resource',\r\n    de_name: item.srfdename\r\n  },\r\n  metadata: {\r\n   name: item.title ? item.title : (item.name ? item.name : item.content),\r\n   downloadContext: (item.srfdename || '') +':'+(item.id || '')+';'+'srfdynaprinttag:'+(item.srfdename || ''),\r\n   downloadactionid: 'chat_resource_print@'+(item.srfdename || '')\r\n  }\r\n}));\r\nview.closeView({ ok: true, data: transformedList });",
+      timeout: 60000,
+      uiactionMode: 'CUSTOM',
+      uiactionTag: 'panel_auto40195056_button_okaction_click',
+      uiactionType: 'DEUIACTION',
+      showBusyIndicator: true,
+      noPrivDisplayMode: 2,
+      appDataEntityId: 'plmweb.search_hub',
+      name: '确定',
+      id: 'panel_auto40195056_button_okaction_click@search_hub',
+    },
+  ],
   deopprivs: [
     {
       logicName: '建立',

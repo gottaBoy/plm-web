@@ -419,7 +419,7 @@ export default {
   viewStyle: 'DEFAULT',
   viewType: 'DEEDITVIEW',
   enableDP: true,
-  showCaptionBar: true,
+  showCaptionBar: false,
   modelId: 'f8dbcd6f5d81ed815e7e77a57787540a',
   modelType: 'PSAPPDEVIEW',
   name: 'insight_viewbase_info_edit_view',

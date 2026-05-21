@@ -395,6 +395,12 @@ export default {
             openMode: 'POPUPMODAL',
             navigateContexts: [
               {
+                key: 'REVIEW',
+                rawValue: true,
+                name: 'REVIEW',
+                id: 'review',
+              },
+              {
                 key: 'IDEA',
                 value: 'target_id',
                 name: 'IDEA',
@@ -408,6 +414,12 @@ export default {
             {
               openMode: 'POPUPMODAL',
               navigateContexts: [
+                {
+                  key: 'REVIEW',
+                  rawValue: true,
+                  name: 'REVIEW',
+                  id: 'review',
+                },
                 {
                   key: 'IDEA',
                   value: 'target_id',
@@ -431,6 +443,12 @@ export default {
       {
         openMode: 'POPUPMODAL',
         navigateContexts: [
+          {
+            key: 'REVIEW',
+            rawValue: true,
+            name: 'REVIEW',
+            id: 'review',
+          },
           {
             key: 'IDEA',
             value: 'target_id',

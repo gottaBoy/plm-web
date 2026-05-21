@@ -1,0 +1,247 @@
+export default {
+  enableDirtyChecking: true,
+  showDataInfoBar: true,
+  xdataControlName: 'form',
+  loadDefault: true,
+  deviewCodeName: 'advanced_setting_view',
+  deviewId: '2ebc7fe16adb29753d8c52467f6c77c7',
+  accUserMode: 2,
+  capLanguageRes: {
+    lanResTag: 'PAGE.CAPTION.AI_KNOWLEDGE_BASE.ADVANCED_SETTING_VIEW',
+  },
+  caption: '高级设置',
+  codeName: 'ai_knowledge_base_advanced_setting_view',
+  appDataEntityId: 'plmweb.ai_knowledge_base',
+  appViewEngines: [
+    {
+      engineCat: 'VIEW',
+      engineType: 'EditView',
+      id: 'engine',
+    },
+  ],
+  controls: [
+    {
+      xdataControlName: 'form',
+      codeName: 'advanced_setting_view_toolbar',
+      controlType: 'TOOLBAR',
+      logicName: '知识库高级设置_工具栏',
+      appDataEntityId: 'plmweb.ai_knowledge_base',
+      controlParam: {
+        id: 'toolbar',
+      },
+      modelId: 'cccd1f59f95ba497021630f8f123117a',
+      modelType: 'PSDETOOLBAR',
+      name: 'toolbar',
+      id: 'advanced_setting_view_toolbar',
+    },
+    {
+      createControlAction: {
+        appDEMethodId: 'create',
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'create',
+      },
+      getDraftFromControlAction: {
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'loaddraftfrom',
+      },
+      getDraftControlAction: {
+        appDEMethodId: 'get_draft',
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'loaddraft',
+      },
+      getControlAction: {
+        appDEMethodId: 'get',
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'load',
+      },
+      removeControlAction: {
+        appDEMethodId: 'remove',
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'remove',
+      },
+      updateControlAction: {
+        appDEMethodId: 'update',
+        appDataEntityId: 'plmweb.ai_knowledge_base',
+        id: 'update',
+      },
+      deformPages: [
+        {
+          layout: {
+            columnCount: 24,
+            layout: 'TABLE_24COL',
+          },
+          deformDetails: [
+            {
+              layout: {
+                columnCount: 24,
+                layout: 'TABLE_24COL',
+              },
+              deformDetails: [
+                {
+                  rawItem: {
+                    caption:
+                      '如果此知识库已经不再需要了，你可以删除它。删除后如果想找回知识库，可以通过配置中心由管理员进行恢复。',
+                    halign: 'LEFT',
+                    valign: 'MIDDLE',
+                    wrapMode: 'NOWRAP',
+                    contentType: 'RAW',
+                    id: 'rawitem1',
+                  },
+                  codeName: 'rawitem1',
+                  detailStyle: 'DEFAULT',
+                  detailType: 'RAWITEM',
+                  layoutPos: {
+                    colMD: 24,
+                    layout: 'TABLE_24COL',
+                  },
+                  showCaption: true,
+                  id: 'rawitem1',
+                },
+                {
+                  actionType: 'UIACTION',
+                  buttonStyle: 'DEFAULT',
+                  uiactionId: 'delete_to_home@ai_knowledge_base',
+                  tooltip: '删除知识库',
+                  uiactionTarget: 'SINGLEKEY',
+                  capLanguageRes: {
+                    lanResTag:
+                      'CONTROL.DEFORM.AI_KNOWLEDGE_BASE.MAIN2.BUTTON.BUTTON1',
+                  },
+                  caption: '删除知识库',
+                  codeName: 'button1',
+                  detailStyle: 'DEFAULT',
+                  detailType: 'BUTTON',
+                  layoutPos: {
+                    colLG: 3,
+                    colMD: 3,
+                    layout: 'TABLE_24COL',
+                  },
+                  sysCss: {
+                    cssName: 'delete-button',
+                  },
+                  showCaption: true,
+                  id: 'button1',
+                },
+              ],
+              capLanguageRes: {
+                lanResTag:
+                  'CONTROL.DEFORM.AI_KNOWLEDGE_BASE.MAIN2.GROUPPANEL.GROUP1',
+              },
+              caption: '删除知识库',
+              codeName: 'group1',
+              detailStyle: 'DEFAULT',
+              detailType: 'GROUPPANEL',
+              layoutPos: {
+                colMD: 24,
+                layout: 'TABLE_24COL',
+              },
+              showCaption: true,
+              id: 'group1',
+            },
+            {
+              dataType: 25,
+              enableCond: 3,
+              labelPos: 'LEFT',
+              labelWidth: 130,
+              noPrivDisplayMode: 1,
+              appDEFieldId: 'id',
+              editor: {
+                editorType: 'HIDDEN',
+                valueType: 'SIMPLE',
+                editable: true,
+                id: 'id',
+              },
+              allowEmpty: true,
+              hidden: true,
+              capLanguageRes: {
+                lanResTag: 'DEF.LNAME.AI_KNOWLEDGE_BASE.ID',
+              },
+              caption: '知识库标识',
+              codeName: 'id',
+              detailStyle: 'DEFAULT',
+              detailType: 'FORMITEM',
+              layoutPos: {
+                colMD: 24,
+                layout: 'TABLE_24COL',
+              },
+              id: 'id',
+            },
+          ],
+          capLanguageRes: {
+            lanResTag:
+              'CONTROL.DEFORM.AI_KNOWLEDGE_BASE.MAIN2.FORMPAGE.FORMPAGE1',
+          },
+          caption: '基本信息',
+          codeName: 'formpage1',
+          detailStyle: 'DEFAULT',
+          detailType: 'FORMPAGE',
+          id: 'formpage1',
+        },
+      ],
+      layout: {
+        columnCount: 24,
+        layout: 'TABLE_24COL',
+      },
+      tabHeaderPos: 'TOP',
+      noTabHeader: true,
+      autoLoad: true,
+      showBusyIndicator: true,
+      codeName: 'main2',
+      controlType: 'FORM',
+      logicName: '知识库高级设置_表单',
+      appDataEntityId: 'plmweb.ai_knowledge_base',
+      controlParam: {
+        id: 'form',
+      },
+      modelId: 'a04d5df4a43d972312df80edc9f423d2',
+      modelType: 'PSDEFORM_EDITFORM',
+      name: 'form',
+      id: 'plmweb.ai_knowledge_base.main2',
+    },
+    {
+      codeName: 'advanced_setting_view_datainfobar',
+      controlType: 'DATAINFOBAR',
+      appDataEntityId: 'plmweb.ai_knowledge_base',
+      controlParam: {
+        id: 'datainfobar',
+      },
+      name: 'datainfobar',
+      id: 'advanced_setting_view_datainfobar',
+    },
+    {
+      capLanguageRes: {
+        lanResTag: 'PAGE.CAPTION.AI_KNOWLEDGE_BASE.ADVANCED_SETTING_VIEW',
+      },
+      caption: '高级设置',
+      codeName: 'advanced_setting_view_captionbar',
+      controlType: 'CAPTIONBAR',
+      appDataEntityId: 'plmweb.ai_knowledge_base',
+      controlParam: {},
+      name: 'captionbar',
+      id: 'advanced_setting_view_captionbar',
+    },
+  ],
+  viewLayoutPanel: {
+    layoutBodyOnly: true,
+    useDefaultLayout: true,
+    layoutPanel: true,
+    codeName: 'layoutpanel',
+    controlStyle: 'APPDEEDITVIEW',
+    controlType: 'VIEWLAYOUTPANEL',
+    appDataEntityId: 'plmweb.ai_knowledge_base',
+    controlParam: {},
+    id: 'layoutpanel',
+  },
+  title: '高级设置',
+  titleLanguageRes: {
+    lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.ADVANCED_SETTING_VIEW',
+  },
+  viewStyle: 'DEFAULT',
+  viewType: 'DEEDITVIEW',
+  enableDP: true,
+  showCaptionBar: false,
+  modelId: 'e8e33059dbe227352b42c404e737c1ff',
+  modelType: 'PSAPPDEVIEW',
+  name: 'ai_knowledge_baseadvanced_setting_view',
+  id: 'plmweb.ai_knowledge_base_advanced_setting_view',
+};

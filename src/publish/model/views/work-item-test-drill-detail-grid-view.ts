@@ -22,6 +22,16 @@ export default {
   ],
   appViewLogics: [
     {
+      eventNames: 'onCreated',
+      logicTrigger: 'VIEWEVENT',
+      logicType: 'SCRIPT',
+      scriptCode:
+        "if (view && viewParam.reportcaption) {\r\n    view.model.caption = viewParam.reportcaption;\r\n    view.evt.on('onViewInfoChange', {});\r\n}",
+      builtinLogic: true,
+      name: 'onCreated',
+      id: 'oncreated',
+    },
+    {
       logicTrigger: 'CUSTOM',
       logicType: 'APPUILOGIC',
       builtinAppUILogic: {
@@ -55,12 +65,28 @@ export default {
       builtinAppUILogic: {
         openDataAppView: {
           openMode: 'POPUPMODAL',
+          navigateContexts: [
+            {
+              key: 'PROJECT',
+              value: 'project_id',
+              name: 'PROJECT',
+              id: 'project',
+            },
+          ],
           refAppViewId: 'plmweb.work_item_main_view',
         },
         editMode: true,
         appUILogicRefViews: [
           {
             openMode: 'POPUPMODAL',
+            navigateContexts: [
+              {
+                key: 'PROJECT',
+                value: 'project_id',
+                name: 'PROJECT',
+                id: 'project',
+              },
+            ],
             refAppViewId: 'plmweb.work_item_main_view',
           },
         ],
@@ -76,6 +102,14 @@ export default {
   appViewRefs: [
     {
       openMode: 'POPUPMODAL',
+      navigateContexts: [
+        {
+          key: 'PROJECT',
+          value: 'project_id',
+          name: 'PROJECT',
+          id: 'project',
+        },
+      ],
       realOpenMode: 'POPUPMODAL',
       realTitle: '工作项',
       refAppViewId: 'plmweb.work_item_main_view',

@@ -78,7 +78,16 @@ export default {
           id: 'expitem:ai_credential',
         },
         {
+          realTitle: '知识库标签集表格视图',
+          refAppViewId: 'plmweb.ai_kb_tag_set_grid_view',
+          name: 'EXPITEM:ai_kb_tag_set',
+          id: 'expitem:ai_kb_tag_set',
+        },
+        {
           realTitle: '知识库表格视图',
+          realTitleLanguageRes: {
+            lanResTag: 'PAGE.TITLE.AI_KNOWLEDGE_BASE.GRIDVIEW',
+          },
           refAppViewId: 'plmweb.ai_knowledge_base_grid_view',
           name: 'EXPITEM:ai_knowledge_base',
           id: 'expitem:ai_knowledge_base',
@@ -105,6 +114,13 @@ export default {
       controls: [
         {
           detreeNodeRSs: [
+            {
+              childDETreeNodeId: 'node_4',
+              parentDETreeNodeId: 'node_3',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '更多（node_3）-配置中心（node_4）',
+            },
             {
               childDETreeNodeId: 'node_1',
               parentDETreeNodeId: 'root',
@@ -134,13 +150,6 @@ export default {
               searchMode: 3,
               name: ' AI大模型（node_2）- AI大模型（node_3）',
               id: ' ai大模型（node_2）- ai大模型（node_3）',
-            },
-            {
-              childDETreeNodeId: 'ai_knowledge_source',
-              parentDETreeNodeId: 'node',
-              parentValueLevel: 1,
-              searchMode: 3,
-              id: '知识库（node）-知识库源（ai_knowledge_source）',
             },
             {
               childDETreeNodeId: 'ai_credential',
@@ -174,6 +183,13 @@ export default {
               id: '默认根节点（root）-知识库（node）',
             },
             {
+              childDETreeNodeId: 'ai_kb_tag_set',
+              parentDETreeNodeId: 'node',
+              parentValueLevel: 1,
+              searchMode: 3,
+              id: '知识库（node）-标签集（node_3）',
+            },
+            {
               childDETreeNodeId: 'ai_tool',
               parentDETreeNodeId: 'root',
               parentValueLevel: 1,
@@ -188,6 +204,14 @@ export default {
               searchMode: 3,
               name: '默认根节点（ROOT）-智能体会话（ai_agent_conversation）',
               id: '默认根节点（root）-智能体会话（ai_agent_conversation）',
+            },
+            {
+              childDETreeNodeId: 'node_3',
+              parentDETreeNodeId: 'root',
+              parentValueLevel: 1,
+              searchMode: 3,
+              name: '默认根节点（ROOT）-更多（node_3）',
+              id: '默认根节点（root）-更多（node_3）',
             },
           ],
           detreeNodes: [
@@ -255,6 +279,18 @@ export default {
               treeNodeType: 'STATIC',
               name: 'AI凭证',
               id: 'ai_credential',
+            },
+            {
+              text: '标签集',
+              navAppViewId: 'plmweb.ai_kb_tag_set_grid_view',
+              nodeType: 'ai_kb_tag_set',
+              sysImage: {
+                rawContent:
+                  '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1767084116413" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6242" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16"><path d="M482.304 635.904c4.096 0 13.312-4.096 13.312-4.096l43.008-43.008c4.096-4.096 4.096-8.192 4.096-13.312 0-13.312-8.192-21.504-21.504-21.504-4.096 0-13.312 4.096-13.312 4.096l-43.008 43.008C460.8 606.208 460.8 610.304 460.8 614.4 460.8 626.688 468.992 635.904 482.304 635.904zM230.4 303.104c-33.792 0-59.392 29.696-59.392 64.512s25.6 59.392 59.392 59.392 64.512-29.696 64.512-64.512C294.912 332.8 264.192 303.104 230.4 303.104zM230.4 388.096c-13.312 0-21.504-8.192-21.504-21.504 0-13.312 8.192-21.504 21.504-21.504 13.312 0 21.504 8.192 21.504 21.504C251.904 379.904 242.688 388.096 230.4 388.096zM413.696 183.296c-4.096-4.096-8.192-4.096-17.408-4.096L106.496 179.2c-33.792 0-63.488 25.6-63.488 64.512l0 289.792c0 4.096 4.096 13.312 4.096 13.312l417.792 417.792c4.096 4.096 8.192 4.096 13.312 4.096s13.312-4.096 13.312-4.096l332.8-332.8c4.096-4.096 4.096-8.192 4.096-13.312s-4.096-13.312-4.096-13.312L413.696 183.296zM482.304 921.6 84.992 525.312 84.992 303.104l0-4.096 0-55.296c0-13.312 8.192-21.504 21.504-21.504l59.392 0 4.096 0 222.208 0 396.288 397.312L482.304 921.6zM955.392 478.208 537.6 59.392c-4.096-4.096-8.192-4.096-13.312-4.096L230.4 55.296c-33.792 0-59.392 25.6-59.392 59.392 0 13.312 8.192 21.504 21.504 21.504 13.312 0 21.504-8.192 21.504-21.504s8.192-21.504 21.504-21.504l281.6 0 397.312 396.288-47.104 47.104c-4.096 4.096-4.096 8.192-4.096 13.312 0 13.312 8.192 21.504 21.504 21.504 4.096 0 13.312-4.096 13.312-4.096l64.512-64.512c4.096-4.096 4.096-8.192 4.096-13.312C960.512 486.4 960.512 482.304 955.392 478.208zM482.304 801.792c4.096 0 13.312-4.096 13.312-4.096l84.992-84.992c4.096-4.096 4.096-8.192 4.096-13.312 0-12.288-8.192-21.504-21.504-21.504-4.096 0-13.312 4.096-13.312 4.096L464.896 768C460.8 772.096 460.8 776.192 460.8 780.288 460.8 793.6 468.992 801.792 482.304 801.792zM375.808 699.392c0 13.312 8.192 21.504 21.504 21.504 4.096 0 13.312-4.096 13.312-4.096l21.504-21.504c4.096-4.096 4.096-8.192 4.096-13.312 0-13.312-8.192-21.504-21.504-21.504-4.096 0-13.312 4.096-13.312 4.096l-17.408 17.408C379.904 687.104 375.808 695.296 375.808 699.392z" fill="#0B80E0" p-id="6243"></path></svg>',
+              },
+              treeNodeType: 'STATIC',
+              name: '标签集',
+              id: 'ai_kb_tag_set',
             },
             {
               text: '知识库',
@@ -339,6 +375,54 @@ export default {
               name: ' AI大模型',
               id: 'node_2',
             },
+            {
+              text: '更多',
+              nodeType: 'node_3',
+              treeNodeType: 'STATIC',
+              hasDETreeNodeRSs: true,
+              expanded: true,
+              name: '更多',
+              id: 'node_3',
+            },
+            {
+              text: '配置中心',
+              nodeType: 'node_4',
+              decontextMenu: {
+                detoolbarItems: [
+                  {
+                    actionLevel: 200,
+                    noPrivDisplayMode: 2,
+                    uiactionId: 'open_kb_setting@ai_agent',
+                    uiactionTarget: 'NONE',
+                    valid: true,
+                    caption: '知识库配置',
+                    itemType: 'DEUIACTION',
+                    tooltip: '知识库配置',
+                    showCaption: true,
+                    showIcon: true,
+                    id: 'deuiaction1',
+                  },
+                ],
+                codeName: 'tree_exp_view_node4_cm',
+                controlType: 'CONTEXTMENU',
+                logicName: '知识库配置树节点菜单',
+                appDataEntityId: 'plmweb.ai_agent',
+                controlParam: {
+                  id: 'node_4_cm',
+                },
+                modelId: '3b4659393d4f88607040276a6549e7ac',
+                modelType: 'PSDETOOLBAR',
+                name: 'node_4_cm',
+                id: 'tree_exp_view_node4_cm',
+              },
+              sysImage: {
+                rawContent:
+                  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="dydnnkk8m__design-iconfont" width="18" height="18">\n  <path d="M8.00016594,11 C6.34331179,11 5.00016594,9.65685463 5.00016594,8 C5.00016594,6.34314585 6.34331179,5 8.00016594,5 C9.65702009,5 11.0001659,6.34314585 11.0001659,8 C11.0001659,9.65685463 9.65702009,11 8.00016594,11 Z M8.00016594,10 C6.8955965,10 6.00016594,9.10456944 6.00016594,8 C6.00016594,6.89543056 6.8955965,6 8.00016594,6 C9.10473537,6 10.0001659,6.89543056 10.0001659,8 C10.0001659,9.10456944 9.10473537,10 8.00016594,10 Z M14.0623436,4.625 L14.0623436,11.375 L8.00016594,14.75 L1.93798828,11.375 L1.93798828,4.625 L8.00016594,1.25 L14.0623436,4.625 Z M8.00016594,2.39453006 L13.0623436,5.21279955 L13.0623436,10.7872009 L8.00016594,13.6054697 L2.93798828,10.7872009 L2.93798828,5.21279955 L8.00016594,2.39453006 Z" fill-opacity=".9" fill-rule="evenodd" fill="#56AAFC"></path>\n</svg>',
+              },
+              treeNodeType: 'STATIC',
+              name: '配置中心',
+              id: 'node_4',
+            },
           ],
           outputIconDefault: true,
           navViewPos: 'NONE',
@@ -368,6 +452,36 @@ export default {
           },
           autoLoad: true,
           showBusyIndicator: true,
+          controls: [
+            {
+              detoolbarItems: [
+                {
+                  actionLevel: 200,
+                  noPrivDisplayMode: 2,
+                  uiactionId: 'open_kb_setting@ai_agent',
+                  uiactionTarget: 'NONE',
+                  valid: true,
+                  caption: '知识库配置',
+                  itemType: 'DEUIACTION',
+                  tooltip: '知识库配置',
+                  showCaption: true,
+                  showIcon: true,
+                  id: 'deuiaction1',
+                },
+              ],
+              codeName: 'tree_exp_view_node4_cm',
+              controlType: 'CONTEXTMENU',
+              logicName: '知识库配置树节点菜单',
+              appDataEntityId: 'plmweb.ai_agent',
+              controlParam: {
+                id: 'node_4_cm',
+              },
+              modelId: '3b4659393d4f88607040276a6549e7ac',
+              modelType: 'PSDETOOLBAR',
+              name: 'node_4_cm',
+              id: 'tree_exp_view_node4_cm',
+            },
+          ],
           codeName: 'tree_exp_view_tree_view',
           controlStyle: 'LIST_TREE',
           controlType: 'TREEVIEW',

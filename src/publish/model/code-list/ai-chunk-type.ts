@@ -1,0 +1,45 @@
+export default {
+  codeListTag: 'ai__chunk_type',
+  codeListType: 'STATIC',
+  codeName: 'ai__chunk_type',
+  emptyText: '未定义',
+  appDataEntityId: 'plmweb.ai_kb_chunk',
+  codeItems: [
+    {
+      codeName: 'original',
+      color: 'rgba(74, 144, 226, 1)',
+      text: '默认',
+      value: 'original',
+      id: 'original',
+    },
+    {
+      codeName: 'cluster',
+      color: 'rgba(80, 227, 194, 1)',
+      text: '聚合簇',
+      value: 'cluster',
+      id: 'cluster',
+    },
+    {
+      codeName: 'manual',
+      color: 'rgba(245, 166, 35, 1)',
+      text: '手动',
+      value: 'manual',
+      id: 'manual',
+    },
+    {
+      codeName: 'index',
+      text: '页面索引',
+      value: 'index',
+      id: 'index',
+    },
+    {
+      codeName: 'page',
+      text: '页面',
+      value: 'page',
+      id: 'page',
+    },
+  ],
+  enableCache: true,
+  name: '文档分块类型',
+  id: 'plmweb.ai__chunk_type',
+};

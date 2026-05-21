@@ -4,7 +4,7 @@ export default {
   openMode: 'POPOVER',
   viewType: 'DEOPTVIEW',
   width: 600,
-  height: 0,
+  height: undefined,
   appDataEntityId: 'plmweb.work_item',
   redirectView: false,
   modalOption: {},
