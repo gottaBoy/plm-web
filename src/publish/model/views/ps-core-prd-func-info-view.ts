@@ -1179,7 +1179,7 @@ export default {
                                     'SRFNAVPARAM.n_pscoreprdfuncid_eq':
                                       '%pscoreprdfunc%',
                                     'SRFNAVPARAM.n_pscoreprdid_eq':
-                                      '%srfv2systemid%',
+                                      '%srfsystemid%',
                                   },
                                   editorType: 'MDROPDOWNLIST',
                                   valueType: 'SIMPLE',
@@ -1192,7 +1192,7 @@ export default {
                                     },
                                     {
                                       key: 'n_pscoreprdid_eq',
-                                      value: 'srfv2systemid',
+                                      value: 'srfsystemid',
                                       id: 'n_pscoreprdid_eq',
                                     },
                                   ],

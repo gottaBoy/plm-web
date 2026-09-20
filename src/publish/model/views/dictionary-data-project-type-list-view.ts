@@ -23,7 +23,8 @@ export default {
       logicTrigger: 'CTRLEVENT',
       logicType: 'SCRIPT',
       ctrlName: 'list',
-      scriptCode: "view.evt.emit('onSelectionChange', { data });",
+      scriptCode:
+        "return (async function() {\r\n    const selected = Array.isArray(data) ? data[0] : data;\r\n    if (selected) {\r\n      await view.evt.emit('onSelectionChange', { data: [selected] });\r\n    }\r\n})();",
       builtinLogic: true,
       name: 'LOGIC',
       id: 'logic',
@@ -34,7 +35,7 @@ export default {
       logicType: 'SCRIPT',
       ctrlName: 'list',
       scriptCode:
-        "let list = view.layoutPanel.panelItems.list.control.state.items;\r\nlet select_list = view.layoutPanel.panelItems.list.control.state.selectedData;\r\n\r\nreturn (async function() {\r\n    // 获取所有临时数据\r\n    const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;\r\n    const service = await serviceUtil.getService(context, 'plmweb.project');\r\n    const data_list = service.local.getList();\r\n    // 遍历临时数据\r\n    data_list.forEach(item => {\r\n      if (item.type == undefined) {\r\n        for (let i = 0; i < list.length; i++) {\r\n          const it = list[i];\r\n          if (it.id == 'scrum' && select_list.length == 0) {\r\n            view.layoutPanel.panelItems.list.control.state.selectedData.push(it);\r\n            view.evt.emit('onSelectionChange', { data });\r\n            break;\r\n          }\r\n        }\r\n      } else {\r\n        for (let j = 0; j < list.length; j++) {\r\n          const it = list[j];\r\n          if (it.id == item.type) {\r\n            item.type = undefined;\r\n            view.layoutPanel.panelItems.list.control.state.selectedData.push(it);\r\n            view.evt.emit('onSelectionChange', { data });\r\n            break;\r\n          }\r\n        }\r\n      }\r\n    })\r\n})();",
+        "const control = view.layoutPanel.panelItems.list.control;\r\nconst list = control.state.items;\r\n\r\nreturn (async function() {\r\n    // onLoadSuccess can run before the embedded pickup view is mounted. Wait for\r\n    // that lifecycle boundary so the selection event reaches the pickup editor.\r\n    for (let attempt = 0; attempt < 100 && !view.state.isMounted; attempt++) {\r\n      await new Promise(resolve => setTimeout(resolve, 50));\r\n    }\r\n    if (!view.state.isMounted || view.state.isDestroyed) {\r\n      return;\r\n    }\r\n    await new Promise(resolve => setTimeout(resolve, 0));\r\n\r\n    const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;\r\n    const service = await serviceUtil.getService(context, 'plmweb.project');\r\n    const dataList = service.local.getList();\r\n    const project = dataList[0];\r\n    const targetId = project && project.type !== undefined ? project.type : 'scrum';\r\n    const target = list.find(item => item.id == targetId);\r\n\r\n    if (target) {\r\n      control.setSelection([target]);\r\n      await view.evt.emit('onSelectionChange', { data: [target] });\r\n    }\r\n})();",
       builtinLogic: true,
       name: 'LOGIC2',
       id: 'logic2',

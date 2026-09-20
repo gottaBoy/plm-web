@@ -9,6 +9,7 @@ import {
 import { resolve, join } from 'node:path';
 import { HtmlTagDescriptor, Plugin } from 'vite';
 import cpy from 'cpy';
+import { localDocumentationPlugin } from './local-documentation';
 
 function IBizVitePlugin(): Plugin[] {
   const p: Plugin = {
@@ -66,10 +67,17 @@ function IBizVitePlugin(): Plugin[] {
             `<script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>`,
             '',
           );
-        // 标准 vite 编译后脚本
-        const rootJsReg =
-          /<script type="module" crossorigin src=".\/assets\/index.(.*).js"><\/script>/;
-        html = html.replace(rootJsReg, '');
+        // 运行时统一使用 SystemJS legacy 入口，移除 Vite 生成的原生 ESM 入口。
+        // 输出目录从 assets 迁移到 static/js 后，旧规则未再命中，导致裸模块
+        // （例如 vue）被浏览器按原生 ESM 解析。
+        const modernEntryReg =
+          /<script\b(?=[^>]*\btype="module")(?=[^>]*\bsrc="\.\/(?:assets|static\/js)\/index[-.][^"]+\.js")[^>]*><\/script>/g;
+        html = html.replace(modernEntryReg, '');
+        if (modernEntryReg.test(html)) {
+          throw new Error(
+            'Failed to remove the Vite modern entry from index.html',
+          );
+        }
         html = html.replace('<script nomodule', '<script');
         html = html.replace('<script nomodule', '<script');
         html = html.replace('<script nomodule', '<script');
@@ -201,7 +209,13 @@ function IBizVitePlugin(): Plugin[] {
     },
   };
 
-  return [p, devP];
+  return [
+    p,
+    devP,
+    localDocumentationPlugin({
+      sourceDirectory: resolve(__dirname, '../../plm/doc/docsify'),
+    }),
+  ];
 }
 
 export default IBizVitePlugin;

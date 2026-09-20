@@ -1,5 +1,5 @@
 export default {
-  htmlUrl: 'https://plm.ibizlab.cn/doc#/',
+  htmlUrl: './doc/#/',
   loadDefault: true,
   deviewCodeName: 'data_model_html_view',
   deviewId: 'a330cf46f90157761ab3bc48deb4716c',

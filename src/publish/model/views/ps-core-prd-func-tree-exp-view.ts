@@ -10,6 +10,13 @@ export default {
   caption: '应用市场',
   codeName: 'ps_core_prd_func_tree_exp_view',
   appDataEntityId: 'plmweb.pscoreprdfunc',
+  appViewNavParams: [
+    {
+      key: 'n_pscoreprdid_eq',
+      value: 'product',
+      id: 'n_pscoreprdid_eq',
+    },
+  ],
   viewLayoutPanel: {
     viewProxyMode: true,
     layoutMode: 'FLEX',

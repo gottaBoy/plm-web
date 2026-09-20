@@ -1,5 +1,5 @@
 export default {
-  htmlUrl: 'https://plm.ibizlab.cn/doc#/api/ServiceAPI/ServiceAPI',
+  htmlUrl: './doc/#/api/ServiceAPI/ServiceAPI',
   loadDefault: true,
   deviewCodeName: 'api_show_html_view',
   deviewId: 'c173c513731ac76cadb90ef1382f5f3d',

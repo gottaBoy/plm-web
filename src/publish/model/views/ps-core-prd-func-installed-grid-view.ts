@@ -20,7 +20,7 @@ export default {
     },
     {
       key: 'n_pscoreprdid_eq',
-      value: 'srfv2systemid',
+      value: 'srfsystemid',
       id: 'n_pscoreprdid_eq',
     },
   ],

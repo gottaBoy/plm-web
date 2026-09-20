@@ -19,6 +19,35 @@ function isCustomElement(tag: string): boolean {
   return tag.startsWith('ion-');
 }
 
+const platformApiTarget =
+  process.env.AIBIZ_PLATFORM_API_TARGET || 'http://127.0.0.1:30000';
+const plmApiTarget =
+  process.env.AIBIZ_PLM_API_TARGET || 'http://127.0.0.1:30251';
+const mainApiPrefix = '/api/ibizplm__plmweb';
+const appDataProxy = {
+  target: platformApiTarget,
+  changeOrigin: true,
+  rewrite: (path: string) => path.replace(mainApiPrefix, ''),
+};
+const plmServiceProxy = {
+  target: plmApiTarget,
+  changeOrigin: true,
+  rewrite: (path: string) =>
+    path.replace(mainApiPrefix, '/ibizplm/serviceapi'),
+};
+const platformServiceProxy = {
+  target: platformApiTarget,
+  changeOrigin: true,
+  rewrite: (path: string) => path.replace(mainApiPrefix, ''),
+};
+const sharedProxy = {
+  '/api/ibizplm__plmweb/appdata': appDataProxy,
+  '/api/ibizplm__plmweb/v7': platformServiceProxy,
+  '/api/ibizplm__plmweb/uaa': platformServiceProxy,
+  '/api/ibizplm__plmweb/configs': platformServiceProxy,
+  '/api/ibizplm__plmweb': plmServiceProxy,
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
@@ -155,14 +184,7 @@ export default defineConfig({
         target: 'https://plm.ibizlab.cn',
         changeOrigin: true,
       },
-      '/api/ibizplm__plmweb/appdata': {
-        target: 'https://plm.ibizlab.cn',
-        changeOrigin: true,
-      },
-      '/api/ibizplm__plmweb': {
-        target: 'https://plm.ibizlab.cn',
-        changeOrigin: true,
-      },
+      ...sharedProxy,
 
       // nacos代理
       // '/api/ibizplm__plmweb/uaa/': {
@@ -264,6 +286,37 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+  },
+  preview: {
+    host: '0.0.0.0',
+    proxy: {
+      '/api/c85a9cfc76024ede4c6200b3f82eac9d__plmweb__formdesign': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      '/api/f268d51400e62c982974b66a561bbe28__plmweb__plmcomweb': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      '/api/333a5fe850a5a9235744a63bcee17b40__plmweb__formdesign': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      '/api/bee3e98b47a6ae07936311e25460a636__plmweb__logicdesign': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      '/api/8d6b7a540f03688de6c2fafee39b339e__plmweb__logicdesign': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      '/api/0887f742467822fadc6d27196587a993__plmweb__plmcomweb': {
+        target: 'https://plm.ibizlab.cn',
+        changeOrigin: true,
+      },
+      ...sharedProxy,
+    },
+    cors: true,
   },
   css: {
     preprocessorOptions: {

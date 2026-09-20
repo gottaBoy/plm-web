@@ -9331,7 +9331,7 @@ export default {
           id: 'deaction1',
         },
         {
-          code: "\r\nibiz.mc.command.update.send({ srfdecodename: 'idea', srfkey: context.idea})",
+          code: "\r\nibiz.mc.command.create.send({ srfdecodename: 'idea', srfkey: context.idea})",
           codeName: 'RAWJSCODE3',
           leftPos: 590,
           logicNodeType: 'RAWJSCODE',
