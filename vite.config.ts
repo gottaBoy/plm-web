@@ -21,6 +21,8 @@ function isCustomElement(tag: string): boolean {
 
 const platformApiTarget =
   process.env.AIBIZ_PLATFORM_API_TARGET || 'http://127.0.0.1:30000';
+const modelApiTarget =
+  process.env.AIBIZ_MODEL_API_TARGET || 'http://127.0.0.1:32003';
 const plmApiTarget =
   process.env.AIBIZ_PLM_API_TARGET || 'http://127.0.0.1:30251';
 const mainApiPrefix = '/api/ibizplm__plmweb';
@@ -40,8 +42,17 @@ const platformServiceProxy = {
   changeOrigin: true,
   rewrite: (path: string) => path.replace(mainApiPrefix, ''),
 };
+const modelServiceProxy = {
+  target: modelApiTarget,
+  changeOrigin: true,
+};
 const sharedProxy = {
   '/api/ibizplm__plmweb/appdata': appDataProxy,
+  '/api/ibizplm__plmweb/jsonschema': modelServiceProxy,
+  '/api/ibizplm__plmweb/extension/internal_messages/fetch_cur_receiver':
+    modelServiceProxy,
+  '/api/ibizplm__plmweb/extension/app_view_themes/fetch_cur_user_all':
+    modelServiceProxy,
   '/api/ibizplm__plmweb/v7': platformServiceProxy,
   '/api/ibizplm__plmweb/uaa': platformServiceProxy,
   '/api/ibizplm__plmweb/configs': platformServiceProxy,
