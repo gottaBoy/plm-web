@@ -53,6 +53,7 @@ const sharedProxy = {
     modelServiceProxy,
   '/api/ibizplm__plmweb/extension/app_view_themes/fetch_cur_user_all':
     modelServiceProxy,
+  '/api/ibizplm__plmweb/dictionaries/codelist': modelServiceProxy,
   '/api/ibizplm__plmweb/v7': platformServiceProxy,
   '/api/ibizplm__plmweb/uaa': platformServiceProxy,
   '/api/ibizplm__plmweb/configs': platformServiceProxy,
