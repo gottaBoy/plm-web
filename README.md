@@ -163,6 +163,31 @@ $ pnpm run preview
 
 启动后，预览开发项目。<br>
 
+### 本地源码运行
+
+PLM 前端可独立拉取后直接开发。前提是本机已启动 PLM 相关后端服务，默认地址如下：
+
+| 服务 | 默认地址 | 环境变量 |
+| ----- | ----- | ----- |
+| Platform | `http://127.0.0.1:30000` | `AIBIZ_PLATFORM_API_TARGET` |
+| Modeling | `http://127.0.0.1:32003` | `AIBIZ_MODEL_API_TARGET` |
+| PLM API | `http://127.0.0.1:30251` | `AIBIZ_PLM_API_TARGET` |
+
+```bash
+corepack enable
+pnpm install
+pnpm build
+pnpm preview --host 127.0.0.1 --port 4173
+```
+
+开发模式使用：
+
+```bash
+pnpm dev
+```
+
+如果后端不在本机，将上述环境变量替换为对应机器的 IP 或域名后，再启动开发或预览服务。
+
 ## 本地开发
 
 ### 代码获取
