@@ -1,30 +1,96 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {
   copyFileSync,
+  existsSync,
   mkdirSync,
   readFileSync,
   writeFileSync,
-  existsSync,
 } from 'node:fs';
-import { resolve, join } from 'node:path';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import { extname, join, resolve, sep } from 'node:path';
 import { HtmlTagDescriptor, Plugin } from 'vite';
 import cpy from 'cpy';
 import { localDocumentationPlugin } from './local-documentation';
+
+// 模板底包
+const templatePackages = ['core', 'runtime', 'model-helper'];
+// 组件底包
+const componentPackages = [
+  'vue3-util',
+  'vue3-components',
+  'web-theme',
+  'devtool',
+];
+
+const systemAssetPrefix = '/extras/js/@ibiz-template/';
+const systemAssetTypes: Record<string, string> = {
+  '.js': 'application/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+};
+
+/**
+ * 开发态按需回源 node_modules 中的 SystemJS 底包。
+ *
+ * public/extras 只提交第三方库产物，@ibiz-template 底包由构建阶段从
+ * node_modules 拷贝到 dist/extras；开发态没有 dist，因此这些资源会 404，
+ * 页面框架可以渲染但所有视图都加载失败。
+ */
+function systemDevMiddleware(
+  baseModule: string,
+): (req: IncomingMessage, res: ServerResponse, next: () => void) => void {
+  const packages = [...templatePackages, ...componentPackages];
+  return (
+    req: IncomingMessage,
+    res: ServerResponse,
+    next: () => void,
+  ): void => {
+    const rawPath = (req.url || '').split('?', 1)[0];
+    if (!rawPath.startsWith(systemAssetPrefix)) {
+      next();
+      return;
+    }
+    const [pkg, ...rest] = rawPath.slice(systemAssetPrefix.length).split('/');
+    const subPath = rest.join('/');
+    if (
+      !packages.includes(pkg) ||
+      !subPath ||
+      subPath.split('/').some(part => part === '..' || part.startsWith('.'))
+    ) {
+      next();
+      return;
+    }
+    const distDir = join(baseModule, pkg, 'dist');
+    const file = resolve(join(distDir, subPath));
+    if (!file.startsWith(`${resolve(distDir)}${sep}`)) {
+      res.statusCode = 403;
+      res.end('Forbidden');
+      return;
+    }
+    if (!existsSync(file)) {
+      next();
+      return;
+    }
+    res.statusCode = 200;
+    res.setHeader(
+      'Content-Type',
+      systemAssetTypes[extname(file)] || 'application/octet-stream',
+    );
+    res.setHeader('Cache-Control', 'no-cache');
+    res.end(readFileSync(file));
+  };
+}
 
 function IBizVitePlugin(): Plugin[] {
   const p: Plugin = {
     name: 'iBizSys:System',
     apply: 'build',
     closeBundle() {
-      // 模板底包
-      const templatePackages = ['core', 'runtime', 'model-helper'];
-      // 组件底包
-      const componentPackages = [
-        'vue3-util',
-        'vue3-components',
-        'web-theme',
-        'devtool',
-      ];
       const cwd = process.cwd();
       const baseModule = join(cwd, 'node_modules/@ibiz-template');
       const baseOutModule = join(cwd, 'dist/extras/js/@ibiz-template');
@@ -163,6 +229,13 @@ function IBizVitePlugin(): Plugin[] {
         '.pnpm/@vue+runtime-core@3.3.8/node_modules/@vue/runtime-core/dist',
       );
       cpy(cpDir, outDir);
+    },
+    configureServer(server) {
+      server.middlewares.use(
+        systemDevMiddleware(
+          resolve(__dirname, '../node_modules/@ibiz-template'),
+        ),
+      );
     },
     transformIndexHtml(html) {
       const tags: HtmlTagDescriptor[] = [];

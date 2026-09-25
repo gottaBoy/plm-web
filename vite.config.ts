@@ -21,43 +21,39 @@ function isCustomElement(tag: string): boolean {
 
 const platformApiTarget =
   process.env.AIBIZ_PLATFORM_API_TARGET || 'http://127.0.0.1:30000';
-const modelApiTarget =
-  process.env.AIBIZ_MODEL_API_TARGET || 'http://127.0.0.1:32003';
-const plmApiTarget =
-  process.env.AIBIZ_PLM_API_TARGET || 'http://127.0.0.1:30251';
+// 业务、建模、jsonschema 与字典接口统一交给网关，与容器 nginx 的
+// location /api/ 转发保持一致；网关按注册路由分发，本地源码构建的
+// plmservice 会被自动命中，前端不再逐个维护各后端地址。
+const gatewayApiTarget =
+  process.env.AIBIZ_GATEWAY_API_TARGET || 'http://127.0.0.1:30086';
 const mainApiPrefix = '/api/ibizplm__plmweb';
 const appDataProxy = {
   target: platformApiTarget,
   changeOrigin: true,
   rewrite: (path: string) => path.replace(mainApiPrefix, ''),
 };
-const plmServiceProxy = {
-  target: plmApiTarget,
+const gatewayProxy = {
+  target: gatewayApiTarget,
   changeOrigin: true,
-  rewrite: (path: string) =>
-    path.replace(mainApiPrefix, '/ibizplm/serviceapi'),
+  rewrite: (path: string) => path.replace(/^\/api/, ''),
 };
 const platformServiceProxy = {
   target: platformApiTarget,
   changeOrigin: true,
   rewrite: (path: string) => path.replace(mainApiPrefix, ''),
 };
-const modelServiceProxy = {
-  target: modelApiTarget,
-  changeOrigin: true,
-};
 const sharedProxy = {
   '/api/ibizplm__plmweb/appdata': appDataProxy,
-  '/api/ibizplm__plmweb/jsonschema': modelServiceProxy,
+  '/api/ibizplm__plmweb/jsonschema': gatewayProxy,
   '/api/ibizplm__plmweb/extension/internal_messages/fetch_cur_receiver':
-    modelServiceProxy,
+    gatewayProxy,
   '/api/ibizplm__plmweb/extension/app_view_themes/fetch_cur_user_all':
-    modelServiceProxy,
-  '/api/ibizplm__plmweb/dictionaries/codelist': modelServiceProxy,
+    gatewayProxy,
+  '/api/ibizplm__plmweb/dictionaries/codelist': gatewayProxy,
   '/api/ibizplm__plmweb/v7': platformServiceProxy,
   '/api/ibizplm__plmweb/uaa': platformServiceProxy,
   '/api/ibizplm__plmweb/configs': platformServiceProxy,
-  '/api/ibizplm__plmweb': plmServiceProxy,
+  '/api/ibizplm__plmweb': gatewayProxy,
 };
 
 // https://vitejs.dev/config/
@@ -297,6 +293,16 @@ export default defineConfig({
     cors: true,
     fs: {
       strict: false,
+    },
+    // 开发态只监听源码与静态资源，忽略构建产物。public/plugins 下已有约 4800
+    // 个目录，再叠加 dist（约 8000 个目录）会超出系统 inotify 上限并导致 ENOSPC。
+    watch: {
+      ignored: [
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/dist-ssr/**',
+        '**/.git/**',
+      ],
     },
   },
   preview: {

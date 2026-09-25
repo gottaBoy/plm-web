@@ -169,9 +169,8 @@ PLM 前端可独立拉取后直接开发。前提是本机已启动 PLM 相关�
 
 | 服务 | 默认地址 | 环境变量 |
 | ----- | ----- | ----- |
-| Platform | `http://127.0.0.1:30000` | `AIBIZ_PLATFORM_API_TARGET` |
-| Modeling | `http://127.0.0.1:32003` | `AIBIZ_MODEL_API_TARGET` |
-| PLM API | `http://127.0.0.1:30251` | `AIBIZ_PLM_API_TARGET` |
+| Gateway（业务与建模接口） | `http://127.0.0.1:30086` | `AIBIZ_GATEWAY_API_TARGET` |
+| Platform（`v7`、`uaa`、`configs`、`appdata`） | `http://127.0.0.1:30000` | `AIBIZ_PLATFORM_API_TARGET` |
 
 ```bash
 corepack enable
@@ -185,6 +184,10 @@ pnpm preview --host 127.0.0.1 --port 4173
 ```bash
 pnpm dev
 ```
+
+注意：开发模式下 `src/publish` 会以 Vite ESM 入口加载，同时页面仍然通过
+SystemJS 引入 `public/extras` 底包，两套运行时会同时存在，部分视图无法正常
+渲染。回归验证与端到端测试请统一使用上面的 `pnpm build` + `pnpm preview`。
 
 如果后端不在本机，将上述环境变量替换为对应机器的 IP 或域名后，再启动开发或预览服务。
 
