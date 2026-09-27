@@ -1,61 +1,60 @@
-import './style.css';
-var w = Object.defineProperty;
-var x = (s, i, n) => i in s ? w(s, i, { enumerable: !0, configurable: !0, writable: !0, value: n }) : s[i] = n;
-var u = (s, i, n) => (x(s, typeof i != "symbol" ? i + "" : i, n), n);
-import { defineComponent as B, ref as f, watch as y, createVNode as a, resolveComponent as m } from "vue";
-import { getDropdownProps as L, getEditorEmits as z, useNamespace as M } from "@ibiz-template/vue3-util";
-import { CodeListEditorController as _, registerEditorProvider as N } from "@ibiz-template/runtime";
-const k = /* @__PURE__ */ B({
+import './assets/style.css';
+import './assets/style.css';
+import { defineComponent as P, ref as h, watch as x, createVNode as n, resolveComponent as m } from "vue";
+import { getDropdownProps as B, getEditorEmits as T, useNamespace as z } from "@ibiz-template/vue3-util";
+import { registerEditorProvider as L, CodeListEditorController as O } from "@ibiz-template/runtime";
+var M = Object.defineProperty, N = (t, r, s) => r in t ? M(t, r, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[r] = s, g = (t, r, s) => (N(t, typeof r != "symbol" ? r + "" : r, s), s);
+const C = /* @__PURE__ */ P({
   name: "IBizTreePicker",
-  props: L(),
-  emits: z(),
-  setup(s, {
-    emit: i
+  props: B(),
+  emits: T(),
+  setup(t, {
+    emit: r
   }) {
-    const n = M("tree-picker"), c = s.controller, v = f(!1), o = f([]), d = f(), p = /* @__PURE__ */ new Map(), h = /* @__PURE__ */ new Map(), C = (e, r) => {
-      e.length && e.forEach((t) => {
-        p.set(t.value, t), h.set(t.value, r), t.children && C(t.children, t);
+    const s = z("tree-picker"), o = t.controller, v = h(!1), c = h([]), d = h(), p = /* @__PURE__ */ new Map(), u = /* @__PURE__ */ new Map(), f = (e, i) => {
+      e.length && e.forEach((a) => {
+        p.set(a.value, a), u.set(a.value, i), a.children && f(a.children, a);
       });
-    }, I = (e, r) => !e.children || !e.children.length ? !0 : e.children.every((t) => r.includes("".concat(t.value))), g = (e, r) => {
-      if (e.children && e.children.forEach((t) => {
-        g(t, r);
-      }), !I(e, r)) {
-        const t = r.indexOf("".concat(e.value));
-        t !== -1 && r.splice(t, 1);
+    }, k = (e, i) => !e.children || !e.children.length ? !0 : e.children.every((a) => i.includes("".concat(a.value))), b = (e, i) => {
+      if (e.children && e.children.forEach((a) => {
+        b(a, i);
+      }), !k(e, i)) {
+        const a = i.indexOf("".concat(e.value));
+        a !== -1 && i.splice(a, 1);
       }
-    }, b = () => {
+    }, y = () => {
       const e = [];
-      typeof s.value == "string" && e.push(...s.value.split(",").filter(Boolean)), e.map((t) => p.get(t)).filter(Boolean).forEach((t) => {
-        g(t, e);
+      typeof t.value == "string" && e.push(...t.value.split(",").filter(Boolean)), e.map((i) => p.get(i)).filter(Boolean).forEach((i) => {
+        b(i, e);
       }), d.value && d.value.setCheckedKeys(e);
     };
-    y(() => s.value, async () => {
-      v.value || (o.value = await c.loadCodeList(s.data), C(o.value || []), v.value = !0), b();
+    x(() => t.value, async () => {
+      v.value || (c.value = await o.loadCodeList(t.data), f(c.value || []), v.value = !0), y();
     }, {
       immediate: !0
     });
-    const E = (e) => h.get(e.value) ? [...E(h.get(e.value)), e] : [e];
+    const E = (e) => u.get(e.value) ? [...E(u.get(e.value)), e] : [e];
     return {
-      ns: n,
-      c,
+      ns: s,
+      c: o,
       tree: d,
-      codeListItems: o,
-      handleCheck: (e, r) => {
-        const t = /* @__PURE__ */ new Map();
-        (r.checkedNodes || []).forEach((T) => {
-          E(T).forEach((l) => {
-            l && l.value && !t.has(l.value) && t.set(l.value, l);
+      codeListItems: c,
+      handleCheck: (e, i) => {
+        const a = /* @__PURE__ */ new Map();
+        (i.checkedNodes || []).forEach((I) => {
+          E(I).forEach((l) => {
+            l && l.value && !a.has(l.value) && a.set(l.value, l);
           });
         });
-        const P = [...t.keys()].join(",");
-        i("change", P);
+        const w = [...a.keys()].join(",");
+        r("change", w);
       }
     };
   },
   render() {
-    return a("div", {
+    return n("div", {
       class: [this.ns.b(), this.disabled && this.ns.m("disabled")]
-    }, [a(m("el-tree"), {
+    }, [n(m("el-tree"), {
       ref: "tree",
       data: this.codeListItems,
       "show-checkbox": !0,
@@ -68,44 +67,43 @@ const k = /* @__PURE__ */ B({
       onCheck: this.handleCheck
     }, {
       default: ({
-        data: s
+        data: t
       }) => {
-        var i;
-        return a("div", {
+        var r;
+        return n("div", {
           class: this.ns.b("item")
-        }, [(i = s.sysImage) != null && i.imagePath ? a(m("iBizIcon"), {
+        }, [(r = t.sysImage) != null && r.imagePath ? n(m("iBizIcon"), {
           class: this.ns.be("item", "icon"),
-          icon: s.sysImage
-        }, null) : a(m("iBizIcon"), {
+          icon: t.sysImage
+        }, null) : n(m("iBizIcon"), {
           class: this.ns.be("item", "icon"),
           icon: {
             cssClass: "fa fa-file-text-o"
           }
-        }, null), a("span", {
+        }, null), n("span", {
           class: this.ns.be("item", "text")
-        }, [s.text || ""])]);
+        }, [t.text || ""])]);
       }
     })]);
   }
 });
-class O {
+class R {
   constructor() {
-    u(this, "formEditor", "IBizTreePicker");
-    u(this, "gridEditor", "IBizTreePicker");
+    g(this, "formEditor", "IBizTreePicker"), g(this, "gridEditor", "IBizTreePicker");
   }
-  async createController(i, n) {
-    const c = new _(i, n);
-    return await c.init(), c;
+  async createController(r, s) {
+    const o = new O(r, s);
+    return await o.init(), o;
   }
 }
-const A = {
-  install(s) {
-    s.component(k.name, k), N(
+const K = {
+  install(t) {
+    t.component(C.name, C), L(
       "EDITOR_CUSTOMSTYLE_TREE_PICKER",
-      () => new O()
+      () => new R()
     );
   }
 };
 export {
-  A as default
+  K as default
 };

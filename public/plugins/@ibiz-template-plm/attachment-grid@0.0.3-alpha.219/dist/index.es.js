@@ -1,568 +1,567 @@
-import './style.css';
-var yt = Object.defineProperty;
-var Ct = (t, e, n) => e in t ? yt(t, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : t[e] = n;
-var Z = (t, e, n) => (Ct(t, typeof e != "symbol" ? e + "" : e, n), n);
-import { useControlController as bt, useNamespace as U, withInstall as xt } from "@ibiz-template/vue3-util";
-import { GridRowState as Rt, ControlVO as vt, GridController as St, registerControlProvider as Dt, ControlType as Et } from "@ibiz-template/runtime";
-import { ref as X, watch as Y, computed as W, reactive as Tt, createVNode as g, resolveComponent as y, defineComponent as kt, createTextVNode as $, mergeProps as Nt, h as At } from "vue";
-import { RuntimeError as j } from "@ibiz-template/core";
-function Lt(t) {
-  function e(i) {
-    !i || i === t.state.curPage || (t.state.curPage = i, t.load());
+import './assets/style.css';
+import './assets/style.css';
+import { withInstall as ge, useControlController as we, useNamespace as U } from "@ibiz-template/vue3-util";
+import { registerControlProvider as ye, ControlType as be, GridController as Ce, GridRowState as ve, ControlVO as xe } from "@ibiz-template/runtime";
+import { defineComponent as Re, createVNode as g, createTextVNode as V, resolveComponent as b, ref as Q, watch as X, computed as j, reactive as Se, mergeProps as De, h as ke } from "vue";
+import { RuntimeError as W } from "@ibiz-template/core";
+var Te = Object.defineProperty, Ee = (e, t, o) => t in e ? Te(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o, Le = (e, t, o) => (Ee(e, typeof t != "symbol" ? t + "" : t, o), o);
+function Pe(e) {
+  function t(l) {
+    !l || l === e.state.curPage || (e.state.curPage = l, e.load());
   }
-  function n(i) {
-    !i || i === t.state.size || (t.state.size = i, t.state.curPage === 1 && t.load());
+  function o(l) {
+    !l || l === e.state.size || (e.state.size = l, e.state.curPage === 1 && e.load());
   }
-  function o() {
-    t.load();
+  function n() {
+    e.load();
   }
-  return { onPageChange: e, onPageSizeChange: n, onPageRefresh: o };
+  return { onPageChange: t, onPageSizeChange: o, onPageRefresh: n };
 }
-function Bt(t) {
-  const e = X();
-  let n = !1;
-  async function o(r, d, u) {
-    if (ibiz.config.grid.editShowMode === "row" && t.model.enableRowEdit) {
-      const h = t.findRowState(r);
-      h && h.showRowEdit !== !0 && await t.switchRowEdit(h, !0);
+function Ne(e) {
+  const t = Q();
+  let o = !1;
+  async function n(c, u, d) {
+    if (ibiz.config.grid.editShowMode === "row" && e.model.enableRowEdit) {
+      const h = e.findRowState(c);
+      h && h.showRowEdit !== !0 && await e.switchRowEdit(h, !0);
     } else
-      t.onRowClick(r);
+      e.onRowClick(c);
   }
-  function i(r) {
-    t.onDbRowClick(r);
+  function l(c) {
+    e.onDbRowClick(c);
   }
-  function c(r) {
-    n || t.setSelection(r);
+  function r(c) {
+    o || e.setSelection(c);
   }
-  Y(
+  X(
     [
-      () => e.value,
-      () => t.state.isLoaded,
-      () => t.state.selectedData
+      () => t.value,
+      () => e.state.isLoaded,
+      () => e.state.selectedData
     ],
-    ([r, d, u]) => {
-      !d || !r || (t.state.singleSelect ? u[0] ? e.value.setCurrentRow(u[0], !0) : e.value.setCurrentRow() : (n = !0, e.value.clearSelection(), u.forEach((h) => e.value.toggleRowSelection(h, !0)), n = !1));
+    ([c, u, d]) => {
+      !u || !c || (e.state.singleSelect ? d[0] ? t.value.setCurrentRow(d[0], !0) : t.value.setCurrentRow() : (o = !0, t.value.clearSelection(), d.forEach((h) => t.value.toggleRowSelection(h, !0)), o = !1));
     }
   );
-  function s(r) {
-    const { prop: d, order: u } = r, h = t.fieldColumns[d].model.appDEFieldId;
+  function i(c) {
+    const { prop: u, order: d } = c, h = e.fieldColumns[u].model.appDEFieldId;
     let f;
-    u === "ascending" ? f = "asc" : u === "descending" && (f = "desc"), t.setSort(h, f), t.load();
+    d === "ascending" ? f = "asc" : d === "descending" && (f = "desc"), e.setSort(h, f), e.load();
   }
-  function l({ row: r }) {
-    let d = "";
-    t.state.selectedData.length > 0 && t.state.selectedData.forEach((h) => {
-      h === r && (d = "current-row");
+  function a({ row: c }) {
+    let u = "";
+    e.state.selectedData.length > 0 && e.state.selectedData.forEach((h) => {
+      h === c && (u = "current-row");
     });
-    const u = t.findRowState(r);
-    return u != null && u.showRowEdit && (d += " editing-row"), r.srfkey && (d += " id-".concat(r.srfkey)), d;
+    const d = e.findRowState(c);
+    return d != null && d.showRowEdit && (u += " editing-row"), c.srfkey && (u += " id-".concat(c.srfkey)), u;
   }
-  function a({
-    _row: r,
-    column: d,
-    _rowIndex: u,
+  function s({
+    _row: c,
+    column: u,
+    _rowIndex: d,
     _columnIndex: h
   }) {
-    var p;
-    const f = (p = t.model.degridColumns) == null ? void 0 : p.find((m) => m.codeName === d.property);
-    return f && f.headerSysCss && f.headerSysCss.cssName ? f.headerSysCss.cssName : "";
+    var f;
+    const m = (f = e.model.degridColumns) == null ? void 0 : f.find((p) => p.codeName === u.property);
+    return m && m.headerSysCss && m.headerSysCss.cssName ? m.headerSysCss.cssName : "";
   }
-  return Y(
-    () => t.state.sortQuery,
-    (r) => {
-      if (r) {
-        const d = t.state.sortQuery.split(",")[0], u = t.state.sortQuery.split(",")[1];
-        if (e.value && d && u) {
-          const h = u === "desc" ? "descending" : "ascending";
+  return X(
+    () => e.state.sortQuery,
+    (c) => {
+      if (c) {
+        const u = e.state.sortQuery.split(",")[0], d = e.state.sortQuery.split(",")[1];
+        if (t.value && u && d) {
+          const h = d === "desc" ? "descending" : "ascending";
           setTimeout(() => {
             var f;
-            (f = e.value) == null || f.sort(d, h);
+            (f = t.value) == null || f.sort(u, h);
           });
         }
       }
     }
   ), {
-    tableRef: e,
-    onRowClick: o,
-    onDbRowClick: i,
-    onSelectionChange: c,
-    onSortChange: s,
-    handleRowClassName: l,
-    handleHeaderCellClassName: a
+    tableRef: t,
+    onRowClick: n,
+    onDbRowClick: l,
+    onSelectionChange: r,
+    onSortChange: i,
+    handleRowClassName: a,
+    handleHeaderCellClassName: s
   };
 }
-function Pt(t, e) {
-  const n = () => {
-    e.data && (t.state.items = e.data, t.state.rows = e.data.map((l) => new Rt(new vt(l), t)));
-  }, o = W(() => {
-    var a;
-    const l = Object.values(t.fieldColumns).find(
-      (r) => r.model.appDEFieldId === t.model.minorSortAppDEFieldId
+function Be(e, t) {
+  const o = () => {
+    t.data && (e.state.items = t.data, e.state.rows = t.data.map((i) => new ve(new xe(i), e)));
+  }, n = j(() => {
+    var i;
+    const a = Object.values(e.fieldColumns).find(
+      (s) => s.model.appDEFieldId === e.model.minorSortAppDEFieldId
     );
     return {
-      prop: l == null ? void 0 : l.model.codeName,
-      order: ((a = t.model.minorSortDir) == null ? void 0 : a.toLowerCase()) === "desc" ? "descending" : "ascending"
+      prop: a == null ? void 0 : a.model.codeName,
+      order: ((i = e.model.minorSortDir) == null ? void 0 : i.toLowerCase()) === "desc" ? "descending" : "ascending"
     };
   });
-  t.evt.on("onCreated", async () => {
-    e.isSimple && (n(), t.state.isLoaded = !0);
-  }), Y(
-    () => e.data,
+  e.evt.on("onCreated", async () => {
+    t.isSimple && (o(), e.state.isLoaded = !0);
+  }), X(
+    () => t.data,
     () => {
-      e.isSimple && n();
+      t.isSimple && o();
     },
     {
       deep: !0
     }
   );
-  const i = W(() => {
-    const { state: l } = t;
-    if (t.model.enableGroup) {
+  const l = j(() => {
+    const { state: i } = e;
+    if (e.model.enableGroup) {
       const a = [];
-      return l.groups.forEach((r) => {
-        if (!r.children.length)
+      return i.groups.forEach((s) => {
+        if (!s.children.length)
           return;
-        const d = [...r.children], u = d.shift();
+        const c = [...s.children], u = c.shift();
         a.push({
-          srfkey: (u == null ? void 0 : u.srfkey) || r.caption,
+          srfkey: (u == null ? void 0 : u.srfkey) || s.caption,
           isGroupData: !0,
-          caption: r.caption,
+          caption: s.caption,
           first: u,
-          children: d
+          children: c
         });
       }), a;
     }
-    return l.rows.map((a) => a.data);
-  }), c = W(() => {
-    if (t.isMultistageHeader)
-      return t.model.degridColumns || [];
-    const l = [];
-    return t.state.columnStates.forEach((a) => {
-      var d, u;
+    return i.rows.map((a) => a.data);
+  }), r = j(() => {
+    if (e.isMultistageHeader)
+      return e.model.degridColumns || [];
+    const i = [];
+    return e.state.columnStates.forEach((a) => {
+      var s, c;
       if (a.hidden)
         return;
-      const r = ((d = t.fieldColumns[a.key]) == null ? void 0 : d.model) || ((u = t.uaColumns[a.key]) == null ? void 0 : u.model);
-      r && l.push(r);
-    }), l;
+      const u = ((s = e.fieldColumns[a.key]) == null ? void 0 : s.model) || ((c = e.uaColumns[a.key]) == null ? void 0 : c.model);
+      u && i.push(u);
+    }), i;
   });
-  return { tableData: i, renderColumns: c, defaultSort: o, summaryMethod: ({
-    columns: l
-  }) => l.map((a, r) => r === 0 ? t.aggTitle : t.state.aggResult[a.property]) };
+  return { tableData: l, renderColumns: r, defaultSort: n, summaryMethod: ({
+    columns: i
+  }) => i.map((a, s) => s === 0 ? e.aggTitle : e.state.aggResult[a.property]) };
 }
-const F = (t) => {
-  t.stopPropagation();
-}, tt = async (t, e, n, o) => {
-  n.grid.setSelection([o.data]), await n.onActionClick(t, o, e);
+const G = (e) => {
+  e.stopPropagation();
+}, K = async (e, t, o, n) => {
+  o.grid.setSelection([n.data]), await o.onActionClick(e, n, t);
 };
-function rt(t) {
-  return t.split("-")[0];
+function le(e) {
+  return e.split("-")[0];
 }
-function Ot(t) {
-  return t.split("-")[1];
+function ze(e) {
+  return e.split("-")[1];
 }
-function Gt(t) {
-  return t === "x" ? "y" : "x";
+function Ae(e) {
+  return e === "x" ? "y" : "x";
 }
-function Mt(t) {
-  return t === "y" ? "height" : "width";
+function Oe(e) {
+  return e === "y" ? "height" : "width";
 }
-function lt(t) {
-  return ["top", "bottom"].includes(rt(t)) ? "y" : "x";
+function ie(e) {
+  return ["top", "bottom"].includes(le(e)) ? "y" : "x";
 }
-function zt(t) {
-  return Gt(lt(t));
+function Me(e) {
+  return Ae(ie(e));
 }
-function at(t) {
+function ae(e) {
   const {
-    x: e,
-    y: n,
-    width: o,
-    height: i
-  } = t;
+    x: t,
+    y: o,
+    width: n,
+    height: l
+  } = e;
   return {
-    width: o,
-    height: i,
-    top: n,
-    left: e,
-    right: e + o,
-    bottom: n + i,
-    x: e,
-    y: n
+    width: n,
+    height: l,
+    top: o,
+    left: t,
+    right: t + n,
+    bottom: o + l,
+    x: t,
+    y: o
   };
 }
-function et(t, e, n) {
+function Z(e, t, o) {
   let {
-    reference: o,
-    floating: i
-  } = t;
-  const c = lt(e), s = zt(e), l = Mt(s), a = rt(e), r = c === "y", d = o.x + o.width / 2 - i.width / 2, u = o.y + o.height / 2 - i.height / 2, h = o[l] / 2 - i[l] / 2;
+    reference: n,
+    floating: l
+  } = e;
+  const r = ie(t), i = Me(t), a = Oe(i), s = le(t), c = r === "y", u = n.x + n.width / 2 - l.width / 2, d = n.y + n.height / 2 - l.height / 2, h = n[a] / 2 - l[a] / 2;
   let f;
-  switch (a) {
+  switch (s) {
     case "top":
       f = {
-        x: d,
-        y: o.y - i.height
+        x: u,
+        y: n.y - l.height
       };
       break;
     case "bottom":
       f = {
-        x: d,
-        y: o.y + o.height
+        x: u,
+        y: n.y + n.height
       };
       break;
     case "right":
       f = {
-        x: o.x + o.width,
-        y: u
+        x: n.x + n.width,
+        y: d
       };
       break;
     case "left":
       f = {
-        x: o.x - i.width,
-        y: u
+        x: n.x - l.width,
+        y: d
       };
       break;
     default:
       f = {
-        x: o.x,
-        y: o.y
+        x: n.x,
+        y: n.y
       };
   }
-  switch (Ot(e)) {
+  switch (ze(t)) {
     case "start":
-      f[s] -= h * (n && r ? -1 : 1);
+      f[i] -= h * (o && c ? -1 : 1);
       break;
     case "end":
-      f[s] += h * (n && r ? -1 : 1);
+      f[i] += h * (o && c ? -1 : 1);
       break;
   }
   return f;
 }
-const _t = async (t, e, n) => {
+const Ge = async (e, t, o) => {
   const {
-    placement: o = "bottom",
-    strategy: i = "absolute",
-    middleware: c = [],
-    platform: s
-  } = n, l = c.filter(Boolean), a = await (s.isRTL == null ? void 0 : s.isRTL(e));
-  let r = await s.getElementRects({
-    reference: t,
-    floating: e,
-    strategy: i
+    placement: n = "bottom",
+    strategy: l = "absolute",
+    middleware: r = [],
+    platform: i
+  } = o, a = r.filter(Boolean), s = await (i.isRTL == null ? void 0 : i.isRTL(t));
+  let c = await i.getElementRects({
+    reference: e,
+    floating: t,
+    strategy: l
   }), {
-    x: d,
-    y: u
-  } = et(r, o, a), h = o, f = {}, p = 0;
-  for (let m = 0; m < l.length; m++) {
+    x: u,
+    y: d
+  } = Z(c, n, s), h = n, f = {}, m = 0;
+  for (let p = 0; p < a.length; p++) {
     const {
       name: R,
-      fn: D
-    } = l[m], {
-      x: E,
-      y: T,
-      data: O,
-      reset: w
-    } = await D({
-      x: d,
-      y: u,
-      initialPlacement: o,
+      fn: E
+    } = a[p], {
+      x: S,
+      y: w,
+      data: D,
+      reset: y
+    } = await E({
+      x: u,
+      y: d,
+      initialPlacement: n,
       placement: h,
-      strategy: i,
+      strategy: l,
       middlewareData: f,
-      rects: r,
-      platform: s,
+      rects: c,
+      platform: i,
       elements: {
-        reference: t,
-        floating: e
+        reference: e,
+        floating: t
       }
     });
-    d = E != null ? E : d, u = T != null ? T : u, f = {
+    u = S != null ? S : u, d = w != null ? w : d, f = {
       ...f,
       [R]: {
         ...f[R],
-        ...O
+        ...D
       }
-    }, w && p <= 50 && (p++, typeof w == "object" && (w.placement && (h = w.placement), w.rects && (r = w.rects === !0 ? await s.getElementRects({
-      reference: t,
-      floating: e,
-      strategy: i
-    }) : w.rects), {
-      x: d,
-      y: u
-    } = et(r, h, a)), m = -1);
+    }, y && m <= 50 && (m++, typeof y == "object" && (y.placement && (h = y.placement), y.rects && (c = y.rects === !0 ? await i.getElementRects({
+      reference: e,
+      floating: t,
+      strategy: l
+    }) : y.rects), {
+      x: u,
+      y: d
+    } = Z(c, h, s)), p = -1);
   }
   return {
-    x: d,
-    y: u,
+    x: u,
+    y: d,
     placement: h,
-    strategy: i,
+    strategy: l,
     middlewareData: f
   };
-}, nt = Math.min, M = Math.max, H = Math.round, N = (t) => ({
-  x: t,
-  y: t
+}, ee = Math.min, A = Math.max, H = Math.round, L = (e) => ({
+  x: e,
+  y: e
 });
-function A(t) {
-  return ct(t) ? (t.nodeName || "").toLowerCase() : "#document";
+function P(e) {
+  return re(e) ? (e.nodeName || "").toLowerCase() : "#document";
 }
-function C(t) {
-  var e;
-  return (t == null || (e = t.ownerDocument) == null ? void 0 : e.defaultView) || window;
+function C(e) {
+  var t;
+  return (e == null || (t = e.ownerDocument) == null ? void 0 : t.defaultView) || window;
 }
-function L(t) {
-  var e;
-  return (e = (ct(t) ? t.ownerDocument : t.document) || window.document) == null ? void 0 : e.documentElement;
+function N(e) {
+  var t;
+  return (t = (re(e) ? e.ownerDocument : e.document) || window.document) == null ? void 0 : t.documentElement;
 }
-function ct(t) {
-  return t instanceof Node || t instanceof C(t).Node;
+function re(e) {
+  return e instanceof Node || e instanceof C(e).Node;
 }
-function S(t) {
-  return t instanceof Element || t instanceof C(t).Element;
+function T(e) {
+  return e instanceof Element || e instanceof C(e).Element;
 }
-function v(t) {
-  return t instanceof HTMLElement || t instanceof C(t).HTMLElement;
+function x(e) {
+  return e instanceof HTMLElement || e instanceof C(e).HTMLElement;
 }
-function ot(t) {
-  return typeof ShadowRoot > "u" ? !1 : t instanceof ShadowRoot || t instanceof C(t).ShadowRoot;
+function te(e) {
+  return typeof ShadowRoot > "u" ? !1 : e instanceof ShadowRoot || e instanceof C(e).ShadowRoot;
 }
-function _(t) {
+function M(e) {
   const {
-    overflow: e,
-    overflowX: n,
-    overflowY: o,
-    display: i
-  } = x(t);
-  return /auto|scroll|overlay|hidden|clip/.test(e + o + n) && !["inline", "contents"].includes(i);
+    overflow: t,
+    overflowX: o,
+    overflowY: n,
+    display: l
+  } = v(e);
+  return /auto|scroll|overlay|hidden|clip/.test(t + n + o) && !["inline", "contents"].includes(l);
 }
-function Ft(t) {
-  return ["table", "td", "th"].includes(A(t));
+function He(e) {
+  return ["table", "td", "th"].includes(P(e));
 }
-function K(t) {
-  const e = J(), n = x(t);
-  return n.transform !== "none" || n.perspective !== "none" || (n.containerType ? n.containerType !== "normal" : !1) || !e && (n.backdropFilter ? n.backdropFilter !== "none" : !1) || !e && (n.filter ? n.filter !== "none" : !1) || ["transform", "perspective", "filter"].some((o) => (n.willChange || "").includes(o)) || ["paint", "layout", "strict", "content"].some((o) => (n.contain || "").includes(o));
+function $(e) {
+  const t = J(), o = v(e);
+  return o.transform !== "none" || o.perspective !== "none" || (o.containerType ? o.containerType !== "normal" : !1) || !t && (o.backdropFilter ? o.backdropFilter !== "none" : !1) || !t && (o.filter ? o.filter !== "none" : !1) || ["transform", "perspective", "filter"].some((n) => (o.willChange || "").includes(n)) || ["paint", "layout", "strict", "content"].some((n) => (o.contain || "").includes(n));
 }
-function Ht(t) {
-  let e = P(t);
-  for (; v(e) && !I(e); ) {
-    if (K(e))
-      return e;
-    e = P(e);
+function Ie(e) {
+  let t = z(e);
+  for (; x(t) && !I(t); ) {
+    if ($(t))
+      return t;
+    t = z(t);
   }
   return null;
 }
 function J() {
   return typeof CSS > "u" || !CSS.supports ? !1 : CSS.supports("-webkit-backdrop-filter", "none");
 }
-function I(t) {
-  return ["html", "body", "#document"].includes(A(t));
+function I(e) {
+  return ["html", "body", "#document"].includes(P(e));
 }
-function x(t) {
-  return C(t).getComputedStyle(t);
+function v(e) {
+  return C(e).getComputedStyle(e);
 }
-function V(t) {
-  return S(t) ? {
-    scrollLeft: t.scrollLeft,
-    scrollTop: t.scrollTop
+function _(e) {
+  return T(e) ? {
+    scrollLeft: e.scrollLeft,
+    scrollTop: e.scrollTop
   } : {
-    scrollLeft: t.pageXOffset,
-    scrollTop: t.pageYOffset
+    scrollLeft: e.pageXOffset,
+    scrollTop: e.pageYOffset
   };
 }
-function P(t) {
-  if (A(t) === "html")
-    return t;
-  const e = (
-    // Step into the shadow DOM of the parent of a slotted node.
-    t.assignedSlot || // DOM Element detected.
-    t.parentNode || // ShadowRoot detected.
-    ot(t) && t.host || // Fallback.
-    L(t)
-  );
-  return ot(e) ? e.host : e;
-}
-function ut(t) {
-  const e = P(t);
-  return I(e) ? t.ownerDocument ? t.ownerDocument.body : t.body : v(e) && _(e) ? e : ut(e);
-}
-function Q(t, e, n) {
-  var o;
-  e === void 0 && (e = []), n === void 0 && (n = !0);
-  const i = ut(t), c = i === ((o = t.ownerDocument) == null ? void 0 : o.body), s = C(i);
-  return c ? e.concat(s, s.visualViewport || [], _(i) ? i : [], s.frameElement && n ? Q(s.frameElement) : []) : e.concat(i, Q(i, [], n));
-}
-function dt(t) {
-  const e = x(t);
-  let n = parseFloat(e.width) || 0, o = parseFloat(e.height) || 0;
-  const i = v(t), c = i ? t.offsetWidth : n, s = i ? t.offsetHeight : o, l = H(n) !== c || H(o) !== s;
-  return l && (n = c, o = s), {
-    width: n,
-    height: o,
-    $: l
-  };
-}
-function ft(t) {
-  return S(t) ? t : t.contextElement;
-}
-function B(t) {
-  const e = ft(t);
-  if (!v(e))
-    return N(1);
-  const n = e.getBoundingClientRect(), {
-    width: o,
-    height: i,
-    $: c
-  } = dt(e);
-  let s = (c ? H(n.width) : n.width) / o, l = (c ? H(n.height) : n.height) / i;
-  return (!s || !Number.isFinite(s)) && (s = 1), (!l || !Number.isFinite(l)) && (l = 1), {
-    x: s,
-    y: l
-  };
-}
-const It = /* @__PURE__ */ N(0);
-function ht(t) {
-  const e = C(t);
-  return !J() || !e.visualViewport ? It : {
-    x: e.visualViewport.offsetLeft,
-    y: e.visualViewport.offsetTop
-  };
-}
-function Vt(t, e, n) {
-  return e === void 0 && (e = !1), !n || e && n !== C(t) ? !1 : e;
-}
-function z(t, e, n, o) {
-  e === void 0 && (e = !1), n === void 0 && (n = !1);
-  const i = t.getBoundingClientRect(), c = ft(t);
-  let s = N(1);
-  e && (o ? S(o) && (s = B(o)) : s = B(t));
-  const l = Vt(c, n, o) ? ht(c) : N(0);
-  let a = (i.left + l.x) / s.x, r = (i.top + l.y) / s.y, d = i.width / s.x, u = i.height / s.y;
-  if (c) {
-    const h = C(c), f = o && S(o) ? C(o) : o;
-    let p = h.frameElement;
-    for (; p && o && f !== h; ) {
-      const m = B(p), R = p.getBoundingClientRect(), D = x(p), E = R.left + (p.clientLeft + parseFloat(D.paddingLeft)) * m.x, T = R.top + (p.clientTop + parseFloat(D.paddingTop)) * m.y;
-      a *= m.x, r *= m.y, d *= m.x, u *= m.y, a += E, r += T, p = C(p).frameElement;
-    }
-  }
-  return at({
-    width: d,
-    height: u,
-    x: a,
-    y: r
-  });
-}
-function Wt(t) {
-  let {
-    rect: e,
-    offsetParent: n,
-    strategy: o
-  } = t;
-  const i = v(n), c = L(n);
-  if (n === c)
+function z(e) {
+  if (P(e) === "html")
     return e;
-  let s = {
-    scrollLeft: 0,
-    scrollTop: 0
-  }, l = N(1);
-  const a = N(0);
-  if ((i || !i && o !== "fixed") && ((A(n) !== "body" || _(c)) && (s = V(n)), v(n))) {
-    const r = z(n);
-    l = B(n), a.x = r.x + n.clientLeft, a.y = r.y + n.clientTop;
-  }
-  return {
-    width: e.width * l.x,
-    height: e.height * l.y,
-    x: e.x * l.x - s.scrollLeft * l.x + a.x,
-    y: e.y * l.y - s.scrollTop * l.y + a.y
+  const t = (
+    // Step into the shadow DOM of the parent of a slotted node.
+    e.assignedSlot || // DOM Element detected.
+    e.parentNode || // ShadowRoot detected.
+    te(e) && e.host || // Fallback.
+    N(e)
+  );
+  return te(t) ? t.host : t;
+}
+function se(e) {
+  const t = z(e);
+  return I(t) ? e.ownerDocument ? e.ownerDocument.body : e.body : x(t) && M(t) ? t : se(t);
+}
+function Y(e, t, o) {
+  var n;
+  t === void 0 && (t = []), o === void 0 && (o = !0);
+  const l = se(e), r = l === ((n = e.ownerDocument) == null ? void 0 : n.body), i = C(l);
+  return r ? t.concat(i, i.visualViewport || [], M(l) ? l : [], i.frameElement && o ? Y(i.frameElement) : []) : t.concat(l, Y(l, [], o));
+}
+function ce(e) {
+  const t = v(e);
+  let o = parseFloat(t.width) || 0, n = parseFloat(t.height) || 0;
+  const l = x(e), r = l ? e.offsetWidth : o, i = l ? e.offsetHeight : n, a = H(o) !== r || H(n) !== i;
+  return a && (o = r, n = i), {
+    width: o,
+    height: n,
+    $: a
   };
 }
-function $t(t) {
-  return Array.from(t.getClientRects());
+function ue(e) {
+  return T(e) ? e : e.contextElement;
 }
-function pt(t) {
-  return z(L(t)).left + V(t).scrollLeft;
-}
-function jt(t) {
-  const e = L(t), n = V(t), o = t.ownerDocument.body, i = M(e.scrollWidth, e.clientWidth, o.scrollWidth, o.clientWidth), c = M(e.scrollHeight, e.clientHeight, o.scrollHeight, o.clientHeight);
-  let s = -n.scrollLeft + pt(t);
-  const l = -n.scrollTop;
-  return x(o).direction === "rtl" && (s += M(e.clientWidth, o.clientWidth) - i), {
-    width: i,
-    height: c,
-    x: s,
-    y: l
-  };
-}
-function qt(t, e) {
-  const n = C(t), o = L(t), i = n.visualViewport;
-  let c = o.clientWidth, s = o.clientHeight, l = 0, a = 0;
-  if (i) {
-    c = i.width, s = i.height;
-    const r = J();
-    (!r || r && e === "fixed") && (l = i.offsetLeft, a = i.offsetTop);
-  }
-  return {
-    width: c,
-    height: s,
-    x: l,
+function B(e) {
+  const t = ue(e);
+  if (!x(t))
+    return L(1);
+  const o = t.getBoundingClientRect(), {
+    width: n,
+    height: l,
+    $: r
+  } = ce(t);
+  let i = (r ? H(o.width) : o.width) / n, a = (r ? H(o.height) : o.height) / l;
+  return (!i || !Number.isFinite(i)) && (i = 1), (!a || !Number.isFinite(a)) && (a = 1), {
+    x: i,
     y: a
   };
 }
-function Ut(t, e) {
-  const n = z(t, !0, e === "fixed"), o = n.top + t.clientTop, i = n.left + t.clientLeft, c = v(t) ? B(t) : N(1), s = t.clientWidth * c.x, l = t.clientHeight * c.y, a = i * c.x, r = o * c.y;
-  return {
-    width: s,
-    height: l,
-    x: a,
-    y: r
+const _e = /* @__PURE__ */ L(0);
+function de(e) {
+  const t = C(e);
+  return !J() || !t.visualViewport ? _e : {
+    x: t.visualViewport.offsetLeft,
+    y: t.visualViewport.offsetTop
   };
 }
-function it(t, e, n) {
-  let o;
-  if (e === "viewport")
-    o = qt(t, n);
-  else if (e === "document")
-    o = jt(L(t));
-  else if (S(e))
-    o = Ut(e, n);
+function Fe(e, t, o) {
+  return t === void 0 && (t = !1), !o || t && o !== C(e) ? !1 : t;
+}
+function O(e, t, o, n) {
+  t === void 0 && (t = !1), o === void 0 && (o = !1);
+  const l = e.getBoundingClientRect(), r = ue(e);
+  let i = L(1);
+  t && (n ? T(n) && (i = B(n)) : i = B(e));
+  const a = Fe(r, o, n) ? de(r) : L(0);
+  let s = (l.left + a.x) / i.x, c = (l.top + a.y) / i.y, u = l.width / i.x, d = l.height / i.y;
+  if (r) {
+    const h = C(r), f = n && T(n) ? C(n) : n;
+    let m = h.frameElement;
+    for (; m && n && f !== h; ) {
+      const p = B(m), R = m.getBoundingClientRect(), E = v(m), S = R.left + (m.clientLeft + parseFloat(E.paddingLeft)) * p.x, w = R.top + (m.clientTop + parseFloat(E.paddingTop)) * p.y;
+      s *= p.x, c *= p.y, u *= p.x, d *= p.y, s += S, c += w, m = C(m).frameElement;
+    }
+  }
+  return ae({
+    width: u,
+    height: d,
+    x: s,
+    y: c
+  });
+}
+function Ve(e) {
+  let {
+    rect: t,
+    offsetParent: o,
+    strategy: n
+  } = e;
+  const l = x(o), r = N(o);
+  if (o === r)
+    return t;
+  let i = {
+    scrollLeft: 0,
+    scrollTop: 0
+  }, a = L(1);
+  const s = L(0);
+  if ((l || !l && n !== "fixed") && ((P(o) !== "body" || M(r)) && (i = _(o)), x(o))) {
+    const c = O(o);
+    a = B(o), s.x = c.x + o.clientLeft, s.y = c.y + o.clientTop;
+  }
+  return {
+    width: t.width * a.x,
+    height: t.height * a.y,
+    x: t.x * a.x - i.scrollLeft * a.x + s.x,
+    y: t.y * a.y - i.scrollTop * a.y + s.y
+  };
+}
+function je(e) {
+  return Array.from(e.getClientRects());
+}
+function fe(e) {
+  return O(N(e)).left + _(e).scrollLeft;
+}
+function We(e) {
+  const t = N(e), o = _(e), n = e.ownerDocument.body, l = A(t.scrollWidth, t.clientWidth, n.scrollWidth, n.clientWidth), r = A(t.scrollHeight, t.clientHeight, n.scrollHeight, n.clientHeight);
+  let i = -o.scrollLeft + fe(e);
+  const a = -o.scrollTop;
+  return v(n).direction === "rtl" && (i += A(t.clientWidth, n.clientWidth) - l), {
+    width: l,
+    height: r,
+    x: i,
+    y: a
+  };
+}
+function qe(e, t) {
+  const o = C(e), n = N(e), l = o.visualViewport;
+  let r = n.clientWidth, i = n.clientHeight, a = 0, s = 0;
+  if (l) {
+    r = l.width, i = l.height;
+    const c = J();
+    (!c || c && t === "fixed") && (a = l.offsetLeft, s = l.offsetTop);
+  }
+  return {
+    width: r,
+    height: i,
+    x: a,
+    y: s
+  };
+}
+function Ue(e, t) {
+  const o = O(e, !0, t === "fixed"), n = o.top + e.clientTop, l = o.left + e.clientLeft, r = x(e) ? B(e) : L(1), i = e.clientWidth * r.x, a = e.clientHeight * r.y, s = l * r.x, c = n * r.y;
+  return {
+    width: i,
+    height: a,
+    x: s,
+    y: c
+  };
+}
+function oe(e, t, o) {
+  let n;
+  if (t === "viewport")
+    n = qe(e, o);
+  else if (t === "document")
+    n = We(N(e));
+  else if (T(t))
+    n = Ue(t, o);
   else {
-    const i = ht(t);
-    o = {
-      ...e,
-      x: e.x - i.x,
-      y: e.y - i.y
+    const l = de(e);
+    n = {
+      ...t,
+      x: t.x - l.x,
+      y: t.y - l.y
     };
   }
-  return at(o);
+  return ae(n);
 }
-function mt(t, e) {
-  const n = P(t);
-  return n === e || !S(n) || I(n) ? !1 : x(n).position === "fixed" || mt(n, e);
+function he(e, t) {
+  const o = z(e);
+  return o === t || !T(o) || I(o) ? !1 : v(o).position === "fixed" || he(o, t);
 }
-function Xt(t, e) {
-  const n = e.get(t);
-  if (n)
-    return n;
-  let o = Q(t, [], !1).filter((l) => S(l) && A(l) !== "body"), i = null;
-  const c = x(t).position === "fixed";
-  let s = c ? P(t) : t;
-  for (; S(s) && !I(s); ) {
-    const l = x(s), a = K(s);
-    !a && l.position === "fixed" && (i = null), (c ? !a && !i : !a && l.position === "static" && !!i && ["absolute", "fixed"].includes(i.position) || _(s) && !a && mt(t, s)) ? o = o.filter((d) => d !== s) : i = l, s = P(s);
+function Qe(e, t) {
+  const o = t.get(e);
+  if (o)
+    return o;
+  let n = Y(e, [], !1).filter((a) => T(a) && P(a) !== "body"), l = null;
+  const r = v(e).position === "fixed";
+  let i = r ? z(e) : e;
+  for (; T(i) && !I(i); ) {
+    const a = v(i), s = $(i);
+    !s && a.position === "fixed" && (l = null), (r ? !s && !l : !s && a.position === "static" && l && ["absolute", "fixed"].includes(l.position) || M(i) && !s && he(e, i)) ? n = n.filter((c) => c !== i) : l = a, i = z(i);
   }
-  return e.set(t, o), o;
+  return t.set(e, n), n;
 }
-function Yt(t) {
+function Xe(e) {
   let {
-    element: e,
-    boundary: n,
-    rootBoundary: o,
-    strategy: i
-  } = t;
-  const s = [...n === "clippingAncestors" ? Xt(e, this._c) : [].concat(n), o], l = s[0], a = s.reduce((r, d) => {
-    const u = it(e, d, i);
-    return r.top = M(u.top, r.top), r.right = nt(u.right, r.right), r.bottom = nt(u.bottom, r.bottom), r.left = M(u.left, r.left), r;
-  }, it(e, l, i));
+    element: t,
+    boundary: o,
+    rootBoundary: n,
+    strategy: l
+  } = e;
+  const r = [...o === "clippingAncestors" ? Qe(t, this._c) : [].concat(o), n], i = r[0], a = r.reduce((s, c) => {
+    const u = oe(t, c, l);
+    return s.top = A(u.top, s.top), s.right = ee(u.right, s.right), s.bottom = ee(u.bottom, s.bottom), s.left = A(u.left, s.left), s;
+  }, oe(t, i, l));
   return {
     width: a.right - a.left,
     height: a.bottom - a.top,
@@ -570,237 +569,237 @@ function Yt(t) {
     y: a.top
   };
 }
-function Qt(t) {
-  return dt(t);
+function Ye(e) {
+  return ce(e);
 }
-function Kt(t, e, n) {
-  const o = v(e), i = L(e), c = n === "fixed", s = z(t, !0, c, e);
-  let l = {
+function $e(e, t, o) {
+  const n = x(t), l = N(t), r = o === "fixed", i = O(e, !0, r, t);
+  let a = {
     scrollLeft: 0,
     scrollTop: 0
   };
-  const a = N(0);
-  if (o || !o && !c)
-    if ((A(e) !== "body" || _(i)) && (l = V(e)), o) {
-      const r = z(e, !0, c, e);
-      a.x = r.x + e.clientLeft, a.y = r.y + e.clientTop;
+  const s = L(0);
+  if (n || !n && !r)
+    if ((P(t) !== "body" || M(l)) && (a = _(t)), n) {
+      const c = O(t, !0, r, t);
+      s.x = c.x + t.clientLeft, s.y = c.y + t.clientTop;
     } else
-      i && (a.x = pt(i));
+      l && (s.x = fe(l));
   return {
-    x: s.left + l.scrollLeft - a.x,
-    y: s.top + l.scrollTop - a.y,
-    width: s.width,
-    height: s.height
+    x: i.left + a.scrollLeft - s.x,
+    y: i.top + a.scrollTop - s.y,
+    width: i.width,
+    height: i.height
   };
 }
-function st(t, e) {
-  return !v(t) || x(t).position === "fixed" ? null : e ? e(t) : t.offsetParent;
+function ne(e, t) {
+  return !x(e) || v(e).position === "fixed" ? null : t ? t(e) : e.offsetParent;
 }
-function gt(t, e) {
-  const n = C(t);
-  if (!v(t))
-    return n;
-  let o = st(t, e);
-  for (; o && Ft(o) && x(o).position === "static"; )
-    o = st(o, e);
-  return o && (A(o) === "html" || A(o) === "body" && x(o).position === "static" && !K(o)) ? n : o || Ht(t) || n;
+function me(e, t) {
+  const o = C(e);
+  if (!x(e))
+    return o;
+  let n = ne(e, t);
+  for (; n && He(n) && v(n).position === "static"; )
+    n = ne(n, t);
+  return n && (P(n) === "html" || P(n) === "body" && v(n).position === "static" && !$(n)) ? o : n || Ie(e) || o;
 }
-const Jt = async function(t) {
+const Je = async function(e) {
   let {
-    reference: e,
-    floating: n,
-    strategy: o
-  } = t;
-  const i = this.getOffsetParent || gt, c = this.getDimensions;
+    reference: t,
+    floating: o,
+    strategy: n
+  } = e;
+  const l = this.getOffsetParent || me, r = this.getDimensions;
   return {
-    reference: Kt(e, await i(n), o),
+    reference: $e(t, await l(o), n),
     floating: {
       x: 0,
       y: 0,
-      ...await c(n)
+      ...await r(o)
     }
   };
 };
-function Zt(t) {
-  return x(t).direction === "rtl";
+function Ke(e) {
+  return v(e).direction === "rtl";
 }
-const te = {
-  convertOffsetParentRelativeRectToViewportRelativeRect: Wt,
-  getDocumentElement: L,
-  getClippingRect: Yt,
-  getOffsetParent: gt,
-  getElementRects: Jt,
-  getClientRects: $t,
-  getDimensions: Qt,
+const Ze = {
+  convertOffsetParentRelativeRectToViewportRelativeRect: Ve,
+  getDocumentElement: N,
+  getClippingRect: Xe,
+  getOffsetParent: me,
+  getElementRects: Je,
+  getClientRects: je,
+  getDimensions: Ye,
   getScale: B,
-  isElement: S,
-  isRTL: Zt
-}, ee = (t, e, n) => {
-  const o = /* @__PURE__ */ new Map(), i = {
-    platform: te,
-    ...n
-  }, c = {
-    ...i.platform,
-    _c: o
+  isElement: T,
+  isRTL: Ke
+}, et = (e, t, o) => {
+  const n = /* @__PURE__ */ new Map(), l = {
+    platform: Ze,
+    ...o
+  }, r = {
+    ...l.platform,
+    _c: n
   };
-  return _t(t, e, {
-    ...i,
-    platform: c
+  return Ge(e, t, {
+    ...l,
+    platform: r
   });
 };
-function ne(t, e) {
-  let n;
-  const o = X(!1), i = X(), c = Tt({}), s = (u) => {
-    if (!t.value)
-      throw new j("找不到表格组件引用");
-    const h = t.value.$el;
+function tt(e, t) {
+  let o;
+  const n = Q(!1), l = Q(), r = Se({}), i = (d) => {
+    if (!e.value)
+      throw new W("找不到表格组件引用");
+    const h = e.value.$el;
     let f = ".el-table__row";
-    u.data.srfkey && (f += ".id-".concat(u.data.srfkey));
-    const p = h.querySelector(f);
-    if (!p)
-      throw new j("找不到对应的表格行dom元素");
-    return p;
-  }, l = async (u) => {
-    const h = s(u);
-    if (!n)
-      throw new j("拿不到pop组件的实例");
-    const f = n.$el, {
-      x: p,
-      y: m
-    } = await ee(h, f, {
+    d.data.srfkey && (f += ".id-".concat(d.data.srfkey));
+    const m = h.querySelector(f);
+    if (!m)
+      throw new W("找不到对应的表格行dom元素");
+    return m;
+  }, a = async (d) => {
+    const h = i(d);
+    if (!o)
+      throw new W("拿不到pop组件的实例");
+    const f = o.$el, {
+      x: m,
+      y: p
+    } = await et(h, f, {
       placement: "bottom"
     });
-    Object.assign(c, {
-      top: "".concat(m, "px"),
-      left: "".concat(p, "px")
-    }), i.value = u, o.value = !0;
-  }, a = async () => {
-    i.value && e.switchRowEdit(i.value, !1, !0);
-  }, r = async () => {
-    i.value && e.switchRowEdit(i.value, !1, !1);
-  }, d = () => {
-    const u = o.value && e.state.rows[e.state.rows.length - 1].showRowEdit;
+    Object.assign(r, {
+      top: "".concat(p, "px"),
+      left: "".concat(m, "px")
+    }), l.value = d, n.value = !0;
+  }, s = async () => {
+    l.value && t.switchRowEdit(l.value, !1, !0);
+  }, c = async () => {
+    l.value && t.switchRowEdit(l.value, !1, !1);
+  }, u = () => {
+    const d = n.value && t.state.rows[t.state.rows.length - 1].showRowEdit;
     return [g("div", {
       class: "row-edit-popover__placeholder",
       style: {
-        display: u ? "block" : "none"
+        display: d ? "block" : "none"
       }
-    }, null), g(y("iBizRowEditPopover"), {
+    }, null), g(b("iBizRowEditPopover"), {
       ref: (h) => {
-        n = h;
+        o = h;
       },
-      style: c,
-      show: o.value,
-      onConfirm: a,
-      onCancel: r
+      style: r,
+      show: n.value,
+      onConfirm: s,
+      onCancel: c
     }, null)];
   };
-  return e.evt.on("onRowEditChange", (u) => {
-    u.row.showRowEdit ? setTimeout(() => {
-      l(u.row);
-    }, 0) : (i.value = void 0, o.value = !1, Object.assign(c, {
+  return t.evt.on("onRowEditChange", (d) => {
+    d.row.showRowEdit ? setTimeout(() => {
+      a(d.row);
+    }, 0) : (l.value = void 0, n.value = !1, Object.assign(r, {
       top: void 0,
       left: void 0
     }));
   }), {
-    renderPopover: d
+    renderPopover: u
   };
 }
-class oe extends St {
+class ot extends Ce {
   /**
    * 添加附件
    *
    * @memberof AttachGridController
    */
-  async addAttachMent(e) {
-    const { appDataEntityId: n } = this.model;
-    n && (await ibiz.hub.getApp(this.context.srfappid).deService.exec(n, "create", this.context, e), await this.load({ isInitialLoad: !1 }), await this.evt.emit("onSaveSuccess", void 0));
+  async addAttachMent(t) {
+    const { appDataEntityId: o } = this.model;
+    o && (await ibiz.hub.getApp(this.context.srfappid).deService.exec(o, "create", this.context, t), await this.load({ isInitialLoad: !1 }), await this.evt.emit("onSaveSuccess", void 0));
   }
 }
-function ie(t, e, n, o) {
-  var u;
-  if (e.hideDefault)
+function nt(e, t, o, n) {
+  var l;
+  if (t.hideDefault)
     return null;
   const {
-    codeName: i,
-    width: c
-  } = e, s = t.columns[i], l = t.state.columnStates.find((h) => h.key === i), r = s.isAdaptiveColumn || !t.hasAdaptiveColumn && o === n.length - 1 ? "min-width" : "width";
-  let d = "";
-  return e.columnType === "UAGRIDCOLUMN" && (d = "attachment-ua-column"), g(y("el-table-column"), Nt({
-    label: e.caption,
-    prop: i,
-    "class-name": d,
-    "label-class-name": d
+    codeName: r,
+    width: i
+  } = t, a = e.columns[r], s = e.state.columnStates.find((d) => d.key === r), c = a.isAdaptiveColumn || !e.hasAdaptiveColumn && n === o.length - 1 ? "min-width" : "width";
+  let u = "";
+  return t.columnType === "UAGRIDCOLUMN" && (u = "attachment-ua-column"), g(b("el-table-column"), De({
+    label: t.caption,
+    prop: r,
+    "class-name": u,
+    "label-class-name": u
   }, {
-    [r]: c
+    [c]: i
   }, {
-    fixed: l.fixed,
-    sortable: e.enableSort ? "custom" : !1,
-    align: ((u = e.align) == null ? void 0 : u.toLowerCase()) || "center"
+    fixed: s.fixed,
+    sortable: t.enableSort ? "custom" : !1,
+    align: ((l = t.align) == null ? void 0 : l.toLowerCase()) || "center"
   }), {
     default: ({
-      row: h
+      row: d
     }) => {
-      var m, R;
-      let f = h;
-      h.isGroupData && (f = h.first);
-      const p = t.findRowState(f);
+      var h, f;
+      let m = d;
+      d.isGroupData && (m = d.first);
+      const p = e.findRowState(m);
       if (p) {
-        if (e.columnType === "UAGRIDCOLUMN") {
-          const E = U("grid-ua-column"), T = U("attachment-grid"), O = ((m = s.model.deuiactionGroup) == null ? void 0 : m.uiactionGroupDetails) || [], w = O.filter((b) => b.actionLevel !== 250), k = O.filter((b) => b.actionLevel === 250);
+        if (t.columnType === "UAGRIDCOLUMN") {
+          const E = U("grid-ua-column"), S = U("attachment-grid"), w = ((h = a.model.deuiactionGroup) == null ? void 0 : h.uiactionGroupDetails) || [], D = w.filter((k) => k.actionLevel !== 250), y = w.filter((k) => k.actionLevel === 250);
           return g("div", {
-            class: [E.b(), (R = s.model.cellSysCss) == null ? void 0 : R.cssName]
-          }, [k.length && g(y("iBizActionToolbar"), {
-            onDblclick: F,
-            onClick: F,
-            "action-details": k,
-            "actions-state": p.uaColStates[s.model.codeName],
-            popperClass: T.e("popper"),
-            onActionClick: (b, G) => {
-              tt(b, G, s, p);
+            class: [E.b(), (f = a.model.cellSysCss) == null ? void 0 : f.cssName]
+          }, [y.length && g(b("iBizActionToolbar"), {
+            onDblclick: G,
+            onClick: G,
+            "action-details": y,
+            "actions-state": p.uaColStates[a.model.codeName],
+            popperClass: S.e("popper"),
+            onActionClick: (k, F) => {
+              K(k, F, a, p);
             }
-          }, null), w.length && g(y("iBizActionToolbar"), {
-            onDblclick: F,
-            onClick: F,
+          }, null), D.length && g(b("iBizActionToolbar"), {
+            onDblclick: G,
+            onClick: G,
             mode: "dropdown",
             caption: "· · ·",
-            "action-details": w,
-            popperClass: T.e("popper"),
-            "actions-state": p.uaColStates[s.model.codeName],
-            onActionClick: (b, G) => {
-              tt(b, G, s, p);
+            "action-details": D,
+            popperClass: S.e("popper"),
+            "actions-state": p.uaColStates[a.model.codeName],
+            onActionClick: (k, F) => {
+              K(k, F, a, p);
             }
           }, null)]);
         }
-        const D = y(t.providers[i].component);
-        return At(D, {
-          controller: s,
+        const R = b(e.providers[r].component);
+        return ke(R, {
+          controller: a,
           row: p,
-          key: f.tempsrfkey + i
+          key: m.tempsrfkey + r
         });
       }
       return null;
     }
   });
 }
-function wt(t, e, n, o) {
-  var i, c;
-  if (e.columnType === "GROUPGRIDCOLUMN") {
-    const s = ((i = e.degridColumns) == null ? void 0 : i.filter((r) => !r.hideDefault)) || [], {
-      width: l
-    } = e, a = ((c = e.align) == null ? void 0 : c.toLowerCase()) || "center";
-    return g(y("el-table-column"), {
-      prop: e.codeName,
-      label: e.caption,
-      "min-width": l,
-      align: a
+function pe(e, t, o, n) {
+  var l, r;
+  if (t.columnType === "GROUPGRIDCOLUMN") {
+    const i = ((l = t.degridColumns) == null ? void 0 : l.filter((c) => !c.hideDefault)) || [], {
+      width: a
+    } = t, s = ((r = t.align) == null ? void 0 : r.toLowerCase()) || "center";
+    return g(b("el-table-column"), {
+      prop: t.codeName,
+      label: t.caption,
+      "min-width": a,
+      align: s
     }, {
-      default: () => s.map((r, d) => wt(t, r, n, d))
+      default: () => i.map((c, u) => pe(e, c, o, u))
     });
   }
-  return ie(t, e, n, o);
+  return nt(e, t, o, n);
 }
-const q = /* @__PURE__ */ kt({
+const q = /* @__PURE__ */ Re({
   name: "AttachmentGridControl",
   props: {
     modelData: {
@@ -851,84 +850,84 @@ const q = /* @__PURE__ */ kt({
       default: !0
     }
   },
-  setup(t) {
-    const e = bt((...w) => new oe(...w)), n = U("control-".concat(e.model.controlType.toLowerCase())), {
-      tableRef: o,
-      onRowClick: i,
-      onDbRowClick: c,
-      onSelectionChange: s,
-      onSortChange: l,
-      handleRowClassName: a,
-      handleHeaderCellClassName: r
-    } = Bt(e), {
-      onPageChange: d,
-      onPageRefresh: u,
+  setup(e) {
+    const t = we((...w) => new ot(...w)), o = U("control-".concat(t.model.controlType.toLowerCase())), {
+      tableRef: n,
+      onRowClick: l,
+      onDbRowClick: r,
+      onSelectionChange: i,
+      onSortChange: a,
+      handleRowClassName: s,
+      handleHeaderCellClassName: c
+    } = Ne(t), {
+      onPageChange: u,
+      onPageRefresh: d,
       onPageSizeChange: h
-    } = Lt(e), f = () => {
-      var k;
+    } = Pe(t), f = () => {
+      var w;
       const {
-        isLoaded: w
-      } = e.state;
-      if (w) {
-        const b = (k = e.model.controls) == null ? void 0 : k.find((G) => G.name === "".concat(e.model.name, "_quicktoolbar"));
-        return b ? g(y("iBizToolbarControl"), {
-          modelData: b,
-          context: e.context,
-          params: e.params,
-          class: n.b("quick-toolbar")
-        }, null) : g(y("iBizNoData"), {
-          text: e.model.emptyText,
-          emptyTextLanguageRes: e.model.emptyTextLanguageRes
+        isLoaded: D
+      } = t.state;
+      if (D) {
+        const y = (w = t.model.controls) == null ? void 0 : w.find((k) => k.name === "".concat(t.model.name, "_quicktoolbar"));
+        return y ? g(b("iBizToolbarControl"), {
+          modelData: y,
+          context: t.context,
+          params: t.params,
+          class: o.b("quick-toolbar")
+        }, null) : g(b("iBizNoData"), {
+          text: t.model.emptyText,
+          emptyTextLanguageRes: t.model.emptyTextLanguageRes
         }, null);
       }
       return null;
     }, {
-      tableData: p,
-      renderColumns: m,
+      tableData: m,
+      renderColumns: p,
       defaultSort: R,
-      summaryMethod: D
-    } = Pt(e, t), {
-      renderPopover: E
-    } = ne(o, e);
+      summaryMethod: E
+    } = Be(t, e), {
+      renderPopover: S
+    } = tt(n, t);
     return {
-      c: e,
-      ns: n,
-      tableRef: o,
-      tableData: p,
-      renderColumns: m,
-      onDbRowClick: c,
-      onRowClick: i,
-      onSelectionChange: s,
-      onSortChange: l,
-      onPageChange: d,
+      c: t,
+      ns: o,
+      tableRef: n,
+      tableData: m,
+      renderColumns: p,
+      onDbRowClick: r,
+      onRowClick: l,
+      onSelectionChange: i,
+      onSortChange: a,
+      onPageChange: u,
       onPageSizeChange: h,
-      onPageRefresh: u,
-      handleRowClassName: a,
-      handleHeaderCellClassName: r,
+      onPageRefresh: d,
+      handleRowClassName: s,
+      handleHeaderCellClassName: c,
       renderNoData: f,
-      summaryMethod: D,
-      renderPopover: E,
+      summaryMethod: E,
+      renderPopover: S,
       defaultSort: R,
       onColumnStateClick: (w) => {
-        e.setColumnVisible(w);
+        t.setColumnVisible(w);
       },
       renderBatchToolBar: () => {
-        var k;
-        const w = (k = e.model.controls) == null ? void 0 : k.find((b) => b.name === "".concat(e.model.name, "_batchtoolbar"));
-        if (!(!w || e.state.singleSelect))
+        var w;
+        const D = (w = t.model.controls) == null ? void 0 : w.find((y) => y.name === "".concat(t.model.name, "_batchtoolbar"));
+        if (!(!D || t.state.singleSelect))
           return g("div", {
-            class: [n.b("batch-toolbar"), n.is("show", e.state.selectedData.length > 0)]
+            class: [o.b("batch-toolbar"), o.is("show", t.state.selectedData.length > 0)]
           }, [g("div", {
-            class: n.b("batch-toolbar-content")
+            class: o.b("batch-toolbar-content")
           }, [g("div", {
-            class: n.b("batch-toolbar-text")
-          }, [$("已选中"), e.state.selectedData.length, $("项")]), g("div", {
-            class: n.b("batch-toolbar-separator")
-          }, [$("|")]), g(y("iBizToolbarControl"), {
-            modelData: w,
-            context: e.context,
-            params: e.params,
-            class: n.b("batch-toolbar-items")
+            class: o.b("batch-toolbar-text")
+          }, [V("已选中"), t.state.selectedData.length, V("项")]), g("div", {
+            class: o.b("batch-toolbar-separator")
+          }, [V("|")]), g(b("iBizToolbarControl"), {
+            modelData: D,
+            context: t.context,
+            params: t.params,
+            class: o.b("batch-toolbar-items")
           }, null)])]);
       }
     };
@@ -937,24 +936,24 @@ const q = /* @__PURE__ */ kt({
     if (!this.c.state.isLoaded)
       return;
     const {
-      state: t
+      state: e
     } = this.c, {
-      hideHeader: e,
-      enablePagingBar: n
+      hideHeader: t,
+      enablePagingBar: o
     } = this.c.model;
-    return g(y("iBizControlBase"), {
-      class: [this.ns.is("show-header", !e), this.ns.is("enable-page", n), this.ns.is("enable-group", this.c.model.enableGroup)],
+    return g(b("iBizControlBase"), {
+      class: [this.ns.is("show-header", !t), this.ns.is("enable-page", o), this.ns.is("enable-group", this.c.model.enableGroup)],
       controller: this.c
     }, {
-      default: () => [g(y("el-table"), {
+      default: () => [g(b("el-table"), {
         ref: "tableRef",
         class: [this.ns.e("table"), this.ns.is("attachment", !0)],
         "default-sort": this.defaultSort,
         border: !0,
-        "show-header": !e,
+        "show-header": !t,
         "show-summary": this.c.enableAgg,
         "summary-method": this.summaryMethod,
-        "highlight-current-row": t.singleSelect,
+        "highlight-current-row": e.singleSelect,
         "row-class-name": this.handleRowClassName,
         "header-cell-class-name": this.handleHeaderCellClassName,
         "row-key": "tempsrfkey",
@@ -966,48 +965,48 @@ const q = /* @__PURE__ */ kt({
         "tooltip-effect": "light"
       }, {
         empty: this.renderNoData,
-        default: () => [!t.singleSelect && g(y("el-table-column"), {
+        default: () => [!e.singleSelect && g(b("el-table-column"), {
           "class-name": this.ns.e("selection"),
           type: "selection",
           width: "55"
-        }, null), this.renderColumns.map((o, i) => wt(this.c, o, this.renderColumns, i))],
+        }, null), this.renderColumns.map((n, l) => pe(this.c, n, this.renderColumns, l))],
         append: () => this.renderPopover()
-      }), n && g(y("iBizPagination"), {
-        total: t.total,
-        curPage: t.curPage,
-        size: t.size,
+      }), o && g(b("iBizPagination"), {
+        total: e.total,
+        curPage: e.curPage,
+        size: e.size,
         onChange: this.onPageChange,
         onPageSizeChange: this.onPageSizeChange,
         onPageRefresh: this.onPageRefresh
-      }, null), this.c.model.enableCustomized && !e && g("div", {
+      }, null), this.c.model.enableCustomized && !t && g("div", {
         class: this.ns.b("setting-box")
-      }, [g(y("iBizGridSetting"), {
-        columnStates: t.columnStates,
+      }, [g(b("iBizGridSetting"), {
+        columnStates: e.columnStates,
         controller: this.c
       }, null)]), this.renderBatchToolBar()]
     });
   }
 });
-class se {
+class lt {
   constructor() {
-    Z(this, "component", "AttachmentGridControl");
+    Le(this, "component", "AttachmentGridControl");
   }
 }
-const re = xt(
+const it = ge(
   q,
-  (t) => {
-    t.component(q.name, q), Dt(
-      "".concat(Et.GRID, "_RENDER_ATTACHMENT_GRID"),
-      () => new se()
+  (e) => {
+    e.component(q.name, q), ye(
+      "".concat(be.GRID, "_RENDER_ATTACHMENT_GRID"),
+      () => new lt()
     );
   }
-), fe = {
+), ut = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(t) {
-    t.use(re);
+  install(e) {
+    e.use(it);
   }
 };
 export {
-  re as IBizAttachmentGridControl,
-  fe as default
+  it as IBizAttachmentGridControl,
+  ut as default
 };

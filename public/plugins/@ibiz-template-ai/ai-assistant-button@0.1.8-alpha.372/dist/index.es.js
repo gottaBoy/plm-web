@@ -1,23 +1,16 @@
-import './style.css';
-var U = Object.defineProperty;
-var R = (e, n, t) => n in e ? U(e, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[n] = t;
-var g = (e, n, t) => (R(e, typeof n != "symbol" ? n + "" : n, t), t);
-import { PanelItemState as k, PanelItemController as E, UIActionButtonState as W, UIActionUtil as L, registerPanelItemProvider as _ } from "@ibiz-template/runtime";
-import { useNamespace as H, withInstall as V } from "@ibiz-template/vue3-util";
-import { defineComponent as X, ref as d, onMounted as Y, createVNode as l, resolveComponent as q } from "vue";
-import { showTitle as F } from "@ibiz-template/core";
-class Z extends k {
+import './assets/style.css';
+import './assets/style.css';
+import { registerPanelItemProvider as U, PanelItemController as k, UIActionButtonState as R, UIActionUtil as E, PanelItemState as L } from "@ibiz-template/runtime";
+import { withInstall as V, useNamespace as W } from "@ibiz-template/vue3-util";
+import { defineComponent as _, ref as u, onMounted as j, createVNode as o, resolveComponent as Z } from "vue";
+import { showTitle as q } from "@ibiz-template/core";
+var F = Object.defineProperty, H = (e, t, n) => t in e ? F(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n, I = (e, t, n) => (H(e, typeof t != "symbol" ? t + "" : t, n), n);
+class J extends L {
   constructor() {
-    super(...arguments);
-    /**
-     * @description 界面行为状态
-     * @type {UIActionButtonState}
-     * @memberof AIAssistantState
-     */
-    g(this, "uiActionState");
+    super(...arguments), I(this, "uiActionState");
   }
 }
-class x extends E {
+class C extends k {
   /**
    * Creates an instance of AIAssistantButtonController.
    * @param {IPanelButton} model
@@ -25,18 +18,12 @@ class x extends E {
    * @param {PanelItemController} [parent]
    * @memberof AIAssistantButtonController
    */
-  constructor(t, i, s) {
-    super(t, i, s);
-    /**
-     * @description 自定义对齐方式
-     * @memberof AIAssistantButtonController
-     */
-    g(this, "customizedAlign", "RIGHTEND");
-    this.state.uiActionState = this.createUIActionState();
+  constructor(t, n, a) {
+    super(t, n, a), I(this, "customizedAlign", "RIGHTEND"), this.state.uiActionState = this.createUIActionState();
   }
   createState() {
     var t;
-    return new Z((t = this.parent) == null ? void 0 : t.state);
+    return new J((t = this.parent) == null ? void 0 : t.state);
   }
   /**
    * @description 父容器数据对象数据
@@ -63,12 +50,12 @@ class x extends E {
   async initPluginParams() {
     const t = await ibiz.hub.getAppAsync(this.model.appId);
     if (t && t.model.appPFPluginRefs) {
-      const i = t.model.appPFPluginRefs.find(
-        (s) => s.pluginCode === "AI_ASSISTANT_BUTTON"
+      const n = t.model.appPFPluginRefs.find(
+        (a) => a.pluginCode === "AI_ASSISTANT_BUTTON"
       );
-      if (!i)
+      if (!n)
         return;
-      i.pluginParams && i.pluginParams.customizedalign && (this.customizedAlign = i.pluginParams.customizedalign);
+      n.pluginParams && n.pluginParams.customizedalign && (this.customizedAlign = n.pluginParams.customizedalign);
     }
   }
   /**
@@ -79,9 +66,9 @@ class x extends E {
    * @memberof AIAssistantButtonController
    */
   createUIActionState() {
-    const { uiactionId: t, name: i } = this.model;
-    return new W(
-      i,
+    const { uiactionId: t, name: n } = this.model;
+    return new R(
+      n,
       this.panel.context.srfappid,
       t
     );
@@ -124,18 +111,18 @@ class x extends E {
    * @memberof AIAssistantButtonController
    */
   async onActionClick(t) {
-    var u;
-    const { uiactionId: i, actionType: s } = this.model;
-    if (s === "NONE")
+    var n;
+    const { uiactionId: a, actionType: r } = this.model;
+    if (r === "NONE")
       return;
     t.stopPropagation(), t.preventDefault();
-    const r = await ibiz.aiChatUtil.getAIChat();
-    if (r.container) {
-      (u = r.close) == null || u.call(r);
+    const c = await ibiz.aiChatUtil.getAIChat();
+    if (c.container) {
+      (n = c.close) == null || n.call(c);
       return;
     }
-    await L.execAndResolved(
-      i,
+    await E.execAndResolved(
+      a,
       {
         context: this.panel.context,
         params: {
@@ -178,30 +165,30 @@ class x extends E {
     super.calcItemDisabled(t);
   }
 }
-function j(e) {
+function G(e) {
   return e.x >= 0 && e.x <= 1 && e.y >= 0 && e.y <= 1;
 }
-function J(e, n, t, i) {
-  const s = e / window.innerWidth, r = n / window.innerHeight, u = Math.max(0, Math.min(s, 1 - t)), m = Math.max(0, Math.min(r, 1 - i));
-  return { x: u, y: m };
+function X(e, t, n, a) {
+  const r = e / window.innerWidth, c = t / window.innerHeight, p = Math.max(0, Math.min(r, 1 - n)), m = Math.max(0, Math.min(c, 1 - a));
+  return { x: p, y: m };
 }
-const $ = () => l("svg", {
+const Y = () => o("svg", {
   viewBox: "0 0 1024 1024",
   version: "1.1",
   xmlns: "http://www.w3.org/2000/svg"
-}, [l("path", {
+}, [o("path", {
   d: "M481.0752 263.3728l50.9952 1.024 1.8432-105.8816-50.9952-0.8192z"
-}, null), l("path", {
+}, null), o("path", {
   d: "M486.441426 180.895362a66.56 66.56 0 1 0 42.091944-126.290153 66.56 66.56 0 1 0-42.091944 126.290153Z"
-}, null), l("path", {
+}, null), o("path", {
   d: "M138.8544 664.3712c-52.8384 0-95.8464-43.008-95.8464-95.8464s43.008-95.8464 95.8464-95.8464M880.0256 472.6784c52.8384 0 95.8464 43.008 95.8464 95.8464s-43.008 95.8464-95.8464 95.8464"
-}, null), l("path", {
+}, null), o("path", {
   d: "M507.4944 220.5696c-220.16 0-398.7456 162.816-398.7456 363.7248s178.5856 363.7248 398.7456 363.7248 398.7456-162.816 398.7456-363.7248-178.5856-363.7248-398.7456-363.7248z m0 559.9232c-166.2976 0-301.2608-100.5568-301.2608-224.4608s134.9632-224.4608 301.2608-224.4608S808.7552 432.128 808.7552 556.032 673.792 780.4928 507.4944 780.4928z"
-}, null), l("path", {
+}, null), o("path", {
   d: "M319.6928 556.032a47.9232 38.912 90 1 0 77.824 0 47.9232 38.912 90 1 0-77.824 0Z"
-}, null), l("path", {
+}, null), o("path", {
   d: "M617.472 556.032a47.9232 38.912 90 1 0 77.824 0 47.9232 38.912 90 1 0-77.824 0Z"
-}, null)]), w = /* @__PURE__ */ X({
+}, null)]), w = /* @__PURE__ */ _({
   name: "IBizAIAssistantButton",
   props: {
     /**
@@ -215,111 +202,111 @@ const $ = () => l("svg", {
      * @description 面板项控制器
      */
     controller: {
-      type: x,
+      type: C,
       required: !0
     }
   },
   setup(e) {
-    const n = H("ai-assistant-button"), {
-      sysImage: t,
-      buttonCssStyle: i,
-      tooltip: s = "AI助手"
+    const t = W("ai-assistant-button"), {
+      sysImage: n,
+      buttonCssStyle: a,
+      tooltip: r = "AI助手"
     } = e.modelData, {
-      state: r
-    } = e.controller, u = d("");
-    i && (u.value = i);
-    const m = "ai-assistant-button-position-style", I = d(), o = d(), S = d(), y = d(!1), p = d(""), B = () => {
-      if (!o.value)
+      state: c
+    } = e.controller, p = u("");
+    a && (p.value = a);
+    const m = "ai-assistant-button-position-style", f = u(), s = u(), S = u(), A = u(!1), d = u(""), b = () => {
+      if (!s.value)
         return;
-      const a = I.value.offsetWidth || 56, c = window.innerWidth, h = 20, v = o.value.x * c + a, A = c - v;
-      o.value.x * c <= h ? p.value = "adsorption-left" : A <= h && (p.value = "adsorption-right");
-    }, b = () => {
-      o.value && (S.value = {
-        [n.cssVarBlockName("position-drag-left")]: "".concat(o.value.x * 100, "%"),
-        [n.cssVarBlockName("position-drag-top")]: "".concat(o.value.y * 100, "%")
-      }, localStorage.setItem(m, JSON.stringify(o.value)));
+      const i = f.value.offsetWidth || 56, l = window.innerWidth, h = 20, y = s.value.x * l + i, g = l - y;
+      s.value.x * l <= h ? d.value = "adsorption-left" : g <= h && (d.value = "adsorption-right");
+    }, x = () => {
+      s.value && (S.value = {
+        [t.cssVarBlockName("position-drag-left")]: "".concat(s.value.x * 100, "%"),
+        [t.cssVarBlockName("position-drag-top")]: "".concat(s.value.y * 100, "%")
+      }, localStorage.setItem(m, JSON.stringify(s.value)));
     }, N = () => {
-      const a = I.value;
-      a && (a.onmousedown = (c) => {
+      const i = f.value;
+      i && (i.onmousedown = (l) => {
         document.body.style.userSelect = "none";
-        const h = c.clientX - a.offsetLeft, v = c.clientY - a.offsetTop, A = Date.now(), C = (f) => {
-          p.value && (p.value = "");
-          const z = 56 / window.innerWidth, T = 56 / window.innerHeight, {
+        const h = l.clientX - i.offsetLeft, y = l.clientY - i.offsetTop, g = Date.now(), P = (v) => {
+          d.value && (d.value = "");
+          const M = 56 / window.innerWidth, T = 56 / window.innerHeight, {
             x: D,
             y: O
-          } = J(f.clientX - h, f.clientY - v, z, T);
-          o.value = {
+          } = X(v.clientX - h, v.clientY - y, M, T);
+          s.value = {
             x: D,
             y: O
           }, requestAnimationFrame(() => {
-            b();
+            x();
           });
-        }, P = () => {
-          const f = Date.now();
-          y.value = f - A > 300, B(), document.body.style.userSelect = "", document.removeEventListener("mousemove", C), document.removeEventListener("mouseup", P);
+        }, B = () => {
+          const v = Date.now();
+          A.value = v - g > 300, b(), document.body.style.userSelect = "", document.removeEventListener("mousemove", P), document.removeEventListener("mouseup", B);
         };
-        document.addEventListener("mousemove", C), document.addEventListener("mouseup", P);
+        document.addEventListener("mousemove", P), document.addEventListener("mouseup", B);
       });
-    }, M = async (a) => {
-      y.value || (await e.controller.onActionClick(a), e.controller.onClick(a));
+    }, z = async (i) => {
+      A.value || (await e.controller.onActionClick(i), e.controller.onClick(i));
     };
-    return Y(() => {
-      const a = localStorage.getItem(m);
-      if (a) {
-        const c = JSON.parse(a);
-        o.value = {}, j(c) && Object.assign(o.value, c);
+    return j(() => {
+      const i = localStorage.getItem(m);
+      if (i) {
+        const l = JSON.parse(i);
+        s.value = {}, G(l) && Object.assign(s.value, l);
       }
-      b(), N(), B();
+      x(), N(), b();
     }), {
-      ns: n,
-      btnRef: I,
-      state: r,
-      sysImage: t,
-      tooltip: s,
-      tempStyle: u,
-      adsorption: p,
+      ns: t,
+      btnRef: f,
+      state: c,
+      sysImage: n,
+      tooltip: r,
+      tempStyle: p,
+      adsorption: d,
       positionStyle: S,
-      handleButtonClick: M
+      handleButtonClick: z
     };
   },
   render() {
     if (this.state.visible) {
       const e = this.controller.customizedAlign.toLocaleLowerCase();
-      return l("div", {
+      return o("div", {
         ref: "btnRef",
         class: [this.ns.b(), this.ns.is(e, !!e), this.ns.is("drag", !!this.positionStyle), this.ns.is(this.adsorption, !!this.adsorption), this.tempStyle, ...this.controller.containerClass],
         style: this.positionStyle,
-        title: F(this.tooltip),
+        title: q(this.tooltip),
         onClick: this.handleButtonClick
-      }, [l("div", {
+      }, [o("div", {
         class: this.ns.e("content")
-      }, [this.sysImage ? l(q("iBizIcon"), {
+      }, [this.sysImage ? o(Z("iBizIcon"), {
         class: this.ns.em("content", "icon"),
         icon: this.sysImage
-      }, null) : $()])]);
+      }, null) : Y()])]);
     }
     return null;
   }
 });
-class G {
+class $ {
   constructor() {
-    g(this, "component", "IBizAIAssistantButton");
+    I(this, "component", "IBizAIAssistantButton");
   }
-  async createController(n, t, i) {
-    const s = new x(n, t, i);
-    return await s.init(), s;
+  async createController(t, n, a) {
+    const r = new C(t, n, a);
+    return await r.init(), r;
   }
 }
-const it = V(
+const nt = V(
   w,
   function(e) {
-    e.component(w.name, w), _(
+    e.component(w.name, w), U(
       "CUSTOM_AI_ASSISTANT_BUTTON",
-      () => new G()
+      () => new $()
     );
   }
 );
 export {
-  it as IBizAssistantButton,
-  it as default
+  nt as IBizAssistantButton,
+  nt as default
 };

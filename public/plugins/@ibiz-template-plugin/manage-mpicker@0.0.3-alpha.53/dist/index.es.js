@@ -1,76 +1,14 @@
-import './style.css';
-var _ = Object.defineProperty;
-var W = (l, u, o) => u in l ? _(l, u, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[u] = o;
-var d = (l, u, o) => (W(l, typeof u != "symbol" ? u + "" : u, o), o);
-import { EditorController as X, ButtonContainerState as $, ControllerEvent as H, getDeACMode as Q, UIActionButtonState as Y, OpenAppViewCommand as V, UIActionUtil as Z, registerEditorProvider as q } from "@ibiz-template/runtime";
-import { getDataPickerProps as ee, getEditorEmits as te, useNamespace as ie, withInstall as ae } from "@ibiz-template/vue3-util";
+import './assets/style.css';
+import './assets/style.css';
+import { registerEditorProvider as _, EditorController as W, ButtonContainerState as X, ControllerEvent as H, getDeACMode as q, UIActionButtonState as Q, OpenAppViewCommand as V, UIActionUtil as Y } from "@ibiz-template/runtime";
+import { getDataPickerProps as Z, getEditorEmits as $, useNamespace as ee, withInstall as te } from "@ibiz-template/vue3-util";
 import { RuntimeModelError as P } from "@ibiz-template/core";
-import { mergeDeepLeft as oe, clone as D } from "ramda";
-import { defineComponent as se, ref as g, watch as S, computed as ne, onMounted as le, createVNode as h, resolveComponent as N, createTextVNode as M } from "vue";
-class re extends X {
+import { clone as D, mergeDeepLeft as ae } from "ramda";
+import { defineComponent as ie, ref as N, watch as S, computed as se, onMounted as oe, createVNode as u, resolveComponent as f, createTextVNode as F } from "vue";
+var ne = Object.defineProperty, le = (l, i, o) => i in l ? ne(l, i, { enumerable: !0, configurable: !0, writable: !0, value: o }) : l[i] = o, d = (l, i, o) => (le(l, typeof i != "symbol" ? i + "" : i, o), o);
+class re extends W {
   constructor() {
-    super(...arguments);
-    /**
-     * 是否多选
-     */
-    d(this, "multiple", !1);
-    /**
-     *选择视图相关参数
-     */
-    d(this, "pickupView", null);
-    /**
-     *链接视图相关参数
-     */
-    d(this, "linkView", null);
-    /**
-     *值项
-     */
-    d(this, "valueItem", "");
-    /**
-     * 主键属性名称
-     */
-    d(this, "keyName", "srfkey");
-    /**
-     * 主文本属性名称
-     */
-    d(this, "textName", "srfmajortext");
-    /**
-     * 数据集codeName
-     */
-    d(this, "interfaceName", "");
-    /**
-     * 自填模式sort排序
-     */
-    d(this, "sort", "");
-    /**
-     * 不支持AC（根据编辑器类型得）
-     */
-    d(this, "noAC", !1);
-    /**
-     * 不支持按钮（根据编辑器类型得）
-     */
-    d(this, "noButton", !1);
-    /**
-     * 实体自填模式模型
-     */
-    d(this, "deACMode");
-    /**
-     * 自填数据项集合（已排除了value和text)
-     */
-    d(this, "dataItems", []);
-    // 对象标识属性
-    d(this, "objectIdField", "");
-    // 对象名称属性
-    d(this, "objectNameField", "");
-    // 对象值属性
-    d(this, "objectValueField", "");
-    // 项布局面板
-    d(this, "itemLayoutPanel");
-    /**
-     * 分组行为状态
-     */
-    d(this, "groupActionState", new $());
-    d(this, "evt", new H(
+    super(...arguments), d(this, "multiple", !1), d(this, "pickupView", null), d(this, "linkView", null), d(this, "valueItem", ""), d(this, "keyName", "srfkey"), d(this, "textName", "srfmajortext"), d(this, "interfaceName", ""), d(this, "sort", ""), d(this, "noAC", !1), d(this, "noButton", !1), d(this, "deACMode"), d(this, "dataItems", []), d(this, "objectIdField", ""), d(this, "objectNameField", ""), d(this, "objectValueField", ""), d(this, "itemLayoutPanel"), d(this, "groupActionState", new X()), d(this, "evt", new H(
       this.getEventArgs.bind(this)
     ));
   }
@@ -85,41 +23,41 @@ class re extends X {
     };
   }
   async onInit() {
-    var r, m, n, c;
-    if (super.onInit(), this.initParams(), this.valueItem = ((r = this.model.valueItemName) == null ? void 0 : r.toLowerCase()) || "", this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await Q(
+    var i, o, e, m;
+    if (super.onInit(), this.initParams(), this.valueItem = ((i = this.model.valueItemName) == null ? void 0 : i.toLowerCase()) || "", this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await q(
       this.model.appDEACModeId,
       this.model.appDataEntityId,
       this.context.srfappid
     ), this.deACMode))) {
-      const { minorSortAppDEFieldId: v, minorSortDir: f } = this.deACMode;
-      v && f && (this.sort = "".concat(v.toLowerCase(), ",").concat(f.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
-        (b) => {
-          b.id !== "value" && b.id !== "text" && this.dataItems.push(b);
+      const { minorSortAppDEFieldId: r, minorSortDir: y } = this.deACMode;
+      r && y && (this.sort = "".concat(r.toLowerCase(), ",").concat(y.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
+        (v) => {
+          v.id !== "value" && v.id !== "text" && this.dataItems.push(v);
         }
       )), this.deACMode.itemLayoutPanel && (this.itemLayoutPanel = this.deACMode.itemLayoutPanel);
     }
-    const o = [
+    const c = [
       "PICKEREX_DROPDOWNVIEW",
       "PICKEREX_DROPDOWNVIEW_LINK",
       "PICKUPVIEW"
     ];
-    if (this.model.editorType && o.includes(this.model.editorType) && this.initPickupViewParams(), this.objectIdField = (m = this.model.objectIdField) == null ? void 0 : m.toLowerCase(), this.objectNameField = (n = this.model.objectNameField) == null ? void 0 : n.toLowerCase(), this.objectValueField = (c = this.model.objectValueField) == null ? void 0 : c.toLowerCase(), this.model.uiactionGroup) {
-      const v = this.model.uiactionGroup.uiactionGroupDetails || [];
-      v.length > 0 && (v.forEach((f) => {
-        const b = f.uiactionId;
-        if (b) {
-          const k = new Y(
-            f.id,
+    if (this.model.editorType && c.includes(this.model.editorType) && this.initPickupViewParams(), this.objectIdField = (o = this.model.objectIdField) == null ? void 0 : o.toLowerCase(), this.objectNameField = (e = this.model.objectNameField) == null ? void 0 : e.toLowerCase(), this.objectValueField = (m = this.model.objectValueField) == null ? void 0 : m.toLowerCase(), this.model.uiactionGroup) {
+      const r = this.model.uiactionGroup.uiactionGroupDetails || [];
+      r.length > 0 && (r.forEach((y) => {
+        const v = y.uiactionId;
+        if (v) {
+          const I = new Q(
+            y.id,
             this.context.srfappid,
-            b
+            v
           );
-          this.groupActionState.addState(f.id, k);
+          this.groupActionState.addState(y.id, I);
         }
       }), await this.groupActionState.init());
     }
-    const e = this.getView();
-    e && e.evt.on("onDataChange", (v) => {
-      v.eventName === "onLoadSuccess" && this.context.srfshowchoose && this.toggleMenu(!0);
+    const p = this.getView();
+    p && p.evt.on("onDataChange", (r) => {
+      r.eventName === "onLoadSuccess" && this.context.srfshowchoose && this.toggleMenu(!0);
     });
   }
   /**
@@ -160,18 +98,18 @@ class re extends X {
    * @returns {*}  {Promise<IHttpResponse<IData[]>>}
    * @memberof PickerEditorController
    */
-  async getServiceData(o, e) {
-    const { context: r, params: m } = this.handlePublicParams(e, this.context, {
+  async getServiceData(i, o) {
+    const { context: e, params: m } = this.handlePublicParams(o, this.context, {
       ...this.params
-    }), n = {};
-    this.sort && !Object.is(this.sort, "") && Object.assign(n, { sort: this.sort }), o && Object.assign(n, { query: o }), Object.assign(n, { size: 1e3 });
-    const c = oe(m, n);
+    }), c = {};
+    this.sort && !Object.is(this.sort, "") && Object.assign(c, { sort: this.sort }), i && Object.assign(c, { query: i }), Object.assign(c, { size: 1e3 });
+    const p = ae(m, c);
     if (this.interfaceName)
       return await ibiz.hub.getApp(this.context.srfappid).deService.exec(
         this.model.appDataEntityId,
         this.interfaceName,
-        r,
-        c
+        e,
+        p
       );
     throw new P(this.model, "请配置实体和实体数据集");
   }
@@ -183,39 +121,39 @@ class re extends X {
    * @returns {*}  {(Promise<IData[] | undefined>)}
    * @memberof PickerEditorController
    */
-  async openPickUpView(o, e) {
+  async openPickUpView(i, o) {
     await this.initPickupViewParams();
-    const { context: r, params: m } = this.handlePublicParams(o, this.context, {
+    const { context: e, params: m } = this.handlePublicParams(i, this.context, {
       ...this.params
     });
-    if (e && (m.selectedData = e), !this.pickupView)
+    if (o && (m.selectedData = o), !this.pickupView)
       throw new P(this.model, "请配置数据选择视图");
-    const n = await ibiz.commands.execute(
+    const c = await ibiz.commands.execute(
       V.TAG,
       this.pickupView.id,
-      r,
+      e,
       m,
       { openMode: "POPUPMODAL" }
     );
-    if (n && n.ok && n.data)
-      return n.data;
-    ibiz.log.debug("模态取消或关闭异常", n);
+    if (c && c.ok && c.data)
+      return c.data;
+    ibiz.log.debug("模态取消或关闭异常", c);
   }
   /**
    * 打开数据链接视图
    */
-  async openLinkView(o) {
-    const e = this.context.clone();
-    o[this.valueItem] && (e.srfkey = o[this.valueItem]);
-    const { context: r, params: m } = this.handlePublicParams(o, e, {
+  async openLinkView(i) {
+    const o = this.context.clone();
+    i[this.valueItem] && (o.srfkey = i[this.valueItem]);
+    const { context: e, params: m } = this.handlePublicParams(i, o, {
       ...this.params
-    }), { linkAppViewId: n } = this.model;
-    if (!n)
+    }), { linkAppViewId: c } = this.model;
+    if (!c)
       throw new P(this.model, "请配置数据链接视图");
     return ibiz.commands.execute(
       V.TAG,
-      n,
-      r,
+      c,
+      e,
       m
     );
   }
@@ -227,11 +165,11 @@ class re extends X {
    * @param {IData} data 选中数据
    * @returns {*}  {Promise<Array<{ id: string; value: any }>>}
    */
-  async calcFillDataItems(o) {
+  async calcFillDataItems(i) {
     return this.deACMode ? this.dataItems.length === 0 ? [] : await Promise.all(
-      this.dataItems.map((r) => {
-        const m = o[r.appDEFieldId];
-        return r.format || r.convertToCodeItemText && r.codeListId || r.customCode, { id: r.id, value: m };
+      this.dataItems.map((o) => {
+        const e = i[o.appDEFieldId];
+        return o.format || o.convertToCodeItemText && o.codeListId || o.customCode, { id: o.id, value: e };
       })
     ) : [];
   }
@@ -242,15 +180,15 @@ class re extends X {
    * @author: zhujiamin
    * @Date: 2023-08-22 15:58:56
    */
-  handleObjectParams(o) {
-    const e = {};
-    return this.objectIdField && Object.assign(e, {
-      [this.objectIdField]: o[this.keyName]
-    }), this.objectNameField && Object.assign(e, {
-      [this.objectNameField]: o[this.textName]
-    }), this.objectValueField && Object.assign(e, {
-      [this.objectValueField]: D(o)
-    }), e;
+  handleObjectParams(i) {
+    const o = {};
+    return this.objectIdField && Object.assign(o, {
+      [this.objectIdField]: i[this.keyName]
+    }), this.objectNameField && Object.assign(o, {
+      [this.objectNameField]: i[this.textName]
+    }), this.objectValueField && Object.assign(o, {
+      [this.objectValueField]: D(i)
+    }), o;
   }
   /**
    * 分组行为项点击
@@ -260,18 +198,18 @@ class re extends X {
    * @return {*}  {Promise<void>}
    * @memberof RoutePickerController
    */
-  async onActionClick(o, e) {
-    const r = o.uiactionId;
-    await Z.execAndResolved(
-      r,
+  async onActionClick(i, o) {
+    const e = i.uiactionId;
+    await Y.execAndResolved(
+      e,
       {
         context: this.context,
         params: this.params,
         data: [],
         view: this.getView(),
-        event: e
+        event: o
       },
-      o.appId
+      i.appId
     );
   }
   /**
@@ -292,210 +230,208 @@ class re extends X {
    * @param {boolean} visible
    * @memberof ManageMPickerController
    */
-  toggleMenu(o) {
-    this.evt.emit("toggleMenu", { visible: o });
+  toggleMenu(i) {
+    this.evt.emit("toggleMenu", { visible: i });
   }
 }
 class de {
   constructor() {
-    d(this, "formEditor");
-    d(this, "gridEditor");
-    this.formEditor = "ManageMPicker", this.gridEditor = "ManageMPicker";
+    d(this, "formEditor"), d(this, "gridEditor"), this.formEditor = "ManageMPicker", this.gridEditor = "ManageMPicker";
   }
-  async createController(u, o) {
-    const e = new re(u, o);
+  async createController(i, o) {
+    const e = new re(i, o);
     return await e.init(), e;
   }
 }
-const E = /* @__PURE__ */ se({
+const x = /* @__PURE__ */ ie({
   name: "ManageMPicker",
-  props: ee(),
-  emits: te(),
+  props: Z(),
+  emits: $(),
   setup(l, {
-    emit: u
+    emit: i
   }) {
-    const o = ie("mpicker"), e = l.controller, r = e.model, m = g([]), n = g([]), c = g([]), v = g(!1), f = g(), b = g(!1), k = g(!1);
-    let y = null;
-    const A = g("最近浏览"), j = g("更多");
-    r.editorParams && (r.editorParams.toplabel && (A.value = r.editorParams.toplabel), r.editorParams.lastlabel && (j.value = r.editorParams.lastlabel));
-    const C = (i) => {
-      if (m.value = [], c.value = [], i) {
+    const o = ee("mpicker"), e = l.controller, m = e.model, c = N([]), p = N([]), r = N([]), y = N(!1), v = N(), I = N(!1), k = N(!1);
+    let b = null;
+    const A = N("最近浏览"), j = N("更多");
+    m.editorParams && (m.editorParams.toplabel && (A.value = m.editorParams.toplabel), m.editorParams.lastlabel && (j.value = m.editorParams.lastlabel));
+    const w = (a) => {
+      if (c.value = [], r.value = [], a) {
         if (e.model.valueType === "OBJECTS")
-          i.forEach((t) => {
-            const a = D(t);
-            Object.assign(a, {
+          a.forEach((t) => {
+            const s = D(t);
+            Object.assign(s, {
               [e.keyName]: t[e.objectIdField],
               [e.textName]: t[e.objectNameField]
-            }), e.objectValueField && (Object.assign(a, {
+            }), e.objectValueField && (Object.assign(s, {
               ...t[e.objectValueField]
-            }), delete a[e.objectValueField]), a[e.keyName] && c.value.push(a);
+            }), delete s[e.objectValueField]), s[e.keyName] && r.value.push(s);
           });
         else if (e.objectIdField && e.model.valueSeparator)
-          i.split(e.model.valueSeparator).forEach((a) => {
-            c.value.push({
-              [e.keyName]: a
+          a.split(e.model.valueSeparator).forEach((t) => {
+            r.value.push({
+              [e.keyName]: t
             });
           });
         else
           try {
-            c.value = JSON.parse(i);
+            r.value = JSON.parse(a);
           } catch (t) {
-            ibiz.log.error("SIMPLE类型地址栏值格式".concat(i, "不符合JSON字符串要求"));
+            ibiz.log.error("SIMPLE类型地址栏值格式".concat(a, "不符合JSON字符串要求"));
           }
-        c.value.forEach((t) => {
-          m.value.push(t[e.keyName]), n.value.findIndex((s) => Object.is(s[e.keyName], t[e.keyName])) < 0 && n.value.push({
+        r.value.forEach((t) => {
+          c.value.push(t[e.keyName]), p.value.findIndex((s) => Object.is(s[e.keyName], t[e.keyName])) < 0 && p.value.push({
             [e.keyName]: t[e.keyName],
             [e.textName]: t[e.textName]
           });
         });
       }
     };
-    S(() => l.value, (i) => {
-      C(i);
+    S(() => l.value, (a) => {
+      w(a);
     }, {
       immediate: !0,
       deep: !0
     });
-    const F = (i) => {
+    const M = (a) => {
       const t = [];
-      i && Array.isArray(i) && i.forEach((s) => {
-        Object.assign(s, {
-          [e.keyName]: s[e.keyName] ? s[e.keyName] : s.srfkey,
-          [e.textName]: s[e.textName] ? s[e.textName] : s.srfmajortext
-        }), e.model.valueType === "OBJECTS" ? t.push(e.handleObjectParams(s)) : e.objectIdField ? t.push(s[e.keyName]) : t.push({
-          [e.keyName]: s[e.keyName],
-          [e.textName]: s[e.textName]
-        }), n.value.findIndex((I) => Object.is(I[e.keyName], s[e.keyName])) < 0 && n.value.push(s);
+      a && Array.isArray(a) && a.forEach((n) => {
+        Object.assign(n, {
+          [e.keyName]: n[e.keyName] ? n[e.keyName] : n.srfkey,
+          [e.textName]: n[e.textName] ? n[e.textName] : n.srfmajortext
+        }), e.model.valueType === "OBJECTS" ? t.push(e.handleObjectParams(n)) : e.objectIdField ? t.push(n[e.keyName]) : t.push({
+          [e.keyName]: n[e.keyName],
+          [e.textName]: n[e.textName]
+        }), p.value.findIndex((h) => Object.is(h[e.keyName], n[e.keyName])) < 0 && p.value.push(n);
       });
-      let a = null;
-      t.length > 0 && (e.model.valueType === "OBJECTS" ? a = t : a = e.objectIdField ? t.join(e.model.valueSeparator) : JSON.stringify(t)), y = a, C(y);
+      let s = null;
+      t.length > 0 && (e.model.valueType === "OBJECTS" ? s = t : s = e.objectIdField ? t.join(e.model.valueSeparator) : JSON.stringify(t)), b = s, w(b);
     }, T = async () => {
-      let i;
-      if (f.value.blur(), c.value.length) {
-        const a = JSON.parse(JSON.stringify(c.value));
-        a.forEach((s, p) => {
-          a[p].srfkey = s[e.keyName], a[p].srfmajortext = s[e.textName];
-        }), i = JSON.stringify(a);
+      let a;
+      if (v.value.blur(), r.value.length) {
+        const s = JSON.parse(JSON.stringify(r.value));
+        s.forEach((n, h) => {
+          s[h].srfkey = n[e.keyName], s[h].srfmajortext = n[e.textName];
+        }), a = JSON.stringify(s);
       }
-      b.value = !0;
-      const t = await e.openPickUpView(l.data, i);
-      t && F(t), b.value = !1;
-    }, L = (i) => {
+      I.value = !0;
+      const t = await e.openPickUpView(l.data, a);
+      t && M(t), I.value = !1;
+    }, L = (a) => {
       const t = [];
-      let a = null;
-      i.length > 0 && (i.forEach((s) => {
-        if (s !== "more" && s !== "recent") {
-          let p = n.value.findIndex((x) => Object.is(x[e.keyName], s)), I = {};
-          p >= 0 ? I = n.value[p] : (p = c.value.findIndex((x) => Object.is(x[e.keyName], s)), p >= 0 && (I = c.value[p])), e.model.valueType === "OBJECTS" ? t.push(e.handleObjectParams(I)) : e.objectIdField ? t.push(I[e.keyName]) : t.push({
-            [e.keyName]: I[e.keyName],
-            [e.textName]: I[e.textName]
+      let s = null;
+      a.length > 0 && (a.forEach((n) => {
+        if (n !== "more" && n !== "recent") {
+          let h = p.value.findIndex((E) => Object.is(E[e.keyName], n)), g = {};
+          h >= 0 ? g = p.value[h] : (h = r.value.findIndex((E) => Object.is(E[e.keyName], n)), h >= 0 && (g = r.value[h])), e.model.valueType === "OBJECTS" ? t.push(e.handleObjectParams(g)) : e.objectIdField ? t.push(g[e.keyName]) : t.push({
+            [e.keyName]: g[e.keyName],
+            [e.textName]: g[e.textName]
           });
         }
-      }), t.length > 0 && (e.model.valueType === "OBJECTS" ? a = t : a = e.objectIdField ? t.join(e.model.valueSeparator) : JSON.stringify(t)), y = a, C(y));
-    }, B = (i) => {
-      const t = c.value.findIndex((a) => Object.is(a[e.keyName], i));
+      }), t.length > 0 && (e.model.valueType === "OBJECTS" ? s = t : s = e.objectIdField ? t.join(e.model.valueSeparator) : JSON.stringify(t)), b = s, w(b));
+    }, B = (a) => {
+      const t = r.value.findIndex((s) => Object.is(s[e.keyName], a));
       if (t >= 0) {
-        c.value.splice(t, 1);
-        const a = [];
-        let s = null;
-        c.value.forEach((p) => {
-          e.model.valueType === "OBJECTS" ? a.push(e.handleObjectParams(p)) : e.objectIdField ? a.push(p[e.keyName]) : a.push({
-            [e.keyName]: p[e.keyName],
-            [e.textName]: p[e.textName]
+        r.value.splice(t, 1);
+        const s = [];
+        let n = null;
+        r.value.forEach((h) => {
+          e.model.valueType === "OBJECTS" ? s.push(e.handleObjectParams(h)) : e.objectIdField ? s.push(h[e.keyName]) : s.push({
+            [e.keyName]: h[e.keyName],
+            [e.textName]: h[e.textName]
           });
-        }), a.length > 0 && (e.model.valueType === "OBJECTS" ? s = a : s = e.objectIdField ? a.join(e.model.valueSeparator) : JSON.stringify(a)), y = s, C(y);
+        }), s.length > 0 && (e.model.valueType === "OBJECTS" ? n = s : n = e.objectIdField ? s.join(e.model.valueSeparator) : JSON.stringify(s)), b = n, w(b);
       }
-    }, w = async (i) => {
+    }, C = async (a) => {
       if (e.model.appDataEntityId) {
         k.value = !0;
         try {
-          const t = i.trim(), a = await e.getServiceData(t, l.data);
-          k.value = !1, a && (n.value = a.data);
+          const t = a.trim(), s = await e.getServiceData(t, l.data);
+          k.value = !1, s && (p.value = s.data);
         } catch (t) {
           k.value = !1;
         }
       }
-    }, J = (i) => {
-      v.value = i, v.value && (n.value = [], w(""));
+    }, J = (a) => {
+      y.value = a, y.value && (p.value = [], C(""));
     }, R = () => {
-      e.model.valueType === "OBJECTS" ? y = [] : y = "", u("change", y);
+      e.model.valueType === "OBJECTS" ? b = [] : b = "", i("change", b);
     }, U = () => {
-      u("change", y);
-    }, O = ne(() => c.value.map((i) => i[e.textName]).join(","));
-    S(O, (i, t) => {
-      i !== t && u("infoTextChange", i);
+      i("change", b);
+    }, O = se(() => r.value.map((a) => a[e.textName]).join(","));
+    S(O, (a, t) => {
+      a !== t && i("infoTextChange", a);
     }, {
       immediate: !0
     });
-    const G = (i) => {
-      u("focus", i);
-    }, K = (i) => {
-      u("blur", i);
-    }, z = (i) => {
-      i && i.code === "Enter" && u("enter", i);
+    const K = (a) => {
+      i("focus", a);
+    }, z = (a) => {
+      i("blur", a);
+    }, G = (a) => {
+      a && a.code === "Enter" && i("enter", a);
     };
-    return le(() => {
-      e.objectNameField && w(""), e.evt.on("toggleMenu", () => {
-        f.value && f.value.selectOption();
+    return oe(() => {
+      e.objectNameField && C(""), e.evt.on("toggleMenu", () => {
+        v.value && v.value.selectOption();
       });
     }), {
       ns: o,
       c: e,
-      selectRef: f,
-      curValue: m,
+      selectRef: v,
+      curValue: c,
       loading: k,
-      items: n,
+      items: p,
       valueText: O,
-      isOpenView: b,
+      isOpenView: I,
       topLabel: A,
       lastLabel: j,
-      onSearch: w,
+      onSearch: C,
       onOpenChange: J,
       onSelect: L,
       onRemove: B,
       openPickUpView: T,
-      onFocus: G,
-      onBlur: K,
-      handleKeyUp: z,
+      onFocus: K,
+      onBlur: z,
+      handleKeyUp: G,
       handleCancel: R,
       onConfirm: U,
       renderGroupAction: () => {
         const {
-          uiactionGroup: i
+          uiactionGroup: a
         } = e.model;
-        if (i)
-          return h("div", {
+        if (a)
+          return u("div", {
             class: o.e("group-action")
-          }, [h(N("iBizActionToolbar"), {
+          }, [u(f("iBizActionToolbar"), {
             class: o.be("group", "header-actions"),
-            actionDetails: i.uiactionGroupDetails,
+            actionDetails: a.uiactionGroupDetails,
             "actions-state": e.groupActionState,
-            onActionClick: (t, a) => {
-              e.onActionClick(t, a);
+            onActionClick: (t, s) => {
+              e.onActionClick(t, s);
             }
           }, null)]);
       },
-      renderPanelItemLayout: (i, t) => {
+      renderPanelItemLayout: (a, t) => {
         const {
-          context: a,
-          params: s
+          context: s,
+          params: n
         } = e;
-        return h(N("iBizControlShell"), {
-          data: i,
+        return u(f("iBizControlShell"), {
+          data: a,
           modelData: t,
-          context: a,
-          params: s
+          context: s,
+          params: n
         }, null);
       }
     };
   },
   render() {
-    return this.readonly ? h("div", {
+    return this.readonly ? u("div", {
       class: (this.ns.b(), this.ns.m("readonly"))
-    }, [this.valueText]) : h("div", {
+    }, [this.valueText]) : u("div", {
       class: [this.ns.b(), this.disabled ? this.ns.m("disabled") : "", this.ns.is("work-item", !0)],
       ref: "editorRef"
-    }, [h(N("el-select"), {
+    }, [u(f("el-select"), {
       ref: "selectRef",
       modelValue: this.curValue,
       "onUpdate:modelValue": (l) => this.curValue = l,
@@ -514,50 +450,50 @@ const E = /* @__PURE__ */ se({
       onBlur: this.onBlur,
       onKeyup: this.handleKeyUp
     }, {
-      default: () => [h(N("el-option"), {
+      default: () => [u(f("el-option"), {
         value: "recent",
         label: "recent",
         class: this.ns.e("recent")
       }, {
         default: () => [this.topLabel]
-      }), this.items.map((l) => h(N("el-option"), {
+      }), this.items.map((l) => u(f("el-option"), {
         key: l[this.c.keyName],
         value: l[this.c.keyName],
         label: l[this.c.textName]
       }, {
         default: () => [this.c.itemLayoutPanel && this.renderPanelItemLayout(l, this.c.itemLayoutPanel)]
-      })), this.c.model.pickupAppViewId && h(N("el-option"), {
+      })), this.c.model.pickupAppViewId && u(f("el-option"), {
         value: "more",
         label: "more",
         class: this.ns.e("more")
       }, {
-        default: () => [h(N("el-button"), {
+        default: () => [u(f("el-button"), {
           text: !0,
           onClick: this.openPickUpView
         }, {
-          default: () => [h(N("ion-icon"), {
+          default: () => [u(f("ion-icon"), {
             name: "list-outline"
           }, null), this.lastLabel]
         })]
       })]
-    }), h("div", {
+    }), u("div", {
       class: this.ns.e("actions")
-    }, [this.renderGroupAction()]), h("div", {
+    }, [this.renderGroupAction()]), u("div", {
       class: this.ns.e("bottom")
-    }, [h(N("el-button"), {
+    }, [u(f("el-button"), {
       text: !0,
       onClick: this.handleCancel
     }, {
-      default: () => [M("取消")]
-    }), h(N("el-button"), {
+      default: () => [F("取消")]
+    }), u(f("el-button"), {
       onClick: this.onConfirm
     }, {
-      default: () => [M("确认")]
+      default: () => [F("确认")]
     })])]);
   }
-}), ce = ae(E, function(l) {
-  l.component(E.name, E), q("PICKER_MANAGE", () => new de());
-}), Ne = {
+}), ce = te(x, function(l) {
+  l.component(x.name, x), _("PICKER_MANAGE", () => new de());
+}), be = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(l) {
     l.use(ce);
@@ -565,5 +501,5 @@ const E = /* @__PURE__ */ se({
 };
 export {
   ce as IBizManageMPicker,
-  Ne as default
+  be as default
 };

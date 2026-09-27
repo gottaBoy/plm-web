@@ -1,110 +1,19 @@
-import './style.css';
-var j = Object.defineProperty;
-var B = (d, m, a) => m in d ? j(d, m, { enumerable: !0, configurable: !0, writable: !0, value: a }) : d[m] = a;
-var y = (d, m, a) => (B(d, typeof m != "symbol" ? m + "" : m, a), a);
-import { useNamespace as z, useControlController as k, withInstall as $ } from "@ibiz-template/vue3-util";
-import { EditFormController as q, ControlVO as J, getFormDetailProvider as G, isFormDataContainer as Q, findChildFormDetails as K, ScriptFactory as H, hasDeCodeName as W, calcDeCodeNameById as X, FormNotifyState as Y, calcNavParams as Z, registerControlProvider as ee } from "@ibiz-template/runtime";
-import { defineComponent as te, ref as b, watch as M, reactive as ae, createVNode as i, createTextVNode as N, resolveComponent as E, isVNode as se, h as O } from "vue";
-import { clone as P } from "lodash-es";
-import { RuntimeModelError as oe } from "@ibiz-template/core";
-class ie {
+import './assets/style.css';
+import './assets/style.css';
+import { withInstall as L, useNamespace as U, useControlController as B } from "@ibiz-template/vue3-util";
+import { registerControlProvider as _, EditFormController as z, ControlVO as k, getFormDetailProvider as x, isFormDataContainer as q, findChildFormDetails as J, ScriptFactory as K, hasDeCodeName as Q, calcDeCodeNameById as H, FormNotifyState as $, calcNavParams as W } from "@ibiz-template/runtime";
+import { defineComponent as X, ref as N, watch as M, reactive as Y, h as A, resolveComponent as R, createVNode as r, createTextVNode as C, isVNode as Z } from "vue";
+import { clone as I } from "lodash-es";
+import { RuntimeModelError as tt } from "@ibiz-template/core";
+var et = Object.defineProperty, at = (l, a, e) => a in l ? et(l, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : l[a] = e, f = (l, a, e) => (at(l, typeof a != "symbol" ? a + "" : a, e), e);
+class it {
   constructor() {
-    y(this, "component", "IBizFormDataComparison");
+    f(this, "component", "IBizFormDataComparison");
   }
 }
-class re extends q {
+class st extends z {
   constructor() {
-    super(...arguments);
-    /**
-     *   基础数据
-     *
-     * @author fangZhiHao
-     * @date 2024-04-26 17:04:49
-     * @type {IData}
-     */
-    y(this, "baseResData", []);
-    /**
-     *   对比数据
-     *
-     * @author fangZhiHao
-     * @date 2024-04-26 17:04:49
-     * @type {IData}
-     */
-    y(this, "compareResData", []);
-    /**
-     * 表单旧数据
-     *
-     * @author zk
-     * @date 2023-12-20 11:12:43
-     * @protected
-     * @type {IData}
-     * @memberof FormController
-     */
-    y(this, "oldData", new J());
-    /**
-     * version数据
-     *
-     * @author fangZhiHao
-     * @date 2024-04-26 16:04:37
-     * @type {IData[]}
-     */
-    y(this, "versionData", []);
-    /**
-     *  对比数据
-     *
-     * @author fangZhiHao
-     * @date 2024-04-26 16:04:37
-     * @type {IData[]}
-     */
-    y(this, "comparisonArr", {});
-    /**
-     *  基础表格数据
-     *
-     * @author fangZhiHao
-     * @date 2024-05-06 11:05:57
-     * @type {IData[]}
-     */
-    y(this, "gridData", []);
-    /**
-     *  展示完全数据
-     *
-     * @author fangZhiHao
-     * @date 2024-05-06 11:05:04
-     * @type {IData[]}
-     */
-    y(this, "AllGridData", []);
-    /**
-     *  去除相同数据
-     *
-     * @author fangZhiHao
-     * @date 2024-05-06 11:05:15
-     * @type {IData[]}
-     */
-    y(this, "removeSameGridData", []);
-    /**
-     *  关系界面数据
-     *
-     * @author fangZhiHao
-     * @date 2024-04-30 10:04:33
-     * @type {IData}
-     */
-    y(this, "AlldruipartData", /* @__PURE__ */ new Map());
-    /**
-     *  关系界面数据长度
-     *
-     * @author fangZhiHao
-     * @date 2024-05-06 11:05:56
-     * @type {number}
-     */
-    y(this, "druipartDataSize", 0);
-    /**
-     *   关系界面实际数据
-     *
-     * @author fangZhiHao
-     * @date 2024-05-06 11:05:13
-     * @type {IData}
-     */
-    y(this, "newDruipartData", {});
+    super(...arguments), f(this, "baseResData", []), f(this, "compareResData", []), f(this, "oldData", new k()), f(this, "versionData", []), f(this, "comparisonArr", {}), f(this, "gridData", []), f(this, "AllGridData", []), f(this, "removeSameGridData", []), f(this, "AlldruipartData", /* @__PURE__ */ new Map()), f(this, "druipartDataSize", 0), f(this, "newDruipartData", {});
   }
   async onMounted() {
     await super.onMounted(), await this.getVersion(), this.model.deformPages && this.model.deformPages[0].deformDetails && await this.calcGridData(this.model.deformPages[0].deformDetails), !this.state.isSimple && this.state.loadDefault && this.load();
@@ -118,51 +27,51 @@ class re extends q {
    */
   async initDetailControllers(a = this.model.deformPages, e = this, t = void 0) {
     await Promise.all(
-      a.map(async (s) => {
-        const r = await G(s, this.model);
-        if (!r)
+      a.map(async (i) => {
+        const o = await x(i, this.model);
+        if (!o)
           return;
-        if (e.details[s.id])
-          throw new oe(
-            s,
+        if (e.details[i.id])
+          throw new tt(
+            i,
             ibiz.i18n.t(
               "runtime.controller.control.form.initializationException",
               {
-                id: s.id,
-                detailType: s.detailType
+                id: i.id,
+                detailType: i.detailType
               }
             )
           );
-        e.providers[s.id] = r;
-        const n = await r.createController(
-          s,
+        e.providers[i.id] = o;
+        const n = await o.createController(
+          i,
           e,
           t
         );
-        if (e.details[s.id] = n, s.detailType === "FORMITEM") {
-          const l = n;
-          if (e.formItems.push(l), l.editorProvider) {
-            const c = await l.editorProvider.createController(
-              l.createEditorModel(),
-              l
+        if (e.details[i.id] = n, i.detailType === "FORMITEM") {
+          const d = n;
+          if (e.formItems.push(d), d.editorProvider) {
+            const c = await d.editorProvider.createController(
+              d.createEditorModel(),
+              d
             );
-            l.newEditor = c;
+            d.newEditor = c;
           }
         }
-        if (s.detailType === "MDCTRL") {
+        if (i.detailType === "MDCTRL") {
           e.formMDCtrls.push(n);
-          const l = s.id, c = await r.createController(
-            { ...s, id: "new_".concat(l) },
+          const d = i.id, c = await o.createController(
+            { ...i, id: "new_".concat(d) },
             e,
             t
           );
-          e.details["new_".concat(l)] = c, console.log("detailController", n, s), e.formMDCtrls.push(c);
+          e.details["new_".concat(d)] = c, console.log("detailController", n, i), e.formMDCtrls.push(c);
         }
-        if (Q(s))
+        if (q(i))
           return;
-        const p = K(s);
-        p.length && await this.initDetailControllers(
-          p,
+        const m = J(i);
+        m.length && await this.initDetailControllers(
+          m,
           e,
           n
         );
@@ -176,20 +85,20 @@ class re extends q {
    * @date 2024-05-06 11:05:24
    */
   async getVersion() {
-    var g;
-    const { REQUESTMETHOD: a, REQUESTPARAMS: e, REQUESTURL: t, RESPONSEMAP: s } = (g = this.model.controlParam) == null ? void 0 : g.ctrlParams, r = a || "post", n = H.execScriptFn(
+    var a;
+    const { REQUESTMETHOD: e, REQUESTPARAMS: t, REQUESTURL: i, RESPONSEMAP: o } = (a = this.model.controlParam) == null ? void 0 : a.ctrlParams, n = e || "post", m = K.execScriptFn(
       { context: this.context, params: this.params },
-      e,
+      t,
       { singleRowReturn: !0 }
-    ), p = await ibiz.net[r](t, {
-      n_owner_id_eq: n
-    }), l = JSON.parse(s), c = [];
-    p.data.forEach((f) => {
-      const D = {};
-      for (const R in l)
-        D[R] = f[l[R]];
-      c.push(D);
-    }), this.versionData = c;
+    ), d = await ibiz.net[n](i, {
+      n_owner_id_eq: m
+    }), c = JSON.parse(o), h = [];
+    d.data.forEach((D) => {
+      const y = {};
+      for (const b in c)
+        y[b] = D[c[b]];
+      h.push(y);
+    }), this.versionData = h;
   }
   /**
    *  设置关系界面数据
@@ -214,29 +123,29 @@ class re extends q {
     const e = "".concat(a.context.version).concat(a.context.versionItemName);
     if (this.AlldruipartData.get(e)) {
       this.druipartDataSize += 1;
-      const t = this.AlldruipartData.get(e), s = t.model.xdataControlName, r = t.getController(s), { compareItem: n, compareViewFieldName: p } = t.context, { version: l } = a.context;
+      const t = this.AlldruipartData.get(e), i = t.model.xdataControlName, o = t.getController(i), { compareItem: n, compareViewFieldName: m } = t.context, { version: d } = a.context;
       let c = [];
       if (n) {
-        const g = n.split(",");
-        r.state.items.forEach((f) => {
-          const D = [];
-          g.forEach((R) => {
-            f[p] && f[p][R] && D.push(f[p][R]);
-          }), D.sort(), D.length > 0 && c.push(D.join("."));
+        const h = n.split(",");
+        o.state.items.forEach((D) => {
+          const y = [];
+          h.forEach((b) => {
+            D[m] && D[m][b] && y.push(D[m][b]);
+          }), y.sort(), y.length > 0 && c.push(y.join("."));
         });
       } else
-        c = r.state.items;
+        c = o.state.items;
       c.sort(), a.context.version === "base" ? this.baseResData[a.context.versionItemName] = c : this.compareResData[a.context.versionItemName] = c, this.newDruipartData[a.context.versionItemName] ? Object.assign(this.newDruipartData[a.context.versionItemName], {
-        [l]: c
+        [d]: c
       }) : (this.newDruipartData[a.context.versionItemName] = {}, Object.assign(this.newDruipartData[a.context.versionItemName], {
-        [l]: c
+        [d]: c
       }));
     }
     if (this.druipartDataSize === this.AlldruipartData.size) {
       const t = this.duripartDifference();
       this.calcCategorduriptData(this.AllGridData, t);
-      const s = P(this.AllGridData);
-      this.removeSameGridData = this.removeSame(s);
+      const i = I(this.AllGridData);
+      this.removeSameGridData = this.removeSame(i);
     }
   }
   /**
@@ -262,8 +171,8 @@ class re extends q {
   calcCategorduriptData(a, e) {
     a.forEach((t) => {
       if (t.detailType === "DRUIPART") {
-        const s = this.caleduriptCategory(t.name, e);
-        t.category = s;
+        const i = this.caleduriptCategory(t.name, e);
+        t.category = i;
       }
       t.detailType === "GROUPPANEL" && t.slot.length > 0 && this.calcCategorduriptData(t.slot, e);
     });
@@ -315,13 +224,13 @@ class re extends q {
         oldItem: t,
         newItem: t
       }), t.detailType === "MDCTRL")) {
-        let s = "";
+        let i = "";
         if (t.sysPFPluginId) {
-          const r = await G(
+          const o = await x(
             t,
             this.model
           );
-          r && (s = r.component);
+          o && (i = o.component);
         }
         e.push({
           detailType: t.detailType,
@@ -329,7 +238,7 @@ class re extends q {
           name: t.codeName,
           oldItem: t,
           newItem: t,
-          component: s
+          component: i
         });
       }
     }), e;
@@ -399,13 +308,13 @@ class re extends q {
     const e = [];
     return a.forEach((t) => {
       if (t.detailType === "FORMITEM" && t.category !== "samed" && e.push(t), t.detailType === "GROUPPANEL") {
-        const s = [];
-        t.slot.length > 0 && t.slot.forEach((r) => {
-          (r.detailType === "FORMITEM" && r.category !== "samed" || r.detailType === "MDCTRL" && r.category !== "samed" || r.detailType === "DRUIPART" && r.category !== "samed") && s.push(r);
-        }), s.length > 0 && e.push({
+        const i = [];
+        t.slot.length > 0 && t.slot.forEach((o) => {
+          (o.detailType === "FORMITEM" && o.category !== "samed" || o.detailType === "MDCTRL" && o.category !== "samed" || o.detailType === "DRUIPART" && o.category !== "samed") && i.push(o);
+        }), i.length > 0 && e.push({
           caption: t.caption,
           detailType: t.detailType,
-          slot: s
+          slot: i
         });
       }
     }), e;
@@ -429,29 +338,29 @@ class re extends q {
    * @return {*}
    */
   diffObjects(a, e) {
-    const t = [], s = [], r = [];
+    const t = [], i = [], o = [];
     for (const n in e) {
-      const p = a[n], l = e[n];
-      this.isFalseyButNotEmpty(p) && !this.isFalseyButNotEmpty(l) && t.push(n);
+      const m = a[n], d = e[n];
+      this.isFalseyButNotEmpty(m) && !this.isFalseyButNotEmpty(d) && t.push(n);
     }
     for (const n in e) {
-      const p = a[n], l = e[n];
-      !this.isFalseyButNotEmpty(p) && !this.isFalseyButNotEmpty(l) && this.compareObjectValues(p, l) && s.push(n);
+      const m = a[n], d = e[n];
+      !this.isFalseyButNotEmpty(m) && !this.isFalseyButNotEmpty(d) && this.compareObjectValues(m, d) && i.push(n);
     }
     for (const n in a)
       if (!Object.prototype.hasOwnProperty.call(e, n) || this.isFalseyButNotEmpty(e[n])) {
-        const p = a[n];
-        this.isFalseyButNotEmpty(p) || r.push(n);
+        const m = a[n];
+        this.isFalseyButNotEmpty(m) || o.push(n);
       }
     return {
       added: t,
-      modified: s,
-      deleted: r
+      modified: i,
+      deleted: o
     };
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   addPrefixToKeys(a, e) {
-    return Object.keys(a).reduce((t, s) => (t[e + s] = a[s], t), {});
+    return Object.keys(a).reduce((t, i) => (t[e + i] = a[i], t), {});
   }
   /**
    * 部件加载数据行为
@@ -462,45 +371,45 @@ class re extends q {
   async load(a) {
     this.druipartDataSize = 0, this.newDruipartData = {}, this.AlldruipartData = /* @__PURE__ */ new Map();
     const e = this.params.srfcopymode;
-    let t = "", s = "";
-    const { base_version: r, compare_version: n } = this.params;
-    if (t = a && a.data && a.data.baseVersion || r, s = a && a.data && a.data.compareVersion || n, this.state.isLoaded = !1, e)
+    let t = "", i = "";
+    const { base_version: o, compare_version: n } = this.params;
+    if (t = a && a.data && a.data.baseVersion || o, i = a && a.data && a.data.compareVersion || n, this.state.isLoaded = !1, e)
       return this.copy();
-    if (!W(
+    if (!Q(
       this.context,
-      X(this.model.appDataEntityId)
+      H(this.model.appDataEntityId)
     ))
       return this.loadDraft();
-    const { context: l, params: c } = this.handlerAbilityParams(a), g = P(c);
-    let f, D;
+    const { context: m, params: d } = this.handlerAbilityParams(a), c = I(d);
+    let h, D;
     try {
-      await this.startLoading(), await this.evt.emit("onBeforeLoad", { args: g }), f = await this.service.get(
-        l,
-        Object.assign(g, { srfversionid: t })
-      ), console.log("res", f), D = await this.service.get(
-        l,
-        Object.assign(g, { srfversionid: s })
+      await this.startLoading(), await this.evt.emit("onBeforeLoad", { args: c }), h = await this.service.get(
+        m,
+        Object.assign(c, { srfversionid: t })
+      ), console.log("res", h), D = await this.service.get(
+        m,
+        Object.assign(c, { srfversionid: i })
       );
-      const o = this.diffObjects(f.data, D.data);
-      this.comparisonArr = o;
-    } catch (o) {
-      throw await this.evt.emit("onLoadError", { args: o }), this.actionNotification("GETERROR", {
-        error: o
-      }), o;
+      const s = this.diffObjects(h.data, D.data);
+      this.comparisonArr = s;
+    } catch (s) {
+      throw await this.evt.emit("onLoadError", { args: s }), this.actionNotification("GETERROR", {
+        error: s
+      }), s;
     } finally {
       await this.endLoading();
     }
     this.state.modified = !1;
-    const R = P(D.data), S = this.addPrefixToKeys(R, "new_");
-    this.state.data = { ...f.data, ...S }, this.baseResData = f.data, this.compareResData = D.data, this.oldData = this.data, this.formStateNotify(Y.LOAD), await this.evt.emit("onLoadSuccess", { args: f.data }), this.actionNotification("GETSUCCESS"), this.state.isLoaded = !0, this.AllGridData = P(this.gridData), this.calcCategoryGridData(this.AllGridData);
-    const F = P(this.AllGridData);
-    return this.removeSameGridData = this.removeSame(F), this.data;
+    const y = I(D.data), b = this.addPrefixToKeys(y, "new_");
+    this.state.data = { ...h.data, ...b }, this.baseResData = h.data, this.compareResData = D.data, this.oldData = this.data, this.formStateNotify($.LOAD), await this.evt.emit("onLoadSuccess", { args: h.data }), this.actionNotification("GETSUCCESS"), this.state.isLoaded = !0, this.AllGridData = I(this.gridData), this.calcCategoryGridData(this.AllGridData);
+    const O = I(this.AllGridData);
+    return this.removeSameGridData = this.removeSame(O), this.data;
   }
 }
-function x(d) {
-  return typeof d == "function" || Object.prototype.toString.call(d) === "[object Object]" && !se(d);
+function V(l) {
+  return typeof l == "function" || Object.prototype.toString.call(l) === "[object Object]" && !Z(l);
 }
-const A = /* @__PURE__ */ te({
+const S = /* @__PURE__ */ X({
   name: "IBizFormDataComparison",
   props: {
     modelData: {
@@ -531,252 +440,252 @@ const A = /* @__PURE__ */ te({
       default: !0
     }
   },
-  setup(d) {
-    const m = z("form-data-comparison"), a = [], e = k((...o) => new re(...o), {
+  setup(l) {
+    const a = U("form-data-comparison"), e = [], t = B((...s) => new st(...s), {
       excludePropsKeys: ["data"]
-    }), t = b(""), s = b(""), r = b(!1), n = b([]), p = b([]), {
-      base_version: l,
-      compare_version: c
-    } = d.params;
-    l && (t.value = l), c && (s.value = c), M(() => t.value, () => {
-      e.load({
+    }), i = N(""), o = N(""), n = N(!1), m = N([]), d = N([]), {
+      base_version: c,
+      compare_version: h
+    } = l.params;
+    c && (i.value = c), h && (o.value = h), M(() => i.value, () => {
+      t.load({
         data: {
-          baseVersion: t.value,
-          compareVersion: s.value
+          baseVersion: i.value,
+          compareVersion: o.value
         }
       });
-    }), M(() => s.value, () => {
-      e.load({
+    }), M(() => o.value, () => {
+      t.load({
         data: {
-          baseVersion: t.value,
-          compareVersion: s.value
+          baseVersion: i.value,
+          compareVersion: o.value
         }
       });
-    }), d.isSimple && (e.evt.on("onMounted", () => {
-      e.setSimpleData(d.data || {});
-    }), M(() => d.data, (o) => {
-      const u = o || {};
-      Object.keys(e.data).find((h) => u[h] !== e.data[h]) && e.setSimpleData(u);
+    }), l.isSimple && (t.evt.on("onMounted", () => {
+      t.setSimpleData(l.data || {});
+    }), M(() => l.data, (s) => {
+      const p = s || {};
+      Object.keys(t.data).find((w) => p[w] !== t.data[w]) && t.setSimpleData(p);
     }, {
       deep: !0
-    })), e.evt.on("onCreated", () => {
-      Object.keys(e.details).forEach((u) => {
-        const v = e.details[u];
-        v.state = ae(v.state);
+    })), t.evt.on("onCreated", () => {
+      Object.keys(t.details).forEach((s) => {
+        const p = t.details[s];
+        p.state = Y(p.state);
       });
     });
-    const g = (o, u, v = !1) => {
-      const h = e.formItems.find((w) => w.name === o.codeName);
-      let T = "";
-      o.codeName && (T = u[o.codeName]);
-      let C = null;
-      if (h) {
-        let w = h.editor;
-        v && (w = h.newEditor);
-        const I = {
-          value: T,
-          data: e.data,
-          controller: w,
+    const D = (s, p, w = !1) => {
+      const u = t.formItems.find((g) => g.name === s.codeName);
+      let v = "";
+      s.codeName && (v = p[s.codeName]);
+      let T = null;
+      if (u) {
+        let g = u.editor;
+        w && (g = u.newEditor);
+        const E = {
+          value: v,
+          data: t.data,
+          controller: g,
           readonly: !0,
           disabled: !0
         };
-        if (h.editorProvider) {
-          const V = E(h.editorProvider.formEditor);
-          C = O(V, {
-            ...I
+        if (u.editorProvider) {
+          const P = R(u.editorProvider.formEditor);
+          T = A(P, {
+            ...E
           });
         }
       }
-      return C;
-    }, f = (o, u, v, h) => {
+      return T;
+    }, y = (s, p, w, u) => {
       const {
-        navigateContexts: T,
-        navigateParams: C
-      } = o, w = {
-        navContexts: T,
-        navParams: C
-      }, I = {
-        context: v,
-        params: h,
-        data: u
+        navigateContexts: v,
+        navigateParams: T
+      } = s, g = {
+        navContexts: v,
+        navParams: T
+      }, E = {
+        context: w,
+        params: u,
+        data: p
       }, {
-        resultContext: V,
-        resultParams: L
-      } = Z(w, I), _ = Object.assign(v.clone(), V, {
-        currentSrfNav: o.id
-      }), U = {
-        ...h,
-        ...L
+        resultContext: P,
+        resultParams: F
+      } = W(g, E), j = Object.assign(w.clone(), P, {
+        currentSrfNav: s.id
+      }), G = {
+        ...u,
+        ...F
       };
       return {
-        newContext: _,
-        newParams: U
+        newContext: j,
+        newParams: G
       };
-    }, D = (o) => {
-      e.calcAlldruipartData(o.context.version, o.context.versionItemName, o.view);
-    }, R = (o) => {
-      e.setdruipartData(o);
+    }, b = (s) => {
+      t.calcAlldruipartData(s.context.version, s.context.versionItemName, s.view);
+    }, O = (s) => {
+      t.setdruipartData(s);
     };
     return {
-      baseVersion: t,
-      compareVersion: s,
-      switchValue: r,
-      c: e,
-      ns: m,
-      gridData: p,
-      formItems: a,
-      activeNames: n,
-      renderEditor: g,
-      renderDruipart: (o, u, v) => {
-        if (u[o.codeName] && u[o.codeName].length === 0)
+      baseVersion: i,
+      compareVersion: o,
+      switchValue: n,
+      c: t,
+      ns: a,
+      gridData: d,
+      formItems: e,
+      activeNames: m,
+      renderEditor: D,
+      renderDruipart: (s, p, w) => {
+        if (p[s.codeName] && p[s.codeName].length === 0)
           return null;
-        const h = e.context.clone(), T = P(u);
-        Object.assign(h, T);
+        const u = t.context.clone(), v = I(p);
+        Object.assign(u, v);
         const {
-          newContext: C,
-          newParams: w
-        } = f(o, T, h, {});
-        return Object.assign(C, {
-          version: v
+          newContext: T,
+          newParams: g
+        } = y(s, v, u, {});
+        return Object.assign(T, {
+          version: w
         }, {
-          versionItemName: o.codeName
+          versionItemName: s.codeName
         }, {
-          compareItem: o.userTag2 || ""
+          compareItem: s.userTag2 || ""
         }, {
-          compareViewFieldName: o.userTag || ""
-        }), O(E("IBizViewShell"), {
-          context: C,
-          params: w,
-          key: o.id,
-          viewId: o.appViewId,
-          onCreated: D,
-          onDataChange: R
+          compareViewFieldName: s.userTag || ""
+        }), A(R("IBizViewShell"), {
+          context: T,
+          params: g,
+          key: s.id,
+          viewId: s.appViewId,
+          onCreated: b,
+          onDataChange: O
         });
       },
-      renderMdctrl: (o, u, v, h) => {
-        let T = null;
-        u === "old" ? T = e.formMDCtrls.find((I) => o.codeName === I.name) : u === "new" && (T = e.formMDCtrls.find((I) => "new_".concat(o.codeName) === I.name));
-        const C = P(T);
-        let w = "iBizFormMDCtrl";
-        return h && (w = h), O(E(w), {
-          controller: C,
-          modelData: C.model
+      renderMdctrl: (s, p, w, u) => {
+        let v = null;
+        p === "old" ? v = t.formMDCtrls.find((E) => s.codeName === E.name) : p === "new" && (v = t.formMDCtrls.find((E) => "new_".concat(s.codeName) === E.name));
+        const T = I(v);
+        let g = "iBizFormMDCtrl";
+        return u && (g = u), A(R(g), {
+          controller: T,
+          modelData: T.model
         });
       }
     };
   },
   render() {
-    let d, m, a;
+    let l, a, e;
     if (this.c.state.isLoaded)
       this.switchValue ? this.gridData = this.c.removeSameGridData : this.gridData = this.c.AllGridData;
     else
       return null;
-    return i("div", {
+    return r("div", {
       class: [this.ns.b()]
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.e("top-hidesame-content")
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.e("top-hidesame-content-left")
-    }, [N("隐藏相同项 "), i(E("el-switch"), {
+    }, [C("隐藏相同项 "), r(R("el-switch"), {
       modelValue: this.switchValue,
-      "onUpdate:modelValue": (e) => this.switchValue = e
-    }, null)]), i("div", {
+      "onUpdate:modelValue": (t) => this.switchValue = t
+    }, null)]), r("div", {
       class: this.ns.e("top-hidesame-content-right")
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.e("top-hidesame-content-right-item")
-    }, [N("新增"), i("div", {
+    }, [C("新增"), r("div", {
       class: this.ns.e("top-hidesame-content-right-item-add")
-    }, null)]), i("div", {
+    }, null)]), r("div", {
       class: this.ns.e("top-hidesame-content-right-item")
-    }, [N("修改"), i("div", {
+    }, [C("修改"), r("div", {
       class: this.ns.e("top-hidesame-content-right-item-change")
-    }, null)]), i("div", {
+    }, null)]), r("div", {
       class: this.ns.e("top-hidesame-content-right-item")
-    }, [N("删除"), i("div", {
+    }, [C("删除"), r("div", {
       class: this.ns.e("top-hidesame-content-right-item-delete")
-    }, null)])])]), i("div", {
+    }, null)])])]), r("div", {
       class: this.ns.e("top-content")
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.e("top-content-left")
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.e("top-content-left-attribute")
-    }, [N("属性")]), i("div", {
+    }, [C("属性")]), r("div", {
       class: this.ns.e("top-content-left-version")
-    }, [N("版本号")])]), i("div", {
+    }, [C("版本号")])]), r("div", {
       class: [this.ns.e("top-content-choose"), this.baseVersion !== this.compareVersion ? "modified" : ""]
-    }, [i(E("el-select"), {
+    }, [r(R("el-select"), {
       modelValue: this.baseVersion,
-      "onUpdate:modelValue": (e) => this.baseVersion = e,
+      "onUpdate:modelValue": (t) => this.baseVersion = t,
       size: "large",
       class: this.ns.e("top-content-choose-select")
-    }, x(d = this.c.versionData.map((e) => i(E("el-option"), {
-      key: e.id,
-      label: e.label,
-      value: e.id
-    }, null))) ? d : {
-      default: () => [d]
-    })]), i("div", {
+    }, V(l = this.c.versionData.map((t) => r(R("el-option"), {
+      key: t.id,
+      label: t.label,
+      value: t.id
+    }, null))) ? l : {
+      default: () => [l]
+    })]), r("div", {
       class: [this.ns.e("top-content-choose"), this.baseVersion !== this.compareVersion ? "modified" : ""]
-    }, [i(E("el-select"), {
+    }, [r(R("el-select"), {
       modelValue: this.compareVersion,
-      "onUpdate:modelValue": (e) => this.compareVersion = e,
+      "onUpdate:modelValue": (t) => this.compareVersion = t,
       size: "large",
       class: this.ns.e("top-content-choose-select")
-    }, x(m = this.c.versionData.map((e) => i(E("el-option"), {
-      key: e.id,
-      label: e.label,
-      value: e.id
-    }, null))) ? m : {
-      default: () => [m]
-    })])]), i(E("el-collapse"), {
-      modelValue: this.activeNames,
-      "onUpdate:modelValue": (e) => this.activeNames = e
-    }, x(a = this.gridData.map((e) => {
-      if (e.detailType === "FORMITEM")
-        return i("div", {
-          class: [this.ns.e("mid-content"), e.category]
-        }, [i("div", {
-          class: this.ns.e("mid-content-left")
-        }, [e.caption]), i("div", {
-          class: this.ns.e("mid-content-item")
-        }, [this.renderEditor(e.oldItem, this.c.baseResData)]), i("div", {
-          class: this.ns.e("mid-content-item")
-        }, [this.renderEditor(e.newItem, this.c.compareResData)])]);
-      if (e.detailType === "GROUPPANEL")
-        return i(E("el-collapse-item"), {
-          class: this.ns.e("collapse-item"),
-          title: e.caption
-        }, {
-          default: () => [e.slot && e.slot.map((t) => i("div", {
-            class: [this.ns.e("mid-content"), "slot", t.category]
-          }, [i("div", {
-            class: [this.ns.e("mid-content-left"), "slot"]
-          }, [t.caption]), i("div", {
-            class: this.ns.e("mid-content-item")
-          }, [t.detailType === "FORMITEM" && this.renderEditor(t.oldItem, this.c.baseResData), t.detailType === "DRUIPART" && this.renderDruipart(t.oldItem, this.c.baseResData, "base"), t.detailType === "MDCTRL" && this.renderMdctrl(t.oldItem, "old", this.c.baseResData, t.component)]), i("div", {
-            class: this.ns.e("mid-content-item")
-          }, [t.detailType === "FORMITEM" && this.renderEditor(t.newItem, this.c.compareResData, !0), t.detailType === "DRUIPART" && this.renderDruipart(t.newItem, this.c.compareResData, "compare"), t.detailType === "MDCTRL" && this.renderMdctrl(t.newItem, "new", this.c.compareResData, t.component)])]))]
-        });
-    })) ? a : {
+    }, V(a = this.c.versionData.map((t) => r(R("el-option"), {
+      key: t.id,
+      label: t.label,
+      value: t.id
+    }, null))) ? a : {
       default: () => [a]
+    })])]), r(R("el-collapse"), {
+      modelValue: this.activeNames,
+      "onUpdate:modelValue": (t) => this.activeNames = t
+    }, V(e = this.gridData.map((t) => {
+      if (t.detailType === "FORMITEM")
+        return r("div", {
+          class: [this.ns.e("mid-content"), t.category]
+        }, [r("div", {
+          class: this.ns.e("mid-content-left")
+        }, [t.caption]), r("div", {
+          class: this.ns.e("mid-content-item")
+        }, [this.renderEditor(t.oldItem, this.c.baseResData)]), r("div", {
+          class: this.ns.e("mid-content-item")
+        }, [this.renderEditor(t.newItem, this.c.compareResData)])]);
+      if (t.detailType === "GROUPPANEL")
+        return r(R("el-collapse-item"), {
+          class: this.ns.e("collapse-item"),
+          title: t.caption
+        }, {
+          default: () => [t.slot && t.slot.map((i) => r("div", {
+            class: [this.ns.e("mid-content"), "slot", i.category]
+          }, [r("div", {
+            class: [this.ns.e("mid-content-left"), "slot"]
+          }, [i.caption]), r("div", {
+            class: this.ns.e("mid-content-item")
+          }, [i.detailType === "FORMITEM" && this.renderEditor(i.oldItem, this.c.baseResData), i.detailType === "DRUIPART" && this.renderDruipart(i.oldItem, this.c.baseResData, "base"), i.detailType === "MDCTRL" && this.renderMdctrl(i.oldItem, "old", this.c.baseResData, i.component)]), r("div", {
+            class: this.ns.e("mid-content-item")
+          }, [i.detailType === "FORMITEM" && this.renderEditor(i.newItem, this.c.compareResData, !0), i.detailType === "DRUIPART" && this.renderDruipart(i.newItem, this.c.compareResData, "compare"), i.detailType === "MDCTRL" && this.renderMdctrl(i.newItem, "new", this.c.compareResData, i.component)])]))]
+        });
+    })) ? e : {
+      default: () => [e]
     })]);
   }
-}), ne = $(
-  A,
+}), ot = L(
+  S,
   // eslint-disable-next-line func-names
-  function(d) {
-    d.component(A.name, A), ee(
+  function(l) {
+    l.component(S.name, S), _(
       "EDITFORM_RENDER_FORM_DATA_COMPARISON",
-      () => new ie()
+      () => new it()
     );
   }
-), me = {
+), mt = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(d) {
-    d.use(ne);
+  install(l) {
+    l.use(ot);
   }
 };
 export {
-  ne as IBizFormDataComparison,
-  me as default
+  ot as IBizFormDataComparison,
+  mt as default
 };

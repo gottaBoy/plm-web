@@ -1,15 +1,14 @@
-import './style.css';
-var se = Object.defineProperty;
-var ie = (t, c, d) => c in t ? se(t, c, { enumerable: !0, configurable: !0, writable: !0, value: d }) : t[c] = d;
-var z = (t, c, d) => (ie(t, typeof c != "symbol" ? c + "" : c, d), d);
-import { TreeController as le, getControlPanel as re, registerControlProvider as ae } from "@ibiz-template/runtime";
-import { useControlController as ce, useNamespace as de, withInstall as ue } from "@ibiz-template/vue3-util";
-import { defineComponent as fe, ref as _, reactive as pe, watch as U, computed as he, nextTick as ge, resolveComponent as I, onMounted as me, onUnmounted as Ie, withDirectives as xe, createVNode as p, resolveDirective as be, isVNode as Ne, createTextVNode as ye } from "vue";
+import './assets/style.css';
+import './assets/style.css';
+import { registerControlProvider as ne, TreeController as oe, getControlPanel as ae } from "@ibiz-template/runtime";
+import { withInstall as le, useControlController as ie, useNamespace as se } from "@ibiz-template/vue3-util";
+import { defineComponent as de, ref as y, reactive as re, watch as z, computed as ce, nextTick as ue, resolveComponent as b, onMounted as pe, onUnmounted as he, createVNode as p, createTextVNode as fe, withDirectives as ve, resolveDirective as me, isVNode as ge } from "vue";
 import { createUUID as O } from "qx-util";
-import { debounce as P } from "lodash-es";
-import { RuntimeError as S } from "@ibiz-template/core";
-import { clone as _e, isNil as ve } from "ramda";
-class Ce extends le {
+import { debounce as j } from "lodash-es";
+import { RuntimeError as M } from "@ibiz-template/core";
+import { isNil as be, clone as xe } from "ramda";
+var Ie = Object.defineProperty, ye = (t, r, c) => r in t ? Ie(t, r, { enumerable: !0, configurable: !0, writable: !0, value: c }) : t[r] = c, _e = (t, r, c) => (ye(t, typeof r != "symbol" ? r + "" : r, c), c);
+class Ce extends oe {
   /**
    * 树节点点击事件
    *
@@ -17,62 +16,61 @@ class Ce extends le {
    * @returns {*}  {Promise<void>}
    * @memberof ListTreeController
    */
-  async onTreeNodeClick(c, d) {
-    var x;
-    const s = this.getNodeData(c._id);
+  async onTreeNodeClick(r, c) {
+    var u;
+    const s = this.getNodeData(r._id);
     if (!s)
       return;
     this.setNavData(s);
-    const u = (x = this.contextMenuInfos[s._nodeId]) == null ? void 0 : x.clickTBUIActionItem;
-    if (u)
+    const l = (u = this.contextMenuInfos[s._nodeId]) == null ? void 0 : u.clickTBUIActionItem;
+    if (l)
       return this.doUIAction(
-        u.uiactionId,
+        l.uiactionId,
         s,
-        d,
-        u.appId
+        c,
+        l.appId
       );
     if (this.state.navigational) {
-      const r = this.getNodeModel(s._nodeId);
-      if (!(r != null && r.navAppViewId))
+      const d = this.getNodeModel(s._nodeId);
+      if (!(d != null && d.navAppViewId))
         return;
     }
     if (this.state.singleSelect && !s._disableSelect) {
-      const { selectedData: r } = this.state, g = r.filter((a) => a._id !== s._id);
-      g.length === r.length ? this.setSelection(
-        this.state.singleSelect ? [s] : r.concat([s])
-      ) : this.setSelection(g);
+      const { selectedData: d } = this.state, f = d.filter((h) => h._id !== s._id);
+      f.length === d.length ? this.setSelection(
+        this.state.singleSelect ? [s] : d.concat([s])
+      ) : this.setSelection(f);
     }
     this.state.mdctrlActiveMode === 1 && await this.setActive(s);
   }
 }
-function b(t, c) {
-  const d = c.state.items.find((s) => s._id === t);
-  return d || c.state.items.find((s) => s._uuid === t);
+function x(t, r) {
+  return r.state.items.find((u) => u._id === t) || r.state.items.find((u) => u._uuid === t);
 }
-function Te(t, c) {
-  const d = () => {
-    const r = t.value;
-    if (!r)
-      throw new S("找不到el-tree实例对象");
-    return r;
-  }, s = () => {
-    var g;
-    const r = t.value;
-    if (!r) {
+function Ne(t, r) {
+  const c = () => {
+    const l = t.value;
+    if (!l)
+      throw new M("找不到el-tree实例对象");
+    return l;
+  }, u = () => {
+    var l;
+    const d = t.value;
+    if (!d) {
       setTimeout(() => {
-        s();
+        u();
       }, 200);
       return;
     }
-    Object.values(r.store.nodesMap).forEach((a) => {
-      const f = c.state.expandedKeys.includes(a.data._id);
-      f !== a.expanded && (f ? a.expand() : a.collapse());
-    }), c.state.singleSelect ? t.value.setCurrentKey(((g = c.state.selectedData[0]) == null ? void 0 : g._id) || void 0) : r.setCheckedKeys(c.state.selectedData.map((a) => a._id));
-  }, u = P(s, 500);
-  return { getTreeInstance: d, updateUI: u, triggerNodeExpand: (r) => {
-    const a = d().store.nodesMap[r];
-    if (a)
-      return a.expanded ? (a.collapse(), !1) : (a.expand(), !0);
+    Object.values(d.store.nodesMap).forEach((f) => {
+      const h = r.state.expandedKeys.includes(f.data._id);
+      h !== f.expanded && (h ? f.expand() : f.collapse());
+    }), r.state.singleSelect ? t.value.setCurrentKey(((l = r.state.selectedData[0]) == null ? void 0 : l._id) || void 0) : d.setCheckedKeys(r.state.selectedData.map((f) => f._id));
+  }, s = j(u, 500);
+  return { getTreeInstance: c, updateUI: s, triggerNodeExpand: (l) => {
+    const d = c().store.nodesMap[l];
+    if (d)
+      return d.expanded ? (d.collapse(), !1) : (d.expand(), !0);
   } };
 }
 function we(t) {
@@ -84,13 +82,13 @@ function we(t) {
     case "after":
       return "next";
     default:
-      throw new S("暂不支持dropType:".concat(t));
+      throw new M("暂不支持dropType:".concat(t));
   }
 }
-function ke(t) {
-  return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !Ne(t);
+function Te(t) {
+  return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !ge(t);
 }
-const D = /* @__PURE__ */ fe({
+const E = /* @__PURE__ */ de({
   name: "IBizListTreeControl",
   props: {
     modelData: {
@@ -144,40 +142,40 @@ const D = /* @__PURE__ */ fe({
     }
   },
   setup() {
-    const t = ce((...e) => new Ce(...e)), c = _(!1), d = pe({});
+    const t = ie((...e) => new Ce(...e)), r = y(!1), c = re({});
     t.evt.on("onCreated", () => {
       t.counter && t.counter.onChange((e) => {
-        Object.assign(d, e);
-      }, !0), t.controlParams.cascadeselect && (c.value = !0);
+        Object.assign(c, e);
+      }, !0), t.controlParams.cascadeselect && (r.value = !0);
     });
-    const s = de("control-".concat(t.model.controlType.toLowerCase())), u = _(null), x = _(null), r = _(""), g = _(null), a = _(null), f = _(null);
-    U(() => g.value, (e) => {
+    const u = se("control-".concat(t.model.controlType.toLowerCase())), s = y(null), l = y(null), d = y(""), f = y(null), h = y(null), v = y(null);
+    z(() => f.value, (e) => {
       e && e.$el.getElementsByTagName("input")[0].focus();
     });
-    const T = (e) => {
-      var i;
+    const w = (e) => {
+      var n;
       if (e._disableSelect)
         return !1;
-      const n = t.getNodeModel(e._nodeId), o = (i = t.contextMenuInfos[e._nodeId]) == null ? void 0 : i.clickTBUIActionItem;
-      return !!(n != null && n.navAppViewId || o || e != null && e._children);
-    }, B = () => {
-      var i;
-      const e = (i = u.value) == null ? void 0 : i.getCurrentKey();
-      if (!e || e === a.value)
+      const o = t.getNodeModel(e._nodeId), a = (n = t.contextMenuInfos[e._nodeId]) == null ? void 0 : n.clickTBUIActionItem;
+      return !!(o != null && o.navAppViewId || a || e != null && e._children);
+    }, S = () => {
+      var e;
+      const n = (e = s.value) == null ? void 0 : e.getCurrentKey();
+      if (!n || n === h.value)
         return;
-      const n = b(e, t), o = t.getNodeModel(n._nodeId);
-      o != null && o.allowEditText && (a.value = e);
-    }, j = async () => {
-      if (a.value)
-        if (f.value) {
-          const e = b(a.value, t);
-          await t.modifyNodeText(e, f.value), a.value = null, f.value = null;
+      const o = x(n, t), a = t.getNodeModel(o._nodeId);
+      a != null && a.allowEditText && (h.value = n);
+    }, U = async () => {
+      if (h.value)
+        if (v.value) {
+          const e = x(h.value, t);
+          await t.modifyNodeText(e, v.value), h.value = null, v.value = null;
         } else
-          a.value = null;
+          h.value = null;
     }, {
       updateUI: A,
-      triggerNodeExpand: V
-    } = Te(u, t), M = (e) => e.map((n) => ({
+      triggerNodeExpand: P
+    } = Ne(s, t), B = (e) => e.map((n) => ({
       _id: n._id,
       _uuid: n._uuid,
       _leaf: n._leaf,
@@ -185,226 +183,226 @@ const D = /* @__PURE__ */ fe({
       _disableSelect: n._disableSelect
     }));
     t.evt.on("onAfterRefreshParent", (e) => {
-      if (u.value) {
+      if (s.value) {
         const {
           parentNode: n,
           children: o
-        } = e, i = M(o);
-        u.value.updateKeyChildren(n._id, i), A();
+        } = e, a = B(o);
+        s.value.updateKeyChildren(n._id, a), A();
       }
     }), t.evt.on("onAfterNodeDrop", (e) => {
-      e.isChangedParent && (r.value = O());
+      e.isChangedParent && (d.value = O());
     });
-    const w = he(() => t.state.isLoaded ? t.model.rootVisible ? t.state.rootNodes : t.state.rootNodes.reduce((e, n) => n._children ? e.concat(n._children) : e, []) : []);
-    U(w, (e, n) => {
-      e !== n && (r.value = O());
+    const T = ce(() => t.state.isLoaded ? t.model.rootVisible ? t.state.rootNodes : t.state.rootNodes.reduce((e, n) => n._children ? e.concat(n._children) : e, []) : []);
+    z(T, (e, n) => {
+      e !== n && (d.value = O());
     });
-    const q = async (e, n) => {
+    const V = async (e, n) => {
       let o;
       if (e.level === 0)
-        o = w.value, ibiz.log.debug("初始加载");
+        o = T.value, ibiz.log.debug("初始加载");
       else {
-        const i = b(e.data._uuid, t);
-        i._children ? (ibiz.log.debug("节点展开加载-本地", i), o = i._children) : (ibiz.log.debug("节点展开加载-远程", i), o = await t.loadNodes(i));
+        const a = x(e.data._uuid, t);
+        a._children ? (ibiz.log.debug("节点展开加载-本地", a), o = a._children) : (ibiz.log.debug("节点展开加载-远程", a), o = await t.loadNodes(a));
       }
-      ibiz.log.debug("给树返回值", o), n(M(o)), A();
+      ibiz.log.debug("给树返回值", o), n(B(o)), A();
     };
-    let k = !1;
+    let D = !1;
     t.evt.on("onLoadSuccess", () => {
-      k = !0, setTimeout(() => {
-        k = !1;
+      D = !0, setTimeout(() => {
+        D = !1;
       }, 200);
     }), t.evt.on("onSelectionChange", async () => {
       var e;
-      k && await ge(), t.state.singleSelect ? u.value.setCurrentKey(((e = t.state.selectedData[0]) == null ? void 0 : e._id) || void 0) : u.value.setCheckedKeys(t.state.selectedData.map((n) => n._id));
+      D && await ue(), t.state.singleSelect ? s.value.setCurrentKey(((e = t.state.selectedData[0]) == null ? void 0 : e._id) || void 0) : s.value.setCheckedKeys(t.state.selectedData.map((n) => n._id));
     });
-    const $ = (e, n) => {
+    const q = (e, n) => {
       const {
         checkedNodes: o
       } = n;
       t.setSelection(o);
     };
-    let E = !1;
+    let k = !1;
     const H = (e, n) => {
-      var o, i;
-      if (n.stopPropagation(), !(E || !T(e))) {
-        if (((o = u.value) == null ? void 0 : o.getCurrentKey()) === e._id && B(), t.state.singleSelect || (i = u.value) == null || i.setCurrentKey(e._id), t.state.navigational) {
-          const h = t.getNodeModel(e._nodeId);
-          if (!(h != null && h.navAppViewId)) {
-            const l = V(e._id);
-            t.onExpandChange(e, l);
+      var o, a;
+      if (n.stopPropagation(), !(k || !w(e))) {
+        if (((o = s.value) == null ? void 0 : o.getCurrentKey()) === e._id && S(), t.state.singleSelect || (a = s.value) == null || a.setCurrentKey(e._id), t.state.navigational) {
+          const m = t.getNodeModel(e._nodeId);
+          if (!(m != null && m.navAppViewId)) {
+            const i = P(e._id);
+            t.onExpandChange(e, i);
           }
         }
-        t.onTreeNodeClick(e, n), E = !0, setTimeout(() => {
-          E = !1;
+        t.onTreeNodeClick(e, n), k = !0, setTimeout(() => {
+          k = !1;
         }, 200);
       }
-    }, W = (e, n) => {
-      n.stopPropagation(), T(e) && t.onDbTreeNodeClick(e);
+    }, $ = (e, n) => {
+      n.stopPropagation(), w(e) && t.onDbTreeNodeClick(e);
     };
-    let v;
+    let _;
     t.evt.on("onMounted", () => {
-      Object.values(t.contextMenus).length > 0 && (() => import("@imengyu/vue3-context-menu"))().then((n) => {
-        v = n.default, v.default && !v.showContextMenu && (v = v.default);
+      Object.values(t.contextMenus).length > 0 && (() => import("./vue3-context-menu.umd.es.js").then((e) => e.v))().then((e) => {
+        _ = e.default, _.default && !_.showContextMenu && (_ = _.default);
       });
     });
-    const L = (e, n) => {
+    const R = (e, n) => {
       const o = [];
-      return e == null || e.forEach((i) => {
-        (n === "nodeItem" && i.actionLevel === 250 || n === "popper" && i.actionLevel < 200) && o.push(i);
+      return e == null || e.forEach((a) => {
+        (n === "nodeItem" && a.actionLevel === 250 || n === "popper" && a.actionLevel < 200) && o.push(a);
       }), o;
-    }, F = I("IBizRawItem"), Q = I("IBizIcon"), K = (e, n, o, i) => {
-      const h = [];
-      return e.forEach((l) => {
-        var C;
-        if (l.itemType === "SEPERATOR") {
-          h.push({
+    }, F = b("IBizRawItem"), Q = b("IBizIcon"), K = (e, n, o, a) => {
+      const m = [];
+      return e.forEach((i) => {
+        var I;
+        if (i.itemType === "SEPERATOR") {
+          m.push({
             divided: "self"
           });
           return;
         }
-        const N = i[l.id];
-        if (N && !N.visible)
+        const C = a[i.id];
+        if (C && !C.visible)
           return;
-        const m = {};
-        if (l.showCaption && l.caption && (m.label = l.caption), l.sysImage && l.showIcon && (m.icon = p(Q, {
-          icon: l.sysImage
-        }, null)), l.itemType === "DEUIACTION") {
-          m.disabled = N.disabled, m.clickClose = !0;
+        const g = {};
+        if (i.showCaption && i.caption && (g.label = i.caption), i.sysImage && i.showIcon && (g.icon = p(Q, {
+          icon: i.sysImage
+        }, null)), i.itemType === "DEUIACTION") {
+          g.disabled = C.disabled, g.clickClose = !0;
           const {
-            uiactionId: y
-          } = l;
-          y && (m.onClick = () => {
-            t.doUIAction(y, n, o, l.appId);
+            uiactionId: N
+          } = i;
+          N && (g.onClick = () => {
+            t.doUIAction(N, n, o, i.appId);
           });
-        } else if (l.itemType === "RAWITEM") {
+        } else if (i.itemType === "RAWITEM") {
           const {
-            rawItem: y
-          } = l;
-          y && (m.label = p(F, {
-            rawItem: l
+            rawItem: N
+          } = i;
+          N && (g.label = p(F, {
+            rawItem: i
           }, null));
         } else
-          l.itemType === "ITEMS" && (C = l.detoolbarItems) != null && C.length && (m.children = K(l.detoolbarItems, n, o, i));
-        h.push(m);
-      }), h;
-    }, G = async (e, n) => {
+          i.itemType === "ITEMS" && (I = i.detoolbarItems) != null && I.length && (g.children = K(i.detoolbarItems, n, o, a));
+        m.push(g);
+      }), m;
+    }, W = async (e, n) => {
       n.preventDefault(), n.stopPropagation();
       const o = t.getNodeModel(e._nodeId);
       if (!(o != null && o.decontextMenu))
         return;
-      const i = t.contextMenus[o.decontextMenu.id];
-      if (!i.model.detoolbarItems)
+      const a = t.contextMenus[o.decontextMenu.id];
+      if (!a.model.detoolbarItems)
         return;
-      await i.calcButtonState(e._deData || (e.srfkey ? e : void 0), o.appDataEntityId);
-      const h = i.state.buttonsState, l = L(i.model.detoolbarItems, "popper"), N = K(l, e, n, h);
-      N.length && v.showContextMenu({
+      await a.calcButtonState(e._deData || (e.srfkey ? e : void 0), o.appDataEntityId);
+      const m = a.state.buttonsState, i = R(a.model.detoolbarItems, "popper"), I = K(i, e, n, m);
+      I.length && _.showContextMenu({
         x: n.x,
         y: n.y,
-        customClass: s.b("context-menu"),
-        items: N
+        customClass: u.b("context-menu"),
+        items: I
       });
-    }, J = (e, n) => {
-      var N, m, C;
-      if (!((m = (N = e == null ? void 0 : e.decontextMenu) == null ? void 0 : N.detoolbarItems) != null && m.length))
+    }, G = (e, n) => {
+      var o, a, m;
+      if (!((a = (o = e == null ? void 0 : e.decontextMenu) == null ? void 0 : o.detoolbarItems) != null && a.length))
         return;
-      const o = t.contextMenuInfos[e.id];
-      if (o.clickTBUIActionItem && o.onlyOneActionItem)
+      const i = t.contextMenuInfos[e.id];
+      if (i.clickTBUIActionItem && i.onlyOneActionItem)
         return null;
-      const h = {
-        detoolbarItems: L((C = e == null ? void 0 : e.decontextMenu) == null ? void 0 : C.detoolbarItems, "nodeItem")
-      }, l = _e(e);
-      return Object.assign(l.decontextMenu, h), p(I("iBizContextMenuControl"), {
-        modelData: h,
+      const I = {
+        detoolbarItems: R((m = e == null ? void 0 : e.decontextMenu) == null ? void 0 : m.detoolbarItems, "nodeItem")
+      }, C = xe(e);
+      return Object.assign(C.decontextMenu, I), p(b("iBizContextMenuControl"), {
+        modelData: I,
         groupLevelKeys: [50, 100],
-        nodeModel: l,
+        nodeModel: C,
         nodeData: n,
         context: t.context,
-        onActionClick: (y, oe) => t.doUIAction(y.uiactionId, n, oe, y.appId)
+        onActionClick: (g, N) => t.doUIAction(g.uiactionId, n, N, g.appId)
       }, null);
-    }, X = (e, n) => {
-      const o = b(e._uuid, t);
+    }, J = (e, n) => {
+      const o = x(e._uuid, t);
       if (!o)
-        throw new S("没有找到_uuid为".concat(e._uuid, "的节点"));
+        throw new M("没有找到_uuid为".concat(e._uuid, "的节点"));
       t.onExpandChange(o, n);
-    }, Y = P(() => {
+    }, X = j(() => {
       t.load();
-    }, 500), Z = (e) => {
-      t.state.query = e, Y();
-    }, ee = (e, n, o) => {
-      const i = b(e.data._uuid, t), h = b(n.data._uuid, t);
-      return t.calcAllowDrop(i, h, o);
-    }, te = (e) => {
-      const n = b(e.data._uuid, t);
+    }, 500), Y = (e) => {
+      t.state.query = e, X();
+    }, Z = (e, n, o) => {
+      const a = x(e.data._uuid, t), m = x(n.data._uuid, t);
+      return t.calcAllowDrop(a, m, o);
+    }, ee = (e) => {
+      const n = x(e.data._uuid, t);
       return t.calcAllowDrag(n);
-    }, ne = (e, n, o) => {
-      const i = we(o), h = b(e.data._uuid, t), l = b(n.data._uuid, t);
-      t.onNodeDrop(h, l, i);
-    }, R = (e) => {
-      (e.code === "F2" || e.code === "Enter") && B();
+    }, te = (e, n, o) => {
+      const a = we(o), m = x(e.data._uuid, t), i = x(n.data._uuid, t);
+      t.onNodeDrop(m, i, a);
+    }, L = (e) => {
+      (e.code === "F2" || e.code === "Enter") && S();
     };
-    return me(() => {
+    return pe(() => {
       var e;
-      (e = x.value) == null || e.$el.addEventListener("keydown", R);
-    }), Ie(() => {
+      (e = l.value) == null || e.$el.addEventListener("keydown", L);
+    }), he(() => {
       var e;
-      (e = x.value) == null || e.$el.removeEventListener("keydown", R);
+      (e = l.value) == null || e.$el.removeEventListener("keydown", L);
     }), {
       c: t,
-      ns: s,
-      treeRef: u,
-      treeviewRef: x,
-      treeNodeTextInputRef: g,
-      treeData: w,
-      treeRefreshKey: r,
-      editingNodeKey: a,
-      editingNodeText: f,
-      cascadeSelect: c,
-      findNodeData: b,
-      onCheck: $,
+      ns: u,
+      treeRef: s,
+      treeviewRef: l,
+      treeNodeTextInputRef: f,
+      treeData: T,
+      treeRefreshKey: d,
+      editingNodeKey: h,
+      editingNodeText: v,
+      cascadeSelect: r,
+      findNodeData: x,
+      onCheck: q,
       onNodeClick: H,
-      onNodeDbClick: W,
-      onNodeContextmenu: G,
-      loadData: q,
-      renderContextMenu: J,
+      onNodeDbClick: $,
+      onNodeContextmenu: W,
+      loadData: V,
+      renderContextMenu: G,
       renderCounter: (e) => {
         if (e.counterId) {
-          const n = d[e.counterId];
-          return ve(n) || e.counterMode === 1 && n === 0 ? null : p("div", {
-            class: s.b("counter")
+          const n = c[e.counterId];
+          return be(n) || e.counterMode === 1 && n === 0 ? null : p("div", {
+            class: u.b("counter")
           }, [p("span", {
-            class: s.be("counter", "dot")
-          }, [ye("·")]), p(I("iBizBadge"), {
+            class: u.be("counter", "dot")
+          }, [fe("·")]), p(b("iBizBadge"), {
             value: n
           }, null)]);
         }
       },
-      updateNodeExpand: X,
-      onInput: Z,
-      allowDrop: ee,
-      allowDrag: te,
-      handleDrop: ne,
-      onNodeTextEditBlur: j,
-      calcNodeAbility: T
+      updateNodeExpand: J,
+      onInput: Y,
+      allowDrop: Z,
+      allowDrag: ee,
+      handleDrop: te,
+      onNodeTextEditBlur: U,
+      calcNodeAbility: w
     };
   },
   render() {
     const t = {
-      searchbar: () => this.c.enableQuickSearch ? p(I("el-input"), {
+      searchbar: () => this.c.enableQuickSearch ? p(b("el-input"), {
         "model-value": this.c.state.query,
         class: [this.ns.b("quick-search"), this.ns.b("quick-search")],
         placeholder: this.c.state.placeHolder,
         onInput: this.onInput
       }, {
-        prefix: () => p(I("ion-icon"), {
+        prefix: () => p(b("ion-icon"), {
           class: this.ns.e("search-icon"),
           name: "search"
         }, null)
       }) : null
-    }, c = this.c.controlPanel ? "tree" : "default";
-    return t[c] = () => {
+    }, r = this.c.controlPanel ? "tree" : "default";
+    return t[r] = () => {
       if (this.c.state.isLoaded && this.treeRefreshKey)
-        return p(I("el-tree"), {
+        return p(b("el-tree"), {
           ref: "treeRef",
           class: [this.ns.b("tree"), this.ns.is("list", !0)],
           key: this.treeRefreshKey,
@@ -424,11 +422,11 @@ const D = /* @__PURE__ */ fe({
           lazy: !0,
           load: this.loadData,
           onCheck: this.onCheck,
-          onNodeExpand: (d) => {
-            this.updateNodeExpand(d, !0);
+          onNodeExpand: (c) => {
+            this.updateNodeExpand(c, !0);
           },
-          onNodeCollapse: (d) => {
-            this.updateNodeExpand(d, !1);
+          onNodeCollapse: (c) => {
+            this.updateNodeExpand(c, !1);
           },
           draggable: !0,
           "allow-drop": this.allowDrop,
@@ -436,79 +434,79 @@ const D = /* @__PURE__ */ fe({
           onNodeDrop: this.handleDrop
         }, {
           default: ({
-            data: d
+            data: c
           }) => {
-            var g, a;
-            const s = this.findNodeData(d._uuid, this.c);
-            if (!s)
+            var u, s;
+            const l = this.findNodeData(c._uuid, this.c);
+            if (!l)
               return null;
-            const u = this.c.getNodeModel(s._nodeId);
-            if (this.editingNodeKey === s._id)
+            const d = this.c.getNodeModel(l._nodeId);
+            if (this.editingNodeKey === l._id)
               return p("div", {
-                class: [this.ns.b("node"), (g = u.sysCss) == null ? void 0 : g.cssName]
-              }, [p(I("el-input"), {
+                class: [this.ns.b("node"), (u = d.sysCss) == null ? void 0 : u.cssName]
+              }, [p(b("el-input"), {
                 modelValue: this.editingNodeText,
-                "onUpdate:modelValue": (f) => this.editingNodeText = f,
+                "onUpdate:modelValue": (v) => this.editingNodeText = v,
                 ref: "treeNodeTextInputRef",
                 class: this.ns.b("editing-node"),
                 onBlur: () => {
                   this.onNodeTextEditBlur();
                 },
-                onKeydown: (f) => {
-                  f.stopPropagation(), f.code === "Enter" && this.onNodeTextEditBlur();
+                onKeydown: (v) => {
+                  v.stopPropagation(), v.code === "Enter" && this.onNodeTextEditBlur();
                 }
               }, null)]);
-            const x = re(u);
-            let r;
-            return x ? r = p(I("iBizControlShell"), {
-              data: s,
-              modelData: x,
+            const f = ae(d);
+            let h;
+            return f ? h = p(b("iBizControlShell"), {
+              data: l,
+              modelData: f,
               context: this.c.context,
               params: this.c.params
-            }, null) : r = [s._icon ? p(I("iBizIcon"), {
+            }, null) : h = [l._icon ? p(b("iBizIcon"), {
               class: this.ns.be("node", "icon"),
-              icon: s._icon
-            }, null) : null, s._textHtml ? p("span", {
+              icon: l._icon
+            }, null) : null, l._textHtml ? p("span", {
               class: this.ns.be("node", "label"),
-              innerHTML: s._textHtml
+              innerHTML: l._textHtml
             }, null) : p("span", {
               class: this.ns.be("node", "label")
-            }, [s._text])], p("div", {
-              onDblclick: (f) => this.onNodeDbClick(s, f),
-              onClick: (f) => this.onNodeClick(s, f),
-              onContextmenu: (f) => this.onNodeContextmenu(s, f),
-              class: [this.ns.b("node"), this.calcNodeAbility(s) ? "" : this.ns.bm("node", "disabled"), s._leaf ? this.ns.be("node", "item") : this.ns.be("node", "group"), (a = u.sysCss) == null ? void 0 : a.cssName]
-            }, [r, this.renderCounter(u), this.renderContextMenu(u, s)]);
+            }, [l._text])], p("div", {
+              onDblclick: (v) => this.onNodeDbClick(l, v),
+              onClick: (v) => this.onNodeClick(l, v),
+              onContextmenu: (v) => this.onNodeContextmenu(l, v),
+              class: [this.ns.b("node"), this.calcNodeAbility(l) ? "" : this.ns.bm("node", "disabled"), l._leaf ? this.ns.be("node", "item") : this.ns.be("node", "group"), (s = d.sysCss) == null ? void 0 : s.cssName]
+            }, [h, this.renderCounter(d), this.renderContextMenu(d, l)]);
           }
         });
-    }, xe(p(I("iBizControlBase"), {
+    }, ve(p(b("iBizControlBase"), {
       ref: "treeviewRef",
       controller: this.c
-    }, ke(t) ? t : {
+    }, Te(t) ? t : {
       default: () => [t]
-    }), [[be("loading"), this.c.state.isLoading]]);
+    }), [[me("loading"), this.c.state.isLoading]]);
   }
 });
-class Ee {
+class De {
   constructor() {
-    z(this, "component", "IBizListTreeControl");
+    _e(this, "component", "IBizListTreeControl");
   }
 }
-const De = ue(
-  D,
+const ke = le(
+  E,
   function(t) {
-    t.component(D.name, D), ae(
+    t.component(E.name, E), ne(
       "TREE_RENDER_LIST_TREE",
-      () => new Ee()
+      () => new De()
     );
   }
-), Oe = {
+), Le = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(t) {
-    t.use(De);
+    t.use(ke);
   }
 };
 export {
-  De as IBizListTreeControl,
-  Oe as default
+  ke as IBizListTreeControl,
+  Le as default
 };

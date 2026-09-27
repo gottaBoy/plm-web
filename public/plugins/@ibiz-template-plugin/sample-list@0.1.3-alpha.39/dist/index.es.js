@@ -1,10 +1,8 @@
-var c = Object.defineProperty;
-var p = (e, t, o) => t in e ? c(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
-var i = (e, t, o) => (p(e, typeof t != "symbol" ? t + "" : t, o), o);
-import { useControlController as d, useNamespace as m, withInstall as u } from "@ibiz-template/vue3-util";
-import { ListController as f, registerControlProvider as C, ControlType as S } from "@ibiz-template/runtime";
-import { defineComponent as b, createVNode as s, resolveComponent as l, isVNode as L } from "vue";
-class y extends f {
+import { withInstall as a, useControlController as c, useNamespace as p } from "@ibiz-template/vue3-util";
+import { registerControlProvider as u, ControlType as m, ListController as d } from "@ibiz-template/runtime";
+import { defineComponent as f, createVNode as r, resolveComponent as s, isVNode as b } from "vue";
+var v = Object.defineProperty, y = (e, t, o) => t in e ? v(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o, h = (e, t, o) => (y(e, typeof t != "symbol" ? t + "" : t, o), o);
+class C extends d {
   /**
    * 选择表格
    *
@@ -22,8 +20,8 @@ class y extends f {
    * @memberof SampleListController
    */
   handleRemove(t) {
-    const { items: o } = this.state, n = o.findIndex((a) => a.srfkey === t.srfkey);
-    n !== -1 && o.splice(n, 1), this.pickupGrid.setSelection([...o]);
+    const { items: o } = this.state, i = o.findIndex((l) => l.srfkey === t.srfkey);
+    i !== -1 && o.splice(i, 1), this.pickupGrid.setSelection([...o]);
   }
   /**
    * 设置表格选中数据
@@ -35,10 +33,10 @@ class y extends f {
     this.state.items = t, this.pickupGrid.setSelection([...t]);
   }
 }
-function h(e) {
-  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !L(e);
+function S(e) {
+  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !b(e);
 }
-const r = /* @__PURE__ */ b({
+const n = /* @__PURE__ */ f({
   name: "SampleList",
   props: {
     modelData: {
@@ -74,50 +72,50 @@ const r = /* @__PURE__ */ b({
     }
   },
   setup() {
-    const e = d((...n) => new y(...n)), t = m("sample-list");
+    const e = c((...o) => new C(...o)), t = p("sample-list");
     return {
       c: e,
       ns: t,
-      renderListContent: () => s("div", {
+      renderListContent: () => r("div", {
         class: t.b("content")
-      }, [e.state.items.map((n) => s("div", {
+      }, [e.state.items.map((o) => r("div", {
         class: [t.b("item")]
-      }, [s("span", {
+      }, [r("span", {
         class: t.be("item", "caption")
-      }, [n.srfmajortext]), s(l("ion-icon"), {
+      }, [o.srfmajortext]), r(s("ion-icon"), {
         name: "close-outline",
         class: t.be("item", "icon"),
-        onClick: () => e.handleRemove(n)
+        onClick: () => e.handleRemove(o)
       }, null)]))])
     };
   },
   render() {
     let e;
-    return s(l("iBizControlBase"), {
+    return r(s("iBizControlBase"), {
       class: [this.ns.b()],
       controller: this.c
-    }, h(e = this.renderListContent()) ? e : {
+    }, S(e = this.renderListContent()) ? e : {
       default: () => [e]
     });
   }
 });
-class v {
+class j {
   constructor() {
-    i(this, "component", "SampleList");
+    h(this, "component", "SampleList");
   }
 }
-const j = u(r, function(e) {
-  e.component(r.name, r), C(
-    "".concat(S.LIST, "_RENDER_SAMPLE_LIST"),
-    () => new v()
+const L = a(n, function(e) {
+  e.component(n.name, n), u(
+    "".concat(m.LIST, "_RENDER_SAMPLE_LIST"),
+    () => new j()
   );
 }), B = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(e) {
-    e.use(j);
+    e.use(L);
   }
 };
 export {
-  j as IBizSampleList,
+  L as IBizSampleList,
   B as default
 };

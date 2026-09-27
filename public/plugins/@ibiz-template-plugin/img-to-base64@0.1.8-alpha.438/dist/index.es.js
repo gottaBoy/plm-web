@@ -1,31 +1,29 @@
-var K = Object.defineProperty;
-var V = (t, s, n) => s in t ? K(t, s, { enumerable: !0, configurable: !0, writable: !0, value: n }) : t[s] = n;
-var c = (t, s, n) => (V(t, typeof s != "symbol" ? s + "" : s, n), n);
-import { EditorController as j, registerEditorProvider as q } from "@ibiz-template/runtime";
-import { defineComponent as Q, ref as f, computed as C, watch as R, createVNode as u, resolveComponent as v, mergeProps as S } from "vue";
-import { getUploadProps as X, getEditorEmits as Y, useNamespace as Z, useAutoFocusBlur as ee, useFocusAndBlur as oe } from "@ibiz-template/vue3-util";
+import { registerEditorProvider as j, EditorController as q } from "@ibiz-template/runtime";
+import { defineComponent as G, ref as f, computed as N, watch as T, createVNode as c, resolveComponent as v, mergeProps as z } from "vue";
+import { getUploadProps as K, getEditorEmits as Q, useNamespace as X, useAutoFocusBlur as Y, useFocusAndBlur as Z } from "@ibiz-template/vue3-util";
 import { RuntimeModelError as A } from "@ibiz-template/core";
-const ae = /* @__PURE__ */ Q({
+var ee = Object.defineProperty, ae = (s, o, n) => o in s ? ee(s, o, { enumerable: !0, configurable: !0, writable: !0, value: n }) : s[o] = n, r = (s, o, n) => (ae(s, typeof o != "symbol" ? o + "" : o, n), n);
+const ie = /* @__PURE__ */ G({
   name: "ImgToBase64",
-  props: X(),
-  emits: Y(),
-  setup(t, {
-    emit: s
+  props: K(),
+  emits: Q(),
+  setup(s, {
+    emit: o
   }) {
-    const n = Z("image-upload"), o = t.controller, l = o.model.editorItems || [], {
-      useInFocusAndBlur: h
-    } = ee(t, s), p = f([]), w = f(0), m = f(!1), r = f(""), d = f([]), P = ibiz.util.file.getUploadHeaders(), b = f({
-      ...P
-    }), x = f(""), O = C(() => o.multiple ? 9999 : 1);
-    console.log(666), R(() => t.data, (e) => {
+    const n = X("image-upload"), a = s.controller, l = a.model.editorItems || [], {
+      useInFocusAndBlur: w
+    } = Y(s, o), m = f([]), h = f(0), p = f(!1), u = f(""), d = f([]), b = ibiz.util.file.getUploadHeaders(), I = f({
+      ...b
+    }), C = f(""), F = N(() => a.multiple ? 9999 : 1);
+    console.log(666), T(() => s.data, (e) => {
       if (e) {
-        const a = {
-          ...o.editorParams,
-          enableNoAccess: o.enableNoAccess
+        const i = {
+          ...a.editorParams,
+          enableNoAccess: a.enableNoAccess
         };
-        a.uploadparams && (a.uploadParams = JSON.parse(a.uploadparams));
-        const i = ibiz.util.file.calcFileUpDownUrl(o.context, o.params, e, a);
-        if (x.value = i.uploadUrl, l.length > 0) {
+        i.uploadparams && (i.uploadParams = JSON.parse(i.uploadparams));
+        const t = ibiz.util.file.calcFileUpDownUrl(a.context, a.params, e, i);
+        if (C.value = t.uploadUrl, l.length > 0) {
           const g = l[0].id;
           e[g] ? d.value = JSON.parse(e[g]) : d.value = [];
         }
@@ -34,144 +32,144 @@ const ae = /* @__PURE__ */ Q({
       immediate: !0,
       deep: !0
     });
-    const z = (e) => {
+    const S = (e) => {
       e && (d.value.push({
         name: e.filename,
         id: e.fileid,
         folder: e.folder,
-        ...o.transformInfoMap(e, o.infoMap)
-      }), l.length > 0 && s("change", JSON.stringify(d.value), l[0].id));
-    }, F = (e) => {
-      m.value = e;
-    }, k = C(() => !!r.value), H = C(() => !!(t.controlParams && t.controlParams.editmode === "hover" && !t.readonly)), {
-      componentRef: J
-    } = oe(() => s("focus"), () => h()), M = (e, a, i, g) => new Promise((y) => {
-      const E = new FileReader();
-      E.onload = function(I) {
-        var T;
-        if (o.imageWidth && o.imageHeight) {
-          const N = new Image();
-          I.target && I.target.result && (N.src = I.target.result, N.onload = function() {
-            const D = document.createElement("canvas"), B = D.getContext("2d");
-            D.width = i, D.height = g, B && B.drawImage(N, 0, 0, i, g);
-            const G = D.toDataURL("image/png", 0.9);
-            s("change", G), y();
+        ...a.transformInfoMap(e, a.infoMap)
+      }), l.length > 0 && o("change", JSON.stringify(d.value), l[0].id));
+    }, B = (e) => {
+      p.value = e;
+    }, J = N(() => !!u.value), M = N(() => !!(s.controlParams && s.controlParams.editmode === "hover" && !s.readonly)), {
+      componentRef: k
+    } = Z(() => o("focus"), () => w()), H = (e, i, t, g) => new Promise((y) => {
+      const D = new FileReader();
+      D.onload = function(P) {
+        var R;
+        if (a.imageWidth && a.imageHeight) {
+          const E = new Image();
+          P.target && P.target.result && (E.src = P.target.result, E.onload = function() {
+            const x = document.createElement("canvas"), O = x.getContext("2d");
+            x.width = t, x.height = g, O && O.drawImage(E, 0, 0, t, g);
+            const $ = x.toDataURL("image/png", 0.9);
+            o("change", $), y();
           });
         } else
-          s("change", (T = I.target) == null ? void 0 : T.result), y();
-      }, e.split(".").pop() === "svg" ? E.readAsText(a) : E.readAsDataURL(a);
+          o("change", (R = P.target) == null ? void 0 : R.result), y();
+      }, e.split(".").pop() === "svg" ? D.readAsText(i) : D.readAsDataURL(i);
     }), W = async (e) => {
-      e.status === "ready" && await M(e.name, e.raw, o.imageWidth, o.imageHeight);
+      e.status === "ready" && await H(e.name, e.raw, a.imageWidth, a.imageHeight);
     }, L = (e = "") => {
-      const i = new DOMParser().parseFromString(e, "image/svg+xml"), g = i.querySelector("parsererror");
-      return i.documentElement.tagName === "svg" && !g;
+      const i = new DOMParser().parseFromString(e, "image/svg+xml"), t = i.querySelector("parsererror");
+      return i.documentElement.tagName === "svg" && !t;
     };
-    R(() => t.value, (e) => {
+    T(() => s.value, (e) => {
       if (e && L(e)) {
-        const a = encodeURIComponent(e);
-        r.value = "data:image/svg+xml,".concat(a);
+        const i = encodeURIComponent(e);
+        u.value = "data:image/svg+xml,".concat(i);
       } else
-        r.value = e || "";
+        u.value = e || "";
     }, {
       immediate: !0
     });
-    const _ = () => {
-      s("change", null), l.length > 0 && s("change", null, l[0].id);
-    }, $ = (e, a = "") => {
-      const i = document.createElement("a");
-      i.href = e, i.download = a, document.body.appendChild(i), i.click(), document.body.removeChild(i);
+    const V = () => {
+      o("change", null), l.length > 0 && o("change", null, l[0].id);
+    }, _ = (e, i = "") => {
+      const t = document.createElement("a");
+      t.href = e, t.download = i, document.body.appendChild(t), t.click(), document.body.removeChild(t);
     }, U = () => {
       if (l.length > 0 && d.value.length > 0) {
-        const e = d.value[0], a = {
-          ...o.editorParams,
-          enableNoAccess: o.enableNoAccess
+        const e = d.value[0], i = {
+          ...a.editorParams,
+          enableNoAccess: a.enableNoAccess
         };
-        a.exportparams && (a.exportParams = JSON.parse(a.exportparams)), a.globaldownloadprifix ? a.globalDownloadPrifix = a.globaldownloadprifix === "true" : a.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, e && e.folder && (a.osscat = e.folder);
-        const i = ibiz.util.file.calcFileUpDownUrl(o.context, o.params, t.data, a), {
+        i.exportparams && (i.exportParams = JSON.parse(i.exportparams)), i.globaldownloadprifix ? i.globalDownloadPrifix = i.globaldownloadprifix === "true" : i.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, e && e.folder && (i.osscat = e.folder);
+        const t = ibiz.util.file.calcFileUpDownUrl(a.context, a.params, s.data, i), {
           downloadUrl: g
-        } = i;
+        } = t;
         return e.url || g.replace("%fileId%", e.id);
       }
-      return r.value;
+      return u.value;
     };
     return {
       ns: n,
-      c: o,
-      limit: O,
-      uploadUrl: x,
-      headers: b,
+      c: a,
+      limit: F,
+      uploadUrl: C,
+      headers: I,
       editorItems: l,
-      dialogImageUrl: p,
-      dialogVisible: m,
-      noUploadIcon: k,
-      onRemove: _,
+      dialogImageUrl: m,
+      dialogVisible: p,
+      noUploadIcon: J,
+      onRemove: V,
       onDownload: () => {
         if (l.length > 0 && d.value.length > 0) {
-          const e = U(), a = d.value[0], i = {
-            ...o.editorParams,
-            enableNoAccess: o.enableNoAccess
+          const e = U(), i = d.value[0], t = {
+            ...a.editorParams,
+            enableNoAccess: a.enableNoAccess
           };
-          i.exportparams && (i.exportParams = JSON.parse(i.exportparams)), i.globaldownloadprifix ? i.globalDownloadPrifix = i.globaldownloadprifix === "true" : i.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, ibiz.util.file.fileDownload(e, a.name, {
-            context: o.context,
-            params: o.params,
-            data: t.data,
+          t.exportparams && (t.exportParams = JSON.parse(t.exportparams)), t.globaldownloadprifix ? t.globalDownloadPrifix = t.globaldownloadprifix === "true" : t.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, ibiz.util.file.fileDownload(e, i.name, {
+            context: a.context,
+            params: a.params,
+            data: s.data,
             file: {
-              fileId: a.id,
-              ...a
+              fileId: i.id,
+              ...i
             },
-            extraParams: i,
-            downloadTicketParams: o.downloadTicketParams
-          }, void 0, o.enableNoAccess);
+            extraParams: t,
+            downloadTicketParams: a.downloadTicketParams
+          }, void 0, a.enableNoAccess);
         } else
-          $(r.value);
+          _(u.value);
       },
-      onSuccess: z,
-      base64Data: r,
+      onSuccess: S,
+      base64Data: u,
       fileList: d,
-      onDialogVisibleChange: F,
+      onDialogVisibleChange: B,
       onPreview: () => {
         const e = U();
-        p.value = [e], m.value = !0;
+        m.value = [e], p.value = !0;
       },
       getDownloadUrl: U,
       handleImgToBase64: W,
-      componentRef: J,
-      showFormDefaultContent: H,
-      dialogImageUrlIndex: w
+      componentRef: k,
+      showFormDefaultContent: M,
+      dialogImageUrlIndex: h
     };
   },
   render() {
-    let t = {};
-    this.c.imageWidth && this.c.imageHeight && !this.fileList.length && (t = this.ns.cssVarBlock({
+    let s = {};
+    this.c.imageWidth && this.c.imageHeight && !this.fileList.length && (s = this.ns.cssVarBlock({
       "image-height": "".concat(this.c.imageHeight, "px"),
       "image-width": "".concat(this.c.imageWidth, "px")
     }));
-    const s = this.getDownloadUrl();
-    return u("div", {
+    const o = this.getDownloadUrl();
+    return c("div", {
       class: [this.ns.b(), this.disabled ? this.ns.m("disabled") : "", this.readonly ? this.ns.m("readonly") : "", this.readonly && this.c.autoPreview && this.ns.m("autosize"), this.ns.is("show-default", this.showFormDefaultContent)],
-      style: t,
+      style: s,
       ref: "componentRef"
-    }, [u("div", {
+    }, [c("div", {
       class: this.ns.e("image-upload-list")
-    }, [s ? u("div", {
+    }, [o ? c("div", {
       class: this.ns.e("list-item")
-    }, [u("img", {
-      src: s
-    }, null), u("div", {
+    }, [c("img", {
+      src: o
+    }, null), c("div", {
       class: this.ns.e("list-item-cover")
-    }, [u(v("ion-icon"), {
+    }, [c(v("ion-icon"), {
       class: this.ns.e("preview-icon"),
       onClick: this.onPreview,
       name: "search"
-    }, null), u(v("ion-icon"), {
+    }, null), c(v("ion-icon"), {
       class: this.ns.e("download-icon"),
       onClick: this.onDownload,
       name: "download"
-    }, null), u(v("ion-icon"), {
+    }, null), c(v("ion-icon"), {
       class: this.ns.e("remove-icon"),
       onClick: this.onRemove,
       name: "remove"
-    }, null)])]) : null]), u(v("el-upload"), S({
+    }, null)])]) : null]), c(v("el-upload"), z({
       ref: "imageUpload",
       class: [this.ns.b("icon"), this.ns.is("not-show", this.noUploadIcon)],
       action: this.uploadUrl,
@@ -187,11 +185,11 @@ const ae = /* @__PURE__ */ Q({
       onSuccess: this.onSuccess,
       onChange: this.handleImgToBase64
     }, this.$attrs), {
-      default: () => [u(v("ion-icon"), {
+      default: () => [c(v("ion-icon"), {
         name: "add-outline",
         class: this.ns.e("image-upload-add")
       }, null)]
-    }), this.dialogVisible ? u(v("el-image-viewer"), S({
+    }), this.dialogVisible ? c(v("el-image-viewer"), z({
       onClose: () => this.onDialogVisibleChange(!1),
       "url-list": this.dialogImageUrl,
       "hide-on-click-modal": !0,
@@ -202,120 +200,48 @@ const ae = /* @__PURE__ */ Q({
     }, this.$attrs), null) : null]);
   }
 });
-class ie extends j {
+class oe extends q {
   constructor() {
-    super(...arguments);
-    /**
-     * 是否支持拖拽
-     */
-    c(this, "isDrag", !1);
-    /**
-     * 是否多选
-     */
-    c(this, "multiple", !0);
-    /**
-     * 接受上传的文件类型
-     */
-    c(this, "accept", "");
-    /**
-     * 上传的文件大小
-     *
-     * @type {number}
-     * @memberof ImgToBase64Controller
-     */
-    c(this, "size", 0);
-    /**
-     * 上传参数
-     */
-    c(this, "uploadParams");
-    /**
-     * 下载参数
-     */
-    c(this, "exportParams");
-    /**
-     * 自适应预览
-     * 只读状态下且配置了编辑器参数autoPreview ，加载完图片后自动调整大小达到预览态，且禁用图片hover工具栏
-     *
-     * @type {boolean}
-     * @memberof ImgToBase64Controller
-     */
-    c(this, "autoPreview", !1);
-    /**
-     * @description 图片宽度
-     * @type {number}
-     * @memberof ImgToBase64Controller
-     */
-    c(this, "imageWidth", 0);
-    /**
-     * @description 图片高度
-     * @type {number}
-     * @memberof ImgToBase64Controller
-     */
-    c(this, "imageHeight", 0);
-    /**
-     * 上传文件信息的映射规则字符串，格式为"源键:目标键;源键2:目标键2"
-     */
-    c(this, "infoMap", "");
-    /**
-     * 根据配置的映射关系转换对象属性
-     * 将源对象的指定属性，按照映射规则映射到新对象的目标属性
-     *
-     * @param {IData} [_data={}] - 源数据对象，包含需要被映射的原始属性
-     * @param {string} [infoMap=''] - 映射规则字符串，格式为"源键:目标键;源键2:目标键2"
-     * @param {boolean} [isEmit=false] - 是否为抛值时处理，抛值时将源键替换为目标键
-     * @returns {IData} 转换后的新对象，仅包含映射规则中定义的属性
-     *
-     * @example
-     * // isEmit=false
-     * // 源对象：{ filesize:'10000', fileext:'.gif', folder:'file' };
-     * // 映射规则：'filesize:size;fileext:ext;folder:folder';
-     * // 转换结果: { size:'10000', ext:'.gif', folder:'file' }
-     *
-     * // isEmit=true
-     * // 源对象：{ filesize:'10000', fileext:'.gif', folder:'file' };
-     * // 映射规则：'filesize:size;fileext:ext;folder:folder';
-     * // 转换结果: { size:undefined, ext:undefined, folder:'file' }
-     */
-    c(this, "transformInfoMap", (n = {}, o = "", l = !1) => {
-      const h = {};
-      return o.split(";").forEach((w) => {
-        let [m, r] = w.split(":");
-        l && (m = r), m && r && Object.assign(h, { [r]: n[m] });
-      }), h;
+    super(...arguments), r(this, "isDrag", !1), r(this, "multiple", !0), r(this, "accept", ""), r(this, "size", 0), r(this, "uploadParams"), r(this, "exportParams"), r(this, "autoPreview", !1), r(this, "imageWidth", 0), r(this, "imageHeight", 0), r(this, "infoMap", ""), r(this, "transformInfoMap", (o = {}, n = "", a = !1) => {
+      const l = {};
+      return n.split(";").forEach((w) => {
+        let [m, h] = w.split(":");
+        a && (m = h), m && h && Object.assign(l, { [h]: o[m] });
+      }), l;
     });
   }
   async onInit() {
-    var n;
-    if (await super.onInit(), this.infoMap = ibiz.config.uploadEditor.infoMap, (n = this.model.editorType) != null && n.includes("PICTURE") && (this.accept = "image/*"), ["FILEUPLOADER_ONE", "PICTURE_ONE", "PICTURE_ONE_RAW"].includes(
+    var o;
+    if (await super.onInit(), this.infoMap = ibiz.config.uploadEditor.infoMap, (o = this.model.editorType) != null && o.includes("PICTURE") && (this.accept = "image/*"), ["FILEUPLOADER_ONE", "PICTURE_ONE", "PICTURE_ONE_RAW"].includes(
       this.model.editorType
     ) && (this.multiple = !1), this.editorParams) {
       const {
-        isDrag: o,
-        multiple: l,
-        accept: h,
-        size: p,
-        infomap: w,
-        uploadParams: m,
-        exportParams: r,
-        autoPreview: d,
-        imageWidth: P,
+        isDrag: n,
+        multiple: a,
+        accept: l,
+        size: w,
+        infomap: m,
+        uploadParams: h,
+        exportParams: p,
+        autoPreview: u,
+        imageWidth: d,
         imageHeight: b
       } = this.editorParams;
-      if (P && (this.imageWidth = Number(P)), b && (this.imageHeight = Number(b)), o && (this.isDrag = !!o), d && (this.autoPreview = d), l && (this.multiple = !!l), h && (this.accept = h), p && (this.size = Number(p)), w && (this.infoMap = w), m)
+      if (d && (this.imageWidth = Number(d)), b && (this.imageHeight = Number(b)), n && (this.isDrag = !!n), u && (this.autoPreview = u), a && (this.multiple = !!a), l && (this.accept = l), w && (this.size = Number(w)), m && (this.infoMap = m), h)
         try {
-          this.uploadParams = JSON.parse(m);
-        } catch (x) {
+          this.uploadParams = JSON.parse(h);
+        } catch (I) {
           throw new A(
-            m,
+            h,
             ibiz.i18n.t("editor.upload.uploadJsonFormatErr")
           );
         }
-      if (r)
+      if (p)
         try {
-          this.exportParams = JSON.parse(r);
-        } catch (x) {
+          this.exportParams = JSON.parse(p);
+        } catch (I) {
           throw new A(
-            r,
+            p,
             ibiz.i18n.t("editor.upload.exportJsonFormatErr")
           );
         }
@@ -324,19 +250,18 @@ class ie extends j {
 }
 class te {
   constructor() {
-    c(this, "formEditor", "ImgToBase64");
-    c(this, "gridEditor", "ImgToBase64");
+    r(this, "formEditor", "ImgToBase64"), r(this, "gridEditor", "ImgToBase64");
   }
-  async createController(s, n) {
-    const o = new ie(s, n);
-    return await o.init(), o;
+  async createController(o, n) {
+    const a = new oe(o, n);
+    return await a.init(), a;
   }
 }
-const ue = {
-  install(t) {
-    t.component("ImgToBase64", ae), q("PICTURE_ONE_TOBASE64", () => new te());
+const de = {
+  install(s) {
+    s.component("ImgToBase64", ie), j("PICTURE_ONE_TOBASE64", () => new te());
   }
 };
 export {
-  ue as default
+  de as default
 };

@@ -1,13 +1,12 @@
-import './style.css';
-var _e = Object.defineProperty;
-var Be = (l, d, r) => d in l ? _e(l, d, { enumerable: !0, configurable: !0, writable: !0, value: r }) : l[d] = r;
-var n = (l, d, r) => (Be(l, typeof d != "symbol" ? d + "" : d, r), r);
-import { PluginStaticResource as He, EditorController as We, getDeACMode as Ye, registerEditorProvider as Ze } from "@ibiz-template/runtime";
-import { defineComponent as oe, ref as p, onMounted as ne, watch as ce, createVNode as a, computed as Ke, onBeforeMount as Xe, nextTick as qe, onUnmounted as Je, resolveComponent as S, isVNode as Ge, createTextVNode as $ } from "vue";
-import { useNamespace as de, getDataPickerProps as Qe, getEditorEmits as et, useClickOutside as tt } from "@ibiz-template/vue3-util";
-import { RuntimeModelError as re } from "@ibiz-template/core";
+import './assets/style.css';
+import './assets/style.css';
+import { PluginStaticResource as _e, registerEditorProvider as Be, EditorController as $e, getDeACMode as We } from "@ibiz-template/runtime";
+import { defineComponent as oe, ref as u, computed as Ye, onBeforeMount as Ze, watch as ne, onMounted as de, nextTick as Ke, onUnmounted as qe, createVNode as a, resolveComponent as I, isVNode as Xe, createTextVNode as k } from "vue";
+import { getDataPickerProps as Je, getEditorEmits as Ge, useNamespace as me, useClickOutside as Qe } from "@ibiz-template/vue3-util";
+import { RuntimeModelError as ie } from "@ibiz-template/core";
 import { mergeDeepLeft as le } from "ramda";
-import { notNilEmpty as j } from "qx-util";
+import { notNilEmpty as R } from "qx-util";
+var et = Object.defineProperty, tt = (r, i, l) => i in r ? et(r, i, { enumerable: !0, configurable: !0, writable: !0, value: l }) : r[i] = l, n = (r, i, l) => (tt(r, typeof i != "symbol" ? i + "" : i, l), l);
 const at = /* @__PURE__ */ oe({
   name: "VirtualList",
   props: {
@@ -28,34 +27,34 @@ const at = /* @__PURE__ */ oe({
     }
   },
   emits: ["scrollEvent"],
-  setup(l, {
-    emit: d
+  setup(r, {
+    emit: i
   }) {
-    const r = de("team-select-virtual-list"), t = p(36), f = p(), o = p([]), u = p(0), m = p(0), v = p(0), b = p(0), M = () => {
-      m.value = Math.floor(b.value / l.itemHeight), v.value = m.value + l.showNum, o.value = l.items.slice(m.value, v.value);
-      const h = b.value - b.value % l.itemHeight;
-      u.value = h;
-    }, E = () => {
-      b.value = f.value.scrollTop, M(), P(t.value, b.value);
-    }, P = (h, w) => {
-      d("scrollEvent", h, w);
+    const l = me("team-select-virtual-list"), s = u(36), h = u(), d = u([]), c = u(0), p = u(0), g = u(0), f = u(0), E = () => {
+      p.value = Math.floor(f.value / r.itemHeight), g.value = p.value + r.showNum, d.value = r.items.slice(p.value, g.value);
+      const v = f.value - f.value % r.itemHeight;
+      c.value = v;
+    }, y = () => {
+      f.value = h.value.scrollTop, E(), w(s.value, f.value);
+    }, w = (v, M) => {
+      i("scrollEvent", v, M);
     };
-    return ne(() => {
+    return de(() => {
       setTimeout(() => {
         scroll();
       }, 1e3);
-    }), ce(() => l.items, () => {
-      t.value = l.itemHeight * l.items.length, M();
+    }), ne(() => r.items, () => {
+      s.value = r.itemHeight * r.items.length, E();
     }, {
       immediate: !0,
       deep: !0
     }), {
-      ns: r,
-      contentHeight: t,
-      showList: o,
-      contentBox: f,
-      top: u,
-      onScroll: E
+      ns: l,
+      contentHeight: s,
+      showList: d,
+      contentBox: h,
+      top: c,
+      onScroll: y
     };
   },
   render() {
@@ -69,27 +68,27 @@ const at = /* @__PURE__ */ oe({
     }, [a("div", {
       class: this.ns.e("content"),
       style: "top:".concat(this.top, "px;")
-    }, [this.showList.map((l, d) => a("div", {
-      key: d,
+    }, [this.showList.map((r, i) => a("div", {
+      key: i,
       class: this.ns.m("item")
     }, [this.$slots.default ? this.$slots.default({
-      ...l,
+      ...r,
       // eslint-disable-next-line object-shorthand
-      index: d
-    }) : l.name]))])])]);
+      index: i
+    }) : r.name]))])])]);
   }
-}), _ = new He(import.meta.url);
-function st(l) {
-  return typeof l == "function" || Object.prototype.toString.call(l) === "[object Object]" && !Ge(l);
+}), j = new _e(import.meta.url);
+function st(r) {
+  return typeof r == "function" || Object.prototype.toString.call(r) === "[object Object]" && !Xe(r);
 }
-const ie = /* @__PURE__ */ oe({
+const re = /* @__PURE__ */ oe({
   name: "TeamSelect",
-  props: Qe(),
-  emits: et(),
-  setup(l, {
-    emit: d
+  props: Je(),
+  emits: Ge(),
+  setup(r, {
+    emit: i
   }) {
-    const r = de("team-select"), t = l.controller, f = [{
+    const l = me("team-select"), s = r.controller, h = [{
       name: "成员",
       label: "member"
     }, {
@@ -98,11 +97,11 @@ const ie = /* @__PURE__ */ oe({
     }, {
       name: "团队",
       label: "team"
-    }], o = p({
+    }], d = u({
       member: !1,
       department: !1,
       team: !1
-    }), u = () => a("svg", {
+    }), c = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -116,7 +115,7 @@ const ie = /* @__PURE__ */ oe({
     }, [a("path", {
       d: "M8 .828a4.172 4.172 0 0 1 2.548 7.476A6.696 6.696 0 0 1 14.7 14.5a.7.7 0 0 1-1.4 0 5.3 5.3 0 0 0-10.595-.222L2.7 14.5a.7.7 0 0 1-1.4 0l.006-.279a6.7 6.7 0 0 1 4.146-5.92A4.172 4.172 0 0 1 8 .828zm0 1.344a2.828 2.828 0 0 0-.326 5.637 6.797 6.797 0 0 1 .651-.002A2.828 2.828 0 0 0 8 2.172z",
       id: "azv形状结合"
-    }, null)])]), m = () => a("svg", {
+    }, null)])]), p = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -130,7 +129,7 @@ const ie = /* @__PURE__ */ oe({
     }, [a("path", {
       d: "M9 1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-.39l-.016 2.138H11.5a2.1 2.1 0 0 1 2.095 1.95l.005.15V11h.4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h.4V9.238a.9.9 0 0 0-.787-.893l-.113-.007h-7a.9.9 0 0 0-.893.787l-.007.113V11H4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h.4V9.238a2.1 2.1 0 0 1 1.95-2.094l.15-.006h2.894L7.41 5H7a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h2zm4.8 11.2h-1.6v1.6h1.6v-1.6zm-10 0H2.2v1.6h1.6v-1.6zm5-10H7.2v1.6h1.6V2.2z",
       id: "aqo形状结合"
-    }, null)])]), v = () => a("svg", {
+    }, null)])]), g = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -144,14 +143,14 @@ const ie = /* @__PURE__ */ oe({
     }, [a("path", {
       d: "M8.2 8.85a5.602 5.602 0 0 1 3.399 5.04.6.6 0 1 1-1.19.11H10.4a4.4 4.4 0 0 0-8.8-.06l.003.06a.6.6 0 0 1-1.2 0H.4c0-2.311 1.4-4.296 3.4-5.15a3.6 3.6 0 1 1 4.402 0zM6 8.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8zm4.5 1.2V8.4a1.9 1.9 0 0 0 0-3.8V3.4a3.1 3.1 0 0 1 2.048 5.428A5.104 5.104 0 0 1 15.576 13h-.016a.6.6 0 1 1-1.198-.048A3.9 3.9 0 0 0 10.5 9.6zM6.632 13H5.424h1.208z",
       id: "azz形状结合"
-    }, null)])]), b = (e) => {
+    }, null)])]), f = (e) => {
       if (e === "member")
-        return u();
+        return c();
       if (e === "department")
-        return m();
+        return p();
       if (e === "team")
-        return v();
-    }, M = () => a("svg", {
+        return g();
+    }, E = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -166,7 +165,7 @@ const ie = /* @__PURE__ */ oe({
       d: "M7.978 11.498l-.005.005L2.3 5.831 3.13 5l4.848 4.848L12.826 5l.83.831-5.673 5.672-.005-.005z",
       id: "abb形状结合",
       transform: "rotate(-90 7.978 8.252)"
-    }, null)])]), E = () => a("svg", {
+    }, null)])]), y = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -180,7 +179,7 @@ const ie = /* @__PURE__ */ oe({
     }, [a("path", {
       d: "M8.2 8.85a5.602 5.602 0 0 1 3.399 5.04.6.6 0 1 1-1.19.11H10.4a4.4 4.4 0 0 0-8.8-.06l.003.06a.6.6 0 0 1-1.2 0H.4c0-2.311 1.4-4.296 3.4-5.15a3.6 3.6 0 1 1 4.402 0zM6 8.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8zm4.5 1.2V8.4a1.9 1.9 0 0 0 0-3.8V3.4a3.1 3.1 0 0 1 2.048 5.428A5.104 5.104 0 0 1 15.576 13h-.016a.6.6 0 1 1-1.198-.048A3.9 3.9 0 0 0 10.5 9.6zM6.632 13H5.424h1.208z",
       id: "azz形状结合"
-    }, null)])]), P = () => a("svg", {
+    }, null)])]), w = () => a("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
       height: "1em",
@@ -194,41 +193,41 @@ const ie = /* @__PURE__ */ oe({
     }, [a("path", {
       d: "M0 8c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm6.296.064l-2.298 2.298 1.768 1.768 2.298-2.298 2.298 2.298 1.768-1.768-2.298-2.298 2.298-2.298-1.768-1.768-2.298 2.298-2.298-2.298-1.768 1.768 2.298 2.298z",
       id: "agw形状结合"
-    }, null)])]), h = p("member"), w = p(!1), L = p(!1), ue = p(""), T = p([]), F = p([]), D = p([]), O = p(/* @__PURE__ */ new Map()), C = p(/* @__PURE__ */ new Map()), me = p(), y = p(), X = p(!1), he = p(), k = p(""), B = p([]), H = p([]), W = p(), I = p(null);
+    }, null)])]), v = u("member"), M = u(!1), H = u(!1), he = u(""), S = u([]), C = u([]), D = u([]), O = u(/* @__PURE__ */ new Map()), T = u(/* @__PURE__ */ new Map()), ce = u(), A = u(), K = u(!1), ue = u(), N = u(""), _ = u([]), B = u([]), $ = u(), P = u(null);
     let z;
-    const q = p([]), pe = Ke(() => !!(l.controlParams && l.controlParams.editmode === "hover" && !l.readonly)), ve = () => {
+    const q = u([]), pe = Ye(() => !!(r.controlParams && r.controlParams.editmode === "hover" && !r.readonly)), ve = () => {
       const e = document.documentElement;
       return e ? getComputedStyle(e).getPropertyValue("--ibiz-color-primary") : null;
-    }, fe = (e) => /[\u4E00-\u9FA5]/.test(e), ge = (e) => /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(e), J = (e) => {
+    }, ge = (e) => /[\u4E00-\u9FA5]/.test(e), fe = (e) => /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(e), X = (e) => {
       if (!e)
         return "";
-      let s = 0;
-      for (let R = 0; R < e.length; R++)
-        if (fe(e))
-          s = e.charCodeAt(R) + ((s << 5) - s), s = s & s;
+      let t = 0;
+      for (let L = 0; L < e.length; L++)
+        if (ge(e))
+          t = e.charCodeAt(L) + ((t << 5) - t), t = t & t;
         else {
-          const je = e.charCodeAt(R);
-          s += je.toString(16);
+          const He = e.charCodeAt(L);
+          t += He.toString(16);
         }
-      const i = String(s).substring(0, 6);
-      let c = parseInt(i.substring(0, 2), 16), g = parseInt(i.substring(2, 4), 16), A = parseInt(i.substring(4, 6), 16);
-      c < 0 && (c = 10), g < 0 && (g = 10), A < 0 && (A = 10);
-      const x = "#".concat(c.toString(16).padStart(2, "0")).concat(g.toString(16).padStart(2, "0")).concat(A.toString(16).padStart(2, "0"));
-      return x === "#FFFFFF" && ve() || x;
+      const o = String(t).substring(0, 6);
+      let m = parseInt(o.substring(0, 2), 16), b = parseInt(o.substring(2, 4), 16), x = parseInt(o.substring(4, 6), 16);
+      m < 0 && (m = 10), b < 0 && (b = 10), x < 0 && (x = 10);
+      const se = "#".concat(m.toString(16).padStart(2, "0")).concat(b.toString(16).padStart(2, "0")).concat(x.toString(16).padStart(2, "0"));
+      return se === "#FFFFFF" && ve() || se;
     }, be = (e) => {
       if (e && e.toString().length < 2)
         return e;
       if (e && e.toString().length >= 2) {
-        if (ge(e)) {
-          const g = e.split("").find((x) => /[a-zA-Z]/.test(x)) || "", A = e.split("").find((x) => /[\u4E00-\u9FA5]/.test(x)) || "";
-          return "".concat(g).concat(A).toLowerCase();
+        if (fe(e)) {
+          const t = e.split("").find((m) => /[a-zA-Z]/.test(m)) || "", o = e.split("").find((m) => /[\u4E00-\u9FA5]/.test(m)) || "";
+          return "".concat(t).concat(o).toLowerCase();
         }
-        return /[a-zA-Z]/.test(e) ? e.split("").filter((g) => /[a-zA-Z]/.test(g)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(e) ? e.split("").filter((g) => /[\u4E00-\u9FA5]/.test(g)).slice(-2).join("") : e.replaceAll(" ", "").substring(0, 2);
+        return /[a-zA-Z]/.test(e) ? e.split("").filter((t) => /[a-zA-Z]/.test(t)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(e) ? e.split("").filter((t) => /[\u4E00-\u9FA5]/.test(t)).slice(-2).join("") : e.replaceAll(" ", "").substring(0, 2);
       }
     }, we = (e) => {
-      var s;
-      return ((s = I.value) == null ? void 0 : s.id) === e ? a("div", {
-        class: r.bem("select-modal", "personel-list", "icon")
+      var t;
+      return ((t = P.value) == null ? void 0 : t.id) === e ? a("div", {
+        class: l.bem("select-modal", "personel-list", "icon")
       }, [a("i", {
         class: "fa fa-check",
         "aria-hidden": "true"
@@ -238,340 +237,340 @@ const ie = /* @__PURE__ */ oe({
     }, Ee = (e) => {
       if (!e)
         return null;
-      const s = JSON.parse(e);
-      if (s.length === 0)
+      const t = JSON.parse(e);
+      if (t.length === 0)
         return null;
       const {
-        downloadUrl: i
-      } = ibiz.util.file.calcFileUpDownUrl(t.context, t.params, l.data, t.editorParams), c = i.replace("%fileId%", s[0].id);
+        downloadUrl: o
+      } = ibiz.util.file.calcFileUpDownUrl(s.context, s.params, r.data, s.editorParams), m = o.replace("%fileId%", t[0].id);
       return a("img", {
-        class: r.bem("select-modal", "personel-list", "avatar"),
-        src: c,
+        class: l.bem("select-modal", "personel-list", "avatar"),
+        src: m,
         onError: () => Me(e),
         alt: ""
       }, null);
-    }, G = (e, s) => t.operatorMap && t.operatorMap.get(e) && t.operatorMap.get(e).data.iconurl && !q.value.includes(t.operatorMap.get(e).data.iconurl) ? Ee(t.operatorMap.get(e).data.iconurl) : be(s), Y = async (e, s, i = !1) => {
-      if (e.preventDefault(), e.stopPropagation(), console.log("选中数据", s), o.value.team = !1, o.value.department = !1, o.value.member = !1, i) {
-        const c = C.value.get(s.id);
-        c.value = !0, d("change", s.id, t.valueItem), d("change", s.name), t.teamValueItem && d("change", 30, t.teamValueItem);
+    }, J = (e, t) => s.operatorMap && s.operatorMap.get(e) && s.operatorMap.get(e).data.iconurl && !q.value.includes(s.operatorMap.get(e).data.iconurl) ? Ee(s.operatorMap.get(e).data.iconurl) : be(t), W = async (e, t, o = !1) => {
+      if (e.preventDefault(), e.stopPropagation(), console.log("选中数据", t), d.value.team = !1, d.value.department = !1, d.value.member = !1, o) {
+        const m = T.value.get(t.id);
+        m.value = !0, i("change", t.id, s.valueItem), i("change", t.name), s.teamValueItem && i("change", 30, s.teamValueItem);
       } else
-        Q(), h.value === "member" || h.value === "team" ? d("change", s[t.userFilterMap.id], t.valueItem) : d("change", s[t.deptFilterMap.id], t.valueItem), h.value === "member" || h.value === "team" ? d("change", s[t.userFilterMap.name]) : d("change", s[t.deptFilterMap.name]), t.teamValueItem && d("change", 20, t.teamValueItem);
-      k.value = "", y.value.handleClose();
+        G(), v.value === "member" || v.value === "team" ? i("change", t[s.userFilterMap.id], s.valueItem) : i("change", t[s.deptFilterMap.id], s.valueItem), v.value === "member" || v.value === "team" ? i("change", t[s.userFilterMap.name]) : i("change", t[s.deptFilterMap.name]), s.teamValueItem && i("change", 20, s.teamValueItem);
+      N.value = "", A.value.handleClose();
     };
-    Xe(async () => {
-      await se();
-      const e = K(l.data[t.valueItem]);
-      e === "team" ? I.value = {
+    Ze(async () => {
+      await ae();
+      const e = Z(r.data[s.valueItem]);
+      e === "team" ? P.value = {
         dataType: "team",
-        name: l.value
-      } : e === "member" && (I.value = {
-        name: l.value,
-        [t.userFilterMap.id]: l.data[t.valueItem],
-        [t.deptFilterMap.id]: l.data[t.valueItem]
+        name: r.value
+      } : e === "member" && (P.value = {
+        name: r.value,
+        [s.userFilterMap.id]: r.data[s.valueItem],
+        [s.deptFilterMap.id]: r.data[s.valueItem]
       });
     });
-    const Q = () => {
-      Array.from(C.value.keys()).forEach((s) => {
-        const i = C.value.get(s);
-        i && (i.value = !1);
+    const G = () => {
+      Array.from(T.value.keys()).forEach((e) => {
+        const t = T.value.get(e);
+        t && (t.value = !1);
       });
-    }, ee = (e = !1) => {
-      k.value = "", o.value.team = !1, o.value.department = !1, o.value.member = !1, Q(), d("change", null, t.valueItem), d("change", null);
-    }, U = (e, s = !0, i = !0) => {
-      const c = h.value === "member" || h.value === "team" ? e[t.userFilterMap.name] || e.name : e[t.deptFilterMap.name] || e.name, g = h.value === "member" || h.value === "team" ? e[t.userFilterMap.id] : e[t.deptFilterMap.id];
+    }, Q = (e = !1) => {
+      N.value = "", d.value.team = !1, d.value.department = !1, d.value.member = !1, G(), i("change", null, s.valueItem), i("change", null);
+    }, F = (e, t = !0, o = !0) => {
+      const m = v.value === "member" || v.value === "team" ? e[s.userFilterMap.name] || e.name : e[s.deptFilterMap.name] || e.name, b = v.value === "member" || v.value === "team" ? e[s.userFilterMap.id] : e[s.deptFilterMap.id];
       return a("div", {
         class: [
-          r.bem("select-modal", "personel-list", "item"),
-          i ? "isShowPadding" : ""
+          l.bem("select-modal", "personel-list", "item"),
+          o ? "isShowPadding" : ""
           // ns.is('selected', selectedPersonnel.value?.id === userid),
         ],
-        onClick: (A) => Y(A, e)
+        onClick: (x) => W(x, e)
       }, [a("div", {
-        class: r.bem("select-modal", "personel-list", "text")
+        class: l.bem("select-modal", "personel-list", "text")
       }, [a("div", {
-        class: r.bem("select-modal", "personel-list", "text-img"),
-        style: "background-color:".concat(J(c))
-      }, [G(g, c)]), a("div", {
-        class: r.bem("select-modal", "personel-list", "text-label")
-      }, [c]), s && g === t.context.srfuserid ? a("div", {
-        class: r.bem("select-modal", "personel-list", "myself")
-      }, [$("我自己")]) : null]), s && we(g)]);
-    }, ye = (e) => {
-      const s = O.value.get(e.id);
+        class: l.bem("select-modal", "personel-list", "text-img"),
+        style: "background-color:".concat(X(m))
+      }, [J(b, m)]), a("div", {
+        class: l.bem("select-modal", "personel-list", "text-label")
+      }, [m]), t && b === s.context.srfuserid ? a("div", {
+        class: l.bem("select-modal", "personel-list", "myself")
+      }, [k("我自己")]) : null]), t && we(b)]);
+    }, Ae = (e) => {
+      const t = O.value.get(e.id);
       return a("div", {
         class: [
-          r.bem("select-modal", "personel-list", "item-team")
+          l.bem("select-modal", "personel-list", "item-team")
           // ns.is('selected', refValue.value === userid),
         ],
-        onClick: (i) => Y(i, e, !0)
+        onClick: (o) => W(o, e, !0)
       }, [a("img", {
-        src: "".concat(_.dir("assets/images/svg/user-group-avatar.svg")),
+        src: "".concat(j.dir("assets/images/svg/user-group-avatar.svg")),
         style: "margin-right:6px",
         alt: ""
-      }, null), e.name, s && " · ", s && s.length]);
-    }, Ae = (e, s) => {
+      }, null), e.name, t && " · ", t && t.length]);
+    }, ye = (e, t) => {
       const {
-        context: i,
-        params: c
-      } = t;
-      return a(S("iBizControlShell"), {
-        class: r.b("panel-item"),
+        context: o,
+        params: m
+      } = s;
+      return a(I("iBizControlShell"), {
+        class: l.b("panel-item"),
         data: e,
-        modelData: s,
-        context: i,
-        params: c
+        modelData: t,
+        context: o,
+        params: m
       }, null);
-    }, Ie = (e, s) => {
-      const i = p();
-      return a(S("el-popover"), {
-        ref: i,
+    }, Pe = (e, t) => {
+      const o = u();
+      return a(I("el-popover"), {
+        ref: o,
         target: "hover",
         placement: "right",
         offset: 24,
         width: "auto"
       }, {
-        reference: () => U(e),
-        default: () => Ae(e, s)
+        reference: () => F(e),
+        default: () => ye(e, t)
       });
-    }, te = (e) => {
-      var c;
-      const s = e, i = (c = t.deACMode) == null ? void 0 : c.itemLayoutPanel;
+    }, ee = (e) => {
+      var t;
+      const o = e, m = (t = s.deACMode) == null ? void 0 : t.itemLayoutPanel;
       return a(at, {
-        items: s,
+        items: o,
         itemHeight: 36,
         class: [
-          r.be("select-modal", "personel-list"),
-          r.be("select-modal", "personel-list-".concat(h.value))
+          l.be("select-modal", "personel-list"),
+          l.be("select-modal", "personel-list-".concat(v.value))
           // ns.is('no-solider-tab', !c.isShowTab && actions.length > 0),
         ]
       }, {
-        default: (g) => i ? Ie(g, i) : U(g, !0)
+        default: (b) => m ? Pe(b, m) : F(b, !0)
       });
-    }, Pe = (e, s) => {
-      e.forEach((i) => {
-        const c = T.value.findIndex((g) => g[s] === i[s]);
-        c > -1 ? T.value.splice(c, 1, i) : T.value.push(i);
+    }, Ie = (e, t) => {
+      e.forEach((o) => {
+        const m = S.value.findIndex((b) => b[t] === o[t]);
+        m > -1 ? S.value.splice(m, 1, o) : S.value.push(o);
       });
     }, Se = async (e = !1) => {
-      w.value = !0;
-      const s = {};
-      s.page = t.page;
+      M.value = !0;
+      const t = {};
+      t.page = s.page;
       try {
-        const i = await t.loadMore(l.data, "member", s);
-        i && (T.value.length === 0 ? T.value = i.data : Pe(i.data, t.userFilterMap.id));
-      } catch (i) {
-        w.value = !1;
+        const o = await s.loadMore(r.data, "member", t);
+        o && (S.value.length === 0 ? S.value = o.data : Ie(o.data, s.userFilterMap.id));
+      } catch (o) {
+        M.value = !1;
       }
-      w.value = !1;
+      M.value = !1;
     }, Te = async (e = !1) => {
-      w.value = !0;
-      const s = {};
-      s.page = t.deptpage;
+      M.value = !0;
+      const t = {};
+      t.page = s.deptpage;
       try {
-        const i = await t.loadMore(l.data, "department", s);
-        i && (F.value.length === 0 ? F.value = i.data : F.value.push(...i.data));
-      } catch (i) {
-        w.value = !1;
+        const o = await s.loadMore(r.data, "department", t);
+        o && (C.value.length === 0 ? C.value = o.data : C.value.push(...o.data));
+      } catch (o) {
+        M.value = !1;
       }
-      w.value = !1;
-    }, Ce = async (e) => {
+      M.value = !1;
+    }, xe = async (e) => {
       if (e !== "team")
         return;
-      w.value = !0;
-      const s = {};
+      M.value = !0;
+      const t = {};
       try {
-        const i = await t.loadMore(l.data, "team", s);
-        i && (D.value = i == null ? void 0 : i.data, D.value.forEach((c) => {
-          if (C.value.get(c.id) === void 0) {
-            const A = p(!1);
-            C.value.set(c.id, A);
+        const o = await s.loadMore(r.data, "team", t);
+        o && (D.value = o == null ? void 0 : o.data, D.value.forEach((m) => {
+          if (T.value.get(m.id) === void 0) {
+            const b = u(!1);
+            T.value.set(m.id, b);
           }
         }));
-      } catch (i) {
-        w.value = !1;
+      } catch (o) {
+        M.value = !1;
       }
-      w.value = !1;
-    }, xe = async (e, s) => {
-      const i = {}, c = await t.loadTeamMember(l.data, s.id, i);
-      O.value.get(s.id) || c && O.value.set(s.id, c.data), y.value.handleOpen();
-    }, Fe = (e) => {
-      Array.from(C.value.keys()).filter((c) => c !== e).forEach((c) => {
-        const g = C.value.get(c);
-        g && (g.value = !1);
+      M.value = !1;
+    }, Ce = async (e, t) => {
+      const o = {}, m = await s.loadTeamMember(r.data, t.id, o);
+      O.value.get(t.id) || m && O.value.set(t.id, m.data), A.value.handleOpen();
+    }, De = (e) => {
+      Array.from(T.value.keys()).filter((t) => t !== e).forEach((t) => {
+        const o = T.value.get(t);
+        o && (o.value = !1);
       });
-    }, De = async (e, s) => {
-      e.preventDefault(), e.stopPropagation(), C.value.get(s.id).value ? ee(!0) : (await Y(e, s, !0), Fe(s.id)), o.value.team = !1, o.value.department = !1, o.value.member = !1, y.value.handleClose();
-    }, Z = async (e) => {
-      h.value = e, h.value === "member" && T.value.length === 0 && (t.resetUserState(), await Se()), h.value === "department" && F.value.length === 0 && (t.resetDeptState(), await Te()), await Ce(e);
-    }, ae = (e, s) => {
-      e.stopPropagation(), L.value = s, y.value.handleOpen();
-    }, Oe = () => a("div", {
-      class: r.be("select-modal", "deptpersonel"),
+    }, Oe = async (e, t) => {
+      e.preventDefault(), e.stopPropagation(), T.value.get(t.id).value ? Q(!0) : (await W(e, t, !0), De(t.id)), d.value.team = !1, d.value.department = !1, d.value.member = !1, A.value.handleClose();
+    }, Y = async (e) => {
+      v.value = e, v.value === "member" && S.value.length === 0 && (s.resetUserState(), await Se()), v.value === "department" && C.value.length === 0 && (s.resetDeptState(), await Te()), await xe(e);
+    }, te = (e, t) => {
+      e.stopPropagation(), H.value = t, A.value.handleOpen();
+    }, Fe = () => a("div", {
+      class: l.be("select-modal", "deptpersonel"),
       onClick: () => {
-        y.value.handleOpen();
+        A.value.handleOpen();
       }
     }, [a("div", {
-      class: r.bem("select-modal", "deptpersonel", "dept")
+      class: l.bem("select-modal", "deptpersonel", "dept")
     }, [a("div", {
       class: "collpase-icon"
-    }, [L.value ? a("i", {
+    }, [H.value ? a("i", {
       class: "fa fa-angle-right",
       "aria-hidden": "true",
-      onClick: (e) => ae(e, !1)
+      onClick: (e) => te(e, !1)
     }, null) : a("i", {
       class: "fa fa-angle-down",
       "aria-hidden": "true",
-      onClick: (e) => ae(e, !0)
+      onClick: (e) => te(e, !0)
     }, null)]), a("img", {
-      src: "".concat(_.dir("assets/images/svg/org.svg"))
-    }, null), a("span", null, ["".concat(t.context.srfusername, "的团队")]), a("span", null, [$("·")]), a("span", null, [t.depttotal])]), L.value ? null : a("div", {
-      class: r.bem("select-modal", "deptpersonel", "dept-person")
-    }, [te(F.value)])]), Ue = async (e) => {
-      w.value = !0, B.value = [], H.value = [];
+      src: "".concat(j.dir("assets/images/svg/org.svg"))
+    }, null), a("span", null, ["".concat(s.context.srfusername, "的团队")]), a("span", null, [k("·")]), a("span", null, [s.depttotal])]), H.value ? null : a("div", {
+      class: l.bem("select-modal", "deptpersonel", "dept-person")
+    }, [ee(C.value)])]), Ue = async (e) => {
+      M.value = !0, _.value = [], B.value = [];
       try {
-        const s = {};
-        Object.assign(s, {
+        const t = {};
+        Object.assign(t, {
           query: e,
           size: 1e3
         });
-        const i = await t.getServiceData("member", l.data, s), c = await t.getServiceData("team", l.data, s);
-        i && (i.data.forEach((g) => {
-          Object.keys(t.userFilterMap).forEach((A) => {
-            g[A] = g[t.userFilterMap[A]];
+        const o = await s.getServiceData("member", r.data, t), m = await s.getServiceData("team", r.data, t);
+        o && (o.data.forEach((b) => {
+          Object.keys(s.userFilterMap).forEach((x) => {
+            b[x] = b[s.userFilterMap[x]];
           });
-        }), B.value = i.data, w.value = !1), c && (H.value = c.data);
-      } catch (s) {
-        w.value = !1;
+        }), _.value = o.data, M.value = !1), m && (B.value = m.data);
+      } catch (t) {
+        M.value = !1;
       }
-      y.value.handleOpen();
+      A.value.handleOpen();
     }, Ne = (e) => {
-      clearTimeout(W.value), W.value = setTimeout(() => {
-        e && Ue(e), clearTimeout(W.value);
+      clearTimeout($.value), $.value = setTimeout(() => {
+        e && Ue(e), clearTimeout($.value);
       }, 300);
-    }, Le = () => a(S("el-collapse"), {
-      class: r.e("collapse")
+    }, ze = () => a(I("el-collapse"), {
+      class: l.e("collapse")
     }, {
       default: () => [D.value.length === 0 ? a("div", {
-        class: r.e("no-team")
-      }, [$("暂无团队")]) : D.value.map((e) => {
-        const s = O.value.get(e.id), i = C.value.get(e.id);
-        return a(S("el-collapse-item"), {
-          class: r.e("collapse-item"),
+        class: l.e("no-team")
+      }, [k("暂无团队")]) : D.value.map((e) => {
+        const t = O.value.get(e.id), o = T.value.get(e.id);
+        return a(I("el-collapse-item"), {
+          class: l.e("collapse-item"),
           name: e.id,
           title: e.caption,
-          onClick: (c) => xe(c, e)
+          onClick: (m) => Ce(m, e)
         }, {
-          default: () => a("div", null, [s && s.length > 0 ? s.map((c) => U(c, !0)) : a("div", {
-            class: r.e("noteamItem")
-          }, [$("暂无人员")])]),
+          default: () => a("div", null, [t && t.length > 0 ? t.map((m) => F(m, !0)) : a("div", {
+            class: l.e("noteamItem")
+          }, [k("暂无人员")])]),
           title: () => a("div", {
-            class: r.e("collapse-item-checkbox-wrapper")
-          }, [a(S("el-checkbox"), {
-            class: r.e("collapse-item-checkbox"),
+            class: l.e("collapse-item-checkbox-wrapper")
+          }, [a(I("el-checkbox"), {
+            class: l.e("collapse-item-checkbox"),
             size: "large",
-            modelValue: i.value,
-            "onUpdate:modelValue": (c) => i.value = c,
-            onClick: (c) => De(c, e)
+            modelValue: o.value,
+            "onUpdate:modelValue": (m) => o.value = m,
+            onClick: (m) => Oe(m, e)
           }, null), a("img", {
-            src: "".concat(_.dir("assets/images/svg/user-group-avatar.svg")),
+            src: "".concat(j.dir("assets/images/svg/user-group-avatar.svg")),
             style: "margin-right:6px",
             alt: ""
-          }, null), e.name, s && " · ", s && s.length])
+          }, null), e.name, t && " · ", t && t.length])
         });
       })]
-    }), ke = (e) => e === "department" ? Oe() : e === "member" ? te(T.value) : e === "team" ? Le() : a("div", null, [e]), ze = () => !k.value && I.value ? I.value.dataType === "team" ? a("div", {
-      class: r.e("personnel-team")
+    }), Ve = (e) => e === "department" ? Fe() : e === "member" ? ee(S.value) : e === "team" ? ze() : a("div", null, [e]), Le = () => !N.value && P.value ? P.value.dataType === "team" ? a("div", {
+      class: l.e("personnel-team")
     }, [a("div", {
-      class: r.e("personnel-team-svg")
-    }, [E()]), a("div", null, [I.value.name])]) : U(I.value, !1, !1) : null, Ve = (e) => {
-      y.value && y.value.$el && (V.value = y.value.$el.clientWidth), X.value = e;
-    }, se = async () => {
-      l.readonly || l.disabled || (await Z("member"), await Z("department"), await Z("team"), h.value = "member");
-    }, Re = (e, s) => {
-      e.stopPropagation(), h.value = s.label, o.value[s.label] = !o.value[s.label], ["member", "department", "team"].filter((c) => c !== s.label).forEach((c) => {
-        o.value[c] = !1;
+      class: l.e("personnel-team-svg")
+    }, [y()]), a("div", null, [P.value.name])]) : F(P.value, !1, !1) : null, ke = (e) => {
+      A.value && A.value.$el && (V.value = A.value.$el.clientWidth), K.value = e;
+    }, ae = async () => {
+      r.readonly || r.disabled || (await Y("member"), await Y("department"), await Y("team"), v.value = "member");
+    }, Re = (e, t) => {
+      e.stopPropagation(), v.value = t.label, d.value[t.label] = !d.value[t.label], ["member", "department", "team"].filter((o) => o !== t.label).forEach((o) => {
+        d.value[o] = !1;
       });
-    }, N = p(), $e = p(), K = (e) => D.value.findIndex((c) => c.id === e) >= 0 ? "team" : T.value.findIndex((c) => c.id === e) >= 0 ? "member" : "";
-    ce(() => l.value, (e) => {
-      (e || e === null || e === void 0) && (e ? K(l.data[t.valueItem]) === "team" ? I.value = {
+    }, U = u(), je = u(), Z = (e) => D.value.findIndex((t) => t.id === e) >= 0 ? "team" : S.value.findIndex((t) => t.id === e) >= 0 ? "member" : "";
+    ne(() => r.value, (e) => {
+      (e || e === null || e === void 0) && (e ? Z(r.data[s.valueItem]) === "team" ? P.value = {
         dataType: "team",
         name: e
-      } : I.value = {
+      } : P.value = {
         name: e,
-        [t.userFilterMap.id]: l.data[t.valueItem],
-        [t.deptFilterMap.id]: l.data[t.valueItem]
-      } : I.value = null);
+        [s.userFilterMap.id]: r.data[s.valueItem],
+        [s.deptFilterMap.id]: r.data[s.valueItem]
+      } : P.value = null);
     }, {
       immediate: !0
     });
-    const V = p(0);
-    return ne(() => {
-      N.value && (z = tt(N, async (e) => {
-        if (N.value && !N.value.contains(e.target)) {
-          let s = [];
-          e.target && e.target.className && typeof e.target.className == "string" && (s = e.target.className.split(" ")), s.findIndex((c) => c === "ibiz-team-select__popover-item") === -1 && (o.value.team = !1, o.value.department = !1, o.value.member = !1);
+    const V = u(0);
+    return de(() => {
+      U.value && (z = Qe(U, async (e) => {
+        if (U.value && !U.value.contains(e.target)) {
+          let t = [];
+          e.target && e.target.className && typeof e.target.className == "string" && (t = e.target.className.split(" ")), t.findIndex((o) => o === "ibiz-team-select__popover-item") === -1 && (d.value.team = !1, d.value.department = !1, d.value.member = !1);
         }
-      })), V.value = y.value.$el.clientWidth;
+      })), V.value = A.value.$el.clientWidth;
+    }), Ke(() => {
+      V.value = A.value.$el.clientWidth;
     }), qe(() => {
-      V.value = y.value.$el.clientWidth;
-    }), Je(() => {
       z && z.stop && z.stop();
     }), {
-      ns: r,
-      c: t,
-      curValue: ue,
-      items: T,
-      dropDownItem: f,
-      numberSvg: u,
-      departmentSvg: m,
-      teamSvg: v,
-      renderItemSvg: b,
-      rightArrowSvg: M,
-      deleteSvg: P,
-      renderItemContent: ke,
+      ns: l,
+      c: s,
+      curValue: he,
+      items: S,
+      dropDownItem: h,
+      numberSvg: c,
+      departmentSvg: p,
+      teamSvg: g,
+      renderItemSvg: f,
+      rightArrowSvg: E,
+      deleteSvg: w,
+      renderItemContent: Ve,
       showFormDefaultContent: pe,
-      searchValue: k,
+      searchValue: N,
       handleSearch: Ne,
-      romateData: B,
-      renderPersonItem: U,
-      selectedPersonnel: I,
-      searchRef: me,
-      visibleChange: Ve,
-      dropdownRef: y,
-      dropdownClick: se,
-      popoverRef: he,
+      romateData: _,
+      renderPersonItem: F,
+      selectedPersonnel: P,
+      searchRef: ce,
+      visibleChange: ke,
+      dropdownRef: A,
+      dropdownClick: ae,
+      popoverRef: ue,
       teamMenberItems: O,
-      renderPersonnel: ze,
-      renderTeamItem: ye,
-      dropDownItemVisible: o,
+      renderPersonnel: Le,
+      renderTeamItem: Ae,
+      dropDownItemVisible: d,
       dropdownItemClick: Re,
-      romateTeamData: H,
-      dropdownVisible: X,
-      pxx: N,
-      dropdownMenu: $e,
+      romateTeamData: B,
+      dropdownVisible: K,
+      pxx: U,
+      dropdownMenu: je,
       handleFocus: (e) => {
-        o.value.team = !1, o.value.department = !1, o.value.member = !1;
+        d.value.team = !1, d.value.department = !1, d.value.member = !1;
       },
-      clearSelect: ee,
-      readOnlyItem: () => l.value ? K(l.data[t.valueItem]) === "team" ? a("div", {
-        class: r.e("personnel-team")
+      clearSelect: Q,
+      readOnlyItem: () => r.value ? Z(r.data[s.valueItem]) === "team" ? a("div", {
+        class: l.e("personnel-team")
       }, [a("div", {
-        class: r.e("personnel-team-svg")
-      }, [E()]), a("div", null, [l.value])]) : a("div", {
-        class: r.bem("select-modal", "personel-list", "text")
+        class: l.e("personnel-team-svg")
+      }, [y()]), a("div", null, [r.value])]) : a("div", {
+        class: l.bem("select-modal", "personel-list", "text")
       }, [a("div", {
-        class: r.bem("select-modal", "personel-list", "text-img"),
-        style: "background-color:".concat(J(l.value))
-      }, [G(l.data[t.valueItem], l.value)]), a("div", {
-        class: r.bem("select-modal", "personel-list", "text-label")
-      }, [l.value])]) : "未设置",
+        class: l.bem("select-modal", "personel-list", "text-img"),
+        style: "background-color:".concat(X(r.value))
+      }, [J(r.data[s.valueItem], r.value)]), a("div", {
+        class: l.bem("select-modal", "personel-list", "text-label")
+      }, [r.value])]) : "未设置",
       width: V
     };
   },
   render() {
     return a("div", {
       class: [this.ns.b()]
-    }, [this.$props.readonly || this.$props.disabled ? this.readOnlyItem() : a(S("el-dropdown"), {
+    }, [this.$props.readonly || this.$props.disabled ? this.readOnlyItem() : a(I("el-dropdown"), {
       class: [this.ns.e("dropdown")],
       ref: "dropdownRef",
       "popper-class": this.ns.e("popover"),
@@ -581,25 +580,25 @@ const ie = /* @__PURE__ */ oe({
     }, {
       default: () => a("div", {
         class: [this.ns.e("dropdown-input")]
-      }, [a(S("el-input"), {
+      }, [a(I("el-input"), {
         class: [this.ns.e("search-input"), this.searchValue || this.selectedPersonnel ? "hasValue" : ""],
         ref: "searchRef",
         modelValue: this.searchValue,
-        "onUpdate:modelValue": (l) => this.searchValue = l,
+        "onUpdate:modelValue": (r) => this.searchValue = r,
         placeholder: this.selectedPersonnel ? "" : "选择评审人",
-        onInput: (l) => this.handleSearch(l),
+        onInput: (r) => this.handleSearch(r),
         onFocus: this.handleFocus
       }, {
         suffix: () => a("div", {
           class: [this.ns.e("dropdown-input-suffix")]
         }, [a("img", {
           class: [this.ns.e("search-arrow"), this.dropdownVisible ? "isopen" : ""],
-          src: "".concat(_.dir("assets/images/svg/arrow.svg")),
+          src: "".concat(j.dir("assets/images/svg/arrow.svg")),
           alt: ""
         }, null), a("div", {
           class: [this.ns.e("search-delete")],
-          onClick: (l) => {
-            l.stopPropagation(), this.clearSelect();
+          onClick: (r) => {
+            r.stopPropagation(), this.clearSelect();
           }
         }, [this.deleteSvg()])]),
         prefix: () => a("div", {
@@ -607,10 +606,10 @@ const ie = /* @__PURE__ */ oe({
         }, [this.renderPersonnel()])
       })]),
       dropdown: () => {
-        let l;
-        return this.searchValue ? a(S("el-dropdown-menu"), null, {
-          default: () => [this.romateData.length > 0 && this.dropDownItem.map((d) => {
-            if (d.label === "member")
+        let r;
+        return this.searchValue ? a(I("el-dropdown-menu"), null, {
+          default: () => [this.romateData.length > 0 && this.dropDownItem.map((i) => {
+            if (i.label === "member")
               return a("div", {
                 class: this.ns.e("popover-item"),
                 style: this.width ? "width:".concat(this.width, "px") : "pointer-events: none;"
@@ -618,11 +617,11 @@ const ie = /* @__PURE__ */ oe({
                 class: this.ns.e("popover-item-center")
               }, [a("div", {
                 class: this.ns.e("popover-item-name")
-              }, [d.name])])]);
-          }), this.romateData.map((d) => a("div", {
+              }, [i.name])])]);
+          }), this.romateData.map((i) => a("div", {
             class: this.ns.e("search-romate-item")
-          }, [this.renderPersonItem(d, !1, !1)])), this.romateTeamData.length > 0 && this.dropDownItem.map((d) => {
-            if (d.label === "team")
+          }, [this.renderPersonItem(i, !1, !1)])), this.romateTeamData.length > 0 && this.dropDownItem.map((i) => {
+            if (i.label === "team")
               return a("div", {
                 class: this.ns.e("popover-item"),
                 style: this.width ? "width:".concat(this.width, "px") : "pointer-events: none;"
@@ -630,16 +629,16 @@ const ie = /* @__PURE__ */ oe({
                 class: this.ns.e("popover-item-center")
               }, [a("div", {
                 class: this.ns.e("popover-item-name")
-              }, [d.name])])]);
-          }), this.romateTeamData.map((d) => a("div", {
+              }, [i.name])])]);
+          }), this.romateTeamData.map((i) => a("div", {
             class: this.ns.e("search-romate-item")
-          }, [this.renderTeamItem(d)]))]
-        }) : a(S("el-dropdown-menu"), null, st(l = this.dropDownItem.map((d) => a(S("el-popover"), {
+          }, [this.renderTeamItem(i)]))]
+        }) : a(I("el-dropdown-menu"), null, st(r = this.dropDownItem.map((i) => a(I("el-popover"), {
           trigger: "click",
           placement: "right",
           width: "380",
           "show-after": 100,
-          "popper-class": [this.ns.e("popover-content"), d.label],
+          "popper-class": [this.ns.e("popover-content"), i.label],
           ref: "popoverRef",
           "popper-options": {
             modifiers: [
@@ -659,245 +658,66 @@ const ie = /* @__PURE__ */ oe({
               // 防止溢出时的设置
             ]
           },
-          visible: this.dropDownItemVisible[d.label]
+          visible: this.dropDownItemVisible[i.label]
         }, {
           reference: () => a("div", {
             class: this.ns.e("popover-item"),
             style: this.width ? "width:".concat(this.width, "px") : "",
-            onClick: (r) => this.dropdownItemClick(r, d),
+            onClick: (l) => this.dropdownItemClick(l, i),
             ref: "dropdownMenu"
           }, [a("div", {
             class: this.ns.e("popover-item-center")
           }, [a("div", {
             class: this.ns.e("popover-item-left")
-          }, [this.renderItemSvg(d.label)]), a("div", {
+          }, [this.renderItemSvg(i.label)]), a("div", {
             class: this.ns.e("popover-item-name")
-          }, [d.name])]), a("div", {
+          }, [i.name])]), a("div", {
             class: this.ns.e("popover-item-right")
           }, [this.rightArrowSvg()])]),
           default: () => a("div", {
-            onClick: (r) => {
+            onClick: (l) => {
               this.dropdownRef.handleOpen();
             },
-            class: [this.ns.e("popover-item-content"), d.label],
+            class: [this.ns.e("popover-item-content"), i.label],
             ref: "pxx"
-          }, [this.renderItemContent(d.label)])
-        }))) ? l : {
-          default: () => [l]
+          }, [this.renderItemContent(i.label)])
+        }))) ? r : {
+          default: () => [r]
         });
       }
     })]);
   }
 });
-class rt extends We {
+class it extends $e {
   constructor() {
-    super(...arguments);
-    /**
-     * 云系统操作者Map
-     *
-     * @memberof PersonelSelectController
-     */
-    n(this, "operatorMap", /* @__PURE__ */ new Map());
-    /**
-     * 总数
-     */
-    n(this, "total", 0);
-    /**
-     * 当前人员数量
-     */
-    n(this, "currentNumber", -1);
-    /**
-     * 人员当前页
-     */
-    n(this, "page", 0);
-    /**
-     * 部门人员数据页数
-     */
-    n(this, "deptpage", 0);
-    /**
-     * 当前部门人员数量
-     */
-    n(this, "deptcurrentNumber", -1);
-    /**
-     * 部门人员总数
-     */
-    n(this, "depttotal", 0);
-    /**
-     * 每页数量
-     */
-    n(this, "size", 20);
-    /**
-     * 是否多选
-     */
-    n(this, "multiple", !1);
-    /**
-     * 是否附加符号 多选且开启附加符号并且选择值为多个时，每个选择值前后都拼接上单引号后再抛出去
-     */
-    n(this, "isAddSymbol", !1);
-    /**
-     * 多选时拼接的字符串
-     */
-    n(this, "separator", ",");
-    /**
-     *选择视图相关参数
-     */
-    n(this, "pickupView", null);
-    /**
-     *链接视图相关参数
-     */
-    n(this, "linkView", null);
-    /**
-     * 人员UI转化
-     */
-    n(this, "userFilterMap", {
+    super(...arguments), n(this, "operatorMap", /* @__PURE__ */ new Map()), n(this, "total", 0), n(this, "currentNumber", -1), n(this, "page", 0), n(this, "deptpage", 0), n(this, "deptcurrentNumber", -1), n(this, "depttotal", 0), n(this, "size", 20), n(this, "multiple", !1), n(this, "isAddSymbol", !1), n(this, "separator", ","), n(this, "pickupView", null), n(this, "linkView", null), n(this, "userFilterMap", {
       id: "id",
       name: "name"
-    });
-    /**
-     * 部门人员UI转化
-     */
-    n(this, "deptFilterMap", {
+    }), n(this, "deptFilterMap", {
       id: "id",
       name: "name"
-    });
-    /**
-     * 是否显示人员部门分页
-     */
-    n(this, "isShowTab", !0);
-    /**
-     *值项
-     */
-    n(this, "valueItem", "");
-    /**
-     * 主键属性名称
-     */
-    n(this, "keyName", "srfkey");
-    /**
-     * 主文本属性名称
-     */
-    n(this, "textName", "srfmajortext");
-    /**
-     * 数据集codeName
-     */
-    n(this, "interfaceName", "");
-    /**
-     * 自填模式sort排序
-     */
-    n(this, "sort", "");
-    /**
-     * 不支持AC（根据编辑器类型得）
-     */
-    n(this, "noAC", !1);
-    /**
-     * 不支持按钮（根据编辑器类型得）
-     */
-    n(this, "noButton", !1);
-    /**
-     * 实体自填模式模型
-     */
-    n(this, "deACMode");
-    /**
-     * 自填数据项集合（已排除了value和text)
-     */
-    n(this, "dataItems", []);
-    // 对象标识属性
-    n(this, "objectIdField", "");
-    // 对象名称属性
-    n(this, "objectNameField", "");
-    // 对象值属性
-    n(this, "objectValueField", "");
-    // 人员请求地址
-    n(this, "userUrl", "");
-    // 部门请求地址
-    n(this, "deptUrl", "");
-    //  团队请求地址
-    n(this, "teamUrl", "");
-    //  团队成员请求地址
-    n(this, "teamMemberUrl", "");
-    // 团队值项
-    n(this, "teamValueItem", "");
-    // 复制人员请求url,这是用来保证当配置的URL中的动态参数变化后可以刷新当前请求状态
-    n(this, "copyUserUrl", "");
-    // 复制部门人员请求url
-    n(this, "copyDeptUrl", "");
-    // 复制团队请求url
-    n(this, "copyTeamUrl", "");
-    // 复制团队成员请求url
-    n(this, "copyTeamMemberUrl", "");
-    // 人员请求方式
-    n(this, "userMethod", "post");
-    // 部门人员请求方式
-    n(this, "deptMethod", "post");
-    // 团队请求方式
-    n(this, "teamMethod", "post");
-    // 团队人员请求方式
-    n(this, "teamMemberMethod", "post");
-    /**
-     * 上下文替换正则
-     *
-     */
-    n(this, "contextReg", /\$\{context.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g);
-    /**
-     * 数据替换正则
-     *
-     */
-    n(this, "dataReg", /\$\{data.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g);
-    /**
-     * 参数替换正则
-     *
-     */
-    n(this, "paramsReg", /\$\{params.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g);
-    /**
-     * 是否配置了默认显示当前用户
-     */
-    n(this, "defaultSelCurUser", !1);
-    /**
-     * 值类型
-     */
-    n(this, "valueType", "OBJECTS");
-    /**
-     * 关注类型属性
-     *
-     */
-    n(this, "attentionTypeField", "type");
-    /**
-     * 自填充映射
-     */
-    n(this, "selfFillMap", {});
-    /**
-     * 选中后默认关注值
-     *
-     */
-    n(this, "defaultAttentionValue", "");
-    /**
-     * 是否显示姓名文字
-     */
-    n(this, "showNameText", !0);
-    /**
-     * 是否显示姓名提示
-     */
-    n(this, "showNameTip", !1);
+    }), n(this, "isShowTab", !0), n(this, "valueItem", ""), n(this, "keyName", "srfkey"), n(this, "textName", "srfmajortext"), n(this, "interfaceName", ""), n(this, "sort", ""), n(this, "noAC", !1), n(this, "noButton", !1), n(this, "deACMode"), n(this, "dataItems", []), n(this, "objectIdField", ""), n(this, "objectNameField", ""), n(this, "objectValueField", ""), n(this, "userUrl", ""), n(this, "deptUrl", ""), n(this, "teamUrl", ""), n(this, "teamMemberUrl", ""), n(this, "teamValueItem", ""), n(this, "copyUserUrl", ""), n(this, "copyDeptUrl", ""), n(this, "copyTeamUrl", ""), n(this, "copyTeamMemberUrl", ""), n(this, "userMethod", "post"), n(this, "deptMethod", "post"), n(this, "teamMethod", "post"), n(this, "teamMemberMethod", "post"), n(this, "contextReg", /\$\{context.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g), n(this, "dataReg", /\$\{data.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g), n(this, "paramsReg", /\$\{params.[a-zA-Z_$][a-zA-Z0-9_$]{1,}\}/g), n(this, "defaultSelCurUser", !1), n(this, "valueType", "OBJECTS"), n(this, "attentionTypeField", "type"), n(this, "selfFillMap", {}), n(this, "defaultAttentionValue", ""), n(this, "showNameText", !0), n(this, "showNameTip", !1);
   }
   async onInit() {
-    var t, f, o, u;
-    if (super.onInit(), this.initDefaultAttribute(), this.valueItem = ((t = this.model.valueItemName) == null ? void 0 : t.toLowerCase()) || "", this.initParams(), await this.getOperatorUserList(), this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await Ye(
+    var i, l, s, h;
+    if (super.onInit(), this.initDefaultAttribute(), this.valueItem = ((i = this.model.valueItemName) == null ? void 0 : i.toLowerCase()) || "", this.initParams(), await this.getOperatorUserList(), this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await We(
       this.model.appDEACModeId,
       this.model.appDataEntityId,
       this.context.srfappid
     ), this.deACMode))) {
-      const { minorSortAppDEFieldId: m, minorSortDir: v } = this.deACMode;
-      m && v && (this.sort = "".concat(m.toLowerCase(), ",").concat(v.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
-        (b) => {
-          b.id !== "value" && b.id !== "text" && this.dataItems.push(b);
+      const { minorSortAppDEFieldId: c, minorSortDir: p } = this.deACMode;
+      c && p && (this.sort = "".concat(c.toLowerCase(), ",").concat(p.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
+        (g) => {
+          g.id !== "value" && g.id !== "text" && this.dataItems.push(g);
         }
       ));
     }
-    const r = [
+    const d = [
       "PICKEREX_DROPDOWNVIEW",
       "PICKEREX_DROPDOWNVIEW_LINK",
       "PICKUPVIEW"
     ];
-    this.model.editorType && r.includes(this.model.editorType), this.objectIdField = (f = this.model.objectIdField) == null ? void 0 : f.toLowerCase(), this.objectNameField = (o = this.model.objectNameField) == null ? void 0 : o.toLowerCase(), this.objectValueField = (u = this.model.objectValueField) == null ? void 0 : u.toLowerCase();
+    this.model.editorType && d.includes(this.model.editorType), this.objectIdField = (l = this.model.objectIdField) == null ? void 0 : l.toLowerCase(), this.objectNameField = (s = this.model.objectNameField) == null ? void 0 : s.toLowerCase(), this.objectValueField = (h = this.model.objectValueField) == null ? void 0 : h.toLowerCase();
   }
   /**
    * 初始化字段默认属性
@@ -909,7 +729,7 @@ class rt extends We {
    * 初始化noAc和noButton
    */
   initParams() {
-    var r, t, f, o, u, m, v, b;
+    var i, l, s, h, d, c, p, g;
     switch (this.model.editorType) {
       case "PICKEREX_NOAC":
       case "PICKEREX_NOAC_LINK":
@@ -921,18 +741,18 @@ class rt extends We {
       default:
         this.noButton = !1, this.noAC = !1;
     }
-    if (this.userUrl = this.editorParams.URL, this.deptUrl = this.editorParams.DEPTURL, this.teamUrl = this.editorParams.TEAMURL, this.teamMemberUrl = this.editorParams.TEAMMEMBERURL, this.userMethod = this.editorParams.USERMETHOD || "post", this.deptMethod = this.editorParams.DEPTMETHOD || "post", this.teamMethod = this.editorParams.TEAMMETHOD || "post", this.teamMemberMethod = this.editorParams.TEAMMEMBERURL || "post", this.teamValueItem = (r = this.editorParams) == null ? void 0 : r.TEAMTYPEFIELD, this.multiple = this.editorParams.MULTIPLE === "true", this.defaultSelCurUser = this.editorParams.DEFAULTSELCURUSER === "true", this.separator = this.editorParams.SEPARATOR || ",", this.isAddSymbol = this.editorParams.ISADDSYMBOL === "true" && this.multiple === !0, this.isShowTab = this.editorParams.ISSHOWTAB !== "false", (t = this.editorParams) != null && t.VALUETYPE && (this.valueType = (f = this.editorParams) == null ? void 0 : f.VALUETYPE), (o = this.editorParams) != null && o.DEFAULTATNVALUE && (this.defaultAttentionValue = (u = this.editorParams) == null ? void 0 : u.DEFAULTATNVALUE), (m = this.editorParams) != null && m.VALUEITEMNAME && (this.valueItem = (v = this.editorParams) == null ? void 0 : v.VALUEITEMNAME), this.editorParams && Object.prototype.hasOwnProperty.call(this.editorParams, "SELFFILLMAP"))
+    if (this.userUrl = this.editorParams.URL, this.deptUrl = this.editorParams.DEPTURL, this.teamUrl = this.editorParams.TEAMURL, this.teamMemberUrl = this.editorParams.TEAMMEMBERURL, this.userMethod = this.editorParams.USERMETHOD || "post", this.deptMethod = this.editorParams.DEPTMETHOD || "post", this.teamMethod = this.editorParams.TEAMMETHOD || "post", this.teamMemberMethod = this.editorParams.TEAMMEMBERURL || "post", this.teamValueItem = (i = this.editorParams) == null ? void 0 : i.TEAMTYPEFIELD, this.multiple = this.editorParams.MULTIPLE === "true", this.defaultSelCurUser = this.editorParams.DEFAULTSELCURUSER === "true", this.separator = this.editorParams.SEPARATOR || ",", this.isAddSymbol = this.editorParams.ISADDSYMBOL === "true" && this.multiple === !0, this.isShowTab = this.editorParams.ISSHOWTAB !== "false", (l = this.editorParams) != null && l.VALUETYPE && (this.valueType = (s = this.editorParams) == null ? void 0 : s.VALUETYPE), (h = this.editorParams) != null && h.DEFAULTATNVALUE && (this.defaultAttentionValue = (d = this.editorParams) == null ? void 0 : d.DEFAULTATNVALUE), (c = this.editorParams) != null && c.VALUEITEMNAME && (this.valueItem = (p = this.editorParams) == null ? void 0 : p.VALUEITEMNAME), this.editorParams && Object.prototype.hasOwnProperty.call(this.editorParams, "SELFFILLMAP"))
       try {
-        const M = JSON.parse((b = this.editorParams) == null ? void 0 : b.SELFFILLMAP);
-        Object.assign(this.selfFillMap, M);
-      } catch (M) {
+        const f = JSON.parse((g = this.editorParams) == null ? void 0 : g.SELFFILLMAP);
+        Object.assign(this.selfFillMap, f);
+      } catch (f) {
         this.selfFillMap = {};
       }
     if (this.editorParams && Object.prototype.hasOwnProperty.call(this.editorParams, "USERMAP"))
       try {
-        const M = JSON.parse(this.editorParams.USERMAP);
-        Object.assign(this.userFilterMap, M);
-      } catch (M) {
+        const f = JSON.parse(this.editorParams.USERMAP);
+        Object.assign(this.userFilterMap, f);
+      } catch (f) {
         this.userFilterMap = {
           id: "id",
           name: "name"
@@ -940,9 +760,9 @@ class rt extends We {
       }
     if (this.editorParams && Object.prototype.hasOwnProperty.call(this.editorParams, "DEPTMAP"))
       try {
-        const M = JSON.parse(this.editorParams.DEPTMAP);
-        Object.assign(this.deptFilterMap, M);
-      } catch (M) {
+        const f = JSON.parse(this.editorParams.DEPTMAP);
+        Object.assign(this.deptFilterMap, f);
+      } catch (f) {
         this.deptFilterMap = {
           id: "id",
           name: "name"
@@ -971,58 +791,58 @@ class rt extends We {
   /**
    * 加载更多
    */
-  async loadMore(r, t, f = {}) {
-    if (t === "member") {
-      const o = await this.getServiceData(t, r, f);
-      if (o)
-        return this.page += 1, this.currentNumber < 0 && (this.currentNumber += 1), this.currentNumber += this.size, this.total = o.total ? Number(o.total) : Number(o.headers["x-total"]), o.data.forEach((u) => {
-          Object.keys(this.userFilterMap).forEach((m) => {
-            u[m] = u[this.userFilterMap[m]];
+  async loadMore(i, l, s = {}) {
+    if (l === "member") {
+      const h = await this.getServiceData(l, i, s);
+      if (h)
+        return this.page += 1, this.currentNumber < 0 && (this.currentNumber += 1), this.currentNumber += this.size, this.total = h.total ? Number(h.total) : Number(h.headers["x-total"]), h.data.forEach((d) => {
+          Object.keys(this.userFilterMap).forEach((c) => {
+            d[c] = d[this.userFilterMap[c]];
           });
-        }), o;
-    } else if (t === "department" && this.deptcurrentNumber < this.depttotal) {
-      const o = await this.getServiceData(t, r, f);
-      if (o)
-        return this.deptpage += 1, this.deptcurrentNumber < 0 && (this.deptcurrentNumber += 1), this.deptcurrentNumber += this.size, this.depttotal = o.total ? Number(o.total) : Number(o.headers["x-total"]), o.data.forEach((u) => {
-          Object.keys(this.deptFilterMap).forEach((m) => {
-            u[m] = u[this.deptFilterMap[m]];
+        }), h;
+    } else if (l === "department" && this.deptcurrentNumber < this.depttotal) {
+      const h = await this.getServiceData(l, i, s);
+      if (h)
+        return this.deptpage += 1, this.deptcurrentNumber < 0 && (this.deptcurrentNumber += 1), this.deptcurrentNumber += this.size, this.depttotal = h.total ? Number(h.total) : Number(h.headers["x-total"]), h.data.forEach((d) => {
+          Object.keys(this.deptFilterMap).forEach((c) => {
+            d[c] = d[this.deptFilterMap[c]];
           });
-        }), o;
-    } else if (t === "team")
-      return await this.getServiceData(t, r, f);
+        }), h;
+    } else if (l === "team")
+      return await this.getServiceData(l, i, s);
   }
-  async getServiceDataTeamMember(r, t, f) {
-    const { context: o, params: u } = this.handlePublicParams(
-      t,
+  async getServiceDataTeamMember(i, l, s) {
+    const { context: h, params: d } = this.handlePublicParams(
+      l,
       this.context,
       this.params
-    ), m = {
+    ), c = {
       n_owner_type_eq: "GROUP",
-      n_owner_id_eq: r
+      n_owner_id_eq: i
     };
-    this.sort && !Object.is(this.sort, "") && Object.assign(m, { sort: this.sort }), Object.assign(m, { size: this.size }), f && Object.assign(m, f);
-    const v = le(u, m);
-    let b = "";
-    const M = this.fill(
+    this.sort && !Object.is(this.sort, "") && Object.assign(c, { sort: this.sort }), Object.assign(c, { size: this.size }), s && Object.assign(c, s);
+    const p = le(d, c);
+    let g = "";
+    const f = this.fill(
       this.teamMemberUrl,
-      o,
-      { ...u, teamid: r },
-      t
+      h,
+      { ...d, teamid: i },
+      l
     ).replaceAll("//", "/");
-    this.copyTeamMemberUrl = M;
+    this.copyTeamMemberUrl = f;
     let E = "post";
-    const P = {};
-    if (b = M, E = this.teamMethod.toLowerCase(), E === "get" ? Object.assign(P, { method: E, params: v }) : Object.assign(P, { method: E, data: v }), b)
-      return await ibiz.net.request(b, P);
-    throw new re(this.model, "请配置数据接口地址");
+    const y = {};
+    if (g = f, E = this.teamMethod.toLowerCase(), E === "get" ? Object.assign(y, { method: E, params: p }) : Object.assign(y, { method: E, data: p }), g)
+      return await ibiz.net.request(g, y);
+    throw new ie(this.model, "请配置数据接口地址");
   }
   /**
    * 团队成员
    */
-  async loadTeamMember(r, t, f = {}) {
-    const o = await this.getServiceDataTeamMember(t, r, f);
-    if (o)
-      return o;
+  async loadTeamMember(i, l, s = {}) {
+    const h = await this.getServiceDataTeamMember(l, i, s);
+    if (h)
+      return h;
   }
   /**
    * 填充字符串中的数据
@@ -1035,31 +855,31 @@ class rt extends We {
    * @param {*} [data]
    * @return {*}  {string}
    */
-  fill(r = "", t, f, o) {
-    if (j(r)) {
-      if (j(t)) {
-        const u = r.match(this.contextReg);
-        u == null || u.forEach((m) => {
-          const v = m.slice(10, m.length - 1);
-          r = r.replace("${context.".concat(v, "}"), t[v] || "");
+  fill(i = "", l, s, h) {
+    if (R(i)) {
+      if (R(l)) {
+        const d = i.match(this.contextReg);
+        d == null || d.forEach((c) => {
+          const p = c.slice(10, c.length - 1);
+          i = i.replace("${context.".concat(p, "}"), l[p] || "");
         });
       }
-      if (j(f)) {
-        const u = r.match(this.paramsReg);
-        u == null || u.forEach((m) => {
-          const v = m.slice(9, m.length - 1);
-          r = r.replace("${params.".concat(v, "}"), f[v] || "");
+      if (R(s)) {
+        const d = i.match(this.paramsReg);
+        d == null || d.forEach((c) => {
+          const p = c.slice(9, c.length - 1);
+          i = i.replace("${params.".concat(p, "}"), s[p] || "");
         });
       }
-      if (j(o)) {
-        const u = r.match(this.dataReg);
-        u == null || u.forEach((m) => {
-          const v = m.slice(7, m.length - 1);
-          r = r.replace("${data.".concat(v, "}"), o[v] || "");
+      if (R(h)) {
+        const d = i.match(this.dataReg);
+        d == null || d.forEach((c) => {
+          const p = c.slice(7, c.length - 1);
+          i = i.replace("${data.".concat(p, "}"), h[p] || "");
         });
       }
     }
-    return r;
+    return i;
   }
   /**
    * 加载实体数据集数据
@@ -1070,31 +890,31 @@ class rt extends We {
    * @returns {*}  {Promise<IHttpResponse<IData[]>>}
    * @memberof PersonelSelectController
    */
-  async getServiceData(r, t, f) {
-    const { context: o, params: u } = this.handlePublicParams(
-      t,
+  async getServiceData(i, l, s) {
+    const { context: h, params: d } = this.handlePublicParams(
+      l,
       this.context,
       this.params
-    ), m = {};
-    this.sort && !Object.is(this.sort, "") && Object.assign(m, { sort: this.sort }), Object.assign(m, { size: this.size }), f && Object.assign(m, f);
-    const v = le(u, m);
-    let b = "";
-    const M = this.fill(this.userUrl, o, u, t).replaceAll(
+    ), c = {};
+    this.sort && !Object.is(this.sort, "") && Object.assign(c, { sort: this.sort }), Object.assign(c, { size: this.size }), s && Object.assign(c, s);
+    const p = le(d, c);
+    let g = "";
+    const f = this.fill(this.userUrl, h, d, l).replaceAll(
       "//",
       "/"
-    ), E = this.fill(this.deptUrl, o, u, t).replaceAll(
+    ), E = this.fill(this.deptUrl, h, d, l).replaceAll(
       "//",
       "/"
-    ), P = this.fill(this.teamUrl, o, u, t).replaceAll(
+    ), y = this.fill(this.teamUrl, h, d, l).replaceAll(
       "//",
       "/"
     );
-    this.copyUserUrl = M, this.copyDeptUrl = E, this.copyTeamUrl = P;
-    let h = "post";
-    const w = {};
-    if (r === "member" ? (b = M, h = this.userMethod.toLowerCase(), h === "get" ? Object.assign(w, { method: h, params: v }) : Object.assign(w, { method: h, data: v })) : r === "department" ? (b = E, h = this.deptMethod.toLowerCase(), h === "get" ? Object.assign(w, { method: h, params: v }) : Object.assign(w, { method: h, data: v })) : r === "team" && (b = P, h = this.teamMethod.toLowerCase(), h === "get" ? Object.assign(w, { method: h, params: v }) : Object.assign(w, { method: h, data: v })), b)
-      return await ibiz.net.request(b, w);
-    throw new re(this.model, "请配置数据接口地址");
+    this.copyUserUrl = f, this.copyDeptUrl = E, this.copyTeamUrl = y;
+    let w = "post";
+    const v = {};
+    if (i === "member" ? (g = f, w = this.userMethod.toLowerCase(), w === "get" ? Object.assign(v, { method: w, params: p }) : Object.assign(v, { method: w, data: p })) : i === "department" ? (g = E, w = this.deptMethod.toLowerCase(), w === "get" ? Object.assign(v, { method: w, params: p }) : Object.assign(v, { method: w, data: p })) : i === "team" && (g = y, w = this.teamMethod.toLowerCase(), w === "get" ? Object.assign(v, { method: w, params: p }) : Object.assign(v, { method: w, data: p })), g)
+      return await ibiz.net.request(g, v);
+    throw new ie(this.model, "请配置数据接口地址");
   }
   /**
    * 获取操作用户列表
@@ -1102,36 +922,35 @@ class rt extends We {
    * @memberof PersonelSelectController
    */
   async getOperatorUserList() {
-    const r = await ibiz.hub.getApp(this.context.srfappid);
-    let t = [];
-    t = await r.codeList.get(
+    const i = await ibiz.hub.getApp(this.context.srfappid);
+    let l = [];
+    l = await i.codeList.get(
       "SysOperator",
       this.context,
       this.params
     ), this.operatorMap = new Map(
-      t.map((f) => [f.value, f])
+      l.map((s) => [s.value, s])
     );
   }
 }
 class lt {
   constructor() {
-    n(this, "formEditor", "TeamSelect");
-    n(this, "gridEditor", "TeamSelect");
+    n(this, "formEditor", "TeamSelect"), n(this, "gridEditor", "TeamSelect");
   }
-  async createController(d, r) {
-    const t = new rt(d, r);
-    return await t.init(), t;
+  async createController(i, l) {
+    const s = new it(i, l);
+    return await s.init(), s;
   }
 }
-const vt = {
+const ct = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(l) {
-    l.component(ie.name, ie), Ze(
+  install(r) {
+    r.component(re.name, re), Be(
       "EDITOR_CUSTOMSTYLE_TEAM_SELECT",
       () => new lt()
     );
   }
 };
 export {
-  vt as default
+  ct as default
 };

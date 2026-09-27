@@ -1,36 +1,27 @@
-import './style.css';
-var v = Object.defineProperty;
-var f = (i, s, t) => s in i ? v(i, s, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[s] = t;
-var r = (i, s, t) => (f(i, typeof s != "symbol" ? s + "" : s, t), t);
-import { PanelItemState as w, PanelItemController as g, ViewCallTag as y, registerPanelItemProvider as I } from "@ibiz-template/runtime";
-import { useNamespace as T, withInstall as b } from "@ibiz-template/vue3-util";
-import { defineComponent as z, ref as p, createVNode as e, resolveComponent as x } from "vue";
-class C extends w {
+import './assets/style.css';
+import './assets/style.css';
+import { registerPanelItemProvider as m, PanelItemController as v, ViewCallTag as w, PanelItemState as f } from "@ibiz-template/runtime";
+import { withInstall as g, useNamespace as y } from "@ibiz-template/vue3-util";
+import { defineComponent as b, ref as p, createVNode as e, resolveComponent as I } from "vue";
+var z = Object.defineProperty, x = (i, t, s) => t in i ? z(i, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : i[t] = s, c = (i, t, s) => (x(i, typeof t != "symbol" ? t + "" : t, s), s);
+class T extends f {
   constructor() {
-    super(...arguments);
-    /**
-     * 标题
-     */
-    r(this, "caption", "");
+    super(...arguments), c(this, "caption", "");
   }
 }
-class u extends g {
+class d extends v {
   constructor() {
-    super(...arguments);
-    /**
-     * 编号
-     */
-    r(this, "titleNumnber", "");
+    super(...arguments), c(this, "titleNumnber", "");
   }
   async onInit() {
     super.onInit(), this.state.caption = this.panel.view.state.caption, this.panel.view.evt.on(
       "onViewInfoChange",
-      ({ caption: t, dataInfo: o }) => {
-        var a;
+      ({ caption: t, dataInfo: s }) => {
+        var o;
         const l = this.model.userTag || "";
         this.titleNumnber = "";
-        const n = this.panel.view.ctx.controllersMap.get("form");
-        n && (this.titleNumnber = n.state.data[l]), this.state.caption = "".concat(this.panel.view.state.caption).concat(this.titleNumnber ? "-".concat(this.titleNumnber) : ""), (a = ibiz.util) == null || a.setBrowserTitle(this.state.caption);
+        const r = this.panel.view.ctx.controllersMap.get("form");
+        r && (this.titleNumnber = r.state.data[l]), this.state.caption = "".concat(this.panel.view.state.caption).concat(this.titleNumnber ? "-".concat(this.titleNumnber) : ""), (o = ibiz.util) == null || o.setBrowserTitle(this.state.caption);
       }
     );
   }
@@ -42,7 +33,7 @@ class u extends g {
    */
   createState() {
     var t;
-    return new C((t = this.parent) == null ? void 0 : t.state);
+    return new T((t = this.parent) == null ? void 0 : t.state);
   }
   /**
    * 获取分享路径
@@ -51,19 +42,19 @@ class u extends g {
    * @memberof IdentifierTitleController
    */
   async copyPath() {
-    return (await this.panel.view.call(y.COPY_PATH)).ok;
+    return (await this.panel.view.call(w.COPY_PATH)).ok;
   }
 }
-class M {
+class C {
   constructor() {
-    r(this, "component", "IdentifierTitle");
+    c(this, "component", "IdentifierTitle");
   }
-  async createController(s, t, o) {
-    const l = new u(s, t, o);
+  async createController(t, s, o) {
+    const l = new d(t, s, o);
     return await l.init(), l;
   }
 }
-const d = /* @__PURE__ */ z({
+const n = /* @__PURE__ */ b({
   name: "IdentifierTitle",
   props: {
     modelData: {
@@ -71,22 +62,22 @@ const d = /* @__PURE__ */ z({
       required: !0
     },
     controller: {
-      type: u,
+      type: d,
       required: !0
     }
   },
   setup(i) {
-    const s = T("identifier-title"), t = p(!1), o = p(!1);
-    let l, n;
+    const t = y("identifier-title"), s = p(!1), o = p(!1);
+    let l, r;
     return {
-      ns: s,
-      copyIdSuccess: t,
+      ns: t,
+      copyIdSuccess: s,
       copyUrlSuccess: o,
-      copy: async (h, c) => {
-        const m = c === "id" ? ibiz.util.text.copy(h) : await i.controller.copyPath();
-        clearTimeout(c === "id" ? l : n), m ? (ibiz.message.success("拷贝成功!"), c === "id" ? (t.value = !0, l = setTimeout(() => {
-          t.value = !1;
-        }, 3e3)) : (o.value = !0, n = setTimeout(() => {
+      copy: async (u, a) => {
+        const h = a === "id" ? ibiz.util.text.copy(u) : await i.controller.copyPath();
+        clearTimeout(a === "id" ? l : r), h ? (ibiz.message.success("拷贝成功!"), a === "id" ? (s.value = !0, l = setTimeout(() => {
+          s.value = !1;
+        }, 3e3)) : (o.value = !0, r = setTimeout(() => {
           o.value = !1;
         }, 3e3))) : ibiz.message.error("拷贝失败，浏览器copy操作不被支持或未被启用!");
       }
@@ -97,7 +88,7 @@ const d = /* @__PURE__ */ z({
       class: this.ns.b()
     }, [e("div", {
       class: [this.ns.b("caption"), this.ns.is("show-icon", !!this.$props.controller.model.sysImage)]
-    }, [this.$props.controller.model.sysImage && e(x("iBizIcon"), {
+    }, [this.$props.controller.model.sysImage && e(I("iBizIcon"), {
       class: [this.ns.be("caption", "icon")],
       icon: this.$props.controller.model.sysImage
     }, null), e("span", null, [this.$props.controller.state.caption]), e("div", {
@@ -176,22 +167,22 @@ const d = /* @__PURE__ */ z({
       transform: "rotate(46 8.253 8.13)"
     }, null)])])])])])]);
   }
-}), k = b(
-  d,
+}), M = g(
+  n,
   // eslint-disable-next-line func-names
   function(i) {
-    i.component(d.name, d), I(
+    i.component(n.name, n), m(
       "CUSTOM_IDENTIFIER_TITLE",
-      () => new M()
+      () => new C()
     );
   }
-), D = {
+), S = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(i) {
-    i.use(k);
+    i.use(M);
   }
 };
 export {
-  k as IBizIdentifierTitle,
-  D as default
+  M as IBizIdentifierTitle,
+  S as default
 };

@@ -1,39 +1,32 @@
-import './style.css';
-var Ce = Object.defineProperty;
-var ge = (t, u, e) => u in t ? Ce(t, u, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[u] = e;
-var _ = (t, u, e) => (ge(t, typeof u != "symbol" ? u + "" : u, e), e);
-import { ValueOP as d, ConfigService as Oe, ControlController as be, convertNavData as Ie, getEntitySchema as Ee, ItemsValueOPs as Fe, isSimpleItems as Se, SearchBarFilterSimpleItemsController as Te, SearchBarFilterController as Pe, SearchBarFilterItemsController as we, ScriptFactory as Ne, SearchCondEx2filterNode as xe, calcSearchConds as Le, registerControlProvider as De } from "@ibiz-template/runtime";
-import { useNamespace as ae, useControlController as ke, useUIStore as _e, useClickOutside as Be, withInstall as Ge } from "@ibiz-template/vue3-util";
-import { defineComponent as K, computed as Q, createVNode as l, resolveComponent as C, isVNode as ie, ref as x, watch as ee, createTextVNode as A, h as ue, reactive as Me } from "vue";
-import { clearAll as Re, createUUID as te } from "qx-util";
+import './assets/style.css';
+import './assets/style.css';
+import { ValueOP as u, registerControlProvider as ge, ControlController as be, convertNavData as Ce, getEntitySchema as Ie, ItemsValueOPs as Oe, isSimpleItems as Ee, SearchBarFilterSimpleItemsController as Se, SearchBarFilterController as Te, SearchBarFilterItemsController as Fe, ScriptFactory as Pe, ConfigService as we, SearchCondEx2filterNode as Ne, calcSearchConds as Le } from "@ibiz-template/runtime";
+import { withInstall as xe, useControlController as ke, useNamespace as ie, useUIStore as _e, useClickOutside as De } from "@ibiz-template/vue3-util";
+import { defineComponent as H, ref as N, computed as V, createVNode as i, resolveComponent as y, createTextVNode as R, isVNode as se, h as ce, reactive as Be, watch as Z } from "vue";
+import { createUUID as ee, clearAll as Ge } from "qx-util";
 import { isString as de } from "lodash-es";
-import { clone as U, recursiveIterate as pe, isElementSame as Ae } from "@ibiz-template/core";
-var se = /* @__PURE__ */ ((t) => (t.OR = "或", t.AND = "与", t))(se || {});
-const he = /\$\{[^}]*\}/, fe = [
-  d.IS_NULL,
-  d.IS_NOT_NULL,
-  d.EXISTS,
-  d.NOT_EXISTS
+import { clone as M, recursiveIterate as ue, isElementSame as je } from "@ibiz-template/core";
+var Re = Object.defineProperty, Ue = (l, e, t) => e in l ? Re(l, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : l[e] = t, B = (l, e, t) => (Ue(l, typeof e != "symbol" ? e + "" : e, t), t), te = /* @__PURE__ */ ((l) => (l.OR = "或", l.AND = "与", l))(te || {});
+const pe = /\$\{[^}]*\}/, he = [
+  u.IS_NULL,
+  u.IS_NOT_NULL,
+  u.EXISTS,
+  u.NOT_EXISTS
 ];
-class je {
+class Me {
   /**
    * Creates an instance of OdooSearchBarService.
    * @param {ISearchBar} model
    * @param {IContext} context
    * @memberof OdooSearchBarService
    */
-  constructor(u, e) {
-    /**
-     * 应用配置服务
-     *
-     * @type {ConfigService}
-     */
-    _(this, "config");
-    var s, o;
-    this.model = u, this.context = e, this.config = new Oe(
-      u.appId,
+  constructor(e, t) {
+    B(this, "config");
+    var d, n;
+    this.model = e, this.context = t, this.config = new we(
+      e.appId,
       "searchbar",
-      "".concat(e.srfuserid, "_").concat(((s = this.model.appDataEntityId) == null ? void 0 : s.toLowerCase()) || "app", "_").concat((o = this.model.codeName) == null ? void 0 : o.toLowerCase())
+      "".concat(t.srfuserid, "_").concat(((d = this.model.appDataEntityId) == null ? void 0 : d.toLowerCase()) || "app", "_").concat((n = this.model.codeName) == null ? void 0 : n.toLowerCase())
     );
   }
   /**
@@ -43,8 +36,8 @@ class je {
    * @return {*}  {Promise<void>}
    * @memberof OdooSearchBarService
    */
-  async save(u) {
-    await this.config.save(u);
+  async save(e) {
+    await this.config.save(e);
   }
   /**
    * 加载
@@ -56,183 +49,138 @@ class je {
     return this.config.load();
   }
 }
-const V = "", le = {
+const X = "", le = {
   string: [
-    d.EQ,
-    d.NOT_EQ,
-    d.IS_NULL,
-    d.IS_NOT_NULL,
-    d.USER_LIKE,
-    d.LIKE,
-    d.LIFT_LIKE,
-    d.RIGHT_LIKE
+    u.EQ,
+    u.NOT_EQ,
+    u.IS_NULL,
+    u.IS_NOT_NULL,
+    u.USER_LIKE,
+    u.LIKE,
+    u.LIFT_LIKE,
+    u.RIGHT_LIKE
   ],
   number: [
-    d.EQ,
-    d.GT,
-    d.GT_AND_EQ,
-    d.LT,
-    d.LT_AND_EQ,
-    d.NOT_EQ,
-    d.IS_NULL,
-    d.IS_NOT_NULL,
-    d.IN,
-    d.NOT_IN
+    u.EQ,
+    u.GT,
+    u.GT_AND_EQ,
+    u.LT,
+    u.LT_AND_EQ,
+    u.NOT_EQ,
+    u.IS_NULL,
+    u.IS_NOT_NULL,
+    u.IN,
+    u.NOT_IN
   ],
   date: [
-    d.EQ,
-    d.GT,
-    d.GT_AND_EQ,
-    d.LT,
-    d.LT_AND_EQ,
-    d.NOT_EQ,
-    d.IS_NULL,
-    d.IS_NOT_NULL,
-    d.IN,
-    d.NOT_IN
+    u.EQ,
+    u.GT,
+    u.GT_AND_EQ,
+    u.LT,
+    u.LT_AND_EQ,
+    u.NOT_EQ,
+    u.IS_NULL,
+    u.IS_NOT_NULL,
+    u.IN,
+    u.NOT_IN
   ]
-}, X = {};
-function Ue() {
-  Object.keys(le).forEach((t) => {
-    le[t].forEach((e) => {
-      if (fe.includes(e))
+}, K = {};
+function ze() {
+  Object.keys(le).forEach((l) => {
+    le[l].forEach((e) => {
+      if (he.includes(e))
         return;
-      const s = "".concat(t, "_").concat(e);
-      X[s] || (t === "date" && ![d.IN, d.NOT_IN].includes(e) ? X[s] = {
-        appId: V,
+      const t = "".concat(l, "_").concat(e);
+      K[t] || (l === "date" && ![u.IN, u.NOT_IN].includes(e) ? K[t] = {
+        appId: X,
         editorType: "DATEPICKER",
-        id: s
-      } : X[s] = {
-        appId: V,
+        id: t
+      } : K[t] = {
+        appId: X,
         editorType: "TEXTBOX",
-        id: s
+        id: t
       });
     });
   });
 }
-Ue();
-function ze(t, u) {
-  return t.enumSource ? {
-    appId: V,
+ze();
+function Ae(l, e) {
+  return l.enumSource ? {
+    appId: X,
     editorType: "DROPDOWNLIST",
     singleSelect: !0,
     valueType: "SIMPLE",
-    appCodeListId: t.enumSource,
-    id: "".concat(t.key, "_").concat(u)
-  } : X["".concat(t.type, "_").concat(u)];
+    appCodeListId: l.enumSource,
+    id: "".concat(l.key, "_").concat(e)
+  } : K["".concat(l.type, "_").concat(e)];
 }
-async function $e(t, u, e) {
-  var p;
-  const s = [], o = [];
-  if (!t.properties)
-    return { schemaFields: s, searchBarFilters: o };
-  const { properties: i } = t;
-  if (!(Object.keys(i).length > 0))
-    return { schemaFields: s, searchBarFilters: o };
-  const r = {};
-  return (p = (await ibiz.hub.getAppDataEntity(
-    u,
-    e
-  )).appDEFields) == null || p.forEach((f) => {
-    r[f.codeName.toLowerCase()] = f.id;
-  }), ibiz.util.jsonSchema.sortProperties(Object.entries(i)).map((f) => f[0]).forEach((f) => {
-    let h;
-    switch (i[f].type) {
+async function qe(l, e, t) {
+  var d;
+  const n = [], s = [];
+  if (!l.properties)
+    return { schemaFields: n, searchBarFilters: s };
+  const { properties: c } = l;
+  if (!(Object.keys(c).length > 0))
+    return { schemaFields: n, searchBarFilters: s };
+  const p = {};
+  return (d = (await ibiz.hub.getAppDataEntity(
+    e,
+    t
+  )).appDEFields) == null || d.forEach((o) => {
+    p[o.codeName.toLowerCase()] = o.id;
+  }), ibiz.util.jsonSchema.sortProperties(Object.entries(c)).map((o) => o[0]).forEach((o) => {
+    let f;
+    switch (c[o].type) {
       case "string":
-        h = "string", ["date", "date-time", "time"].includes(i[f].format) && (h = "date");
+        f = "string", ["date", "date-time", "time"].includes(c[o].format) && (f = "date");
         break;
       case "integer":
       case "number":
-        h = "number";
+        f = "number";
         break;
       default:
         ibiz.log.error(
           ibiz.i18n.t("runtime.controller.control.grid.unsupported", {
-            type: i[f].type
+            type: c[o].type
           })
         );
         return;
     }
-    h && s.push({
-      key: f,
-      type: h,
-      description: i[f].description,
-      enumSource: i[f].enumSource
+    f && n.push({
+      key: o,
+      type: f,
+      description: c[o].description,
+      enumSource: c[o].enumSource
     });
-  }), s.forEach((f) => {
-    const h = le[f.type];
-    if (!h) {
+  }), n.forEach((o) => {
+    const f = le[o.type];
+    if (!f) {
       ibiz.log.error(
         ibiz.i18n.t("runtime.controller.control.grid.unsupported", {
           type: ""
         }),
-        f.type
+        o.type
       );
       return;
     }
-    h.forEach((P) => {
-      f && o.push({
-        appId: V,
-        appDEFieldId: r[f.key],
-        id: f.key,
-        caption: f.description,
+    f.forEach((I) => {
+      o && s.push({
+        appId: X,
+        appDEFieldId: p[o.key],
+        id: o.key,
+        caption: o.description,
         defsearchMode: {
-          appId: V,
-          valueOP: P
+          appId: X,
+          valueOP: I
         },
-        editor: ze(f, P)
+        editor: Ae(o, I)
       });
     });
-  }), { schemaFields: s, searchBarFilters: o };
+  }), { schemaFields: n, searchBarFilters: s };
 }
-class qe extends be {
+class Qe extends be {
   constructor() {
-    super(...arguments);
-    /**
-     * @description 快速搜索占位符（根据属性计算出来的快速搜索占位符）
-     * @memberof OdooSearchBarController
-     */
-    _(this, "placeHolder", "");
-    /**
-     * @description 搜索栏服务
-     * @type {OdooSearchBarService}
-     * @memberof OdooSearchBarController
-     */
-    _(this, "service");
-    /**
-     * @description 过滤项控制器
-     * @type {SearchBarFilterController[]}
-     * @memberof OdooSearchBarController
-     */
-    _(this, "filterControllers", []);
-    /**
-     * @description schema实体映射map
-     * @type {(Map<string, string | undefined>)}
-     * @memberof OdooSearchBarController
-     */
-    _(this, "schemaEntityMap", /* @__PURE__ */ new Map());
-    /**
-     * @description 互斥过滤项
-     * @type {{ [key: string]: string[] }}
-     * @memberof OdooSearchBarController
-     */
-    _(this, "exclusive", {});
-    /**
-     * @description OR关系组
-     * @type {{ [key: string]: string[] }}
-     * @memberof OdooSearchBarController
-     */
-    _(this, "filterORgroup", {});
-    /**
-     * @description 是否有默认选中
-     * @memberof OdooSearchBarController
-     */
-    _(this, "hasDefaultSelect", !1);
-    /**
-     * @description 时间格式化
-     * @memberof OdooSearchBarController
-     */
-    _(this, "dateFormat", [
+    super(...arguments), B(this, "placeHolder", ""), B(this, "service"), B(this, "filterControllers", []), B(this, "schemaEntityMap", /* @__PURE__ */ new Map()), B(this, "exclusive", {}), B(this, "filterORgroup", {}), B(this, "hasDefaultSelect", !1), B(this, "dateFormat", [
       {
         label: "年",
         value: "year"
@@ -282,7 +230,7 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async onCreated() {
-    this.service = new je(this.model, this.context), await super.onCreated(), await this.initFiltersByJsonSchema(), await this.initSearchBarFilters(), await this.initSearchBar(), this.initFilterByUserParam();
+    this.service = new Me(this.model, this.context), await super.onCreated(), await this.initFiltersByJsonSchema(), await this.initSearchBarFilters(), await this.initSearchBar(), this.initFilterByUserParam();
   }
   /**
    * @description 通过用户参数初始化过滤配置
@@ -291,15 +239,15 @@ class qe extends be {
    */
   initFilterByUserParam() {
     const { searchBarGroups: e } = this.model;
-    !e || !e.length || e.forEach((s) => {
-      var o, i;
-      if ((o = s.userParam) != null && o.exclusive) {
-        const r = this.exclusive[s.userParam.exclusive] || [];
-        r.push(s.id), this.exclusive[s.userParam.exclusive] = r;
+    !e || !e.length || e.forEach((t) => {
+      var d, n;
+      if ((d = t.userParam) != null && d.exclusive) {
+        const s = this.exclusive[t.userParam.exclusive] || [];
+        s.push(t.id), this.exclusive[t.userParam.exclusive] = s;
       }
-      if ((i = s.userParam) != null && i.filterorgroup) {
-        const r = this.filterORgroup[s.userParam.filterorgroup] || [];
-        r.push(s.id), this.filterORgroup[s.userParam.filterorgroup] = r;
+      if ((n = t.userParam) != null && n.filterorgroup) {
+        const s = this.filterORgroup[t.userParam.filterorgroup] || [];
+        s.push(t.id), this.filterORgroup[t.userParam.filterorgroup] = s;
       }
     });
   }
@@ -313,14 +261,14 @@ class qe extends be {
   initSchemaEntityMap(e) {
     if (!e.properties)
       return;
-    const { properties: s } = e;
-    if (!(Object.keys(s).length > 0))
+    const { properties: t } = e;
+    if (!(Object.keys(t).length > 0))
       return;
-    const o = /* @__PURE__ */ new Map();
-    Object.keys(s).forEach((i) => {
-      var r, n;
-      o.set(i, (n = (r = s[i]) == null ? void 0 : r.$ref) == null ? void 0 : n.split(".")[0]);
-    }), this.schemaEntityMap = o;
+    const d = /* @__PURE__ */ new Map();
+    Object.keys(t).forEach((n) => {
+      var s, c;
+      d.set(n, (c = (s = t[n]) == null ? void 0 : s.$ref) == null ? void 0 : c.split(".")[0]);
+    }), this.schemaEntityMap = d;
   }
   /**
    * @description 通过JsonSchema初始化过滤项模型
@@ -328,36 +276,36 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async initFiltersByJsonSchema() {
-    var n;
-    const e = Ie(
+    var e;
+    const t = Ce(
       JSON.parse(this.controlParams.jsonschemaparams || "{}"),
       this.params,
       this.context
     );
-    Object.assign(e, this.params);
-    const s = await Ee(
+    Object.assign(t, this.params);
+    const d = await Ie(
       this.model.appDataEntityId,
       this.context,
-      e
+      t
     );
-    if (!s)
+    if (!d)
       return;
-    this.initSchemaEntityMap(s);
-    const { schemaFields: o, searchBarFilters: i } = await $e(
-      s,
+    this.initSchemaEntityMap(d);
+    const { schemaFields: n, searchBarFilters: s } = await qe(
+      d,
       this.model.appDataEntityId,
       this.model.appId
     );
-    this.state.schemaFields = o;
-    const r = [];
-    (n = this.model.searchBarFilters) == null || n.forEach((m) => {
-      i.findIndex(
-        (f) => {
-          var h;
-          return f.appDEFieldId === m.appDEFieldId && ((h = m.defsearchMode) != null && h.valueOP ? f.defsearchMode.valueOP === m.defsearchMode.valueOP : !0);
+    this.state.schemaFields = n;
+    const c = [];
+    (e = this.model.searchBarFilters) == null || e.forEach((p) => {
+      s.findIndex(
+        (o) => {
+          var f;
+          return o.appDEFieldId === p.appDEFieldId && ((f = p.defsearchMode) != null && f.valueOP ? o.defsearchMode.valueOP === p.defsearchMode.valueOP : !0);
         }
-      ) === -1 && r.push(m);
-    }), i.length && (this.model = U(this.model), this.model.searchBarFilters = r.concat(...i));
+      ) === -1 && c.push(p);
+    }), s.length && (this.model = M(this.model), this.model.searchBarFilters = c.concat(...s));
   }
   /**
    * @description 初始化过滤项控制器
@@ -365,48 +313,48 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async initSearchBarFilters() {
-    const { searchBarFilters: e, appDataEntityId: s } = this.model;
+    const { searchBarFilters: e, appDataEntityId: t } = this.model;
     if (!e || !e.length)
       return;
-    const o = await ibiz.hub.getAppDataEntity(
-      s,
+    const d = await ibiz.hub.getAppDataEntity(
+      t,
       this.context.srfappid
-    ), i = /* @__PURE__ */ new Map();
-    e.forEach((r) => {
-      var m;
-      if ((m = r.defsearchMode) != null && m.valueOP && Fe.includes(r.defsearchMode.valueOP)) {
-        if (Se(r)) {
+    ), n = /* @__PURE__ */ new Map();
+    e.forEach((s) => {
+      var c;
+      if ((c = s.defsearchMode) != null && c.valueOP && Oe.includes(s.defsearchMode.valueOP)) {
+        if (Ee(s)) {
           this.filterControllers.push(
-            new Te(
-              r,
-              o,
+            new Se(
+              s,
+              d,
               this.context,
               this.params
             )
           );
           return;
         }
-        const p = "".concat(r.appDEFieldId, "_").concat(r.defsearchMode.valueOP);
-        i.has(p) || i.set(p, []), i.get(p).push(r);
+        const o = "".concat(s.appDEFieldId, "_").concat(s.defsearchMode.valueOP);
+        n.has(o) || n.set(o, []), n.get(o).push(s);
         return;
       }
-      const n = new Pe(
-        r,
-        o,
+      const p = new Te(
+        s,
+        d,
         this.context,
         this.params
       );
-      this.filterControllers.push(n);
-    }), i.size > 0 && i.forEach((r) => {
-      const n = new we(
-        r,
-        o,
+      this.filterControllers.push(p);
+    }), n.size > 0 && n.forEach((s) => {
+      const c = new Fe(
+        s,
+        d,
         this.context,
         this.params
       );
-      this.filterControllers.push(n);
+      this.filterControllers.push(c);
     }), await Promise.all(
-      this.filterControllers.map((r) => r.init())
+      this.filterControllers.map((s) => s.init())
     );
   }
   /**
@@ -415,62 +363,62 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async initSearchBar() {
-    var n;
-    const { searchBarGroups: e, controlParam: s } = this.model;
-    e && e.length && (this.state.filter = e.map((m) => {
-      var f;
-      const p = {
-        id: m.id,
+    var e;
+    const { searchBarGroups: t, controlParam: d } = this.model;
+    t && t.length && (this.state.filter = t.map((p) => {
+      var o;
+      const f = {
+        id: p.id,
         isShow: !0,
         searchconds: [],
         isCustom: !1,
         isChange: !1,
-        caption: m.caption,
-        showSeparator: m.addSeparator === !0
+        caption: p.caption,
+        showSeparator: p.addSeparator === !0
       };
-      if (m.data)
+      if (p.data)
         try {
-          const h = JSON.parse(m.data);
-          (f = h.theme_model) != null && f.searchconds && (p.searchconds = h.theme_model.searchconds), p.isShow = h.valid_flag === "1";
-        } catch (h) {
+          const I = JSON.parse(p.data);
+          (o = I.theme_model) != null && o.searchconds && (f.searchconds = I.theme_model.searchconds), f.isShow = I.valid_flag === "1";
+        } catch (I) {
           ibiz.log.error(
             ibiz.i18n.t("runtime.controller.control.searchBar.JSONFormat", {
-              data: m.data
+              data: p.data
             }),
-            h
+            I
           );
         }
-      return p;
+      return f;
     }));
-    const o = (n = s == null ? void 0 : s.ctrlParams) == null ? void 0 : n.DEFAULTGROUP;
-    o && o.split(",").forEach((p) => {
-      const f = this.state.schemaFields.find(
-        (h) => p.toLowerCase() === h.key.toLowerCase()
+    const n = (e = d == null ? void 0 : d.ctrlParams) == null ? void 0 : e.DEFAULTGROUP;
+    n && n.split(",").forEach((p) => {
+      const o = this.state.schemaFields.find(
+        (f) => p.toLowerCase() === f.key.toLowerCase()
       );
-      f && this.state.group.push({
-        id: f.key,
+      o && this.state.group.push({
+        id: o.key,
         isCustom: !1,
-        type: f.type,
-        appDEFieldId: f.key,
-        caption: f.description,
-        appCodeListId: f.enumSource
+        type: o.type,
+        appDEFieldId: o.key,
+        caption: o.description,
+        appCodeListId: o.enumSource
       });
     });
-    const i = await this.service.load();
-    if (i) {
-      const { filter: m, collect: p, group: f } = i;
-      m != null && m.length && m.forEach((h) => {
-        const P = this.state.filter.findIndex((G) => G.id === h.id);
-        P === -1 ? this.state.filter.push({ ...h, isCustom: !0 }) : this.state.filter.splice(P, 1, h);
-      }), p != null && p.length && (this.state.collect = p), f != null && f.length && this.state.group.push(...f);
+    const s = await this.service.load();
+    if (s) {
+      const { filter: p, collect: o, group: f } = s;
+      p != null && p.length && p.forEach((I) => {
+        const O = this.state.filter.findIndex((_) => _.id === I.id);
+        O === -1 ? this.state.filter.push({ ...I, isCustom: !0 }) : this.state.filter.splice(O, 1, I);
+      }), o != null && o.length && (this.state.collect = o), f != null && f.length && this.state.group.push(...f);
     }
-    const r = e == null ? void 0 : e.find(
-      (m) => m.defaultGroup
+    const c = t == null ? void 0 : t.find(
+      (p) => p.defaultGroup
     );
-    if (r) {
+    if (c) {
       this.hasDefaultSelect = !0;
-      const m = this.state.filter.find((p) => p.id === r.id);
-      this.handleFilterClick(m);
+      const p = this.state.filter.find((o) => o.id === c.id);
+      this.handleFilterClick(p);
     }
   }
   /**
@@ -480,25 +428,25 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   getSearchCondsById(e) {
-    var r;
-    let s = [];
-    const { searchBarGroups: o } = this.model, i = o == null ? void 0 : o.find((n) => n.id === e);
-    if (i) {
-      if (i.data)
+    var t;
+    let d = [];
+    const { searchBarGroups: n } = this.model, s = n == null ? void 0 : n.find((c) => c.id === e);
+    if (s) {
+      if (s.data)
         try {
-          const n = JSON.parse(i.data);
-          (r = n.theme_model) != null && r.searchconds && (s = n.theme_model.searchconds);
-        } catch (n) {
+          const c = JSON.parse(s.data);
+          (t = c.theme_model) != null && t.searchconds && (d = c.theme_model.searchconds);
+        } catch (c) {
           ibiz.log.error(
             ibiz.i18n.t("runtime.controller.control.searchBar.JSONFormat", {
-              data: i.data
+              data: s.data
             }),
-            n
+            c
           );
         }
       return {
-        searchconds: s,
-        caption: i.caption
+        searchconds: d,
+        caption: s.caption
       };
     }
   }
@@ -513,17 +461,17 @@ class qe extends be {
     switch (e.type) {
       case "filter":
         e.filterType === "OR" && e.filterTypeId ? this.state.selectedFilter = this.state.selectedFilter.filter(
-          (s) => !this.filterORgroup[e.filterTypeId].includes(s.id)
+          (t) => !this.filterORgroup[e.filterTypeId].includes(t.id)
         ) : e.filterType === "EXCLUSIVE" && e.filterTypeId ? this.state.selectedFilter = this.state.selectedFilter.filter(
-          (s) => !this.exclusive[e.filterTypeId].includes(s.id)
+          (t) => !this.exclusive[e.filterTypeId].includes(t.id)
         ) : this.state.selectedFilter = this.state.selectedFilter.filter(
-          (s) => {
-            const o = Object.keys(this.filterORgroup).some(
-              (r) => this.filterORgroup[r].includes(s.id)
-            ), i = Object.values(this.exclusive).some(
-              (r) => r.includes(s.id)
+          (t) => {
+            const d = Object.keys(this.filterORgroup).some(
+              (s) => this.filterORgroup[s].includes(t.id)
+            ), n = Object.values(this.exclusive).some(
+              (s) => s.includes(t.id)
             );
-            return !!(o || i);
+            return !!(d || n);
           }
         ), await this.onSearch();
         break;
@@ -531,8 +479,8 @@ class qe extends be {
         this.state.selectedCollect = void 0, await this.onSearch();
         break;
       case "group":
-        this.state.selectedGroup.forEach((s) => {
-          s.dateFormat = [], s.isExpand = !1;
+        this.state.selectedGroup.forEach((t) => {
+          t.dateFormat = [], t.isExpand = !1;
         }), this.state.selectedGroup = [], this.execGroup();
         break;
     }
@@ -545,16 +493,16 @@ class qe extends be {
    * @returns {*}  {Promise<void>}
    * @memberof OdooSearchBarController
    */
-  async updateByType(e, s, o) {
+  async updateByType(e, t, d) {
     switch (e) {
       case "filter":
-        await this.handleFilterUpdate(s, o);
+        await this.handleFilterUpdate(t, d);
         break;
       case "collect":
-        await this.handleCollectUpdate(s, o);
+        await this.handleCollectUpdate(t, d);
         break;
       case "group":
-        await this.handleGroupUpdate(s, o);
+        await this.handleGroupUpdate(t, d);
         break;
     }
   }
@@ -566,10 +514,10 @@ class qe extends be {
    * @returns {*}  {Promise<void>}
    * @memberof OdooSearchBarController
    */
-  async handleFilterUpdate(e, s) {
-    const { selectedFilter: o, filter: i } = this.state;
-    let r = i.findIndex((n) => n.id === s.id);
-    e === "update" ? r !== -1 ? i.splice(r, 1, s) : i.push(s) : r !== -1 && (i.splice(r, 1), r = o.findIndex((n) => n.id === s.id), r !== -1 && await this.handleFilterClick(s)), await this.save();
+  async handleFilterUpdate(e, t) {
+    const { selectedFilter: d, filter: n } = this.state;
+    let s = n.findIndex((c) => c.id === t.id);
+    e === "update" ? s !== -1 ? n.splice(s, 1, t) : n.push(t) : s !== -1 && (n.splice(s, 1), s = d.findIndex((c) => c.id === t.id), s !== -1 && await this.handleFilterClick(t)), await this.save();
   }
   /**
    * @description 处理收藏更新
@@ -579,9 +527,9 @@ class qe extends be {
    * @returns {*}  {Promise<void>}
    * @memberof OdooSearchBarController
    */
-  async handleCollectUpdate(e, s) {
-    const { collect: o, selectedCollect: i } = this.state, r = o.findIndex((n) => n.id === s.id);
-    e === "update" && r === -1 ? (o.push(s), this.state.selectedFilter = [], this.state.selectedGroup = [], await this.handleCollect(s)) : r !== -1 && (o.splice(r, 1), (i == null ? void 0 : i.id) === s.id && await this.handleCollect(s)), await this.save();
+  async handleCollectUpdate(e, t) {
+    const { collect: d, selectedCollect: n } = this.state, s = d.findIndex((c) => c.id === t.id);
+    e === "update" && s === -1 ? (d.push(t), this.state.selectedFilter = [], this.state.selectedGroup = [], await this.handleCollect(t)) : s !== -1 && (d.splice(s, 1), (n == null ? void 0 : n.id) === t.id && await this.handleCollect(t)), await this.save();
   }
   /**
    * @description 处理分组更新
@@ -591,10 +539,10 @@ class qe extends be {
    * @returns {*}  {Promise<void>}
    * @memberof OdooSearchBarController
    */
-  async handleGroupUpdate(e, s) {
-    const { group: o, selectedGroup: i } = this.state;
-    let r = o.findIndex((n) => n.id === s.id);
-    e === "update" && r === -1 ? (o.push(s), s.type !== "date" && this.handleGroupClick(s)) : r !== -1 && (o.splice(r, 1), r = i.findIndex((n) => n.id === s.id), r !== -1 && this.handleGroupClick(s)), await this.save();
+  async handleGroupUpdate(e, t) {
+    const { group: d, selectedGroup: n } = this.state;
+    let s = d.findIndex((c) => c.id === t.id);
+    e === "update" && s === -1 ? (d.push(t), t.type !== "date" && this.handleGroupClick(t)) : s !== -1 && (d.splice(s, 1), s = n.findIndex((c) => c.id === t.id), s !== -1 && this.handleGroupClick(t)), await this.save();
   }
   /**
    * @description 搜索项点击
@@ -603,16 +551,16 @@ class qe extends be {
    * @returns {*}  {Promise<void>}
    * @memberof OdooSearchBarController
    */
-  async onSearchItemClick(e, s) {
+  async onSearchItemClick(e, t) {
     switch (e) {
       case "filter":
-        this.handleFilterClick(s);
+        this.handleFilterClick(t);
         break;
       case "collect":
-        this.handleCollect(s);
+        this.handleCollect(t);
         break;
       case "group":
-        this.handleGroupClick(s);
+        this.handleGroupClick(t);
         break;
     }
   }
@@ -624,17 +572,17 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async handleFilterClick(e) {
-    const { singleSelect: s } = this.state, o = this.state.selectedFilter.findIndex(
-      (i) => i.id === e.id
+    const { singleSelect: t } = this.state, d = this.state.selectedFilter.findIndex(
+      (n) => n.id === e.id
     );
-    if (s)
-      this.state.selectedFilter = o !== -1 ? [] : [e];
+    if (t)
+      this.state.selectedFilter = d !== -1 ? [] : [e];
     else {
-      o !== -1 ? this.state.selectedFilter.splice(o, 1) : this.state.selectedFilter.push(e);
-      const i = Object.values(this.exclusive).find(
-        (r) => r.includes(e.id)
+      d !== -1 ? this.state.selectedFilter.splice(d, 1) : this.state.selectedFilter.push(e);
+      const n = Object.values(this.exclusive).find(
+        (s) => s.includes(e.id)
       );
-      i != null && i.length && (this.state.selectedFilter = this.state.selectedFilter.filter((r) => i.includes(r.id) ? e.id === r.id : !0));
+      n != null && n.length && (this.state.selectedFilter = this.state.selectedFilter.filter((s) => n.includes(s.id) ? e.id === s.id : !0));
     }
     await this.onSearch();
   }
@@ -645,31 +593,31 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   handleGroupClick(e) {
-    const { selectedGroup: s } = this.state, o = s.findIndex((i) => i.id === e.id);
-    o !== -1 ? s.splice(o, 1) : s.push(e), this.execGroup();
+    const { selectedGroup: t } = this.state, d = t.findIndex((n) => n.id === e.id);
+    d !== -1 ? t.splice(d, 1) : t.push(e), this.execGroup();
   }
   /**
    * @description 执行分组
    * @memberof OdooSearchBarController
    */
   execGroup() {
-    var r, n, m;
+    var e, t, d;
     if (!this.xdataControl)
       return;
-    const { selectedGroup: e, selectedCollect: s } = this.state, o = U(e);
-    (r = s == null ? void 0 : s.groups) != null && r.length && s.groups.forEach((p) => {
-      const f = e.findIndex((h) => h.id === p.id);
-      f !== -1 ? o.splice(f, 1, p) : o.push(p);
+    const { selectedGroup: n, selectedCollect: s } = this.state, c = M(n);
+    (e = s == null ? void 0 : s.groups) != null && e.length && s.groups.forEach((o) => {
+      const f = n.findIndex((I) => I.id === o.id);
+      f !== -1 ? c.splice(f, 1, o) : c.push(o);
     });
-    const i = o.map((p) => ({
-      groupFieldId: p.appDEFieldId,
-      groupCodeListId: p.appCodeListId,
+    const p = c.map((o) => ({
+      groupFieldId: o.appDEFieldId,
+      groupCodeListId: o.appCodeListId,
       dateFormat: this.dateFormat.filter((f) => {
-        var h;
-        return (h = p.dateFormat) == null ? void 0 : h.includes(f.value);
+        var I;
+        return (I = o.dateFormat) == null ? void 0 : I.includes(f.value);
       }).map((f) => f.value)
     }));
-    (m = (n = this.xdataControl).execGroup) == null || m.call(n, i);
+    (d = (t = this.xdataControl).execGroup) == null || d.call(t, p);
   }
   /**
    * @description 处理收藏点击
@@ -679,11 +627,11 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async handleCollect(e) {
-    const { selectedCollect: s } = this.state;
-    if ((s == null ? void 0 : s.id) !== e.id) {
+    const { selectedCollect: t } = this.state;
+    if ((t == null ? void 0 : t.id) !== e.id) {
       this.state.selectedCollect = e;
-      const { filterIds: o, groups: i } = e;
-      o.length && await this.onSearch(), i.length && this.execGroup();
+      const { filterIds: d, groups: n } = e;
+      d.length && await this.onSearch(), n.length && this.execGroup();
     } else
       this.state.selectedCollect = void 0, await this.onSearch(), this.execGroup();
   }
@@ -694,37 +642,37 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   calcFilters() {
-    const { selectedFilter: e, selectedCollect: s, filter: o } = this.state, i = e.map((p) => ({ ...U(p) }));
-    s && o.filter((p) => s.filterIds.includes(p.id)).forEach((p) => i.push({ ...U(p) }));
-    const r = [], { grouped: n, ungrouped: m } = i.reduce(
-      (p, f) => {
-        var P;
-        const h = Object.keys(this.filterORgroup).find(
-          (G) => this.filterORgroup[G].includes(f.id)
+    const { selectedFilter: e, selectedCollect: t, filter: d } = this.state, n = e.map((o) => ({ ...M(o) }));
+    t && d.filter((o) => t.filterIds.includes(o.id)).forEach((o) => n.push({ ...M(o) }));
+    const s = [], { grouped: c, ungrouped: p } = n.reduce(
+      (o, f) => {
+        var I;
+        const O = Object.keys(this.filterORgroup).find(
+          (_) => this.filterORgroup[_].includes(f.id)
         );
-        return h ? (p.grouped[h] = p.grouped[h] || {
+        return O ? (o.grouped[O] = o.grouped[O] || {
           condtype: "GROUP",
           condop: "OR",
           searchconds: []
-        }, (P = p.grouped[h].searchconds) == null || P.push(...f.searchconds)) : p.ungrouped.push(...f.searchconds), p;
+        }, (I = o.grouped[O].searchconds) == null || I.push(...f.searchconds)) : o.ungrouped.push(...f.searchconds), o;
       },
       { grouped: {}, ungrouped: [] }
     );
-    return r.push(...m), Object.keys(n).length && r.push(...Object.values(n)), pe(
-      { searchconds: r },
-      (p) => {
-        p.condtype === "DEFIELD" && de(p.value) && he.test(p.value) && (p.value = Ne.execSingleLine("`".concat(p.value, "`"), {
+    return s.push(...p), Object.keys(c).length && s.push(...Object.values(c)), ue(
+      { searchconds: s },
+      (o) => {
+        o.condtype === "DEFIELD" && de(o.value) && pe.test(o.value) && (o.value = Pe.execSingleLine("`".concat(o.value, "`"), {
           ...this.getEventArgs()
         }));
       },
       {
         childrenFields: ["searchconds"]
       }
-    ), r.length ? [
+    ), s.length ? [
       {
         condtype: "GROUP",
         condop: this.state.condop,
-        searchconds: r
+        searchconds: s
       }
     ] : void 0;
   }
@@ -736,8 +684,8 @@ class qe extends be {
   getFilterParams() {
     const e = {};
     this.state.query && (e.query = this.state.query);
-    const s = this.calcFilters();
-    return s && (e.searchconds = s), e;
+    const t = this.calcFilters();
+    return t && (e.searchconds = t), e;
   }
   /**
    * @description 保存
@@ -746,18 +694,18 @@ class qe extends be {
    * @memberof OdooSearchBarController
    */
   async save() {
-    const { filter: e, collect: s, group: o } = this.state, i = o.filter((n) => n.isCustom).map((n) => ({
-      id: n.id,
-      type: n.type,
-      caption: n.caption,
-      isCustom: n.isCustom,
-      appDEFieldId: n.appDEFieldId,
-      appCodeListId: n.appCodeListId
-    })), r = e.filter((n) => n.isCustom || n.isChange);
+    const { filter: e, collect: t, group: d } = this.state, n = d.filter((c) => c.isCustom).map((c) => ({
+      id: c.id,
+      type: c.type,
+      caption: c.caption,
+      isCustom: c.isCustom,
+      appDEFieldId: c.appDEFieldId,
+      appCodeListId: c.appCodeListId
+    })), s = e.filter((c) => c.isCustom || c.isChange);
     await this.service.save({
-      collect: s,
-      filter: r,
-      group: i
+      collect: t,
+      filter: s,
+      group: n
     });
   }
   /**
@@ -777,55 +725,55 @@ class qe extends be {
     this.state.selectedCollect = void 0, this.state.selectedFilter = [], this.state.selectedGroup = [], await this.onSearch();
   }
 }
-function Qe(t) {
-  return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !ie(t);
+function Ve(l) {
+  return typeof l == "function" || Object.prototype.toString.call(l) === "[object Object]" && !se(l);
 }
 const oe = [{
-  valueOP: d.EQ,
+  valueOP: u.EQ,
   label: "等于(=)"
 }, {
-  valueOP: d.NOT_EQ,
+  valueOP: u.NOT_EQ,
   label: "不等于(<>)"
 }, {
-  valueOP: d.GT,
+  valueOP: u.GT,
   label: "大于(>)"
 }, {
-  valueOP: d.GT_AND_EQ,
+  valueOP: u.GT_AND_EQ,
   label: "大于等于(>=)"
 }, {
-  valueOP: d.LT,
+  valueOP: u.LT,
   label: "小于(<)"
 }, {
-  valueOP: d.LT_AND_EQ,
+  valueOP: u.LT_AND_EQ,
   label: "小于等于(<=)"
 }, {
-  valueOP: d.IS_NULL,
+  valueOP: u.IS_NULL,
   label: "值为空(Nil)"
 }, {
-  valueOP: d.IS_NOT_NULL,
+  valueOP: u.IS_NOT_NULL,
   label: "值不为空(NotNil)"
 }, {
-  valueOP: d.IN,
+  valueOP: u.IN,
   label: "值在范围中(In)"
 }, {
-  valueOP: d.NOT_IN,
+  valueOP: u.NOT_IN,
   label: "值不在范围中(NotIn)"
 }, {
-  valueOP: d.LIKE,
+  valueOP: u.LIKE,
   label: "文本包含(%)"
 }, {
-  valueOP: d.LIFT_LIKE,
+  valueOP: u.LIFT_LIKE,
   label: "文本左包含(%#)"
 }, {
-  valueOP: d.RIGHT_LIKE,
+  valueOP: u.RIGHT_LIKE,
   label: "文本右包含(#%)"
 }, {
-  valueOP: d.EXISTS,
+  valueOP: u.EXISTS,
   label: "存在(EXISTS)"
 }, {
-  valueOP: d.NOT_EXISTS,
+  valueOP: u.NOT_EXISTS,
   label: "不存在(NOTEXISTS)"
-}], ne = /* @__PURE__ */ K({
+}], re = /* @__PURE__ */ H({
   name: "IBizFilterModeSelect",
   props: {
     value: String,
@@ -833,88 +781,88 @@ const oe = [{
     disabled: Boolean
   },
   emits: {
-    change: (t) => !0
+    change: (l) => !0
   },
-  setup(t, {
-    emit: u
+  setup(l, {
+    emit: e
   }) {
     return {
-      availableModes: Q(() => {
-        var o;
-        return (o = t.modes) != null && o.length ? oe.filter((i) => t.modes.includes(i.valueOP)) : oe;
+      availableModes: V(() => {
+        var t;
+        return (t = l.modes) != null && t.length ? oe.filter((d) => l.modes.includes(d.valueOP)) : oe;
       }),
-      onChange: (o) => {
-        u("change", o);
+      onChange: (t) => {
+        e("change", t);
       }
     };
   },
   render() {
-    let t;
-    return l(C("el-select"), {
+    let l;
+    return i(y("el-select"), {
       "model-value": this.value,
       disabled: this.disabled,
       teleported: !0,
-      onChange: (u) => {
-        this.onChange(u);
+      onChange: (e) => {
+        this.onChange(e);
       }
-    }, Qe(t = this.availableModes.map((u) => l(C("el-option"), {
-      key: u.valueOP,
-      value: u.valueOP,
-      label: u.label
-    }, null))) ? t : {
-      default: () => [t]
+    }, Ve(l = this.availableModes.map((e) => i(y("el-option"), {
+      key: e.valueOP,
+      value: e.valueOP,
+      label: e.label
+    }, null))) ? l : {
+      default: () => [l]
     });
   }
 });
-function ce(t) {
-  return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !ie(t);
+function ne(l) {
+  return typeof l == "function" || Object.prototype.toString.call(l) === "[object Object]" && !se(l);
 }
-const Ve = [{
-  valueOP: d.EQ,
+const Xe = [{
+  valueOP: u.EQ,
   label: "等于(=)"
 }, {
-  valueOP: d.NOT_EQ,
+  valueOP: u.NOT_EQ,
   label: "不等于(<>)"
 }, {
-  valueOP: d.GT,
+  valueOP: u.GT,
   label: "大于(>)"
 }, {
-  valueOP: d.GT_AND_EQ,
+  valueOP: u.GT_AND_EQ,
   label: "大于等于(>=)"
 }, {
-  valueOP: d.LT,
+  valueOP: u.LT,
   label: "小于(<)"
 }, {
-  valueOP: d.LT_AND_EQ,
+  valueOP: u.LT_AND_EQ,
   label: "小于等于(<=)"
 }, {
-  valueOP: d.IS_NULL,
+  valueOP: u.IS_NULL,
   label: "值为空(Nil)"
 }, {
-  valueOP: d.IS_NOT_NULL,
+  valueOP: u.IS_NOT_NULL,
   label: "值不为空(NotNil)"
 }, {
-  valueOP: d.IN,
+  valueOP: u.IN,
   label: "值在范围中(In)"
 }, {
-  valueOP: d.NOT_IN,
+  valueOP: u.NOT_IN,
   label: "值不在范围中(NotIn)"
 }, {
-  valueOP: d.LIKE,
+  valueOP: u.LIKE,
   label: "文本包含(%)"
 }, {
-  valueOP: d.LIFT_LIKE,
+  valueOP: u.LIFT_LIKE,
   label: "文本左包含(%#)"
 }, {
-  valueOP: d.RIGHT_LIKE,
+  valueOP: u.RIGHT_LIKE,
   label: "文本右包含(#%)"
 }, {
-  valueOP: d.EXISTS,
+  valueOP: u.EXISTS,
   label: "存在(EXISTS)"
 }, {
-  valueOP: d.NOT_EXISTS,
+  valueOP: u.NOT_EXISTS,
   label: "不存在(NOTEXISTS)"
-}], Xe = /* @__PURE__ */ K({
+}], Ke = /* @__PURE__ */ H({
   name: "IBizFilterTreeControl",
   props: {
     filterControllers: {
@@ -945,76 +893,76 @@ const Ve = [{
     }
   },
   emits: ["confirm", "cancel", "change", "customCondChange"],
-  setup(t, {
-    emit: u
+  setup(l, {
+    emit: e
   }) {
-    const e = ae("search-item-filter-tree"), s = Q(() => t.filterNodes), o = (a) => {
+    const t = ie("search-item-filter-tree"), d = V(() => l.filterNodes), n = (a) => {
       if (a.nodeType === "ITEMS" && a.simple) {
-        const O = a.children[0];
-        return t.filterControllers.find((E) => {
+        const g = a.children[0];
+        return l.filterControllers.find((E) => {
           if (E.type === "SIMPLE_ITEMS") {
-            const I = E;
-            if (I.fieldName === a.field && I.valueOP === a.valueOP && I.subFieldName === O.field && I.subValueOP === O.valueOP)
+            const C = E;
+            if (C.fieldName === a.field && C.valueOP === a.valueOP && C.subFieldName === g.field && C.subValueOP === g.valueOP)
               return !0;
           }
           return !1;
         });
       }
       const {
-        field: y,
+        field: m,
         valueOP: b
       } = a;
-      return t.filterControllers.find((O) => O.type === "SIMPLE_ITEMS" ? !1 : O.fieldName === y ? O.valueOP ? O.valueOP === b : !0 : !1);
-    }, i = [];
-    t.filterControllers.forEach((a) => {
-      let y = i.find((b) => b.name === a.key);
-      a.hidden || (y === void 0 && (y = {
+      return l.filterControllers.find((g) => g.type === "SIMPLE_ITEMS" ? !1 : g.fieldName === m ? g.valueOP ? g.valueOP === b : !0 : !1);
+    }, s = [];
+    l.filterControllers.forEach((a) => {
+      let m = s.find((b) => b.name === a.key);
+      a.hidden || (m === void 0 && (m = {
         name: a.key,
         fieldName: a.fieldName,
         label: a.label,
         valueOPs: []
-      }, a.type === "SIMPLE_ITEMS" && (y.simpleFilterC = a), i.push(y)), a.valueOP ? y.valueOPs.push(a.valueOP) : y.valueOPs = Ve.map((b) => b.valueOP));
+      }, a.type === "SIMPLE_ITEMS" && (m.simpleFilterC = a), s.push(m)), a.valueOP ? m.valueOPs.push(a.valueOP) : m.valueOPs = Xe.map((b) => b.valueOP));
     });
-    const r = x([]);
-    i.forEach(async (a) => {
-      var b, O;
-      const y = t.filterControllers.find((E) => E.key === a.name);
-      y && r.value.push({
+    const c = N([]);
+    s.forEach(async (a) => {
+      var m, b;
+      const g = l.filterControllers.find((E) => E.key === a.name);
+      g && c.value.push({
         appDEFieldId: a.fieldName,
         caption: a.label,
         valueOPs: a.valueOPs,
-        appDataEntityId: t.schemaEntityMap.get(a.fieldName),
-        appDataEntityFullTag: (b = y.appDataEntity) == null ? void 0 : b.defullTag,
-        appCodeListId: (O = y.model.editor) == null ? void 0 : O.appCodeListId
+        appDataEntityId: l.schemaEntityMap.get(a.fieldName),
+        appDataEntityFullTag: (m = g.appDataEntity) == null ? void 0 : m.defullTag,
+        appCodeListId: (b = g.model.editor) == null ? void 0 : b.appCodeListId
       });
     });
-    const n = x(), m = x(t.filterMode || "default"), p = x(""), f = (a) => {
-      p.value = a, u("customCondChange", p.value);
+    const p = N(), o = N(l.filterMode || "default"), f = N(""), I = (a) => {
+      f.value = a, e("customCondChange", f.value);
     };
-    ee(() => t.customCond, () => {
-      p.value = t.customCond;
+    Z(() => l.customCond, () => {
+      f.value = l.customCond;
     }, {
       immediate: !0
     });
-    const h = (a, y = i) => {
+    const O = (a, m = s) => {
       if (!a)
         return;
-      const b = y.find((O) => O.name === a);
+      const b = m.find((g) => g.name === a);
       if (b)
         return b.valueOPs;
-    }, P = (a, y, b = i) => {
-      const O = b.find((E) => E.name === y);
-      if (!O) {
-        ibiz.log.error("allFields找不到属性标识为".concat(y, "的"));
+    }, _ = (a, m, b = s) => {
+      const g = b.find((E) => E.name === m);
+      if (!g) {
+        ibiz.log.error("allFields找不到属性标识为".concat(m, "的"));
         return;
       }
-      if (Re(a), O.simpleFilterC) {
-        O.simpleFilterC.addSimpleFilterNode(a);
+      if (Ge(a), g.simpleFilterC) {
+        g.simpleFilterC.addSimpleFilterNode(a);
         return;
       }
-      a.nodeType = "FIELD", a.field = O.fieldName;
-    }, G = (a, y) => {
-      a.valueOP = y, a.value = null, ["EXISTS", "NOTEXISTS"].includes(y) ? Object.assign(a, {
+      a.nodeType = "FIELD", a.field = g.fieldName;
+    }, z = (a, m) => {
+      a.valueOP = m, a.value = null, ["EXISTS", "NOTEXISTS"].includes(m) ? Object.assign(a, {
         nodeType: "ITEMS",
         children: [{
           nodeType: "FIELD",
@@ -1026,9 +974,9 @@ const Ve = [{
         nodeType: "FIELD",
         children: void 0
       });
-    }, z = (a, y) => {
-      a.logicType = y;
-    }, $ = (a) => {
+    }, A = (a, m) => {
+      a.logicType = m;
+    }, q = (a) => {
       a.children.push({
         nodeType: "GROUP",
         logicType: "AND",
@@ -1039,154 +987,154 @@ const Ve = [{
           value: null
         }]
       });
-    }, w = (a) => {
+    }, P = (a) => {
       a.children.push({
         nodeType: "FIELD",
         field: null,
         valueOP: null,
         value: null
       });
-    }, F = (a, y) => {
-      if (y.noEditor || a.valueOP && fe.includes(a.valueOP))
+    }, F = (a, m) => {
+      if (m.noEditor || a.valueOP && he.includes(a.valueOP))
         return null;
       let b = null;
-      if (y.editorProvider) {
+      if (m.editorProvider) {
         const {
-          data: O,
+          data: g,
           value: E
-        } = y.calcEditorProps(a), I = C(y.editorProvider.formEditor);
-        b = ue(I, {
-          key: y.editor.model.id,
+        } = m.calcEditorProps(a), C = y(m.editorProvider.formEditor);
+        b = ce(C, {
+          key: m.editor.model.id,
           value: E,
-          controller: y.editor,
+          controller: m.editor,
           disabled: a.disabled,
-          data: O,
-          onChange: (J, W) => {
-            y.onEditorChange(a, J, W);
+          data: g,
+          onChange: (J, $) => {
+            m.onEditorChange(a, J, $);
           }
         });
       } else
-        b = l(C("not-supported-editor"), {
-          modelData: y.model.editor
+        b = i(y("not-supported-editor"), {
+          modelData: m.model.editor
         }, null);
-      return l("div", {
-        class: e.e("editor")
+      return i("div", {
+        class: t.e("editor")
       }, [b]);
-    }, S = (a, y) => {
+    }, S = (a, m) => {
       if (a.hidden)
         return;
-      let b = i;
-      y && (b = y.allFields);
-      const O = h(a.field, b);
+      let b = s;
+      m && (b = m.allFields);
+      const g = O(a.field, b);
       let E = null;
       if (a.field && a.valueOP)
-        if (y) {
-          const I = y.getSubFilterController(a.field, a.valueOP);
-          E = F(a, I);
+        if (m) {
+          const C = m.getSubFilterController(a.field, a.valueOP);
+          E = F(a, C);
         } else {
-          const I = o(a);
-          I && !["EXISTS", "NOTEXISTS"].includes(I.valueOP) && (E = F(a, I));
+          const C = n(a);
+          C && !["EXISTS", "NOTEXISTS"].includes(C.valueOP) && (E = F(a, C));
         }
-      return l("div", {
-        class: e.b("item")
-      }, [l(C("el-select"), {
+      return i("div", {
+        class: t.b("item")
+      }, [i(y("el-select"), {
         disabled: a.disabled,
         "model-value": a.field,
         teleported: !0,
         filterable: !0,
-        class: e.e("field-select"),
-        onChange: (I) => {
-          P(a, I, b);
+        class: t.e("field-select"),
+        onChange: (C) => {
+          _(a, C, b);
         }
       }, {
-        default: () => [b == null ? void 0 : b.map((I) => l(C("el-option"), {
-          key: I.name,
-          value: I.name,
-          label: I.label
+        default: () => [b == null ? void 0 : b.map((C) => i(y("el-option"), {
+          key: C.name,
+          value: C.name,
+          label: C.label
         }, null))]
-      }), O && O.length > 0 && l(ne, {
+      }), g && g.length > 0 && i(re, {
         disabled: a.disabled,
-        class: e.e("mode-select"),
+        class: t.e("mode-select"),
         value: a.valueOP,
-        modes: O,
-        onChange: (I) => {
-          G(a, I);
+        modes: g,
+        onChange: (C) => {
+          z(a, C);
         }
       }, null), E]);
     };
-    let D = (a) => l("div", null, null);
-    const q = (a, y, b) => {
+    let x = (a) => i("div", null, null);
+    const Q = (a, m, b) => {
       if (!a.hidden)
-        return a.nodeType === "ITEMS" ? D(a) : l("div", {
-          class: e.b("group")
-        }, [l("div", {
-          class: e.be("group", "actions")
-        }, [l(C("el-button"), {
+        return a.nodeType === "ITEMS" ? x(a) : i("div", {
+          class: t.b("group")
+        }, [i("div", {
+          class: t.be("group", "actions")
+        }, [i(y("el-button"), {
           text: !0,
           type: "primary",
           onClick: () => {
-            if (m.value === "pql") {
-              m.value = "default";
+            if (o.value === "pql") {
+              o.value = "default";
               return;
             }
-            $(a);
+            q(a);
           }
         }, {
-          default: () => [m.value === "pql" ? "切换组" : "添加组"]
-        }), l(C("el-button"), {
+          default: () => [o.value === "pql" ? "切换组" : "添加组"]
+        }), i(y("el-button"), {
           text: !0,
           onClick: () => {
-            if (m.value === "pql") {
-              m.value = "default";
+            if (o.value === "pql") {
+              o.value = "default";
               return;
             }
-            w(a);
+            P(a);
           }
         }, {
-          default: () => [m.value === "pql" ? "切换项" : "添加项"]
-        }), b && l(C("el-button"), {
+          default: () => [o.value === "pql" ? "切换项" : "添加项"]
+        }), b && i(y("el-button"), {
           text: !0,
           onClick: () => {
-            m.value = "pql";
+            o.value = "pql";
           }
         }, {
-          default: () => [A("添加PQL")]
-        }), l(C("el-select"), {
+          default: () => [R("添加PQL")]
+        }), i(y("el-select"), {
           "model-value": a.logicType,
           teleported: !1,
-          class: e.be("group", "logic-type"),
-          onChange: (O) => {
-            m.value = "default", z(a, O);
+          class: t.be("group", "logic-type"),
+          onChange: (g) => {
+            o.value = "default", A(a, g);
           }
         }, {
-          default: () => [l(C("el-option"), {
+          default: () => [i(y("el-option"), {
             key: "AND",
             value: "AND",
             label: "AND"
-          }, null), l(C("el-option"), {
+          }, null), i(y("el-option"), {
             key: "OR",
             value: "OR",
             label: "OR"
           }, null)]
-        })]), m.value === "pql" && l("div", {
-          class: e.be("group", "editor")
-        }, [l(C("iBizPqlEditor"), {
+        })]), o.value === "pql" && i("div", {
+          class: t.be("group", "editor")
+        }, [i(y("iBizPqlEditor"), {
           ref: "pqlEditor",
-          value: p.value,
-          fields: r.value,
-          context: t.context,
-          params: t.params,
-          onChange: f
-        }, null)]), m.value !== "pql" && l("div", {
-          class: e.be("group", "list")
-        }, [a.children.length > 0 && a.children.map((O, E) => {
-          const I = O.nodeType === "FIELD" ? S(O, y) : q(O, y);
-          return I ? l("div", {
-            class: e.be("group", "list-item")
-          }, [l("div", {
-            class: e.be("group", "list-item-left")
-          }, [a.logicType]), I, l(C("iBizIcon"), {
-            class: e.be("group", "list-item-right"),
+          value: f.value,
+          fields: c.value,
+          context: l.context,
+          params: l.params,
+          onChange: I
+        }, null)]), o.value !== "pql" && i("div", {
+          class: t.be("group", "list")
+        }, [a.children.length > 0 && a.children.map((g, E) => {
+          const C = g.nodeType === "FIELD" ? S(g, m) : Q(g, m);
+          return C ? i("div", {
+            class: t.be("group", "list-item")
+          }, [i("div", {
+            class: t.be("group", "list-item-left")
+          }, [a.logicType]), C, i(y("iBizIcon"), {
+            class: t.be("group", "list-item-right"),
             onClick: () => {
               a.children.splice(E, 1);
             },
@@ -1196,56 +1144,56 @@ const Ve = [{
           }, null)]) : null;
         })])]);
     };
-    return D = (a) => {
-      let y;
-      const b = o(a);
+    return x = (a) => {
+      let m;
+      const b = n(a);
       if (b) {
         if (a.simple) {
-          let O;
+          let g;
           const E = a.children[0];
-          return E ? [l(C("el-select"), {
+          return E ? [i(y("el-select"), {
             disabled: E.disabled,
             "model-value": b.key,
             teleported: !0,
             filterable: !0,
-            class: e.e("field-select"),
-            onChange: (I) => {
-              P(a, I);
+            class: t.e("field-select"),
+            onChange: (C) => {
+              _(a, C);
             }
-          }, ce(O = i.map((I) => l(C("el-option"), {
-            key: I.name,
-            value: I.name,
-            label: I.label
-          }, null))) ? O : {
-            default: () => [O]
-          }), l(ne, {
+          }, ne(g = s.map((C) => i(y("el-option"), {
+            key: C.name,
+            value: C.name,
+            label: C.label
+          }, null))) ? g : {
+            default: () => [g]
+          }), i(re, {
             disabled: !0,
-            class: e.e("mode-select"),
+            class: t.e("mode-select"),
             value: E.valueOP,
             modes: [E.valueOP]
           }, null), F(E, b)] : void 0;
         }
-        return l("div", {
-          class: (e.b("group"), e.bm("group", "items"))
-        }, [l("div", {
-          class: e.be("group", "actions")
-        }, [S(a), l(C("el-button"), {
+        return i("div", {
+          class: (t.b("group"), t.bm("group", "items"))
+        }, [i("div", {
+          class: t.be("group", "actions")
+        }, [S(a), i(y("el-button"), {
           text: !0,
           onClick: () => {
-            w(a);
+            P(a);
           }
-        }, ce(y = ibiz.i18n.t("control.searchBar.filterTree.addItem")) ? y : {
-          default: () => [y]
-        })]), l("div", {
-          class: e.be("group", "list")
-        }, [a.children.length > 0 && a.children.map((O, E) => {
-          const I = O.nodeType === "FIELD" ? S(O, b) : q(O, b);
-          return l("div", {
-            class: e.be("group", "list-item")
-          }, [l("div", {
-            class: e.be("group", "list-item-left")
-          }, [A("AND")]), I, l(C("iBizIcon"), {
-            class: e.be("group", "list-item-right"),
+        }, ne(m = ibiz.i18n.t("control.searchBar.filterTree.addItem")) ? m : {
+          default: () => [m]
+        })]), i("div", {
+          class: t.be("group", "list")
+        }, [a.children.length > 0 && a.children.map((g, E) => {
+          const C = g.nodeType === "FIELD" ? S(g, b) : Q(g, b);
+          return i("div", {
+            class: t.be("group", "list-item")
+          }, [i("div", {
+            class: t.be("group", "list-item-left")
+          }, [R("AND")]), C, i(y("iBizIcon"), {
+            class: t.be("group", "list-item-right"),
             onClick: () => {
               a.children.splice(E, 1);
             },
@@ -1256,25 +1204,24 @@ const Ve = [{
         })])]);
       }
     }, {
-      ns: e,
-      UiFilterNodes: s,
-      currentCustomCond: p,
+      ns: t,
+      UiFilterNodes: d,
+      currentCustomCond: f,
       verify: () => {
-        var y, b;
-        let a = !0;
-        return m.value === "pql" && n.value && ((b = (y = n.value).verify) != null && b.call(y) || (a = !1)), a;
+        var a, m;
+        let b = !0;
+        return o.value === "pql" && p.value && ((m = (a = p.value).verify) != null && m.call(a) || (b = !1)), b;
       },
-      renderFilterGroup: q,
+      renderFilterGroup: Q,
       renderFilterItem: S
     };
   },
   render() {
-    return l("div", {
+    return i("div", {
       class: [this.ns.b()]
-    }, [this.UiFilterNodes.length > 0 && this.UiFilterNodes.map((t) => t.nodeType === "FIELD" ? this.renderFilterItem(t) : this.renderFilterGroup(t, void 0, !0))]);
+    }, [this.UiFilterNodes.length > 0 && this.UiFilterNodes.map((l) => l.nodeType === "FIELD" ? this.renderFilterItem(l) : this.renderFilterGroup(l, void 0, !0))]);
   }
-});
-const Ke = /* @__PURE__ */ K({
+}), He = /* @__PURE__ */ H({
   name: "IBizModal",
   props: {
     item: {
@@ -1289,9 +1236,9 @@ const Ke = /* @__PURE__ */ K({
       required: !0
     }
   },
-  setup(t) {
-    const u = ae("control-odoo-search-bar-modal"), e = x(), s = x(), o = x([]), i = x(""), r = x(!1), n = Me(U(t.item) || {
-      id: te(),
+  setup(l) {
+    const e = ie("control-odoo-search-bar-modal"), t = N(), d = N(), n = N([]), s = N(""), c = N(!1), p = Be(M(l.item) || {
+      id: ee(),
       caption: "",
       showSeparator: !1,
       searchconds: [{
@@ -1302,110 +1249,110 @@ const Ke = /* @__PURE__ */ K({
       isShow: !0,
       isCustom: !0,
       isChange: !0
-    }), m = t.controller.getSearchCondsById(n.id), p = x(!n.isCustom && !!m && (m.caption !== n.caption || Ae(!n.searchconds || !n.searchconds.length ? [{
+    }), o = l.controller.getSearchCondsById(p.id), f = N(!p.isCustom && !!o && (o.caption !== p.caption || je(!p.searchconds || !p.searchconds.length ? [{
       condtype: "GROUP",
       condop: "AND",
       searchconds: []
-    }] : m.searchconds, n.searchconds)));
-    ee(() => n.caption, () => {
-      !n.isCustom && m && (p.value = n.caption !== m.caption);
-    }), ee(() => o.value, () => {
-      !n.isCustom && m && r.value && (p.value = !0);
+    }] : o.searchconds, p.searchconds)));
+    Z(() => p.caption, () => {
+      !p.isCustom && o && (f.value = p.caption !== o.caption);
+    }), Z(() => n.value, () => {
+      !p.isCustom && o && c.value && (f.value = !0);
     }, {
       deep: !0
     });
-    const f = () => {
-      var w;
-      if (r.value = !1, (!n.searchconds || !n.searchconds.length) && (n.searchconds = [{
+    const I = () => {
+      var P;
+      if (c.value = !1, (!p.searchconds || !p.searchconds.length) && (p.searchconds = [{
         condtype: "GROUP",
         condop: "AND",
         searchconds: []
-      }]), o.value = n.searchconds.map((F) => xe(F)), o.value.length) {
+      }]), n.value = p.searchconds.map((F) => Ne(F)), n.value.length) {
         const {
           children: F
-        } = o.value[0];
+        } = n.value[0];
         if (Array.isArray(F)) {
-          const S = F.findIndex((D) => D.nodeType === "CUSTOM" && D.customType === "PQL");
+          const S = F.findIndex((x) => x.nodeType === "CUSTOM" && x.customType === "PQL");
           if (S !== -1) {
-            const D = F.splice(S, 1);
-            i.value = ((w = D[0]) == null ? void 0 : w.customCond) || "";
+            const x = F.splice(S, 1);
+            s.value = ((P = x[0]) == null ? void 0 : P.customCond) || "";
           }
         }
-        pe(o.value[0], (S) => {
-          S.nodeType === "FIELD" && S.field && S.valueOP && de(S.value) && he.test(S.value) && (S.disabled = !0);
+        ue(n.value[0], (S) => {
+          S.nodeType === "FIELD" && S.field && S.valueOP && de(S.value) && pe.test(S.value) && (S.disabled = !0);
         });
       }
       setTimeout(() => {
-        r.value = !0;
+        c.value = !0;
       });
-    }, h = (w) => {
-      if (!i.value)
+    }, O = (P) => {
+      if (!s.value)
         return;
-      w[0] || (w[0] = {
+      P[0] || (P[0] = {
         nodeType: "GROUP",
         logicType: "AND",
         children: []
       });
-      const F = w[0];
+      const F = P[0];
       Array.isArray(F.children) || (F.children = []);
-      const S = F.children.find((D) => D.nodeType === "CUSTOM" && D.customType === "PQL");
-      S ? S.customCond = i.value : F.children.push({
+      const S = F.children.find((x) => x.nodeType === "CUSTOM" && x.customType === "PQL");
+      S ? S.customCond = s.value : F.children.push({
         nodeType: "CUSTOM",
         customType: "PQL",
-        customCond: i.value
+        customCond: s.value
       });
-    }, P = async () => {
-      var F, S;
-      let w = (F = e.value) == null ? void 0 : F.verify();
+    }, _ = async () => {
+      var P, F;
+      let S = (P = t.value) == null ? void 0 : P.verify();
       try {
-        await ((S = s.value) == null ? void 0 : S.validate());
-      } catch (D) {
-        w = !1;
+        await ((F = d.value) == null ? void 0 : F.validate());
+      } catch (x) {
+        S = !1;
       }
-      return w;
-    }, G = async () => {
-      if (!await P())
+      return S;
+    }, z = async () => {
+      if (!await _())
         return;
-      const F = U(o.value);
-      h(F), n.searchconds = Le(F), n.isCustom || (n.isChange = p.value), t.modal.dismiss({
+      const P = M(n.value);
+      O(P), p.searchconds = Le(P), p.isCustom || (p.isChange = f.value), l.modal.dismiss({
         ok: !0,
-        data: [n]
+        data: [p]
       });
-    }, z = () => {
-      t.modal.dismiss({
+    }, A = () => {
+      l.modal.dismiss({
         ok: !1
       });
-    }, $ = async () => {
+    }, q = async () => {
       await ibiz.confirm.warning({
         title: "警告",
         desc: "您确定要还原该筛选条件吗？还原后不可恢复！"
-      }) && (Object.assign(n, U(m)), f(), p.value = !0);
+      }) && (Object.assign(p, M(o)), I(), f.value = !0);
     };
-    return f(), {
-      ns: u,
-      data: n,
-      isInit: r,
-      formRef: s,
-      customCond: i,
-      showRestore: p,
-      filterNodes: o,
-      filterTreeRef: e,
-      onCancel: z,
-      onConfirm: G,
-      onRestore: $
+    return I(), {
+      ns: e,
+      data: p,
+      isInit: c,
+      formRef: d,
+      customCond: s,
+      showRestore: f,
+      filterNodes: n,
+      filterTreeRef: t,
+      onCancel: A,
+      onConfirm: z,
+      onRestore: q
     };
   },
   render() {
-    return l("div", {
+    return i("div", {
       class: this.ns.b()
-    }, [l("div", {
+    }, [i("div", {
       class: this.ns.e("header")
-    }, [l("div", null, [this.item ? "变更筛选" : "添加自定义筛选"]), this.showRestore && l(C("el-button"), {
+    }, [i("div", null, [this.item ? "变更筛选" : "添加自定义筛选"]), this.showRestore && i(y("el-button"), {
       type: "primary",
       onClick: this.onRestore
     }, {
-      default: () => [A("还原")]
-    })]), l(C("el-form"), {
+      default: () => [R("还原")]
+    })]), i(y("el-form"), {
       ref: "formRef",
       model: this.data,
       "label-position": "top",
@@ -1418,16 +1365,16 @@ const Ke = /* @__PURE__ */ K({
         }]
       }
     }, {
-      default: () => [l(C("el-form-item"), {
+      default: () => [i(y("el-form-item"), {
         label: "标题",
         prop: "caption"
       }, {
-        default: () => [l(C("el-input"), {
+        default: () => [i(y("el-input"), {
           modelValue: this.data.caption,
-          "onUpdate:modelValue": (t) => this.data.caption = t,
+          "onUpdate:modelValue": (l) => this.data.caption = l,
           placeholder: "请输入标题"
         }, null)]
-      }), l(Xe, {
+      }), i(Ke, {
         ref: "filterTreeRef",
         customCond: this.customCond,
         filterNodes: this.filterNodes,
@@ -1435,40 +1382,40 @@ const Ke = /* @__PURE__ */ K({
         context: this.controller.context,
         schemaEntityMap: this.controller.schemaEntityMap,
         filterControllers: this.controller.filterControllers,
-        onCustomCondChange: (t) => {
-          this.customCond = t;
+        onCustomCondChange: (l) => {
+          this.customCond = l;
         }
       }, null)]
-    }), l("div", {
+    }), i("div", {
       class: this.ns.e("footer")
-    }, [l(C("el-button"), {
+    }, [i(y("el-button"), {
       type: "text",
       onClick: this.onCancel
     }, {
-      default: () => [A("取消")]
-    }), l(C("el-button"), {
+      default: () => [R("取消")]
+    }), i(y("el-button"), {
       type: "primary",
       onClick: this.onConfirm
     }, {
-      default: () => [A("确定")]
+      default: () => [R("确定")]
     })])]);
   }
 });
-function He(t) {
-  return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !ie(t);
+function Je(l) {
+  return typeof l == "function" || Object.prototype.toString.call(l) === "[object Object]" && !se(l);
 }
-const Je = () => l("svg", {
+const $e = () => i("svg", {
   viewBox: "0 0 1024 1024",
   version: "1.1",
   xmlns: "http://www.w3.org/2000/svg",
   "p-id": "4437",
   width: "1em",
   height: "1em"
-}, [l("path", {
+}, [i("path", {
   d: "M512 570.88l196.864 196.8 58.88-58.88L570.752 512l196.864-196.864-58.816-58.88L512 453.248 315.136 256.32l-58.88 58.88L453.248 512l-196.864 196.864 58.88 58.88z",
   fill: "currentColor",
   "p-id": "4438"
-}, null)]), Z = /* @__PURE__ */ K({
+}, null)]), Y = /* @__PURE__ */ H({
   name: "IBizOdooSearchBarControl",
   props: {
     /**
@@ -1501,9 +1448,9 @@ const Je = () => l("svg", {
     }
   },
   setup() {
-    const t = ke((...c) => new qe(...c)), u = ae("control-odoo-search-bar"), {
-      zIndex: e
-    } = _e(), s = [{
+    const l = ke((...r) => new Qe(...r)), e = ie("control-odoo-search-bar"), {
+      zIndex: t
+    } = _e(), d = [{
       type: "filter",
       caption: "筛选",
       icon: {
@@ -1524,58 +1471,58 @@ const Je = () => l("svg", {
         appId: "",
         cssClass: "fa fa-star"
       }
-    }], o = {
-      zIndex: e.increment()
-    }, i = x(!1), r = x(), n = x(""), m = x(), p = x(!1), f = x(!1);
-    let h;
-    const P = Q(() => {
+    }], n = {
+      zIndex: t.increment()
+    }, s = N(!1), c = N(), p = N(""), o = N(), f = N(!1), I = N(!1);
+    let O;
+    const _ = V(() => {
       const {
-        filter: c,
-        collect: v,
-        group: g
-      } = t.state;
+        filter: r,
+        collect: h,
+        group: v
+      } = l.state;
       return {
-        group: g,
-        filter: c,
-        collect: v
+        group: v,
+        filter: r,
+        collect: h
       };
-    }), G = Q(() => t.state.schemaFields.filter((c) => {
-      var v;
-      return ((v = P.value.group) == null ? void 0 : v.findIndex((g) => g.appDEFieldId.toLowerCase() === c.key)) === -1 && c.description.includes(n.value);
-    })), z = Q(() => {
+    }), z = V(() => l.state.schemaFields.filter((r) => {
+      var h;
+      return ((h = _.value.group) == null ? void 0 : h.findIndex((v) => v.appDEFieldId.toLowerCase() === r.key)) === -1 && r.description.includes(p.value);
+    })), A = V(() => {
       const {
-        selectedFilter: c,
-        condop: v,
-        selectedCollect: g,
+        selectedFilter: r,
+        condop: h,
+        selectedCollect: v,
         selectedGroup: T
-      } = t.state, N = [];
-      if (!c.length && !T.length && !g)
-        return N;
-      if (c.length && t.state.showFilter) {
-        const L = [], B = {}, M = {};
-        c.forEach((k) => {
-          const j = Object.keys(t.filterORgroup).find((R) => t.filterORgroup[R].includes(k.id)), Y = Object.keys(t.exclusive).find((R) => {
-            var re;
-            return (re = t.exclusive[R]) == null ? void 0 : re.includes(k.id);
+      } = l.state, w = [];
+      if (!r.length && !T.length && !v)
+        return w;
+      if (r.length && l.state.showFilter) {
+        const L = [], D = {}, G = {};
+        r.forEach((k) => {
+          const U = Object.keys(l.filterORgroup).find((j) => l.filterORgroup[j].includes(k.id)), W = Object.keys(l.exclusive).find((j) => {
+            var ae;
+            return (ae = l.exclusive[j]) == null ? void 0 : ae.includes(k.id);
           });
-          if (j) {
-            const R = M[j] || [];
-            R.push(k), M[j] = R;
-          } else if (Y) {
-            const R = B[Y] || [];
-            R.push(k), B[Y] = R;
+          if (U) {
+            const j = G[U] || [];
+            j.push(k), G[U] = j;
+          } else if (W) {
+            const j = D[W] || [];
+            j.push(k), D[W] = j;
           } else
             L.push(k);
-        }), L.length && N.push({
+        }), L.length && w.push({
           type: "filter",
           icon: {
             appId: "",
             cssClass: "fa fa-filter"
           },
           filterType: "FILTER",
-          caption: L.map((k) => k.caption).join(" ".concat(se[v], " "))
-        }), Object.keys(M).length && Object.keys(M).forEach((k) => {
-          N.push({
+          caption: L.map((k) => k.caption).join(" ".concat(te[h], " "))
+        }), Object.keys(G).length && Object.keys(G).forEach((k) => {
+          w.push({
             type: "filter",
             filterTypeId: k,
             icon: {
@@ -1583,10 +1530,10 @@ const Je = () => l("svg", {
               cssClass: "fa fa-filter"
             },
             filterType: "OR",
-            caption: M[k].map((j) => j.caption).join(" ".concat(se.OR, " "))
+            caption: G[k].map((U) => U.caption).join(" ".concat(te.OR, " "))
           });
-        }), Object.keys(B).length && Object.keys(B).forEach((k) => {
-          N.push({
+        }), Object.keys(D).length && Object.keys(D).forEach((k) => {
+          w.push({
             type: "filter",
             filterTypeId: k,
             icon: {
@@ -1594,309 +1541,309 @@ const Je = () => l("svg", {
               cssClass: "fa fa-filter"
             },
             filterType: "EXCLUSIVE",
-            caption: B[k].map((j) => j.caption).join("")
+            caption: D[k].map((U) => U.caption).join("")
           });
         });
       }
-      return T.length && t.state.showGroup && N.push({
+      return T.length && l.state.showGroup && w.push({
         type: "group",
         icon: {
           appId: "",
           cssClass: "layers-outline"
         },
         caption: T.map((L) => {
-          var B;
-          return (B = L.dateFormat) != null && B.length ? t.dateFormat.filter((M) => L.dateFormat.includes(M.value)).map((M) => "".concat(L.caption, ": ").concat(M.label)).join(" > ") : L.caption;
+          var D;
+          return (D = L.dateFormat) != null && D.length ? l.dateFormat.filter((G) => L.dateFormat.includes(G.value)).map((G) => "".concat(L.caption, ": ").concat(G.label)).join(" > ") : L.caption;
         }).join(" > ")
-      }), g && t.state.showCollect && N.push({
+      }), v && l.state.showCollect && w.push({
         type: "collect",
         icon: {
           appId: "",
           cssClass: "fa fa-star"
         },
-        caption: g.caption
-      }), N;
-    }), $ = (c) => {
-      var L;
+        caption: v.caption
+      }), w;
+    }), q = (r) => {
+      var h;
       const {
         selectedGroup: v,
-        selectedFilter: g,
-        selectedCollect: T
-      } = t.state, N = [...v, ...g];
-      return T && N.push(T), !!N.find((B) => B.id === c.id) || ((L = c.dateFormat) == null ? void 0 : L.length) > 0;
-    }, w = () => {
-      h == null || h.pause(), f.value = !1;
+        selectedFilter: T,
+        selectedCollect: w
+      } = l.state, L = [...v, ...T];
+      return w && L.push(w), !!L.find((D) => D.id === r.id) || ((h = r.dateFormat) == null ? void 0 : h.length) > 0;
+    }, P = () => {
+      O == null || O.pause(), I.value = !1;
     }, F = () => {
-      if (h)
-        return h.proceed();
-      h = Be(r, (c) => {
-        c.target.closest(".".concat(u.e("reference"))) || (i.value = !1);
+      if (O)
+        return O.proceed();
+      O = De(c, (r) => {
+        r.target.closest(".".concat(e.e("reference"))) || (s.value = !1);
       });
-    }, S = (c) => {
-      c.stopPropagation(), t.onSearch();
-    }, D = async () => {
+    }, S = (r) => {
+      r.stopPropagation(), l.onSearch();
+    }, x = async () => {
       const {
-        selectedFilter: c,
-        selectedGroup: v,
-        collectName: g
-      } = t.state;
-      if (!g)
+        selectedFilter: r,
+        selectedGroup: h,
+        collectName: v
+      } = l.state;
+      if (!v)
         return ibiz.message.error("必须输入收藏名称");
       const T = {
-        id: te(),
+        id: ee(),
         isCustom: !0,
-        filterIds: c.map((N) => N.id),
-        groups: v,
-        caption: g
+        filterIds: r.map((w) => w.id),
+        groups: h,
+        caption: v
       };
-      f.value = !1, await t.updateByType("collect", "update", T), t.state.collectName = t.view.model.caption;
-    }, q = (c) => {
-      c ? h == null || h.pause() : h == null || h.proceed(), c || (n.value = "");
-    }, H = async (c) => {
-      const v = ibiz.overlay.createModal((T) => ue(Ke, {
-        item: c,
+      I.value = !1, await l.updateByType("collect", "update", T), l.state.collectName = l.view.model.caption;
+    }, Q = (r) => {
+      r ? O == null || O.pause() : O == null || O.proceed(), r || (p.value = "");
+    }, a = async (r) => {
+      const h = ibiz.overlay.createModal((T) => ce(He, {
+        item: r,
         modal: T,
-        controller: t
+        controller: l
       }), {}, {
         width: "800px",
         height: "auto"
       });
-      h == null || h.pause(), v.present();
-      const g = await v.onWillDismiss();
-      h == null || h.proceed(), g.ok && g.data && t.updateByType("filter", "update", g.data[0]);
-    }, a = async (c, v) => {
-      h == null || h.pause();
-      const g = await ibiz.confirm.warning({
+      O == null || O.pause(), h.present();
+      const v = await h.onWillDismiss();
+      O == null || O.proceed(), v.ok && v.data && l.updateByType("filter", "update", v.data[0]);
+    }, m = async (r, h) => {
+      O == null || O.pause();
+      const v = await ibiz.confirm.warning({
         title: "警告",
-        desc: "您确定要删除 ".concat(v.caption, " 吗？删除后不可恢复！")
+        desc: "您确定要删除 ".concat(h.caption, " 吗？删除后不可恢复！")
       });
-      h == null || h.proceed(), g && t.updateByType(c, "remove", v);
-    }, y = async (c) => {
-      const v = t.state.schemaFields.find((g) => g.key === c);
-      if (v) {
-        const g = {
+      O == null || O.proceed(), v && l.updateByType(r, "remove", h);
+    }, b = async (r) => {
+      const h = l.state.schemaFields.find((v) => v.key === r);
+      if (h) {
+        const v = {
           isCustom: !0,
-          id: te(),
-          appDEFieldId: c,
-          type: v.type,
+          id: ee(),
+          appDEFieldId: r,
+          type: h.type,
           isExpand: !1,
-          caption: v.description,
-          appCodeListId: v.enumSource
+          caption: h.description,
+          appCodeListId: h.enumSource
         };
-        await t.updateByType("group", "update", g);
+        await l.updateByType("group", "update", v);
       }
-    }, b = (c, v) => {
-      if (c === "group" && v.type === "date") {
-        v.isExpand = !v.isExpand;
+    }, g = (r, h) => {
+      if (r === "group" && h.type === "date") {
+        h.isExpand = !h.isExpand;
         return;
       }
-      t.onSearchItemClick(c, v);
-    }, O = (c, v) => {
-      c.dateFormat || (c.dateFormat = []);
-      const g = c.dateFormat.findIndex((L) => L === v);
-      g !== -1 ? c.dateFormat.splice(g, 1) : c.dateFormat.push(v);
-      const T = c.dateFormat.length > 0, N = t.state.selectedGroup.findIndex((L) => L.id === c.id);
-      N !== -1 && !T ? t.state.selectedGroup.splice(N, 1) : N === -1 && T && t.state.selectedGroup.push(c), t.execGroup();
-    }, E = (c) => {
-      c.target.closest(".".concat(u.em("reference", "suffix"))) ? i.value = !i.value : i.value = !0;
-    }, I = (c) => l("div", {
-      class: [u.e("search-item"), u.em("search-item", c.type)]
-    }, [l("div", {
-      class: u.em("search-item", "icon")
-    }, [l(C("iBizIcon"), {
-      icon: c.icon
-    }, null)]), l("div", {
-      class: u.em("search-item", "caption"),
-      title: c.caption
-    }, [c.caption]), l("div", {
-      class: u.em("search-item", "remove"),
-      onClick: () => t.onClearSelectedByType(c)
-    }, [Je()])]), J = () => l("div", {
-      ref: m,
-      class: [u.e("reference"), u.is("search-focus", p.value)],
-      onClick: E
-    }, [l("div", {
-      class: u.em("reference", "left")
-    }, [l(C("el-button"), {
-      class: u.em("reference", "prefix"),
+      l.onSearchItemClick(r, h);
+    }, E = (r, h) => {
+      r.dateFormat || (r.dateFormat = []);
+      const v = r.dateFormat.findIndex((L) => L === h);
+      v !== -1 ? r.dateFormat.splice(v, 1) : r.dateFormat.push(h);
+      const T = r.dateFormat.length > 0, w = l.state.selectedGroup.findIndex((L) => L.id === r.id);
+      w !== -1 && !T ? l.state.selectedGroup.splice(w, 1) : w === -1 && T && l.state.selectedGroup.push(r), l.execGroup();
+    }, C = (r) => {
+      r.target.closest(".".concat(e.em("reference", "suffix"))) ? s.value = !s.value : s.value = !0;
+    }, J = (r) => i("div", {
+      class: [e.e("search-item"), e.em("search-item", r.type)]
+    }, [i("div", {
+      class: e.em("search-item", "icon")
+    }, [i(y("iBizIcon"), {
+      icon: r.icon
+    }, null)]), i("div", {
+      class: e.em("search-item", "caption"),
+      title: r.caption
+    }, [r.caption]), i("div", {
+      class: e.em("search-item", "remove"),
+      onClick: () => l.onClearSelectedByType(r)
+    }, [$e()])]), $ = () => i("div", {
+      ref: o,
+      class: [e.e("reference"), e.is("search-focus", f.value)],
+      onClick: C
+    }, [i("div", {
+      class: e.em("reference", "left")
+    }, [i(y("el-button"), {
+      class: e.em("reference", "prefix"),
       type: "text",
-      onClick: (c) => S(c)
+      onClick: (r) => S(r)
     }, {
-      default: () => [l(C("iBizIcon"), {
+      default: () => [i(y("iBizIcon"), {
         icon: {
           cssClass: "fa fa-search"
         }
       }, null)]
-    }), l("div", {
-      class: u.em("reference", "content")
-    }, [l("div", {
-      class: u.e("search-content")
-    }, [z.value.map((c) => I(c)), l(C("el-input"), {
+    }), i("div", {
+      class: e.em("reference", "content")
+    }, [i("div", {
+      class: e.e("search-content")
+    }, [A.value.map((r) => J(r)), i(y("el-input"), {
       type: "text",
       placeholder: "搜索...",
-      modelValue: t.state.query,
-      "onUpdate:modelValue": (c) => t.state.query = c,
-      onFocus: () => p.value = !0,
-      onBlur: () => p.value = !1,
-      onChange: () => t.onSearch()
-    }, null)])])]), l(C("el-button"), {
-      class: [u.em("reference", "suffix"), u.is("active", i.value)]
+      modelValue: l.state.query,
+      "onUpdate:modelValue": (r) => l.state.query = r,
+      onFocus: () => f.value = !0,
+      onBlur: () => f.value = !1,
+      onChange: () => l.onSearch()
+    }, null)])])]), i(y("el-button"), {
+      class: [e.em("reference", "suffix"), e.is("active", s.value)]
     }, {
-      default: () => [l(C("ion-icon"), {
-        name: i.value ? "chevron-up-outline" : "chevron-down-outline"
+      default: () => [i(y("ion-icon"), {
+        name: s.value ? "chevron-up-outline" : "chevron-down-outline"
       }, null)]
-    })]), W = (c) => c === "filter" ? l("div", {
-      class: u.em("list", "item"),
-      onClick: () => H()
-    }, [l("div", {
+    })]), fe = (r) => r === "filter" ? i("div", {
+      class: e.em("list", "item"),
+      onClick: () => a()
+    }, [i("div", {
       title: "添加自定义筛选",
       class: "caption action-caption"
-    }, [A("添加自定义筛选")])]) : c === "collect" ? [l("div", {
-      class: u.em("list", "item")
-    }, [l("div", {
+    }, [R("添加自定义筛选")])]) : r === "collect" ? [i("div", {
+      class: e.em("list", "item")
+    }, [i("div", {
       title: "保存当前搜索",
       class: "caption action-caption",
       onClick: () => {
-        f.value = !f.value;
+        I.value = !I.value;
       }
-    }, [A("保存当前搜索")]), l("div", {
+    }, [R("保存当前搜索")]), i("div", {
       class: ["action", "collapse-icon"]
-    }, [l(C("ion-icon"), {
-      name: f.value ? "chevron-up-outline" : "chevron-down-outline"
-    }, null)])]), f.value && l("div", {
-      class: u.e("expand-item")
-    }, [l("div", {
-      class: u.em("expand-item", "form")
-    }, [l(C("el-input"), {
-      modelValue: t.state.collectName,
-      "onUpdate:modelValue": (v) => t.state.collectName = v,
-      class: u.em("expand-item", "caption"),
+    }, [i(y("ion-icon"), {
+      name: I.value ? "chevron-up-outline" : "chevron-down-outline"
+    }, null)])]), I.value && i("div", {
+      class: e.e("expand-item")
+    }, [i("div", {
+      class: e.em("expand-item", "form")
+    }, [i(y("el-input"), {
+      modelValue: l.state.collectName,
+      "onUpdate:modelValue": (h) => l.state.collectName = h,
+      class: e.em("expand-item", "caption"),
       placeholder: "请输入收藏名称"
-    }, null), l("div", {
-      class: u.em("expand-item", "btn")
-    }, [l(C("el-button"), {
-      onClick: () => D()
+    }, null), i("div", {
+      class: e.em("expand-item", "btn")
+    }, [i(y("el-button"), {
+      onClick: () => x()
     }, {
-      default: () => [A("保存")]
-    })])])])] : l(C("el-dropdown"), {
+      default: () => [R("保存")]
+    })])])])] : i(y("el-dropdown"), {
       trigger: "click",
-      class: u.e("dropdown"),
-      onCommand: y,
-      onVisibleChange: q,
-      "popper-class": u.em("dropdown", "popper")
+      class: e.e("dropdown"),
+      onCommand: b,
+      onVisibleChange: Q,
+      "popper-class": e.em("dropdown", "popper")
     }, {
-      default: () => l("div", {
-        class: u.em("list", "item")
-      }, [l("div", {
+      default: () => i("div", {
+        class: e.em("list", "item")
+      }, [i("div", {
         title: "添加自定义分组",
         class: "caption action-caption"
-      }, [A("添加自定义分组")]), l("div", {
+      }, [R("添加自定义分组")]), i("div", {
         class: ["action", "collapse-icon"]
-      }, [l(C("ion-icon"), {
+      }, [i(y("ion-icon"), {
         name: "chevron-down-outline"
       }, null)])]),
       dropdown: () => {
-        let v;
-        return l("div", {
-          class: u.em("dropdown", "popper-content")
-        }, [l(C("el-input"), {
-          modelValue: n.value,
-          "onUpdate:modelValue": (g) => n.value = g
-        }, null), l(C("el-dropdown-menu"), null, He(v = G.value.map((g) => l(C("el-dropdown-item"), {
-          command: g.key
+        let h;
+        return i("div", {
+          class: e.em("dropdown", "popper-content")
+        }, [i(y("el-input"), {
+          modelValue: p.value,
+          "onUpdate:modelValue": (v) => p.value = v
+        }, null), i(y("el-dropdown-menu"), null, Je(h = z.value.map((v) => i(y("el-dropdown-item"), {
+          command: v.key
         }, {
-          default: () => [g.description]
-        }))) ? v : {
-          default: () => [v]
+          default: () => [v.description]
+        }))) ? h : {
+          default: () => [h]
         })]);
       }
-    }), ve = (c, v) => {
-      const g = [];
-      return c === "filter" && g.push(l(C("iBizIcon"), {
+    }), me = (r, h) => {
+      const v = [];
+      return r === "filter" && v.push(i(y("iBizIcon"), {
         title: "设置",
         class: "action-icon setting-icon",
         icon: {
           cssClass: "fa fa-fw fa-cog"
         },
-        onClick: () => H(v)
-      }, null)), v.type === "date" && g.push(l("div", {
+        onClick: () => a(h)
+      }, null)), h.type === "date" && v.push(i("div", {
         class: ["action", "collapse-icon"]
-      }, [l(C("ion-icon"), {
-        name: v.isExpand ? "chevron-up-outline" : "chevron-down-outline"
-      }, null)])), v.isCustom && g.push(l(C("iBizIcon"), {
+      }, [i(y("ion-icon"), {
+        name: h.isExpand ? "chevron-up-outline" : "chevron-down-outline"
+      }, null)])), h.isCustom && v.push(i(y("iBizIcon"), {
         title: "删除",
         class: "action-icon remove-icon",
         icon: {
           cssClass: "close-outline"
         },
-        onClick: () => a(c, v)
-      }, null)), g;
-    }, me = (c, v) => v.isExpand && v.type === "date" ? l("div", {
-      class: u.e("expand-item")
-    }, [l("div", {
-      class: u.em("expand-item", "list")
-    }, [t.dateFormat.map((g) => {
+        onClick: () => m(r, h)
+      }, null)), v;
+    }, ve = (r, h) => h.isExpand && h.type === "date" ? i("div", {
+      class: e.e("expand-item")
+    }, [i("div", {
+      class: e.em("expand-item", "list")
+    }, [l.dateFormat.map((v) => {
       var T;
-      return l("div", {
-        class: ["item", u.is("selected", (T = v.dateFormat) == null ? void 0 : T.includes(g.value))],
-        onClick: () => O(v, g.value)
-      }, [g.label]);
-    })])]) : null, ye = (c, v) => [l("div", {
-      class: u.em("list", "item"),
-      onClick: () => b(c, v)
-    }, [l(C("iBizIcon"), {
+      return i("div", {
+        class: ["item", e.is("selected", (T = h.dateFormat) == null ? void 0 : T.includes(v.value))],
+        onClick: () => E(h, v.value)
+      }, [v.label]);
+    })])]) : null, ye = (r, h) => [i("div", {
+      class: e.em("list", "item"),
+      onClick: () => g(r, h)
+    }, [i(y("iBizIcon"), {
       icon: {
         cssClass: "fa fa-check"
       },
-      class: ["selected-icon", u.is("selected", $(v))]
-    }, null), l("div", {
-      title: v.caption,
+      class: ["selected-icon", e.is("selected", q(h))]
+    }, null), i("div", {
+      title: h.caption,
       class: "caption"
-    }, [v.caption]), l("div", {
+    }, [h.caption]), i("div", {
       class: "action",
-      onClick: (g) => g.stopPropagation()
-    }, [ve(c, v)])]), me(c, v)];
+      onClick: (v) => v.stopPropagation()
+    }, [me(r, h)])]), ve(r, h)];
     return {
-      c: t,
-      ns: u,
-      popperStyle: o,
-      dropDownRef: r,
-      dropDownVisible: i,
-      renderList: (c) => {
-        var g;
-        const v = s.find((T) => T.type === c);
+      c: l,
+      ns: e,
+      popperStyle: n,
+      dropDownRef: c,
+      dropDownVisible: s,
+      renderList: (r) => {
+        var h;
+        const v = d.find((T) => T.type === r);
         if (v)
-          return l("div", {
-            class: [u.e("list"), u.e("".concat(c, "-list"))]
-          }, [l("div", {
-            class: u.em("list", "header")
-          }, [l(C("iBizIcon"), {
+          return i("div", {
+            class: [e.e("list"), e.e("".concat(r, "-list"))]
+          }, [i("div", {
+            class: e.em("list", "header")
+          }, [i(y("iBizIcon"), {
             icon: v.icon,
             class: "icon"
-          }, null), l("div", {
+          }, null), i("div", {
             class: "caption"
-          }, [l("span", {
+          }, [i("span", {
             title: v.caption
-          }, [v.caption])])]), l("div", {
-            class: u.em("list", "content")
-          }, [(g = P.value[c]) == null ? void 0 : g.map((T) => [ye(c, T), T.showSeparator && l(C("el-divider"), {
-            class: u.em("list", "separator"),
+          }, [v.caption])])]), i("div", {
+            class: e.em("list", "content")
+          }, [(h = _.value[r]) == null ? void 0 : h.map((T) => [ye(r, T), T.showSeparator && i(y("el-divider"), {
+            class: e.em("list", "separator"),
             "border-style": "double"
-          }, null)])]), l("div", {
-            class: u.em("list", "footer")
-          }, [W(c)])]);
+          }, null)])]), i("div", {
+            class: e.em("list", "footer")
+          }, [fe(r)])]);
       },
-      renderDefault: J,
-      onPopoverHide: w,
+      renderDefault: $,
+      onPopoverHide: P,
       onPopoverShow: F
     };
   },
   render() {
-    return l(C("iBizControlBase"), {
+    return i(y("iBizControlBase"), {
       controller: this.c,
       class: [this.ns.b()]
     }, {
-      default: () => [l(C("el-popover"), {
+      default: () => [i(y("el-popover"), {
         width: "600",
         trigger: "click",
         visible: this.dropDownVisible,
@@ -1906,7 +1853,7 @@ const Je = () => l("svg", {
         "popper-class": this.ns.e("popover")
       }, {
         reference: () => this.renderDefault(),
-        default: () => l("div", {
+        default: () => i("div", {
           ref: "dropDownRef",
           class: this.ns.e("content")
         }, [this.c.state.showFilter && this.renderList("filter"), this.c.state.showGroup && this.renderList("group"), this.c.state.showCollect && this.renderList("collect")])
@@ -1916,24 +1863,24 @@ const Je = () => l("svg", {
 });
 class We {
   constructor() {
-    _(this, "component", "IBizOdooSearchBarControl");
+    B(this, "component", "IBizOdooSearchBarControl");
   }
 }
-const Ye = Ge(
-  Z,
-  function(t) {
-    t.component(Z.name, Z), De(
+const Ye = xe(
+  Y,
+  function(l) {
+    l.component(Y.name, Y), ge(
       "CUSTOM_ODOO_SEARCH_BAR",
       () => new We()
     );
   }
-), ot = {
+), at = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(t) {
-    t.use(Ye);
+  install(l) {
+    l.use(Ye);
   }
 };
 export {
   Ye as IBizOdooSearchBarControl,
-  ot as default
+  at as default
 };

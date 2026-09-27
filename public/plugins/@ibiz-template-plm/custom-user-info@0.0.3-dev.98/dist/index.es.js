@@ -1,14 +1,38 @@
-import './style.css';
-var A = Object.defineProperty;
-var F = (r, e, t) => e in r ? A(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
-var l = (r, e, t) => (F(r, typeof e != "symbol" ? e + "" : e, t), t);
-import { useNamespace as p, withInstall as T } from "@ibiz-template/vue3-util";
-import { PanelItemController as P, registerPanelItemProvider as S } from "@ibiz-template/runtime";
-import { defineComponent as v, createVNode as i, h as w, resolveComponent as d, createTextVNode as O, inject as E, ref as U, onBeforeUnmount as z } from "vue";
-import { useRouter as L } from "vue-router";
-import { NOOP as g, listenJSEvent as j, RuntimeError as N } from "@ibiz-template/core";
-import { isArray as I } from "lodash-es";
-const u = class u {
+import './assets/style.css';
+import './assets/style.css';
+import { withInstall as O, useNamespace as h } from "@ibiz-template/vue3-util";
+import { registerPanelItemProvider as S, PanelItemController as V } from "@ibiz-template/runtime";
+import { inject as y, defineComponent as p, ref as P, onBeforeUnmount as T, createVNode as r, h as C, resolveComponent as c, createTextVNode as U } from "vue";
+import { NOOP as f, listenJSEvent as x, RuntimeError as N } from "@ibiz-template/core";
+import { isArray as v } from "lodash-es";
+/*!
+  * vue-router v4.2.5
+  * (c) 2023 Eduardo San Martin Morote
+  * @license MIT
+  */
+var g;
+(function(s) {
+  s.pop = "pop", s.push = "push";
+})(g || (g = {}));
+var w;
+(function(s) {
+  s.back = "back", s.forward = "forward", s.unknown = "";
+})(w || (w = {}));
+Symbol(process.env.NODE_ENV !== "production" ? "navigation failure" : "");
+var b;
+(function(s) {
+  s[s.aborted = 4] = "aborted", s[s.cancelled = 8] = "cancelled", s[s.duplicated = 16] = "duplicated";
+})(b || (b = {}));
+Symbol(process.env.NODE_ENV !== "production" ? "router view location matched" : "");
+Symbol(process.env.NODE_ENV !== "production" ? "router view depth" : "");
+const z = Symbol(process.env.NODE_ENV !== "production" ? "router" : "");
+Symbol(process.env.NODE_ENV !== "production" ? "route location" : "");
+Symbol(process.env.NODE_ENV !== "production" ? "router view location" : "");
+function D() {
+  return y(z);
+}
+var L = Object.defineProperty, j = (s, t, e) => t in s ? L(s, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : s[t] = e, a = (s, t, e) => (j(s, typeof t != "symbol" ? t + "" : t, e), e);
+const u = class {
   /**
    * 获取主题色
    *
@@ -17,8 +41,8 @@ const u = class u {
    * @memberof Util
    */
   static getThemeVar() {
-    const e = document.documentElement;
-    return e ? getComputedStyle(e).getPropertyValue("--ibiz-color-primary") : null;
+    const t = document.documentElement;
+    return t ? getComputedStyle(t).getPropertyValue("--ibiz-color-primary") : null;
   }
   /**
    * 是否为中文字符串
@@ -28,8 +52,8 @@ const u = class u {
    * @return {*}
    * @memberof Util
    */
-  static isChineseChart(e) {
-    return /[\u4E00-\u9FA5]/.test(e);
+  static isChineseChart(t) {
+    return /[\u4E00-\u9FA5]/.test(t);
   }
   /**
    * 是否同时存在英文和中文
@@ -39,8 +63,8 @@ const u = class u {
    * @return {*}
    * @memberof Util
    */
-  static hasChineseAndEnglish(e) {
-    return /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(e);
+  static hasChineseAndEnglish(t) {
+    return /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(t);
   }
   /**
    * 计算图片文字
@@ -50,44 +74,37 @@ const u = class u {
    * @return {*}
    * @memberof Util
    */
-  static calcTextPhoto(e) {
-    if (e && e.toString().length < 2)
-      return e;
-    if (e && e.toString().length >= 2) {
-      if (this.hasChineseAndEnglish(e)) {
-        const o = e.split("").find((c) => /[a-zA-Z]/.test(c)) || "", a = e.split("").find((c) => /[\u4E00-\u9FA5]/.test(c)) || "";
-        return "".concat(o).concat(a).toLowerCase();
+  static calcTextPhoto(t) {
+    if (t && t.toString().length < 2)
+      return t;
+    if (t && t.toString().length >= 2) {
+      if (this.hasChineseAndEnglish(t)) {
+        const e = t.split("").find((o) => /[a-zA-Z]/.test(o)) || "", n = t.split("").find((o) => /[\u4E00-\u9FA5]/.test(o)) || "";
+        return "".concat(e).concat(n).toLowerCase();
       }
-      return /[a-zA-Z]/.test(e) ? e.split("").filter((o) => /[a-zA-Z]/.test(o)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(e) ? e.split("").filter((o) => /[\u4E00-\u9FA5]/.test(o)).slice(-2).join("") : e.replaceAll(" ", "").substring(0, 2);
+      return /[a-zA-Z]/.test(t) ? t.split("").filter((e) => /[a-zA-Z]/.test(e)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(t) ? t.split("").filter((e) => /[\u4E00-\u9FA5]/.test(e)).slice(-2).join("") : t.replaceAll(" ", "").substring(0, 2);
     }
   }
 };
-/**
- * 计算图片颜色
- *
- * @static
- * @param {string} textVal
- * @memberof Util
- */
-l(u, "calcColorPhoto", (e) => {
-  if (!e)
+a(u, "calcColorPhoto", (s) => {
+  if (!s)
     return "";
   let t = 0;
-  for (let h = 0; h < e.length; h++)
-    if (u.isChineseChart(e))
-      t = e.charCodeAt(h) + ((t << 5) - t), t = t & t;
+  for (let l = 0; l < s.length; l++)
+    if (u.isChineseChart(s))
+      t = s.charCodeAt(l) + ((t << 5) - t), t = t & t;
     else {
-      const y = e.charCodeAt(h);
-      t += y.toString(16);
+      const F = s.charCodeAt(l);
+      t += F.toString(16);
     }
-  const s = String(t).substring(0, 6);
-  let n = parseInt(s.substring(0, 2), 16), o = parseInt(s.substring(2, 4), 16), a = parseInt(s.substring(4, 6), 16);
-  n < 0 && (n = 10), o < 0 && (o = 10), a < 0 && (a = 10);
-  const c = "#".concat(n.toString(16).padStart(2, "0")).concat(o.toString(16).padStart(2, "0")).concat(a.toString(16).padStart(2, "0"));
-  return c === "#FFFFFF" && u.getThemeVar() || c;
+  const e = String(t).substring(0, 6);
+  let n = parseInt(e.substring(0, 2), 16), o = parseInt(e.substring(2, 4), 16), i = parseInt(e.substring(4, 6), 16);
+  n < 0 && (n = 10), o < 0 && (o = 10), i < 0 && (i = 10);
+  const m = "#".concat(n.toString(16).padStart(2, "0")).concat(o.toString(16).padStart(2, "0")).concat(i.toString(16).padStart(2, "0"));
+  return m === "#FFFFFF" && u.getThemeVar() || m;
 });
-let f = u;
-const C = /* @__PURE__ */ v({
+let I = u;
+const A = /* @__PURE__ */ p({
   name: "Avatar",
   props: {
     label: {
@@ -102,26 +119,25 @@ const C = /* @__PURE__ */ v({
       default: !1
     }
   },
-  setup(r) {
-    const e = p("custom-avatar");
+  setup(s) {
+    const t = h("custom-avatar");
     return {
-      ns: e,
-      renderAvatar: () => r.img ? i("img", {
-        class: e.e("user-avatar"),
-        src: r.img
-      }, null) : i("div", {
-        class: e.e("default-avatar"),
-        style: "background-color: ".concat(f.calcColorPhoto(r.label))
-      }, [f.calcTextPhoto(r.label)])
+      ns: t,
+      renderAvatar: () => s.img ? r("img", {
+        class: t.e("user-avatar"),
+        src: s.img
+      }, null) : r("div", {
+        class: t.e("default-avatar"),
+        style: "background-color: ".concat(I.calcColorPhoto(s.label))
+      }, [I.calcTextPhoto(s.label)])
     };
   },
   render() {
-    return i("div", {
+    return r("div", {
       class: this.ns.b()
     }, [this.renderAvatar()]);
   }
-});
-const R = /* @__PURE__ */ v({
+}), R = /* @__PURE__ */ p({
   name: "UserInfoPopover",
   props: {
     controller: {
@@ -143,134 +159,63 @@ const R = /* @__PURE__ */ v({
       type: Object
     }
   },
-  setup(r) {
-    const e = p("user-info-popover"), t = r.controller, s = () => [i("div", {
-      class: e.e("header")
-    }, [i("img", {
+  setup(s) {
+    const t = h("user-info-popover"), e = s.controller, n = () => [r("div", {
+      class: t.e("header")
+    }, [r("img", {
       src: "./assets/images/login-header.png"
-    }, null)]), i("div", {
-      class: e.e("content")
-    }, [i("div", {
-      class: e.em("content", "avatar-container")
-    }, [i(C, {
-      class: e.em("content", "avatar"),
-      label: t.userInfo.srfusername,
-      img: t.userInfo.avatar
-    }, null)]), i("div", {
-      class: e.em("content", "info")
-    }, [i("div", {
+    }, null)]), r("div", {
+      class: t.e("content")
+    }, [r("div", {
+      class: t.em("content", "avatar-container")
+    }, [r(A, {
+      class: t.em("content", "avatar"),
+      label: e.userInfo.srfusername,
+      img: e.userInfo.avatar
+    }, null)]), r("div", {
+      class: t.em("content", "info")
+    }, [r("div", {
       class: "user-name"
-    }, [t.userInfo.srfusername]), i("div", {
+    }, [e.userInfo.srfusername]), r("div", {
       class: "description"
-    }, [t.userInfo.srfpersonname])])]), i(d("el-divider"), {
-      class: e.e("divider"),
+    }, [e.userInfo.srfpersonname])])]), r(c("el-divider"), {
+      class: t.e("divider"),
       "content-position": "center"
-    }, null), i("div", {
-      class: e.e("footer")
-    }, [i(d("el-button"), {
-      class: e.e("log-out"),
-      onClick: () => t.onLogOut(),
+    }, null), r("div", {
+      class: t.e("footer")
+    }, [r(c("el-button"), {
+      class: t.e("log-out"),
+      onClick: () => e.onLogOut(),
       text: !0
     }, {
-      default: () => [i(d("iBizIcon"), {
-        class: e.em("log-out", "icon"),
+      default: () => [r(c("iBizIcon"), {
+        class: t.em("log-out", "icon"),
         icon: {
           cssClass: "fa fa-sign-out"
         }
-      }, null), i("span", {
-        class: e.em("log-out", "text")
-      }, [O("退出登录")])]
+      }, null), r("span", {
+        class: t.em("log-out", "text")
+      }, [U("退出登录")])]
     })])];
     return {
-      ns: e,
-      renderContent: () => r.viewId ? w(d("IBizViewShell"), {
-        context: r.context,
-        params: r.params,
-        viewId: r.viewId,
-        modal: r.modal
-      }) : s()
+      ns: t,
+      renderContent: () => s.viewId ? C(c("IBizViewShell"), {
+        context: s.context,
+        params: s.params,
+        viewId: s.viewId,
+        modal: s.modal
+      }) : n()
     };
   },
   render() {
-    return i("div", {
+    return r("div", {
       class: [this.ns.b()]
     }, [this.renderContent()]);
   }
 });
-class b extends P {
+class E extends V {
   constructor() {
-    super(...arguments);
-    /**
-     * 弹框内导航视图名称
-     *
-     * @private
-     * @memberof CustomUserInfoController
-     */
-    l(this, "navViewName", "");
-    /**
-     * 头像属性
-     *
-     * @type {string}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "avatarField", "");
-    /**
-     * 标题属性
-     *
-     * @type {string}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "titlField", "");
-    /**
-     * 子标题属性
-     *
-     * @type {string}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "subTitleField", "");
-    /**
-     * 路由
-     *
-     * @private
-     * @memberof CustomUserInfoController
-     */
-    l(this, "router");
-    /**
-     * 气泡弹窗容器
-     *
-     * @private
-     * @type {(IOverlayPopoverContainer | null)}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "overlay", null);
-    /**
-     * ctx
-     *
-     * @memberof CustomUserInfoController
-     */
-    l(this, "ctx", E("ctx", void 0));
-    /**
-     * 用户信息视图
-     *
-     * @private
-     * @type {IViewConfig}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "userInfoView");
-    /**
-     * 用户信息
-     *
-     * @public
-     * @type {IData}
-     * @memberof CustomUserInfoController
-     */
-    l(this, "userInfo");
-    /**
-     * 监听函数
-     *
-     * @memberof CustomUserInfoController
-     */
-    l(this, "cleanup", g);
+    super(...arguments), a(this, "navViewName", ""), a(this, "avatarField", ""), a(this, "titlField", ""), a(this, "subTitleField", ""), a(this, "router"), a(this, "overlay", null), a(this, "ctx", y("ctx", void 0)), a(this, "userInfoView"), a(this, "userInfo"), a(this, "cleanup", f);
   }
   /**
    * 是否折叠
@@ -302,20 +247,20 @@ class b extends P {
     var t;
     await super.onInit(), this.initRawItemParams();
     try {
-      const s = ((t = ibiz.appData) == null ? void 0 : t.context) || {}, { srfusername: n = "游客", srfpersonname: o } = s;
-      this.userInfo = { srfusername: n, srfpersonname: o }, this.avatarField && s[this.avatarField] && Object.assign(this.userInfo, {
-        avatar: this.parseAvatar(s[this.avatarField])
-      }), this.titlField && s[this.titlField] && Object.assign(this.userInfo, {
-        srfusername: s[this.titlField]
-      }), this.subTitleField && s[this.subTitleField] && Object.assign(this.userInfo, {
-        srfpersonname: s[this.subTitleField]
+      const e = ((t = ibiz.appData) == null ? void 0 : t.context) || {}, { srfusername: n = "游客", srfpersonname: o } = e;
+      this.userInfo = { srfusername: n, srfpersonname: o }, this.avatarField && e[this.avatarField] && Object.assign(this.userInfo, {
+        avatar: this.parseAvatar(e[this.avatarField])
+      }), this.titlField && e[this.titlField] && Object.assign(this.userInfo, {
+        srfusername: e[this.titlField]
+      }), this.subTitleField && e[this.subTitleField] && Object.assign(this.userInfo, {
+        srfpersonname: e[this.subTitleField]
       }), this.userInfoView = await ibiz.hub.config.view.get(this.navViewName);
-    } catch (s) {
-      ibiz.log.error(s);
+    } catch (e) {
+      ibiz.log.error(e);
     }
-    this.cleanup = j(window, "keydown", (s) => {
+    this.cleanup = x(window, "keydown", (e) => {
       var n;
-      s.keyCode === 27 && ((n = this.overlay) == null || n.dismiss());
+      e.keyCode === 27 && ((n = this.overlay) == null || n.dismiss());
     });
   }
   /**
@@ -327,15 +272,15 @@ class b extends P {
    */
   parseAvatar(t) {
     try {
-      const s = JSON.parse(t);
-      if (s) {
-        const n = I(s) ? s[0] : s;
+      const e = JSON.parse(t);
+      if (e) {
+        const n = v(e) ? e[0] : e;
         return ibiz.util.file.calcFileUpDownUrl(
           this.panel.context,
           this.panel.params
         ).downloadUrl.replace("%fileId%", n.id);
       }
-    } catch (s) {
+    } catch (e) {
       throw new N("头像数据解析异常");
     }
   }
@@ -345,11 +290,11 @@ class b extends P {
    * @memberof CustomUserInfoController
    */
   initRawItemParams() {
-    var s;
-    const t = (s = this.model) == null ? void 0 : s.rawItem;
-    I(t == null ? void 0 : t.rawItemParams) && (t == null || t.rawItemParams.forEach((n) => {
-      const { key: o, value: a } = n;
-      o === "NAVVIEWNAME" && (this.navViewName = a), o === "AVATAR" && (this.avatarField = a.toLowerCase()), o === "TITLE" && (this.titlField = a.toLowerCase()), o === "SUBTITLE" && (this.subTitleField = a.toLowerCase());
+    var t;
+    const e = (t = this.model) == null ? void 0 : t.rawItem;
+    v(e == null ? void 0 : e.rawItemParams) && (e == null || e.rawItemParams.forEach((n) => {
+      const { key: o, value: i } = n;
+      o === "NAVVIEWNAME" && (this.navViewName = i), o === "AVATAR" && (this.avatarField = i.toLowerCase()), o === "TITLE" && (this.titlField = i.toLowerCase()), o === "SUBTITLE" && (this.subTitleField = i.toLowerCase());
     }));
   }
   /**
@@ -367,8 +312,8 @@ class b extends P {
    * @memberof CustomUserInfoController
    */
   async onLogOut() {
-    var s;
-    (s = this.overlay) == null || s.dismiss(), await ibiz.confirm.info({
+    var t;
+    (t = this.overlay) == null || t.dismiss(), await ibiz.confirm.info({
       title: "退出登录",
       desc: "您确定要退出登录吗？"
     }) && await ibiz.hub.controller.logout() && (await this.router.push(
@@ -384,16 +329,16 @@ class b extends P {
    * @memberof CustomUserInfoController
    */
   async openUserInfoPopover(t) {
-    var s, n;
+    var e, n;
     return this.overlay = ibiz.overlay.createPopover(
       (o) => {
-        var a;
-        return w(R, {
+        var i;
+        return C(R, {
           context: this.panel.context.clone(),
           params: this.panel.params,
           modal: o,
           controller: this,
-          viewId: (a = this.userInfoView) == null ? void 0 : a.id
+          viewId: (i = this.userInfoView) == null ? void 0 : i.id
         });
       },
       void 0,
@@ -401,17 +346,17 @@ class b extends P {
         placement: this.menuAlign === "LEFT" ? "right-start" : "bottom",
         autoClose: !0,
         noArrow: !0,
-        width: ((s = this.userInfoView) == null ? void 0 : s.width) || 320,
+        width: ((e = this.userInfoView) == null ? void 0 : e.width) || 320,
         height: (n = this.userInfoView) == null ? void 0 : n.height
       }
     ), await this.overlay.present(t), await this.overlay.onWillDismiss();
   }
   onDestroyed() {
     var t;
-    this.cleanup !== g && this.cleanup(), (t = this.overlay) == null || t.dismiss();
+    this.cleanup !== f && this.cleanup(), (t = this.overlay) == null || t.dismiss();
   }
 }
-const m = /* @__PURE__ */ v({
+const d = /* @__PURE__ */ p({
   name: "CustomUserInfo",
   props: {
     modelData: {
@@ -419,68 +364,68 @@ const m = /* @__PURE__ */ v({
       required: !0
     },
     controller: {
-      type: b,
+      type: E,
       required: !0
     }
   },
-  setup(r) {
-    const e = p("custom-user-info"), t = r.controller, s = U({}), n = L();
-    t.setRouter(n);
-    const o = () => {
-      t.openUserInfoPopover(s.value);
+  setup(s) {
+    const t = h("custom-user-info"), e = s.controller, n = P({}), o = D();
+    e.setRouter(o);
+    const i = () => {
+      e.openUserInfoPopover(n.value);
     };
-    return z(() => {
-      t.onDestroyed();
+    return T(() => {
+      e.onDestroyed();
     }), {
-      c: t,
-      ns: e,
-      userInfo: s,
-      onOpenUserInfoPopover: o
+      c: e,
+      ns: t,
+      userInfo: n,
+      onOpenUserInfoPopover: i
     };
   },
   render() {
-    return i("div", {
+    return r("div", {
       ref: "userInfo",
       class: [this.ns.b(), this.ns.m(this.modelData.id), ...this.c.containerClass, this.ns.is("left", this.c.menuAlign === "LEFT"), this.ns.is("top", this.c.menuAlign === "TOP"), this.ns.is("collapse", this.c.isCollapse)],
       onClick: this.onOpenUserInfoPopover
-    }, [i(C, {
+    }, [r(A, {
       class: this.ns.e("avatar"),
       label: this.c.userInfo.srfusername,
       img: this.c.userInfo.avatar,
       readOnly: !0
-    }, null), !this.c.isCollapse && i("div", {
+    }, null), !this.c.isCollapse && r("div", {
       class: this.ns.e("info")
-    }, [i("div", {
+    }, [r("div", {
       class: this.ns.em("info", "user-name")
-    }, [this.c.userInfo.srfusername]), this.c.menuAlign === "LEFT" && i("div", {
+    }, [this.c.userInfo.srfusername]), this.c.menuAlign === "LEFT" && r("div", {
       class: this.ns.em("info", "description")
     }, [this.c.userInfo.srfpersonname])])]);
   }
 });
-class D {
+class k {
   constructor() {
-    l(this, "component", "CustomUserInfo");
+    a(this, "component", "CustomUserInfo");
   }
-  async createController(e, t, s) {
-    const n = new b(e, t, s);
-    return await n.init(), n;
+  async createController(t, e, n) {
+    const o = new E(t, e, n);
+    return await o.init(), o;
   }
 }
-const B = T(
-  m,
-  function(r) {
-    r.component(m.name, m), S(
+const _ = O(
+  d,
+  function(s) {
+    s.component(d.name, d), S(
       "CUSTOM_CUSTOM_AUTH_USERINFO",
-      () => new D()
+      () => new k()
     );
   }
-), J = {
+), H = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(r) {
-    r.use(B);
+  install(s) {
+    s.use(_);
   }
 };
 export {
-  B as IBizCustomUserInfo,
-  J as default
+  _ as IBizCustomUserInfo,
+  H as default
 };

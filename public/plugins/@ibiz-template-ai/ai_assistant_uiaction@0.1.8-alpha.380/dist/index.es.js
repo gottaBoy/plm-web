@@ -1,5 +1,5 @@
-import { UIActionProviderBase as P, execUILogic as I, ControlVO as N, getDeACMode as z, calcDeCodeNameById as U, registerUIActionProvider as D } from "@ibiz-template/runtime";
-import { RuntimeModelError as C, ModelError as M, RuntimeError as g } from "@ibiz-template/core";
+import { registerUIActionProvider as z, UIActionProviderBase as P, execUILogic as A, getDeACMode as D, calcDeCodeNameById as N, ControlVO as U } from "@ibiz-template/runtime";
+import { RuntimeModelError as g, ModelError as M, RuntimeError as I } from "@ibiz-template/core";
 import { useUIStore as T } from "@ibiz-template/vue3-util";
 class R extends P {
   /**
@@ -8,59 +8,59 @@ class R extends P {
    * @param {IUILogicParams} params
    * @return {*}  {Promise<IUIActionResult>}
    */
-  async exec(t, i) {
-    const e = {
-      refresh: t.reloadData,
-      refreshMode: t.refreshMode,
-      closeView: t.closeEditView
-    }, { context: l, params: h, data: s, view: o } = i;
-    t.closeEditView && (o.state.isClosing = !0);
-    const { appDEUILogicId: r, appDataEntityId: a, uilogicAttachMode: n } = t;
-    if (n === "REPLACE") {
-      if (!r)
-        throw new C(
-          t,
+  async exec(e, i) {
+    const t = {
+      refresh: e.reloadData,
+      refreshMode: e.refreshMode,
+      closeView: e.closeEditView
+    }, { context: u, params: h, data: r, view: c } = i;
+    e.closeEditView && (c.state.isClosing = !0);
+    const { appDEUILogicId: n, appDataEntityId: s, uilogicAttachMode: f } = e;
+    if (f === "REPLACE") {
+      if (!n)
+        throw new g(
+          e,
           ibiz.i18n.t("runtime.logicScheduler.executor.noConfiguredLogic")
         );
-      return await I(r, a, i), e;
+      return await A(n, s, i), t;
     }
-    if (!await this.isConfirm(t, i))
-      return e.cancel = !0, this.returnError(e, o);
-    const d = await this.execAction(t, i), { presetParams: c } = await this.handleParams(
-      t,
-      l,
-      s,
+    if (!await this.isConfirm(e, i))
+      return t.cancel = !0, this.returnError(t, c);
+    const p = await this.execAction(e, i), { presetParams: a } = await this.handleParams(
+      e,
+      u,
+      r,
       h
     );
-    if (c.ignoredirtycheck === "true" && (o.modal.ignoreDismissCheck = !0), Object.assign(e, d), e.cancel === !0)
-      return this.returnError(e, o);
-    if (t.uilogicAttachMode === "AFTER") {
-      if (!r)
-        throw new C(
-          t,
+    if (a.ignoredirtycheck === "true" && (c.modal.ignoreDismissCheck = !0), Object.assign(t, p), t.cancel === !0)
+      return this.returnError(t, c);
+    if (e.uilogicAttachMode === "AFTER") {
+      if (!n)
+        throw new g(
+          e,
           ibiz.i18n.t("runtime.logicScheduler.executor.noConfiguredLogic")
         );
-      await I(
-        r,
-        a,
-        this.mergeArgsByResult(i, e)
+      await A(
+        n,
+        s,
+        this.mergeArgsByResult(i, t)
       );
     }
-    const f = this.mergeArgsByResult(i, e);
-    if (t.closeEditView)
-      this.doNextAction(t, f, t.appId);
+    const d = this.mergeArgsByResult(i, t);
+    if (e.closeEditView)
+      this.doNextAction(e, d, e.appId);
     else {
-      const p = await this.doNextAction(
-        t,
-        f,
-        t.appId
+      const o = await this.doNextAction(
+        e,
+        d,
+        e.appId
       );
-      if (p && (Object.keys(p).forEach((u) => {
-        p[u] !== void 0 && (e[u] = p[u]);
-      }), p.cancel === !0))
-        return this.returnError(e, o);
+      if (o && (Object.keys(o).forEach((l) => {
+        o[l] !== void 0 && (t[l] = o[l]);
+      }), o.cancel === !0))
+        return this.returnError(t, c);
     }
-    return e;
+    return t;
   }
   /**
    * 执行具体界面行为
@@ -68,21 +68,21 @@ class R extends P {
    * @param args
    * @returns
    */
-  async execAction(t, i) {
-    let e = {};
-    switch (t.frontProcessType) {
+  async execAction(e, i) {
+    let t = {};
+    switch (e.frontProcessType) {
       case "CHAT":
-        e = await this.openAiChat(t, i);
+        t = await this.openAiChat(e, i);
         break;
       default:
         throw new M(
-          t,
+          e,
           ibiz.i18n.t("runtime.uiAction.frontProcessingModes", {
-            frontProcessType: t.frontProcessType
+            frontProcessType: e.frontProcessType
           })
         );
     }
-    return e;
+    return t;
   }
   /**
    * 根据 value 查找 key
@@ -90,10 +90,10 @@ class R extends P {
    * @param value
    * @returns
    */
-  getKeyByValueFromMap(t, i) {
-    for (const [e, l] of t.entries())
-      if (l === i)
-        return e;
+  getKeyByValueFromMap(e, i) {
+    for (const [t, u] of e.entries())
+      if (u === i)
+        return t;
   }
   /**
    * 打开AI聊天框
@@ -104,39 +104,39 @@ class R extends P {
    * @return {*}  {Promise<IUIActionResult>}
    * @memberof AIAssistantUIActionProvider
    */
-  async openAiChat(t, i) {
-    var p, u;
+  async openAiChat(e, i) {
+    var t, u;
     if (!ibiz.env.enableAI)
-      throw new g(ibiz.i18n.t("runtime.uiAction.noEnableAI"));
-    const { appDEACModeId: e, appDataEntityId: l, appId: h } = t, { resultContext: s, resultParams: o } = await this.handleParams(
-      t,
+      throw new I(ibiz.i18n.t("runtime.uiAction.noEnableAI"));
+    const { appDEACModeId: h, appDataEntityId: r, appId: c } = e, { resultContext: n, resultParams: s } = await this.handleParams(
+      e,
       i.context,
       i.data,
       i.params
-    ), r = Object.assign(s, { srfappid: h });
-    if (!l || !e)
-      throw new g(ibiz.i18n.t("runtime.uiAction.noEntityOrAcMode"));
-    let a, n, d = {}, c = ibiz.appUtil.route2routeObject();
-    if (c && c.pathNodes.length > 0 && (a = (p = c.pathNodes.pop()) == null ? void 0 : p.viewName, a === "route-modal" && (c = ibiz.appUtil.route2routeObject(!0), a = (u = c.pathNodes.pop()) == null ? void 0 : u.viewName)), a && (n = await ibiz.appUtil.viewCacheCenter.get(a)), n && n.state.srfactiveviewdata) {
-      const m = n.state.srfactiveviewdata;
-      if (d = m instanceof N ? m.getOrigin() : m, Object.assign(r, n.context), d && !o.srfaiagentscope) {
-        const w = await ibiz.hub.getAppAsync(n.model.appId);
-        if (w) {
-          const A = this.getKeyByValueFromMap(
-            w.deName2DeCodeName,
+    ), f = Object.assign(n, { srfappid: c });
+    if (!r || !h)
+      throw new I(ibiz.i18n.t("runtime.uiAction.noEntityOrAcMode"));
+    let p, a, d = {}, o = ibiz.appUtil.route2routeObject();
+    if (o && o.pathNodes.length > 0 && (p = (t = o.pathNodes.pop()) == null ? void 0 : t.viewName, p === "route-modal" && (o = ibiz.appUtil.route2routeObject(!0), p = (u = o.pathNodes.pop()) == null ? void 0 : u.viewName)), p && (a = await ibiz.appUtil.viewCacheCenter.get(p)), a && a.state.srfactiveviewdata) {
+      const l = a.state.srfactiveviewdata;
+      if (d = l instanceof U ? l.getOrigin() : l, Object.assign(f, a.context), d && !s.srfaiagentscope) {
+        const m = await ibiz.hub.getAppAsync(a.model.appId);
+        if (m) {
+          const w = this.getKeyByValueFromMap(
+            m.deName2DeCodeName,
             d.srfdecodename
           );
-          A && (o.srfaiagentscope = A);
+          w && (s.srfaiagentscope = w);
         }
       }
     }
     return { data: await this.openAiChatContainer({
-      appDEACModeId: e,
-      appDataEntityId: l,
-      context: r,
-      view: n,
+      appDEACModeId: h,
+      appDataEntityId: r,
+      context: f,
+      view: a,
       ctrl: void 0,
-      params: o,
+      params: s,
       data: d
     }) };
   }
@@ -147,76 +147,76 @@ class R extends P {
    * @return {*}  {Promise<IChatMessage[]>}
    * @memberof AppUtil
    */
-  async openAiChatContainer(t) {
+  async openAiChatContainer(e) {
     const {
       data: i,
-      view: e,
-      ctrl: l,
+      view: t,
+      ctrl: u,
       params: h,
-      context: s,
-      appDEACModeId: o,
-      appDataEntityId: r
-    } = t, a = await z(
-      o,
-      r,
-      s.srfappid
+      context: r,
+      appDEACModeId: c,
+      appDataEntityId: n
+    } = e, s = await D(
+      c,
+      n,
+      r.srfappid
     );
-    if (!a)
+    if (!s)
       return Promise.resolve([]);
-    const n = await ibiz.aiChatUtil.getAIChat(), d = U(r);
-    let c = "".concat(r, "@").concat(o, "@");
-    c += s[d] ? s[d] : "default";
-    const f = ibiz.aiChatUtil.getChatSessionId("TOPIC", c), p = "新会话", u = { ...h, srfactag: a.codeName }, { zIndex: m } = T(), w = m.increment(), { containerOptions: A, topicOptions: x, chatOptions: E } = await ibiz.aiChatUtil.getUIActionExAIChatParams(
-      s,
+    const f = await ibiz.aiChatUtil.getAIChat(), p = N(n);
+    let a = "".concat(n, "@").concat(c, "@");
+    a += r[p] ? r[p] : "default";
+    const d = ibiz.aiChatUtil.getChatSessionId("TOPIC", a), o = "新会话", l = { ...h, srfactag: s.codeName }, { zIndex: m } = T(), w = m.increment(), { containerOptions: b, topicOptions: E, chatOptions: y } = await ibiz.aiChatUtil.getUIActionExAIChatParams(
+      r,
       h,
       i,
-      a,
-      { chatInstance: n, view: e, ctrl: l }
-    ), v = await ibiz.aiChatUtil.getAIResourceOptions(
       s,
+      { chatInstance: f, view: t, ctrl: u }
+    ), v = await ibiz.aiChatUtil.getAIResourceOptions(
+      r,
       h
     );
-    return new Promise((y) => {
-      n.create({
+    return new Promise((x) => {
+      f.create({
         mode: "TOPIC",
         resourceOptions: v,
         containerOptions: {
           zIndex: w,
           enableBackFill: !1,
-          ...A
+          ...b
         },
         topicOptions: {
           appid: ibiz.env.appId,
-          id: c,
-          caption: p,
+          id: a,
+          caption: o,
           url: window.location.hash.substring(1),
-          type: s.srftopicpath || "default",
-          ...x
+          type: r.srftopicpath || "default",
+          ...E
         },
         chatOptions: {
-          caption: a.logicName,
-          context: { ...s },
-          params: u,
-          appDataEntityId: r,
-          sessionid: f,
+          caption: s.logicName,
+          context: { ...r },
+          params: l,
+          appDataEntityId: n,
+          sessionid: d,
           // 扩展参数
-          ...E,
+          ...y,
           closed: (V, j, O) => {
-            y(O);
+            x(O);
           }
         }
       });
     });
   }
 }
-const L = {
-  install(b) {
-    D(
+const k = {
+  install(C) {
+    z(
       "DEUIACTION_AI_ASSISTANT_UI_ACTION",
       () => new R()
     );
   }
 };
 export {
-  L as default
+  k as default
 };

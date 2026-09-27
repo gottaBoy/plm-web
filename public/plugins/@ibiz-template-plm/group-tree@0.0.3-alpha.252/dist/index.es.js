@@ -1,42 +1,40 @@
-import './style.css';
-var _e = Object.defineProperty;
-var ge = (e, m, n) => m in e ? _e(e, m, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[m] = n;
-var R = (e, m, n) => (ge(e, typeof m != "symbol" ? m + "" : m, n), n);
-import { TreeController as De, getChildNodeRSs as Ie, calcDeCodeNameById as U, handleAllSettled as ve, Srfuf as Ee, getControlPanel as we, registerControlProvider as xe } from "@ibiz-template/runtime";
-import { useControlController as be, useNamespace as ne, withInstall as Ce } from "@ibiz-template/vue3-util";
-import { ref as B, defineComponent as Te, computed as oe, reactive as Me, watch as ie, nextTick as ke, resolveComponent as I, onMounted as Re, onUnmounted as Se, withDirectives as Ae, createVNode as h, resolveDirective as Oe, isVNode as Be, createTextVNode as ae } from "vue";
-import { createUUID as se } from "qx-util";
-import { debounce as de } from "lodash-es";
-import { RuntimeError as P, RuntimeModelError as re, recursiveIterate as Ke } from "@ibiz-template/core";
-import { isNil as le } from "ramda";
-function E(e, m) {
-  const n = m.state.items.find((o) => o._id === e);
-  return n || m.state.items.find((o) => o._uuid === e);
+import './assets/style.css';
+import './assets/style.css';
+import { registerControlProvider as me, getControlPanel as ye, TreeController as De, getChildNodeRSs as _e, calcDeCodeNameById as V, handleAllSettled as we, Srfuf as Ie } from "@ibiz-template/runtime";
+import { withInstall as Ee, useControlController as xe, useNamespace as te } from "@ibiz-template/vue3-util";
+import { defineComponent as be, computed as oe, reactive as Te, ref as A, watch as ae, nextTick as Ce, resolveComponent as D, onMounted as Me, onUnmounted as ke, createVNode as f, withDirectives as Re, resolveDirective as Se, isVNode as Ke, createTextVNode as ne } from "vue";
+import { createUUID as ie } from "qx-util";
+import { debounce as le } from "lodash-es";
+import { RuntimeModelError as de, RuntimeError as F, recursiveIterate as Ae } from "@ibiz-template/core";
+import { isNil as se } from "ramda";
+var Oe = Object.defineProperty, Be = (e, o, n) => o in e ? Oe(e, o, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[o] = n, O = (e, o, n) => (Be(e, typeof o != "symbol" ? o + "" : o, n), n);
+function w(e, o) {
+  return o.state.items.find((a) => a._id === e) || o.state.items.find((a) => a._uuid === e);
 }
-function Fe(e, m) {
+function Fe(e, o) {
   const n = () => {
-    const s = e.value;
-    if (!s)
-      throw new P("找不到el-tree实例对象");
-    return s;
-  }, o = () => {
-    var f;
-    const s = e.value;
-    if (!s) {
+    const d = e.value;
+    if (!d)
+      throw new F("找不到el-tree实例对象");
+    return d;
+  }, a = () => {
+    var d;
+    const p = e.value;
+    if (!p) {
       setTimeout(() => {
-        o();
+        a();
       }, 200);
       return;
     }
-    Object.values(s.store.nodesMap).forEach((l) => {
-      const y = m.state.expandedKeys.includes(l.data._id);
-      y !== l.expanded && (y ? l.expand() : l.collapse());
-    }), m.state.singleSelect ? e.value.setCurrentKey(((f = m.state.selectedData[0]) == null ? void 0 : f._id) || void 0) : s.setCheckedKeys(m.state.selectedData.map((l) => l._id));
-  }, d = de(o, 500);
-  return { getTreeInstance: n, updateUI: d, triggerNodeExpand: (s) => {
-    const f = n(), l = f == null ? void 0 : f.store.nodesMap[s];
-    if (l)
-      return l.expanded ? (l.collapse(), !1) : (l.expand(), !0);
+    Object.values(p.store.nodesMap).forEach((u) => {
+      const v = o.state.expandedKeys.includes(u.data._id);
+      v !== u.expanded && (v ? u.expand() : u.collapse());
+    }), o.state.singleSelect ? e.value.setCurrentKey(((d = o.state.selectedData[0]) == null ? void 0 : d._id) || void 0) : p.setCheckedKeys(o.state.selectedData.map((u) => u._id));
+  }, s = le(a, 500);
+  return { getTreeInstance: n, updateUI: s, triggerNodeExpand: (d) => {
+    const p = n(), u = p == null ? void 0 : p.store.nodesMap[d];
+    if (u)
+      return u.expanded ? (u.collapse(), !1) : (u.expand(), !0);
   } };
 }
 function Pe(e) {
@@ -48,39 +46,12 @@ function Pe(e) {
     case "after":
       return "next";
     default:
-      throw new P("暂不支持dropType:".concat(e));
+      throw new F("暂不支持dropType:".concat(e));
   }
 }
-class ze extends De {
+class Le extends De {
   constructor() {
-    super(...arguments);
-    /**
-     * 底部工具栏
-     *
-     * @type {(IControl | undefined)}
-     * @memberof GroupTreeController
-     */
-    R(this, "bottomToolbar");
-    /**
-     * 隐藏节点id
-     *
-     * @type {string}
-     * @memberof GroupTreeController
-     */
-    R(this, "hiddenNodeId", "");
-    /**
-     * 绘制模式
-     *
-     * @type {('tree' | 'listTree')}
-     * @memberof GroupTreeController
-     */
-    R(this, "renderMode", "tree");
-    /**
-     * 是否正在过滤
-     *
-     * @memberof GroupTreeController
-     */
-    R(this, "isFilter", B(!1));
+    super(...arguments), O(this, "bottomToolbar"), O(this, "hiddenNodeId", ""), O(this, "renderMode", "tree"), O(this, "isFilter", A(!1));
   }
   /**
    * 重新初始化
@@ -90,12 +61,12 @@ class ze extends De {
    * @memberof GroupTreeController
    */
   async onCreated() {
-    var d;
+    var o;
     await super.onCreated();
-    const n = ((d = this.view.model.viewLayoutPanel) == null ? void 0 : d.controls) || [];
-    this.bottomToolbar = n.find((a) => a.name === "toolbar");
-    const { ctrlParams: o = {} } = this.model.controlParam;
-    o.HIDDENNODEID && (this.hiddenNodeId = o.HIDDENNODEID), o.RENDERMODE && (this.renderMode = o.RENDERMODE);
+    const n = ((o = this.view.model.viewLayoutPanel) == null ? void 0 : o.controls) || [];
+    this.bottomToolbar = n.find((s) => s.name === "toolbar");
+    const { ctrlParams: a = {} } = this.model.controlParam;
+    a.HIDDENNODEID && (this.hiddenNodeId = a.HIDDENNODEID), a.RENDERMODE && (this.renderMode = a.RENDERMODE);
   }
   initState() {
     super.initState(), this.state.newingNodeModel = null, this.state.newingNodeText = null, this.state.newingNodeDefault = null, this.state.editingNodeKey = null, this.state.editingNodeText = null, this.state.editingNodeDefault = null;
@@ -104,26 +75,26 @@ class ze extends De {
    *  初始化节点拖入关系处理
    */
   initDropNodeRss() {
-    var n;
-    (n = this.model.detreeNodes) == null || n.forEach((o) => {
-      if (!o.allowDrop)
+    var o;
+    (o = this.model.detreeNodes) == null || o.forEach((n) => {
+      if (!n.allowDrop)
         return;
-      const d = [];
-      Ie(this.model, {
-        parentId: o.id,
+      const a = [];
+      _e(this.model, {
+        parentId: n.id,
         hasQuery: !1
       }).forEach((s) => {
-        var f;
-        if ((f = s.parentDER1N) != null && f.pickupDEFName) {
-          const l = this.getNodeModel(s.childDETreeNodeId);
-          (l == null ? void 0 : l.treeNodeType) === "DE" && l.appDataEntityId && d.push({
-            minorEntityId: l.appDataEntityId,
+        var d;
+        if ((d = s.parentDER1N) != null && d.pickupDEFName) {
+          const p = this.getNodeModel(s.childDETreeNodeId);
+          (p == null ? void 0 : p.treeNodeType) === "DE" && p.appDataEntityId && a.push({
+            minorEntityId: p.appDataEntityId,
             pickupDEFName: s.parentDER1N.pickupDEFName.toLowerCase(),
             childDETreeNodeId: s.childDETreeNodeId,
             detreeNodeRSParams: s.detreeNodeRSParams
           });
         }
-      }), d.length > 0 && this.dropNodeRss.set(o.id, d);
+      }), a.length > 0 && this.dropNodeRss.set(n.id, a);
     });
   }
   /**
@@ -133,14 +104,14 @@ class ze extends De {
    * @return {*}  {void}
    */
   updateTreeNode({
-    nodeKey: n,
-    defaultValue: o
+    nodeKey: o,
+    defaultValue: n
   }) {
-    const d = this.context.srfreadonly === !0 || this.context.srfreadonly === "true";
-    if (!n || n === this.state.editingNodeKey || d)
+    const a = this.context.srfreadonly === !0 || this.context.srfreadonly === "true";
+    if (!o || o === this.state.editingNodeKey || a)
       return;
-    const a = E(n, this), s = this.getNodeModel(a._nodeId);
-    s != null && s.allowEditText && (this.state.editingNodeKey = a._id, this.state.editingNodeText = a._text, this.state.editingNodeDefault = o, this.state.newingNodeModel = null, this.state.newingNodeText = null, this.state.newingNodeDefault = null);
+    const s = w(o, this), d = this.getNodeModel(s._nodeId);
+    d != null && d.allowEditText && (this.state.editingNodeKey = s._id, this.state.editingNodeText = s._text, this.state.editingNodeDefault = n, this.state.newingNodeModel = null, this.state.newingNodeText = null, this.state.newingNodeDefault = null);
   }
   /**
    * 删除指定节点
@@ -148,15 +119,15 @@ class ze extends De {
    * @date 2023-12-27 05:46:02
    * @return {*}  {void}
    */
-  removeTreeNode(n) {
-    if (!n || n === this.state.editingNodeKey)
+  removeTreeNode(o) {
+    if (!o || o === this.state.editingNodeKey)
       return;
-    const o = E(n, this), d = {
+    const n = w(o, this), a = {
       context: this.context || {},
       params: this.params || {},
-      data: [o]
+      data: [n]
     };
-    this.onRemoveTreeNode(d);
+    this.onRemoveTreeNode(a);
   }
   /**
    * 新建树节点
@@ -165,11 +136,11 @@ class ze extends De {
    * @return {*}  {void}
    */
   newTreeNode({
-    nodeType: n,
-    defaultValue: o = {}
+    nodeType: o,
+    defaultValue: n = {}
   }) {
-    const d = this.getNodeModel(n);
-    this.state.newingNodeModel = d, this.state.newingNodeDefault = o, this.state.editingNodeKey = null, this.state.editingNodeText = null, this.state.editingNodeDefault = null;
+    const a = this.getNodeModel(o);
+    this.state.newingNodeModel = a, this.state.newingNodeDefault = n, this.state.editingNodeKey = null, this.state.editingNodeText = null, this.state.editingNodeDefault = null;
   }
   /**
    * 创建实体节点数据
@@ -179,17 +150,17 @@ class ze extends De {
    * @param {ITreeNodeData[]} nodeDatas 节点数据集合
    * @return {*}  {Promise<void>}
    */
-  async createDeNodeData(n) {
-    const o = ibiz.hub.getApp(this.context.srfappid);
+  async createDeNodeData(o) {
+    const n = ibiz.hub.getApp(this.context.srfappid);
     await Promise.all(
-      n.map(async (d) => {
-        const a = this.getNodeModel(d._nodeId), s = d._deData, f = this.context.clone(), l = await o.deService.exec(
-          a.appDataEntityId,
+      o.map(async (a) => {
+        const s = this.getNodeModel(a._nodeId), d = a._deData, p = this.context.clone(), u = await n.deService.exec(
+          s.appDataEntityId,
           "create",
-          f,
-          s
+          p,
+          d
         );
-        this.emitDEDataChange("create", l.data), l.data && this.refresh();
+        this.emitDEDataChange("create", u.data), u.data && this.refresh();
       })
     );
   }
@@ -200,28 +171,28 @@ class ze extends De {
    * @return {*}  {Promise<void>}
    */
   async onCreateTreeNode() {
-    const { textAppDEFieldId: n, id: o } = this.state.newingNodeModel, d = this.state.newingNodeText, a = { _deData: {} };
-    Object.assign(a, { _nodeId: o, _text: d }), Object.assign(a._deData, { [n]: d }), this.state.newingNodeDefault && Object.assign(a._deData, this.state.newingNodeDefault), Object.assign(a._deData, { [n]: d }), await this.createDeNodeData([a]), this.state.newingNodeModel = null, this.state.newingNodeText = null, this.state.newingNodeDefault = null;
+    const { textAppDEFieldId: o, id: n } = this.state.newingNodeModel, a = this.state.newingNodeText, s = { _deData: {} };
+    Object.assign(s, { _nodeId: n, _text: a }), Object.assign(s._deData, { [o]: a }), this.state.newingNodeDefault && Object.assign(s._deData, this.state.newingNodeDefault), Object.assign(s._deData, { [o]: a }), await this.createDeNodeData([s]), this.state.newingNodeModel = null, this.state.newingNodeText = null, this.state.newingNodeDefault = null;
   }
   /**
    * 修改节点文本
    * @param nodeData 节点数据
    * @param _text 节点文本
    */
-  async onModifyTreeNode(n, o) {
-    const d = this.getNodeModel(n._nodeId);
-    if (!d.allowEditText)
-      throw new re(d, "树节点没有配置编辑模式：名称");
-    if (n._nodeType !== "DE")
-      throw new P("不是实体树节点数据");
-    if (n._text !== o) {
-      if (n._text = o, this.state.editingNodeDefault) {
-        const a = Object.keys(this.state.editingNodeDefault);
-        a && a.length > 0 && a.forEach((s) => {
-          le(n._deData[s]) && (n._deData[s] = this.state.editingNodeDefault[s]);
+  async onModifyTreeNode(o, n) {
+    const a = this.getNodeModel(o._nodeId);
+    if (!a.allowEditText)
+      throw new de(a, "树节点没有配置编辑模式：名称");
+    if (o._nodeType !== "DE")
+      throw new F("不是实体树节点数据");
+    if (o._text !== n) {
+      if (o._text = n, this.state.editingNodeDefault) {
+        const s = Object.keys(this.state.editingNodeDefault);
+        s && s.length > 0 && s.forEach((d) => {
+          se(o._deData[d]) && (o._deData[d] = this.state.editingNodeDefault[d]);
         });
       }
-      await this.updateDeNodeData([n]);
+      await this.updateDeNodeData([o]);
     }
     this.state.editingNodeKey = null, this.state.editingNodeText = null, this.state.editingNodeDefault = null;
   }
@@ -230,46 +201,46 @@ class ze extends De {
    * @param args 参数
    * @returns
    */
-  async onRemoveTreeNode(n) {
-    const { context: o, params: d, data: a } = this.handlerAbilityParams(n), s = this.getNodeModel(a[0]._nodeId);
-    if ((n == null ? void 0 : n.silent) !== !0 && !await ibiz.confirm.error({
+  async onRemoveTreeNode(o) {
+    const { context: n, params: a, data: s } = this.handlerAbilityParams(o), d = this.getNodeModel(s[0]._nodeId);
+    if ((o == null ? void 0 : o.silent) !== !0 && !await ibiz.confirm.error({
       title: "数据删除",
       desc: "确认删除数据？"
     }))
       return;
     await this._evt.emit("onBeforeRemove", void 0), await this.startLoading();
-    let f = !1;
+    let p = !1;
     try {
-      const l = U(
-        s.appDataEntityId
+      const u = V(
+        d.appDataEntityId
       );
-      await ve(
-        a.map(async (y) => {
-          if (y.srfuf !== Ee.CREATE) {
-            const g = o.clone();
-            g[l] = y.srfkey, await ibiz.hub.getApp(s.appId).deService.exec(
-              s.appDataEntityId,
+      await we(
+        s.map(async (v) => {
+          if (v.srfuf !== Ie.CREATE) {
+            const N = n.clone();
+            N[u] = v.srfkey, await ibiz.hub.getApp(d.appId).deService.exec(
+              d.appDataEntityId,
               "remove",
-              g,
-              d
-            ), f = !0;
+              N,
+              a
+            ), p = !0;
           }
-          this.afterRemove(y);
+          this.afterRemove(v);
         })
-      ), (n == null ? void 0 : n.silent) !== !0 && this.actionNotification("REMOVESUCCESS", {
-        data: a,
-        default: "数据[".concat(a.map((y) => y.srfmajortext).join("、"), "]删除成功!")
-      }), f && !(n != null && n.notRefresh) && await this.refresh();
-    } catch (l) {
+      ), (o == null ? void 0 : o.silent) !== !0 && this.actionNotification("REMOVESUCCESS", {
+        data: s,
+        default: "数据[".concat(s.map((v) => v.srfmajortext).join("、"), "]删除成功!")
+      }), p && !(o != null && o.notRefresh) && await this.refresh();
+    } catch (u) {
       throw await this._evt.emit("onRemoveError", void 0), this.actionNotification("REMOVEERROR", {
-        error: l,
-        data: a
-      }), l;
+        error: u,
+        data: s
+      }), u;
     } finally {
       await this.endLoading();
     }
-    this.state.selectedData = [], await this._evt.emit("onRemoveSuccess", void 0), a.forEach((l) => {
-      this.emitDEDataChange("remove", l._deData);
+    this.state.selectedData = [], await this._evt.emit("onRemoveSuccess", void 0), s.forEach((u) => {
+      this.emitDEDataChange("remove", u._deData);
     });
   }
   /**
@@ -279,33 +250,33 @@ class ze extends De {
    * @param type
    * @returns
    */
-  calcAllowDrop(n, o, d) {
-    var l, y;
-    let a = !0;
-    if (Ke(
-      { _children: [n] },
-      (g) => {
-        if (g._id === o._id)
-          return a = !1, !0;
+  calcAllowDrop(o, n, a) {
+    var s, d;
+    let p = !0;
+    if (Ae(
+      { _children: [o] },
+      (N) => {
+        if (N._id === n._id)
+          return p = !1, !0;
       },
       { childrenFields: ["_children"] }
-    ), !a)
+    ), !p)
       return !1;
-    const s = this.getNodeModel(n._nodeId), f = this.getNodeModel(o._nodeId);
-    if (d === "inner")
+    const u = this.getNodeModel(o._nodeId), v = this.getNodeModel(n._nodeId);
+    if (a === "inner")
       return !!this.findDropNodeRS(
-        o._nodeId,
-        s.appDataEntityId
+        n._nodeId,
+        u.appDataEntityId
       );
-    if (s.appDataEntityId !== f.appDataEntityId)
+    if (u.appDataEntityId !== v.appDataEntityId)
       return !1;
-    if (((l = n._parent) == null ? void 0 : l._id) === ((y = o._parent) == null ? void 0 : y._id)) {
-      const g = this.getNodeModel(o._nodeId);
-      return (g == null ? void 0 : g.allowOrder) === !0;
+    if (((s = o._parent) == null ? void 0 : s._id) === ((d = n._parent) == null ? void 0 : d._id)) {
+      const N = this.getNodeModel(n._nodeId);
+      return (N == null ? void 0 : N.allowOrder) === !0;
     }
-    return o._parent ? o._parent && o._parent._id && this.getNodeModel(o._parent._nodeId).rootNode ? !0 : !!this.findDropNodeRS(
-      o._parent._nodeId,
-      s.appDataEntityId
+    return n._parent ? n._parent && n._parent._id && this.getNodeModel(n._parent._nodeId).rootNode ? !0 : !!this.findDropNodeRS(
+      n._parent._nodeId,
+      u.appDataEntityId
     ) : !1;
   }
   /**
@@ -314,62 +285,62 @@ class ze extends De {
    * @param dropNode
    * @param dropType
    */
-  async onNodeDrop(n, o, d) {
-    var K, S;
-    d === "inner" && !o._leaf && o._children === void 0 && await this.expandNodeByKey([o._id]);
-    const a = this.getNodeModel(n._nodeId), s = d === "inner" ? o : o._parent, f = d === "inner" || ((K = o._parent) == null ? void 0 : K._id) !== ((S = n._parent) == null ? void 0 : S._id);
-    let l = this.getNodeModel(o._nodeId);
-    const y = a.appDataEntityId !== l.appDataEntityId;
-    let g = !1;
-    if (this.getNodeModel(s._nodeId).rootNode && (g = !0), f || g) {
-      const v = [];
-      for (const D of this.dropNodeRss.values())
-        v.push(
-          ...D.filter((_) => (
+  async onNodeDrop(o, n, a) {
+    var s, d;
+    a === "inner" && !n._leaf && n._children === void 0 && await this.expandNodeByKey([n._id]);
+    const p = this.getNodeModel(o._nodeId), u = a === "inner" ? n : n._parent, v = a === "inner" || ((s = n._parent) == null ? void 0 : s._id) !== ((d = o._parent) == null ? void 0 : d._id);
+    let N = this.getNodeModel(n._nodeId);
+    const P = p.appDataEntityId !== N.appDataEntityId;
+    let k = !1;
+    if (this.getNodeModel(u._nodeId).rootNode && (k = !0), v || k) {
+      const I = [];
+      for (const m of this.dropNodeRss.values())
+        I.push(
+          ...m.filter((g) => (
             // 修复子关系情况，根上也存在当前实体数据
-            _.minorEntityId === a.appDataEntityId
+            g.minorEntityId === p.appDataEntityId
           ))
         );
-      if (g && f)
-        v && (v.forEach((D) => {
-          n._deData[D.pickupDEFName] = null;
-        }), l = this.getNodeModel(a.id));
+      if (k && v)
+        I && (I.forEach((m) => {
+          o._deData[m.pickupDEFName] = null;
+        }), N = this.getNodeModel(p.id));
       else {
-        const D = this.findDropNodeRS(
-          s._nodeId,
-          a.appDataEntityId
+        const m = this.findDropNodeRS(
+          u._nodeId,
+          p.appDataEntityId
         );
-        D && (v && v.forEach((_) => {
-          n._deData[_.pickupDEFName] = null;
-        }), n._deData[D.pickupDEFName] = s._value, D.detreeNodeRSParams && D.detreeNodeRSParams.forEach((_) => {
-          var M, C;
-          _.name && _.value && ((M = n._deData) != null && M.hasOwnProperty(
-            _.name.toLowerCase()
-          )) && ((C = s._deData) != null && C.hasOwnProperty(_.value.toLowerCase())) && (n._deData[_.name.toLowerCase()] = s._deData[_.value.toLowerCase()]);
-        }), l = this.getNodeModel(D.childDETreeNodeId));
+        m && (I && I.forEach((g) => {
+          o._deData[g.pickupDEFName] = null;
+        }), o._deData[m.pickupDEFName] = u._value, m.detreeNodeRSParams && m.detreeNodeRSParams.forEach((g) => {
+          var C, T;
+          g.name && g.value && (C = o._deData) != null && C.hasOwnProperty(
+            g.name.toLowerCase()
+          ) && (T = u._deData) != null && T.hasOwnProperty(g.value.toLowerCase()) && (o._deData[g.name.toLowerCase()] = u._deData[g.value.toLowerCase()]);
+        }), N = this.getNodeModel(m.childDETreeNodeId));
       }
-      this.state.expandedKeys = this.calcExpandedKeys([s]), await this.updateDeNodeData([n]);
+      this.state.expandedKeys = this.calcExpandedKeys([u]), await this.updateDeNodeData([o]);
     }
-    if (d === "inner" || y)
-      f && await this.refreshNodeChildren(n, !0), await this.refreshNodeChildren(s, !0);
+    if (a === "inner" || P)
+      v && await this.refreshNodeChildren(o, !0), await this.refreshNodeChildren(u, !0);
     else {
-      const { moveAppDEActionId: v, appDataEntityId: D, allowOrder: _ } = l;
-      if (_) {
-        if (!v)
-          throw new re(
+      const { moveAppDEActionId: I, appDataEntityId: m, allowOrder: g } = N;
+      if (g) {
+        if (!I)
+          throw new de(
             this.model,
             ibiz.i18n.t("runtime.controller.common.md.noMoveDataCconfig")
           );
-        const M = {
-          srftargetkey: o.srfkey,
-          srfmovetype: d === "prev" ? "MOVEBEFORE" : "MOVEAFTER"
-        }, C = ibiz.hub.getApp(this.context.srfappid), F = U(D), A = this.context.clone();
-        A[F] = n.srfkey, (await C.deService.exec(
-          D,
-          v,
-          A,
-          M
-        )).ok && (this.emitDEDataChange("update", n._deData), f && await this.refreshNodeChildren(n, !0), await this.refreshNodeChildren(s));
+        const C = {
+          srftargetkey: n.srfkey,
+          srfmovetype: a === "prev" ? "MOVEBEFORE" : "MOVEAFTER"
+        }, T = ibiz.hub.getApp(this.context.srfappid), B = V(m), R = this.context.clone();
+        R[B] = o.srfkey, (await T.deService.exec(
+          m,
+          I,
+          R,
+          C
+        )).ok && (this.emitDEDataChange("update", o._deData), v && await this.refreshNodeChildren(o, !0), await this.refreshNodeChildren(u));
       }
     }
     this.state.selectedData = [];
@@ -383,31 +354,31 @@ class ze extends De {
    * @param {IPortalMessage} msg
    * @return {*}  {void}
    */
-  onDEDataChange(n) {
-    var a;
-    if (n.triggerKey === this.triggerKey)
+  onDEDataChange(o) {
+    var n;
+    if (o.triggerKey === this.triggerKey)
       return;
-    const o = n.data;
-    if (n.subtype === "OBJECTCREATED") {
-      ((a = this.model.detreeNodes) == null ? void 0 : a.find((f) => {
-        if (f.appDataEntityId) {
-          const l = U(f.appDataEntityId);
-          if (o.srfdecodename === l)
+    const a = o.data;
+    if (o.subtype === "OBJECTCREATED") {
+      (n = this.model.detreeNodes) != null && n.find((d) => {
+        if (d.appDataEntityId) {
+          const p = V(d.appDataEntityId);
+          if (a.srfdecodename === p)
             return !0;
         }
         return !1;
-      })) && this.refresh();
+      }) && this.refresh();
       return;
     }
-    const d = this.state.items.find(
-      (s) => s._nodeType === "DE" && s._deData && s._deData.srfdecodename === o.srfdecodename && s._deData.srfkey === o.srfkey
+    const s = this.state.items.find(
+      (d) => d._nodeType === "DE" && d._deData && d._deData.srfdecodename === a.srfdecodename && d._deData.srfkey === a.srfkey
     );
-    d && this.doNextActive(() => this.refreshNodeChildren(d, !0), {
-      key: "refresh".concat(d._id)
+    s && this.doNextActive(() => this.refreshNodeChildren(s, !0), {
+      key: "refresh".concat(s._id)
     });
   }
-  async afterLoad(n, o) {
-    return super.afterLoad(n, o);
+  async afterLoad(o, n) {
+    return super.afterLoad(o, n);
   }
   /**
    * 重写节点点击事件
@@ -417,22 +388,22 @@ class ze extends De {
    * @return {*}  {Promise<void>}
    * @memberof GroupTreeController
    */
-  async onTreeNodeClick(n, o) {
+  async onTreeNodeClick(o, n) {
     var a;
-    const d = (a = this.contextMenuInfos[n._nodeId]) == null ? void 0 : a.clickTBUIActionItem;
-    if (d)
+    const s = (a = this.contextMenuInfos[o._nodeId]) == null ? void 0 : a.clickTBUIActionItem;
+    if (s)
       return this.doUIAction(
-        d.uiactionId,
-        n,
+        s.uiactionId,
         o,
-        d.appId
+        n,
+        s.appId
       );
     if (this.state.navigational) {
-      const s = this.getNodeModel(n._nodeId);
-      if (!(s != null && s.navAppViewId))
+      const d = this.getNodeModel(o._nodeId);
+      if (!(d != null && d.navAppViewId))
         return;
     }
-    this.state.singleSelect && !n._disableSelect && this.setSelection([n]), this.state.mdctrlActiveMode === 1 && await this.setActive(n);
+    this.state.singleSelect && !o._disableSelect && this.setSelection([o]), this.state.mdctrlActiveMode === 1 && await this.setActive(o);
   }
   /**
    * 过滤节点
@@ -440,8 +411,8 @@ class ze extends De {
    * @param {string} nodeTag
    * @memberof GroupTreeController
    */
-  async changeTreeState(n) {
-    n && n === "draft" ? (this.isFilter.value = !0, this.evt.emit("onFilterNode", { nodeTag: n })) : this.resetTreeState();
+  async changeTreeState(o) {
+    o && o === "draft" ? (this.isFilter.value = !0, this.evt.emit("onFilterNode", { nodeTag: o })) : this.resetTreeState();
   }
   /**
    *  重置过滤状态
@@ -464,10 +435,10 @@ class ze extends De {
     super.refresh(), this.resetTreeState();
   }
 }
-function Le(e) {
-  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !Be(e);
+function ze(e) {
+  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !Ke(e);
 }
-const V = /* @__PURE__ */ Te({
+const U = /* @__PURE__ */ be({
   name: "IBizGroupTreeControl",
   props: {
     modelData: {
@@ -506,331 +477,331 @@ const V = /* @__PURE__ */ Te({
     }
   },
   setup() {
-    const e = be((...t) => new ze(...t)), m = oe(() => e.context.srfreadonly === !0 || e.context.srfreadonly === "true"), n = Me({});
+    const e = xe((...t) => new Le(...t)), o = oe(() => e.context.srfreadonly === !0 || e.context.srfreadonly === "true"), n = Te({});
     e.evt.on("onCreated", () => {
       e.counter && e.counter.onChange((t) => {
         Object.assign(n, t);
       }, !0);
     });
-    const o = ne("control-group-tree"), d = ne("control-".concat(e.model.controlType.toLowerCase())), a = B(null), s = B(null), f = B(""), l = B(null);
-    ie(() => l.value, (t) => {
+    const a = te("control-group-tree"), s = te("control-".concat(e.model.controlType.toLowerCase())), d = A(null), p = A(null), u = A(""), v = A(null);
+    ae(() => v.value, (t) => {
       t && t.$el.getElementsByTagName("input")[0].focus();
     });
-    const y = async () => {
+    const N = async () => {
       if (e.state.editingNodeKey)
         if (e.state.editingNodeText) {
-          const t = E(e.state.editingNodeKey, e);
+          const t = w(e.state.editingNodeKey, e);
           await e.onModifyTreeNode(t, e.state.editingNodeText);
         } else
           e.state.editingNodeKey = null;
       e.state.newingNodeText ? e.onCreateTreeNode() : e.state.newingNodeModel = null;
-    }, g = async () => {
+    }, P = async () => {
       e.state.editingNodeKey && (e.state.editingNodeKey = null), e.state.newingNodeModel && (e.state.newingNodeModel = null, e.state.newingNodeText = "");
     }, {
-      updateUI: z,
-      triggerNodeExpand: K
-    } = Fe(a, e), S = (t) => t.map((i) => ({
+      updateUI: k,
+      triggerNodeExpand: I
+    } = Fe(d, e), m = (t) => t.map((i) => ({
       _id: i._id,
       _uuid: i._uuid,
       _leaf: i._leaf,
       _text: i._text
     }));
     e.evt.on("onAfterRefreshParent", (t) => {
-      if (a.value) {
+      if (d.value) {
         const {
           parentNode: i,
           children: r
-        } = t, u = S(r);
-        a.value.updateKeyChildren(i._id, u), z();
+        } = t, l = m(r);
+        d.value.updateKeyChildren(i._id, l), k();
       }
     }), e.evt.on("onAfterNodeDrop", (t) => {
-      t.isChangedParent && (f.value = se());
+      t.isChangedParent && (u.value = ie());
     });
-    const v = oe(() => e.state.isLoaded ? e.model.rootVisible ? e.state.rootNodes : e.state.rootNodes.reduce((t, i) => i._children ? t.concat(i._children) : t, []) : []);
-    ie(v, (t, i) => {
-      t !== i && (f.value = se());
+    const g = oe(() => e.state.isLoaded ? e.model.rootVisible ? e.state.rootNodes : e.state.rootNodes.reduce((t, i) => i._children ? t.concat(i._children) : t, []) : []);
+    ae(g, (t, i) => {
+      t !== i && (u.value = ie());
     });
-    const D = async (t, i) => {
+    const C = async (t, i) => {
       let r;
       if (t.level === 0)
-        r = v.value, ibiz.log.debug("初始加载");
+        r = g.value, ibiz.log.debug("初始加载");
       else {
-        const u = E(t.data._uuid, e);
-        u._children ? (ibiz.log.debug("节点展开加载-本地", u), r = u._children) : (ibiz.log.debug("节点展开加载-远程", u), r = await e.loadNodes(u));
+        const l = w(t.data._uuid, e);
+        l._children ? (ibiz.log.debug("节点展开加载-本地", l), r = l._children) : (ibiz.log.debug("节点展开加载-远程", l), r = await e.loadNodes(l));
       }
-      ibiz.log.debug("给树返回值", r), i(S(r)), z();
+      ibiz.log.debug("给树返回值", r), i(m(r)), k();
     };
-    let _ = !1;
+    let T = !1;
     e.evt.on("onLoadSuccess", () => {
-      _ = !0, setTimeout(() => {
-        _ = !1;
+      T = !0, setTimeout(() => {
+        T = !1;
       }, 200);
     }), e.evt.on("onSelectionChange", async () => {
       var t;
-      _ && await ke(), e.state.singleSelect ? a.value.setCurrentKey(((t = e.state.selectedData[0]) == null ? void 0 : t._id) || void 0) : a.value.setCheckedKeys(e.state.selectedData.map((i) => i._id));
+      T && await Ce(), e.state.singleSelect ? d.value.setCurrentKey(((t = e.state.selectedData[0]) == null ? void 0 : t._id) || void 0) : d.value.setCheckedKeys(e.state.selectedData.map((i) => i._id));
     });
-    const M = (t, i) => {
+    const B = (t, i) => {
       const {
         checkedNodes: r
       } = i;
       e.setSelection(r);
     };
-    let C = !1;
-    const F = (t, i) => {
-      var r, u, p;
-      if (i.stopPropagation(), !t._disableSelect && !C) {
-        if (((r = a.value) == null ? void 0 : r.getCurrentKey()) === t._id && !m.value) {
-          const c = (u = a.value) == null ? void 0 : u.getCurrentKey();
+    let R = !1;
+    const G = (t, i) => {
+      var r, l, h;
+      if (i.stopPropagation(), !t._disableSelect && !R) {
+        if (((r = d.value) == null ? void 0 : r.getCurrentKey()) === t._id && !o.value) {
+          const c = (l = d.value) == null ? void 0 : l.getCurrentKey();
           e.updateTreeNode({
             nodeKey: c,
             defaultValue: {}
           });
         }
-        if (e.state.singleSelect || (p = a.value) == null || p.setCurrentKey(t._id), e.state.navigational) {
+        if (e.state.singleSelect || (h = d.value) == null || h.setCurrentKey(t._id), e.state.navigational) {
           const c = e.getNodeModel(t._nodeId);
           if (!(c != null && c.navAppViewId)) {
-            const w = K(t._id);
-            e.onExpandChange(t, w);
+            const E = I(t._id);
+            e.onExpandChange(t, E);
           }
         }
-        e.onTreeNodeClick(t, i), C = !0, setTimeout(() => {
-          C = !1;
+        e.onTreeNodeClick(t, i), R = !0, setTimeout(() => {
+          R = !1;
         }, 200);
       }
-    }, A = (t, i) => {
+    }, H = (t, i) => {
       i.stopPropagation(), !t._disableSelect && e.onDbTreeNodeClick(t);
     };
-    let T;
+    let M;
     e.evt.on("onMounted", () => {
-      Object.values(e.contextMenus).length > 0 && (() => import("@imengyu/vue3-context-menu"))().then((i) => {
-        T = i.default, T.default && !T.showContextMenu && (T = T.default);
+      Object.values(e.contextMenus).length > 0 && (() => import("./vue3-context-menu.umd.es.js").then((t) => t.v))().then((t) => {
+        M = t.default, M.default && !M.showContextMenu && (M = M.default);
       });
     });
-    const ce = I("IBizRawItem"), O = I("IBizIcon"), G = (t, i, r, u) => {
-      const p = [];
+    const re = D("IBizRawItem"), K = D("IBizIcon"), q = (t, i, r, l) => {
+      const h = [];
       return t.forEach((c) => {
-        var Z, ee;
+        var E, _;
         if (c.itemType === "SEPERATOR") {
-          p.push({
+          h.push({
             divided: "self"
           });
           return;
         }
-        const w = u[c.id];
-        if (w && !w.visible || c.actionLevel > 100)
+        const j = l[c.id];
+        if (j && !j.visible || c.actionLevel > 100)
           return;
-        let N = {};
-        if (c.showCaption && c.caption && (N.label = c.caption), c.sysImage && c.showIcon && (N.icon = h(O, {
+        let y = {};
+        if (c.showCaption && c.caption && (y.label = c.caption), c.sysImage && c.showIcon && (y.icon = f(K, {
           icon: c.sysImage
         }, null)), c.itemType === "DEUIACTION") {
-          N.disabled = w.disabled, N.clickClose = !0;
+          y.disabled = j.disabled, y.clickClose = !0;
           const {
             uiactionId: x
           } = c;
-          x && (N.onClick = () => {
+          x && (y.onClick = () => {
             e.doUIAction(x, i, r, c.appId);
           });
         } else if (c.itemType === "RAWITEM") {
           const {
             rawItem: x
           } = c;
-          x && (N.label = h(ce, {
+          x && (y.label = f(re, {
             rawItem: c
           }, null));
         } else if (c.itemType === "ITEMS") {
-          (Z = c.detoolbarItems) != null && Z.length && (N.children = G(c.detoolbarItems, i, r, u));
+          (E = c.detoolbarItems) != null && E.length && (y.children = q(c.detoolbarItems, i, r, l));
           const x = c;
           if (x.uiactionGroup && x.groupExtractMode) {
-            const k = (ee = x.uiactionGroup.uiactionGroupDetails) == null ? void 0 : ee.filter((b) => u[b.id].visible).map((b) => {
-              const te = u[b.id], {
-                sysImage: ye
+            const S = (_ = x.uiactionGroup.uiactionGroupDetails) == null ? void 0 : _.filter((b) => l[b.id].visible).map((b) => {
+              const Ne = l[b.id], {
+                sysImage: ge
               } = b;
               return {
                 label: b.showCaption ? b.caption : void 0,
-                icon: b.showIcon ? h(O, {
-                  icon: ye
+                icon: b.showIcon ? f(K, {
+                  icon: ge
                 }, null) : void 0,
-                disabled: te.disabled,
+                disabled: Ne.disabled,
                 clickableWhenHasChildren: !0,
                 onClick: () => {
-                  T.closeContextMenu(), e.doUIAction(b.uiactionId, i, r, b.appId);
+                  M.closeContextMenu(), e.doUIAction(b.uiactionId, i, r, b.appId);
                 }
               };
             });
             switch (x.groupExtractMode) {
               case "ITEMS":
-                N.children = k;
+                y.children = S;
                 break;
               case "ITEMX":
-                k && (N = k[0], N.children = k.slice(1));
+                S && (y = S[0], y.children = S.slice(1));
                 break;
               case "ITEM":
               default:
-                N = void 0, k && p.push(...k);
+                y = void 0, S && h.push(...S);
                 break;
             }
           }
         }
-        N && p.push(N);
-      }), p;
+        y && h.push(y);
+      }), h;
     }, $ = async (t, i) => {
       i.preventDefault(), i.stopPropagation();
       const r = e.getNodeModel(t._nodeId);
       if (!(r != null && r.decontextMenu))
         return;
-      const u = e.contextMenus[r.decontextMenu.id];
-      if (!u.model.detoolbarItems)
+      const l = e.contextMenus[r.decontextMenu.id];
+      if (!l.model.detoolbarItems)
         return;
-      await u.calcButtonState(t._deData || (t.srfkey ? t : void 0), r.appDataEntityId);
-      const p = u.state.buttonsState, c = G(u.model.detoolbarItems, t, i, p);
-      c.length && T.showContextMenu({
+      await l.calcButtonState(t._deData || (t.srfkey ? t : void 0), r.appDataEntityId);
+      const h = l.state.buttonsState, c = q(l.model.detoolbarItems, t, i, h);
+      c.length && M.showContextMenu({
         x: i.x,
         y: i.y,
-        customClass: o.b("context-menu"),
+        customClass: a.b("context-menu"),
         items: c
       });
-    }, H = (t, i) => {
-      var u, p;
-      if (!((p = (u = t == null ? void 0 : t.decontextMenu) == null ? void 0 : u.detoolbarItems) != null && p.length))
+    }, Q = (t, i) => {
+      var r, l;
+      if (!((l = (r = t == null ? void 0 : t.decontextMenu) == null ? void 0 : r.detoolbarItems) != null && l.length))
         return;
-      const r = e.contextMenuInfos[t.id];
-      return r.clickTBUIActionItem && r.onlyOneActionItem ? null : h(I("iBizContextMenuControl"), {
+      const h = e.contextMenuInfos[t.id];
+      return h.clickTBUIActionItem && h.onlyOneActionItem ? null : f(D("iBizContextMenuControl"), {
         modelData: t.decontextMenu,
         groupLevelKeys: [50, 100],
         nodeModel: t,
         nodeData: i,
         context: e.context,
-        onActionClick: (c, w) => e.doUIAction(c.uiactionId, i, w, c.appId)
+        onActionClick: (c, E) => e.doUIAction(c.uiactionId, i, E, c.appId)
       }, null);
     }, L = (t, i) => {
-      const r = E(t._uuid, e);
+      const r = w(t._uuid, e);
       if (!r)
-        throw new P("没有找到_uuid为".concat(t._uuid, "的节点"));
+        throw new F("没有找到_uuid为".concat(t._uuid, "的节点"));
       e.onExpandChange(r, i);
-    }, ue = de(() => {
+    }, ue = le(() => {
       e.load();
-    }, 500), fe = (t) => {
+    }, 500), ce = (t) => {
       e.state.query = t, ue();
-    }, q = (t, i, r) => {
-      const u = E(t.data._uuid, e), p = E(i.data._uuid, e);
-      return e.calcAllowDrop(u, p, r);
-    }, W = (t) => {
-      const i = E(t.data._uuid, e);
+    }, W = (t, i, r) => {
+      const l = w(t.data._uuid, e), h = w(i.data._uuid, e);
+      return e.calcAllowDrop(l, h, r);
+    }, X = (t) => {
+      const i = w(t.data._uuid, e);
       return e.calcAllowDrag(i);
-    }, Q = (t, i, r) => {
-      const u = Pe(r), p = E(t.data._uuid, e), c = E(i.data._uuid, e);
-      e.onNodeDrop(p, c, u);
-    }, j = (t) => {
-      (t.key === "Enter" || t.keyCode === 13) && (t.stopPropagation(), y()), (t.key === "Escape" || t.keyCode === 27) && (t.stopPropagation(), g());
-    }, J = (t) => {
+    }, J = (t, i, r) => {
+      const l = Pe(r), h = w(t.data._uuid, e), c = w(i.data._uuid, e);
+      e.onNodeDrop(h, c, l);
+    }, z = (t) => {
+      (t.key === "Enter" || t.keyCode === 13) && (t.stopPropagation(), N()), (t.key === "Escape" || t.keyCode === 27) && (t.stopPropagation(), P());
+    }, Y = (t) => {
       var i;
       if (t.code === "F2" || t.code === "Enter") {
-        const r = (i = a.value) == null ? void 0 : i.getCurrentKey();
+        const r = (i = d.value) == null ? void 0 : i.getCurrentKey();
         e.updateTreeNode(r);
       }
-    }, he = async () => {
-      e.evt.emit("onBack", {}), e.isFilter.value = !1, a.value && a.value.filter("");
+    }, pe = async () => {
+      e.evt.emit("onBack", {}), e.isFilter.value = !1, d.value && d.value.filter("");
     };
-    Re(() => {
+    Me(() => {
       var t;
-      (t = s.value) == null || t.$el.addEventListener("keydown", J), e.evt.on("onFilterNode", async (i) => {
+      (t = p.value) == null || t.$el.addEventListener("keydown", Y), e.evt.on("onFilterNode", async (i) => {
         const {
           nodeTag: r
         } = i;
-        r && (e.isFilter.value = !0), a.value && a.value.filter("".concat(r, "@"));
+        r && (e.isFilter.value = !0), d.value && d.value.filter("".concat(r, "@"));
       }), e.evt.on("onResetSate", async () => {
-        e.evt.emit("onBack", {}), e.isFilter.value = !1, a.value && a.value.filter("");
+        e.evt.emit("onBack", {}), e.isFilter.value = !1, d.value && d.value.filter("");
       }), e.evt.on("onLoadSuccess", () => {
         e.isFilter.value ? e.evt.emit("onFilterNode", {
           nodeTag: "draft"
         }) : e.evt.emit("onResetSate", {});
       });
-    }), Se(() => {
+    }), ke(() => {
       var t;
-      (t = s.value) == null || t.$el.removeEventListener("keydown", J);
+      (t = p.value) == null || t.$el.removeEventListener("keydown", Y);
     });
-    const pe = (t, i) => (i._id || "").includes(t), Ne = (t) => t._id === "root:draft_parent" ? "draft_parent" : null, X = (t) => {
+    const he = (t, i) => (i._id || "").includes(t), fe = (t) => t._id === "root:draft_parent" ? "draft_parent" : null, Z = (t) => {
       if (t.counterId) {
         const i = n[t.counterId];
-        return le(i) || t.counterMode === 1 && i === 0 ? null : h("div", {
-          class: o.em("counter", "box")
-        }, [h("span", {
-          class: o.e("dot")
-        }, [ae("·")]), h(I("iBizBadge"), {
-          class: o.e("counter"),
+        return se(i) || t.counterMode === 1 && i === 0 ? null : f("div", {
+          class: a.em("counter", "box")
+        }, [f("span", {
+          class: a.e("dot")
+        }, [ne("·")]), f(D("iBizBadge"), {
+          class: a.e("counter"),
           value: i
         }, null)]);
       }
-    }, me = () => e.isFilter.value ? h("div", {
-      class: o.b("filter")
-    }, [h("div", {
-      class: o.be("filter", "header"),
-      onClick: he
-    }, [h(I("ion-icon"), {
+    }, ve = () => e.isFilter.value ? f("div", {
+      class: a.b("filter")
+    }, [f("div", {
+      class: a.be("filter", "header"),
+      onClick: pe
+    }, [f(D("ion-icon"), {
       name: "arrow-back-outline"
-    }, null), ae("返回")])]) : null, Y = (t) => {
-      var r, u;
+    }, null), ne("返回")])]) : null, ee = (t) => {
+      var i, r;
       if (!e.state.newingNodeModel)
         return null;
       const {
-        parent_id: i
+        parent_id: l
       } = e.state.newingNodeDefault || {};
-      if (i) {
+      if (l) {
         if (!t)
           return null;
         const {
-          _value: p
+          _value: h
         } = t || {};
-        if (p !== i)
+        if (h !== l)
           return null;
       }
-      return !i && t ? null : h("div", {
-        class: [o.be("node", "newing")]
-      }, [(r = e.state.newingNodeModel) != null && r.sysImage ? h(O, {
-        class: o.be("node", "icon"),
-        icon: (u = e.state.newingNodeModel) == null ? void 0 : u.sysImage
-      }, null) : null, h(I("el-input"), {
+      return !l && t ? null : f("div", {
+        class: [a.be("node", "newing")]
+      }, [(i = e.state.newingNodeModel) != null && i.sysImage ? f(K, {
+        class: a.be("node", "icon"),
+        icon: (r = e.state.newingNodeModel) == null ? void 0 : r.sysImage
+      }, null) : null, f(D("el-input"), {
         modelValue: e.state.newingNodeText,
-        "onUpdate:modelValue": (p) => e.state.newingNodeText = p,
+        "onUpdate:modelValue": (h) => e.state.newingNodeText = h,
         ref: "treeNodeTextInputRef",
-        class: o.b("editing-node"),
-        onBlur: y,
-        onKeydown: (p) => {
-          j(p);
+        class: a.b("editing-node"),
+        onBlur: N,
+        onKeydown: (h) => {
+          z(h);
         }
       }, null)]);
     };
     return {
       c: e,
-      ns: o,
-      treeRef: a,
-      treeviewRef: s,
-      treeNodeTextInputRef: l,
-      treeData: v,
-      treeRefreshKey: f,
-      findNodeData: E,
-      handleEditKeyDown: j,
-      onCheck: M,
-      onNodeClick: F,
-      onNodeDbClick: A,
+      ns: a,
+      treeRef: d,
+      treeviewRef: p,
+      treeNodeTextInputRef: v,
+      treeData: g,
+      treeRefreshKey: u,
+      findNodeData: w,
+      handleEditKeyDown: z,
+      onCheck: B,
+      onNodeClick: G,
+      onNodeDbClick: H,
       onNodeContextmenu: $,
-      loadData: D,
-      renderContextMenu: H,
-      renderCounter: X,
+      loadData: C,
+      renderContextMenu: Q,
+      renderCounter: Z,
       updateNodeExpand: L,
-      onInput: fe,
-      allowDrop: q,
-      allowDrag: W,
-      handleDrop: Q,
-      onNodeTextEditBlur: y,
-      renderTree: () => h("div", {
-        class: [o.b("content"), o.is("filter", e.isFilter.value)]
-      }, [me(), h("div", {
-        class: [o.b("tree-box"), o.is("filter", e.isFilter.value)]
-      }, [h(I("el-tree"), {
+      onInput: ce,
+      allowDrop: W,
+      allowDrag: X,
+      handleDrop: J,
+      onNodeTextEditBlur: N,
+      renderTree: () => f("div", {
+        class: [a.b("content"), a.is("filter", e.isFilter.value)]
+      }, [ve(), f("div", {
+        class: [a.b("tree-box"), a.is("filter", e.isFilter.value)]
+      }, [f(D("el-tree"), {
         ref: "treeRef",
-        key: f.value,
-        class: [d.b("tree"), o.is("list-tree", e.renderMode === "listTree")],
+        key: u.value,
+        class: [s.b("tree"), a.is("list-tree", e.renderMode === "listTree")],
         "node-key": "_id",
         "highlight-current": !0,
         "expand-on-click-node": !1,
@@ -842,120 +813,120 @@ const V = /* @__PURE__ */ Te({
           label: "_text",
           children: "_children",
           isLeaf: "_leaf",
-          class: Ne
+          class: fe
         },
         lazy: !0,
-        load: D,
-        onCheck: M,
+        load: C,
+        onCheck: B,
         onNodeExpand: (t) => {
           L(t, !0);
         },
         onNodeCollapse: (t) => {
           L(t, !1);
         },
-        draggable: !m.value,
-        "allow-drop": q,
-        "allow-drag": W,
-        onNodeDrop: Q,
-        "filter-node-method": pe
+        draggable: !o.value,
+        "allow-drop": W,
+        "allow-drag": X,
+        onNodeDrop: J,
+        "filter-node-method": he
       }, {
         default: ({
           data: t
         }) => {
-          var c, w;
-          const i = E(t._uuid, e);
-          if (!i)
+          var i, r;
+          const l = w(t._uuid, e);
+          if (!l)
             return null;
-          const r = e.getNodeModel(i._nodeId);
-          if (e.state.editingNodeKey === i._id && !m.value)
-            return h("div", {
-              class: [o.b("node"), (c = r.sysCss) == null ? void 0 : c.cssName]
-            }, [i._icon ? h(O, {
-              class: o.be("node", "icon"),
-              icon: i._icon
-            }, null) : null, h(I("el-input"), {
+          const h = e.getNodeModel(l._nodeId);
+          if (e.state.editingNodeKey === l._id && !o.value)
+            return f("div", {
+              class: [a.b("node"), (i = h.sysCss) == null ? void 0 : i.cssName]
+            }, [l._icon ? f(K, {
+              class: a.be("node", "icon"),
+              icon: l._icon
+            }, null) : null, f(D("el-input"), {
               modelValue: e.state.editingNodeText,
-              "onUpdate:modelValue": (N) => e.state.editingNodeText = N,
+              "onUpdate:modelValue": (_) => e.state.editingNodeText = _,
               ref: "treeNodeTextInputRef",
-              class: o.b("editing-node"),
+              class: a.b("editing-node"),
               onBlur: () => {
-                y();
+                N();
               },
-              onKeydown: (N) => {
-                j(N);
+              onKeydown: (_) => {
+                z(_);
               }
             }, null)]);
-          const u = we(r);
-          let p;
-          return u ? p = h(I("iBizControlShell"), {
-            data: i,
-            modelData: u,
+          const c = ye(h);
+          let E;
+          return c ? E = f(D("iBizControlShell"), {
+            data: l,
+            modelData: c,
             context: e.context,
             params: e.params
-          }, null) : p = [i._icon ? h(O, {
-            class: o.be("node", "icon"),
-            icon: i._icon
-          }, null) : null, i._textHtml ? h("span", {
-            class: o.be("node", "label"),
-            innerHTML: i._textHtml
-          }, null) : h("span", {
-            class: o.be("node", "label")
-          }, [i._text])], [h("div", {
-            onDblclick: (N) => A(i, N),
-            onClick: (N) => F(i, N),
-            onContextmenu: (N) => $(i, N),
-            class: [o.b("node"), o.is("hidden", Object.is(e.hiddenNodeId, i._nodeId) && !e.isFilter.value), i._leaf ? o.be("node", "item") : o.be("node", "group"), (w = r.sysCss) == null ? void 0 : w.cssName]
-          }, [p, X(r), H(r, i)]), Y(i)];
+          }, null) : E = [l._icon ? f(K, {
+            class: a.be("node", "icon"),
+            icon: l._icon
+          }, null) : null, l._textHtml ? f("span", {
+            class: a.be("node", "label"),
+            innerHTML: l._textHtml
+          }, null) : f("span", {
+            class: a.be("node", "label")
+          }, [l._text])], [f("div", {
+            onDblclick: (_) => H(l, _),
+            onClick: (_) => G(l, _),
+            onContextmenu: (_) => $(l, _),
+            class: [a.b("node"), a.is("hidden", Object.is(e.hiddenNodeId, l._nodeId) && !e.isFilter.value), l._leaf ? a.be("node", "item") : a.be("node", "group"), (r = h.sysCss) == null ? void 0 : r.cssName]
+          }, [E, Z(h), Q(h, l)]), ee(l)];
         }
-      }), Y()])])
+      }), ee()])])
     };
   },
   render() {
     const e = {
-      searchbar: () => this.c.enableQuickSearch ? h(I("el-input"), {
+      searchbar: () => this.c.enableQuickSearch ? f(D("el-input"), {
         "model-value": this.c.state.query,
         class: this.ns.b("quick-search"),
         placeholder: this.c.state.placeHolder,
         onInput: this.onInput
       }, {
-        prefix: () => h(I("ion-icon"), {
+        prefix: () => f(D("ion-icon"), {
           class: this.ns.e("search-icon"),
           name: "search"
         }, null)
       }) : null
     };
-    this.c.bottomToolbar && (e.toolbar = () => h(I("iBizControlShell"), {
+    this.c.bottomToolbar && (e.toolbar = () => f(D("iBizControlShell"), {
       modelData: this.c.bottomToolbar,
       context: this.c.context,
       params: this.c.params
     }, null));
-    const m = this.c.controlPanel ? "tree" : "default";
-    return e[m] = () => {
+    const o = this.c.controlPanel ? "tree" : "default";
+    return e[o] = () => {
       if (this.c.state.isLoaded && this.treeRefreshKey)
         return this.renderTree();
-    }, Ae(h(I("iBizControlBase"), {
+    }, Re(f(D("iBizControlBase"), {
       ref: "treeviewRef",
       controller: this.c
-    }, Le(e) ? e : {
+    }, ze(e) ? e : {
       default: () => [e]
-    }), [[Oe("loading"), this.c.state.isLoading]]);
+    }), [[Se("loading"), this.c.state.isLoading]]);
   }
 });
 class je {
   constructor() {
-    R(this, "component", "IBizGroupTreeControl");
+    O(this, "component", "IBizGroupTreeControl");
   }
 }
-const Xe = Ce(
-  V,
+const We = Ee(
+  U,
   function(e) {
-    e.component(V.name, V), xe(
+    e.component(U.name, U), me(
       "TREE_RENDER_GROUP_TREE",
       () => new je()
     );
   }
 );
 export {
-  Xe as IBizGroupTreeControl,
-  Xe as default
+  We as IBizGroupTreeControl,
+  We as default
 };

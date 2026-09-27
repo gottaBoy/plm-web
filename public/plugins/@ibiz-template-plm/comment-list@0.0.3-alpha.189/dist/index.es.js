@@ -1,122 +1,120 @@
-import './style.css';
-var O = Object.defineProperty;
-var N = (n, r, t) => r in n ? O(n, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[r] = t;
-var p = (n, r, t) => (N(n, typeof r != "symbol" ? r + "" : r, t), t);
-import { EditorController as S, ControllerEvent as T, registerEditorProvider as M } from "@ibiz-template/runtime";
-import { defineComponent as j, ref as C, watch as F, onBeforeUnmount as z, createVNode as l, resolveComponent as $ } from "vue";
-import { getInputProps as U, getEditorEmits as _, useNamespace as Z } from "@ibiz-template/vue3-util";
-const H = () => {
-  const n = document.documentElement;
-  return n ? getComputedStyle(n).getPropertyValue("--ibiz-color-primary") : null;
-}, B = (n) => /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(n), R = (n) => /[\u4E00-\u9FA5]/.test(n), W = (n) => {
-  if (!n)
+import './assets/style.css';
+import './assets/style.css';
+import { registerEditorProvider as I, EditorController as N, ControllerEvent as S } from "@ibiz-template/runtime";
+import { defineComponent as j, ref as x, watch as M, onBeforeUnmount as z, createVNode as c, resolveComponent as F } from "vue";
+import { getInputProps as T, getEditorEmits as U, useNamespace as k } from "@ibiz-template/vue3-util";
+var _ = Object.defineProperty, Z = (i, t, e) => t in i ? _(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e, d = (i, t, e) => (Z(i, typeof t != "symbol" ? t + "" : t, e), e);
+const B = () => {
+  const i = document.documentElement;
+  return i ? getComputedStyle(i).getPropertyValue("--ibiz-color-primary") : null;
+}, R = (i) => /[\u4e00-\u9fa5]+.*[a-zA-Z]+|[a-zA-Z]+.*[\u4e00-\u9fa5]+/.test(i), W = (i) => /[\u4E00-\u9FA5]/.test(i), Y = (i) => {
+  if (!i)
     return "";
-  let r = 0;
-  for (let u = 0; u < n.length; u++)
-    if (R(n))
-      r = n.charCodeAt(u) + ((r << 5) - r), r = r & r;
+  let t = 0;
+  for (let p = 0; p < i.length; p++)
+    if (W(i))
+      t = i.charCodeAt(p) + ((t << 5) - t), t = t & t;
     else {
-      const g = n.charCodeAt(u);
-      r += g.toString(16);
+      const g = i.charCodeAt(p);
+      t += g.toString(16);
     }
-  const t = String(r).substring(0, 6);
-  let e = parseInt(t.substring(0, 2), 16), a = parseInt(t.substring(2, 4), 16), i = parseInt(t.substring(4, 6), 16);
-  e < 0 && (e = 10), a < 0 && (a = 10), i < 0 && (i = 10);
-  const m = "#".concat(e.toString(16).padStart(2, "0")).concat(a.toString(16).padStart(2, "0")).concat(i.toString(16).padStart(2, "0")).replaceAll("-", "0");
-  return m === "#FFFFFF" && H() || m;
-}, x = (n) => {
-  if (n && n.toString().length < 2)
-    return n;
-  if (n && n.toString().length >= 2) {
-    if (B(n)) {
-      const a = n.split("").find((m) => /[a-zA-Z]/.test(m)) || "", i = n.split("").find((m) => /[\u4E00-\u9FA5]/.test(m)) || "";
-      return "".concat(a).concat(i).toLowerCase();
+  const e = String(t).substring(0, 6);
+  let a = parseInt(e.substring(0, 2), 16), n = parseInt(e.substring(2, 4), 16), l = parseInt(e.substring(4, 6), 16);
+  a < 0 && (a = 10), n < 0 && (n = 10), l < 0 && (l = 10);
+  const u = "#".concat(a.toString(16).padStart(2, "0")).concat(n.toString(16).padStart(2, "0")).concat(l.toString(16).padStart(2, "0")).replaceAll("-", "0");
+  return u === "#FFFFFF" && B() || u;
+}, b = (i) => {
+  if (i && i.toString().length < 2)
+    return i;
+  if (i && i.toString().length >= 2) {
+    if (R(i)) {
+      const t = i.split("").find((a) => /[a-zA-Z]/.test(a)) || "", e = i.split("").find((a) => /[\u4E00-\u9FA5]/.test(a)) || "";
+      return "".concat(t).concat(e).toLowerCase();
     }
-    return /[a-zA-Z]/.test(n) ? n.split("").filter((a) => /[a-zA-Z]/.test(a)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(n) ? n.split("").filter((a) => /[\u4E00-\u9FA5]/.test(a)).slice(-2).join("") : n.replaceAll(" ", "").substring(0, 2);
+    return /[a-zA-Z]/.test(i) ? i.split("").filter((t) => /[a-zA-Z]/.test(t)).slice(0, 2).join("").toUpperCase() : /[\u4E00-\u9FA5]/.test(i) ? i.split("").filter((t) => /[\u4E00-\u9FA5]/.test(t)).slice(-2).join("") : i.replaceAll(" ", "").substring(0, 2);
   }
-};
-const b = /* @__PURE__ */ j({
+}, C = /* @__PURE__ */ j({
   name: "CommentList",
   props: {
-    ...U(),
+    ...T(),
     value: {
       type: Array,
       default: () => []
     }
   },
-  emits: _(),
-  setup(n) {
-    const r = Z("comment-list"), t = n.controller, e = C([]), a = C([]);
-    F(() => n.value, async (s) => {
-      if (t.isLocal) {
-        e.value = [];
-        const c = await t.getLocalTempData();
-        if (c) {
-          const o = await c.fetchDefault(t.context);
-          o.data && Array.isArray(o.data) && (e.value = o.data);
+  emits: U(),
+  setup(i) {
+    const t = k("comment-list"), e = i.controller, a = x([]), n = x([]);
+    M(() => i.value, async (s) => {
+      if (e.isLocal) {
+        a.value = [];
+        const o = await e.getLocalTempData();
+        if (o) {
+          const r = await o.fetchDefault(e.context);
+          r.data && Array.isArray(r.data) && (a.value = r.data);
         }
       } else
-        s ? Array.isArray(s) ? e.value = [...s] : e.value = [] : e.value = [];
+        s ? Array.isArray(s) ? a.value = [...s] : a.value = [] : a.value = [];
     }, {
       immediate: !0,
       deep: !0
     });
-    const i = (s) => {
+    const l = (s) => {
       const {
-        eventArg: c
+        eventArg: o
       } = s;
-      if (c) {
-        const o = e.value.findIndex((d) => d.id === c);
-        o >= 0 && e.value.splice(o, 1);
+      if (o) {
+        const r = a.value.findIndex((m) => m.id === o);
+        r >= 0 && a.value.splice(r, 1);
       }
-    }, m = (s) => {
-      e.value.push(s.eventArg);
     }, u = (s) => {
-      const c = e.value.findIndex((o) => o.id === s.id);
-      c > -1 && e.value.splice(c, 1, s);
+      a.value.push(s.eventArg);
+    }, p = (s) => {
+      const o = a.value.findIndex((r) => r.id === s.id);
+      o > -1 && a.value.splice(o, 1, s);
     };
-    t.evt.on("deleteItem", i), t.evt.on("addItem", m), t.evt.on("editreply", u);
+    e.evt.on("deleteItem", l), e.evt.on("addItem", u), e.evt.on("editreply", p);
     const g = async (s) => {
-      t.deleteComment(s);
-    }, L = (s) => {
-      console.log("头像加载失败"), a.value.push(s);
-    }, A = (s) => {
+      e.deleteComment(s);
+    }, y = (s) => {
+      console.log("头像加载失败"), n.value.push(s);
+    }, w = (s) => {
       if (!s)
         return null;
-      const c = JSON.parse(s);
-      if (c.length === 0)
+      const o = JSON.parse(s);
+      if (o.length === 0)
         return null;
       const {
-        downloadUrl: o
-      } = ibiz.util.file.calcFileUpDownUrl(t.context, t.params, n.data, t.editorParams), d = o.replace("%fileId%", c[0].id);
-      return l("img", {
-        src: d,
-        onError: () => L(s),
+        downloadUrl: r
+      } = ibiz.util.file.calcFileUpDownUrl(e.context, e.params, i.data, e.editorParams), m = r.replace("%fileId%", o[0].id);
+      return c("img", {
+        src: m,
+        onError: () => y(s),
         alt: ""
       }, null);
-    }, y = (s) => {
-      const c = t.operatorMap.get(s);
-      let o, d = s;
-      if (c) {
+    }, A = (s) => {
+      const o = e.operatorMap.get(s);
+      let r, m = s;
+      if (o) {
         const {
           label: h,
           iconurl: f
-        } = c.data;
-        d = h, f ? o = A(f) : o = x(h);
+        } = o.data;
+        m = h, f ? r = w(f) : r = b(h);
       } else
-        o = x(s);
-      return l("div", {
-        class: r.em("item", "avatar")
-      }, [l("div", {
-        class: r.em("item", "img"),
-        style: "background-color:".concat(W(d))
-      }, [o]), l("div", {
-        class: r.em("item", "label")
-      }, [d])]);
-    }, E = (s) => {
-      const c = s.split(" ");
-      if (c.length === 2) {
-        const o = c[0].split("-"), d = /* @__PURE__ */ new Date(), h = d.getFullYear() - Number(o[0]), f = d.getMonth() + 1 - Number(o[1]), v = d.getDate() - Number(o[2]);
+        r = b(s);
+      return c("div", {
+        class: t.em("item", "avatar")
+      }, [c("div", {
+        class: t.em("item", "img"),
+        style: "background-color:".concat(Y(m))
+      }, [r]), c("div", {
+        class: t.em("item", "label")
+      }, [m])]);
+    }, P = (s) => {
+      const o = s.split(" ");
+      if (o.length === 2) {
+        const r = o[0].split("-"), m = /* @__PURE__ */ new Date(), h = m.getFullYear() - Number(r[0]), f = m.getMonth() + 1 - Number(r[1]), v = m.getDate() - Number(r[2]);
         if (h === 0) {
           if (f === 0) {
             if (v === 0)
@@ -130,72 +128,58 @@ const b = /* @__PURE__ */ j({
         }
         return s.slice(0, -3);
       }
-    }, P = (s) => {
-      t.updateComment(s);
-    }, D = (s) => l("div", {
-      class: r.e("item")
-    }, [l("div", {
-      class: r.em("item", "header")
-    }, [y(s.create_man), l("span", {
-      class: r.em("item", "time")
-    }, [E(s.create_time)]), s.create_man === t.context.srfuserid ? l("div", null, [l("span", {
-      class: r.em("item", "edit"),
-      onClick: () => P(s),
+    }, E = (s) => {
+      e.updateComment(s);
+    }, L = (s) => c("div", {
+      class: t.e("item")
+    }, [c("div", {
+      class: t.em("item", "header")
+    }, [A(s.create_man), c("span", {
+      class: t.em("item", "time")
+    }, [P(s.create_time)]), s.create_man === e.context.srfuserid ? c("div", null, [c("span", {
+      class: t.em("item", "edit"),
+      onClick: () => E(s),
       title: "编辑"
-    }, [l("i", {
+    }, [c("i", {
       class: "fa fa-edit",
       "aria-hidden": "true"
-    }, null)]), l("span", {
-      class: r.em("item", "delicon"),
+    }, null)]), c("span", {
+      class: t.em("item", "delicon"),
       onClick: () => g(s),
       title: "删除"
-    }, [l("i", {
+    }, [c("i", {
       class: "fa fa-trash-o",
       "aria-hidden": "true"
-    }, null)])]) : null]), l("div", {
-      class: r.em("item", "content")
-    }, [l("div", {
+    }, null)])]) : null]), c("div", {
+      class: t.em("item", "content")
+    }, [c("div", {
       innerHTML: s.content
-    }, null)])]), I = () => e.value.length === 0 ? l($("iBizNoData"), {
-      class: r.e("nodata")
-    }, null) : l("div", {
-      class: r.e("list")
-    }, [e.value.map((s) => D(s))]), w = (s) => {
+    }, null)])]), O = () => a.value.length === 0 ? c(F("iBizNoData"), {
+      class: t.e("nodata")
+    }, null) : c("div", {
+      class: t.e("list")
+    }, [a.value.map((s) => L(s))]), D = (s) => {
       s.stopPropagation(), s.preventDefault();
     };
     return z(() => {
-      t.evt.off("addItem", m), t.evt.off("deleteItem", i), t.evt.off("editreply", u);
+      e.evt.off("addItem", u), e.evt.off("deleteItem", l), e.evt.off("editreply", p);
     }), {
-      ns: r,
-      c: t,
-      renderList: I,
-      stopClick: w
+      ns: t,
+      c: e,
+      renderList: O,
+      stopClick: D
     };
   },
   render() {
-    return l("div", {
+    return c("div", {
       class: this.ns.b(),
       onClick: this.stopClick
     }, [this.renderList()]);
   }
 });
-class Y extends S {
+class H extends N {
   constructor() {
-    super(...arguments);
-    /**
-     * 是否走本地模式
-     *
-     * @type {boolean}
-     * @memberof CommentListComtroller
-     */
-    p(this, "isLocal", !1);
-    /**
-     * 用户列表
-     *
-     * @memberof CommentListComtroller
-     */
-    p(this, "operatorMap", /* @__PURE__ */ new Map());
-    p(this, "evt", new T(
+    super(...arguments), d(this, "isLocal", !1), d(this, "operatorMap", /* @__PURE__ */ new Map()), d(this, "evt", new S(
       () => ({
         context: this.context,
         params: this.params,
@@ -204,20 +188,7 @@ class Y extends S {
         targetName: this.model.name,
         view: this.parent.view
       })
-    ));
-    /**
-     * 代码表模型
-     * @return {*}
-     * @author: zhujiamin
-     * @Date: 2023-05-24 10:55:50
-     */
-    p(this, "codeList");
-    p(this, "extraParams", {});
-    /**
-     * 实体codeName
-     * @type {string}
-     */
-    p(this, "deCodeName", "comment");
+    )), d(this, "codeList"), d(this, "extraParams", {}), d(this, "deCodeName", "comment");
   }
   async onInit() {
     super.onInit(), await this.getOperatorUserList(), this.editorParams && this.editorParams.PID && Object.assign(this.extraParams, { pid: this.editorParams.PID }), this.editorParams && this.editorParams.ISLOCAL === "TRUE" && (this.isLocal = !0), this.editorParams && this.editorParams.DECODENAME && (this.deCodeName = this.editorParams.DECODENAME);
@@ -234,8 +205,8 @@ class Y extends S {
       const a = await this.getLocalTempData();
       if (a) {
         await ((e = a.local) == null ? void 0 : e.delete(this.context, t));
-        const i = ibiz.uiDomainManager.get(this.context.srfsessionid);
-        i && i.dataChangeCompleted();
+        const n = ibiz.uiDomainManager.get(this.context.srfsessionid);
+        n && n.dataChangeCompleted();
       }
     }
     this.evt.emit("deleteItem", {
@@ -336,8 +307,8 @@ class Y extends S {
     const e = {};
     return Object.keys(this.extraParams).forEach((a) => {
       if (this.extraParams[a].startsWith("%") && this.extraParams[a].endsWith("%")) {
-        const i = this.extraParams[a].slice(1, -1);
-        Object.prototype.hasOwnProperty.call(this.context, i) ? Object.assign(e, { [a]: this.context[i] }) : Object.prototype.hasOwnProperty.call(this.params, i) ? Object.assign(e, { [a]: this.params[i] }) : Object.prototype.hasOwnProperty.call(t, i) ? Object.assign(e, { [a]: t[i] }) : Object.assign(e, { [a]: null });
+        const n = this.extraParams[a].slice(1, -1);
+        Object.prototype.hasOwnProperty.call(this.context, n) ? Object.assign(e, { [a]: this.context[n] }) : Object.prototype.hasOwnProperty.call(this.params, n) ? Object.assign(e, { [a]: this.params[n] }) : Object.prototype.hasOwnProperty.call(t, n) ? Object.assign(e, { [a]: t[n] }) : Object.assign(e, { [a]: null });
       } else
         Object.assign(e, { [a]: this.extraParams[a] });
     }), e;
@@ -348,22 +319,22 @@ class Y extends S {
    * @memberof CommentListComtroller
    */
   sendComment(t, e) {
-    const a = this.parent.panel, i = this.parent.form;
+    const a = this.parent.panel, n = this.parent.form;
     if (a) {
-      const m = this.handleExtraParams(a.inputData);
-      Object.assign(m, { value: t }), a.evt.emit("sendcomment", {
+      const l = this.handleExtraParams(a.inputData);
+      Object.assign(l, { value: t }), a.evt.emit("sendcomment", {
         targetName: "comments",
         context: this.context,
         params: this.params,
-        data: [m]
+        data: [l]
       });
-    } else if (i) {
-      const m = this.handleExtraParams(e);
-      Object.assign(m, { value: t }), i.evt.emit("sendcomment", {
+    } else if (n) {
+      const l = this.handleExtraParams(e);
+      Object.assign(l, { value: t }), n.evt.emit("sendcomment", {
         targetName: "comments",
         context: this.context,
         params: this.params,
-        data: [m]
+        data: [l]
       });
     }
   }
@@ -386,24 +357,22 @@ class Y extends S {
 }
 class J {
   constructor() {
-    p(this, "component", "CommentList");
-    p(this, "formEditor", "CommentList");
-    p(this, "gridEditor", "CommentList");
+    d(this, "component", "CommentList"), d(this, "formEditor", "CommentList"), d(this, "gridEditor", "CommentList");
   }
-  async createController(r, t) {
-    const e = new Y(r, t);
-    return await e.init(), e;
+  async createController(t, e) {
+    const a = new H(t, e);
+    return await a.init(), a;
   }
 }
-const Q = {
+const G = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(n) {
-    n.component(b.name, b), M(
+  install(i) {
+    i.component(C.name, C), I(
       "EDITOR_CUSTOMSTYLE_COMMENT_LIST",
       () => new J()
     );
   }
 };
 export {
-  Q as default
+  G as default
 };

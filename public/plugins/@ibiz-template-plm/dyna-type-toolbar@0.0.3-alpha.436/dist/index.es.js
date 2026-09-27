@@ -1,162 +1,160 @@
-var Z = Object.defineProperty;
-var tt = (r, l, o) => l in r ? Z(r, l, { enumerable: !0, configurable: !0, writable: !0, value: o }) : r[l] = o;
-var K = (r, l, o) => (tt(r, typeof l != "symbol" ? l + "" : l, o), o);
-import { calcAllUIActionDetails as et, ToolbarController as ot, UIActionButtonState as X, getAllUIActionItems as nt, getUIActionById as st, UIActionUtil as rt, registerControlProvider as at } from "@ibiz-template/runtime";
-import { defineComponent as lt, ref as it, createVNode as i, resolveComponent as d, isVNode as ut, h as P, createTextVNode as ct } from "vue";
-import { recursiveIterate as pt, RuntimeError as dt, showTitle as D } from "@ibiz-template/core";
-import { useControlController as bt, useNamespace as V } from "@ibiz-template/vue3-util";
-import { convertBtnType as L } from "@ibiz-template/vue3-components";
-function k() {
+import { registerControlProvider as Z, ToolbarController as Q, UIActionButtonState as K, getAllUIActionItems as ee, getUIActionById as te, UIActionUtil as oe, calcAllUIActionDetails as ie } from "@ibiz-template/runtime";
+import { defineComponent as ne, ref as ae, resolveComponent as m, h as P, createVNode as s, createTextVNode as re, isVNode as se } from "vue";
+import { showTitle as T, recursiveIterate as le, RuntimeError as ue } from "@ibiz-template/core";
+import { useControlController as de, useNamespace as W } from "@ibiz-template/vue3-util";
+import { convertBtnType as G } from "@ibiz-template/vue3-components";
+var pe = Object.defineProperty, ce = (a, l, p) => l in a ? pe(a, l, { enumerable: !0, configurable: !0, writable: !0, value: p }) : a[l] = p, me = (a, l, p) => (ce(a, typeof l != "symbol" ? l + "" : l, p), p);
+function z() {
   return ((1 + Math.random()) * 65536 | 0).toString(16).substring(1);
 }
-function ft() {
-  return "".concat(k() + k(), "-").concat(k(), "-").concat(k(), "-").concat(k(), "-").concat(k()).concat(k()).concat(k());
+function be() {
+  return "".concat(z() + z(), "-").concat(z(), "-").concat(z(), "-").concat(z(), "-").concat(z()).concat(z()).concat(z());
 }
-const It = (r, l) => {
+const fe = (a, l) => {
   if (l)
     return {
       cssClass: l,
-      glyph: "".concat(ft(), "@FontAwesome"),
-      appId: r
+      glyph: "".concat(be(), "@FontAwesome"),
+      appId: a
     };
-}, mt = (r, l) => {
+}, Ie = (a, l) => {
   if (l)
     return {
       cssName: l,
-      appId: r
+      appId: a
     };
 };
-async function yt(r, l, o) {
+async function ve(a, l, p) {
   const {
-    appId: e,
-    detailAppDataEntityId: a,
-    detailAppDEDataSetId: p,
+    appId: t,
+    detailAppDataEntityId: o,
+    detailAppDEDataSetId: u,
     // 文本属性
     textAppDEFieldId: f,
     // 提示值属性
-    tipsAppDEFieldId: I,
+    tipsAppDEFieldId: w,
     // 可见逻辑属性
     visibleScriptAppDEFieldId: C,
     // 图标样式属性
-    iconClsAppDEFieldId: A,
+    iconClsAppDEFieldId: g,
     // 样式表属性
-    clsAppDEFieldId: N,
+    clsAppDEFieldId: x,
     // 按钮样式属性
-    buttonStyleAppDEFieldId: x,
+    buttonStyleAppDEFieldId: B,
     // 行为级别属性
-    actionLevelAppDEFieldId: U,
+    actionLevelAppDEFieldId: M,
     // 启用逻辑属性
-    enableScriptAppDEFieldId: $,
+    enableScriptAppDEFieldId: O,
     // 用户标记,用于绑定界面行为标记
-    userTag: B,
+    userTag: F,
     // 用户标记2,用于绑定界面行为动态参数数据
-    userTag2: F
-  } = r, j = [];
+    userTag2: L
+  } = a, U = [];
   try {
-    if (p && a) {
-      const z = await ibiz.hub.getApp(e).deService.exec(
-        a,
-        p,
+    if (u && o) {
+      const k = await ibiz.hub.getApp(t).deService.exec(
+        o,
+        u,
         l,
-        o
+        p
       );
-      z.ok && Array.isArray(z.data) && z.data.forEach((T) => {
-        const O = {
-          uiactionId: B,
-          caption: T[f],
-          tooltip: T[I],
-          visibleScriptCode: T[C],
-          sysImage: It(e, T[A]),
-          sysCss: mt(e, T[N]),
-          buttonStyle: T[x],
-          actionLevel: T[U],
-          enableScriptCode: T[$],
+      k.ok && Array.isArray(k.data) && k.data.forEach((h) => {
+        const R = {
+          uiactionId: F,
+          caption: h[f],
+          tooltip: h[w],
+          visibleScriptCode: h[C],
+          sysImage: fe(t, h[g]),
+          sysCss: Ie(t, h[x]),
+          buttonStyle: h[B],
+          actionLevel: h[M],
+          enableScriptCode: h[O],
           // 适配显示逻辑
-          showCaption: !!T[f],
-          showIcon: !!T[A],
+          showCaption: !!h[f],
+          showIcon: !!h[g],
           detailType: "DEUIACTION",
           itemType: "DEUIACTION",
-          id: T[F],
-          appId: e
+          id: h[L],
+          appId: t
         };
-        O.uiactionId && j.push(O);
+        R.uiactionId && U.push(R);
       });
     }
-  } catch (z) {
-    ibiz.log.error(z);
+  } catch (k) {
+    ibiz.log.error(k);
   }
-  return j;
+  return U;
 }
-async function wt(r, l, o) {
-  if (r.dynamicMode === 1 && !r.uiactionGroupDetails) {
-    const e = await yt(
-      r,
+async function ye(a, l, p) {
+  if (a.dynamicMode === 1 && !a.uiactionGroupDetails) {
+    const t = await ve(
+      a,
       l,
-      o
+      p
     );
-    Object.assign(r, {
-      uiactionGroupDetails: e
+    Object.assign(a, {
+      uiactionGroupDetails: t
     });
   } else {
-    const e = [];
-    if (r != null && r.uiactionGroupDetails) {
-      const a = et(
-        r.uiactionGroupDetails,
+    const t = [];
+    if (a != null && a.uiactionGroupDetails) {
+      const o = ie(
+        a.uiactionGroupDetails,
         l,
-        o
+        p
       );
-      e.push(a);
+      t.push(o);
     }
-    await Promise.all(e);
+    await Promise.all(t);
   }
-  return r;
+  return a;
 }
-class J extends ot {
+class H extends Q {
   /**
    * 初始化工具栏按钮状态对象
    */
   async initButtonState() {
     const l = [];
-    pt(
+    le(
       this.model,
-      (e) => {
-        if (this.allToolbarItems.push(e), e.itemType) {
-          const p = e, f = new X(
-            p.id,
-            p.appId,
-            p.uiactionId
+      (p) => {
+        if (this.allToolbarItems.push(p), p.itemType) {
+          const o = p, u = new K(
+            o.id,
+            o.appId,
+            o.uiactionId
           );
-          this.state.buttonsState.addState(p.id, f);
+          this.state.buttonsState.addState(o.id, u);
         }
-        if (e.controlLogics)
-          for (let p = 0; p < e.controlLogics.length; p++) {
-            const f = e.controlLogics[p], I = this.state.buttonsState[e.id];
-            if (f.itemName === e.id && f.triggerType === "ITEMVISIBLE" && I) {
-              I.visible = !1;
+        if (p.controlLogics)
+          for (let o = 0; o < p.controlLogics.length; o++) {
+            const u = p.controlLogics[o], f = this.state.buttonsState[p.id];
+            if (u.itemName === p.id && u.triggerType === "ITEMVISIBLE" && f) {
+              f.visible = !1;
               break;
             }
           }
-        const a = e;
-        if (a.groupExtractMode && a.uiactionGroup) {
-          const p = wt(
-            a.uiactionGroup,
+        const t = p;
+        if (t.groupExtractMode && t.uiactionGroup) {
+          const o = ye(
+            t.uiactionGroup,
             this.context,
             this.params
           );
-          l.push(p);
+          l.push(o);
         }
       },
       { childrenFields: ["detoolbarItems"] }
-    ), (await Promise.all(l)).forEach((e) => {
-      e != null && e.uiactionGroupDetails && nt(e == null ? void 0 : e.uiactionGroupDetails).forEach(
-        (a) => {
-          const p = new X(
-            a.id,
-            a.appId,
-            a.uiactionId,
-            a
+    ), (await Promise.all(l)).forEach((p) => {
+      p != null && p.uiactionGroupDetails && ee(p == null ? void 0 : p.uiactionGroupDetails).forEach(
+        (t) => {
+          const o = new K(
+            t.id,
+            t.appId,
+            t.uiactionId,
+            t
           );
-          this.state.buttonsState.addState(a.id, p);
+          this.state.buttonsState.addState(t.id, o);
         }
       );
     });
@@ -171,27 +169,27 @@ class J extends ot {
    * @return {*}  {Promise<void>}
    * @memberof ToolbarController
    */
-  async doUIAction(l, o, e = {}) {
+  async doUIAction(l, p, t = {}) {
     if (l.itemType === "DEUIACTION") {
-      const a = l.uiactionId, p = await st(a, l.appId);
-      if (!p)
-        throw new dt(
+      const o = l.uiactionId, u = await te(o, l.appId);
+      if (!u)
+        throw new ue(
           ibiz.i18n.t("runtime.controller.control.toolbar.noFound", {
-            actionId: a
+            actionId: o
           })
         );
-      const f = ["SYS", "BACKEND", "WFBACKEND"].includes(p.uiactionMode) && p.showBusyIndicator !== !1 || p.showBusyIndicator === !0;
+      const f = ["SYS", "BACKEND", "WFBACKEND"].includes(u.uiactionMode) && u.showBusyIndicator !== !1 || u.showBusyIndicator === !0;
       f && this.state.buttonsState.setLoading(l.id);
       try {
-        const I = await this.getToolbarEventArgs();
-        I.context = Object.assign(I.context, {
+        const w = await this.getToolbarEventArgs();
+        w.context = Object.assign(w.context, {
           srfappid: l.appId,
           srfdynatype: l.id
-        }), I.params = Object.assign(e, I.params), await rt.execAndResolved(
-          a,
+        }), w.params = Object.assign(t, w.params), await oe.execAndResolved(
+          o,
           {
-            ...I,
-            event: o
+            ...w,
+            event: p
           },
           l.appId
         );
@@ -201,31 +199,31 @@ class J extends ot {
     }
   }
 }
-function v(r) {
-  return typeof r == "function" || Object.prototype.toString.call(r) === "[object Object]" && !ut(r);
+function A(a) {
+  return typeof a == "function" || Object.prototype.toString.call(a) === "[object Object]" && !se(a);
 }
-const E = (r, l) => {
-  var C, A, N, x;
-  const o = l && r.counterId ? l.counterData[r.counterId] : void 0, e = r, a = ((C = e.refUIActionGroup) == null ? void 0 : C.name) || ((A = e.refUIActionGroup) == null ? void 0 : A.id) || r.caption, p = r.sysImage, f = [], I = V("toolbar-item");
-  return r.showIcon && p && ((N = p.cssClass) != null && N.startsWith("data:image/svg+xml;base64,") || (x = p.cssClass) != null && x.startsWith("data:image/png;base64,") ? f.push(i("span", {
-    class: I.b("icon")
-  }, [i("img", {
-    src: p.cssClass
-  }, null)])) : f.push(i("span", {
-    class: I.b("icon")
-  }, [i(d("iBizIcon"), {
-    icon: p
-  }, null)]))), r.showCaption && a && f.push(i("span", {
-    class: I.b("text")
-  }, [a])), o && f.push(i(d("iBizBadge"), {
-    class: I.b("counter"),
-    value: o,
-    counterMode: r.counterMode
-  }, null)), f;
-}, g = (r) => {
+const D = (a, l) => {
+  var p, t, o, u;
+  const f = l && a.counterId ? l.counterData[a.counterId] : void 0, w = a, C = ((p = w.refUIActionGroup) == null ? void 0 : p.name) || ((t = w.refUIActionGroup) == null ? void 0 : t.id) || a.caption, g = a.sysImage, x = [], B = W("toolbar-item");
+  return a.showIcon && g && ((o = g.cssClass) != null && o.startsWith("data:image/svg+xml;base64,") || (u = g.cssClass) != null && u.startsWith("data:image/png;base64,") ? x.push(s("span", {
+    class: B.b("icon")
+  }, [s("img", {
+    src: g.cssClass
+  }, null)])) : x.push(s("span", {
+    class: B.b("icon")
+  }, [s(m("iBizIcon"), {
+    icon: g
+  }, null)]))), a.showCaption && C && x.push(s("span", {
+    class: B.b("text")
+  }, [C])), f && x.push(s(m("iBizBadge"), {
+    class: B.b("counter"),
+    value: f,
+    counterMode: a.counterMode
+  }, null)), x;
+}, v = (a) => {
   var l;
-  return (l = r == null ? void 0 : r.sysCss) == null ? void 0 : l.cssName;
-}, H = /* @__PURE__ */ lt({
+  return (l = a == null ? void 0 : a.sysCss) == null ? void 0 : l.cssName;
+}, $ = /* @__PURE__ */ ne({
   name: "IBizDynaTypeToolbar",
   props: {
     /**
@@ -273,129 +271,129 @@ const E = (r, l) => {
     }
   },
   emits: ["click"],
-  setup(r, {
+  setup(a, {
     emit: l
   }) {
-    var W;
-    const o = bt((...t) => new J(...t)), e = V("control-".concat(o.model.controlType.toLowerCase())), a = V("control-".concat(o.model.controlType.toLowerCase(), "-actions")), p = it("default"), f = (W = o.model.toolbarStyle) == null ? void 0 : W.toLowerCase(), I = (t) => !!(t.detailType === "DEUIACTIONGROUP" && t.refUIActionGroup), C = async (t, s, c) => {
-      r.runMode === "RUNTIME" ? await o.onItemClick(t, s, c) : l("click", t);
-    }, A = async (t, s, c) => {
-      if (r.runMode === "RUNTIME") {
-        const m = {};
-        Object.assign(m, {
-          ...t,
-          itemType: t.detailType
-        }), await C(m, s, c);
+    var p;
+    const t = de((...e) => new H(...e)), o = W("control-".concat(t.model.controlType.toLowerCase())), u = W("control-".concat(t.model.controlType.toLowerCase(), "-actions")), f = ae("default"), w = (p = t.model.toolbarStyle) == null ? void 0 : p.toLowerCase(), C = (e) => !!(e.detailType === "DEUIACTIONGROUP" && e.refUIActionGroup), g = async (e, n, d) => {
+      a.runMode === "RUNTIME" ? await t.onItemClick(e, n, d) : l("click", e);
+    }, x = async (e, n, d) => {
+      if (a.runMode === "RUNTIME") {
+        const c = {};
+        Object.assign(c, {
+          ...e,
+          itemType: e.detailType
+        }), await g(c, n, d);
       } else
-        l("click", t);
-    }, N = (t) => t.map((s) => {
-      let c;
-      return i("div", {
-        key: s.id,
-        class: [e.e("item")]
-      }, [i(d("el-button"), {
-        title: D(s.tooltip),
-        size: p.value,
-        onClick: (m) => C(s, m)
-      }, v(c = E(s, o.state)) ? c : {
-        default: () => [c]
+        l("click", e);
+    }, B = (e) => e.map((n) => {
+      let d;
+      return s("div", {
+        key: n.id,
+        class: [o.e("item")]
+      }, [s(m("el-button"), {
+        title: T(n.tooltip),
+        size: f.value,
+        onClick: (c) => g(n, c)
+      }, A(d = D(n, t.state)) ? d : {
+        default: () => [d]
       })]);
-    }), x = (t, s) => {
-      var w, n;
-      let c;
-      if (t.id !== s.id && I(s))
-        return B(s, !0);
-      const m = s.uiactionId, S = (w = o.state.buttonsState[s.id]) == null ? void 0 : w.visible, b = o.itemProviders[s.id];
-      if (!S)
+    }), M = (e, n) => {
+      var d, c;
+      let S;
+      if (e.id !== n.id && C(n))
+        return L(n, !0);
+      const b = n.uiactionId, y = (d = t.state.buttonsState[n.id]) == null ? void 0 : d.visible, I = t.itemProviders[n.id];
+      if (!y)
         return null;
-      if (b) {
-        const u = d(b.component);
-        return P(u, {
-          key: s.id,
-          class: [e.e("item")],
-          item: t,
-          controller: o
+      if (I) {
+        const r = m(I.component);
+        return P(r, {
+          key: n.id,
+          class: [o.e("item")],
+          item: e,
+          controller: t
         });
       }
-      const y = (n = s.buttonStyle) == null ? void 0 : n.toLowerCase();
-      return m === "exportexcel" || m === "gridview_exportaction" ? i(d("i-biz-export-excel"), {
-        class: [e.e("menu-exportexcel"), e.em("item", y), g(s)],
+      const i = (c = n.buttonStyle) == null ? void 0 : c.toLowerCase();
+      return b === "exportexcel" || b === "gridview_exportaction" ? s(m("i-biz-export-excel"), {
+        class: [o.e("menu-exportexcel"), o.em("item", i), v(n)],
         mode: "menu",
-        item: s,
-        btnContent: (u) => E(u, o.state),
-        size: p.value,
-        controller: o,
-        onExportExcel: (u, h) => {
-          A(s, u, h);
+        item: n,
+        btnContent: (r) => D(r, t.state),
+        size: f.value,
+        controller: t,
+        onExportExcel: (r, E) => {
+          x(n, r, E);
         }
-      }, null) : i(d("el-menu-item"), {
-        class: [e.is("loading", o.state.buttonsState[s.id].loading), e.em("item", y), g(s)],
-        index: "menuitem".concat(s.id),
-        disabled: o.state.buttonsState[s.id].disabled,
-        title: D(s.caption)
+      }, null) : s(m("el-menu-item"), {
+        class: [o.is("loading", t.state.buttonsState[n.id].loading), o.em("item", i), v(n)],
+        index: "menuitem".concat(n.id),
+        disabled: t.state.buttonsState[n.id].disabled,
+        title: T(n.caption)
       }, {
-        default: () => [i(d("el-button"), {
-          loading: o.state.buttonsState[s.id].loading,
-          onClick: (u) => {
-            s.uiactionId && A(s, u);
+        default: () => [s(m("el-button"), {
+          loading: t.state.buttonsState[n.id].loading,
+          onClick: (r) => {
+            n.uiactionId && x(n, r);
           }
-        }, v(c = E(s, o.state)) ? c : {
-          default: () => [c]
+        }, A(S = D(n, t.state)) ? S : {
+          default: () => [S]
         })]
       });
-    }, U = (t, s) => {
-      if (o.state.buttonsState[t.id].visible) {
-        let c;
-        return i(d("el-button"), {
-          size: p.value,
-          class: g(t),
-          type: s || L(t.buttonStyle),
-          title: D(t.tooltip || t.caption),
-          loading: o.state.buttonsState[t.id].loading,
-          disabled: o.state.buttonsState[t.id].disabled,
-          onClick: (m) => A(t, m)
-        }, v(c = E(t, o.state)) ? c : {
-          default: () => [c]
+    }, O = (e, n) => {
+      if (t.state.buttonsState[e.id].visible) {
+        let d;
+        return s(m("el-button"), {
+          size: f.value,
+          class: v(e),
+          type: n || G(e.buttonStyle),
+          title: T(e.tooltip || e.caption),
+          loading: t.state.buttonsState[e.id].loading,
+          disabled: t.state.buttonsState[e.id].disabled,
+          onClick: (c) => x(e, c)
+        }, A(d = D(e, t.state)) ? d : {
+          default: () => [d]
         });
       }
       return null;
-    }, $ = (t) => {
-      if (o.state.buttonsState[t.id].visible) {
+    }, F = (e) => {
+      if (t.state.buttonsState[e.id].visible) {
         const {
-          disabled: s
-        } = o.state.buttonsState[t.id], c = I(t) ? B(t, !1, !0) : U(t);
-        return i(d("el-dropdown-item"), {
-          class: [a.be("dropdown-popper", "dropdown-item"), a.is("disabled", !!s), e.em("item", L(t.buttonStyle))]
-        }, v(c) ? c : {
-          default: () => [c]
+          disabled: n
+        } = t.state.buttonsState[e.id], d = C(e) ? L(e, !1, !0) : O(e);
+        return s(m("el-dropdown-item"), {
+          class: [u.be("dropdown-popper", "dropdown-item"), u.is("disabled", !!n), o.em("item", G(e.buttonStyle))]
+        }, A(d) ? d : {
+          default: () => [d]
         });
       }
       return null;
-    }, B = (t, s, c = !1) => {
+    }, L = (e, n, d = !1) => {
       const {
-        uiactionGroup: m,
+        uiactionGroup: c,
         refUIActionGroup: S
-      } = t, b = (m == null ? void 0 : m.uiactionGroupDetails) || (S == null ? void 0 : S.uiactionGroupDetails);
+      } = e, b = (c == null ? void 0 : c.uiactionGroupDetails) || (S == null ? void 0 : S.uiactionGroupDetails);
       if (b) {
-        const y = b.length > 0, w = t.buttonStyle || "";
-        if (s) {
-          const u = o.state.buttonsState[t.id].disabled || b.findIndex((h) => {
-            var R;
-            return ((R = o.state.buttonsState[h.id]) == null ? void 0 : R.disabled) === !1;
+        const y = b.length > 0, I = e.buttonStyle || "";
+        if (n) {
+          const i = t.state.buttonsState[e.id].disabled || b.findIndex((r) => {
+            var E;
+            return ((E = t.state.buttonsState[r.id]) == null ? void 0 : E.disabled) === !1;
           }) === -1;
-          return i(d("el-sub-menu"), {
-            class: [e.b("submenu"), e.be("submenu", "groupdetails"), e.em("item", w.toLowerCase()), g(t)],
-            index: t.id,
-            disabled: u,
-            title: D(t.tooltip),
-            "popper-class": [e.b("submenu-popper"), e.em("submenu-popper", "groupdetails"), e.bm("submenu-popper", f), e.em("submenu-popper", w.toLowerCase()), e.bm("submenu-popper", g(t)), g(t)]
+          return s(m("el-sub-menu"), {
+            class: [o.b("submenu"), o.be("submenu", "groupdetails"), o.em("item", I.toLowerCase()), v(e)],
+            index: e.id,
+            disabled: i,
+            title: T(e.tooltip),
+            "popper-class": [o.b("submenu-popper"), o.em("submenu-popper", "groupdetails"), o.bm("submenu-popper", w), o.em("submenu-popper", I.toLowerCase()), o.bm("submenu-popper", v(e)), v(e)]
           }, {
-            default: () => b.map((h) => x(t, h)),
-            title: () => x(t, t)
+            default: () => b.map((r) => M(e, r)),
+            title: () => M(e, e)
           });
         }
-        return c ? i(d("el-popover"), {
-          "popper-class": [a.b("popper"), a.b("dropdown-popper"), a.bm("dropdown-popper", f), a.em("dropdown-popper", w.toLowerCase()), a.bm("dropdown-popper", g(t))],
+        return d ? s(m("el-popover"), {
+          "popper-class": [u.b("popper"), u.b("dropdown-popper"), u.bm("dropdown-popper", w), u.em("dropdown-popper", I.toLowerCase()), u.bm("dropdown-popper", v(e))],
           placement: "right-start",
           teleported: !1,
           "popper-options": {
@@ -407,293 +405,293 @@ const E = (r, l) => {
             }]
           }
         }, {
-          reference: () => i(d("el-button"), {
+          reference: () => s(m("el-button"), {
             text: !0,
-            size: p.value,
-            class: g(t),
-            type: L(t.buttonStyle),
-            title: D(t.tooltip || t.caption),
-            disabled: o.state.buttonsState[t.id].disabled
+            size: f.value,
+            class: v(e),
+            type: G(e.buttonStyle),
+            title: T(e.tooltip || e.caption),
+            disabled: t.state.buttonsState[e.id].disabled
           }, {
-            default: () => [i("div", {
-              class: a.be("popper", "reference-btn")
-            }, [i("div", {
-              class: a.bem("popper", "reference-btn", "content")
-            }, [E(t, o.state)]), i("div", {
-              class: a.bem("popper", "reference-btn", "chevron")
-            }, [i(d("ion-icon"), {
+            default: () => [s("div", {
+              class: u.be("popper", "reference-btn")
+            }, [s("div", {
+              class: u.bem("popper", "reference-btn", "content")
+            }, [D(e, t.state)]), s("div", {
+              class: u.bem("popper", "reference-btn", "chevron")
+            }, [s(m("ion-icon"), {
               name: "chevron-forward-outline"
             }, null)])])]
           }),
-          default: () => i("div", {
-            class: a.be("popper", "wrapper")
-          }, [b.map((n) => {
-            const u = I(n) ? B(n, !1, !0) : U(n);
-            return i("div", {
-              class: a.be("popper", "item")
-            }, [u]);
+          default: () => s("div", {
+            class: u.be("popper", "wrapper")
+          }, [b.map((i) => {
+            const r = C(i) ? L(i, !1, !0) : O(i);
+            return s("div", {
+              class: u.be("popper", "item")
+            }, [r]);
           })])
-        }) : i(d("el-dropdown"), {
-          "popper-class": [a.b("dropdown-popper"), a.bm("dropdown-popper", f), a.em("dropdown-popper", w.toLowerCase()), a.bm("dropdown-popper", g(t))]
+        }) : s(m("el-dropdown"), {
+          "popper-class": [u.b("dropdown-popper"), u.bm("dropdown-popper", w), u.em("dropdown-popper", I.toLowerCase()), u.bm("dropdown-popper", v(e))]
         }, {
-          default: () => U(t),
+          default: () => O(e),
           dropdown: () => {
-            let n;
-            return y && i(d("el-dropdown-menu"), null, v(n = b.map((u) => $(u))) ? n : {
-              default: () => [n]
+            let i;
+            return y && s(m("el-dropdown-menu"), null, A(i = b.map((r) => F(r))) ? i : {
+              default: () => [i]
             });
           }
         });
       }
       return null;
-    }, F = (t, s) => {
-      const c = t[s];
-      return c ? I(c) || o.state.buttonsState[c.id].visible ? s : F(t, s + 1) : -1;
-    }, j = (t, s) => {
+    }, U = (e, n) => {
+      const d = e[n];
+      return d ? C(d) || t.state.buttonsState[d.id].visible ? n : U(e, n + 1) : -1;
+    }, k = (e, n) => {
       const {
-        uiactionGroup: c
-      } = t;
-      if (c && c.uiactionGroupDetails) {
+        uiactionGroup: d
+      } = e;
+      if (d && d.uiactionGroupDetails) {
         const {
-          uiactionGroupDetails: m
-        } = c, S = F(m, 0);
+          uiactionGroupDetails: c
+        } = d, S = U(c, 0);
         if (S !== -1) {
-          const b = m[S], y = m.slice(S + 1).filter((u) => !!o.state.buttonsState[u.id].visible), w = y.length > 0;
-          let n = t.buttonStyle || "";
-          return s ? (n = b.buttonStyle || "", i(d("el-sub-menu"), {
-            class: [e.b("submenu"), e.be("submenu", "groupdetails"), e.em("item", n.toLowerCase()), g(b)],
+          const b = c[S], y = c.slice(S + 1).filter((r) => !!t.state.buttonsState[r.id].visible), I = y.length > 0;
+          let i = e.buttonStyle || "";
+          return n ? (i = b.buttonStyle || "", s(m("el-sub-menu"), {
+            class: [o.b("submenu"), o.be("submenu", "groupdetails"), o.em("item", i.toLowerCase()), v(b)],
             index: b.id,
-            disabled: o.state.buttonsState[b.id].disabled,
-            title: D(b.tooltip),
-            "popper-class": [e.b("submenu-popper"), e.be("submenu-popper", "groupdetails"), e.bm("submenu-popper", f), e.em("submenu-popper", n.toLowerCase()), e.bm("submenu-popper", g(b)), g(b)]
+            disabled: t.state.buttonsState[b.id].disabled,
+            title: T(b.tooltip),
+            "popper-class": [o.b("submenu-popper"), o.be("submenu-popper", "groupdetails"), o.bm("submenu-popper", w), o.em("submenu-popper", i.toLowerCase()), o.bm("submenu-popper", v(b)), v(b)]
           }, {
-            default: () => y.map((u) => x(t, u)),
-            title: () => x(t, b)
-          })) : i(d("el-dropdown"), {
-            "split-button": w,
-            type: L(n),
-            "popper-class": [a.b("dropdown-popper"), a.bm("dropdown-popper", f), a.em("dropdown-popper", n.toLowerCase()), a.bm("dropdown-popper", g(t))]
+            default: () => y.map((r) => M(e, r)),
+            title: () => M(e, b)
+          })) : s(m("el-dropdown"), {
+            "split-button": I,
+            type: G(i),
+            "popper-class": [u.b("dropdown-popper"), u.bm("dropdown-popper", w), u.em("dropdown-popper", i.toLowerCase()), u.bm("dropdown-popper", v(e))]
           }, {
-            default: () => I(b) ? B(b, !1) : U(b, L(n)),
+            default: () => C(b) ? L(b, !1) : O(b, G(i)),
             dropdown: () => {
-              let u;
-              return w && i(d("el-dropdown-menu"), null, v(u = y.map((h) => $(h))) ? u : {
-                default: () => [u]
+              let r;
+              return I && s(m("el-dropdown-menu"), null, A(r = y.map((E) => F(E))) ? r : {
+                default: () => [r]
               });
             }
           });
         }
       }
       return null;
-    }, z = (t, s) => {
+    }, h = (e, n) => {
       const {
-        uiactionGroup: c
-      } = t;
-      if (c && c.uiactionGroupDetails) {
+        uiactionGroup: d
+      } = e;
+      if (d && d.uiactionGroupDetails) {
         const {
-          uiactionGroupDetails: m
-        } = c;
-        return s ? m.map((S) => x(t, S)) : m.map((S) => {
-          const b = I(S) ? B(S, s) : U(S);
-          return i("div", {
-            class: [a.e("item-deuiaction"), e.em("item", L(S.buttonStyle))]
+          uiactionGroupDetails: c
+        } = d;
+        return n ? c.map((S) => M(e, S)) : c.map((S) => {
+          const b = C(S) ? L(S, n) : O(S);
+          return s("div", {
+            class: [u.e("item-deuiaction"), o.em("item", G(S.buttonStyle))]
           }, [b]);
         });
       }
       return null;
-    }, T = (t, s = !1) => {
+    }, R = (e, n = !1) => {
       const {
-        groupExtractMode: c
-      } = t;
-      switch (c) {
+        groupExtractMode: d
+      } = e;
+      switch (d) {
         case "ITEMS":
-          return B(t, s);
+          return L(e, n);
         case "ITEMX":
-          return j(t, s);
+          return k(e, n);
         case "ITEM":
         default:
-          return z(t, s);
+          return h(e, n);
       }
-    }, O = (t) => {
-      const s = t.detoolbarItems || [], c = o.state.buttonsState[t.id].visible, m = o.state.buttonsState[t.id].disabled;
-      if (!c)
+    }, _ = (e) => {
+      const n = e.detoolbarItems || [], d = t.state.buttonsState[e.id].visible, c = t.state.buttonsState[e.id].disabled;
+      if (!d)
         return null;
-      const S = s.findIndex((n) => {
-        var u;
-        return (u = o.state.buttonsState[n.id]) == null ? void 0 : u.loading;
-      }) !== -1, b = s.findIndex((n) => {
-        var u;
-        return ((u = o.state.buttonsState[n.id]) == null ? void 0 : u.visible) === !0;
-      }) !== -1, y = m || s.findIndex((n) => {
-        var u;
-        return ((u = o.state.buttonsState[n.id]) == null ? void 0 : u.disabled) === !1;
+      const S = n.findIndex((i) => {
+        var r;
+        return (r = t.state.buttonsState[i.id]) == null ? void 0 : r.loading;
+      }) !== -1, b = n.findIndex((i) => {
+        var r;
+        return ((r = t.state.buttonsState[i.id]) == null ? void 0 : r.visible) === !0;
+      }) !== -1, y = c || n.findIndex((i) => {
+        var r;
+        return ((r = t.state.buttonsState[i.id]) == null ? void 0 : r.disabled) === !1;
       }) === -1;
-      if (t.uiactionGroup && t.uiactionGroup.uiactionGroupDetails && t.uiactionGroup.uiactionGroupDetails.length > 0)
-        return T(t, !0);
+      if (e.uiactionGroup && e.uiactionGroup.uiactionGroupDetails && e.uiactionGroup.uiactionGroupDetails.length > 0)
+        return R(e, !0);
       if (!b)
         return null;
-      const w = t.buttonStyle || "";
-      return i(d("el-sub-menu"), {
-        class: [e.b("submenu"), e.em("item", w.toLowerCase()), g(t)],
-        index: t.id,
+      const I = e.buttonStyle || "";
+      return s(m("el-sub-menu"), {
+        class: [o.b("submenu"), o.em("item", I.toLowerCase()), v(e)],
+        index: e.id,
         disabled: y,
-        title: D(t.tooltip),
-        "popper-class": [e.b("submenu-popper"), e.bm("submenu-popper", f), e.em("submenu-popper", w.toLowerCase()), e.bm("submenu-popper", g(t)), g(t)]
+        title: T(e.tooltip),
+        "popper-class": [o.b("submenu-popper"), o.bm("submenu-popper", w), o.em("submenu-popper", I.toLowerCase()), o.bm("submenu-popper", v(e)), v(e)]
       }, {
-        default: () => s.map((n) => {
-          var Y, _;
-          const u = n.uiactionId, h = (Y = o.state.buttonsState[n.id]) == null ? void 0 : Y.visible, R = o.itemProviders[n.id];
-          if (!h)
+        default: () => n.map((i) => {
+          var r, E;
+          const V = i.uiactionId, J = (r = t.state.buttonsState[i.id]) == null ? void 0 : r.visible, Y = t.itemProviders[i.id];
+          if (!J)
             return null;
-          if (R) {
-            const M = d(R.component);
-            return P(M, {
-              key: n.id,
-              class: [e.e("item")],
-              item: t,
-              controller: o
+          if (Y) {
+            const N = m(Y.component);
+            return P(N, {
+              key: i.id,
+              class: [o.e("item")],
+              item: e,
+              controller: t
             });
           }
-          if (n.itemType !== "SEPERATOR") {
-            if (n.itemType === "RAWITEM")
-              return i(d("el-menu-item"), {
-                index: "menuitem".concat(n.id),
-                title: D(n.tooltip)
+          if (i.itemType !== "SEPERATOR") {
+            if (i.itemType === "RAWITEM")
+              return s(m("el-menu-item"), {
+                index: "menuitem".concat(i.id),
+                title: T(i.tooltip)
               }, {
-                default: () => [i(d("iBizRawItem"), {
-                  rawItem: n,
-                  content: n.rawItem.content,
-                  class: e.b("submenu-rawitem"),
-                  onClick: (M) => C(n, M)
+                default: () => [s(m("iBizRawItem"), {
+                  rawItem: i,
+                  content: i.rawItem.content,
+                  class: o.b("submenu-rawitem"),
+                  onClick: (N) => g(i, N)
                 }, null)]
               });
-            if (n.itemType === "DEUIACTION") {
-              let M;
-              const q = (_ = n.buttonStyle) == null ? void 0 : _.toLowerCase();
-              return u === "exportexcel" || u === "gridview_exportaction" ? i(d("i-biz-export-excel"), {
-                class: [e.e("menu-exportexcel"), e.em("item", q), g(n)],
+            if (i.itemType === "DEUIACTION") {
+              let N;
+              const q = (E = i.buttonStyle) == null ? void 0 : E.toLowerCase();
+              return V === "exportexcel" || V === "gridview_exportaction" ? s(m("i-biz-export-excel"), {
+                class: [o.e("menu-exportexcel"), o.em("item", q), v(i)],
                 mode: "menu",
-                item: n,
-                btnContent: (G) => E(G, o.state),
-                size: p.value,
-                controller: o,
-                onExportExcel: (G, Q) => {
-                  C(n, G, Q);
+                item: i,
+                btnContent: (j) => D(j, t.state),
+                size: f.value,
+                controller: t,
+                onExportExcel: (j, X) => {
+                  g(i, j, X);
                 }
-              }, null) : i(d("el-menu-item"), {
-                class: [e.is("loading", o.state.buttonsState[n.id].loading), e.em("item", q), g(n)],
-                index: "menuitem".concat(n.id),
-                disabled: o.state.buttonsState[n.id].disabled,
-                title: D(n.tooltip),
-                onClick: (G) => C(n, G)
+              }, null) : s(m("el-menu-item"), {
+                class: [o.is("loading", t.state.buttonsState[i.id].loading), o.em("item", q), v(i)],
+                index: "menuitem".concat(i.id),
+                disabled: t.state.buttonsState[i.id].disabled,
+                title: T(i.tooltip),
+                onClick: (j) => g(i, j)
               }, {
-                default: () => [i(d("el-button"), {
-                  loading: o.state.buttonsState[n.id].loading
-                }, v(M = E(n, o.state)) ? M : {
-                  default: () => [M]
+                default: () => [s(m("el-button"), {
+                  loading: t.state.buttonsState[i.id].loading
+                }, A(N = D(i, t.state)) ? N : {
+                  default: () => [N]
                 })]
               });
             }
-            return n.itemType === "ITEMS" ? O(n) : null;
+            return i.itemType === "ITEMS" ? _(i) : null;
           }
         }),
         title: () => {
-          let n;
-          return i(d("el-button"), {
+          let i;
+          return s(m("el-button"), {
             loading: S,
             disabled: y,
-            type: L(w)
-          }, v(n = E(t, o.state)) ? n : {
-            default: () => [n]
+            type: G(I)
+          }, A(i = D(e, t.state)) ? i : {
+            default: () => [i]
           });
         }
       });
     };
     return {
-      c: o,
-      btnSize: p,
-      ns: e,
-      toolbarStyle: f,
-      handleClick: C,
-      renderExtraButtons: N,
-      renderToolbarItem: (t) => {
-        var S, b;
-        const s = t.id, c = (S = o.state.buttonsState[s]) == null ? void 0 : S.visible, m = o.itemProviders[s];
-        if (!c)
+      c: t,
+      btnSize: f,
+      ns: o,
+      toolbarStyle: w,
+      handleClick: g,
+      renderExtraButtons: B,
+      renderToolbarItem: (e) => {
+        var n, d;
+        const c = e.id, S = (n = t.state.buttonsState[c]) == null ? void 0 : n.visible, b = t.itemProviders[c];
+        if (!S)
           return null;
-        if (m) {
-          const y = d(m.component);
+        if (b) {
+          const y = m(b.component);
           return P(y, {
-            key: s,
-            class: [e.e("item")],
-            item: t,
-            controller: o
+            key: c,
+            class: [o.e("item")],
+            item: e,
+            controller: t
           });
         }
-        if (t.itemType === "SEPERATOR")
-          return o.state.hideSeparator.includes(s) ? null : i("div", {
-            key: s,
-            class: [e.e("item"), e.e("item-separator")]
-          }, [ct("|")]);
-        if (t.itemType === "RAWITEM")
-          return i("div", {
-            key: s,
-            class: [e.e("item"), e.e("item-rawitem")]
-          }, [i(d("iBizRawItem"), {
-            rawItem: t,
-            content: t.rawItem.content,
-            onClick: (y) => C(t, y)
+        if (e.itemType === "SEPERATOR")
+          return t.state.hideSeparator.includes(c) ? null : s("div", {
+            key: c,
+            class: [o.e("item"), o.e("item-separator")]
+          }, [re("|")]);
+        if (e.itemType === "RAWITEM")
+          return s("div", {
+            key: c,
+            class: [o.e("item"), o.e("item-rawitem")]
+          }, [s(m("iBizRawItem"), {
+            rawItem: e,
+            content: e.rawItem.content,
+            onClick: (y) => g(e, y)
           }, null)]);
-        if (t.itemType === "DEUIACTION") {
+        if (e.itemType === "DEUIACTION") {
           let y;
-          const w = t.uiactionId, {
-            buttonStyle: n
-          } = t;
-          return w === "exportexcel" || w === "gridview_exportaction" ? i(d("i-biz-export-excel"), {
-            class: [e.e("item"), e.e("item-deuiaction"), e.em("item", n == null ? void 0 : n.toLowerCase()), g(t)],
-            item: t,
-            btnContent: (u) => E(u, o.state),
-            size: p.value,
-            controller: o,
-            onExportExcel: (u, h) => {
-              C(t, u, h);
+          const I = e.uiactionId, {
+            buttonStyle: i
+          } = e;
+          return I === "exportexcel" || I === "gridview_exportaction" ? s(m("i-biz-export-excel"), {
+            class: [o.e("item"), o.e("item-deuiaction"), o.em("item", i == null ? void 0 : i.toLowerCase()), v(e)],
+            item: e,
+            btnContent: (r) => D(r, t.state),
+            size: f.value,
+            controller: t,
+            onExportExcel: (r, E) => {
+              g(e, r, E);
             }
-          }, null) : w === "shortcut" ? i(d("i-biz-short-cut-button"), {
-            key: s,
-            class: [e.e("item"), e.e("item-deuiaction"), e.em("item", n == null ? void 0 : n.toLowerCase()), g(t)],
-            item: t,
-            controller: o,
-            size: p.value,
-            onClick: (u) => C(t, u)
-          }, null) : i("div", {
-            key: s,
-            class: [e.e("item"), e.e("item-deuiaction"), e.em("item", n == null ? void 0 : n.toLowerCase()), g(t), e.is("loading", o.state.buttonsState[s].loading)]
-          }, [i(d("el-button"), {
-            size: p.value,
-            title: D(t.tooltip),
-            type: L(n),
-            loading: o.state.buttonsState[s].loading,
-            disabled: o.state.buttonsState[s].disabled,
-            onClick: (u) => C(t, u)
-          }, v(y = E(t, o.state)) ? y : {
+          }, null) : I === "shortcut" ? s(m("i-biz-short-cut-button"), {
+            key: c,
+            class: [o.e("item"), o.e("item-deuiaction"), o.em("item", i == null ? void 0 : i.toLowerCase()), v(e)],
+            item: e,
+            controller: t,
+            size: f.value,
+            onClick: (r) => g(e, r)
+          }, null) : s("div", {
+            key: c,
+            class: [o.e("item"), o.e("item-deuiaction"), o.em("item", i == null ? void 0 : i.toLowerCase()), v(e), o.is("loading", t.state.buttonsState[c].loading)]
+          }, [s(m("el-button"), {
+            size: f.value,
+            title: T(e.tooltip),
+            type: G(i),
+            loading: t.state.buttonsState[c].loading,
+            disabled: t.state.buttonsState[c].disabled,
+            onClick: (r) => g(e, r)
+          }, A(y = D(e, t.state)) ? y : {
             default: () => [y]
           })]);
         }
-        if (t.itemType === "ITEMS") {
+        if (e.itemType === "ITEMS") {
           let y;
-          const w = t, n = w.buttonStyle || "";
-          if (w.groupExtractMode && w.uiactionGroup) {
-            const u = "extract-mode-".concat(((b = w.groupExtractMode) == null ? void 0 : b.toLowerCase()) || "item");
-            return i("div", {
-              class: [a.b(), a.e(u), a.em("item", n.toLowerCase()), g(t)]
-            }, [T(t)]);
+          const I = e, i = I.buttonStyle || "";
+          if (I.groupExtractMode && I.uiactionGroup) {
+            const r = "extract-mode-".concat(((d = I.groupExtractMode) == null ? void 0 : d.toLowerCase()) || "item");
+            return s("div", {
+              class: [u.b(), u.e(r), u.em("item", i.toLowerCase()), v(e)]
+            }, [R(e)]);
           }
-          return i(d("el-menu"), {
+          return s(m("el-menu"), {
             mode: "horizontal",
-            class: [e.e("menu"), e.em("menu", n.toLowerCase()), g(t)],
+            class: [o.e("menu"), o.em("menu", i.toLowerCase()), v(e)],
             ellipsis: !1,
             "menu-trigger": "hover"
-          }, v(y = O(t)) ? y : {
+          }, A(y = _(e)) ? y : {
             default: () => [y]
           });
         }
@@ -702,45 +700,45 @@ const E = (r, l) => {
     };
   },
   render() {
-    var o, e, a;
+    var a, l, p;
     const {
-      state: r
+      state: t
     } = this.c;
-    let l = null;
-    return r.isCreated && (l = [
+    let o = null;
+    return t.isCreated && (o = [
       // 绘制最前方的额外按钮
-      ((o = r.extraButtons.before) == null ? void 0 : o.length) > 0 && this.renderExtraButtons(r.extraButtons.before),
-      (e = this.modelData.detoolbarItems) == null ? void 0 : e.map((p, f) => {
-        var C;
-        const I = this.renderToolbarItem(p);
-        return (C = r.extraButtons[f]) != null && C.length ? [I, this.renderExtraButtons(r.extraButtons[f])] : I;
+      ((a = t.extraButtons.before) == null ? void 0 : a.length) > 0 && this.renderExtraButtons(t.extraButtons.before),
+      (l = this.modelData.detoolbarItems) == null ? void 0 : l.map((u, f) => {
+        var w;
+        const C = this.renderToolbarItem(u);
+        return (w = t.extraButtons[f]) != null && w.length ? [C, this.renderExtraButtons(t.extraButtons[f])] : C;
       }),
       // 绘制最后方的额外按钮
-      ((a = r.extraButtons.after) == null ? void 0 : a.length) > 0 && this.renderExtraButtons(r.extraButtons.after)
-    ]), i(d("iBizControlBase"), {
+      ((p = t.extraButtons.after) == null ? void 0 : p.length) > 0 && this.renderExtraButtons(t.extraButtons.after)
+    ]), s(m("iBizControlBase"), {
       controller: this.c,
-      class: [this.ns.m(r.viewMode.toLowerCase()), this.ns.m(this.toolbarStyle)]
-    }, v(l) ? l : {
-      default: () => [l]
+      class: [this.ns.m(t.viewMode.toLowerCase()), this.ns.m(this.toolbarStyle)]
+    }, A(o) ? o : {
+      default: () => [o]
     });
   }
 });
-class gt {
+class we {
   constructor() {
-    K(this, "component", "IBizDynaTypeToolbar");
+    me(this, "component", "IBizDynaTypeToolbar");
   }
-  createController(l, o, e, a) {
-    return new J(l, o, e, a);
+  createController(l, p, t, o) {
+    return new H(l, p, t, o);
   }
 }
-const Et = {
-  install(r) {
-    r.component(H.name, H), at(
+const Ee = {
+  install(a) {
+    a.component($.name, $), Z(
       "TOOLBAR_RENDER_DYNATYPETOOLBAR",
-      () => new gt()
+      () => new we()
     );
   }
 };
 export {
-  Et as default
+  Ee as default
 };

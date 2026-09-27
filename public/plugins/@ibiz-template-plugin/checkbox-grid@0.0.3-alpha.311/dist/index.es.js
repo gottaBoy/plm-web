@@ -1,11 +1,9 @@
-var G = Object.defineProperty;
-var B = (e, l, a) => l in e ? G(e, l, { enumerable: !0, configurable: !0, writable: !0, value: a }) : e[l] = a;
-var v = (e, l, a) => (B(e, typeof l != "symbol" ? l + "" : l, a), a);
-import { useControlController as R, useNamespace as z, withInstall as w } from "@ibiz-template/vue3-util";
-import { GridController as I, registerControlProvider as L, ControlType as N } from "@ibiz-template/runtime";
-import { defineComponent as E, ref as P, watch as S, computed as x, createVNode as i, resolveComponent as d } from "vue";
-import { createUUID as O } from "qx-util";
-class j extends I {
+import { withInstall as B, useControlController as z, useNamespace as G } from "@ibiz-template/vue3-util";
+import { registerControlProvider as R, ControlType as w, GridController as A } from "@ibiz-template/runtime";
+import { defineComponent as N, ref as k, watch as P, computed as S, createVNode as i, resolveComponent as d } from "vue";
+import { createUUID as I } from "qx-util";
+var L = Object.defineProperty, O = (e, a, s) => a in e ? L(e, a, { enumerable: !0, configurable: !0, writable: !0, value: s }) : e[a] = s, j = (e, a, s) => (O(e, typeof a != "symbol" ? a + "" : a, s), s);
+class E extends A {
   /**
    * 简单列表控制器
    *
@@ -14,8 +12,8 @@ class j extends I {
    * @memberof CheckboxGridController
    */
   get simpleList() {
-    var l;
-    return (l = this.view.parentView) == null ? void 0 : l.getController("simplelist");
+    var a;
+    return (a = this.view.parentView) == null ? void 0 : a.getController("simplelist");
   }
   initState() {
     super.initState(), this.state.enableSelectAll = !1;
@@ -27,7 +25,7 @@ class j extends I {
    * @param {MDCtrlLoadParams} args
    * @memberof CheckboxGridController
    */
-  handleRefreshMode(l) {
+  handleRefreshMode(a) {
   }
   /**
    * 部件参数解析
@@ -44,13 +42,13 @@ class j extends I {
    * @param {string[]} selects 选中数据
    * @memberof CheckboxGridController
    */
-  handleSelection(l) {
-    const { items: a, selectedData: s } = this.state, r = s.filter(
-      (h) => !a.find((m) => m.srfkey === h.srfkey)
-    ), p = a.filter(
-      (h) => l.includes(h.srfkey)
+  handleSelection(a) {
+    const { items: s, selectedData: n } = this.state, o = n.filter(
+      (h) => !s.find((m) => m.srfkey === h.srfkey)
+    ), f = s.filter(
+      (h) => a.includes(h.srfkey)
     );
-    r.push(...p), this.setSelection(r), this.handlePushSimpleListItems();
+    o.push(...f), this.setSelection(o), this.handlePushSimpleListItems();
   }
   /**
    * 处理添加简单列表数据
@@ -59,12 +57,12 @@ class j extends I {
    * @memberof CheckboxGridController
    */
   handlePushSimpleListItems() {
-    var s;
-    const { selectedData: l } = this.state, a = [...l];
-    (s = this.simpleList) == null || s.setData(a);
+    var a;
+    const { selectedData: s } = this.state, n = [...s];
+    (a = this.simpleList) == null || a.setData(n);
   }
 }
-const C = /* @__PURE__ */ E({
+const v = /* @__PURE__ */ N({
   name: "CheckboxGrid",
   props: {
     modelData: {
@@ -108,76 +106,76 @@ const C = /* @__PURE__ */ E({
     }
   },
   setup() {
-    const e = R((...t) => new j(...t)), l = z("checkbox-grid"), a = P([]), s = {
-      srfkey: O(),
+    const e = z((...t) => new E(...t)), a = G("checkbox-grid"), s = k([]), n = {
+      srfkey: I(),
       caption: "全选"
-    }, r = P(!1);
-    S(() => e.state.selectedData, (t) => {
-      a.value = t.map((n) => n.srfkey), e.state.enableSelectAll && g(a.value) && a.value.unshift(s.srfkey);
+    }, o = k(!1);
+    P(() => e.state.selectedData, (t) => {
+      s.value = t.map((l) => l.srfkey), e.state.enableSelectAll && g(s.value) && s.value.unshift(n.srfkey);
     });
-    const p = (t) => {
+    const f = (t) => {
       !t || t === e.state.curPage || (e.state.curPage = t, e.load());
     }, h = (t) => {
       !t || t === e.state.size || (e.state.size = t, e.state.curPage !== 1 && (e.state.curPage = 1), e.load());
     }, m = () => {
       e.load();
-    }, u = x(() => {
+    }, u = S(() => {
       const {
         state: t
       } = e;
       if (e.model.enableGroup) {
-        const n = [];
-        return t.groups.forEach((o) => {
-          if (!o.children.length)
+        const l = [];
+        return t.groups.forEach((r) => {
+          if (!r.children.length)
             return [];
-          const f = [...o.children], c = f.shift();
-          n.push({
-            srfkey: (c == null ? void 0 : c.srfkey) || o.caption,
+          const p = [...r.children], c = p.shift();
+          l.push({
+            srfkey: (c == null ? void 0 : c.srfkey) || r.caption,
             isGroupData: !0,
-            caption: o.caption,
+            caption: r.caption,
             first: c,
-            children: f
+            children: p
           });
-        }), n;
+        }), l;
       }
-      return t.rows.map((n) => n.data);
-    }), b = x(() => {
+      return t.rows.map((l) => l.data);
+    }), y = S(() => {
       if (e.isMultistageHeader)
         return e.model.degridColumns || [];
       const t = [];
-      return e.state.columnStates.forEach((n) => {
-        var f, c;
-        if (n.hidden)
+      return e.state.columnStates.forEach((l) => {
+        var r, p;
+        if (l.hidden)
           return;
-        const o = ((f = e.fieldColumns[n.key]) == null ? void 0 : f.model) || ((c = e.uaColumns[n.key]) == null ? void 0 : c.model);
-        o && t.push(o);
+        const c = ((r = e.fieldColumns[l.key]) == null ? void 0 : r.model) || ((p = e.uaColumns[l.key]) == null ? void 0 : p.model);
+        c && t.push(c);
       }), t;
     });
-    e.state.enableSelectAll && S(() => u.value, () => {
-      const t = a.value.filter((n) => n !== s.srfkey);
-      if (r.value = g(t), !r.value) {
-        a.value = t;
+    e.state.enableSelectAll && P(() => u.value, () => {
+      const t = s.value.filter((l) => l !== n.srfkey);
+      if (o.value = g(t), !o.value) {
+        s.value = t;
         return;
       }
-      a.value.unshift(s.srfkey);
+      s.value.unshift(n.srfkey);
     });
-    const g = (t) => u.value.length > 0 && t.length > 0 && u.value.every((n) => t.includes(n.srfkey)), k = (t) => {
-      r.value = t;
-      let n = [];
-      t && (n = u.value.map((o) => o.srfkey)), e.handleSelection(n);
+    const g = (t) => u.value.length > 0 && t.length > 0 && u.value.every((l) => t.includes(l.srfkey)), b = (t) => {
+      o.value = t;
+      let l = [];
+      t && (l = u.value.map((r) => r.srfkey)), e.handleSelection(l);
     }, D = (t) => {
-      const n = t.filter((o) => o !== s.srfkey);
+      const l = t.filter((r) => r !== n.srfkey);
       if (e.state.enableSelectAll) {
-        if (g(n)) {
-          k(!r.value);
+        if (g(l)) {
+          b(!o.value);
           return;
         }
-        r.value = !1;
+        o.value = !1;
       }
-      e.handleSelection(n);
-    }, A = (t) => {
-      t.preventDefault(), t.stopPropagation(), k(!r.value);
-    }, y = () => {
+      e.handleSelection(l);
+    }, x = (t) => {
+      t.preventDefault(), t.stopPropagation(), b(!o.value);
+    }, C = () => {
       const {
         isLoaded: t
       } = e.state;
@@ -188,34 +186,34 @@ const C = /* @__PURE__ */ E({
     };
     return {
       c: e,
-      ns: l,
-      onPageChange: p,
+      ns: a,
+      onPageChange: f,
       onPageSizeChange: h,
       onPageRefresh: m,
-      renderNoData: y,
+      renderNoData: C,
       renderContent: () => u.value.length > 0 ? i(d("el-checkbox-group"), {
-        modelValue: a.value,
-        "onUpdate:modelValue": (t) => a.value = t,
+        modelValue: s.value,
+        "onUpdate:modelValue": (t) => s.value = t,
         onChange: (t) => D(t)
       }, {
         default: () => [[e.state.enableSelectAll && i(d("el-checkbox"), {
-          label: s.srfkey,
-          checked: r.value,
-          onClick: A
+          label: n.srfkey,
+          checked: o.value,
+          onClick: x
         }, {
           default: () => [i("span", {
-            class: l.em("content", "item"),
-            title: s.caption
-          }, [s.caption])]
+            class: a.em("content", "item"),
+            title: n.caption
+          }, [n.caption])]
         }), u.value.map((t) => i(d("el-checkbox"), {
           label: t.srfkey
         }, {
           default: () => [i("span", {
-            class: l.em("content", "item"),
-            title: t[b.value[0].codeName]
-          }, [t[b.value[0].codeName]])]
+            class: a.em("content", "item"),
+            title: t[y.value[0].codeName]
+          }, [t[y.value[0].codeName]])]
         }))]]
-      }) : y()
+      }) : C()
     };
   },
   render() {
@@ -224,15 +222,15 @@ const C = /* @__PURE__ */ E({
     const {
       state: e
     } = this.c, {
-      enablePagingBar: l
+      enablePagingBar: a
     } = this.c.model;
     return i(d("iBizControlBase"), {
-      class: [this.ns.is("enable-page", l), this.ns.is("enable-group", this.c.model.enableGroup), this.ns.b()],
+      class: [this.ns.is("enable-page", a), this.ns.is("enable-group", this.c.model.enableGroup), this.ns.b()],
       controller: this.c
     }, {
       default: () => [i("div", {
         class: this.ns.e("content")
-      }, [this.renderContent()]), l && i(d("iBizPagination"), {
+      }, [this.renderContent()]), a && i(d("iBizPagination"), {
         total: e.total,
         curPage: e.curPage,
         size: e.size,
@@ -245,15 +243,15 @@ const C = /* @__PURE__ */ E({
 });
 class q {
   constructor() {
-    v(this, "component", "CheckboxGrid");
+    j(this, "component", "CheckboxGrid");
   }
 }
-const M = w(C, (e) => {
-  e.component(C.name, C), L(
-    "".concat(N.GRID, "_RENDER_CHECKBOX_GRID"),
+const M = B(v, (e) => {
+  e.component(v.name, v), R(
+    "".concat(w.GRID, "_RENDER_CHECKBOX_GRID"),
     () => new q()
   );
-}), X = {
+}), H = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(e) {
     e.use(M);
@@ -261,5 +259,5 @@ const M = w(C, (e) => {
 };
 export {
   M as IBizCheckboxGrid,
-  X as default
+  H as default
 };

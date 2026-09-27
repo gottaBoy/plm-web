@@ -1,163 +1,162 @@
-import './style.css';
-var X = Object.defineProperty;
-var Y = (e, t, s) => t in e ? X(e, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : e[t] = s;
-var O = (e, t, s) => (Y(e, typeof t != "symbol" ? t + "" : t, s), s);
-import { Srfuf as k, GridRowState as Z, ControlVO as ee, GridController as te, ScriptFactory as L, registerControlProvider as se } from "@ibiz-template/runtime";
-import { ref as y, watch as T, computed as N, nextTick as ae, defineComponent as ne, onMounted as oe, onBeforeUnmount as re, onUnmounted as ie, createVNode as h, resolveComponent as v, createTextVNode as P, renderSlot as le, isVNode as ce, mergeProps as ue, h as de } from "vue";
-import { useControlController as me, useNamespace as pe, useUIStore as he } from "@ibiz-template/vue3-util";
-import { RuntimeModelError as fe } from "@ibiz-template/core";
-import { createUUID as B } from "qx-util";
-function ge(e) {
+import './assets/style.css';
+import './assets/style.css';
+import { registerControlProvider as K, GridController as X, ScriptFactory as L, Srfuf as O, GridRowState as Y, ControlVO as Z } from "@ibiz-template/runtime";
+import { defineComponent as ee, ref as y, onMounted as te, watch as D, onBeforeUnmount as ae, onUnmounted as se, createVNode as m, resolveComponent as C, createTextVNode as R, computed as N, renderSlot as ne, nextTick as oe, isVNode as ie, mergeProps as re, h as le } from "vue";
+import { useControlController as ce, useNamespace as de, useUIStore as ue } from "@ibiz-template/vue3-util";
+import { RuntimeModelError as me } from "@ibiz-template/core";
+import { createUUID as k } from "qx-util";
+var pe = Object.defineProperty, he = (e, t, a) => t in e ? pe(e, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : e[t] = a, ge = (e, t, a) => (he(e, typeof t != "symbol" ? t + "" : t, a), a);
+function fe(e) {
   const t = y();
-  let s = !1, n = !1;
-  async function a(l, u, f) {
-    if (l.srfuf !== k.CREATE)
+  let a = !1, i = !1;
+  async function n(s, p, h) {
+    if (s.srfuf !== O.CREATE)
       if (ibiz.config.grid.editShowMode === "row" && e.model.enableRowEdit) {
-        const r = e.findRowState(l);
-        r && r.showRowEdit !== !0 && await e.switchRowEdit(r, !0);
+        const l = e.findRowState(s);
+        l && l.showRowEdit !== !0 && await e.switchRowEdit(l, !0);
       } else
-        e.onRowClick(l);
+        e.onRowClick(s);
   }
-  function d(l) {
-    l.srfuf !== k.CREATE && e.onDbRowClick(l);
+  function d(s) {
+    s.srfuf !== O.CREATE && e.onDbRowClick(s);
   }
-  function p(l) {
-    s || e.setSelection(l);
+  function c(s) {
+    a || e.setSelection(s);
   }
-  T(
+  D(
     [
       () => t.value,
       () => e.state.isLoaded,
       () => e.state.selectedData
     ],
-    ([l, u, f]) => {
-      !u || !l || (e.state.singleSelect ? f[0] ? t.value.setCurrentRow(f[0], !0) : t.value.setCurrentRow() : (s = !0, t.value.clearSelection(), f.forEach((r) => t.value.toggleRowSelection(r, !0)), s = !1));
+    ([s, p, h]) => {
+      !p || !s || (e.state.singleSelect ? h[0] ? t.value.setCurrentRow(h[0], !0) : t.value.setCurrentRow() : (a = !0, t.value.clearSelection(), h.forEach((l) => t.value.toggleRowSelection(l, !0)), a = !1));
     }
   );
-  function i(l) {
-    if (n) {
-      n = !1;
+  function r(s) {
+    if (i) {
+      i = !1;
       return;
     }
-    const { prop: u, order: f } = l, r = e.fieldColumns[u].model.appDEFieldId;
-    let g;
-    f === "ascending" ? g = "asc" : f === "descending" && (g = "desc"), "".concat(r, ",").concat(g) !== e.state.sortQuery && (e.setSort(r, g), e.load());
+    const { prop: p, order: h } = s, l = e.fieldColumns[p].model.appDEFieldId;
+    let v;
+    h === "ascending" ? v = "asc" : h === "descending" && (v = "desc"), "".concat(l, ",").concat(v) !== e.state.sortQuery && (e.setSort(l, v), e.load());
   }
-  function c({ row: l }) {
-    let u = "";
-    e.state.selectedData.length > 0 && e.state.selectedData.forEach((r) => {
-      r === l && (u = "current-row");
+  function u({ row: s }) {
+    let p = "";
+    e.state.selectedData.length > 0 && e.state.selectedData.forEach((l) => {
+      l === s && (p = "current-row");
     });
-    const f = e.findRowState(l);
-    return f != null && f.showRowEdit && (u += " editing-row"), l.srfkey && (u += " id-".concat(l.srfkey)), e.enableRowEditOrder && (u += " enable-order"), u;
+    const h = e.findRowState(s);
+    return h != null && h.showRowEdit && (p += " editing-row"), s.srfkey && (p += " id-".concat(s.srfkey)), e.enableRowEditOrder && (p += " enable-order"), p;
   }
-  function m({
-    _row: l,
-    column: u,
-    _rowIndex: f,
-    _columnIndex: r
+  function f({
+    _row: s,
+    column: p,
+    _rowIndex: h,
+    _columnIndex: l
   }) {
-    var C;
-    const g = (C = e.model.degridColumns) == null ? void 0 : C.find((_) => _.codeName === u.property);
-    return g && g.headerSysCss && g.headerSysCss.cssName ? g.headerSysCss.cssName : "";
+    var v;
+    const w = (v = e.model.degridColumns) == null ? void 0 : v.find((_) => _.codeName === p.property);
+    return w && w.headerSysCss && w.headerSysCss.cssName ? w.headerSysCss.cssName : "";
   }
-  return T(
+  return D(
     () => e.state.sortQuery,
-    (l) => {
-      if (l) {
-        const u = e.state.sortQuery.split(",")[0], f = e.state.sortQuery.split(",")[1];
-        if (u && f) {
-          const r = f === "desc" ? "descending" : "ascending", g = () => {
-            t.value ? ae(() => {
-              n = !0, t.value.sort(u, r);
-            }) : setTimeout(g, 500);
+    (s) => {
+      if (s) {
+        const p = e.state.sortQuery.split(",")[0], h = e.state.sortQuery.split(",")[1];
+        if (p && h) {
+          const l = h === "desc" ? "descending" : "ascending", v = () => {
+            t.value ? oe(() => {
+              i = !0, t.value.sort(p, l);
+            }) : setTimeout(v, 500);
           };
-          g();
+          v();
         }
       }
     }
   ), {
     tableRef: t,
-    onRowClick: a,
+    onRowClick: n,
     onDbRowClick: d,
-    onSelectionChange: p,
-    onSortChange: i,
-    handleRowClassName: c,
-    handleHeaderCellClassName: m
+    onSelectionChange: c,
+    onSortChange: r,
+    handleRowClassName: u,
+    handleHeaderCellClassName: f
   };
 }
-function we(e) {
-  function t(a) {
-    !a || a === e.state.curPage || (e.state.curPage = a, e.load());
+function ve(e) {
+  function t(n) {
+    !n || n === e.state.curPage || (e.state.curPage = n, e.load());
   }
-  function s(a) {
-    !a || a === e.state.size || (e.state.size = a, e.state.curPage === 1 && e.load());
+  function a(n) {
+    !n || n === e.state.size || (e.state.size = n, e.state.curPage === 1 && e.load());
   }
-  function n() {
+  function i() {
     e.load();
   }
-  return { onPageChange: t, onPageSizeChange: s, onPageRefresh: n };
+  return { onPageChange: t, onPageSizeChange: a, onPageRefresh: i };
 }
-function Ce(e, t) {
-  const s = () => {
-    t.data && (e.state.items = t.data, e.state.rows = t.data.map((i) => new Z(new ee(i), e)));
-  }, n = N(() => {
+function we(e, t) {
+  const a = () => {
+    t.data && (e.state.items = t.data, e.state.rows = t.data.map((c) => new Y(new Z(c), e)));
+  }, i = N(() => {
     var c;
-    const i = Object.values(e.fieldColumns).find(
-      (m) => m.model.appDEFieldId === e.model.minorSortAppDEFieldId
+    const r = Object.values(e.fieldColumns).find(
+      (u) => u.model.appDEFieldId === e.model.minorSortAppDEFieldId
     );
     return {
-      prop: i == null ? void 0 : i.model.codeName,
+      prop: r == null ? void 0 : r.model.codeName,
       order: ((c = e.model.minorSortDir) == null ? void 0 : c.toLowerCase()) === "desc" ? "descending" : "ascending"
     };
   });
   e.evt.on("onCreated", async () => {
-    t.isSimple && (s(), e.state.isLoaded = !0);
-  }), T(
+    t.isSimple && (a(), e.state.isLoaded = !0);
+  }), D(
     () => t.data,
     () => {
-      t.isSimple && s();
+      t.isSimple && a();
     },
     {
       deep: !0
     }
   );
-  const a = N(() => {
-    const { state: i } = e;
+  const n = N(() => {
+    const { state: c } = e;
     if (e.model.enableGroup) {
-      const c = [];
-      return i.groups.forEach((m) => {
-        if (!m.children.length)
+      const r = [];
+      return c.groups.forEach((u) => {
+        if (!u.children.length)
           return;
-        const l = [...m.children], u = l.shift();
-        c.push({
-          tempsrfkey: (u == null ? void 0 : u.tempsrfkey) || m.caption,
-          srfkey: (u == null ? void 0 : u.srfkey) || m.caption,
+        const f = [...u.children], s = f.shift();
+        r.push({
+          tempsrfkey: (s == null ? void 0 : s.tempsrfkey) || u.caption,
+          srfkey: (s == null ? void 0 : s.srfkey) || u.caption,
           isGroupData: !0,
-          caption: m.caption,
-          first: u,
-          children: l
+          caption: u.caption,
+          first: s,
+          children: f
         });
-      }), c;
+      }), r;
     }
-    return i.rows.map((c) => c.data);
+    return c.rows.map((r) => r.data);
   }), d = N(() => {
     if (e.isMultistageHeader)
       return e.model.degridColumns || [];
-    const i = [];
-    return e.state.columnStates.forEach((c) => {
-      var l, u;
-      if (c.hidden)
+    const c = [];
+    return e.state.columnStates.forEach((r) => {
+      var u, f;
+      if (r.hidden)
         return;
-      const m = ((l = e.fieldColumns[c.key]) == null ? void 0 : l.model) || ((u = e.uaColumns[c.key]) == null ? void 0 : u.model);
-      m && i.push(m);
-    }), i;
+      const s = ((u = e.fieldColumns[r.key]) == null ? void 0 : u.model) || ((f = e.uaColumns[r.key]) == null ? void 0 : f.model);
+      s && c.push(s);
+    }), c;
   });
-  return { tableData: a, renderColumns: d, defaultSort: n, summaryMethod: ({
-    columns: i
-  }) => i.map((c, m) => m === 0 ? e.aggTitle : e.state.aggResult[c.property]) };
+  return { tableData: n, renderColumns: d, defaultSort: i, summaryMethod: ({
+    columns: c
+  }) => c.map((r, u) => u === 0 ? e.aggTitle : e.state.aggResult[r.property]) };
 }
-class be extends te {
+class be extends X {
   /**
    * 重写初始化state class类
    *
@@ -178,24 +177,24 @@ class be extends te {
    */
   convertList(t) {
     if (this.controlParams.responsemap) {
-      const s = [], n = {
+      const a = [], i = {
         id: "id",
         name: "name"
       };
       try {
-        const a = JSON.parse(this.controlParams.responsemap);
-        Object.assign(n, a);
-      } catch (a) {
+        const n = JSON.parse(this.controlParams.responsemap);
+        Object.assign(i, n);
+      } catch (n) {
         console.log("转化JSON配置错误");
       }
-      t.forEach((a) => {
-        s.push(
-          Object.assign(a, {
-            id: a[n.id],
-            name: a[n.name]
+      t.forEach((n) => {
+        a.push(
+          Object.assign(n, {
+            id: n[i.id],
+            name: n[i.name]
           })
         );
-      }), this.state.compareList = s;
+      }), this.state.compareList = a;
     } else
       this.state.compareList = t;
   }
@@ -209,26 +208,26 @@ class be extends te {
       { context: this.context, params: this.params },
       this.controlParams.requesturl,
       { singleRowReturn: !0 }
-    ), s = L.execScriptFn(
+    ), a = L.execScriptFn(
       { context: this.context, params: this.params },
       this.controlParams.n_owner_id_eq,
       { singleRowReturn: !0 }
-    ), n = L.execScriptFn(
+    ), i = L.execScriptFn(
       { context: this.context, params: this.params },
       this.controlParams.n_owner_type_eq,
       { singleRowReturn: !0 }
-    ), a = {
+    ), n = {
       method: this.controlParams.requestmethod || "post",
       data: {
-        n_owner_id_eq: s,
-        n_owner_type_eq: n
+        n_owner_id_eq: a,
+        n_owner_type_eq: i
       }
     };
     if (t && typeof t == "string") {
-      const d = await ibiz.net.request(t, a);
+      const d = await ibiz.net.request(t, n);
       d && d.data && (Array.isArray(d.data) ? this.convertList(d.data) : this.convertList([d.data]));
     } else
-      throw new fe(this.model, "请配置数据接口地址");
+      throw new me(this.model, "请配置数据接口地址");
   }
   /**
    * 部件加载数据行为
@@ -239,26 +238,26 @@ class be extends te {
   async load(t = {}) {
     if (this.state.isSimple)
       return [];
-    const s = t.silent === !0;
-    s || await this.startLoading();
+    const a = t.silent === !0;
+    a || await this.startLoading();
     try {
-      const n = t.isInitialLoad === !0, a = t.isLoadMore === !0;
-      n ? this.state.curPage = 1 : a && (this.state.curPage += 1);
-      const { context: d } = this.handlerAbilityParams(t), p = await this.getFetchParams(t == null ? void 0 : t.viewParam);
-      p[this.state.compareline] || (p[this.state.compareline] = this.params[this.state.baseline]);
-      const i = await this.service.fetch(d, p);
-      typeof i.total == "number" && (this.state.total = i.total), typeof i.totalPages == "number" && (this.state.totalPages = i.totalPages), a ? this.state.items.push(...i.data) : this.state.items = i.data, await this.afterLoad(t, i.data), this.state.isLoaded = !0, await this._evt.emit("onLoadSuccess", {
-        isInitialLoad: n
+      const i = t.isInitialLoad === !0, n = t.isLoadMore === !0;
+      i ? this.state.curPage = 1 : n && (this.state.curPage += 1);
+      const { context: d } = this.handlerAbilityParams(t), c = await this.getFetchParams(t == null ? void 0 : t.viewParam);
+      c[this.state.compareline] || (c[this.state.compareline] = this.params[this.state.baseline]);
+      const r = await this.service.fetch(d, c);
+      typeof r.total == "number" && (this.state.total = r.total), typeof r.totalPages == "number" && (this.state.totalPages = r.totalPages), n ? this.state.items.push(...r.data) : this.state.items = r.data, await this.afterLoad(t, r.data), this.state.isLoaded = !0, await this._evt.emit("onLoadSuccess", {
+        isInitialLoad: i
       });
-    } catch (n) {
+    } catch (i) {
       throw await this._evt.emit("onLoadError", void 0), this.actionNotification("FETCHERROR", {
-        error: n
-      }), n;
+        error: i
+      }), i;
     } finally {
-      s || await this.endLoading();
+      a || await this.endLoading();
     }
-    return this.state.items.forEach((n, a) => {
-      n.srfserialnum = a + 1;
+    return this.state.items.forEach((i, n) => {
+      i.srfserialnum = n + 1;
     }), this.actionNotification("FETCHSUCCESS"), this.state.items;
   }
   /**
@@ -269,85 +268,85 @@ class be extends te {
    * @return {*}  {Promise<ControlVO[]>}
    * @memberof BaselineCompareController
    */
-  async afterLoad(t, s) {
-    return await super.afterLoad(t, s), this.computeCompareGroup(t, s), s;
+  async afterLoad(t, a) {
+    return await super.afterLoad(t, a), this.computeCompareGroup(t, a), a;
   }
   /**
    * 计算比对分组数据,根据属性 principal_id 分为两组
    *
    * @memberof BaselineCompareController
    */
-  computeCompareGroup(t, s) {
-    var u, f;
-    const n = [], a = [], d = ((u = t == null ? void 0 : t.viewParam) == null ? void 0 : u[this.state.baseline]) || this.params[this.state.baseline], p = ((f = t == null ? void 0 : t.viewParam) == null ? void 0 : f[this.state.compareline]) || this.params[this.state.baseline], i = [], c = [];
-    s.forEach((r) => {
-      d === p ? r.is_latest === "1" ? c.push(r) : i.push(r) : r.principal_id === d ? i.push(r) : c.push(r);
-    }), i.forEach((r) => {
-      const g = this.diffItms(r.target_id, i, c);
-      if (g === "DEL")
-        n.push(Object.assign(r, { actionType: g })), a.push(
+  computeCompareGroup(t, a) {
+    var i, n;
+    const d = [], c = [], r = ((i = t == null ? void 0 : t.viewParam) == null ? void 0 : i[this.state.baseline]) || this.params[this.state.baseline], u = ((n = t == null ? void 0 : t.viewParam) == null ? void 0 : n[this.state.compareline]) || this.params[this.state.baseline], f = [], s = [];
+    a.forEach((l) => {
+      r === u ? l.is_latest === "1" ? s.push(l) : f.push(l) : l.principal_id === r ? f.push(l) : s.push(l);
+    }), f.forEach((l) => {
+      const v = this.diffItms(l.target_id, f, s);
+      if (v === "DEL")
+        d.push(Object.assign(l, { actionType: v })), c.push(
           Object.assign({}, {
-            actionType: g,
-            tempsrfkey: B(),
-            base_version: d,
-            compare_version: p,
-            base_target_version_id: r.target_version_id,
+            actionType: v,
+            tempsrfkey: k(),
+            base_version: r,
+            compare_version: u,
+            base_target_version_id: l.target_version_id,
             compare_target_version_id: ""
           })
         );
       else {
-        const C = c.findIndex((_) => _.target_id === r.target_id);
-        this.compareField(r, c[C]) ? (n.push(
-          Object.assign(r, {
-            actionType: g
+        const w = s.findIndex((_) => _.target_id === l.target_id);
+        this.compareField(l, s[w]) ? (d.push(
+          Object.assign(l, {
+            actionType: v
           })
-        ), a.push(
-          Object.assign(c[C], {
-            actionType: g,
-            base_version: d,
-            compare_version: p,
-            base_target_version_id: r.target_version_id,
-            compare_target_version_id: c[C].target_version_id
+        ), c.push(
+          Object.assign(s[w], {
+            actionType: v,
+            base_version: r,
+            compare_version: u,
+            base_target_version_id: l.target_version_id,
+            compare_target_version_id: s[w].target_version_id
           })
-        )) : (n.push(
-          Object.assign(r, {
-            actionType: "UN".concat(g)
+        )) : (d.push(
+          Object.assign(l, {
+            actionType: "UN".concat(v)
           })
-        ), a.push(
-          Object.assign(c[C], {
-            actionType: "UN".concat(g),
-            base_version: d,
-            compare_version: p,
-            base_target_version_id: r.target_version_id,
-            compare_target_version_id: c[C].target_version_id
+        ), c.push(
+          Object.assign(s[w], {
+            actionType: "UN".concat(v),
+            base_version: r,
+            compare_version: u,
+            base_target_version_id: l.target_version_id,
+            compare_target_version_id: s[w].target_version_id
           })
-        )), c.splice(C, 1);
+        )), s.splice(w, 1);
       }
-    }), c.forEach((r) => {
-      n.push(
+    }), s.forEach((l) => {
+      d.push(
         Object.assign({}, {
           actionType: "ADD",
-          tempsrfkey: B()
+          tempsrfkey: k()
         })
-      ), a.push(
-        Object.assign(r, {
+      ), c.push(
+        Object.assign(l, {
           actionType: "ADD",
-          base_version: d,
-          compare_version: p
+          base_version: r,
+          compare_version: u
         })
       );
     });
-    const m = this.state.compareList.find((r) => r.id === d), l = this.state.compareList.find((r) => r.id === p);
+    const p = this.state.compareList.find((l) => l.id === r), h = this.state.compareList.find((l) => l.id === u);
     this.state.compareGroup = [
       {
-        name: m == null ? void 0 : m.name,
-        id: m == null ? void 0 : m.id,
-        data: n
+        name: p == null ? void 0 : p.name,
+        id: p == null ? void 0 : p.id,
+        data: d
       },
       {
-        name: l == null ? void 0 : l.name,
-        id: l == null ? void 0 : l.id,
-        data: a
+        name: h == null ? void 0 : h.name,
+        id: h == null ? void 0 : h.id,
+        data: c
       }
     ];
   }
@@ -359,8 +358,8 @@ class be extends te {
    * @return {*}
    * @memberof BaselineCompareController
    */
-  compareField(t, s) {
-    return t.target_version_id !== s.target_version_id;
+  compareField(t, a) {
+    return t.target_version_id !== a.target_version_id;
   }
   /**
    * 判断当前项在左右两边是否存在，因为遍历的是左边，所以肯定不会出现左边没有而右边存在的情况，不会返回 [ADD]
@@ -371,59 +370,59 @@ class be extends te {
    * @return {*}
    * @memberof BaselineCompareController
    */
-  diffItms(t, s, n) {
-    const a = s.filter((p) => p.target_id === t), d = n.filter((p) => p.target_id === t);
-    if (a.length > 0 && d.length > 0)
+  diffItms(t, a, i) {
+    const n = a.filter((c) => c.target_id === t), d = i.filter((c) => c.target_id === t);
+    if (n.length > 0 && d.length > 0)
       return "EDIT";
-    if (a.length > 0)
+    if (n.length > 0)
       return "DEL";
   }
 }
-function ve(e) {
-  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !ce(e);
+function Ce(e) {
+  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !ie(e);
 }
 function ye(e, t) {
-  var n;
-  const s = {};
-  return (n = e.controlAttributes) == null || n.forEach((a) => {
-    a.attrName && a.attrValue && (s[a.attrName] = L.execSingleLine(a.attrValue, {
+  var a;
+  const i = {};
+  return (a = e.controlAttributes) == null || a.forEach((n) => {
+    n.attrName && n.attrValue && (i[n.attrName] = L.execSingleLine(n.attrValue, {
       ...t
     }));
-  }), s;
+  }), i;
 }
-function _e(e, t, s, n) {
-  var l;
+function _e(e, t, a, i) {
+  var n;
   const {
-    codeName: a,
-    width: d
-  } = t, p = e.columns[a], i = e.state.columnStates.find((u) => u.key === a), m = p.isAdaptiveColumn || !e.hasAdaptiveColumn && n === s.length - 1 ? "min-width" : "width";
-  return h(v("el-table-column"), ue({
+    codeName: d,
+    width: c
+  } = t, r = e.columns[d], u = e.state.columnStates.find((s) => s.key === d), f = r.isAdaptiveColumn || !e.hasAdaptiveColumn && i === a.length - 1 ? "min-width" : "width";
+  return m(C("el-table-column"), re({
     label: t.caption,
-    prop: a
+    prop: d
   }, {
-    [m]: d
+    [f]: c
   }, {
-    fixed: i.fixed,
+    fixed: u.fixed,
     sortable: t.enableSort ? "custom" : !1,
-    align: ((l = t.align) == null ? void 0 : l.toLowerCase()) || "center"
+    align: ((n = t.align) == null ? void 0 : n.toLowerCase()) || "center"
   }), {
     default: ({
-      row: u
+      row: s
     }) => {
-      let f = u;
-      u.isGroupData && (f = u.first);
-      const r = e.findRowState(f);
-      if (t.columnType === "UAGRIDCOLUMN" && !["EDIT", "UNEDIT"].includes(f.actionType))
+      let p = s;
+      s.isGroupData && (p = s.first);
+      const h = e.findRowState(p);
+      if (t.columnType === "UAGRIDCOLUMN" && !["EDIT", "UNEDIT"].includes(p.actionType))
         return null;
-      if (r) {
-        const g = v(e.providers[a].component);
-        return de(g, {
-          controller: p,
-          row: r,
-          key: f.tempsrfkey + a,
+      if (h) {
+        const l = C(e.providers[d].component);
+        return le(l, {
+          controller: r,
+          row: h,
+          key: p.tempsrfkey + d,
           attrs: ye(t, {
             ...e.getEventArgs(),
-            data: r.data
+            data: h.data
           })
         });
       }
@@ -431,24 +430,24 @@ function _e(e, t, s, n) {
     }
   });
 }
-function G(e, t, s, n) {
-  var a, d;
+function j(e, t, a, i) {
+  var n, d;
   if (t.columnType === "GROUPGRIDCOLUMN") {
-    const p = ((a = t.degridColumns) == null ? void 0 : a.filter((m) => !m.hideDefault && !m.hiddenDataItem)) || [], {
-      width: i
-    } = t, c = ((d = t.align) == null ? void 0 : d.toLowerCase()) || "center";
-    return h(v("el-table-column"), {
+    const c = ((n = t.degridColumns) == null ? void 0 : n.filter((f) => !f.hideDefault && !f.hiddenDataItem)) || [], {
+      width: r
+    } = t, u = ((d = t.align) == null ? void 0 : d.toLowerCase()) || "center";
+    return m(C("el-table-column"), {
       prop: t.codeName,
       label: t.caption,
-      "min-width": i,
-      align: c
+      "min-width": r,
+      align: u
     }, {
-      default: () => p.map((m, l) => G(e, m, s, l))
+      default: () => c.map((f, s) => j(e, f, a, s))
     });
   }
-  return _e(e, t, s, n);
+  return _e(e, t, a, i);
 }
-const A = /* @__PURE__ */ ne({
+const z = /* @__PURE__ */ ee({
   name: "BaselineCompare",
   props: {
     modelData: {
@@ -502,156 +501,156 @@ const A = /* @__PURE__ */ ne({
   setup(e, {
     slots: t
   }) {
-    const s = me((...o) => new be(...o)), n = pe("baseline-compare"), {
-      zIndex: a
-    } = he();
-    s.state.zIndex = a.increment();
-    const d = y(), p = y(), i = y(), c = y(), m = y([]);
-    s.params[s.state.compareline] && (i.value = s.params[s.state.compareline]), s.params[s.state.baseline] && (c.value = s.params[s.state.baseline]);
+    const a = ce((...o) => new be(...o)), i = de("baseline-compare"), {
+      zIndex: n
+    } = ue();
+    a.state.zIndex = n.increment();
+    const d = y(), c = y(), r = y(), u = y(), f = y([]);
+    a.params[a.state.compareline] && (r.value = a.params[a.state.compareline]), a.params[a.state.baseline] && (u.value = a.params[a.state.baseline]);
     const {
-      onRowClick: l,
-      onDbRowClick: u,
-      onSelectionChange: f,
-      onSortChange: r,
-      handleRowClassName: g,
-      handleHeaderCellClassName: C
-    } = ge(s), {
+      onRowClick: s,
+      onDbRowClick: p,
+      onSelectionChange: h,
+      onSortChange: l,
+      handleRowClassName: v,
+      handleHeaderCellClassName: w
+    } = fe(a), {
       onPageChange: _,
-      onPageRefresh: M,
-      onPageSizeChange: j
-    } = we(s), z = () => {
+      onPageRefresh: A,
+      onPageSizeChange: G
+    } = ve(a), B = () => {
       const {
         isLoaded: o
-      } = s.state;
-      return o ? h(v("iBizNoData"), {
-        text: s.model.emptyText,
-        emptyTextLanguageRes: s.model.emptyTextLanguageRes
-      }, null) : h("div", null, null);
+      } = a.state;
+      return o ? m(C("iBizNoData"), {
+        text: a.model.emptyText,
+        emptyTextLanguageRes: a.model.emptyTextLanguageRes
+      }, null) : m("div", null, null);
     }, {
       tableData: U,
-      renderColumns: x,
-      defaultSort: F,
-      summaryMethod: $
-    } = Ce(s, e), q = (o, w, b) => b === 0 && o.columnType === "UAGRIDCOLUMN" ? null : t[o.id] ? le(t, o.id, {
+      renderColumns: T,
+      defaultSort: M,
+      summaryMethod: F
+    } = we(a, e), q = (o, g, b) => b === 0 && o.columnType === "UAGRIDCOLUMN" ? null : t[o.id] ? ne(t, o.id, {
       model: o,
-      data: s.state.items
-    }) : G(s, o, x.value, w), H = (o) => {
-      const w = g({
+      data: a.state.items
+    }) : j(a, o, T.value, g), H = (o) => {
+      const g = v({
         row: o.row
       });
       if (o.row && o.row.actionType) {
         const b = "compareline-type-".concat(o.row.actionType.toLowerCase());
-        return "".concat(w, " ").concat(b);
+        return "".concat(g, " ").concat(b);
       }
-      return w;
-    }, Q = (o) => {
-      c.value && o && s.load({
+      return g;
+    }, V = (o) => {
+      u.value && o && a.load({
         isInitialLoad: !0,
         viewParam: {
-          [s.state.baseline]: c.value,
-          [s.state.compareline]: o
+          [a.state.baseline]: u.value,
+          [a.state.compareline]: o
         }
       });
-    }, V = () => {
+    }, Q = () => {
       let o;
-      return h(v("el-select"), {
-        modelValue: i.value,
-        "onUpdate:modelValue": (w) => i.value = w,
+      return m(C("el-select"), {
+        modelValue: r.value,
+        "onUpdate:modelValue": (g) => r.value = g,
         "fit-input-width": !0,
-        onChange: Q
-      }, ve(o = s.state.compareList.map((w) => h(v("el-option"), {
-        value: w.id,
-        label: w.name
+        onChange: V
+      }, Ce(o = a.state.compareList.map((g) => m(C("el-option"), {
+        value: g.id,
+        label: g.name
       }, {
-        default: () => [h("div", {
-          class: n.e("dropdown-select")
-        }, [h("span", null, [w.name]), w.id === c.value ? h("div", {
-          class: n.em("dropdown-select", "last")
-        }, [P("最新版本")]) : null])]
+        default: () => [m("div", {
+          class: i.e("dropdown-select")
+        }, [m("span", null, [g.name]), g.id === u.value ? m("div", {
+          class: i.em("dropdown-select", "last")
+        }, [R("最新版本")]) : null])]
       }))) ? o : {
         default: () => [o]
       });
-    }, W = () => h("div", {
-      class: n.e("legen-icon")
-    }, [h("div", {
-      class: n.em("legen-icon", "add")
-    }, [P("新增")]), h("div", {
-      class: n.em("legen-icon", "change")
-    }, [P("修改")]), h("div", {
-      class: n.em("legen-icon", "del")
-    }, [P("删除")])]), D = (o) => {
-      var w;
+    }, W = () => m("div", {
+      class: i.e("legen-icon")
+    }, [m("div", {
+      class: i.em("legen-icon", "add")
+    }, [R("新增")]), m("div", {
+      class: i.em("legen-icon", "change")
+    }, [R("修改")]), m("div", {
+      class: i.em("legen-icon", "del")
+    }, [R("删除")])]), x = (o) => {
+      var g;
       if (o) {
-        const b = (w = o.target) == null ? void 0 : w.scrollTop;
-        d.value.setScrollTop(b), p.value.setScrollTop(b);
+        const b = (g = o.target) == null ? void 0 : g.scrollTop;
+        d.value.setScrollTop(b), c.value.setScrollTop(b);
       }
     }, I = (o) => {
-      o && o.addEventListener("scroll", D);
+      o && o.addEventListener("scroll", x);
     };
-    oe(async () => {
+    te(async () => {
       setTimeout(() => {
-        var b, S, R, E;
-        const o = (S = (b = d.value) == null ? void 0 : b.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : S[0], w = (E = (R = p.value) == null ? void 0 : R.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : E[0];
-        I(o), I(w);
+        var o, g, b, S;
+        const P = (g = (o = d.value) == null ? void 0 : o.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : g[0], E = (S = (b = c.value) == null ? void 0 : b.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : S[0];
+        I(P), I(E);
       }, 1200);
-    }), T(() => s.state.compareList, (o) => {
-      o && !i.value && (i.value = c.value), c.value && i.value && o.length > 0 && s.load({
+    }), D(() => a.state.compareList, (o) => {
+      o && !r.value && (r.value = u.value), u.value && r.value && o.length > 0 && a.load({
         isInitialLoad: !0,
         viewParam: {
-          [s.state.baseline]: c.value,
-          [s.state.compareline]: i.value
+          [a.state.baseline]: u.value,
+          [a.state.compareline]: r.value
         }
       });
     }, {
       immediate: !0,
       deep: !0
     });
-    const J = (o) => {
+    const $ = (o) => {
       if (o.column && o.column.type === "index")
         return "baseline-index";
       if (o.column && o.column.property === "uagridcolumn1")
         return "baseline-uaaction";
-    }, K = (o) => {
-      const w = C({
+    }, J = (o) => {
+      const g = w({
         _row: o.row,
         _columnIndex: o._columnIndex,
         _rowIndex: o.rowIndex,
         column: o.column
       });
-      return o.column && o.column.type === "index" ? "".concat(w, " baseline-header baseline-index") : "".concat(w, " baseline-header");
+      return o.column && o.column.type === "index" ? "".concat(g, " baseline-header baseline-index") : "".concat(g, " baseline-header");
     };
-    return re(() => {
-      var b, S, R, E;
-      const o = (S = (b = d.value) == null ? void 0 : b.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : S[0], w = (E = (R = p.value) == null ? void 0 : R.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : E[0];
-      o && o.removeEventListener("scroll", D), w && w.removeEventListener("scroll", D);
-    }), ie(() => {
-      a.decrement();
+    return ae(() => {
+      var o, g, b, S;
+      const P = (g = (o = d.value) == null ? void 0 : o.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : g[0], E = (S = (b = c.value) == null ? void 0 : b.$refs.bodyWrapper.getElementsByClassName("el-scrollbar__wrap")) == null ? void 0 : S[0];
+      P && P.removeEventListener("scroll", x), E && E.removeEventListener("scroll", x);
+    }), se(() => {
+      n.decrement();
     }), {
-      c: s,
-      ns: n,
+      c: a,
+      ns: i,
       curTableRef: d,
-      compareTableRef: p,
+      compareTableRef: c,
       tableData: U,
-      renderColumns: x,
-      CustomCellClass: J,
+      renderColumns: T,
+      CustomCellClass: $,
       renderTableColumn: q,
-      onDbRowClick: u,
-      onRowClick: l,
-      onSelectionChange: f,
-      onSortChange: r,
+      onDbRowClick: p,
+      onRowClick: s,
+      onSelectionChange: h,
+      onSortChange: l,
       onPageChange: _,
-      onPageSizeChange: j,
-      onPageRefresh: M,
-      handleRowClassName: g,
-      handleHeaderCellClassName: C,
-      renderNoData: z,
-      summaryMethod: $,
-      customHeaderRowClass: K,
-      renderSelectCompare: V,
+      onPageSizeChange: G,
+      onPageRefresh: A,
+      handleRowClassName: v,
+      handleHeaderCellClassName: w,
+      renderNoData: B,
+      summaryMethod: F,
+      customHeaderRowClass: J,
+      renderSelectCompare: Q,
       renderLegendIcon: W,
       customRowClass: H,
-      compareGroup: m,
-      defaultSort: F
+      compareGroup: f,
+      defaultSort: M
     };
   },
   render() {
@@ -661,32 +660,32 @@ const A = /* @__PURE__ */ ne({
       state: e
     } = this.c, {
       hideHeader: t,
-      enablePagingBar: s
+      enablePagingBar: a
     } = this.c.model;
-    return h(v("iBizControlBase"), {
-      class: [this.ns.is("show-header", !t), this.ns.is("enable-page", s), this.ns.is("enable-group", this.c.model.enableGroup), this.ns.is("single-select", e.singleSelect), this.ns.is("empty", e.items.length === 0), this.ns.is("enable-customized", this.c.model.enableCustomized)],
+    return m(C("iBizControlBase"), {
+      class: [this.ns.is("show-header", !t), this.ns.is("enable-page", a), this.ns.is("enable-group", this.c.model.enableGroup), this.ns.is("single-select", e.singleSelect), this.ns.is("empty", e.items.length === 0), this.ns.is("enable-customized", this.c.model.enableCustomized)],
       controller: this.c
     }, {
-      default: () => [h("div", {
-        class: [this.ns.b(), this.ns.is("show-page", s)]
-      }, [h("div", {
+      default: () => [m("div", {
+        class: [this.ns.b(), this.ns.is("show-page", a)]
+      }, [m("div", {
         class: this.ns.e("select")
-      }, [h("div", {
+      }, [m("div", {
         class: this.ns.em("select", "title")
-      }, [this.c.view.model.caption]), h("div", {
+      }, [this.c.view.model.caption]), m("div", {
         class: this.ns.em("select", "right")
-      }, [this.renderSelectCompare(), h("span", {
+      }, [this.renderSelectCompare(), m("span", {
         class: this.ns.em("select", "separate")
-      }, [P("|")]), this.renderLegendIcon()])]), h("div", {
+      }, [R("|")]), this.renderLegendIcon()])]), m("div", {
         class: this.ns.e("grid")
-      }, [e.compareGroup.map((n, a) => h("div", {
-        class: [this.ns.em("grid", n.id), this.ns.e("version")]
-      }, [h("div", {
+      }, [e.compareGroup.map((i, n) => m("div", {
+        class: [this.ns.em("grid", i.id), this.ns.e("version")]
+      }, [m("div", {
         class: this.ns.em("version", "title")
-      }, [n.name]), h("div", {
+      }, [i.name]), m("div", {
         class: this.ns.em("version", "compare-grid")
-      }, [h(v("el-table"), {
-        ref: a === 0 ? "curTableRef" : "compareTableRef",
+      }, [m(C("el-table"), {
+        ref: n === 0 ? "curTableRef" : "compareTableRef",
         class: this.ns.e("table"),
         "default-sort": this.defaultSort,
         border: !0,
@@ -698,7 +697,7 @@ const A = /* @__PURE__ */ ne({
         "row-class-name": this.customRowClass,
         "header-cell-class-name": this.customHeaderRowClass,
         "row-key": "tempsrfkey",
-        data: n.data,
+        data: i.data,
         onRowClick: this.onRowClick,
         onRowDblclick: this.onDbRowClick,
         onSelectionChange: this.onSelectionChange,
@@ -706,19 +705,19 @@ const A = /* @__PURE__ */ ne({
         "tooltip-effect": "light"
       }, {
         empty: this.renderNoData,
-        default: () => [a === 0 && h(v("el-table-column"), {
+        default: () => [n === 0 && m(C("el-table-column"), {
           "class-name": this.ns.e("row-index"),
           label: "#",
           type: "index",
           align: "center",
           width: "55"
-        }, null), this.renderColumns.map((d, p) => this.renderTableColumn(d, p, a))]
-      }), this.c.model.enableCustomized && !t && a === 1 && h("div", {
+        }, null), this.renderColumns.map((d, c) => this.renderTableColumn(d, c, n))]
+      }), this.c.model.enableCustomized && !t && n === 1 && m("div", {
         class: this.ns.b("setting-box")
-      }, [h(v("iBizGridSetting"), {
+      }, [m(C("iBizGridSetting"), {
         columnStates: e.columnStates,
         controller: this.c
-      }, null)])])]))])]), s && h(v("iBizPagination"), {
+      }, null)])])]))])]), a && m(C("iBizPagination"), {
         total: e.total,
         curPage: e.curPage,
         size: e.size,
@@ -732,18 +731,18 @@ const A = /* @__PURE__ */ ne({
 });
 class Se {
   constructor() {
-    O(this, "component", "BaselineCompare");
+    ge(this, "component", "BaselineCompare");
   }
 }
-const Ne = {
+const xe = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(e) {
-    e.component(A.name, A), se(
+    e.component(z.name, z), K(
       "GRID_RENDER_BASELINECOMPARE",
       () => new Se()
     );
   }
 };
 export {
-  Ne as default
+  xe as default
 };

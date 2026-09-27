@@ -1,11 +1,11 @@
-import { UIActionProviderBase as g, convertNavData as l, formatMultiData as u, registerUIActionProvider as h } from "@ibiz-template/runtime";
-class m extends g {
+import { registerUIActionProvider as f, UIActionProviderBase as m, convertNavData as l, formatMultiData as d } from "@ibiz-template/runtime";
+class w extends m {
   async execAction(e, s) {
-    const { context: r, params: a, data: n } = s, { resultParams: t } = await this.handleParams(
+    const { context: a, params: r, data: n } = s, { resultParams: t } = await this.handleParams(
       e,
-      r,
+      a,
       n,
-      a
+      r
     );
     return this.validate(t) ? await this.changePass(t) ? {
       refresh: !0,
@@ -23,39 +23,39 @@ class m extends g {
     }
   }
   validate(e) {
-    const { newpassword: s, oldpassword: r, surepassword: a } = e;
-    return s ? r ? a ? r === s ? (ibiz.message.error("新密码不能与旧密码一致"), !1) : s !== a ? (ibiz.message.error("两次密码不一致"), !1) : !0 : (ibiz.message.error("确认密码不能为空"), !1) : (ibiz.message.error("新密码不能为空"), !1) : (ibiz.message.error("原密码不能为空"), !1);
+    const { newpassword: s, oldpassword: a, surepassword: r } = e;
+    return s ? a ? r ? a === s ? (ibiz.message.error("新密码不能与旧密码一致"), !1) : s !== r ? (ibiz.message.error("两次密码不一致"), !1) : !0 : (ibiz.message.error("确认密码不能为空"), !1) : (ibiz.message.error("新密码不能为空"), !1) : (ibiz.message.error("原密码不能为空"), !1);
   }
-  async handleParams(e, s, r, a) {
-    const n = [], t = s.clone(), o = [...e.navigateContexts || []], i = ["MULTIKEY", "MULTIDATA"].includes(e.actionTarget) && r.length > 0, d = l(
-      o,
-      i ? u(o, r) : r[0] || {},
-      a,
+  async handleParams(e, s, a, r) {
+    const n = [], t = s.clone(), i = [...e.navigateContexts || []], o = ["MULTIKEY", "MULTIDATA"].includes(e.actionTarget) && a.length > 0, g = l(
+      i,
+      o ? d(i, a) : a[0] || {},
+      r,
       s
     );
-    Object.assign(t, d);
-    const c = e.navigateParams, f = l(
+    Object.assign(t, g);
+    const c = e.navigateParams, u = l(
       c,
-      i ? u(c, r) : r[0] || {},
-      a,
+      o ? d(c, a) : a[0] || {},
+      r,
       t
     );
-    return { resultContext: t, resultData: n, resultParams: f };
+    return { resultContext: t, resultData: n, resultParams: u };
   }
 }
-function w() {
-  h(
+function h() {
+  f(
     "DEUIACTION_CHANGE_PASSWORD",
-    () => new m()
+    () => new w()
   );
 }
-const b = {
+const p = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install() {
-    w();
+    h();
   }
 };
 export {
-  b as default,
-  w as registerChangePasswordProvider
+  p as default,
+  h as registerChangePasswordProvider
 };

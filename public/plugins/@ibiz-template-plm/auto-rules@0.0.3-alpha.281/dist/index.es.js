@@ -1,449 +1,441 @@
-import './style.css';
-var ee = Object.defineProperty;
-var le = (r, u, s) => u in r ? ee(r, u, { enumerable: !0, configurable: !0, writable: !0, value: s }) : r[u] = s;
-var _ = (r, u, s) => (le(r, typeof u != "symbol" ? u + "" : u, s), s);
-import { CodeListEditorController as te, registerEditorProvider as se } from "@ibiz-template/runtime";
-import { defineComponent as ae, ref as v, computed as oe, watch as ne, onMounted as ue, createVNode as n, resolveComponent as f, createTextVNode as ce, isVNode as re } from "vue";
-import { getDropdownProps as ie, getEditorEmits as de, useNamespace as ve } from "@ibiz-template/vue3-util";
-import { RuntimeModelError as fe } from "@ibiz-template/core";
-function k(r) {
-  return typeof r == "function" || Object.prototype.toString.call(r) === "[object Object]" && !re(r);
+import './assets/style.css';
+import './assets/style.css';
+import { registerEditorProvider as ee, CodeListEditorController as te } from "@ibiz-template/runtime";
+import { defineComponent as le, ref as v, computed as ae, watch as se, onMounted as oe, createVNode as i, resolveComponent as p, createTextVNode as ne, isVNode as ie } from "vue";
+import { getDropdownProps as ce, getEditorEmits as ue, useNamespace as re } from "@ibiz-template/vue3-util";
+import { RuntimeModelError as de } from "@ibiz-template/core";
+var ve = Object.defineProperty, pe = (u, o, h) => o in u ? ve(u, o, { enumerable: !0, configurable: !0, writable: !0, value: h }) : u[o] = h, P = (u, o, h) => (pe(u, typeof o != "symbol" ? o + "" : o, h), h);
+function E(u) {
+  return typeof u == "function" || Object.prototype.toString.call(u) === "[object Object]" && !ie(u);
 }
-const F = /* @__PURE__ */ ae({
+const D = /* @__PURE__ */ le({
   name: "AutoRules",
   props: {
-    ...ie(),
+    ...ce(),
     value: [String, Object, Array, Number]
   },
-  emits: de(),
-  setup(r, {
-    emit: u
+  emits: ue(),
+  setup(u, {
+    emit: o
   }) {
-    var j;
-    const s = ve("auto-rules"), i = r.controller, p = v(!1), S = v(), g = v([]), C = v(!1), b = v(""), y = v(""), w = v([]), V = v(!1), T = v(), R = v(), L = v([]), N = v([]), O = v(!1), E = v(!1), {
-      editorItems: o
-    } = i.model, B = v([]), x = v("STRING");
-    (j = i.editorParams) != null && j.emitType && (x.value = i.editorParams.emitType);
-    const $ = (t, e = "", l = !0) => {
-      if (t.length === 0)
+    var h;
+    const a = re("auto-rules"), r = u.controller, m = v(!1), S = v(), y = v([]), w = v(!1), g = v(""), b = v(""), C = v([]), I = v(!1), T = v(), k = v(), B = v([]), N = v([]), O = v(!1), _ = v(!1), {
+      editorItems: s
+    } = r.model, L = v([]), x = v("STRING");
+    (h = r.editorParams) != null && h.emitType && (x.value = r.editorParams.emitType);
+    const J = (l, e = "", t = !0) => {
+      if (l.length === 0)
         return [];
       const d = [];
-      return t.forEach((a) => {
+      return l.forEach((n) => {
         if (d.push({
-          ...a,
+          ...n,
           pvalue: e,
-          disabled: a.disableSelect === !0
-        }), l && a.children && a.children.length > 0) {
-          const c = $(a.children, a.value.toString(), l);
+          disabled: n.disableSelect === !0
+        }), t && n.children && n.children.length > 0) {
+          const c = J(n.children, n.value.toString(), t);
           d.push(...c);
         }
       }), d;
-    }, J = async () => {
-      E.value = !0;
-      const t = await i.loadCodeList(r.data);
-      O.value = !0, N.value = $(t, "", !1), B.value = $(t, ""), E.value = !1;
-    }, m = (t) => B.value.find((e) => e.value === t), U = async (t) => {
-      t && !O.value && await J();
-    }, z = (t) => B.value.filter((e) => e.pvalue === t), P = () => {
-      p.value = !1, C.value = !1, S.value = null, b.value = null, y.value = null;
-    }, M = () => {
-      V.value = !1, T.value = null, P();
-    }, A = (t) => {
+    }, U = async () => {
+      _.value = !0;
+      const l = await r.loadCodeList(u.data);
+      O.value = !0, N.value = J(l, "", !1), L.value = J(l, ""), _.value = !1;
+    }, R = (l) => L.value.find((e) => e.value === l), Y = async (l) => {
+      l && !O.value && await U();
+    }, j = (l) => L.value.filter((e) => e.pvalue === l), F = () => {
+      m.value = !1, w.value = !1, S.value = null, g.value = null, b.value = null;
+    }, H = () => {
+      I.value = !1, T.value = null, F();
+    }, A = (l) => {
       const e = [{
         text: "- 任何 -",
         label: "- 任何 -",
         value: ""
       }];
-      return (t === "true" || t === !0) && e.unshift({
+      return (l === "true" || l === !0) && e.unshift({
         text: "- 空 -",
         label: "- 空 -",
         value: "null"
       }), e;
-    }, H = async (t) => {
-      if (M(), !t) {
-        if (R.value = null, u("change", null), o && o.length > 0) {
-          const e = o[0].id;
-          u("change", null, e);
+    }, W = async (l) => {
+      if (H(), !l) {
+        if (k.value = null, o("change", null), s && s.length > 0) {
+          const e = s[0].id;
+          o("change", null, e);
         }
         return;
       }
-      if (t.endsWith(".*")) {
-        if (R.value = t, L.value = z(t), V.value = !0, u("change", null), o && o.length > 0) {
-          const e = o[0].id;
-          u("change", null, e);
+      if (l.endsWith(".*")) {
+        if (k.value = l, B.value = j(l), I.value = !0, o("change", null), s && s.length > 0) {
+          const e = s[0].id;
+          o("change", null, e);
         }
       } else {
-        if (R.value = null, o && o.length > 0) {
-          const l = o[0].id;
-          u("change", null, l);
+        if (k.value = null, s && s.length > 0) {
+          const t = s[0].id;
+          o("change", null, t);
         }
-        u("change", t);
-        const e = m(t);
+        o("change", l);
+        const e = R(l);
         if (e && e.data) {
           const {
-            allow_empty: l,
+            allow_empty: t,
             codelist_tag: d,
-            is_dropdown_list: a
+            is_dropdown_list: n
           } = e.data;
-          if (a === "true" || a === !0) {
-            C.value = !0;
-            const c = await i.loadCustomCodeList(d, r.data), h = A(l);
-            w.value = [...h, ...c];
+          if (n === "true" || n === !0) {
+            w.value = !0;
+            const c = await r.loadCustomCodeList(d, u.data), f = A(t);
+            C.value = [...f, ...c];
             return;
           }
-          if (!l || l === "false" || l === !1) {
-            if (o && o.length > 0) {
-              const c = o[0].id;
-              x.value === "ARRAY" ? u("change", ["", ""], c) : u("change", JSON.stringify(["", ""]), c);
+          if (!t || t === "false" || t === !1) {
+            if (s && s.length > 0) {
+              const c = s[0].id;
+              x.value === "ARRAY" ? o("change", ["", ""], c) : o("change", JSON.stringify(["", ""]), c);
             }
           } else
-            (l === "true" || l === !0) && (g.value = i.allowEmptyText, p.value = !0);
+            (t === "true" || t === !0) && (y.value = r.allowEmptyText, m.value = !0);
         } else
-          g.value = i.allowEmptyText, p.value = !0;
+          y.value = r.allowEmptyText, m.value = !0;
       }
-    }, D = oe({
+    }, z = ae({
       get() {
-        return R.value || r.value;
+        return k.value || u.value;
       },
-      set(t) {
-        H(t);
+      set(l) {
+        W(l);
       }
-    }), W = (t) => {
-      if (o && o.length > 0) {
-        const e = o[0].id;
-        x.value === "ARRAY" ? u("change", JSON.parse(t), e) : u("change", t, e);
+    }), G = (l) => {
+      if (s && s.length > 0) {
+        const e = s[0].id;
+        x.value === "ARRAY" ? o("change", JSON.parse(l), e) : o("change", l, e);
       }
-    }, Y = (t, e) => {
-      if (e === 1 ? b.value = t : y.value = t, o && o.length > 0) {
-        const l = o[0].id;
-        x.value === "ARRAY" ? u("change", [b.value, y.value], l) : u("change", JSON.stringify([b.value, y.value]), l);
+    }, M = (l, e) => {
+      if (e === 1 ? g.value = l : b.value = l, s && s.length > 0) {
+        const t = s[0].id;
+        x.value === "ARRAY" ? o("change", [g.value, b.value], t) : o("change", JSON.stringify([g.value, b.value]), t);
       }
-    }, G = async (t) => {
-      if (P(), !t) {
-        if (u("change", t), o && o.length > 0) {
-          const l = o[0].id;
-          u("change", null, l);
+    }, q = async (l) => {
+      if (F(), !l) {
+        if (o("change", l), s && s.length > 0) {
+          const t = s[0].id;
+          o("change", null, t);
         }
         return;
       }
-      const e = m(t);
+      const e = R(l);
       if (e && e.data) {
         const {
-          allow_empty: l,
+          allow_empty: t,
           codelist_tag: d,
-          is_dropdown_list: a
+          is_dropdown_list: n
         } = e.data;
-        if (a === "true" || a === !0) {
-          C.value = !0;
-          const c = await i.loadCustomCodeList(d, r.data), h = A(l);
-          w.value = [...h, ...c];
+        if (n === "true" || n === !0) {
+          w.value = !0;
+          const c = await r.loadCustomCodeList(d, u.data), f = A(t);
+          C.value = [...f, ...c];
           return;
         }
-        if (!l || l === "false" || l === !1) {
-          if (o && o.length > 0) {
-            const c = o[0].id;
-            x.value === "ARRAY" ? u("change", ["", ""], c) : u("change", JSON.stringify(["", ""]), c);
+        if (!t || t === "false" || t === !1) {
+          if (s && s.length > 0) {
+            const c = s[0].id;
+            x.value === "ARRAY" ? o("change", ["", ""], c) : o("change", JSON.stringify(["", ""]), c);
             return;
           }
         } else
-          (l === "true" || l === !0) && (g.value = i.allowEmptyText, p.value = !0);
+          (t === "true" || t === !0) && (y.value = r.allowEmptyText, m.value = !0);
       } else
-        g.value = i.allowEmptyText, p.value = !0;
-      if (u("change", t), o && o.length > 0) {
-        const l = o[0].id;
-        u("change", null, l);
+        y.value = r.allowEmptyText, m.value = !0;
+      if (o("change", l), s && s.length > 0) {
+        const t = s[0].id;
+        o("change", null, t);
       }
-    }, q = () => {
-      let t;
-      return n(f("el-select"), {
+    }, K = () => {
+      let l;
+      return i(p("el-select"), {
         ref: "childFieldEditorRef",
         modelValue: T.value,
         "onUpdate:modelValue": (e) => T.value = e,
         clearable: !0,
-        class: [s.b("child-select")],
+        class: [a.b("child-select")],
         filterable: !0,
         "fit-input-width": !0,
-        onChange: G
-      }, k(t = L.value.map((e) => n(f("el-option"), {
+        onChange: q
+      }, E(l = B.value.map((e) => i(p("el-option"), {
         key: e.value,
         value: e.value.toString(),
         label: e.text,
         disabled: e.disableSelect === !0,
-        style: e.bkcolor ? s.cssVarBlock({
+        style: e.bkcolor ? a.cssVarBlock({
           "select-option-item-bkcolor": "".concat(e.bkcolor)
         }) : "",
         class: [e.cls ? e.cls : null],
         title: e.text
       }, {
-        default: () => n("div", {
-          class: [s.b("select-option-content"), e.textCls ? e.textCls : null],
-          style: e.color ? s.cssVarBlock({
+        default: () => i("div", {
+          class: [a.b("select-option-content"), e.textCls ? e.textCls : null],
+          style: e.color ? a.cssVarBlock({
             "select-option-item-color": "".concat(e.color)
           }) : ""
-        }, [e.sysImage && n(f("iBizIcon"), {
+        }, [e.sysImage && i(p("iBizIcon"), {
           icon: e.sysImage
-        }, null), n("span", {
-          class: [s.be("select-option-content", "text")]
+        }, null), i("span", {
+          class: [a.be("select-option-content", "text")]
         }, [e.text])])
-      }))) ? t : {
-        default: () => [t]
+      }))) ? l : {
+        default: () => [l]
       });
-    }, K = () => {
-      let t;
-      return n(f("el-select"), {
+    }, Q = () => {
+      let l;
+      return i(p("el-select"), {
         ref: "rulesEditorRef",
         modelValue: S.value,
         "onUpdate:modelValue": (e) => S.value = e,
         clearable: !0,
-        class: [s.em("rules-select", "fix")],
+        class: [a.em("rules-select", "fix")],
         filterable: !0,
         "fit-input-width": !0,
-        onChange: W
-      }, k(t = g.value.map((e) => n(f("el-option"), {
+        onChange: G
+      }, E(l = y.value.map((e) => i(p("el-option"), {
         key: e.value,
         value: e.value.toString(),
         label: e.text,
         disabled: e.disableSelect === !0,
-        style: e.bkcolor ? s.cssVarBlock({
+        style: e.bkcolor ? a.cssVarBlock({
           "select-option-item-bkcolor": "".concat(e.bkcolor)
         }) : "",
         class: [e.cls ? e.cls : null],
         title: e.text
       }, {
-        default: () => n("div", {
-          class: [s.b("select-option-content"), e.textCls ? e.textCls : null],
-          style: e.color ? s.cssVarBlock({
+        default: () => i("div", {
+          class: [a.b("select-option-content"), e.textCls ? e.textCls : null],
+          style: e.color ? a.cssVarBlock({
             "select-option-item-color": "".concat(e.color)
           }) : ""
-        }, [e.sysImage && n(f("iBizIcon"), {
+        }, [e.sysImage && i(p("iBizIcon"), {
           icon: e.sysImage
-        }, null), n("span", {
-          class: [s.be("select-option-content", "text")]
+        }, null), i("span", {
+          class: [a.be("select-option-content", "text")]
         }, [e.text])])
-      }))) ? t : {
-        default: () => [t]
+      }))) ? l : {
+        default: () => [l]
       });
-    }, Q = () => {
-      let t, e;
-      return n("div", {
-        class: s.b("code-rules")
-      }, [n(f("el-select"), {
+    }, X = () => {
+      let l, e;
+      return i("div", {
+        class: a.b("code-rules")
+      }, [i(p("el-select"), {
+        modelValue: g.value,
+        "onUpdate:modelValue": (t) => g.value = t,
+        clearable: !0,
+        class: [a.b("rules-select")],
+        filterable: !0,
+        "fit-input-width": !0,
+        onChange: (t) => M(t, 1)
+      }, E(l = C.value.map((t) => i(p("el-option"), {
+        key: t.value,
+        value: t.value.toString(),
+        label: t.text,
+        disabled: t.disableSelect === !0,
+        style: t.bkcolor ? a.cssVarBlock({
+          "select-option-item-bkcolor": "".concat(t.bkcolor)
+        }) : "",
+        class: [t.cls ? t.cls : null],
+        title: t.text
+      }, {
+        default: () => i("div", {
+          class: [a.b("select-option-content"), t.textCls ? t.textCls : null],
+          style: t.color ? a.cssVarBlock({
+            "select-option-item-color": "".concat(t.color)
+          }) : ""
+        }, [t.sysImage && i(p("iBizIcon"), {
+          icon: t.sysImage
+        }, null), i("span", {
+          class: [a.be("select-option-content", "text")]
+        }, [t.text])])
+      }))) ? l : {
+        default: () => [l]
+      }), i("span", {
+        class: a.be("code-rules", "change")
+      }, [ne("变为")]), i(p("el-select"), {
         modelValue: b.value,
-        "onUpdate:modelValue": (l) => b.value = l,
+        "onUpdate:modelValue": (t) => b.value = t,
         clearable: !0,
-        class: [s.b("rules-select")],
+        class: [a.b("rules-select")],
         filterable: !0,
         "fit-input-width": !0,
-        onChange: (l) => Y(l, 1)
-      }, k(t = w.value.map((l) => n(f("el-option"), {
-        key: l.value,
-        value: l.value.toString(),
-        label: l.text,
-        disabled: l.disableSelect === !0,
-        style: l.bkcolor ? s.cssVarBlock({
-          "select-option-item-bkcolor": "".concat(l.bkcolor)
+        onChange: (t) => M(t, 2)
+      }, E(e = C.value.map((t) => i(p("el-option"), {
+        key: t.value,
+        value: t.value.toString(),
+        label: t.text,
+        disabled: t.disableSelect === !0,
+        style: t.bkcolor ? a.cssVarBlock({
+          "select-option-item-bkcolor": "".concat(t.bkcolor)
         }) : "",
-        class: [l.cls ? l.cls : null],
-        title: l.text
+        class: [t.cls ? t.cls : null],
+        title: t.text
       }, {
-        default: () => n("div", {
-          class: [s.b("select-option-content"), l.textCls ? l.textCls : null],
-          style: l.color ? s.cssVarBlock({
-            "select-option-item-color": "".concat(l.color)
+        default: () => i("div", {
+          class: [a.b("select-option-content"), t.textCls ? t.textCls : null],
+          style: t.color ? a.cssVarBlock({
+            "select-option-item-color": "".concat(t.color)
           }) : ""
-        }, [l.sysImage && n(f("iBizIcon"), {
-          icon: l.sysImage
-        }, null), n("span", {
-          class: [s.be("select-option-content", "text")]
-        }, [l.text])])
-      }))) ? t : {
-        default: () => [t]
-      }), n("span", {
-        class: s.be("code-rules", "change")
-      }, [ce("变为")]), n(f("el-select"), {
-        modelValue: y.value,
-        "onUpdate:modelValue": (l) => y.value = l,
-        clearable: !0,
-        class: [s.b("rules-select")],
-        filterable: !0,
-        "fit-input-width": !0,
-        onChange: (l) => Y(l, 2)
-      }, k(e = w.value.map((l) => n(f("el-option"), {
-        key: l.value,
-        value: l.value.toString(),
-        label: l.text,
-        disabled: l.disableSelect === !0,
-        style: l.bkcolor ? s.cssVarBlock({
-          "select-option-item-bkcolor": "".concat(l.bkcolor)
-        }) : "",
-        class: [l.cls ? l.cls : null],
-        title: l.text
-      }, {
-        default: () => n("div", {
-          class: [s.b("select-option-content"), l.textCls ? l.textCls : null],
-          style: l.color ? s.cssVarBlock({
-            "select-option-item-color": "".concat(l.color)
-          }) : ""
-        }, [l.sysImage && n(f("iBizIcon"), {
-          icon: l.sysImage
-        }, null), n("span", {
-          class: [s.be("select-option-content", "text")]
-        }, [l.text])])
+        }, [t.sysImage && i(p("iBizIcon"), {
+          icon: t.sysImage
+        }, null), i("span", {
+          class: [a.be("select-option-content", "text")]
+        }, [t.text])])
       }))) ? e : {
         default: () => [e]
       })]);
-    }, X = () => {
-      let t;
-      return n(f("el-select"), {
+    }, Z = () => {
+      let l;
+      return i(p("el-select"), {
         ref: "editorRef",
-        modelValue: D.value,
-        "onUpdate:modelValue": (e) => D.value = e,
+        modelValue: z.value,
+        "onUpdate:modelValue": (e) => z.value = e,
         clearable: !0,
-        class: [s.b("select")],
+        class: [a.b("select")],
         filterable: !0,
-        placeholder: i.placeHolder ? i.placeHolder : " ",
-        disabled: r.disabled,
-        loading: E.value,
+        placeholder: r.placeHolder ? r.placeHolder : " ",
+        disabled: u.disabled,
+        loading: _.value,
         "fit-input-width": !0,
-        onVisibleChange: U
-      }, k(t = N.value.map((e) => n(f("el-option"), {
+        onVisibleChange: Y
+      }, E(l = N.value.map((e) => i(p("el-option"), {
         key: e.value,
         value: e.value.toString(),
         label: e.text,
         disabled: e.disableSelect === !0,
-        style: e.bkcolor ? s.cssVarBlock({
+        style: e.bkcolor ? a.cssVarBlock({
           "select-option-item-bkcolor": "".concat(e.bkcolor)
         }) : "",
         class: [e.cls ? e.cls : null],
         title: e.text
       }, {
-        default: () => n("div", {
-          class: [s.b("select-option-content"), e.textCls ? e.textCls : null],
-          style: e.color ? s.cssVarBlock({
+        default: () => i("div", {
+          class: [a.b("select-option-content"), e.textCls ? e.textCls : null],
+          style: e.color ? a.cssVarBlock({
             "select-option-item-color": "".concat(e.color)
           }) : ""
-        }, [e.sysImage && n(f("iBizIcon"), {
+        }, [e.sysImage && i(p("iBizIcon"), {
           icon: e.sysImage
-        }, null), n("span", {
-          class: [s.be("select-option-content", "text")]
+        }, null), i("span", {
+          class: [a.be("select-option-content", "text")]
         }, [e.text])])
-      }))) ? t : {
-        default: () => [t]
+      }))) ? l : {
+        default: () => [l]
       });
-    }, Z = async (t) => {
-      const e = m(t);
+    }, $ = async (l) => {
+      const e = R(l);
       if (e != null && e.pvalue.endsWith(".*")) {
-        R.value = e.pvalue, V.value = !0, T.value = t, p.value = !0, L.value = z(R.value);
-        const l = m(t);
-        if (l && l.data) {
+        k.value = e.pvalue, I.value = !0, T.value = l, m.value = !0, B.value = j(k.value);
+        const t = R(l);
+        if (t && t.data) {
           const {
             allow_empty: d,
-            codelist_tag: a,
+            codelist_tag: n,
             is_dropdown_list: c
-          } = l.data;
+          } = t.data;
           if (c === "true" || c === !0) {
-            C.value = !0;
-            const h = await i.loadCustomCodeList(a, r.data), I = A(d);
-            w.value = [...I, ...h];
+            w.value = !0;
+            const f = await r.loadCustomCodeList(n, u.data), V = A(d);
+            C.value = [...V, ...f];
           } else
-            (d === "true" || d === !0) && (p.value = !0, g.value = i.allowEmptyText);
+            (d === "true" || d === !0) && (m.value = !0, y.value = r.allowEmptyText);
         } else
-          g.value = i.allowEmptyText, p.value = !0;
-        if (o && o.length > 0) {
-          const d = o[0].id, a = r.data[d];
-          if (a) {
+          y.value = r.allowEmptyText, m.value = !0;
+        if (s && s.length > 0) {
+          const d = s[0].id, n = u.data[d];
+          if (n) {
             const c = {
               "[, null]": ["", null],
               "[null, ]": [null, ""],
               "[, ]": ["", ""]
             };
-            x.value, c[a] ? S.value = JSON.stringify(c[a]) : S.value = a;
+            x.value, c[n] ? S.value = JSON.stringify(c[n]) : S.value = n;
           }
         }
       } else {
-        const l = m(t);
-        if (l && l.data) {
+        const t = R(l);
+        if (t && t.data) {
           const {
             allow_empty: d,
-            codelist_tag: a,
+            codelist_tag: n,
             is_dropdown_list: c
-          } = l.data;
+          } = t.data;
           if (c === "true" || c === !0) {
-            C.value = !0;
-            const h = await i.loadCustomCodeList(a, r.data), I = A(d);
-            w.value = [...I, ...h];
+            w.value = !0;
+            const f = await r.loadCustomCodeList(n, u.data), V = A(d);
+            C.value = [...V, ...f];
           } else
-            (d === "true" || d === !0) && (p.value = !0, g.value = i.allowEmptyText);
+            (d === "true" || d === !0) && (m.value = !0, y.value = r.allowEmptyText);
         } else
-          g.value = i.allowEmptyText, p.value = !0;
-        if (o && o.length > 0) {
-          const d = o[0].id, a = r.data[d];
+          y.value = r.allowEmptyText, m.value = !0;
+        if (s && s.length > 0) {
+          const d = s[0].id, n = u.data[d];
           try {
-            if (!a) {
-              y.value = null, b.value = null;
+            if (!n) {
+              b.value = null, g.value = null;
               return;
             }
             if (x.value === "ARRAY")
-              if (Array.isArray(a))
-                b.value = String(a[0]), y.value = String(a[1]);
+              if (Array.isArray(n))
+                g.value = String(n[0]), b.value = String(n[1]);
               else {
-                const c = a.substring(1, a.length - 1).split(",").map((h) => h.trim());
-                b.value = String(c[0]), y.value = String(c[1]);
+                const c = n.substring(1, n.length - 1).split(",").map((f) => f.trim());
+                g.value = String(c[0]), b.value = String(c[1]);
               }
             else {
-              const c = JSON.parse(a);
-              b.value = String(c[0]), y.value = String(c[1]);
+              const c = JSON.parse(n);
+              g.value = String(c[0]), b.value = String(c[1]);
             }
           } catch (c) {
-            const h = a.substring(1, a.length - 1).split(",").map((I) => I.trim());
-            h.length === 2 ? (b.value = String(h[0]), y.value = String(h[1])) : (y.value = null, b.value = null);
+            const f = n.substring(1, n.length - 1).split(",").map((V) => V.trim());
+            f.length === 2 ? (g.value = String(f[0]), b.value = String(f[1])) : (b.value = null, g.value = null);
           }
         }
       }
     };
-    return ne(() => r.value, async (t, e) => {
-      (t || t === null || t === 0) && (!O.value && e === void 0 && await J(), t && t !== e && await Z(String(t)));
+    return se(() => u.value, async (l, e) => {
+      (l || l === null || l === 0) && (!O.value && e === void 0 && await U(), l && l !== e && await $(String(l)));
     }, {
       immediate: !0
-    }), ue(async () => {
-      await J();
+    }), oe(async () => {
+      await U();
     }), {
-      ns: s,
-      c: i,
+      ns: a,
+      c: r,
       items: N,
-      showSelect: p,
-      showChildSelect: V,
-      isLoading: E,
-      curValue: D,
-      showCodeRulesSelect: C,
-      renderFieldSelect: q,
-      renderRulesSelect: K,
-      renderCodeRulesSelect: Q,
-      renderRuleTypesSelect: X,
-      onVisibleChange: U,
-      getCodeListItemByValue: m
+      showSelect: m,
+      showChildSelect: I,
+      isLoading: _,
+      curValue: z,
+      showCodeRulesSelect: w,
+      renderFieldSelect: K,
+      renderRulesSelect: Q,
+      renderCodeRulesSelect: X,
+      renderRuleTypesSelect: Z,
+      onVisibleChange: Y,
+      getCodeListItemByValue: R
     };
   },
   render() {
-    return n("div", {
+    return i("div", {
       class: this.ns.b()
-    }, [n("div", {
+    }, [i("div", {
       class: this.ns.e("field-select")
-    }, [this.renderRuleTypesSelect(), this.showChildSelect ? this.renderFieldSelect() : null]), n("div", {
+    }, [this.renderRuleTypesSelect(), this.showChildSelect ? this.renderFieldSelect() : null]), i("div", {
       class: [this.ns.e("rules-select"), this.ns.is("visible", !this.showSelect && !this.showCodeRulesSelect)]
     }, [this.showSelect ? this.renderRulesSelect() : null, this.showCodeRulesSelect ? this.renderCodeRulesSelect() : null])]);
   }
 });
-class pe extends te {
+class me extends te {
   constructor() {
-    super(...arguments);
-    /**
-     * [属性确定,文本项,允许空] 自定义仿真数据
-     *
-     * @static
-     * @memberof AutoRulesController
-     */
-    _(this, "allowEmptyText", [
+    super(...arguments), P(this, "allowEmptyText", [
       { text: "从任何到任何", value: JSON.stringify(["", ""]) },
       {
         text: "从有值到空值",
@@ -459,22 +451,22 @@ class pe extends te {
     super.onInit();
   }
   // 加载自定义配置的下拉代码表
-  async loadCustomCodeList(s, i) {
-    const { context: p, params: S } = this.handlePublicParams(
-      i,
+  async loadCustomCodeList(o, h) {
+    const { context: a, params: r } = this.handlePublicParams(
+      h,
       this.context,
       this.params
     );
-    if (s) {
-      const g = await ibiz.hub.getApp(this.context.srfappid);
-      let C = [];
-      return C = await g.codeList.get(
-        "".concat(g.model.id, ".").concat(s),
-        p,
-        S
-      ), C;
+    if (o) {
+      const m = await ibiz.hub.getApp(this.context.srfappid);
+      let S = [];
+      return S = await m.codeList.get(
+        "".concat(m.model.id, ".").concat(o),
+        a,
+        r
+      ), S;
     }
-    throw new fe(
+    throw new de(
       this.model,
       ibiz.i18n.t("runtime.controller.common.editor.editorNoConfigured", {
         editorType: this.model.editorType
@@ -482,24 +474,23 @@ class pe extends te {
     );
   }
 }
-class he {
+class fe {
   constructor() {
-    _(this, "formEditor", "AutoRules");
-    _(this, "gridEditor", "AutoRules");
+    P(this, "formEditor", "AutoRules"), P(this, "gridEditor", "AutoRules");
   }
-  async createController(u, s) {
-    const i = new pe(u, s);
-    return await i.init(), i;
+  async createController(o, h) {
+    const a = new me(o, h);
+    return await a.init(), a;
   }
 }
-const xe = {
-  install(r) {
-    r.component(F.name, F), se(
+const Se = {
+  install(u) {
+    u.component(D.name, D), ee(
       "EDITOR_CUSTOMSTYLE_AUTO_RULES",
-      () => new he()
+      () => new fe()
     );
   }
 };
 export {
-  xe as default
+  Se as default
 };

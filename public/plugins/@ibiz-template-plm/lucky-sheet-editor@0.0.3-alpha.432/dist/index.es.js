@@ -1,25 +1,23 @@
-import './style.css';
-var B = Object.defineProperty;
-var M = (i, e, t) => e in i ? B(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
-var C = (i, e, t) => (M(i, typeof e != "symbol" ? e + "" : e, t), t);
-import { EditorController as F, PluginStaticResource as J, registerEditorProvider as V } from "@ibiz-template/runtime";
-import { getInputProps as U, getEditorEmits as W, useNamespace as Y, withInstall as $ } from "@ibiz-template/vue3-util";
-import { createVNode as d, defineComponent as G, ref as w, watch as q, onMounted as K, onBeforeUnmount as _, withDirectives as Q, resolveDirective as X } from "vue";
-import { createUUID as Z } from "qx-util";
-class ee extends F {
+import './assets/style.css';
+import './assets/style.css';
+import { PluginStaticResource as P, registerEditorProvider as B, EditorController as J } from "@ibiz-template/runtime";
+import { getInputProps as V, getEditorEmits as F, useNamespace as U, withInstall as W } from "@ibiz-template/vue3-util";
+import { createVNode as c, defineComponent as Y, ref as v, watch as q, onMounted as G, onBeforeUnmount as K, withDirectives as $, resolveDirective as Q } from "vue";
+import { createUUID as X } from "qx-util";
+var Z = Object.defineProperty, _ = (a, e, t) => e in a ? Z(a, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : a[e] = t, D = (a, e, t) => (_(a, typeof e != "symbol" ? e + "" : e, t), t);
+class ee extends J {
 }
 class te {
   constructor() {
-    C(this, "formEditor", "IBizLuckySheet");
-    C(this, "gridEditor", "IBizLuckySheet");
+    D(this, "formEditor", "IBizLuckySheet"), D(this, "gridEditor", "IBizLuckySheet");
   }
   async createController(e, t) {
     const s = new ee(e, t);
     return await s.init(), s;
   }
 }
-const k = new J(import.meta.url);
-class o {
+const k = new P(import.meta.url);
+class l {
   /**
    * @description 获取Luckysheet对象
    * @static
@@ -38,8 +36,8 @@ class o {
    */
   static loadScript(e) {
     return new Promise((t, s) => {
-      const a = document.createElement("script");
-      a.src = e, a.onload = t, a.onerror = s, document.head.appendChild(a);
+      const i = document.createElement("script");
+      i.src = e, i.onload = t, i.onerror = s, document.head.appendChild(i);
     });
   }
   /**
@@ -51,8 +49,8 @@ class o {
    */
   static loadStyle(e) {
     return new Promise((t, s) => {
-      const a = document.createElement("link");
-      a.rel = "stylesheet", a.href = e, a.onload = t, a.onerror = s, document.head.appendChild(a);
+      const i = document.createElement("link");
+      i.rel = "stylesheet", i.href = e, i.onload = t, i.onerror = s, document.head.appendChild(i);
     });
   }
   /**
@@ -67,7 +65,7 @@ class o {
       if (this.getLuckySheet())
         e();
       else {
-        const a = [
+        const s = [
           this.loadStyle(
             k.dir("assets/luckysheet/plugins/css/pluginsCss.css")
           ),
@@ -81,7 +79,7 @@ class o {
           ),
           this.loadScript(k.dir("assets/luckysheet/luckysheet.umd.js"))
         ];
-        Promise.all(a).then(() => {
+        Promise.all(s).then(() => {
           e();
         }).catch(() => {
           ibiz.message.error(
@@ -209,7 +207,7 @@ class o {
   static getGridData() {
     let e = [];
     const t = this.getLuckySheet();
-    return t && (e = t.getSheetData().map((a) => a.map((c) => c ? c.v : null))), e;
+    return t && (e = t.getSheetData().map((s) => s.map((i) => i ? i.v : null))), e;
   }
   /**
    * @description 设置工作表配置
@@ -219,8 +217,8 @@ class o {
   static setConfig(e, t = !1) {
     const s = this.getLuckySheet();
     if (t) {
-      const a = Object.assign(s.getConfig(), e);
-      s.setConfig(a);
+      const i = Object.assign(s.getConfig(), e);
+      s.setConfig(i);
     } else
       s.setConfig(e);
   }
@@ -245,9 +243,9 @@ class o {
    * @param {boolean} [isRefresh=false] 是否刷新界面；默认为true；用于多个单元格赋值时候控制节流，前面单元格赋值的时候应设置为 false，最后一个单元格赋值时设置为true
    * @memberof SheetUtil
    */
-  static setCellValue(e, t, s, a = !1) {
-    const c = this.getLuckySheet();
-    c && c.setCellValue(e, t, s, { isRefresh: a });
+  static setCellValue(e, t, s, i = !1) {
+    const u = this.getLuckySheet();
+    u && u.setCellValue(e, t, s, { isRefresh: i });
   }
   /**
    * @description 指定工作表选区是否高亮
@@ -301,7 +299,7 @@ class o {
   static clearAll() {
     const e = this.getLuckySheet();
     if (e) {
-      const t = o.getTotalRow(), s = o.getTotalColumn();
+      const t = l.getTotalRow(), s = l.getTotalColumn();
       e.clearRange({
         range: { row: [0, t - 1], column: [0, s - 1] }
       });
@@ -360,8 +358,8 @@ class o {
    * @memberof SheetUtil
    */
   static addCustomEvent(e, t, s) {
-    const a = document.querySelector(e);
-    a && a.addEventListener(t, s);
+    const i = document.querySelector(e);
+    i && i.addEventListener(t, s);
   }
   /**
    * 获取总列数
@@ -470,36 +468,36 @@ class o {
    * @memberof SheetUtil
    */
   static setRangeBg(e, t) {
-    const { row: s, column: a } = e, c = this.getSheetData();
-    if (c)
-      for (let r = s[0]; r <= s[1]; r++)
-        c[r].forEach((y, l) => {
-          l >= a[0] && l <= a[1] && y && (Object.assign(y, { bg: t }), this.setCellValue(
-            r,
-            l,
+    const { row: s, column: i } = e, u = this.getSheetData();
+    if (u)
+      for (let o = s[0]; o <= s[1]; o++)
+        u[o].forEach((d, y) => {
+          y >= i[0] && y <= i[1] && d && (Object.assign(d, { bg: t }), this.setCellValue(
+            o,
             y,
-            r === s[1] && l === a[1]
+            d,
+            o === s[1] && y === i[1]
           ));
         });
   }
 }
-function se(i) {
-  return { all: i = i || /* @__PURE__ */ new Map(), on: function(e, t) {
-    var s = i.get(e);
-    s ? s.push(t) : i.set(e, [t]);
+function se(a) {
+  return { all: a = a || /* @__PURE__ */ new Map(), on: function(e, t) {
+    var s = a.get(e);
+    s ? s.push(t) : a.set(e, [t]);
   }, off: function(e, t) {
-    var s = i.get(e);
-    s && (t ? s.splice(s.indexOf(t) >>> 0, 1) : i.set(e, []));
+    var s = a.get(e);
+    s && (t ? s.splice(s.indexOf(t) >>> 0, 1) : a.set(e, []));
   }, emit: function(e, t) {
-    var s = i.get(e);
-    s && s.slice().map(function(a) {
-      a(t);
-    }), (s = i.get("*")) && s.slice().map(function(a) {
-      a(e, t);
+    var s = a.get(e);
+    s && s.slice().map(function(i) {
+      i(t);
+    }), (s = a.get("*")) && s.slice().map(function(i) {
+      i(e, t);
     });
   } };
 }
-const j = se(), ie = d("svg", {
+const A = se(), ae = c("svg", {
   viewBox: "0 0 16 16",
   xmlns: "http://www.w3.org/2000/svg",
   height: "1em",
@@ -507,22 +505,22 @@ const j = se(), ie = d("svg", {
   preserveAspectRatio: "xMidYMid meet",
   focusable: "false",
   fill: "CurrentColor"
-}, [d("g", {
+}, [c("g", {
   id: "ajpaction/edit",
   "stroke-width": "1",
   "fill-rule": "evenodd"
-}, [d("path", {
+}, [c("path", {
   d: "M2 8.34L10.71 0 15 4.17 6.538 13H2V8.34zm1.2.512V11.8h2.826l7.283-7.6-2.606-2.533L3.2 8.852zM0 16v-1.2h16V16H0z",
   id: "ajp编辑"
-}, null)])]), v = /* @__PURE__ */ G({
+}, null)])]), b = /* @__PURE__ */ Y({
   name: "IBizLuckySheet",
-  props: U(),
-  emits: W(),
-  setup(i, {
+  props: V(),
+  emits: F(),
+  setup(a, {
     emit: e
   }) {
-    var R;
-    const t = i.controller, s = Y("lucky-sheet-editor"), a = w(!0), c = w(""), r = "lucky-sheet-editor-".concat(Z()), L = JSON.stringify([{
+    var t;
+    const s = a.controller, i = U("lucky-sheet-editor"), u = v(!0), o = v(""), d = "lucky-sheet-editor-".concat(X()), y = JSON.stringify([{
       name: "sheet1",
       // 工作表名称
       color: "",
@@ -544,172 +542,172 @@ const j = se(), ie = d("svg", {
       defaultColWidth: 73,
       // 自定义列宽
       celldata: []
-    }]), y = w(!1);
-    let l = "default";
-    t && ((R = t.editorParams) != null && R.showmode) && (l = t.editorParams.showmode);
-    const x = ((n, h) => {
-      let f = 0, g;
-      return (...m) => {
+    }]), p = v(!1);
+    let h = "default";
+    s && (t = s.editorParams) != null && t.showmode && (h = s.editorParams.showmode);
+    const H = ((n, f) => {
+      let m = 0, g;
+      return (...w) => {
         const S = Date.now();
-        S - f >= h ? (f = S, n.apply(this, m)) : (clearTimeout(g), g = setTimeout(() => {
-          f = S, n.apply(this, m);
-        }, h - (S - f)));
+        S - m >= f ? (m = S, n.apply(this, w)) : (clearTimeout(g), g = setTimeout(() => {
+          m = S, n.apply(this, w);
+        }, f - (S - m)));
       };
     })(() => {
-      if (i.readonly || i.disabled || l === "manual")
+      if (a.readonly || a.disabled || h === "manual")
         return;
-      const h = o.getLuckySheet().getAllSheets();
-      c.value = JSON.stringify(h), e("change", c.value);
-    }, 1e3), u = {
-      container: r,
+      const n = l.getLuckySheet().getAllSheets();
+      o.value = JSON.stringify(n), e("change", o.value);
+    }, 1e3), r = {
+      container: d,
       // 设定DOM容器的id
       lang: "zh",
       // 设定表格语言showtoolbar: false,
       data: [],
       hook: {},
-      allowEdit: !i.readonly && !i.disabled && l !== "manual",
+      allowEdit: !a.readonly && !a.disabled && h !== "manual",
       // 是否允许编辑
-      showtoolbar: !i.readonly && !i.disabled && l !== "manual",
+      showtoolbar: !a.readonly && !a.disabled && h !== "manual",
       // 工具栏在只读或禁用下不显示
-      enableAddRow: !i.readonly && !i.disabled && l !== "manual",
+      enableAddRow: !a.readonly && !a.disabled && h !== "manual",
       // 允许增加行
-      enableAddCol: !i.readonly && !i.disabled && l !== "manual"
+      enableAddCol: !a.readonly && !a.disabled && h !== "manual"
       // 允许增加列
-    }, E = w(!1), A = () => {
-      o.loadLuckySheet().then(() => {
-        Object.assign(u, {
-          data: JSON.parse(c.value)
-        }), o.create(u), a.value = !1, E.value = !0;
+    }, C = v(!1), T = () => {
+      l.loadLuckySheet().then(() => {
+        Object.assign(r, {
+          data: JSON.parse(o.value)
+        }), l.create(r), u.value = !1, C.value = !0;
       }).catch(() => {
       });
-    }, T = () => {
-      o.addHook(u, {
+    }, z = () => {
+      l.addHook(r, {
         cellRenderAfter: () => {
-          x();
+          H();
         }
       });
-    }, p = () => {
-      a.value = !0, T(), A();
+    }, E = () => {
+      u.value = !0, z(), T();
     };
-    q(() => i.value, (n, h) => {
-      if (n !== h) {
-        const f = c.value;
-        if (n ? c.value = n : c.value = L, c.value !== f && E.value) {
-          const g = o.getLuckySheet();
-          g && (g.destroy(), Object.assign(u, {
-            data: JSON.parse(c.value)
-          }), o.create(u));
+    q(() => a.value, (n, f) => {
+      if (n !== f) {
+        const m = o.value;
+        if (n ? o.value = n : o.value = y, o.value !== m && C.value) {
+          const g = l.getLuckySheet();
+          g && (g.destroy(), Object.assign(r, {
+            data: JSON.parse(o.value)
+          }), l.create(r));
         }
-        if (i.readonly || i.disabled) {
-          const g = o.getLuckySheet();
+        if (a.readonly || a.disabled) {
+          const g = l.getLuckySheet();
           if (g) {
-            const m = g.getLuckysheetfile(), S = JSON.parse(c.value);
-            m.length > 0 && m.forEach((D) => {
-              var H;
-              const O = S.find((b) => b.name === D.name);
-              O && ((H = O.data) == null || H.forEach((b, P) => {
-                D.data[P] = b;
+            const w = g.getLuckysheetfile(), S = JSON.parse(o.value);
+            w.length > 0 && w.forEach((R) => {
+              var O;
+              const j = S.find((L) => L.name === R.name);
+              j && ((O = j.data) == null || O.forEach((L, M) => {
+                R.data[M] = L;
               }));
             }), g.luckysheetrefreshgrid();
           }
         }
       } else
-        n === void 0 && h === void 0 && (c.value = L);
+        n === void 0 && f === void 0 && (o.value = y);
     }, {
       immediate: !0
-    }), K(() => {
+    }), G(() => {
       window.luckySheetList || (window.luckySheetList = []);
       const n = window.luckySheetList;
-      n.push(r), j.on("luckysheet", () => {
-        n && n.length > 0 && n[n.length - 1] === r && p();
+      n.push(d), A.on("luckysheet", () => {
+        n && n.length > 0 && n[n.length - 1] === d && E();
       });
-    }), _(() => {
-      const n = window.luckySheetList.indexOf(r);
-      n > -1 && window.luckySheetList.splice(n, 1), j.emit("luckysheet");
-    }), p();
-    const z = () => {
-      const n = o.getLuckySheet();
-      n && (n.destroy(), Object.assign(u, {
+    }), K(() => {
+      const n = window.luckySheetList.indexOf(d);
+      n > -1 && window.luckySheetList.splice(n, 1), A.emit("luckysheet");
+    }), E();
+    const x = () => {
+      const n = l.getLuckySheet();
+      n && (n.destroy(), Object.assign(r, {
         allowEdit: !0,
         showtoolbar: !0,
         enableAddRow: !0,
         enableAddCol: !0,
-        data: JSON.parse(c.value)
-      }), o.create(u)), y.value = !0;
-    }, N = () => {
-      const n = o.getLuckySheet();
-      n && (n.destroy(), Object.assign(u, {
+        data: JSON.parse(o.value)
+      }), l.create(r)), p.value = !0;
+    }, I = () => {
+      const n = l.getLuckySheet();
+      n && (n.destroy(), Object.assign(r, {
         allowEdit: !1,
         showtoolbar: !1,
         enableAddRow: !1,
         enableAddCol: !1,
-        data: JSON.parse(c.value)
-      }), o.create(u)), y.value = !1;
-    }, I = () => {
-      const n = o.getLuckySheet();
+        data: JSON.parse(o.value)
+      }), l.create(r)), p.value = !1;
+    }, N = () => {
+      const n = l.getLuckySheet();
       if (n) {
-        const h = n.getAllSheets();
-        c.value = JSON.stringify(h), e("change", c.value), n.destroy(), Object.assign(u, {
+        const f = n.getAllSheets();
+        o.value = JSON.stringify(f), e("change", o.value), n.destroy(), Object.assign(r, {
           allowEdit: !1,
           showtoolbar: !1,
           enableAddRow: !1,
           enableAddCol: !1,
-          data: h
-        }), o.create(u);
+          data: f
+        }), l.create(r);
       }
-      y.value = !1;
+      p.value = !1;
     };
     return {
-      c: t,
-      ns: s,
-      uuid: r,
-      loading: a,
-      isEditing: y,
-      showmode: l,
+      c: s,
+      ns: i,
+      uuid: d,
+      loading: u,
+      isEditing: p,
+      showmode: h,
       renderHeader: () => {
-        if (l === "manual" && !i.disabled && !i.readonly)
-          return d("div", {
-            class: s.b("header")
-          }, [d("div", {
-            class: s.be("header", "edit"),
-            onClick: z,
+        if (h === "manual" && !a.disabled && !a.readonly)
+          return c("div", {
+            class: i.b("header")
+          }, [c("div", {
+            class: i.be("header", "edit"),
+            onClick: x,
             title: ibiz.i18n.t("app.edit")
-          }, [ie])]);
+          }, [ae])]);
       },
       renderFooter: () => {
-        if (l === "manual" && !i.disabled && !i.readonly)
-          return d("div", {
-            class: s.b("footer")
-          }, [d("div", {
-            class: s.be("footer", "cancel"),
-            onClick: N
-          }, [ibiz.i18n.t("editor.common.cancel")]), d("div", {
-            class: s.be("footer", "save"),
+        if (h === "manual" && !a.disabled && !a.readonly)
+          return c("div", {
+            class: i.b("footer")
+          }, [c("div", {
+            class: i.be("footer", "cancel"),
             onClick: I
+          }, [ibiz.i18n.t("editor.common.cancel")]), c("div", {
+            class: i.be("footer", "save"),
+            onClick: N
           }, [ibiz.i18n.t("editor.common.confirm")])]);
       }
     };
   },
   render() {
-    return d("div", {
+    return c("div", {
       class: [this.ns.b("container"), this.ns.is("manual", this.showmode === "manual"), this.ns.is("editing", this.isEditing), this.ns.is("loading", this.loading), this.ns.is("readonly", this.readonly), this.ns.is("disabled", this.disabled)]
-    }, [this.renderHeader(), Q(d("div", {
+    }, [this.renderHeader(), $(c("div", {
       class: this.ns.b(),
       id: this.uuid
-    }, null), [[X("loading"), this.loading]]), this.renderFooter()]);
+    }, null), [[Q("loading"), this.loading]]), this.renderFooter()]);
   }
-}), ae = $(v, function(i) {
-  i.component(v.name, v), V(
+}), ie = W(b, function(a) {
+  a.component(b.name, b), B(
     "EDITOR_CUSTOMSTYLE_LUCKYSHEET",
     () => new te()
   );
-}), ye = {
+}), ce = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(i) {
-    i.use(ae);
+  install(a) {
+    a.use(ie);
   }
 };
 export {
-  ae as IBizLuckySheet,
-  ye as default
+  ie as IBizLuckySheet,
+  ce as default
 };

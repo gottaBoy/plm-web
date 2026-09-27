@@ -1,11 +1,10 @@
-import './style.css';
-var H = Object.defineProperty;
-var J = (a, n, o) => n in a ? H(a, n, { enumerable: !0, configurable: !0, writable: !0, value: o }) : a[n] = o;
-var A = (a, n, o) => (J(a, typeof n != "symbol" ? n + "" : n, o), o);
-import { PanelItemController as Q, UIActionUtil as X, registerPanelItemProvider as Z } from "@ibiz-template/runtime";
-import { defineComponent as ee, ref as p, computed as k, createVNode as s, resolveComponent as c } from "vue";
-import { useNamespace as te } from "@ibiz-template/vue3-util";
-class V extends Q {
+import './assets/style.css';
+import './assets/style.css';
+import { PanelItemController as J, registerPanelItemProvider as $, UIActionUtil as Q } from "@ibiz-template/runtime";
+import { defineComponent as X, ref as p, computed as R, createVNode as o, resolveComponent as r } from "vue";
+import { useNamespace as Z } from "@ibiz-template/vue3-util";
+var ee = Object.defineProperty, te = (a, t, i) => t in a ? ee(a, t, { enumerable: !0, configurable: !0, writable: !0, value: i }) : a[t] = i, V = (a, t, i) => (te(a, typeof t != "symbol" ? t + "" : t, i), i);
+class D extends J {
   /**
    * Creates an instance of KanbanOperateController.
    * @param {IPanelButton} model
@@ -13,12 +12,8 @@ class V extends Q {
    * @param {PanelItemController} [parent]
    * @memberof KanbanOperateController
    */
-  constructor(o, l, i) {
-    super(o, l, i);
-    /**
-     * 行为模型
-     */
-    A(this, "actionModel", {});
+  constructor(t, i, l) {
+    super(t, i, l), V(this, "actionModel", {});
   }
   /**
    * 父容器数据对象数据
@@ -31,8 +26,8 @@ class V extends Q {
     return this.panel.inputData || this.dataParent.data;
   }
   get uaState() {
-    const o = this.panel.ctx.controllersMap.get("kanban").state.uaState || {};
-    return o ? o[this.data.srfkey] : {};
+    const t = this.panel.ctx.controllersMap.get("kanban").state.uaState || {};
+    return t ? t[this.data.srfkey] : {};
   }
   /**
    * 初始化
@@ -42,16 +37,16 @@ class V extends Q {
    */
   async onInit() {
     await super.onInit();
-    const o = this.panel.view, l = this.model.userTag || "OPERATE", i = o.getController("kanban");
-    if (i) {
-      const { dedataViewItems: m = [] } = i.model;
-      this.actionModel = m.find(
-        (b) => Object.is(b.name, l)
+    const t = this.panel.view, i = this.model.userTag || "OPERATE", l = t.getController("kanban");
+    if (l) {
+      const { dedataViewItems: u = [] } = l.model;
+      this.actionModel = u.find(
+        (b) => Object.is(b.name, i)
       );
     }
   }
 }
-const T = /* @__PURE__ */ ee({
+const T = /* @__PURE__ */ X({
   name: "IBizKanbanOperate",
   props: {
     modelData: {
@@ -59,30 +54,30 @@ const T = /* @__PURE__ */ ee({
       required: !0
     },
     controller: {
-      type: V,
+      type: D,
       required: !0
     }
   },
   setup(a) {
-    const n = te("panel-button"), o = a.controller, l = p(), i = p(), m = p(), b = p(), I = p(!1), v = p(!1), {
-      caption: D,
-      captionItemName: O,
-      renderMode: N,
-      showCaption: S,
-      sysImage: E,
-      codeName: M,
+    const t = Z("panel-button"), i = a.controller, l = p(), u = p(), b = p(), S = p(), g = p(!1), v = p(!1), {
+      caption: M,
+      captionItemName: N,
+      renderMode: k,
+      showCaption: A,
+      sysImage: O,
+      codeName: K,
       itemStyle: x,
-      tooltip: L,
+      tooltip: z,
       buttonCssStyle: y
     } = a.modelData, {
       panel: d
-    } = a.controller, z = p("");
-    y && (z.value = y);
-    const P = k(() => O && d.data ? d.data[O.toLowerCase()] : D);
-    let C = !1;
-    Object.is(N, "LINK") && (C = !0);
-    const B = k(() => {
-      if (Object.is(N, "LINK"))
+    } = a.controller, E = p("");
+    y && (E.value = y);
+    const L = R(() => N && d.data ? d.data[N.toLowerCase()] : M);
+    let I = !1;
+    Object.is(k, "LINK") && (I = !0);
+    const P = R(() => {
+      if (Object.is(k, "LINK"))
         return null;
       switch (x) {
         case "PRIMARY":
@@ -100,170 +95,170 @@ const T = /* @__PURE__ */ ee({
         default:
           return null;
       }
-    }), h = (t) => {
-      const e = o.uaState[t.id];
+    }), h = (n) => {
+      const e = i.uaState[n.id];
       return !!(e && e.disabled === !1 && e.visible === !0);
-    }, U = () => {
+    }, j = () => {
       const {
-        actionModel: t
-      } = o, e = [], r = [], u = [];
-      if (t && t.deuiactionGroup) {
+        actionModel: n
+      } = i, e = [], s = [], c = [];
+      if (n && n.deuiactionGroup) {
         const {
-          uiactionGroupDetails: g
-        } = t.deuiactionGroup;
-        g.forEach((f) => {
-          f.actionLevel === 250 ? e.push(f) : f.actionLevel === 200 ? r.push(f) : u.push(f);
+          uiactionGroupDetails: f
+        } = n.deuiactionGroup;
+        f.forEach((m) => {
+          m.actionLevel === 250 ? e.push(m) : m.actionLevel === 200 ? s.push(m) : c.push(m);
         });
       }
       return {
-        deActions: u,
-        useActions: r,
+        deActions: c,
+        useActions: s,
         keyActions: e
       };
-    }, G = (t, e, r) => {
-      const u = {
+    }, G = (n, e, s) => {
+      const c = {
         ...e
       };
-      if (r) {
-        const g = r.querySelector(".".concat(t.id));
-        g && (u.target = g);
+      if (s) {
+        const f = s.querySelector(".".concat(n.id));
+        f && (c.target = f);
       }
-      return u;
-    }, w = async (t, e, r) => {
+      return c;
+    }, C = async (n, e, s) => {
       e.stopPropagation(), v.value = !0;
-      const u = {
+      const c = {
         context: d.context,
         params: d.params,
         data: [d.inputData],
         view: d.view,
-        event: G(t, e, r)
+        event: G(n, e, s)
       };
-      await X.execAndResolved(t.uiactionId, u, t.appId), v.value = !1;
-    }, K = async (t) => {
+      await Q.execAndResolved(n.uiactionId, c, n.appId), v.value = !1;
+    }, B = async (n) => {
       a.controller.onClick();
-    }, R = (t) => {
+    }, w = (n) => {
       const {
         actionLevel: e
-      } = t;
-      return [t.id, n.e("item"), n.is("disabled", !1), n.em("item", "level-".concat(e))];
-    }, j = (t) => t.length === 0 ? null : s("div", {
-      class: n.be("poper-content", "keyaction")
-    }, [t.map((e) => s(c("el-button"), {
-      class: [n.bem("poper-content", "keyaction", "action"), ...R(e), {
+      } = n;
+      return [n.id, t.e("item"), t.is("disabled", !1), t.em("item", "level-".concat(e))];
+    }, U = (n) => n.length === 0 ? null : o("div", {
+      class: t.be("poper-content", "keyaction")
+    }, [n.map((e) => o(r("el-button"), {
+      class: [t.bem("poper-content", "keyaction", "action"), ...w(e), {
         "no-access": !h(e)
       }],
       text: !0,
       size: "small",
-      onClick: (r) => w(e, r, null),
+      onClick: (s) => C(e, s, null),
       title: e.tooltip || e.caption
     }, {
-      default: () => [e.showIcon && e.sysImage ? s(c("iBizIcon"), {
+      default: () => [e.showIcon && e.sysImage ? o(r("iBizIcon"), {
         icon: e.sysImage
-      }, null) : s(c("iBizIcon"), {
+      }, null) : o(r("iBizIcon"), {
         icon: "fa fa-save"
       }, null)]
-    }))]), q = (t) => t.length === 0 ? null : s("div", {
-      class: n.be("poper-content", "deaction"),
-      ref: m
-    }, [t.map((e) => h(e) ? s("div", {
-      class: [n.bem("poper-content", "deaction", "action"), ...R(e), {
-        "no-access": !h(e)
-      }],
-      onClick: (r) => w(e, r, m.value),
-      title: e.tooltip || e.caption
-    }, [e.showIcon && e.sysImage ? s(c("iBizIcon"), {
-      icon: e.sysImage
-    }, null) : s("i", {
-      class: "ibiz-icon fa fa-ravelry",
-      "aria-hidden": "true"
-    }, null), s("span", {
-      class: n.bem("poper-content", "deaction", "action-text")
-    }, [e.showCaption ? e.capLanguageRes ? ibiz.i18n.t(e.capLanguageRes.lanResTag, e.caption) : e.caption : ""])]) : null)]), _ = (t) => t.length === 0 ? null : s("div", {
-      class: n.be("poper-content", "useaction"),
+    }))]), q = (n) => n.length === 0 ? null : o("div", {
+      class: t.be("poper-content", "deaction"),
       ref: b
-    }, [t.map((e) => s("div", {
-      class: [n.bem("poper-content", "useaction", "action"), ...R(e), {
+    }, [n.map((e) => h(e) ? o("div", {
+      class: [t.bem("poper-content", "deaction", "action"), ...w(e), {
         "no-access": !h(e)
       }],
-      onClick: (r) => w(e, r, b.value),
+      onClick: (s) => C(e, s, b.value),
       title: e.tooltip || e.caption
-    }, [e.showIcon && e.sysImage ? s(c("iBizIcon"), {
+    }, [e.showIcon && e.sysImage ? o(r("iBizIcon"), {
       icon: e.sysImage
-    }, null) : s("i", {
+    }, null) : o("i", {
       class: "ibiz-icon fa fa-ravelry",
       "aria-hidden": "true"
-    }, null), s("span", {
-      class: n.bem("poper-content", "useaction", "action-text")
+    }, null), o("span", {
+      class: t.bem("poper-content", "deaction", "action-text")
+    }, [e.showCaption ? e.capLanguageRes ? ibiz.i18n.t(e.capLanguageRes.lanResTag, e.caption) : e.caption : ""])]) : null)]), _ = (n) => n.length === 0 ? null : o("div", {
+      class: t.be("poper-content", "useaction"),
+      ref: S
+    }, [n.map((e) => o("div", {
+      class: [t.bem("poper-content", "useaction", "action"), ...w(e), {
+        "no-access": !h(e)
+      }],
+      onClick: (s) => C(e, s, S.value),
+      title: e.tooltip || e.caption
+    }, [e.showIcon && e.sysImage ? o(r("iBizIcon"), {
+      icon: e.sysImage
+    }, null) : o("i", {
+      class: "ibiz-icon fa fa-ravelry",
+      "aria-hidden": "true"
+    }, null), o("span", {
+      class: t.bem("poper-content", "useaction", "action-text")
     }, [e.showCaption ? e.capLanguageRes ? ibiz.i18n.t(e.capLanguageRes.lanResTag, e.caption) : e.caption : ""])]))]), F = () => {
       const {
-        keyActions: t,
+        keyActions: n,
         useActions: e,
-        deActions: r
-      } = U();
-      return s("div", {
-        class: n.b("poper-content")
-      }, [j(t), _(e), q(r)]);
-    }, $ = () => s("div", null, [s(c("el-tooltip"), {
-      popperClass: n.b("title"),
+        deActions: s
+      } = j();
+      return o("div", {
+        class: t.b("poper-content")
+      }, [U(n), _(e), q(s)]);
+    }, W = () => o("div", null, [o(r("el-tooltip"), {
+      popperClass: t.b("title"),
       effect: "dark",
-      content: L,
+      content: z,
       placement: "top",
       "show-arrow": !0
     }, {
-      default: () => [s(c("el-button"), {
+      default: () => [o(r("el-button"), {
         ref: "buttonRef",
-        type: B.value,
-        text: C,
-        onClick: K
+        type: P.value,
+        text: I,
+        onClick: B
       }, {
-        default: () => [s("div", {
-          class: n.b("content")
-        }, [s(c("iBizIcon"), {
-          class: n.bm("content", "icon"),
-          icon: E
-        }, null), S ? s("span", {
-          class: n.bm("content", "caption")
-        }, [P]) : ""])]
+        default: () => [o("div", {
+          class: t.b("content")
+        }, [o(r("iBizIcon"), {
+          class: t.bm("content", "icon"),
+          icon: O
+        }, null), A ? o("span", {
+          class: t.bm("content", "caption")
+        }, [L]) : ""])]
       })]
-    })]), W = (t) => {
-      t.stopPropagation(), t.preventDefault();
-    }, Y = k({
+    })]), Y = (n) => {
+      n.stopPropagation(), n.preventDefault();
+    }, H = R({
       get() {
-        return I.value || v.value;
+        return g.value || v.value;
       },
-      set(t) {
-        I.value = t;
+      set(n) {
+        g.value = n;
       }
     });
     return {
-      ns: n,
-      isText: C,
-      captionText: P,
-      buttonType: B,
-      showCaption: S,
-      sysImage: E,
-      codeName: M,
-      tooltip: L,
-      handleButtonClick: K,
+      ns: t,
+      isText: I,
+      captionText: L,
+      buttonType: P,
+      showCaption: A,
+      sysImage: O,
+      codeName: K,
+      tooltip: z,
+      handleButtonClick: B,
       buttonCssStyle: y,
-      tempStyle: z,
+      tempStyle: E,
       itemStyle: x,
       buttonRef: l,
-      popoverRef: i,
-      popoverRefVisible: I,
+      popoverRef: u,
+      popoverRefVisible: g,
       renderPoperContent: F,
-      renderBtn: $,
-      stopEvent: W,
+      renderBtn: W,
+      stopEvent: Y,
       processing: v,
-      isVisible: Y
+      isVisible: H
     };
   },
   render() {
-    return s("div", {
+    return o("div", {
       class: [this.ns.b(), this.ns.m(this.codeName), this.itemStyle && this.ns.m(this.itemStyle.toLowerCase()), this.ns.is("show-popover", this.isVisible), ...this.controller.containerClass],
       onClick: this.stopEvent,
       style: this.tempStyle
-    }, [s(c("el-popover"), {
+    }, [o(r("el-popover"), {
       ref: "popoverRef",
       visible: this.isVisible,
       "onUpdate:visible": (a) => this.isVisible = a,
@@ -279,22 +274,22 @@ const T = /* @__PURE__ */ ee({
 });
 class ne {
   constructor() {
-    A(this, "component", "IBizKanbanOperate");
+    V(this, "component", "IBizKanbanOperate");
   }
-  async createController(n, o, l) {
-    const i = new V(n, o, l);
-    return await i.init(), i;
+  async createController(t, i, l) {
+    const u = new D(t, i, l);
+    return await u.init(), u;
   }
 }
 const ie = {
   install(a) {
-    a.component(T.name, T), Z(
+    a.component(T.name, T), $(
       "FORM_USERCONTROL_KANBAN_OPERATE",
       () => new ne()
     );
   }
 };
 export {
-  V as KanbanOperateController,
+  D as KanbanOperateController,
   ie as default
 };

@@ -1,13 +1,11 @@
-import './style.css';
-var b = Object.defineProperty;
-var E = (a, e, n) => e in a ? b(a, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : a[e] = n;
-var y = (a, e, n) => (E(a, typeof e != "symbol" ? e + "" : e, n), n);
-import { PluginStaticResource as S, convertNavData as V, registerViewProvider as $ } from "@ibiz-template/runtime";
-import { useNamespace as B, withInstall as D } from "@ibiz-template/vue3-util";
-import { defineComponent as I, ref as l, onBeforeMount as x, h as F, resolveComponent as h, withDirectives as N, createVNode as t, resolveDirective as O, createTextVNode as o } from "vue";
-import { notNilEmpty as j } from "qx-util";
-const m = new S(import.meta.url);
-const v = /* @__PURE__ */ I({
+import './assets/style.css';
+import './assets/style.css';
+import { PluginStaticResource as P, registerViewProvider as C, convertNavData as S } from "@ibiz-template/runtime";
+import { withInstall as V, useNamespace as D } from "@ibiz-template/vue3-util";
+import { defineComponent as E, ref as r, onBeforeMount as I, createVNode as t, createTextVNode as o, resolveComponent as m, h as O, withDirectives as j, resolveDirective as x } from "vue";
+import { notNilEmpty as N } from "qx-util";
+var z = Object.defineProperty, $ = (a, e, n) => e in a ? z(a, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : a[e] = n, A = (a, e, n) => ($(a, typeof e != "symbol" ? e + "" : e, n), n);
+const v = new P(import.meta.url), h = /* @__PURE__ */ E({
   name: "SharedCheckPage",
   props: {
     context: {
@@ -31,48 +29,48 @@ const v = /* @__PURE__ */ I({
     }
   },
   setup(a) {
-    const e = B("shared-check-page"), n = l(""), d = l(!1), u = l(""), p = l(!1), c = l(""), f = () => {
+    const e = D("shared-check-page"), n = r(""), d = r(!1), u = r(""), p = r(!1), i = r(""), k = () => {
       let s = {};
-      const r = a.modelData.appViewNavParams;
-      return j(r) && (s = V(r, a.params, a.context)), s;
-    }, k = async () => {
+      const l = a.modelData.appViewNavParams;
+      return N(l) && (s = S(l, a.params, a.context)), s;
+    }, f = async () => {
       if (!u.value.length) {
-        c.value = "密码不能为空";
+        i.value = "密码不能为空";
         return;
       }
       p.value = !0;
-      const s = f(), r = "".concat(s.check_entity, "/").concat(s.check_key, "/check_access_password");
+      const s = k(), l = "".concat(s.check_entity, "/").concat(s.check_key, "/check_access_password");
       try {
-        const i = await ibiz.net.post(r, {
+        const c = await ibiz.net.post(l, {
           id: s.check_key,
           access_password: u.value
         });
-        p.value = !1, i && i.ok && i.data && (i.data.check_access_password === "1" ? n.value = "pass" : c.value = "密码错误");
-      } catch (i) {
+        p.value = !1, c && c.ok && c.data && (c.data.check_access_password === "1" ? n.value = "pass" : i.value = "密码错误");
+      } catch (c) {
         p.value = !1;
       }
-    }, P = async () => {
+    }, y = async () => {
       d.value = !0;
-      const s = f(), r = "".concat(s.check_entity, "/").concat(s.check_key, "/check_shared");
+      const s = k(), l = "".concat(s.check_entity, "/").concat(s.check_key, "/check_shared");
       try {
-        const i = await ibiz.net.get(r);
-        if (d.value = !1, i && i.ok && i.data) {
+        const c = await ibiz.net.get(l);
+        if (d.value = !1, c && c.ok && c.data) {
           const {
             effective: g,
             check_access_pwd: w
-          } = i.data;
+          } = c.data;
           g === 0 ? n.value = "invalid" : g === 1 && (w === 0 ? n.value = "pass" : w === 1 && (n.value = "checkPwd"));
         }
-      } catch (i) {
+      } catch (c) {
         d.value = !1;
       }
-    }, C = () => {
-      c.value = "";
-    }, _ = (s) => {
-      s && s.code === "Enter" && k();
+    }, _ = () => {
+      i.value = "";
+    }, b = (s) => {
+      s && s.code === "Enter" && f();
     };
-    return x(async () => {
-      P();
+    return I(async () => {
+      y();
     }), {
       ns: e,
       uiState: n,
@@ -85,12 +83,12 @@ const v = /* @__PURE__ */ I({
         class: e.em("link-container", "header")
       }, [t("img", {
         class: e.em("pwd-container", "header-logo"),
-        src: "".concat(m.dir("assets/images/share.png"))
+        src: "".concat(v.dir("assets/images/share.png"))
       }, null), t("span", null, [o("Wiki")])]), t("div", {
         class: e.em("link-container", "content")
       }, [t("img", {
         class: e.em("link-container", "unlink"),
-        src: "".concat(m.dir("assets/images/unlink.png"))
+        src: "".concat(v.dir("assets/images/unlink.png"))
       }, null), t("span", {
         class: e.em("link-container", "tip")
       }, [o("页面共享链接已过期")])])])]),
@@ -101,61 +99,61 @@ const v = /* @__PURE__ */ I({
       }, [t("div", {
         class: e.em("pwd-container", "header")
       }, [t("img", {
-        src: "".concat(m.dir("assets/images/share.png")),
+        src: "".concat(v.dir("assets/images/share.png")),
         class: e.em("pwd-container", "header-logo")
       }, null), t("span", null, [o("Wiki")])]), t("div", {
         class: e.em("pwd-container", "content")
-      }, [t("p", null, [o("访问密码")]), t(h("el-input"), {
-        class: [e.em("pwd-container", "input"), e.is("error", !!c.value.length)],
+      }, [t("p", null, [o("访问密码")]), t(m("el-input"), {
+        class: [e.em("pwd-container", "input"), e.is("error", !!i.value.length)],
         placeholder: "请输入密码",
         modelValue: u.value,
         "onUpdate:modelValue": (s) => u.value = s,
-        onInput: C,
-        onkeydown: _
-      }, null), t(h("el-button"), {
+        onInput: _,
+        onkeydown: b
+      }, null), t(m("el-button"), {
         loading: p.value,
         class: e.em("pwd-container", "submit"),
-        onClick: k
+        onClick: f
       }, {
         default: () => [o("确定")]
       }), t("p", {
-        class: [e.e("error-msg"), e.is("visible", !!c.value.length)]
-      }, [c.value])])])])
+        class: [e.e("error-msg"), e.is("visible", !!i.value.length)]
+      }, [i.value])])])])
     };
   },
   render() {
     let a;
-    return this.uiState === "invalid" && (a = this.renderInvalid()), this.uiState === "checkPwd" && (a = this.renderVerifyPwd()), this.uiState === "pass" && (a = F(h("IBizView"), {
+    return this.uiState === "invalid" && (a = this.renderInvalid()), this.uiState === "checkPwd" && (a = this.renderVerifyPwd()), this.uiState === "pass" && (a = O(m("IBizView"), {
       context: this.$props.context,
       params: this.$props.params,
       modelData: this.modelData,
       modal: this.modal,
       ...this.$attrs
-    }, this.$slots)), N(t("div", {
+    }, this.$slots)), j(t("div", {
       class: this.ns.b()
-    }, [a]), [[O("loading"), this.loading]]);
+    }, [a]), [[x("loading"), this.loading]]);
   }
 });
-class A {
+class B {
   constructor() {
-    y(this, "component", "SharedCheckPage");
+    A(this, "component", "SharedCheckPage");
   }
 }
-const z = D(
-  v,
+const U = V(
+  h,
   function(a) {
-    a.component(v.name, v), $(
+    a.component(h.name, h), C(
       "VIEW_CUSTOM_SHARED_CHECK_PAGE",
-      () => new A()
+      () => new B()
     );
   }
-), U = {
+), T = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(a) {
-    a.use(z);
+    a.use(U);
   }
 };
 export {
-  z as IBizSharedCheckPage,
-  U as default
+  U as IBizSharedCheckPage,
+  T as default
 };

@@ -1,219 +1,217 @@
-import './style.css';
-var Ne = Object.defineProperty;
-var Oe = (n, c, t) => c in n ? Ne(n, c, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[c] = t;
-var m = (n, c, t) => (Oe(n, typeof c != "symbol" ? c + "" : c, t), t);
-import { EditorController as Ue, getDeACMode as $e, UIActionUtil as Re, OpenAppViewCommand as Fe, registerEditorProvider as _e } from "@ibiz-template/runtime";
-import { getMarkDownProps as Be, getEditorEmits as He, useNamespace as Ve, useUIStore as Je, withInstall as qe } from "@ibiz-template/vue3-util";
-import { ref as w, onBeforeUnmount as we, createVNode as g, resolveComponent as We, nextTick as $, defineComponent as Ke, watch as U, onMounted as je, onUnmounted as Ge } from "vue";
-import { createUUID as Xe } from "qx-util";
-import Qe from "cherry-markdown";
-import { RuntimeModelError as me } from "@ibiz-template/core";
-import { clone as fe } from "ramda";
-function ge(n, c) {
-  return !!(n && n.nodeType === 1 && n.nodeName === c);
+import './assets/style.css';
+import './assets/style.css';
+import { registerEditorProvider as Oe, EditorController as Ne, getDeACMode as Ue, UIActionUtil as _e, OpenAppViewCommand as Be } from "@ibiz-template/runtime";
+import { getMarkDownProps as Ve, getEditorEmits as Re, useNamespace as He, useUIStore as Fe, withInstall as Je } from "@ibiz-template/vue3-util";
+import { defineComponent as qe, ref as b, watch as _, onMounted as We, onBeforeUnmount as pe, onUnmounted as je, createVNode as g, nextTick as B, resolveComponent as $e } from "vue";
+import { createUUID as Ge } from "qx-util";
+import Ke from "cherry-markdown";
+import { RuntimeModelError as ue } from "@ibiz-template/core";
+import { clone as he } from "ramda";
+var Qe = Object.defineProperty, Xe = (n, e, i) => e in n ? Qe(n, e, { enumerable: !0, configurable: !0, writable: !0, value: i }) : n[e] = i, p = (n, e, i) => (Xe(n, typeof e != "symbol" ? e + "" : e, i), i);
+function ve(n, e) {
+  return !!(n && n.nodeType === 1 && n.nodeName === e);
 }
 function Ye(n) {
-  let c = n;
-  for (; c; ) {
-    if (c.classList.contains("cherry-previewer"))
+  let e = n;
+  for (; e; ) {
+    if (e.classList.contains("cherry-previewer"))
       return null;
-    const t = c.parentElement;
-    if (ge(c, "svg") && t && t.dataset.type === "mermaid")
-      return c;
-    c = c.parentElement;
+    const i = e.parentElement;
+    if (ve(e, "svg") && i && i.dataset.type === "mermaid")
+      return e;
+    e = e.parentElement;
   }
   return null;
 }
 function Ze(n) {
-  const c = n.cloneNode(!0), t = n.width.baseVal.value || n.clientWidth, o = n.height.baseVal.value || n.clientHeight;
-  c.setAttribute("width", t), c.setAttribute("height", o), c.style.backgroundColor = "white";
-  const e = new XMLSerializer().serializeToString(c), s = btoa(unescape(encodeURIComponent(e)));
-  return "data:image/svg+xml;base64,".concat(s);
+  const e = n.cloneNode(!0), i = n.width.baseVal.value || n.clientWidth, r = n.height.baseVal.value || n.clientHeight;
+  e.setAttribute("width", i), e.setAttribute("height", r), e.style.backgroundColor = "white";
+  const s = new XMLSerializer().serializeToString(e), d = btoa(unescape(encodeURIComponent(s)));
+  return "data:image/svg+xml;base64,".concat(d);
 }
 function et(n) {
-  const c = w(""), t = w([]), o = w();
-  let e = null;
-  const s = async (d) => {
-    var u;
-    if (c.value = d, t.value = [d], await $(), o.value) {
+  const e = b(""), i = b([]), r = b();
+  let s = null;
+  const d = async (o) => {
+    var m;
+    if (e.value = o, i.value = [o], await B(), r.value) {
       const {
-        container: f
-      } = o.value.$refs;
-      f && ((u = f.children[0]) == null || u.click());
+        container: v
+      } = r.value.$refs;
+      v && ((m = v.children[0]) == null || m.click());
     }
-  }, i = (d) => {
-    (d.key === "Escape" || d.keyCode === 27) && (d.stopPropagation(), d.preventDefault(), t.value = [], p());
-  }, h = async () => {
-    var f;
-    await $();
-    const d = (f = o.value) == null ? void 0 : f.$refs.container;
-    if (!d)
+  }, h = (o) => {
+    (o.key === "Escape" || o.keyCode === 27) && (o.stopPropagation(), o.preventDefault(), i.value = [], C());
+  }, f = async () => {
+    var o;
+    await B();
+    const m = (o = r.value) == null ? void 0 : o.$refs.container;
+    if (!m)
       return;
-    const u = d.querySelector(".el-image-viewer__wrapper");
-    u == null || u.addEventListener("keydown", i);
-  }, p = () => {
-    var f;
-    const d = (f = o.value) == null ? void 0 : f.$refs.container;
-    if (!d)
+    const v = m.querySelector(".el-image-viewer__wrapper");
+    v == null || v.addEventListener("keydown", h);
+  }, C = () => {
+    var o;
+    const m = (o = r.value) == null ? void 0 : o.$refs.container;
+    if (!m)
       return;
-    const u = d.querySelector(".el-image-viewer__wrapper");
-    u == null || u.removeEventListener("keydown", i);
-  }, x = (d) => {
-    const u = d == null ? void 0 : d.target;
-    if (ge(u, "IMG") && u) {
-      s(u.src);
+    const v = m.querySelector(".el-image-viewer__wrapper");
+    v == null || v.removeEventListener("keydown", h);
+  }, u = (o) => {
+    const m = o == null ? void 0 : o.target;
+    if (ve(m, "IMG") && m) {
+      d(m.src);
       return;
     }
-    const f = Ye(u);
-    f && s(Ze(f));
-  }, C = () => g(We("el-image"), {
+    const v = Ye(m);
+    v && d(Ze(v));
+  }, l = () => g($e("el-image"), {
     class: n.e("img-preview"),
-    ref: o,
+    ref: r,
     "zoom-rate": 1.1,
-    src: c.value,
-    "preview-src-list": t.value,
+    src: e.value,
+    "preview-src-list": i.value,
     "hide-on-click-modal": !0,
-    onShow: h,
+    onShow: f,
     fit: "cover"
-  }, null), y = (d) => {
-    var u, f;
-    e = ((f = (u = d == null ? void 0 : d.previewer) == null ? void 0 : u.previewerBubble) == null ? void 0 : f.previewerDom) || null, e == null || e.addEventListener("click", x);
+  }, null), y = (o) => {
+    var m, v;
+    s = ((v = (m = o == null ? void 0 : o.previewer) == null ? void 0 : m.previewerBubble) == null ? void 0 : v.previewerDom) || null, s == null || s.addEventListener("click", u);
   };
-  return we(() => {
-    e && (e.removeEventListener("click", x), e = null), p();
+  return pe(() => {
+    s && (s.removeEventListener("click", u), s = null), C();
   }), {
-    renderImgPreview: C,
+    renderImgPreview: l,
     onMDEditorCreated: y
   };
 }
-const tt = (n) => n.replaceAll("&quot;", '"').replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("\\n", "").replaceAll(/>([\s]*)</g, "><"), pe = (n) => n.replace(/<\?xml(.+?)>/, "").replaceAll("\n", "").replaceAll(/>([\s]*)</g, "><");
-const J = /* @__PURE__ */ Ke({
+const tt = (n) => n.replaceAll("&quot;", '"').replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("\\n", "").replaceAll(/>([\s]*)</g, "><"), me = (n) => n.replace(/<\?xml(.+?)>/, "").replaceAll("\n", "").replaceAll(/>([\s]*)</g, "><"), j = /* @__PURE__ */ qe({
   name: "MarkDownPreview",
-  props: Be(),
-  emits: He(),
+  props: Ve(),
+  emits: Re(),
   setup(n, {
-    emit: c,
-    slots: t
+    emit: e,
+    slots: i
   }) {
-    var oe, ne, se, ae, le, ce;
-    const o = Ve("markdown"), e = n.controller, s = w("");
-    let i = null;
-    const h = Xe(), {
-      onMDEditorCreated: p,
-      renderImgPreview: x
-    } = et(o), C = ibiz.util.file.getUploadHeaders(), y = w({
-      ...C
-    }), d = w(""), u = ((oe = e == null ? void 0 : e.editorParams) == null ? void 0 : oe.customTheme) || ((ne = e == null ? void 0 : e.editorParams) == null ? void 0 : ne.customtheme), f = ((se = e == null ? void 0 : e.editorParams) == null ? void 0 : se.enablenoaccess) === "true", {
+    var r, s, d, h, f, C;
+    const u = He("markdown"), l = n.controller, y = b("");
+    let o = null;
+    const m = Ge(), {
+      onMDEditorCreated: v,
+      renderImgPreview: fe
+    } = et(u), be = ibiz.util.file.getUploadHeaders(), $ = b({
+      ...be
+    }), G = b(""), D = ((r = l == null ? void 0 : l.editorParams) == null ? void 0 : r.customTheme) || ((s = l == null ? void 0 : l.editorParams) == null ? void 0 : s.customtheme), V = ((d = l == null ? void 0 : l.editorParams) == null ? void 0 : d.enablenoaccess) === "true", {
       UIStore: R
-    } = Je(), I = w(u || R.theme), S = w(!1);
-    let E = "default";
-    e && ((ae = e.editorParams) != null && ae.showmode) && (E = e.editorParams.showmode);
-    const k = w(!1), P = w("editOnly");
-    let T = null, L = null, q = 0;
-    const F = w({}), W = w({}), _ = w("pure");
-    let M = !1, K = !1;
-    (le = e == null ? void 0 : e.editorParams) != null && le.disabledirectory && (K = e.editorParams.disabledirectory === "true");
-    let j = "absolute";
-    (ce = e == null ? void 0 : e.editorParams) != null && ce.tocpos && (j = e.editorParams.tocpos === "fixed" ? "fixed" : "absolute"), U(() => n.data, (r) => {
-      if (r && e) {
-        const l = {
-          ...e.editorParams,
-          enableNoAccess: f
+    } = Fe(), I = b(D || R.theme), M = b(!1);
+    let P = "default";
+    l && (h = l.editorParams) != null && h.showmode && (P = l.editorParams.showmode);
+    const A = b(!1), E = b("editOnly");
+    let L = null, z = null, K = 0;
+    const H = b({}), Q = b({}), F = b("pure");
+    let S = !1, X = !1;
+    (f = l == null ? void 0 : l.editorParams) != null && f.disabledirectory && (X = l.editorParams.disabledirectory === "true");
+    let Y = "absolute";
+    (C = l == null ? void 0 : l.editorParams) != null && C.tocpos && (Y = l.editorParams.tocpos === "fixed" ? "fixed" : "absolute"), _(() => n.data, (t) => {
+      if (t && l) {
+        const c = {
+          ...l.editorParams,
+          enableNoAccess: V
         };
-        l.uploadparams && (l.uploadParams = JSON.parse(l.uploadparams));
-        const a = ibiz.util.file.calcFileUpDownUrl(e.context, e.params, r, l);
-        d.value = a.uploadUrl;
+        c.uploadparams && (c.uploadParams = JSON.parse(c.uploadparams));
+        const a = ibiz.util.file.calcFileUpDownUrl(l.context, l.params, t, c);
+        G.value = a.uploadUrl;
       }
     }, {
       immediate: !0,
       deep: !0
     });
-    const v = w(), ve = (r, l) => {
-      if (!e)
+    const w = b(), ge = (t, c) => {
+      if (!l)
         return "";
       const a = {
-        ...e.editorParams,
-        enableNoAccess: f
+        ...l.editorParams,
+        enableNoAccess: V
       };
-      return a.exportparams && (a.exportParams = JSON.parse(a.exportparams)), a.globaldownloadprifix ? a.globalDownloadPrifix = a.globaldownloadprifix === "true" : a.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, l && l.folder && (a.osscat = l.folder), ibiz.util.file.calcFileUpDownUrl(e.context, e.params, r, a).downloadUrl;
-    }, be = async (r, l) => {
-      const a = await ibiz.util.file.fileUpload(d.value, r, y.value), b = ve(n.data || {}, a.fileid);
-      let A = b.replace("%fileId%", a.fileid);
-      if (ibiz.config.common.enableDownloadTicket && e && e.editorParams && !f) {
-        const D = await ibiz.util.file.getDownloadTicket(e.context, e.params, n.data || {}, {
+      return a.exportparams && (a.exportParams = JSON.parse(a.exportparams)), a.globaldownloadprifix ? a.globalDownloadPrifix = a.globaldownloadprifix === "true" : a.globalDownloadPrifix = ibiz.config.common.globalDownloadPrifix, c && c.folder && (a.osscat = c.folder), ibiz.util.file.calcFileUpDownUrl(l.context, l.params, t, a).downloadUrl;
+    }, we = async (t, c) => {
+      const a = await ibiz.util.file.fileUpload(G.value, t, $.value), k = ge(n.data || {}, a.fileid);
+      let x = k.replace("%fileId%", a.fileid);
+      if (ibiz.config.common.enableDownloadTicket && l && l.editorParams && !V) {
+        const T = await ibiz.util.file.getDownloadTicket(l.context, l.params, n.data || {}, {
           fileId: a.fileid
-        }, e.downloadTicketParams);
-        D && D.ticket && (A = b.replace("%fileId%", D.ticket), l(A));
+        }, l.downloadTicketParams);
+        T && T.ticket && (x = k.replace("%fileId%", T.ticket), c(x));
       } else
-        l(A);
-    }, Ce = () => i == null ? void 0 : i.getHtml(), z = () => i == null ? void 0 : i.getMarkdown(), B = (r) => {
-      M = !0, i == null || i.setMarkdown(r, !0);
+        c(x);
+    }, Ce = () => o == null ? void 0 : o.getHtml(), O = () => o == null ? void 0 : o.getMarkdown(), J = (t) => {
+      S = !0, o == null || o.setMarkdown(t, !0);
     };
-    U(() => n.value, (r, l) => {
-      r !== l && (r ? s.value = e.transformMarkdown(r) : s.value = "");
+    _(() => n.value, (t, c) => {
+      t !== c && (t ? y.value = l.transformMarkdown(t) : y.value = "");
     }, {
       immediate: !0
-    }), U(s, (r, l) => {
-      const a = z();
-      r !== l && a !== r && B(r);
+    }), _(y, (t, c) => {
+      const a = O();
+      t !== c && a !== t && J(t);
     });
-    const ye = (r) => {
-      console.log(r, "afterChange"), E !== "manual" && (c("change", z(), e == null ? void 0 : e.model.id, M), M = !1);
-    }, Ie = (r, l) => (console.log("beforeImageMounted", r, l), {
-      [r]: l
-    }), G = (r, l = "") => {
-      const a = document.createElement(r);
-      return a.className = l, a;
-    }, H = (r) => G("i", "ch-icon ch-icon-".concat(r)), X = o.e("fullscreen"), Q = (r) => {
-      for (; r.firstChild; )
-        r.removeChild(r.firstChild);
-    }, V = () => {
-      if (i && v.value) {
+    const ye = (t) => {
+      console.log(t, "afterChange"), P !== "manual" && (e("change", O(), l == null ? void 0 : l.model.id, S), S = !1);
+    }, ke = (t, c) => (console.log("beforeImageMounted", t, c), {
+      [t]: c
+    }), Z = (t, c = "") => {
+      const a = document.createElement(t);
+      return a.className = c, a;
+    }, q = (t) => Z("i", "ch-icon ch-icon-".concat(t)), ee = u.e("fullscreen"), te = (t) => {
+      for (; t.firstChild; )
+        t.removeChild(t.firstChild);
+    }, W = () => {
+      if (o && w.value) {
         const {
-          parentElement: r
-        } = i.editor.options.editorDom;
-        if (!r)
+          parentElement: t
+        } = o.editor.options.editorDom;
+        if (!t)
           return {};
-        const l = r.classList, a = v.value.querySelector(".".concat(X));
+        const c = t.classList, a = w.value.querySelector(".".concat(ee));
         return a ? {
-          parentElement: r,
-          cherryClass: l,
+          parentElement: t,
+          cherryClass: c,
           fullscreenNode: a
         } : {};
       }
       return {};
-    }, ke = () => {
+    }, Ie = () => {
       const {
-        parentElement: r,
-        cherryClass: l,
+        parentElement: t,
+        cherryClass: c,
         fullscreenNode: a
-      } = V();
-      r && l && a && (Q(a), a.appendChild(H("minscreen")), l.add("fullscreen"), a.title = ibiz.i18n.t("editor.common.minimize"), r.setAttribute("tabindex", "-1"), $(() => r == null ? void 0 : r.focus()));
-    }, Y = () => {
+      } = W();
+      t && c && a && (te(a), a.appendChild(q("minscreen")), c.add("fullscreen"), a.title = ibiz.i18n.t("editor.common.minimize"), t.setAttribute("tabindex", "-1"), B(() => t == null ? void 0 : t.focus()));
+    }, ie = () => {
       const {
-        parentElement: r,
-        cherryClass: l,
+        parentElement: t,
+        cherryClass: c,
         fullscreenNode: a
-      } = V();
-      r && l && a && (Q(a), a.appendChild(H("fullscreen")), a.title = ibiz.i18n.t("editor.common.fullscreen"), l.remove("fullscreen"), r == null || r.blur(), r.setAttribute("tabindex", "-1"));
-    }, Z = () => {
+      } = W();
+      t && c && a && (te(a), a.appendChild(q("fullscreen")), a.title = ibiz.i18n.t("editor.common.fullscreen"), c.remove("fullscreen"), t == null || t.blur(), t.setAttribute("tabindex", "-1"));
+    }, oe = () => {
       const {
-        cherryClass: r
-      } = V();
-      return r == null ? void 0 : r.contains("fullscreen");
-    }, ee = () => {
-      i && v.value && (Z() ? (Y(), i.toggleToc(_.value), k.value = !1) : (ke(), _.value = i.toc.model, i.toggleToc("full"), k.value = !0));
-    }, te = (r) => {
-      r.stopPropagation(), r.key === "Escape" && (r.preventDefault(), Z() && (Y(), i.toggleToc(_.value), k.value = !1));
-    }, Pe = () => {
-      (n.disabled || n.readonly || E === "manual") && (P.value = "previewOnly"), $(() => {
-        var N, de, ue;
-        const r = ["bold", "italic", "underline", "strikethrough", "sub", "sup", "|", "size", "color"], l = ["bold", "italic", "underline", "strikethrough", "|", "color", "header", "|", "list", "image", {
+        cherryClass: t
+      } = W();
+      return t == null ? void 0 : t.contains("fullscreen");
+    }, re = () => {
+      o && w.value && (oe() ? (ie(), o.toggleToc(F.value), A.value = !1) : (Ie(), F.value = o.toc.model, o.toggleToc("full"), A.value = !0));
+    }, ne = (t) => {
+      t.stopPropagation(), t.key === "Escape" && (t.preventDefault(), oe() && (ie(), o.toggleToc(F.value), A.value = !1));
+    }, Ae = () => {
+      (n.disabled || n.readonly || P === "manual") && (E.value = "previewOnly"), B(() => {
+        var t, c, a;
+        const k = ["bold", "italic", "underline", "strikethrough", "sub", "sup", "|", "size", "color"], x = ["bold", "italic", "underline", "strikethrough", "|", "color", "header", "|", "list", "image", {
           insert: ["link", "hr", "br", "code", "formula", "toc", "table", "line-table", "bar-table"]
         }, "settings", "togglePreview"];
-        e && e.chatCompletion && (l.unshift("AIChart"), r.unshift("AI")), i = new Qe({
-          id: h,
-          value: s.value,
+        l && l.chatCompletion && (x.unshift("AIChart"), k.unshift("AI")), o = new Ke({
+          id: m,
+          value: y.value,
           previewer: {
             enablePreviewerBubble: !(n.disabled || n.readonly)
           },
@@ -223,7 +221,7 @@ const J = /* @__PURE__ */ Ke({
             // 目前应用的代码块主题
             codeBlockTheme: I.value
           },
-          fileUpload: be,
+          fileUpload: we,
           emoji: {
             useUnicode: !0
           },
@@ -237,29 +235,29 @@ const J = /* @__PURE__ */ Ke({
             // edit&preview: 双栏编辑预览模式
             // editOnly: 纯编辑模式（没有预览，可通过toolbar切换成双栏或预览模式）
             // previewOnly: 预览模式（没有编辑框，toolbar只显示“返回编辑”按钮，可通过toolbar切换成编辑模式）
-            defaultModel: P.value,
+            defaultModel: E.value,
             codemirror: {
               // 是否自动focus 默认为true
               autofocus: !1
             }
           },
           toolbars: {
-            toolbar: l,
-            bubble: r,
+            toolbar: x,
+            bubble: k,
             float: ["h1", "h2", "h3", "|", "checklist", "quote", "quickTable", "code"],
             // 定义侧边栏，默认为空
             sidebar: ["theme", "copy"],
             // 定义顶部右侧工具栏，默认为空
             toolbarRight: [],
             // 目录
-            toc: !K && {
+            toc: !X && {
               updateLocationHash: !1,
               // 要不要更新URL的hash
               defaultModel: "pure",
               // pure: 精简模式/缩略模式，只有一排小点； full: 完整模式，会展示所有标题
               showAutoNumber: !0,
               // 是否显示自增序号
-              position: j,
+              position: Y,
               // 悬浮目录的悬浮方式。当滚动条在cherry内部时，用absolute；当滚动条在cherry外部时，用fixed
               cssText: ""
               // 自定义样式
@@ -267,7 +265,7 @@ const J = /* @__PURE__ */ Ke({
           },
           callback: {
             afterChange: ye,
-            beforeImageMounted: Ie
+            beforeImageMounted: ke
           },
           engine: {
             syntax: {
@@ -281,79 +279,79 @@ const J = /* @__PURE__ */ Ke({
               htmlAttrWhiteList: "data-value"
             }
           }
-        }), i.toggleToc("pure");
-        const a = i.engine.makeHtml(s.value);
-        i.previewer.update(a), (de = (N = i.toc) == null ? void 0 : N.updateTocList) == null || de.call(N), i.setTheme(I.value), u && (i.setTheme(u), i.setCodeBlockTheme(u));
-        const b = G("span", "".concat(X, " cherry-toolbar-button"));
-        b.title = ibiz.i18n.t("editor.common.fullscreen"), b.onclick = ee, b.appendChild(H("fullscreen"));
-        const A = n.disabled ? i.editor.options.editorDom.parentElement : (ue = i.editor.options.editorDom.parentElement) == null ? void 0 : ue.querySelector(".cherry-toolbar>.toolbar-right");
-        if (A == null || A.appendChild(b), e == null || e.setMDEditor(i), p(i), t.editorSwitchMenu && window.ResizeObserver && v.value) {
-          const O = v.value.querySelector(".cherry-toolbar");
-          O && (L = new ResizeObserver((Le) => {
-            var he;
-            const ze = (he = Le[0]) == null ? void 0 : he.contentRect.height;
-            W.value = o.cssVarBlock({
+        }), o.toggleToc("pure");
+        const T = o.engine.makeHtml(y.value);
+        o.previewer.update(T), (c = (t = o.toc) == null ? void 0 : t.updateTocList) == null || c.call(t), o.setTheme(I.value), D && (o.setTheme(D), o.setCodeBlockTheme(D));
+        const N = Z("span", "".concat(ee, " cherry-toolbar-button"));
+        N.title = ibiz.i18n.t("editor.common.fullscreen"), N.onclick = re, N.appendChild(q("fullscreen"));
+        const se = n.disabled ? o.editor.options.editorDom.parentElement : (a = o.editor.options.editorDom.parentElement) == null ? void 0 : a.querySelector(".cherry-toolbar>.toolbar-right");
+        if (se == null || se.appendChild(N), l == null || l.setMDEditor(o), v(o), i.editorSwitchMenu && window.ResizeObserver && w.value) {
+          const U = w.value.querySelector(".cherry-toolbar");
+          U && (z = new ResizeObserver((Le) => {
+            var ce;
+            const ze = (ce = Le[0]) == null ? void 0 : ce.contentRect.height;
+            Q.value = u.cssVarBlock({
               "toolbar-height": "".concat(ze, "px")
             });
-          }), L.observe(O));
+          }), z.observe(U));
         }
-        const D = i == null ? void 0 : i.wrapperDom;
-        D && D.addEventListener("click", (O) => {
-          e.handleClick(O);
+        const de = o == null ? void 0 : o.wrapperDom;
+        de && de.addEventListener("click", (U) => {
+          l.handleClick(U);
         });
       });
     };
-    U(() => R.theme, (r) => {
-      I.value = u || r, i == null || i.setTheme(I.value), i == null || i.setCodeBlockTheme(I.value);
+    _(() => R.theme, (t) => {
+      I.value = D || t, o == null || o.setTheme(I.value), o == null || o.setCodeBlockTheme(I.value);
     });
-    const Ae = () => {
-      if (window.ResizeObserver && v.value) {
-        const r = {
-          width: v.value.offsetWidth ? "".concat(v.value.offsetWidth, "px") : "100%"
+    const Ee = () => {
+      if (window.ResizeObserver && w.value) {
+        const t = {
+          width: w.value.offsetWidth ? "".concat(w.value.offsetWidth, "px") : "100%"
         };
-        e && typeof e.parent.model.height == "number" && Object.assign(r, {
-          height: "".concat(e.parent.model.height, "px")
-        }), F.value = o.cssVarBlock(r), T = new ResizeObserver((l) => {
+        l && typeof l.parent.model.height == "number" && Object.assign(t, {
+          height: "".concat(l.parent.model.height, "px")
+        }), H.value = u.cssVarBlock(t), L = new ResizeObserver((c) => {
           const {
             width: a
-          } = l[0].contentRect;
-          if (a !== q) {
-            const b = {
-              width: "".concat(l[0].contentRect.width, "px")
+          } = c[0].contentRect;
+          if (a !== K) {
+            const k = {
+              width: "".concat(c[0].contentRect.width, "px")
             };
-            e && typeof e.parent.model.height == "number" && Object.assign(b, {
-              height: "".concat(e.parent.model.height, "px")
-            }), F.value = o.cssVarBlock(b), q = a;
+            l && typeof l.parent.model.height == "number" && Object.assign(k, {
+              height: "".concat(l.parent.model.height, "px")
+            }), H.value = u.cssVarBlock(k), K = a;
           }
-        }), T.observe(v.value);
+        }), L.observe(w.value);
       }
-    }, Ee = () => {
-      S.value = !0, P.value = "editOnly", i == null || i.switchModel(P.value);
-    }, ie = () => {
-      S.value = !1, P.value = "previewOnly", i == null || i.switchModel(P.value);
-    }, De = () => {
-      B(s.value), ie();
+    }, Pe = () => {
+      M.value = !0, E.value = "editOnly", o == null || o.switchModel(E.value);
+    }, le = () => {
+      M.value = !1, E.value = "previewOnly", o == null || o.switchModel(E.value);
     }, xe = () => {
-      c("change", z(), e == null ? void 0 : e.model.id, M), M = !1, ie();
-    }, re = () => {
-      const r = document.getElementById(h);
-      r == null || r.focus();
-    }, Se = () => {
-      if (E === "manual" && !S.value)
+      J(y.value), le();
+    }, De = () => {
+      e("change", O(), l == null ? void 0 : l.model.id, S), S = !1, le();
+    }, ae = () => {
+      const t = document.getElementById(m);
+      t == null || t.focus();
+    }, Me = () => {
+      if (P === "manual" && !M.value)
         return g("div", {
-          onClick: re,
-          class: [o.e("header"), o.is("fullscreen", k.value)]
+          onClick: ae,
+          class: [u.e("header"), u.is("fullscreen", A.value)]
         }, [!n.disabled && !n.readonly && g("div", {
-          class: o.em("header", "edit"),
-          onClick: Ee,
+          class: u.em("header", "edit"),
+          onClick: Pe,
           title: ibiz.i18n.t("editor.markdown.edit")
         }, [g("i", {
           class: "fa fa-edit",
           "aria-hidden": "true"
         }, null)]), g("div", {
-          class: o.em("header", "full"),
-          onClick: ee
-        }, [k.value ? g("i", {
+          class: u.em("header", "full"),
+          onClick: re
+        }, [A.value ? g("i", {
           class: "fa fa-compress",
           "aria-hidden": "true",
           title: ibiz.i18n.t("editor.html.reduce")
@@ -362,52 +360,52 @@ const J = /* @__PURE__ */ Ke({
           "aria-hidden": "true",
           title: ibiz.i18n.t("editor.common.fullscreen")
         }, null)])]);
-    }, Me = () => {
-      if (E === "manual" && S.value && !n.disabled && !n.readonly)
+    }, Se = () => {
+      if (P === "manual" && M.value && !n.disabled && !n.readonly)
         return g("div", {
-          onClick: re,
-          class: [o.e("footer"), o.is("fullscreen", k.value)]
+          onClick: ae,
+          class: [u.e("footer"), u.is("fullscreen", A.value)]
         }, [g("div", {
-          class: o.em("footer", "cancel"),
-          onClick: De
-        }, [ibiz.i18n.t("editor.common.cancel")]), g("div", {
-          class: o.em("footer", "save"),
+          class: u.em("footer", "cancel"),
           onClick: xe
+        }, [ibiz.i18n.t("editor.common.cancel")]), g("div", {
+          class: u.em("footer", "save"),
+          onClick: De
         }, [ibiz.i18n.t("editor.common.confirm")])]);
     }, Te = () => {
-      var r;
+      var t;
       return g("div", {
-        class: [o.b("menu"), o.is("fullscreen", k.value)],
-        style: W.value
-      }, [(r = t.editorSwitchMenu) == null ? void 0 : r.call(t)]);
+        class: [u.b("menu"), u.is("fullscreen", A.value)],
+        style: Q.value
+      }, [(t = i.editorSwitchMenu) == null ? void 0 : t.call(i)]);
     };
-    return je(() => {
-      var r;
-      Pe(), Ae(), (r = v.value) == null || r.addEventListener("keydown", te.bind(this));
-    }), we(() => {
-      var r;
-      (r = v.value) == null || r.removeEventListener("keydown", te.bind(this));
-    }), Ge(() => {
-      i = null, T && T.disconnect(), L && L.disconnect();
+    return We(() => {
+      var t;
+      Ae(), Ee(), (t = w.value) == null || t.addEventListener("keydown", ne.bind(this));
+    }), pe(() => {
+      var t;
+      (t = w.value) == null || t.removeEventListener("keydown", ne.bind(this));
+    }), je(() => {
+      o = null, L && L.disconnect(), z && z.disconnect();
     }), {
-      ns: o,
-      currentVal: s,
-      id: h,
-      editor: i,
-      markDownBox: v,
-      headers: y,
+      ns: u,
+      currentVal: y,
+      id: m,
+      editor: o,
+      markDownBox: w,
+      headers: $,
       theme: I,
       UIStore: R,
-      defaultModel: P,
-      cssVars: F,
-      isEditing: S,
-      showmode: E,
+      defaultModel: E,
+      cssVars: H,
+      isEditing: M,
+      showmode: P,
       getCherryHtml: Ce,
-      getCherryContent: z,
-      setCherryContent: B,
-      renderHeader: Se,
-      renderFooter: Me,
-      renderImgPreview: x,
+      getCherryContent: O,
+      setCherryContent: J,
+      renderHeader: Me,
+      renderFooter: Se,
+      renderImgPreview: fe,
       renderEditorSwitchMenu: Te
     };
   },
@@ -424,168 +422,51 @@ const J = /* @__PURE__ */ Ke({
     }, null)]);
   }
 });
-class it extends Ue {
+class it extends Ne {
   constructor() {
-    super(...arguments);
-    /**
-     * 上传参数
-     */
-    m(this, "uploadParams");
-    /**
-     * 下载参数
-     */
-    m(this, "exportParams");
-    /**
-     * 应用实体服务
-     *
-     * @author chitanda
-     * @date 2023-10-12 14:10:41
-     * @type {IAppDEService}
-     */
-    m(this, "deService");
-    /**
-     * 自填模式
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:52
-     * @type {IAppDEACMode}
-     */
-    m(this, "deACMode");
-    /**
-     * 自填模式对应主键属性名称
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:58
-     * @type {string}
-     */
-    m(this, "keyName", "srfkey");
-    /**
-     * 自填模式对应主文本属性名称
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:02
-     * @type {string}
-     */
-    m(this, "textName", "srfmajortext");
-    /**
-     * 自填模式排序模式，默认升序
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:29
-     * @type {string}
-     */
-    m(this, "sort", "asc");
-    /**
-     * 自填数据项集合（已排除了value和text)
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:23
-     * @type {IDEACModeDataItem[]}
-     */
-    m(this, "dataItems", []);
-    /**
-     * AI 聊天自填模式
-     *
-     * @author chitanda
-     * @date 2023-10-12 10:10:37
-     * @type {boolean}
-     */
-    m(this, "chatCompletion", !1);
-    /**
-     * 编辑器实例
-     *
-     * @type {IData}
-     * @memberof MarkDownPreviewController
-     */
-    m(this, "mdeditor", null);
-    /**
-     * 选区位置缓存
-     *
-     * @type {(IData | null)}
-     * @memberof MarkDownPreviewController
-     */
-    m(this, "selectionAreaPosition", null);
-    /**
-     * 选区方向  true表示正向，从左到右；false表示反向，从右到左
-     *
-     * @type {boolean}
-     * @memberof MarkDownPreviewController
-     */
-    m(this, "selectionDirection", !0);
-    /**
-     * 当前编辑器使用主题
-     *
-     * @type {string}
-     * @memberof MarkDownPreviewController
-     */
-    m(this, "currentEditorTheme", "light");
-    /**
-     * AI行内聊天框高度
-     *
-     * @type {number}
-     * @memberof MarkDownPreviewController
-     */
-    m(this, "inlineAiChatHeight");
-    /**
-     * @description 链接视图id
-     * @type {string}
-     * @memberof RawEditorController
-     */
-    m(this, "linkViewId", "plmweb.recent_redirect_view");
-    /**
-     * @description 图标代码表标识
-     * @type {string}
-     * @memberof CommentItemRawItemEditorController
-     */
-    m(this, "iconCodeListId", "plmweb.base__recent_visite");
-    /**
-     * @description 代码表数据
-     * @type {readonly}
-     * @memberof CommentItemRawItemEditorController
-     */
-    m(this, "codeListItems", []);
+    super(...arguments), p(this, "uploadParams"), p(this, "exportParams"), p(this, "deService"), p(this, "deACMode"), p(this, "keyName", "srfkey"), p(this, "textName", "srfmajortext"), p(this, "sort", "asc"), p(this, "dataItems", []), p(this, "chatCompletion", !1), p(this, "mdeditor", null), p(this, "selectionAreaPosition", null), p(this, "selectionDirection", !0), p(this, "currentEditorTheme", "light"), p(this, "inlineAiChatHeight"), p(this, "linkViewId", "plmweb.recent_redirect_view"), p(this, "iconCodeListId", "plmweb.base__recent_visite"), p(this, "codeListItems", []);
   }
   async onInit() {
     if (await super.onInit(), this.style.height || (this.style.height = "600px"), this.editorParams) {
-      const { uploadparams: s, exportparams: i, inlineaichatheight: h } = this.editorParams;
+      const { uploadparams: s, exportparams: d, inlineaichatheight: h } = this.editorParams;
       if (s)
         try {
           this.uploadParams = JSON.parse(s);
-        } catch (p) {
-          throw new me(
+        } catch (f) {
+          throw new ue(
             s,
             ibiz.i18n.t("editor.markdown.uploadJsonFormatErr")
           );
         }
-      if (i)
+      if (d)
         try {
-          this.exportParams = JSON.parse(i);
-        } catch (p) {
-          throw new me(
-            i,
+          this.exportParams = JSON.parse(d);
+        } catch (f) {
+          throw new ue(
+            d,
             ibiz.i18n.t("editor.markdown.exportJsonFormatErr")
           );
         }
       h && (this.inlineAiChatHeight = Number(h));
     }
-    const { model: t } = this;
-    if (t.appDEACModeId && (this.deACMode = await $e(
-      t.appDEACModeId,
-      t.appDataEntityId,
+    const { model: e } = this;
+    if (e.appDEACModeId && (this.deACMode = await Ue(
+      e.appDEACModeId,
+      e.appDataEntityId,
       this.context.srfappid
     ), this.deACMode)) {
       if (this.deACMode.actype === "AUTOCOMPLETE") {
-        const { minorSortAppDEFieldId: s, minorSortDir: i } = this.deACMode;
-        s && i && (this.sort = "".concat(s.toLowerCase(), ",").concat(i.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
+        const { minorSortAppDEFieldId: s, minorSortDir: d } = this.deACMode;
+        s && d && (this.sort = "".concat(s.toLowerCase(), ",").concat(d.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
           (h) => {
             h.id !== "value" && h.id !== "text" && this.dataItems.push(h);
           }
         ));
       }
-      this.deACMode.actype === "CHATCOMPLETION" && (this.deService = await ibiz.hub.getApp(t.appId).deService.getService(this.context, t.appDataEntityId), this.chatCompletion = !0);
+      this.deACMode.actype === "CHATCOMPLETION" && (this.deService = await ibiz.hub.getApp(e.appId).deService.getService(this.context, e.appDataEntityId), this.chatCompletion = !0);
     }
-    const { LINKVIEWID: o, ICONCODELISTID: e } = this.editorParams;
-    o && (this.linkViewId = o), e && (this.iconCodeListId = e), this.codeListItems = await this.loadCodeList(this.iconCodeListId);
+    const { LINKVIEWID: i, ICONCODELISTID: r } = this.editorParams;
+    i && (this.linkViewId = i), r && (this.iconCodeListId = r), this.codeListItems = await this.loadCodeList(this.iconCodeListId);
   }
   /**
    * 加载代码表
@@ -594,25 +475,25 @@ class it extends Ue {
    * @return {*}  {(Promise<readonly CodeListItem[]>)}
    * @memberof CommentItemRawItemEditorController
    */
-  async loadCodeList(t) {
+  async loadCodeList(e) {
     return await ibiz.hub.getApp(this.context.srfappid).codeList.get(
-      t,
+      e,
       this.context,
       this.params
     );
   }
-  findCodeListItem(t, o) {
-    if (t) {
-      const e = t.find((s) => s.value == o);
-      if (e)
-        return e;
-      for (let s = 0; s < t.length; s++) {
-        const i = this.findCodeListItem(
-          t[s].children,
-          o
+  findCodeListItem(e, i) {
+    if (e) {
+      const r = e.find((s) => s.value == i);
+      if (r)
+        return r;
+      for (let s = 0; s < e.length; s++) {
+        const d = this.findCodeListItem(
+          e[s].children,
+          i
         );
-        if (i)
-          return i;
+        if (d)
+          return d;
       }
     }
   }
@@ -622,8 +503,8 @@ class it extends Ue {
    * @param {IData} mdeditor
    * @memberof MarkDownPreviewController
    */
-  setMDEditor(t) {
-    this.mdeditor = t;
+  setMDEditor(e) {
+    this.mdeditor = e;
   }
   /**
    * 设置保存当前选区位置
@@ -632,8 +513,8 @@ class it extends Ue {
    * @param {IData} end
    * @memberof MarkDownPreviewController
    */
-  setCursorPos(t, o) {
-    this.selectionAreaPosition = { start: t, end: o };
+  setCursorPos(e, i) {
+    this.selectionAreaPosition = { start: e, end: i };
   }
   /**
    * 设置当前编辑器的主题
@@ -641,8 +522,8 @@ class it extends Ue {
    * @param {string} theme
    * @memberof MarkDownPreviewController
    */
-  setCurrentEditorTheme(t) {
-    this.currentEditorTheme = t;
+  setCurrentEditorTheme(e) {
+    this.currentEditorTheme = e;
   }
   /**
    * 设置当前选区方向
@@ -650,8 +531,8 @@ class it extends Ue {
    * @param {boolean} direction
    * @memberof MarkDownPreviewController
    */
-  setSelectionDirection(t) {
-    this.selectionDirection = t;
+  setSelectionDirection(e) {
+    this.selectionDirection = e;
   }
   /**
    * 获取当前主题
@@ -669,8 +550,8 @@ class it extends Ue {
    * @memberof MarkDownPreviewController
    */
   getSelectionText() {
-    var t;
-    return (t = this.mdeditor) == null ? void 0 : t.editor.editor.getSelection();
+    var e;
+    return (e = this.mdeditor) == null ? void 0 : e.editor.editor.getSelection();
   }
   /**
    * 获取内联AI编辑器主题
@@ -689,8 +570,8 @@ class it extends Ue {
    * @return {*}  {boolean}
    * @memberof MarkDownPreviewController
    */
-  isPositionBefore(t, o) {
-    return t.line < o.line ? !0 : t.line > o.line ? !1 : t.ch < o.ch;
+  isPositionBefore(e, i) {
+    return e.line < i.line ? !0 : e.line > i.line ? !1 : e.ch < i.ch;
   }
   /**
    * 插入文本
@@ -698,18 +579,18 @@ class it extends Ue {
    * @param {string} text
    * @memberof MarkDownPreviewController
    */
-  insertText(t) {
-    var o, e, s;
+  insertText(e) {
+    var i, r, s;
     if (this.selectionAreaPosition) {
-      const { start: i, end: h } = this.selectionAreaPosition, p = "\n".concat(t, "\n");
-      if (!!(i.line === h.line && i.ch === h.ch)) {
-        (o = this.mdeditor) == null || o.editor.editor.replaceSelection(p);
+      const { start: d, end: h } = this.selectionAreaPosition, f = "\n".concat(e, "\n");
+      if (d.line === h.line && d.ch === h.ch) {
+        (i = this.mdeditor) == null || i.editor.editor.replaceSelection(f);
         return;
       }
       let C;
-      if (this.selectionDirection ? C = h : C = i, (e = this.mdeditor) == null || e.editor.editor.setCursor(C), (s = this.mdeditor) == null || s.editor.editor.replaceSelection(p), this.selectionDirection === !1) {
-        const y = (p.match(/\n/g) || []).length;
-        this.selectionAreaPosition.start.line += y, this.selectionAreaPosition.end.line += y, this.selectionAreaPosition.end.ch -= this.selectionAreaPosition.start.ch, this.selectionAreaPosition.start.ch = 0;
+      if (this.selectionDirection ? C = h : C = d, (r = this.mdeditor) == null || r.editor.editor.setCursor(C), (s = this.mdeditor) == null || s.editor.editor.replaceSelection(f), this.selectionDirection === !1) {
+        const u = (f.match(/\n/g) || []).length;
+        this.selectionAreaPosition.start.line += u, this.selectionAreaPosition.end.line += u, this.selectionAreaPosition.end.ch -= this.selectionAreaPosition.start.ch, this.selectionAreaPosition.start.ch = 0;
       }
       this.restoreSelection();
     }
@@ -720,9 +601,9 @@ class it extends Ue {
    * @param {string} text
    * @memberof MarkDownPreviewController
    */
-  replaceSelectionText(t) {
-    var o;
-    (o = this.mdeditor) == null || o.editor.editor.replaceSelection(t);
+  replaceSelectionText(e) {
+    var i;
+    (i = this.mdeditor) == null || i.editor.editor.replaceSelection(e);
   }
   /**
    * 恢复选区
@@ -730,10 +611,10 @@ class it extends Ue {
    * @memberof MarkDownPreviewController
    */
   restoreSelection() {
-    var t, o, e;
-    (e = this.mdeditor) == null || e.editor.editor.setSelection(
-      (t = this.selectionAreaPosition) == null ? void 0 : t.start,
-      (o = this.selectionAreaPosition) == null ? void 0 : o.end
+    var e, i, r;
+    (r = this.mdeditor) == null || r.editor.editor.setSelection(
+      (e = this.selectionAreaPosition) == null ? void 0 : e.start,
+      (i = this.selectionAreaPosition) == null ? void 0 : i.end
     );
   }
   /**
@@ -743,18 +624,18 @@ class it extends Ue {
    * @memberof MarkDownPreviewController
    */
   getInLineAiChatOptions() {
-    var e, s, i, h, p;
-    const t = (e = this.mdeditor) == null ? void 0 : e.wrapperDom.getBoundingClientRect();
-    (s = this.mdeditor) != null && s.bubble.visible || (i = this.mdeditor) == null || i.bubble.showBubble();
-    const o = (h = this.mdeditor) == null ? void 0 : h.bubble.bubbleDom.getBoundingClientRect();
+    var e, i, r, s, d;
+    const h = (e = this.mdeditor) == null ? void 0 : e.wrapperDom.getBoundingClientRect();
+    (i = this.mdeditor) != null && i.bubble.visible || (r = this.mdeditor) == null || r.bubble.showBubble();
+    const f = (s = this.mdeditor) == null ? void 0 : s.bubble.bubbleDom.getBoundingClientRect();
     return {
       // 编辑器的左侧距离 + 10px
-      left: t.left + 10,
+      left: h.left + 10,
       // 浮动工具栏的顶部距离位置
-      top: o.top,
+      top: f.top,
       // 编辑器的宽度 - 右侧工具栏的宽度(38px) - 左侧边距（10px）- 右侧边距（10px）
-      width: t.width - 58,
-      editorElement: (p = this.mdeditor) == null ? void 0 : p.wrapperDom,
+      width: h.width - 58,
+      editorElement: (d = this.mdeditor) == null ? void 0 : d.wrapperDom,
       editorTheme: this.getCurrentTheme(),
       height: this.inlineAiChatHeight
     };
@@ -766,8 +647,8 @@ class it extends Ue {
    * @memberof MarkDownPreviewController
    */
   getInLineAiEditorElement() {
-    var t;
-    return (t = this.mdeditor) == null ? void 0 : t.wrapperDom;
+    var e;
+    return (e = this.mdeditor) == null ? void 0 : e.wrapperDom;
   }
   /**
    *  执行内联AIUI操作
@@ -777,27 +658,27 @@ class it extends Ue {
    * @return {*}  {Promise<void>}
    * @memberof MarkDownPreviewController
    */
-  async doInLineAIUIAction(t, o) {
-    const e = this.ctrl.getEventArgs();
-    e.params = fe(e.params), e.params.editor = this, this.editorParams.srfaiappendcurdata && this.editorParams.srfaiappendcurdata === "true" && (e.context.srfaiappendcurdata = !0), await Re.exec(
-      t,
+  async doInLineAIUIAction(e, i) {
+    const r = this.ctrl.getEventArgs();
+    r.params = he(r.params), r.params.editor = this, this.editorParams.srfaiappendcurdata && this.editorParams.srfaiappendcurdata === "true" && (r.context.srfaiappendcurdata = !0), await _e.exec(
+      e,
       {
-        ...e
+        ...r
       },
-      o
+      i
     );
   }
-  parseCommentTag(t) {
-    let { icon: o } = t;
-    const e = JSON.stringify(t);
-    if (!t.icon && t.owner_subtype && this.codeListItems.length) {
+  parseCommentTag(e) {
+    let { icon: i } = e;
+    const r = JSON.stringify(e);
+    if (!e.icon && e.owner_subtype && this.codeListItems.length) {
       const s = this.findCodeListItem(
         this.codeListItems,
-        t.owner_subtype
+        e.owner_subtype
       );
-      s && s.sysImage && (o = s.sysImage.rawContent || ""), o = tt(o), o = pe(o);
+      s && s.sysImage && (i = s.sysImage.rawContent || ""), i = tt(i), i = me(i);
     }
-    return "<span data-value='".concat(e, "' class='comment-tag is-click'>").concat(o, " ").concat(t.identifier, " ").concat(t.name, "</span>");
+    return "<span data-value='".concat(r, "' class='comment-tag is-click'>").concat(i, " ").concat(e.identifier, " ").concat(e.name, "</span>");
   }
   /**
    * @description 转换markdown
@@ -805,63 +686,62 @@ class it extends Ue {
    * @returns {*}  {string}
    * @memberof MarkDownPreviewController
    */
-  transformMarkdown(t) {
-    return t.replace(
+  transformMarkdown(e) {
+    return e.replace(
       /@{[^,]*,"name":"(.*?)"}/g,
       "<span class='comment-tag'>@$1</span>"
     ).replace(
       /#{(".+?":".+?")(,"icon":"((.|[\t\r\f\n\s])+?)")*}/g,
-      (o, e, s, i) => {
-        const h = JSON.parse("{".concat(e, "}"));
-        i && (i = pe(i));
-        const p = { icon: i, ...h };
-        return this.parseCommentTag(p);
+      (i, r, s, d) => {
+        const h = JSON.parse("{".concat(r, "}"));
+        d && (d = me(d));
+        const f = { icon: d, ...h };
+        return this.parseCommentTag(f);
       }
     );
   }
-  handleClick(t) {
-    const o = t.target.getAttribute("data-value");
-    if (!o) {
-      t.stopPropagation();
+  handleClick(e) {
+    const i = e.target.getAttribute("data-value");
+    if (!i) {
+      e.stopPropagation();
       return;
     }
-    const e = JSON.parse(o);
-    if (!e.owner_type)
+    const r = JSON.parse(i);
+    if (!r.owner_type)
       return;
-    const s = this.context.clone(), i = fe(this.params);
-    s.srfkey = e.id, e.owner_subtype === "page" ? i.article_page = e.owner_id : i[e.owner_subtype] = e.owner_id, i[e.owner_type] = e.recent_parent, delete e.script, delete e.icon, delete e.id, Object.assign(i, e), e && this.linkViewId && ibiz.commands.execute(
-      Fe.TAG,
+    const s = this.context.clone(), d = he(this.params);
+    s.srfkey = r.id, r.owner_subtype === "page" ? d.article_page = r.owner_id : d[r.owner_subtype] = r.owner_id, d[r.owner_type] = r.recent_parent, delete r.script, delete r.icon, delete r.id, Object.assign(d, r), r && this.linkViewId && ibiz.commands.execute(
+      Be.TAG,
       this.linkViewId,
       s,
-      i
+      d
     );
   }
 }
-class rt {
+class ot {
   constructor() {
-    m(this, "formEditor", "MarkDownPreview");
-    m(this, "gridEditor", "MarkDownPreview");
+    p(this, "formEditor", "MarkDownPreview"), p(this, "gridEditor", "MarkDownPreview");
   }
-  async createController(c, t) {
-    const o = new it(c, t);
-    return await o.init(), o;
+  async createController(e, i) {
+    const r = new it(e, i);
+    return await r.init(), r;
   }
 }
-const ot = qe(
-  J,
+const rt = Je(
+  j,
   function(n) {
-    n.component(J.name, J), _e(
+    n.component(j.name, j), Oe(
       "MARKDOWN_PREVIEW",
-      () => new rt()
+      () => new ot()
     );
   }
-), mt = {
+), ht = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(n) {
-    n.use(ot);
+    n.use(rt);
   }
 };
 export {
-  ot as IbizMarkDownPreview,
-  mt as default
+  rt as IbizMarkDownPreview,
+  ht as default
 };

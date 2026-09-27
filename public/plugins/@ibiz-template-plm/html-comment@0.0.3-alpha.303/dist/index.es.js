@@ -1,17 +1,15 @@
-import './style.css';
+import './assets/style.css';
+import './assets/style.css';
+import { i as s, A as d } from "./index.es2.js";
 import "vue";
 import "@ibiz-template/runtime";
 import "@ibiz-template/vue3-util";
-import { I as n, i as u } from "./index-ce522f55.js";
 import "lodash-es";
 import "@ibiz-template/core";
-import "dayjs";
 import "qx-util";
-import "@wangeditor/editor-for-vue";
-import "@wangeditor/editor";
 import "ramda";
 import "element-plus";
 export {
-  n as IBizHtmlComment,
-  u as default
+  s as IBizHtmlComment,
+  d as default
 };
