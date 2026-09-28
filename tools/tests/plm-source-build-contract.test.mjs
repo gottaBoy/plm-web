@@ -108,6 +108,16 @@ test('local plugin packages expose the required SystemJS source-build inputs', (
 
 test('Vite build contract copies local assets and rewrites generated extras', () => {
   assert.match(vitePlugin, /const localSystemPlugins = \[/);
+  assert.match(
+    vitePlugin,
+    /async closeBundle\(\)/,
+    'closeBundle must wait for asynchronous asset copies',
+  );
+  assert.match(
+    vitePlugin,
+    /await Promise\.all\(\s*componentPackages\.map\(async pkg => \{/,
+    'component SystemJS assets must be copied before the build completes',
+  );
   assert.match(vitePlugin, /function copyLocalSystemPlugin/);
   assert.match(vitePlugin, /dist\/extras\/js/);
   assert.match(vitePlugin, /index\.legacy\.js/);

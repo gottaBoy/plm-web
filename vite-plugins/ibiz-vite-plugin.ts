@@ -155,7 +155,7 @@ function IBizVitePlugin(): Plugin[] {
   const p: Plugin = {
     name: 'iBizSys:System',
     apply: 'build',
-    closeBundle() {
+    async closeBundle() {
       const cwd = process.cwd();
       const baseModule = join(cwd, 'node_modules/@ibiz-template');
       const baseOutModule = join(cwd, 'dist/extras/js/@ibiz-template');
@@ -176,14 +176,16 @@ function IBizVitePlugin(): Plugin[] {
       // eslint-disable-next-line no-lone-blocks
       {
         // 拷贝组件底包并修改文件名称
-        componentPackages.forEach(pkg => {
-          if (!existsSync(join(baseOutModule, pkg))) {
-            mkdirSync(join(baseOutModule, pkg), { recursive: true });
-          }
-          const cpDir = join(baseModule, pkg, 'dist/**');
-          const outDir = join(baseOutModule, pkg);
-          cpy(cpDir, outDir);
-        });
+        await Promise.all(
+          componentPackages.map(async pkg => {
+            if (!existsSync(join(baseOutModule, pkg))) {
+              mkdirSync(join(baseOutModule, pkg), { recursive: true });
+            }
+            const cpDir = join(baseModule, pkg, 'dist/**');
+            const outDir = join(baseOutModule, pkg);
+            await cpy(cpDir, outDir);
+          }),
+        );
       }
       const localPluginAssets = new Map(
         localSystemPlugins.map(packageName => [
