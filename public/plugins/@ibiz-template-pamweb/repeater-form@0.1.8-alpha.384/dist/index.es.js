@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerFormDetailProvider as Jr, FormMDCtrlController as Qr, FormMDCtrlRepeaterController as Nr, FormMDCtrlFormController as Zr, FormMDCtrlMDController as kr, ControlVO as qr } from "@ibiz-template/runtime";
 import { withInstall as _r, useNamespace as Fr, useController as tn } from "@ibiz-template/vue3-util";
 import en, { defineComponent as jr, createVNode as at, resolveComponent as Se, computed as yr } from "vue";

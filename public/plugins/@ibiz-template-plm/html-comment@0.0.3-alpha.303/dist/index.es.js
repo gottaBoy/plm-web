@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { i as s, A as d } from "./index.es2.js";
 import "vue";
 import "@ibiz-template/runtime";

@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { withInstall as v, useNamespace as h } from "@ibiz-template/vue3-util";
 import { registerToolbarItemProvider as u, ToolbarController as d } from "@ibiz-template/runtime";
 import { defineComponent as p, ref as b, createVNode as i, resolveComponent as g } from "vue";

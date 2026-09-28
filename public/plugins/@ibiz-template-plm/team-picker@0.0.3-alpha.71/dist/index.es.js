@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerEditorProvider as G, EditorController as H, getDeACMode as q } from "@ibiz-template/runtime";
 import { defineComponent as Y, ref as g, computed as J, watch as K, onMounted as W, onBeforeUnmount as $, createVNode as i, resolveComponent as D, createTextVNode as h } from "vue";
 import { getDataPickerProps as Q, getEditorEmits as X, useNamespace as ee } from "@ibiz-template/vue3-util";

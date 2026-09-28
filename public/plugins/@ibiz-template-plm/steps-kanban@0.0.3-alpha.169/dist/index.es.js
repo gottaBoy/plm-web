@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { withInstall as _n, useControlController as tr, useNamespace as er } from "@ibiz-template/vue3-util";
 import { registerControlProvider as nr, KanbanController as rr, calcDeCodeNameById as or } from "@ibiz-template/runtime";
 import ar, { defineComponent as Un, ref as ce, computed as He, onMounted as $n, onBeforeUnmount as ir, createVNode as H, resolveComponent as vt, watch as lr, mergeProps as sr, createTextVNode as Qt } from "vue";

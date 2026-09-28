@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PanelItemController as J, registerPanelItemProvider as $, UIActionUtil as Q } from "@ibiz-template/runtime";
 import { defineComponent as X, ref as p, computed as R, createVNode as o, resolveComponent as r } from "vue";
 import { useNamespace as Z } from "@ibiz-template/vue3-util";

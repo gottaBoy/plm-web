@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as R, ControlType as B, ListController as T } from "@ibiz-template/runtime";
 import { withInstall as k, useControlController as O, useNamespace as I } from "@ibiz-template/vue3-util";
 import { defineComponent as S, computed as j, createVNode as o, resolveComponent as c, isVNode as V, withDirectives as N, resolveDirective as M, createTextVNode as y } from "vue";

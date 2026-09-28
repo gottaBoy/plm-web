@@ -11,12 +11,18 @@ dependencies:
   '@floating-ui/dom':
     specifier: ^1.5.3
     version: 1.5.3
+  '@ibiz-template-plugin/ai-chat':
+    specifier: link:../ibiz-app-hub/plugins/ibiz-ai-chat
+    version: link:../ibiz-app-hub/plugins/ibiz-ai-chat
   '@ibiz-template-plugin/bi-report':
     specifier: link:../ibiz-app-hub/plugins/ibiz-bi-report
     version: link:../ibiz-app-hub/plugins/ibiz-bi-report
   '@ibiz-template-plugin/data-view':
     specifier: link:../ibiz-app-hub/plugins/ibiz-data-view
     version: link:../ibiz-app-hub/plugins/ibiz-data-view
+  '@ibiz-template-plugin/gantt':
+    specifier: link:../ibiz-app-hub/plugins/ibiz-gantt
+    version: link:../ibiz-app-hub/plugins/ibiz-gantt
   '@ibiz-template/core':
     specifier: link:../ibiz-app-hub/packages/core
     version: link:../ibiz-app-hub/packages/core
@@ -253,6 +259,9 @@ devDependencies:
   vite-plugin-eslint:
     specifier: ^1.8.1
     version: 1.8.1(eslint@8.51.0)(vite@4.5.0)
+  vite-plugin-libcss:
+    specifier: 1.1.1
+    version: 1.1.1(vite@4.5.0)
   vue-eslint-parser:
     specifier: ^9.3.2
     version: 9.3.2(eslint@8.51.0)
@@ -14051,6 +14060,15 @@ packages:
       '@types/eslint': 8.4.5
       eslint: 8.51.0
       rollup: 2.78.1
+      vite: 4.5.0(@types/node@20.8.7)(sass@1.69.4)(terser@5.22.0)
+    dev: true
+
+  /vite-plugin-libcss@1.1.1(vite@4.5.0):
+    resolution: {integrity: sha512-WAk6U9iYWMbcu7cdw4wACpVebZiLHMyyE9KTcBzzkTt1cnXj3a7loIoIGNblx+xMb9quPpO3iRbNTOnIFDzgmg==}
+    peerDependencies:
+      vite: '*'
+    dependencies:
+      minimatch: 9.0.3
       vite: 4.5.0(@types/node@20.8.7)(sass@1.69.4)(terser@5.22.0)
     dev: true
 

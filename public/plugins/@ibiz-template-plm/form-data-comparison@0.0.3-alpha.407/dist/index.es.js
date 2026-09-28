@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { withInstall as L, useNamespace as U, useControlController as B } from "@ibiz-template/vue3-util";
 import { registerControlProvider as _, EditFormController as z, ControlVO as k, getFormDetailProvider as x, isFormDataContainer as q, findChildFormDetails as J, ScriptFactory as K, hasDeCodeName as Q, calcDeCodeNameById as H, FormNotifyState as $, calcNavParams as W } from "@ibiz-template/runtime";
 import { defineComponent as X, ref as N, watch as M, reactive as Y, h as A, resolveComponent as R, createVNode as r, createTextVNode as C, isVNode as Z } from "vue";

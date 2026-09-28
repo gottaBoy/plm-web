@@ -134,6 +134,8 @@ export default defineConfig({
         '@ibiz-template/vue3-components',
         '@ibiz-template-plugin/ai-chat',
         '@ibiz-template-plugin/bi-report',
+        '@ibiz-template-plugin/data-view',
+        '@ibiz-template-plugin/gantt',
       ],
       output: {
          entryFileNames: 'static/js/[name]-[hash].js',

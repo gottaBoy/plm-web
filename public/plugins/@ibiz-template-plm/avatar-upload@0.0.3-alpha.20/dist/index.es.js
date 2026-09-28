@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PluginStaticResource as Pn, registerEditorProvider as Nn, EditorController as Xn } from "@ibiz-template/runtime";
 import { defineComponent as Jn, ref as G, watch as re, createVNode as m, resolveComponent as ZA, mergeProps as Hr, createTextVNode as RA, computed as Yn, nextTick as Er } from "vue";
 import { getUploadProps as Wn, getEditorEmits as Zn, useNamespace as _n } from "@ibiz-template/vue3-util";

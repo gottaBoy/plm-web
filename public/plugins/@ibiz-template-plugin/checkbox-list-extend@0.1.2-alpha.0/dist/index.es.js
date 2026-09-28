@@ -1,3 +1,4 @@
+import './assets/style.css';
 import { registerEditorProvider as ce, CodeListEditorController as de, ScriptFactory as ne } from "@ibiz-template/runtime";
 import { getListBoxProps as he, getEditorEmits as fe, useNamespace as pe, useFocusAndBlur as ve, withInstall as me } from "@ibiz-template/vue3-util";
 import { defineComponent as ge, ref as W, computed as ae, watch as be, createVNode as $, resolveComponent as k, isVNode as ye, mergeProps as De } from "vue";

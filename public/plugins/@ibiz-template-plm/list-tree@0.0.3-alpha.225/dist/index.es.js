@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as ne, TreeController as oe, getControlPanel as ae } from "@ibiz-template/runtime";
 import { withInstall as le, useControlController as ie, useNamespace as se } from "@ibiz-template/vue3-util";
 import { defineComponent as de, ref as y, reactive as re, watch as z, computed as ce, nextTick as ue, resolveComponent as b, onMounted as pe, onUnmounted as he, createVNode as p, createTextVNode as fe, withDirectives as ve, resolveDirective as me, isVNode as ge } from "vue";

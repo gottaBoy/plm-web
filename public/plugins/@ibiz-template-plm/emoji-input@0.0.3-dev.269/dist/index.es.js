@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { getDataPickerProps as J, getEditorEmits as Q, useNamespace as q, renderString as Y, withInstall as Z } from "@ibiz-template/vue3-util";
 import { registerEditorProvider as ee, EditorController as ne, getDeACMode as se, getAcItemProvider as ae, OpenAppViewCommand as H } from "@ibiz-template/runtime";
 import { RuntimeModelError as F } from "@ibiz-template/core";

@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PluginStaticResource as Vn, registerEditorProvider as Se, EditorController as Un, convertNavData as zn, getDeACMode as Hn, UIActionUtil as Nn, ScriptFactory as hs, Srfuf as Bn, OpenAppViewCommand as Pn } from "@ibiz-template/runtime";
 import { getEditorEmits as li, useNamespace as ds, useUIStore as ar, useClickOutside as jn, withInstall as Fn } from "@ibiz-template/vue3-util";
 import { createUUID as Ht, QXEvent as qn } from "qx-util";

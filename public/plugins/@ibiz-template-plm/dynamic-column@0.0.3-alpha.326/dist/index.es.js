@@ -1,210 +1,205 @@
 import './assets/style.css';
-import './assets/style.css';
-import { registerGridColumnProvider as k, GridFieldEditColumnController as z } from "@ibiz-template/runtime";
-import { defineComponent as R, ref as b, computed as o, createVNode as x, resolveComponent as P, h as B, nextTick as F, reactive as f, onUnmounted as j } from "vue";
-import { isNil as q } from "ramda";
-import { useNamespace as G, useClickOutside as T } from "@ibiz-template/vue3-util";
-import { RuntimeError as L, listenJSEvent as V, NOOP as E } from "@ibiz-template/core";
-var _ = Object.defineProperty, J = (e, l, t) => l in e ? _(e, l, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[l] = t, U = (e, l, t) => (J(e, typeof l != "symbol" ? l + "" : l, t), t);
-function Y(e, l) {
-  const t = o(() => e.controller.getDynamicController(e.row.data)), r = o(() => e.row.editColStates[t.value.fieldName].disabled), u = o(() => e.row.editColStates[t.value.fieldName].readonly), a = o(() => e.controller.grid.state.rowEditOpen), d = o(() => u.value || !a.value), n = o(() => a.value && r.value), i = o(() => a.value), c = () => {
-    t.value.grid.editSaveMode === "cell-blur" && t.value.grid.save(e.row.data);
-  }, v = f({
-    stopPropagation: i
-  }), s = f({
-    disabled: n,
-    readonly: d,
-    onBlur: c
-  });
+import { GridFieldEditColumnController as I, registerGridColumnProvider as S } from "@ibiz-template/runtime";
+import { computed as o, reactive as u, ref as y, onUnmounted as D, defineComponent as P, h as b, resolveComponent as E, nextTick as M } from "vue";
+import { isNil as O } from "ramda";
+import { listenJSEvent as x, NOOP as R, RuntimeError as k } from "@ibiz-template/core";
+import { useClickOutside as z, useNamespace as T } from "@ibiz-template/vue3-util";
+function B(e) {
+  const a = o(
+    () => e.controller.getDynamicController(e.row.data)
+  ), t = o(
+    () => e.row.editColStates[a.value.fieldName].disabled
+  ), l = o(
+    () => e.row.editColStates[a.value.fieldName].readonly
+  ), n = e.controller.grid, i = o(() => n.state.rowEditOpen), d = () => {
+    a.value.grid.editSaveMode === "cell-blur" && a.value.grid.save(e.row.data);
+  };
   return {
-    gridEditItemProps: v,
-    editorProps: s
+    gridEditItemProps: u({ stopPropagation: i }),
+    editorProps: u({
+      disabled: o(() => i.value && t.value),
+      readonly: o(() => l.value || !i.value),
+      onBlur: d
+    })
   };
 }
-function A(e, l) {
-  const t = o(() => e.controller.getDynamicController(e.row.data)), r = o(() => e.row.editColStates[t.value.fieldName].disabled), u = o(() => e.row.editColStates[t.value.fieldName].readonly), a = o(() => !!e.row.errors[t.value.fieldName]), d = o(
+function F(e, a) {
+  const t = o(
+    () => e.controller.getDynamicController(e.row.data)
+  ), l = o(
+    () => e.row.editColStates[t.value.fieldName].disabled
+  ), n = o(
+    () => e.row.editColStates[t.value.fieldName].readonly
+  ), i = o(
+    () => !!e.row.errors[t.value.fieldName]
+  ), d = o(
     () => e.row.editColStates[t.value.fieldName].editable
-  ), n = (p) => {
-    e.row.editColStates[t.value.fieldName].editable = p;
-  }, i = o(() => !r.value && !u.value && !a.value), c = o(() => a.value || i.value && d.value), v = o(() => !c.value), s = !1, w = o(() => !a.value), g = o(() => i.value && !d.value), h = o(() => i.value || c.value);
-  let m;
-  const C = () => {
-    n(!0), m = T(l, async (p) => {
-      n(!1), m.stop();
-    });
-  }, S = () => {
-    m && m.stop(), ibiz.log.debug("".concat(t.value.fieldName, "属性编辑器focus事件"));
-  }, M = () => {
-    ibiz.log.debug("".concat(t.value.fieldName, "属性编辑器blur事件")), n(!1), t.value.grid.editSaveMode === "cell-blur" && t.value.grid.save(e.row.data);
-  };
-  let y = E;
-  const N = b(!1);
-  y = V(window, "keyup", (p) => {
-    p.code === "Escape" && d.value && (n(!1), N.value = !0);
-  }), j(() => {
-    y !== E && y();
+  ), c = (g) => {
+    e.row.editColStates[t.value.fieldName].editable = g;
+  }, s = o(
+    () => !l.value && !n.value && !i.value
+  ), v = o(
+    () => i.value || s.value && d.value
+  ), w = y(!1);
+  let r;
+  const h = () => {
+    c(!0), r = z(
+      a,
+      async () => {
+        c(!1), r == null || r.stop();
+      }
+    );
+  }, C = () => {
+    r == null || r.stop(), ibiz.log.debug("".concat(t.value.fieldName, "属性编辑器focus事件"));
+  }, m = () => {
+    ibiz.log.debug("".concat(t.value.fieldName, "属性编辑器blur事件")), c(!1), t.value.grid.editSaveMode === "cell-blur" && t.value.grid.save(e.row.data);
+  }, f = x(window, "keyup", (g) => {
+    g.code === "Escape" && d.value && (c(!1), w.value = !0);
   });
-  const O = f({
-    showEditMask: g,
-    stopPropagation: h,
-    isEscOut: N,
-    onMaskClick: C
-  }), D = f({
-    autoFocus: w,
-    disabled: s,
-    readonly: v,
-    onBlur: M,
-    onFocus: S
-  });
-  return {
-    gridEditItemProps: O,
-    editorProps: D
-  };
-}
-function H(e, l) {
-  const t = o(() => e.controller.getDynamicController(e.row.data)), r = o(() => e.row.editColStates[t.value.fieldName].disabled), u = o(() => e.row.editColStates[t.value.fieldName].readonly), a = o(
-    () => e.row.editColStates[t.value.fieldName].editable
-  ), d = o(() => u.value || !a.value), n = o(() => a.value && r.value), i = o(() => a.value), c = f({
-    stopPropagation: i
-  }), v = f({
-    disabled: n,
-    readonly: d
-  });
-  return {
-    gridEditItemProps: c,
-    editorProps: v
+  return D(() => {
+    f !== R && f();
+  }), {
+    gridEditItemProps: u({
+      showEditMask: o(() => s.value && !d.value),
+      stopPropagation: o(() => s.value || v.value),
+      isEscOut: w,
+      onMaskClick: h
+    }),
+    editorProps: u({
+      autoFocus: o(() => !i.value),
+      disabled: !1,
+      readonly: o(() => !v.value),
+      onBlur: m,
+      onFocus: C
+    })
   };
 }
-const I = /* @__PURE__ */ R({
+function p(e) {
+  const a = o(
+    () => e.controller.getDynamicController(e.row.data)
+  ), t = o(
+    () => e.row.editColStates[a.value.fieldName].disabled
+  ), l = o(
+    () => e.row.editColStates[a.value.fieldName].readonly
+  ), n = o(
+    () => e.row.editColStates[a.value.fieldName].editable
+  );
+  return {
+    gridEditItemProps: u({ stopPropagation: n }),
+    editorProps: u({
+      disabled: o(() => n.value && t.value),
+      readonly: o(() => l.value || !n.value)
+    })
+  };
+}
+const N = P({
   name: "IBizDynamicColumn",
   props: {
-    controller: {
-      type: Object,
-      required: !0
-    },
-    row: {
-      type: Object,
-      required: !0
-    },
-    attrs: {
-      type: Object,
-      required: !1
-    }
+    controller: { type: Object, required: !0 },
+    row: { type: Object, required: !0 },
+    attrs: { type: Object, required: !1 }
   },
   setup(e) {
-    const l = G("dynamic-column"), t = b(), r = o(() => e.controller.getDynamicController(e.row.data)), u = () => {
-      switch (r.value.grid.editShowMode) {
+    const a = T("dynamic-column"), t = y(), l = o(() => e.controller.getDynamicController(e.row.data)), n = () => {
+      switch (l.value.grid.editShowMode) {
         case "cell":
-          return A(e, t);
+          return F(e, t);
         case "row":
-          return H(e);
+          return p(e);
         case "all":
-          return Y(e);
+          return B(e);
         default:
-          throw new L(ibiz.i18n.t("control.common.noSupportItem", {
-            name: r.value.grid.editShowMode
+          throw new k(ibiz.i18n.t("control.common.noSupportItem", {
+            name: l.value.grid.editShowMode
           }));
       }
-    }, {
-      gridEditItemProps: a,
-      editorProps: d
-    } = u(), n = async (s, w, g = !1) => {
-      ibiz.log.debug("".concat(r.value.fieldName, "值变更"), s);
-      const {
-        isEscOut: h
-      } = a;
-      if (h) {
-        a.isEscOut = !1;
-        const m = e.row.data, C = m[r.value.fieldName];
-        m[r.value.fieldName] = null, F(() => {
-          m[r.value.fieldName] = C;
+    }, { gridEditItemProps: i, editorProps: d } = n(), c = async (r, h, C = !1) => {
+      if (ibiz.log.debug("".concat(l.value.fieldName, "值变更"), r), i.isEscOut) {
+        i.isEscOut = !1;
+        const m = e.row.data, f = m[l.value.fieldName];
+        m[l.value.fieldName] = null, M(() => {
+          m[l.value.fieldName] = f;
         });
         return;
       }
-      await r.value.setRowValue(e.row, s, w, g);
-    }, i = b(void 0), c = (s) => {
-      i.value = s;
-    }, v = o(() => {
-      if (d.readonly) {
-        if (q(i.value)) {
-          const s = e.row.data[r.value.fieldName];
-          return r.value.formatValue(s);
-        }
-        return i.value;
-      }
+      await l.value.setRowValue(e.row, r, h, C);
+    }, s = y(), v = o(() => {
+      if (d.readonly)
+        return O(s.value) ? l.value.formatValue(e.row.data[l.value.fieldName]) : s.value;
     });
     return {
-      c: r,
-      ns: l,
+      c: l,
+      ns: a,
       tooltip: v,
       editorProps: d,
       componentRef: t,
-      gridEditItemProps: a,
-      rowDataChange: n,
-      onInfoTextChange: c
+      gridEditItemProps: i,
+      rowDataChange: c,
+      onInfoTextChange: (r) => {
+        s.value = r;
+      }
     };
   },
   render() {
-    var e;
-    const l = this.row.data[this.c.fieldName];
-    return x(P("iBizGridEditItem"), {
+    var a;
+    const e = this.row.data[this.c.fieldName];
+    return b(E("iBizGridEditItem"), {
       ref: "componentRef",
       required: !this.c.editItem.allowEmpty,
       error: this.row.errors[this.c.fieldName],
       overflowMode: this.c.grid.overflowMode,
-      class: [this.ns.b(), this.ns.m(this.c.grid.overflowMode), (e = this.controller.model.cellSysCss) == null ? void 0 : e.cssName],
+      class: [
+        this.ns.b(),
+        this.ns.m(this.c.grid.overflowMode),
+        (a = this.controller.model.cellSysCss) == null ? void 0 : a.cssName
+      ],
       ...this.gridEditItemProps
     }, {
-      default: () => [this.c.editorProvider && B(P(this.c.editorProvider.gridEditor), {
-        class: this.ns.e("editor"),
-        value: l,
-        data: this.row.data,
-        key: this.c.model.id,
-        controller: this.c.editor,
-        overflowMode: this.c.grid.overflowMode,
-        onChange: this.rowDataChange,
-        onInfoTextChange: this.onInfoTextChange,
-        title: this.tooltip,
-        ...this.editorProps,
-        ...this.attrs
-      })]
+      default: () => [
+        this.c.editorProvider && b(E(this.c.editorProvider.gridEditor), {
+          class: this.ns.e("editor"),
+          value: e,
+          data: this.row.data,
+          key: this.c.model.id,
+          controller: this.c.editor,
+          overflowMode: this.c.grid.overflowMode,
+          onChange: this.rowDataChange,
+          onInfoTextChange: this.onInfoTextChange,
+          title: this.tooltip,
+          ...this.editorProps,
+          ...this.attrs
+        })
+      ]
     });
   }
 });
-class K extends z {
-  /**
-   * @description 返回动态列控制器
-   * @param {IData} data
-   * @returns {*}  {GridColumnController}
-   * @memberof DynamicColumnController
-   */
-  getDynamicController(l) {
-    var t;
-    const { userParam: r } = this.model;
-    if (!(r != null && r.dynamicColumn) || !(r != null && r.condField))
+class q extends I {
+  getDynamicController(a) {
+    var i;
+    const { userParam: t } = this.model;
+    if (!(t != null && t.dynamicColumn) || !(t != null && t.condField))
       return this;
-    const { dynamicColumn: u, condField: a } = r;
-    return l[a] ? (t = this.grid.columns[u]) != null ? t : this : this;
+    const { dynamicColumn: l, condField: n } = t;
+    return a[n] ? (i = this.grid.columns[l]) != null ? i : this : this;
   }
 }
-class Q {
+class G {
   constructor() {
-    U(this, "component", "IBizDynamicColumn");
+    this.component = "IBizDynamicColumn";
   }
-  async createController(l, t) {
-    const r = new K(l, t);
-    return await r.init(), r;
+  async createController(a, t) {
+    const l = new q(a, t);
+    return await l.init(), l;
   }
 }
-const te = {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
+const U = {
   install(e) {
-    e.component(I.name, I), k(
+    e.component(N.name, N), S(
       "GRID_COLRENDER_DYNAMIC_COLUMN",
-      () => new Q()
+      () => new G()
     );
   }
 };
 export {
-  te as default
+  U as default
 };

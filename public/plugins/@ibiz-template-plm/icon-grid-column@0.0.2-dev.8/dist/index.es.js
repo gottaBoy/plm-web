@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerGridColumnProvider as G, GridFieldColumnController as k, GridRowState as L, GridFieldEditColumnController as b } from "@ibiz-template/runtime";
 import { withInstall as N, useNamespace as y } from "@ibiz-template/vue3-util";
 import { defineComponent as A, computed as a, ref as x, createVNode as n, resolveComponent as f } from "vue";

@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerEditorProvider as Oe, EditorController as Ne, getDeACMode as Ue, UIActionUtil as _e, OpenAppViewCommand as Be } from "@ibiz-template/runtime";
 import { getMarkDownProps as Ve, getEditorEmits as Re, useNamespace as He, useUIStore as Fe, withInstall as Je } from "@ibiz-template/vue3-util";
 import { defineComponent as qe, ref as b, watch as _, onMounted as We, onBeforeUnmount as pe, onUnmounted as je, createVNode as g, nextTick as B, resolveComponent as $e } from "vue";

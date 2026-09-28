@@ -1,3 +1,4 @@
+import './assets/style.css';
 import { registerEditorProvider as j, EditorController as q } from "@ibiz-template/runtime";
 import { defineComponent as G, ref as f, computed as N, watch as T, createVNode as c, resolveComponent as v, mergeProps as z } from "vue";
 import { getUploadProps as K, getEditorEmits as Q, useNamespace as X, useAutoFocusBlur as Y, useFocusAndBlur as Z } from "@ibiz-template/vue3-util";
@@ -14,7 +15,7 @@ const ie = /* @__PURE__ */ G({
       useInFocusAndBlur: w
     } = Y(s, o), m = f([]), h = f(0), p = f(!1), u = f(""), d = f([]), b = ibiz.util.file.getUploadHeaders(), I = f({
       ...b
-    }), C = f(""), F = N(() => a.multiple ? 9999 : 1);
+    }), y = f(""), F = N(() => a.multiple ? 9999 : 1);
     console.log(666), T(() => s.data, (e) => {
       if (e) {
         const i = {
@@ -23,7 +24,7 @@ const ie = /* @__PURE__ */ G({
         };
         i.uploadparams && (i.uploadParams = JSON.parse(i.uploadparams));
         const t = ibiz.util.file.calcFileUpDownUrl(a.context, a.params, e, i);
-        if (C.value = t.uploadUrl, l.length > 0) {
+        if (y.value = t.uploadUrl, l.length > 0) {
           const g = l[0].id;
           e[g] ? d.value = JSON.parse(e[g]) : d.value = [];
         }
@@ -43,7 +44,7 @@ const ie = /* @__PURE__ */ G({
       p.value = e;
     }, J = N(() => !!u.value), M = N(() => !!(s.controlParams && s.controlParams.editmode === "hover" && !s.readonly)), {
       componentRef: k
-    } = Z(() => o("focus"), () => w()), H = (e, i, t, g) => new Promise((y) => {
+    } = Z(() => o("focus"), () => w()), H = (e, i, t, g) => new Promise((C) => {
       const D = new FileReader();
       D.onload = function(P) {
         var R;
@@ -53,10 +54,10 @@ const ie = /* @__PURE__ */ G({
             const x = document.createElement("canvas"), O = x.getContext("2d");
             x.width = t, x.height = g, O && O.drawImage(E, 0, 0, t, g);
             const $ = x.toDataURL("image/png", 0.9);
-            o("change", $), y();
+            o("change", $), C();
           });
         } else
-          o("change", (R = P.target) == null ? void 0 : R.result), y();
+          o("change", (R = P.target) == null ? void 0 : R.result), C();
       }, e.split(".").pop() === "svg" ? D.readAsText(i) : D.readAsDataURL(i);
     }), W = async (e) => {
       e.status === "ready" && await H(e.name, e.raw, a.imageWidth, a.imageHeight);
@@ -96,7 +97,7 @@ const ie = /* @__PURE__ */ G({
       ns: n,
       c: a,
       limit: F,
-      uploadUrl: C,
+      uploadUrl: y,
       headers: I,
       editorItems: l,
       dialogImageUrl: m,

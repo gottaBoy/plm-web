@@ -1,11 +1,10 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerEditorProvider as ae, EditorController as oe, ButtonContainerState as ie, getDeACMode as se, calcDeCodeNameById as ne, UIActionButtonState as re, UIActionUtil as le, openRedirectView as de } from "@ibiz-template/runtime";
-import { getDataPickerProps as ue, getEditorEmits as ce, useNamespace as pe, getNestedRoutePath as he, renderString as me, withInstall as ve, parseRouteViewData as fe, route2routePath as T, routePath2string as B } from "@ibiz-template/vue3-util";
+import { getDataPickerProps as ue, getEditorEmits as ce, useNamespace as he, getNestedRoutePath as pe, renderString as me, withInstall as fe, parseRouteViewData as ve, route2routePath as T, routePath2string as B } from "@ibiz-template/vue3-util";
 import { listenJSEvent as ye, NOOP as U, RuntimeModelError as Ee, IBizContext as z } from "@ibiz-template/core";
 import { mergeDeepLeft as Ce } from "ramda";
-import { inject as q, defineComponent as we, ref as b, computed as H, watch as M, onMounted as De, onBeforeUnmount as be, onActivated as Ne, createVNode as c, resolveComponent as y } from "vue";
-import { isUndefined as Ie } from "lodash-es";
+import { inject as X, defineComponent as we, ref as b, computed as H, watch as M, onMounted as Ie, onBeforeUnmount as be, onActivated as De, createVNode as c, resolveComponent as y } from "vue";
+import { isUndefined as Ae } from "lodash-es";
 /*!
   * vue-router v4.2.5
   * (c) 2023 Eduardo San Martin Morote
@@ -15,29 +14,25 @@ var G;
 (function(i) {
   i.pop = "pop", i.push = "push";
 })(G || (G = {}));
-var _;
-(function(i) {
-  i.back = "back", i.forward = "forward", i.unknown = "";
-})(_ || (_ = {}));
-Symbol(process.env.NODE_ENV !== "production" ? "navigation failure" : "");
 var F;
 (function(i) {
-  i[i.aborted = 4] = "aborted", i[i.cancelled = 8] = "cancelled", i[i.duplicated = 16] = "duplicated";
+  i.back = "back", i.forward = "forward", i.unknown = "";
 })(F || (F = {}));
-Symbol(process.env.NODE_ENV !== "production" ? "router view location matched" : "");
-Symbol(process.env.NODE_ENV !== "production" ? "router view depth" : "");
-const Ae = Symbol(process.env.NODE_ENV !== "production" ? "router" : ""), ge = Symbol(process.env.NODE_ENV !== "production" ? "route location" : "");
-Symbol(process.env.NODE_ENV !== "production" ? "router view location" : "");
-function xe() {
-  return q(Ae);
-}
+var q;
+(function(i) {
+  i[i.aborted = 4] = "aborted", i[i.cancelled = 8] = "cancelled", i[i.duplicated = 16] = "duplicated";
+})(q || (q = {}));
+const ge = Symbol(""), xe = Symbol("");
 function ke() {
-  return q(ge);
+  return X(ge);
 }
-var Me = Object.defineProperty, Se = (i, a, s) => a in i ? Me(i, a, { enumerable: !0, configurable: !0, writable: !0, value: s }) : i[a] = s, p = (i, a, s) => (Se(i, typeof a != "symbol" ? a + "" : a, s), s);
-class Re extends oe {
+function Ne() {
+  return X(xe);
+}
+var Me = Object.defineProperty, Re = (i, a, s) => a in i ? Me(i, a, { enumerable: !0, configurable: !0, writable: !0, value: s }) : i[a] = s, h = (i, a, s) => (Re(i, typeof a != "symbol" ? a + "" : a, s), s);
+class Se extends oe {
   constructor() {
-    super(...arguments), p(this, "keyName", "srfkey"), p(this, "textName", "srfmajortext"), p(this, "interfaceName", ""), p(this, "sort", ""), p(this, "deACMode"), p(this, "dataItems", []), p(this, "groupActionState", new ie()), p(this, "suffix", ""), p(this, "enablesearch", !1), p(this, "enableCache", !1), p(this, "immediate", !1), p(this, "routeKey", ""), p(this, "valueMode", "ROUTECHANGE"), p(this, "itemLayoutPanel");
+    super(...arguments), h(this, "keyName", "srfkey"), h(this, "textName", "srfmajortext"), h(this, "interfaceName", ""), h(this, "sort", ""), h(this, "deACMode"), h(this, "dataItems", []), h(this, "groupActionState", new ie()), h(this, "suffix", ""), h(this, "enablesearch", !1), h(this, "enableCache", !1), h(this, "immediate", !1), h(this, "routeKey", ""), h(this, "valueMode", "ROUTECHANGE"), h(this, "itemLayoutPanel");
   }
   /**
    * 当前视图
@@ -123,13 +118,13 @@ class Re extends oe {
       this.params
     ), m = {};
     this.sort && !Object.is(this.sort, "") && Object.assign(m, { sort: this.sort }), a && Object.assign(m, { query: a }), Object.assign(m, { size: 1e3 });
-    const v = Ce(l, m);
+    const f = Ce(l, m);
     if (this.interfaceName)
       return await ibiz.hub.getApp(this.context.srfappid).deService.exec(
         this.model.appDataEntityId,
         this.interfaceName,
         e,
-        v
+        f
       );
     throw new Ee(this.model, "请配置实体和实体数据集");
   }
@@ -181,83 +176,83 @@ class Re extends oe {
    * @memberof RoutePickerController
    */
   async getRouteKey(a, s, e = !1) {
-    let l = (await fe(a, this.routeDepth)).context[this.routeKey];
+    let l = (await ve(a, this.routeDepth)).context[this.routeKey];
     return !l && e && (l = s[0].srfkey), l;
   }
 }
-class Oe {
+class Pe {
   constructor() {
-    p(this, "formEditor"), p(this, "gridEditor"), this.formEditor = "RoutePicker", this.gridEditor = "RoutePicker";
+    h(this, "formEditor"), h(this, "gridEditor"), this.formEditor = "RoutePicker", this.gridEditor = "RoutePicker";
   }
   async createController(a, s) {
-    const e = new Re(a, s);
+    const e = new Se(a, s);
     return await e.init(), e;
   }
 }
-const S = /* @__PURE__ */ we({
+const R = /* @__PURE__ */ we({
   name: "RoutePicker",
   props: ue(),
   emits: ce(),
   setup(i, {
     emit: a
   }) {
-    const s = pe("route-picker"), e = i.controller, l = ke(), m = xe(), v = b(""), f = b({}), h = b({}), u = b([]), D = b("");
-    let I = "", A = !1;
-    const R = () => {
-      f.value = u.value.find((t) => t[e.textName] === v.value) || {};
+    const s = he("route-picker"), e = i.controller, l = Ne(), m = ke(), f = b(""), v = b({}), p = b({}), u = b([]), I = b("");
+    let A = "", g = !1;
+    const S = () => {
+      v.value = u.value.find((t) => t[e.textName] === f.value) || {};
     }, E = H(() => {
       var t, o, n;
-      return (n = (o = (t = h.value) == null ? void 0 : t.popperRef) == null ? void 0 : o.popperRef) == null ? void 0 : n.contentRef;
+      return (n = (o = (t = p.value) == null ? void 0 : t.popperRef) == null ? void 0 : o.popperRef) == null ? void 0 : n.contentRef;
     });
     M(() => i.value, (t) => {
       var o;
-      (t || t === null) && (v.value = t, t === null && (v.value = "")), R(), (o = ibiz.util) == null || o.setBrowserTitle(v.value);
+      (t || t === null) && (f.value = t, t === null && (f.value = "")), S(), (o = ibiz.util) == null || o.setBrowserTitle(f.value);
     }, {
       immediate: !0
     });
-    const O = (t = 0) => {
+    const P = (t = 0) => {
       if (E.value) {
-        const o = E.value.querySelector(".ibiz-route-picker__dropdown-list"), n = u.value.findIndex((d) => d[e.keyName] === f.value[e.keyName]);
+        const o = E.value.querySelector(".ibiz-route-picker__dropdown-list"), n = u.value.findIndex((d) => d[e.keyName] === v.value[e.keyName]);
         o && n > -1 && setTimeout(() => {
           const d = o.offsetHeight, r = Math.floor(d / 38);
           n + 1 > r ? o.scrollTop = 38 * (n + 1 - r) : o.scrollTop = 0;
         }, t);
       }
     };
-    M(() => f.value, () => {
-      O();
+    M(() => v.value, () => {
+      P();
     });
-    const P = () => {
+    const O = () => {
       var t, o, n;
-      h.value && (t = h.value) != null && t.popperRef && ((n = (o = h.value) == null ? void 0 : o.popperRef) == null || n.hide());
-    }, X = () => {
-      D.value || N(D.value);
+      p.value && (t = p.value) != null && t.popperRef && ((n = (o = p.value) == null ? void 0 : o.popperRef) == null || n.hide());
+    }, _ = () => {
+      I.value || D(I.value);
     }, Y = (t) => {
       var o;
-      t.keyCode === 13 && (t.stopPropagation(), t.preventDefault(), N(D.value)), ((t == null ? void 0 : t.keyCode) === 38 || (t == null ? void 0 : t.keyCode) === 40) && ((o = t.target) == null || o.blur());
-    }, V = (t) => {
+      t.keyCode === 13 && (t.stopPropagation(), t.preventDefault(), D(I.value)), ((t == null ? void 0 : t.keyCode) === 38 || (t == null ? void 0 : t.keyCode) === 40) && ((o = t.target) == null || o.blur());
+    }, L = (t) => {
       (t.keyCode === 13 || t.keyCode === 32) && (t.stopPropagation(), t.preventDefault());
     };
-    let g = U;
-    De(() => {
-      const t = he(l, e.routeDepth);
-      I = t.substring(0, t.lastIndexOf("/")), g = ye(window, "keyup", (o) => {
-        A && (o.keyCode === 27 && P(), o.keyCode === 40 ? x("down") : o.keyCode === 38 ? x("up") : o.keyCode === 13 && x("enter"));
-      }), h.value && (h.value.triggerKeys = []), E.value && E.value.addEventListener("keydown", V, !0);
+    let x = U;
+    Ie(() => {
+      const t = pe(l, e.routeDepth);
+      A = t.substring(0, t.lastIndexOf("/")), x = ye(window, "keyup", (o) => {
+        g && (o.keyCode === 27 && O(), o.keyCode === 40 ? k("down") : o.keyCode === 38 ? k("up") : o.keyCode === 13 && k("enter"));
+      }), p.value && (p.value.triggerKeys = []), E.value && E.value.addEventListener("keydown", L, !0);
     }), be(() => {
-      g !== U && g(), E.value && E.value.removeEventListener("keydown", V);
+      x !== U && x(), E.value && E.value.removeEventListener("keydown", L);
     });
-    const x = (t) => {
-      let o = u.value.findIndex((n) => n[e.keyName] === f.value[e.keyName]);
+    const k = (t) => {
+      let o = u.value.findIndex((n) => n[e.keyName] === v.value[e.keyName]);
       switch (t) {
         case "up":
-          o--, (o === -1 || o === -2) && (o = u.value.length - 1), f.value = u.value[o];
+          o--, (o === -1 || o === -2) && (o = u.value.length - 1), v.value = u.value[o];
           break;
         case "down":
-          o++, o === u.value.length && (o = 0), f.value = u.value[o];
+          o++, o === u.value.length && (o = 0), v.value = u.value[o];
           break;
         case "enter":
-          C(f.value, !1);
+          C(v.value, !1);
           break;
       }
     }, J = async (t, o = !1) => {
@@ -271,8 +266,8 @@ const S = /* @__PURE__ */ we({
             srfsessionid: e.context.srfsessionid,
             srfappid: e.context.srfappid
           };
-          Object.keys(e.context).forEach((k) => {
-            k !== "srfreadonly" && (j[k] = e.context[k]);
+          Object.keys(e.context).forEach((N) => {
+            N !== "srfreadonly" && (j[N] = e.context[N]);
           });
           const te = z.create({
             [e.routeKey]: n
@@ -283,7 +278,7 @@ const S = /* @__PURE__ */ we({
         r.pathNodes[e.routeDepth - 2].context[e.routeKey] = n, r.pathNodes.splice(e.routeDepth), r.pathNodes[e.routeDepth - 1] && r.pathNodes[e.routeDepth - 1].srfnav && delete r.pathNodes[e.routeDepth - 1].srfnav, d = B(r);
       } else {
         const r = T(l), w = r.pathNodes[e.routeDepth - 1];
-        Ie(w.context) && Object.assign(r.pathNodes[e.routeDepth - 1], {
+        Ae(w.context) && Object.assign(r.pathNodes[e.routeDepth - 1], {
           context: z.create()
         }), r.pathNodes[e.routeDepth - 1].context[e.routeKey] = n, d = B(r);
       }
@@ -291,14 +286,14 @@ const S = /* @__PURE__ */ we({
         path: d
       }) : ibiz.openView.push(d);
     }, Q = (t) => {
-      e.enableCache && localStorage.setItem("routePick-".concat(e.context.srfuserid, "-").concat(I), t.id || t.srfkey);
+      e.enableCache && localStorage.setItem("routePick-".concat(e.context.srfuserid, "-").concat(A), t.id || t.srfkey);
     }, W = () => {
       if (e.enableCache) {
-        const t = localStorage.getItem("routePick-".concat(e.context.srfuserid, "-").concat(I));
+        const t = localStorage.getItem("routePick-".concat(e.context.srfuserid, "-").concat(A));
         return u.value.find((o) => o.id === t || o.srfkey === t);
       }
     }, C = async (t, o, n = !1) => {
-      P();
+      O();
       const d = await e.calcFillDataItems(t);
       d.length && d.forEach((w) => {
         a("change", w.value, w.id);
@@ -308,15 +303,15 @@ const S = /* @__PURE__ */ we({
         [e.keyName]: r[e.keyName] ? r[e.keyName] : r.srfkey,
         [e.textName]: r[e.textName] ? r[e.textName] : r.srfmajortext
       }), a("change", t[e.textName]), Q(t), !(o && e.valueMode && e.valueMode === "CONTEXTCHANGE" && e.immediate === !1) && J(t, n);
-    }, N = async (t, o) => {
+    }, D = async (t, o) => {
       if (e.model.appDataEntityId) {
         let n = "";
         t !== i.value && (n = t.trim());
         const d = await e.getServiceData(n, i.data);
         d && (u.value = d.data, o && o instanceof Function && o(u.value));
       }
-    }, L = H(() => me(v.value));
-    M(L, (t, o) => {
+    }, V = H(() => me(f.value));
+    M(V, (t, o) => {
       t !== o && a("infoTextChange", t);
     }, {
       immediate: !0
@@ -331,30 +326,30 @@ const S = /* @__PURE__ */ we({
     };
     e.enableCache && K(), e.currentView.evt.on("onMounted", () => {
       e.enableCache || K();
-    }), Ne(async () => {
+    }), De(async () => {
       const t = await e.getRouteKey(l, u.value, !0), o = u.value.find((n) => n[e.keyName] === t);
       o && C(o, !1);
     });
     const Z = (t) => {
-      A = t, A ? (N(""), O(300)) : (D.value = "", R());
+      g = t, g ? (D(""), P(300)) : (I.value = "", S());
     }, $ = (t) => {
       C(t, !1);
     }, ee = () => {
-      h.value && h.value.handleClose();
+      p.value && p.value.handleClose();
     };
     return {
       ns: s,
       c: e,
-      dropDown: h,
-      curValue: v,
-      curSelect: f,
-      valueText: L,
+      dropDown: p,
+      curValue: f,
+      curSelect: v,
+      valueText: V,
       items: u,
-      query: D,
+      query: I,
       onACSelect: C,
-      onSearch: N,
+      onSearch: D,
       onKeyup: Y,
-      onInput: X,
+      onInput: _,
       onVisibleChange: Z,
       onCommand: $,
       renderGroupAction: () => {
@@ -434,15 +429,15 @@ const S = /* @__PURE__ */ we({
       }
     })])]);
   }
-}), Pe = ve(S, function(i) {
-  i.component(S.name, S), ae("PICKER_ROUTE", () => new Oe());
+}), Oe = fe(R, function(i) {
+  i.component(R.name, R), ae("PICKER_ROUTE", () => new Pe());
 }), Ue = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(i) {
-    i.use(Pe);
+    i.use(Oe);
   }
 };
 export {
-  Pe as IBizRoutePicker,
+  Oe as IBizRoutePicker,
   Ue as default
 };

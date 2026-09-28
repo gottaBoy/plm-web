@@ -1,3 +1,4 @@
+import './assets/style.css';
 import { withInstall as B, useControlController as z, useNamespace as G } from "@ibiz-template/vue3-util";
 import { registerControlProvider as R, ControlType as w, GridController as A } from "@ibiz-template/runtime";
 import { defineComponent as N, ref as k, watch as P, computed as S, createVNode as i, resolveComponent as d } from "vue";

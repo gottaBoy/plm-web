@@ -12,7 +12,7 @@
 - 其余 65 个均没有原始 `src`，但都有 `.d.ts` 类型声明；除 `lucky-sheet-editor` 外没有 source map。
 - 所有运行时插件均声明 MIT License，并带有 `gitHead`，可作为后续向上游仓库溯源的线索。
 - 第一批不建议处理未引用旧版本，优先保证当前运行时 66 个可源码构建。
-- 当前恢复结果：66/66 个运行时插件均已恢复到 `plugin-src`；其中 `cron-editor` 为原始源码，`person-select` 为完整拆分式源码，其余 64 个为 bundle 级源码（可编辑、可构建，变量名仍为压缩名）。
+- 当前恢复结果：66/66 个运行时插件均已恢复到 `plugin-src`；其中 `cron-editor` 为上游原始源码，`person-select` 加本批 8 个插件共 9 个为拆分式源码，其余 56 个为 bundle 级源码（可编辑、可构建，部分局部变量仍为压缩名）。
 
 ## 分类策略
 
@@ -28,11 +28,10 @@
 试点插件：
 
 ```sh
-cd plm-web/plugin-src/@ibiz-template-plm/person-select
-NODE_PATH=/home/my/workspace/ainfra/aibiz/plm-web/node_modules \
-  /home/my/workspace/ainfra/aibiz/plm-web/node_modules/.bin/vite build
-cp ../../public/plugins/@ibiz-template-plm/person-select@0.0.3-alpha.434/dist/assets/style.css \
-  ../../public/plugins/@ibiz-template-plm/person-select@0.0.3-alpha.434/dist/style.css
+pnpm plugin:harness:test
+pnpm plugins:check
+pnpm ibiz:versions:check
+pnpm plugin:regression -- @ibiz-template-plm/person-select@0.0.3-alpha.434
 ```
 
 当前 `person-select@0.0.3-alpha.434` 已完成：
@@ -46,13 +45,13 @@ cp ../../public/plugins/@ibiz-template-plm/person-select@0.0.3-alpha.434/dist/as
 
 每个插件源码化完成时必须满足：
 
-1. `tsc` 编译通过。
-2. Vite 构建成功并写回原插件目录。
-3. 插件静态资源返回 200。
-4. 相关页面专项 E2E 通过。
-5. PLM Web 桌面回归通过。
+1. TypeScript 或插件自身的类型检查通过（当前 9 个拆分式插件已纳入专项检查；其余 bundle 级源码仍需逐包补齐）。
+2. Vite staging 构建成功，且新产物写回原插件目录。
+3. 插件静态资源返回 200，并与本地构建文件 SHA-256 一致。
+4. 导出契约、版本、输出目录和应用级资源污染检查通过。
+5. 相关页面专项 E2E 通过；未有专项场景的插件必须标注为批量桌面 smoke 覆盖。
 
-批量恢复阶段的实际验收为：每个常规插件均用恢复脚本执行 Vite 构建并写回原插件目录。`html-comment` 和 `html-vditor` 额外保留了原始动态 chunk 后再重建。后续拆分维护时再按插件逐个补齐 `tsc` 和专项 E2E。
+批量恢复阶段的实际验收为：每个常规插件均用临时 staging 执行 Vite 构建，再只合并新生成文件到原插件目录；`html-comment` 和 `html-vditor` 额外保留了原始动态 chunk 后再重建。统一入口为 `pnpm plugin:regression -- <ref>...`，报告写入唯一 artifact 目录。后续拆分维护时再按插件逐个补齐 `tsc` 和专项 E2E。
 
 ## 后续优先级
 

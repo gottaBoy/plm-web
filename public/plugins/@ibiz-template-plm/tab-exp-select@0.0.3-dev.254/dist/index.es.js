@@ -1,45 +1,40 @@
 import './assets/style.css';
-import './assets/style.css';
-import { registerControlProvider as A, hasSubRoute as N, ControlController as _, calcItemVisibleByCounter as k, calcItemVisible as z, Srfuf as q, calcNavParams as U, CounterService as H } from "@ibiz-template/runtime";
-import { withInstall as K, useControlController as X, useNamespace as F, getNestedRoutePath as E, route2routePath as G } from "@ibiz-template/vue3-util";
-import { inject as j, defineComponent as J, ref as S, reactive as Q, watch as W, createVNode as u, resolveComponent as y, createTextVNode as R, isVNode as Y } from "vue";
+import { registerControlProvider as A, hasSubRoute as x, ControlController as k, calcItemVisibleByCounter as z, calcItemVisible as _, Srfuf as q, calcNavParams as U, CounterService as H } from "@ibiz-template/runtime";
+import { withInstall as K, useControlController as X, useNamespace as F, getNestedRoutePath as N, route2routePath as G } from "@ibiz-template/vue3-util";
+import { inject as O, defineComponent as J, ref as S, reactive as Q, watch as W, createVNode as h, resolveComponent as C, createTextVNode as B, isVNode as Y } from "vue";
 /*!
   * vue-router v4.2.5
   * (c) 2023 Eduardo San Martin Morote
   * @license MIT
   */
-var V;
+var E;
 (function(t) {
   t.pop = "pop", t.push = "push";
-})(V || (V = {}));
-var O;
+})(E || (E = {}));
+var V;
 (function(t) {
   t.back = "back", t.forward = "forward", t.unknown = "";
-})(O || (O = {}));
-Symbol(process.env.NODE_ENV !== "production" ? "navigation failure" : "");
-var B;
+})(V || (V = {}));
+var j;
 (function(t) {
   t[t.aborted = 4] = "aborted", t[t.cancelled = 8] = "cancelled", t[t.duplicated = 16] = "duplicated";
-})(B || (B = {}));
-Symbol(process.env.NODE_ENV !== "production" ? "router view location matched" : "");
-Symbol(process.env.NODE_ENV !== "production" ? "router view depth" : "");
-const Z = Symbol(process.env.NODE_ENV !== "production" ? "router" : ""), $ = Symbol(process.env.NODE_ENV !== "production" ? "route location" : "");
-Symbol(process.env.NODE_ENV !== "production" ? "router view location" : "");
+})(j || (j = {}));
+const Z = Symbol(""), $ = Symbol("");
 function ee() {
-  return j(Z);
+  return O(Z);
 }
 function te() {
-  return j($);
+  return O($);
 }
-var ae = Object.defineProperty, se = (t, e, s) => e in t ? ae(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s, C = (t, e, s) => (se(t, typeof e != "symbol" ? e + "" : e, s), s);
+var ae = Object.defineProperty, se = (t, e, s) => e in t ? ae(t, e, { enumerable: !0, configurable: !0, writable: !0, value: s }) : t[e] = s, y = (t, e, s) => (se(t, typeof e != "symbol" ? e + "" : e, s), s);
 class oe {
   constructor() {
-    C(this, "component", "IBizTabExpSelect");
+    y(this, "component", "IBizTabExpSelect");
   }
 }
-class ie extends _ {
+class ie extends k {
   constructor() {
-    super(...arguments), C(this, "groupTabPages", []), C(this, "counter"), C(this, "router");
+    super(...arguments), y(this, "groupTabPages", []), y(this, "counter"), y(this, "router");
   }
   /**
    * 导航占位控制器
@@ -125,7 +120,7 @@ class ie extends _ {
    */
   calcItemStateByCounter() {
     if (this.state.drTabPages.forEach((e) => {
-      const s = k(e, this.counter);
+      const s = z(e, this.counter);
       s !== void 0 && (e.hidden = !s);
     }), this.state.activeName) {
       const { visible: e, defaultVisibleItem: s } = this.getItemVisibleState(
@@ -165,7 +160,7 @@ class ie extends _ {
   async calcPermitted(e) {
     var s;
     let o = !0;
-    const i = (s = this.getData()) != null && s.length ? this.getData()[0] : void 0, n = await z(
+    const i = (s = this.getData()) != null && s.length ? this.getData()[0] : void 0, n = await _(
       e,
       this.context,
       this.params,
@@ -238,28 +233,28 @@ class ie extends _ {
       hideEditItem: o,
       editItemSysImage: i,
       uniqueTag: n,
-      dedrtabPages: c
-    } = this.model, h = [], p = [];
+      dedrtabPages: l
+    } = this.model, u = [], p = [];
     let d = e;
-    s && (d = ibiz.i18n.t(s.lanResTag, e)), o ? this.state.defaultName = (c == null ? void 0 : c[0].id) || "" : (h.push({
+    s && (d = ibiz.i18n.t(s.lanResTag, e)), o ? this.state.defaultName = (l == null ? void 0 : l[0].id) || "" : (u.push({
       tag: n,
       caption: d,
       hidden: !!o,
       disabled: !1,
       sysImage: i,
-      fullPath: this.routeDepth ? E(this.router.currentRoute.value, this.routeDepth) : ""
-    }), this.state.defaultName = ""), c == null || c.forEach((r) => {
-      let b = r.caption;
-      r.capLanguageRes && (b = ibiz.i18n.t(r.capLanguageRes.lanResTag, r.caption));
+      fullPath: this.routeDepth ? N(this.router.currentRoute.value, this.routeDepth) : ""
+    }), this.state.defaultName = ""), l == null || l.forEach((r) => {
+      let f = r.caption;
+      r.capLanguageRes && (f = ibiz.i18n.t(r.capLanguageRes.lanResTag, r.caption));
       const {
         enableMode: w,
         dataAccessAction: T,
-        testAppDELogicId: D,
-        testScriptCode: v,
-        counterMode: f
+        testAppDELogicId: I,
+        testScriptCode: g,
+        counterMode: b
       } = r, a = {
         tag: r.id,
-        caption: b,
+        caption: f,
         sysImage: r.sysImage,
         hidden: !1,
         disabled: !1,
@@ -267,16 +262,16 @@ class ie extends _ {
         pid: r.group_name,
         dataAccessAction: T,
         enableMode: w,
-        testAppDELogicId: D,
-        testScriptCode: v,
-        counterMode: f
+        testAppDELogicId: I,
+        testScriptCode: g,
+        counterMode: b
       };
       if (r.itemTag) {
         Object.assign(a, { pid: r.itemTag });
-        const l = p.findIndex(
+        const c = p.findIndex(
           (m) => m.tag === r.itemTag
         );
-        if (l === -1) {
+        if (c === -1) {
           const m = {
             tag: r.itemTag,
             caption: r.itemTag,
@@ -284,13 +279,13 @@ class ie extends _ {
           };
           p.push(m);
         } else
-          p[l].children.push(a);
+          p[c].children.push(a);
       } else
         p.push(a);
-      h.push(a);
-    }), this.state.drTabPages = h, this.groupTabPages = p, this.view.state.srfnav ? this.state.activeName = this.view.state.srfnav : this.state.activeName = h[0].tag;
-    const g = !!this.routeDepth && N(this.routeDepth);
-    this.handleTabChange(g);
+      u.push(a);
+    }), this.state.drTabPages = u, this.groupTabPages = p, this.view.state.srfnav ? this.state.activeName = this.view.state.srfnav : this.state.activeName = u[0].tag;
+    const v = !!this.routeDepth && x(this.routeDepth);
+    this.handleTabChange(v);
   }
   /**
    * 处理分页改变
@@ -332,9 +327,9 @@ class ie extends _ {
       context: this.context,
       params: this.params,
       data: this.getData()[0]
-    }, { resultContext: c, resultParams: h } = U(i, n), p = Object.assign(this.context.clone(), c, {
+    }, { resultContext: l, resultParams: u } = U(i, n), p = Object.assign(this.context.clone(), l, {
       currentSrfNav: e.id
-    }), d = { ...this.params, ...h };
+    }), d = { ...this.params, ...u };
     return { context: p, params: d };
   }
   /**
@@ -384,18 +379,18 @@ class ie extends _ {
     await super.onDestroyed(), this.counter && (this.counter.offChange(this.calcItemStateByCounter), this.counter.destroy());
   }
 }
-const re = () => u("svg", {
+const re = () => h("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 1024 1024",
   height: "1em",
   width: "1em"
-}, [u("path", {
+}, [h("path", {
   d: "M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z"
 }, null)]);
 function ne(t) {
   return typeof t == "function" || Object.prototype.toString.call(t) === "[object Object]" && !Y(t);
 }
-const I = /* @__PURE__ */ J({
+const D = /* @__PURE__ */ J({
   name: "IBizTabExpSelect",
   props: {
     modelData: {
@@ -415,114 +410,114 @@ const I = /* @__PURE__ */ J({
     }
   },
   setup() {
-    const t = X((...a) => new ie(...a)), e = F("tab-exp-select"), s = ee(), o = S(), i = S({}), n = S(!1), c = Q({});
+    const t = X((...a) => new ie(...a)), e = F("tab-exp-select"), s = ee(), o = S(), i = S({}), n = S(!1), l = Q({});
     t.groupTabPages.forEach((a) => {
-      Object.assign(c, {
+      Object.assign(l, {
         [a.tag]: !1
       });
     }), t.setRouter(s);
-    const h = () => {
+    const u = () => {
       t.groupTabPages.forEach((a) => {
-        Object.assign(c, {
+        Object.assign(l, {
           [a.tag]: !1
         });
       });
     }, p = (a) => {
-      h();
-      const l = setTimeout(() => {
-        n.value = !1, i.value = {}, t.state.drTabPages.findIndex((m) => m.tag === a.tag) !== -1 && (t.state.activeName = a.tag, t.handleTabChange()), clearTimeout(l);
+      u();
+      const c = setTimeout(() => {
+        n.value = !1, i.value = {}, t.state.drTabPages.findIndex((m) => m.tag === a.tag) !== -1 && (t.state.activeName = a.tag, t.handleTabChange()), clearTimeout(c);
       }, 100);
     }, d = te();
-    let g = "";
-    t.routeDepth && (g = E(d, t.routeDepth));
+    let v = "";
+    t.routeDepth && (v = N(d, t.routeDepth));
     const r = (a) => {
       i.value = a;
-    }, b = () => {
+    }, f = () => {
       i.value = {};
     }, w = (a) => i.value.tag && i.value.tag === a.tag, T = (a) => {
-      h(), c[a.tag] = !0, c[a.pid] = !0;
-    }, D = (a) => {
-      c[a.tag] = !1, c[a.pid] = !1;
+      u(), l[a.tag] = !0, l[a.pid] = !0;
+    }, I = (a) => {
+      l[a.tag] = !1, l[a.pid] = !1;
     };
-    W(() => d.fullPath, (a, l) => {
-      if (a !== l) {
+    W(() => d.fullPath, (a, c) => {
+      if (a !== c) {
         const m = t.routeDepth;
-        if (m && E(d, t.routeDepth) === g) {
+        if (m && N(d, t.routeDepth) === v) {
           const L = G(d), {
             srfnav: P
-          } = L.pathNodes[m - 1], x = !!t.routeDepth && N(t.routeDepth);
+          } = L.pathNodes[m - 1], R = !!t.routeDepth && x(t.routeDepth);
           if (P && t.state.activeName && t.state.activeName !== P)
-            t.state.activeName = P, t.handleTabChange(x);
+            t.state.activeName = P, t.handleTabChange(R);
           else if (!P) {
-            const M = !!t.routeDepth && !N(t.routeDepth);
-            (t.state.activeName !== t.state.defaultName || M) && (t.state.activeName = t.state.defaultName, t.handleTabChange(x));
+            const M = !!t.routeDepth && !x(t.routeDepth);
+            (t.state.activeName !== t.state.defaultName || M) && (t.state.activeName = t.state.defaultName, t.handleTabChange(R));
           }
         }
       }
     }, {
       immediate: !0
     });
-    const v = (a) => {
-      const l = a.caption ? String(a.caption).length > 10 : !1;
-      return u("div", {
+    const g = (a) => {
+      const c = a.caption ? String(a.caption).length > 10 : !1;
+      return h("div", {
         class: [e.be("popper", "item"), e.is("activated", t.state.activeName === a.tag), e.is("secondary-show", w(a))],
         onClick: () => p(a),
         onMouseenter: () => T(a),
-        onMouseleave: () => D(a)
-      }, [a.sysImage && u(y("iBizIcon"), {
+        onMouseleave: () => I(a)
+      }, [a.sysImage && h(C("iBizIcon"), {
         class: [e.bem("popper", "item", "icon")],
         icon: a.sysImage
-      }, null), a.caption && u("span", {
-        title: l ? a.caption : "",
+      }, null), a.caption && h("span", {
+        title: c ? a.caption : "",
         class: [e.bem("popper", "item", "caption")]
-      }, [a.caption]), a.children && u("span", {
+      }, [a.caption]), a.children && h("span", {
         class: [e.bem("popper", "item", "left-arrow")]
       }, [re()])]);
-    }, f = (a) => u(y("el-popover"), {
+    }, b = (a) => h(C("el-popover"), {
       trigger: "hover",
       offset: 0,
       "popper-class": [e.b("popper"), e.b("secondary-popper")],
       placement: "right-start",
       "hide-after": 0,
-      visible: c[a.tag],
-      "onUpdate:visible": (l) => c[a.tag] = l,
+      visible: l[a.tag],
+      "onUpdate:visible": (c) => l[a.tag] = c,
       onShow: () => r(a),
-      onHide: () => b()
+      onHide: () => f()
     }, {
-      reference: () => v(a),
-      default: () => u("div", {
+      reference: () => g(a),
+      default: () => h("div", {
         class: [e.be("popper", "content"), e.be("popper", "secondary-popper")]
-      }, [a.children.map((l) => l.children ? f(l) : v(l))])
+      }, [a.children.map((c) => c.children ? b(c) : g(c))])
     });
     return {
       c: t,
       ns: e,
       controlRef: o,
-      renderContent: () => u(y("el-popover"), {
+      renderContent: () => h(C("el-popover"), {
         trigger: "click",
         placement: "bottom-start",
         visible: n.value,
         "onUpdate:visible": (a) => n.value = a,
         "popper-class": e.b("popper"),
-        onHide: () => h()
+        onHide: () => u()
       }, {
-        reference: () => u("div", {
+        reference: () => h("div", {
           class: e.b("content"),
           onClick: () => n.value === !0
-        }, [u("span", {
+        }, [h("span", {
           class: e.be("content", "hashtag")
-        }, [R("#")]), u("span", {
+        }, [B("#")]), h("span", {
           class: e.be("content", "caption")
-        }, [R("维度")])]),
-        default: () => u("div", {
+        }, [B("维度")])]),
+        default: () => h("div", {
           class: e.be("popper", "content")
-        }, [t.groupTabPages.map((a) => a.children ? f(a) : v(a))])
+        }, [t.groupTabPages.map((a) => a.children ? b(a) : g(a))])
       })
     };
   },
   render() {
     let t;
-    return u(y("iBizControlBase"), {
+    return h(C("iBizControlBase"), {
       ref: "controlRef",
       controller: this.c,
       class: [this.ns.b()]
@@ -530,10 +525,10 @@ const I = /* @__PURE__ */ J({
       default: () => [t]
     });
   }
-}), ce = K(
-  I,
+}), le = K(
+  D,
   function(t) {
-    t.component(I.name, I), A(
+    t.component(D.name, D), A(
       "CUSTOM_TAB_EXP_SELECT",
       () => new oe()
     );
@@ -541,10 +536,10 @@ const I = /* @__PURE__ */ J({
 ), pe = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(t) {
-    t.use(ce);
+    t.use(le);
   }
 };
 export {
-  ce as IBizTabExpSelectControl,
+  le as IBizTabExpSelectControl,
   pe as default
 };

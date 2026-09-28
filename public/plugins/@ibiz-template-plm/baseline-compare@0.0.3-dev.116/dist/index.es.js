@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as K, GridController as X, ScriptFactory as L, Srfuf as O, GridRowState as Y, ControlVO as Z } from "@ibiz-template/runtime";
 import { defineComponent as ee, ref as y, onMounted as te, watch as D, onBeforeUnmount as ae, onUnmounted as se, createVNode as m, resolveComponent as C, createTextVNode as R, computed as N, renderSlot as ne, nextTick as oe, isVNode as ie, mergeProps as re, h as le } from "vue";
 import { useControlController as ce, useNamespace as de, useUIStore as ue } from "@ibiz-template/vue3-util";

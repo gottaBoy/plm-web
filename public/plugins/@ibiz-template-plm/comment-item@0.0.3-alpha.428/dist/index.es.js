@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PluginStaticResource as H, registerEditorProvider as N, EditorController as U, ScriptFactory as J, PanelItemEventName as B, OpenAppViewCommand as K } from "@ibiz-template/runtime";
 import { getRawProps as $, getEditorEmits as W, useNamespace as G, withInstall as X } from "@ibiz-template/vue3-util";
 import { defineComponent as Y, ref as w, computed as A, watch as O, createVNode as C, resolveComponent as x, nextTick as I } from "vue";

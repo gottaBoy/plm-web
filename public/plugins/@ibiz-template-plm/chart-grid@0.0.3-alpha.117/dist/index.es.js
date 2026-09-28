@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as VA, ChartController as RA } from "@ibiz-template/runtime";
 import { defineComponent as zA, ref as ni, nextTick as jh, onMounted as BA, onBeforeUnmount as GA, createVNode as ee, resolveComponent as Cr, createTextVNode as qh } from "vue";
 import { useControlController as FA, useNamespace as HA } from "@ibiz-template/vue3-util";

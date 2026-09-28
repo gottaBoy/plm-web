@@ -1,0 +1,49 @@
+{
+  "plugins": [
+    {
+      "name": "person-select",
+      "vueCompilerTarget": 3,
+      "mode": "baseline"
+    },
+    {
+      "name": "attachment-grid",
+      "vueCompilerTarget": 3,
+      "mode": "baseline"
+    },
+    {
+      "name": "attention",
+      "vueCompilerTarget": 3,
+      "mode": "baseline"
+    },
+    {
+      "name": "auto-rules",
+      "vueCompilerTarget": 3,
+      "mode": "baseline"
+    },
+    {
+      "name": "comment-list",
+      "vueCompilerTarget": 3,
+      "mode": "baseline"
+    },
+    {
+      "name": "data-info-title",
+      "vueCompilerTarget": 3,
+      "mode": "strict"
+    },
+    {
+      "name": "dynamic-column",
+      "vueCompilerTarget": 3,
+      "mode": "strict"
+    },
+    {
+      "name": "filter-condition",
+      "vueCompilerTarget": 3,
+      "mode": "strict"
+    },
+    {
+      "name": "review-content-sort",
+      "vueCompilerTarget": 3,
+      "mode": "strict"
+    }
+  ]
+}

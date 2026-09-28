@@ -22,6 +22,16 @@ const componentPackages = [
   'devtool',
 ];
 
+// Generate these SystemJS assets from the local source packages during build.
+// public/extras is the checked-in development fallback and must use the same
+// source versions as the generated dist assets.
+const localSystemPlugins = [
+  '@ibiz-template-plugin/ai-chat',
+  '@ibiz-template-plugin/gantt',
+  '@ibiz-template-plugin/bi-report',
+  '@ibiz-template-plugin/data-view',
+] as const;
+
 const systemAssetPrefix = '/extras/js/@ibiz-template/';
 const systemAssetTypes: Record<string, string> = {
   '.js': 'application/javascript; charset=utf-8',
@@ -86,6 +96,61 @@ function systemDevMiddleware(
   };
 }
 
+function copyLocalSystemPlugin(
+  cwd: string,
+  packageName: (typeof localSystemPlugins)[number],
+): { importPath: string; stylePath: string } {
+  const packageRoot = join(cwd, 'node_modules', ...packageName.split('/'));
+  const manifestPath = join(packageRoot, 'package.json');
+  if (!existsSync(manifestPath)) {
+    throw new Error(`Local iBiz plugin manifest not found: ${manifestPath}`);
+  }
+
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8')) as {
+    version?: string;
+  };
+  if (!manifest.version) {
+    throw new Error(`Local iBiz plugin has no version: ${manifestPath}`);
+  }
+
+  const sourceDist = join(packageRoot, 'dist');
+  const requiredFiles = [
+    'index.legacy.js',
+    'style.css',
+    'polyfills.legacy.js',
+  ];
+  for (const fileName of requiredFiles) {
+    if (!existsSync(join(sourceDist, fileName))) {
+      throw new Error(
+        `Local iBiz plugin ${packageName}@${manifest.version} is missing dist/${fileName}`,
+      );
+    }
+  }
+
+  const outDir = join(
+    cwd,
+    'dist/extras/js',
+    ...packageName.split('/'),
+    manifest.version,
+  );
+  mkdirSync(outDir, { recursive: true });
+  copyFileSync(
+    join(sourceDist, 'index.legacy.js'),
+    join(outDir, 'index.system.min.js'),
+  );
+  copyFileSync(join(sourceDist, 'style.css'), join(outDir, 'index.min.css'));
+  copyFileSync(
+    join(sourceDist, 'polyfills.legacy.js'),
+    join(outDir, 'polyfills.legacy.js'),
+  );
+
+  const assetPrefix = `../js/${packageName}/${manifest.version}`;
+  return {
+    importPath: `${assetPrefix}/index.system.min.js`,
+    stylePath: `${assetPrefix}/index.min.css`,
+  };
+}
+
 function IBizVitePlugin(): Plugin[] {
   const p: Plugin = {
     name: 'iBizSys:System',
@@ -120,17 +185,27 @@ function IBizVitePlugin(): Plugin[] {
           cpy(cpDir, outDir);
         });
       }
+      const localPluginAssets = new Map(
+        localSystemPlugins.map(packageName => [
+          packageName,
+          copyLocalSystemPlugin(cwd, packageName),
+        ]),
+      );
       // 重新改写 index.html 部分代码
       const htmlFilePath = join(cwd, 'dist/index.html');
       if (existsSync(htmlFilePath)) {
         let html = readFileSync(htmlFilePath, 'utf-8');
         html = html
           .replace(
-            '<script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>',
+            /<script\b[^>]*type="module"[^>]*>[\s\S]*?window\.__vite_is_modern_browser[\s\S]*?<\/script>/g,
             '',
           )
           .replace(
-            `<script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>`,
+            /<script\b[^>]*>[\s\S]*?vite: loading legacy chunks[\s\S]*?<\/script>/g,
+            '',
+          )
+          .replace(
+            /<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?onbeforeload(?:(?!<\/script>)[\s\S])*?t\.type="module",t\.src="\."(?:(?!<\/script>)[\s\S])*?<\/script>/g,
             '',
           );
         // 运行时统一使用 SystemJS legacy 入口，移除 Vite 生成的原生 ESM 入口。
@@ -172,6 +247,16 @@ function IBizVitePlugin(): Plugin[] {
             const json = JSON.parse(content);
             const items = json.imports as Record<string, string>;
             const styles = json.styles as Record<string, string | string[]>;
+            for (const packageName of localSystemPlugins) {
+              const assets = localPluginAssets.get(packageName);
+              if (!assets) {
+                throw new Error(
+                  `Generated local iBiz plugin assets not found: ${packageName}`,
+                );
+              }
+              items[packageName] = assets.importPath;
+              styles[packageName] = assets.stylePath;
+            }
             const date = new Date();
             // eslint-disable-next-line no-restricted-syntax, guard-for-in
             for (const key in items) {

@@ -1,3 +1,5 @@
+import './style.css';
+
 var re = Object.defineProperty;
 var le = (u, p, e) => p in u ? re(u, p, { enumerable: !0, configurable: !0, writable: !0, value: e }) : u[p] = e;
 var x = (u, p, e) => (le(u, typeof p != "symbol" ? p + "" : p, e), e);

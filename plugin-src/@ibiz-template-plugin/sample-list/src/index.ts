@@ -1,3 +1,5 @@
+import './style.css';
+
 var c = Object.defineProperty;
 var p = (e, t, o) => t in e ? c(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
 var i = (e, t, o) => (p(e, typeof t != "symbol" ? t + "" : t, o), o);

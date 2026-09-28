@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as j, TreeController as K, TreeService as P, AppDataEntity as F, TreeDataSetNodeData as G, getControlPanel as V } from "@ibiz-template/runtime";
 import { withInstall as Y, useControlController as Z, useNamespace as q } from "@ibiz-template/vue3-util";
 import { defineComponent as U, ref as T, computed as I, createVNode as a, createTextVNode as E, resolveComponent as p, withDirectives as W, resolveDirective as H, isVNode as J } from "vue";

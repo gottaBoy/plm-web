@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PluginStaticResource as P, registerViewProvider as C, convertNavData as S } from "@ibiz-template/runtime";
 import { withInstall as V, useNamespace as D } from "@ibiz-template/vue3-util";
 import { defineComponent as E, ref as r, onBeforeMount as I, createVNode as t, createTextVNode as o, resolveComponent as m, h as O, withDirectives as j, resolveDirective as x } from "vue";

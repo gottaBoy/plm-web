@@ -1,10 +1,21 @@
 #!/usr/bin/env node
 
 import { existsSync, readFileSync } from 'node:fs';
-import { mkdir, cp, access, readdir, rename } from 'node:fs/promises';
+import {
+  access,
+  cp,
+  mkdir,
+  mkdtemp,
+  readdir,
+  rename,
+  rm,
+  stat,
+} from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
+import ts from 'typescript';
 import { build, loadConfigFromFile } from 'vite';
 import legacy from '@qx-chitanda/vite-plugin-lib-legacy';
 
@@ -19,6 +30,24 @@ const runtimeList = path.join(
 const sourceRoot = path.join(rootDir, 'plugin-src');
 const publicRoot = path.join(rootDir, 'public', 'plugins');
 const ibizTempBin = path.join(rootDir, 'node_modules', '.bin', 'ibiz-temp');
+const forbiddenPluginOutputFiles = [
+  'cas-login.html',
+  'dingtalk.html',
+  'favicon.ico',
+  'oauth.html',
+];
+const forbiddenPluginOutputDirs = [
+  'environments',
+  'extras',
+  'model',
+  'plugins',
+];
+const forbiddenPluginAssetDirs = [
+  'css',
+  'font-awesome-4.7.0',
+  'iconfont',
+  'ionicons',
+];
 
 function fail(message) {
   throw new Error(message);
@@ -99,7 +128,161 @@ async function ensurePluginLayout(plugin) {
   return readJson(packageFile);
 }
 
-async function buildVitePlugin(plugin) {
+function resolvePluginDist(plugin) {
+  return path.join(plugin.publicDir, 'dist');
+}
+
+function resolveStagingOutput(stagingDist, relativeFile) {
+  const normalized = relativeFile.replaceAll('\\', '/');
+  const distRelative = normalized.startsWith('dist/')
+    ? normalized.slice('dist/'.length)
+    : normalized;
+  return path.join(stagingDist, distRelative);
+}
+
+function getPackageOutputs(packageJson) {
+  return [
+    ...['main', 'module', 'system'].flatMap((field) =>
+      packageJson[field] ? [packageJson[field]] : [],
+    ),
+    ...(packageJson.styles || []),
+  ].filter((file, index, files) => files.indexOf(file) === index);
+}
+
+function resolveConfiguredOutDir(plugin, config) {
+  const configuredOutDir = config.build?.outDir || 'dist';
+  return path.resolve(plugin.sourceDir, configuredOutDir);
+}
+
+function collectRuntimeExports(sourceText, fileName) {
+  const sourceFile = ts.createSourceFile(
+    fileName,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+    fileName.endsWith('.ts') || fileName.endsWith('.tsx')
+      ? ts.ScriptKind.TSX
+      : ts.ScriptKind.JS,
+  );
+  const exports = new Set();
+  const addExportName = (name) => {
+    if (name && name !== 'undefined') {
+      exports.add(name);
+    }
+  };
+
+  for (const statement of sourceFile.statements) {
+    if (ts.isExportAssignment(statement)) {
+      addExportName('default');
+      continue;
+    }
+    const modifiers = ts.canHaveModifiers(statement)
+      ? ts.getModifiers(statement) || []
+      : [];
+    const isExported = modifiers.some(
+      (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword,
+    );
+    if (isExported) {
+      if (
+        ts.isInterfaceDeclaration(statement) ||
+        ts.isTypeAliasDeclaration(statement) ||
+        ts.isImportDeclaration(statement)
+      ) {
+        continue;
+      }
+      const isDefault = modifiers.some(
+        (modifier) => modifier.kind === ts.SyntaxKind.DefaultKeyword,
+      );
+      if (isDefault) {
+        addExportName('default');
+      } else if (statement.name) {
+        addExportName(statement.name.text);
+      } else if (ts.isVariableStatement(statement)) {
+        for (const declaration of statement.declarationList.declarations) {
+          if (ts.isIdentifier(declaration.name)) {
+            addExportName(declaration.name.text);
+          }
+        }
+      } else if (ts.isEnumDeclaration(statement)) {
+        addExportName(statement.name.text);
+      }
+    }
+
+    if (ts.isExportDeclaration(statement)) {
+      if (statement.isTypeOnly || !statement.exportClause) {
+        continue;
+      }
+      if (ts.isNamedExports(statement.exportClause)) {
+        for (const element of statement.exportClause.elements) {
+          if (!element.isTypeOnly) {
+            addExportName(element.name.text);
+          }
+        }
+      } else if (ts.isNamespaceExport(statement.exportClause)) {
+        addExportName(statement.exportClause.name.text);
+      }
+    }
+  }
+  return exports;
+}
+
+async function assertFreshOutputs(plugin, packageJson, stagingDist) {
+  const missing = [];
+  for (const relativeFile of getPackageOutputs(packageJson)) {
+    const outputFile = resolveStagingOutput(stagingDist, relativeFile);
+    try {
+      const outputStat = await stat(outputFile);
+      if (!outputStat.isFile() || outputStat.size === 0) {
+        missing.push(`${relativeFile} (empty or not a file)`);
+      }
+    } catch {
+      missing.push(`${relativeFile} (not generated in fresh staging build)`);
+    }
+  }
+  if (missing.length) {
+    fail(
+      `${plugin.ref} fresh staging build is incomplete:\n${missing
+        .map((item) => `  - ${item}`)
+        .join('\n')}`,
+    );
+  }
+}
+
+async function normalizeCss(distDir) {
+  const assetCss = path.join(distDir, 'assets', 'style.css');
+  const rootCss = path.join(distDir, 'style.css');
+  if (existsSync(assetCss)) {
+    await cp(assetCss, rootCss, { force: true });
+  }
+}
+
+async function clearGeneratedDist(distDir) {
+  if (!existsSync(distDir)) {
+    return;
+  }
+  const entries = await readdir(distDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isFile()) {
+      await rm(path.join(distDir, entry.name), { force: true });
+    }
+  }
+  await rm(path.join(distDir, 'assets', 'style.css'), { force: true });
+}
+
+async function normalizeLegacyFiles(distDir) {
+  const files = [
+    ['index.legacy.es.js', 'index.legacy.js'],
+    ['polyfills.legacy.es.js', 'polyfills.legacy.js'],
+  ];
+  for (const [source, target] of files) {
+    const sourceFile = path.join(distDir, source);
+    if (existsSync(sourceFile)) {
+      await rename(sourceFile, path.join(distDir, target));
+    }
+  }
+}
+
+async function buildVitePlugin(plugin, packageJson) {
   const configFile = path.join(plugin.sourceDir, 'vite.config.ts');
   if (!existsSync(configFile)) {
     fail(`Vite config not found: ${configFile}`);
@@ -112,6 +295,14 @@ async function buildVitePlugin(plugin) {
   );
   if (!loaded) {
     fail(`Unable to load Vite config: ${configFile}`);
+  }
+
+  const expectedDist = resolvePluginDist(plugin);
+  const resolvedConfiguredOutDir = resolveConfiguredOutDir(plugin, loaded.config);
+  if (path.resolve(resolvedConfiguredOutDir) !== path.resolve(expectedDist)) {
+    fail(
+      `${plugin.ref} vite.config outDir mismatch: expected ${expectedDist}, got ${resolvedConfiguredOutDir}`,
+    );
   }
 
   const plugins = loaded.config.plugins || [];
@@ -136,19 +327,47 @@ async function buildVitePlugin(plugin) {
     ? rollupOptions.output.map(normalizeOutput)
     : normalizeOutput(rollupOptions.output);
 
-  await build({
-    ...loaded.config,
-    configFile,
-    root: plugin.sourceDir,
-    build: {
-      ...buildConfig,
-      rollupOptions: {
-        ...rollupOptions,
-        output,
+  const stagingRoot = await mkdtemp(
+    path.join(os.tmpdir(), 'aibiz-plugin-build-'),
+  );
+  const stagingDist = path.join(stagingRoot, 'dist');
+  const pluginPublicDir = path.join(plugin.sourceDir, 'public');
+  try {
+    await build({
+      ...loaded.config,
+      configFile: false,
+      root: plugin.sourceDir,
+      publicDir: existsSync(pluginPublicDir) ? pluginPublicDir : false,
+      // Runtime plugins are loaded directly by SystemJS in the browser.
+      // Replace dependency checks such as vue-router's process.env.NODE_ENV
+      // references so legacy bundles do not require a Node global.
+      define: {
+        ...(loaded.config.define || {}),
+        'process.env.NODE_ENV': JSON.stringify('production'),
       },
-    },
-    plugins: [...legacyPlugins, ...plugins],
-  });
+      build: {
+        ...buildConfig,
+        outDir: stagingDist,
+        emptyOutDir: true,
+        rollupOptions: {
+          ...rollupOptions,
+          output,
+        },
+      },
+      plugins: [...legacyPlugins, ...plugins],
+    });
+    await normalizeLegacyFiles(stagingDist);
+    await normalizeCss(stagingDist);
+    await assertFreshOutputs(plugin, packageJson, stagingDist);
+    await clearGeneratedDist(expectedDist);
+    await mkdir(expectedDist, { recursive: true });
+    await cp(stagingDist, expectedDist, {
+      recursive: true,
+      force: true,
+    });
+  } finally {
+    await rm(stagingRoot, { recursive: true, force: true });
+  }
 }
 
 async function buildCronEditor(plugin) {
@@ -158,38 +377,13 @@ async function buildCronEditor(plugin) {
   await runCommand(ibizTempBin, ['build', '-c'], plugin.sourceDir);
 }
 
-async function normalizeCss(plugin) {
-  const assetCss = path.join(plugin.publicDir, 'dist', 'assets', 'style.css');
-  const rootCss = path.join(plugin.publicDir, 'dist', 'style.css');
-  if (existsSync(assetCss) && !existsSync(rootCss)) {
-    await cp(assetCss, rootCss);
-  }
-}
-
-async function normalizeLegacyFiles(plugin) {
-  const distDir = path.join(plugin.publicDir, 'dist');
-  if (!existsSync(distDir)) {
-    return;
-  }
-  const files = await readdir(distDir);
-  for (const file of files) {
-    if (!file.endsWith('.legacy.es.js')) {
-      continue;
-    }
-    const target = file.replace('.legacy.es.js', '.legacy.js');
-    await rename(path.join(distDir, file), path.join(distDir, target));
-  }
-}
-
 async function buildOne(plugin) {
   const packageJson = await ensurePluginLayout(plugin);
   console.log(`\n[plugins:build] ${plugin.ref}`);
   if (isCronEditor(plugin)) {
     await buildCronEditor(plugin);
   } else {
-    await buildVitePlugin(plugin);
-    await normalizeLegacyFiles(plugin);
-    await normalizeCss(plugin);
+    await buildVitePlugin(plugin, packageJson);
   }
   return packageJson;
 }
@@ -205,7 +399,12 @@ async function checkFile(file, missing) {
 async function checkOne(plugin) {
   const packageFile = path.join(plugin.sourceDir, 'package.json');
   const publicPackageFile = path.join(plugin.publicDir, 'package.json');
+  const sourceEntry = path.join(plugin.sourceDir, 'src', 'index.ts');
+  const distDir = path.join(plugin.publicDir, 'dist');
   const missing = [];
+  if (!existsSync(sourceEntry)) {
+    missing.push(`${sourceEntry} (source entry missing)`);
+  }
   if (!existsSync(packageFile)) {
     missing.push(packageFile);
   }
@@ -238,6 +437,25 @@ async function checkOne(plugin) {
     await checkFile(path.join(plugin.publicDir, relativeFile), missing);
   }
 
+  const entryFile = packageJson.module || packageJson.main;
+  const sourceText = readFileSync(sourceEntry, 'utf8');
+  const builtEntry = path.join(plugin.publicDir, entryFile);
+  if (existsSync(builtEntry)) {
+    const sourceExports = collectRuntimeExports(sourceText, sourceEntry);
+    const builtExports = collectRuntimeExports(
+      readFileSync(builtEntry, 'utf8'),
+      builtEntry,
+    );
+    const missingExports = [...sourceExports].filter(
+      (name) => !builtExports.has(name),
+    );
+    if (missingExports.length) {
+      missing.push(
+        `${builtEntry} (missing runtime exports: ${missingExports.join(', ')})`,
+      );
+    }
+  }
+
   if (!isCronEditor(plugin) && (packageJson.styles || []).length) {
     for (const relativeFile of [
       'dist/index.es.js',
@@ -246,6 +464,27 @@ async function checkOne(plugin) {
       'dist/style.css',
     ]) {
       await checkFile(path.join(plugin.publicDir, relativeFile), missing);
+    }
+  }
+
+  for (const file of forbiddenPluginOutputFiles) {
+    if (existsSync(path.join(distDir, file))) {
+      missing.push(`${path.join(distDir, file)} (unexpected application output)`);
+    }
+  }
+  for (const directory of forbiddenPluginOutputDirs) {
+    if (existsSync(path.join(distDir, directory))) {
+      missing.push(
+        `${path.join(distDir, directory)} (unexpected application output)`,
+      );
+    }
+  }
+  const assetsDir = path.join(distDir, 'assets');
+  for (const directory of forbiddenPluginAssetDirs) {
+    if (existsSync(path.join(assetsDir, directory))) {
+      missing.push(
+        `${path.join(assetsDir, directory)} (unexpected application asset)`,
+      );
     }
   }
   return missing;
@@ -316,7 +555,22 @@ async function main() {
   fail(`Unknown command: ${command}`);
 }
 
-main().catch((error) => {
-  console.error(`\n[plugins] ${error.message}`);
-  process.exitCode = 1;
-});
+export {
+  assertFreshOutputs,
+  buildOne,
+  checkOne,
+  collectRuntimeExports,
+  getPackageOutputs,
+  loadRuntimePlugins,
+  clearGeneratedDist,
+  normalizeLegacyFiles,
+  parsePackageRef,
+  resolveConfiguredOutDir,
+};
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((error) => {
+    console.error(`\n[plugins] ${error.message}`);
+    process.exitCode = 1;
+  });
+}

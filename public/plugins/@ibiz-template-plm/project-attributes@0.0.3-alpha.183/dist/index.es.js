@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { withInstall as z, useNamespace as w, useControlController as M, useClickOutside as I } from "@ibiz-template/vue3-util";
 import { registerControlProvider as j, EditFormController as A, convertNavData as F, EditFormService as B, getEntitySchema as L } from "@ibiz-template/runtime";
 import { defineComponent as k, computed as T, watch as D, reactive as x, ref as v, onMounted as S, createVNode as o, onUnmounted as N, resolveComponent as R, h as V, nextTick as H } from "vue";

@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as X4, TreeController as q4 } from "@ibiz-template/runtime";
 import { defineComponent as J4, ref as Z4, watch as $4, onUnmounted as tL, withDirectives as eL, createVNode as Sf, resolveComponent as Hw, resolveDirective as nL, h as Of } from "vue";
 import { useNamespace as iL, useControlController as rL } from "@ibiz-template/vue3-util";

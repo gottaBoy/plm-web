@@ -1,7 +1,8 @@
+import './assets/style.css';
 import { withInstall as a, useControlController as c, useNamespace as p } from "@ibiz-template/vue3-util";
 import { registerControlProvider as u, ControlType as m, ListController as d } from "@ibiz-template/runtime";
 import { defineComponent as f, createVNode as r, resolveComponent as s, isVNode as b } from "vue";
-var v = Object.defineProperty, y = (e, t, o) => t in e ? v(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o, h = (e, t, o) => (y(e, typeof t != "symbol" ? t + "" : t, o), o);
+var y = Object.defineProperty, v = (e, t, o) => t in e ? y(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o, h = (e, t, o) => (v(e, typeof t != "symbol" ? t + "" : t, o), o);
 class C extends d {
   /**
    * 选择表格

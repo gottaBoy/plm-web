@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { PluginStaticResource as _e, registerEditorProvider as Be, EditorController as $e, getDeACMode as We } from "@ibiz-template/runtime";
 import { defineComponent as oe, ref as u, computed as Ye, onBeforeMount as Ze, watch as ne, onMounted as de, nextTick as Ke, onUnmounted as qe, createVNode as a, resolveComponent as I, isVNode as Xe, createTextVNode as k } from "vue";
 import { getDataPickerProps as Je, getEditorEmits as Ge, useNamespace as me, useClickOutside as Qe } from "@ibiz-template/vue3-util";

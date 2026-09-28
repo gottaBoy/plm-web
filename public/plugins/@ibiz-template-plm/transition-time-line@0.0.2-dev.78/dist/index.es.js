@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerControlProvider as nt, CalendarController as rt } from "@ibiz-template/runtime";
 import { withInstall as st, useControlController as it, useNamespace as at } from "@ibiz-template/vue3-util";
 import { defineComponent as ot, ref as ut, watch as ct, createVNode as _, resolveComponent as F, isVNode as lt, createTextVNode as dt } from "vue";

@@ -17,10 +17,14 @@ const sourceRoot = path.join(rootDir, 'plugin-src');
 const publicRoot = path.join(rootDir, 'public', 'plugins');
 
 const localPackages = {
+  '@ibiz-template-plugin/ai-chat':
+    '../ibiz-app-hub/plugins/ibiz-ai-chat',
   '@ibiz-template-plugin/bi-report':
     '../ibiz-app-hub/plugins/ibiz-bi-report',
   '@ibiz-template-plugin/data-view':
     '../ibiz-app-hub/plugins/ibiz-data-view',
+  '@ibiz-template-plugin/gantt':
+    '../ibiz-app-hub/plugins/ibiz-gantt',
   '@ibiz-template/core': '../ibiz-app-hub/packages/core',
   '@ibiz-template/devtool': '../ibiz-app-hub/plugins/ibiz-template-devtools',
   '@ibiz-template/model-helper': '../ibiz-app-hub/packages/model-helper',

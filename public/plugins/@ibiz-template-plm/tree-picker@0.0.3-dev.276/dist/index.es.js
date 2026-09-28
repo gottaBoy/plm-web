@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { defineComponent as P, ref as h, watch as x, createVNode as n, resolveComponent as m } from "vue";
 import { getDropdownProps as B, getEditorEmits as T, useNamespace as z } from "@ibiz-template/vue3-util";
 import { registerEditorProvider as L, CodeListEditorController as O } from "@ibiz-template/runtime";

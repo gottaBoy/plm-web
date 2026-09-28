@@ -1,5 +1,4 @@
 import './assets/style.css';
-import './assets/style.css';
 import { registerEditorProvider as ot, CodeListEditorController as ut, OpenAppViewCommand as ct } from "@ibiz-template/runtime";
 import { getSpanProps as lt, useNamespace as dt, useFocusAndBlur as ft, withInstall as ht } from "@ibiz-template/vue3-util";
 import { defineComponent as mt, ref as nt, watch as rt, computed as st, createVNode as K } from "vue";

@@ -1,351 +1,344 @@
 import './assets/style.css';
-import './assets/style.css';
-import { withInstall as ge, useControlController as we, useNamespace as U } from "@ibiz-template/vue3-util";
-import { registerControlProvider as ye, ControlType as be, GridController as Ce, GridRowState as ve, ControlVO as xe } from "@ibiz-template/runtime";
-import { defineComponent as Re, createVNode as g, createTextVNode as V, resolveComponent as b, ref as Q, watch as X, computed as j, reactive as Se, mergeProps as De, h as ke } from "vue";
-import { RuntimeError as W } from "@ibiz-template/core";
-var Te = Object.defineProperty, Ee = (e, t, o) => t in e ? Te(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o, Le = (e, t, o) => (Ee(e, typeof t != "symbol" ? t + "" : t, o), o);
-function Pe(e) {
-  function t(l) {
-    !l || l === e.state.curPage || (e.state.curPage = l, e.load());
+import { useNamespace as U, useControlController as ge, withInstall as we } from "@ibiz-template/vue3-util";
+import { GridController as ye, GridRowState as Ce, ControlVO as be, registerControlProvider as ve, ControlType as xe } from "@ibiz-template/runtime";
+import { ref as Q, watch as $, computed as F, reactive as Re, createVNode as g, resolveComponent as C, mergeProps as Se, defineComponent as De, createTextVNode as W } from "vue";
+import { RuntimeError as j } from "@ibiz-template/core";
+class ke extends ye {
+  /**
+   * 添加附件
+   *
+   * @memberof AttachGridController
+   */
+  async addAttachMent(t) {
+    const { appDataEntityId: n } = this.model;
+    n && (await ibiz.hub.getApp(this.context.srfappid).deService.exec(n, "create", this.context, t), await this.load({ isInitialLoad: !1 }), await this.evt.emit("onSaveSuccess", void 0));
   }
-  function o(l) {
-    !l || l === e.state.size || (e.state.size = l, e.state.curPage === 1 && e.load());
+}
+function Te(e) {
+  function t(i) {
+    !i || i === e.state.curPage || (e.state.curPage = i, e.load());
   }
-  function n() {
+  function n(i) {
+    !i || i === e.state.size || (e.state.size = i, e.state.curPage === 1 && e.load());
+  }
+  function o() {
     e.load();
   }
-  return { onPageChange: t, onPageSizeChange: o, onPageRefresh: n };
+  return { onPageChange: t, onPageSizeChange: n, onPageRefresh: o };
 }
-function Ne(e) {
+function Ee(e) {
   const t = Q();
-  let o = !1;
-  async function n(c, u, d) {
+  let n = !1;
+  async function o(c, d, u) {
     if (ibiz.config.grid.editShowMode === "row" && e.model.enableRowEdit) {
       const h = e.findRowState(c);
       h && h.showRowEdit !== !0 && await e.switchRowEdit(h, !0);
     } else
       e.onRowClick(c);
   }
-  function l(c) {
+  function i(c) {
     e.onDbRowClick(c);
   }
-  function r(c) {
-    o || e.setSelection(c);
+  function l(c) {
+    n || e.setSelection(c);
   }
-  X(
+  $(
     [
       () => t.value,
       () => e.state.isLoaded,
       () => e.state.selectedData
     ],
-    ([c, u, d]) => {
-      !u || !c || (e.state.singleSelect ? d[0] ? t.value.setCurrentRow(d[0], !0) : t.value.setCurrentRow() : (o = !0, t.value.clearSelection(), d.forEach((h) => t.value.toggleRowSelection(h, !0)), o = !1));
+    ([c, d, u]) => {
+      !d || !c || (e.state.singleSelect ? u[0] ? t.value.setCurrentRow(u[0], !0) : t.value.setCurrentRow() : (n = !0, t.value.clearSelection(), u.forEach((h) => t.value.toggleRowSelection(h, !0)), n = !1));
     }
   );
-  function i(c) {
-    const { prop: u, order: d } = c, h = e.fieldColumns[u].model.appDEFieldId;
+  function a(c) {
+    const { prop: d, order: u } = c, h = e.fieldColumns[d].model.appDEFieldId;
     let f;
-    d === "ascending" ? f = "asc" : d === "descending" && (f = "desc"), e.setSort(h, f), e.load();
+    u === "ascending" ? f = "asc" : u === "descending" && (f = "desc"), e.setSort(h, f), e.load();
   }
-  function a({ row: c }) {
-    let u = "";
+  function s({ row: c }) {
+    let d = "";
     e.state.selectedData.length > 0 && e.state.selectedData.forEach((h) => {
-      h === c && (u = "current-row");
+      h === c && (d = "current-row");
     });
-    const d = e.findRowState(c);
-    return d != null && d.showRowEdit && (u += " editing-row"), c.srfkey && (u += " id-".concat(c.srfkey)), u;
+    const u = e.findRowState(c);
+    return u != null && u.showRowEdit && (d += " editing-row"), c.srfkey && (d += " id-".concat(c.srfkey)), d;
   }
-  function s({
-    _row: c,
-    column: u,
-    _rowIndex: d,
-    _columnIndex: h
-  }) {
+  function r({ _row: c, column: d, _rowIndex: u, _columnIndex: h }) {
     var f;
-    const m = (f = e.model.degridColumns) == null ? void 0 : f.find((p) => p.codeName === u.property);
+    const m = (f = e.model.degridColumns) == null ? void 0 : f.find((p) => p.codeName === d.property);
     return m && m.headerSysCss && m.headerSysCss.cssName ? m.headerSysCss.cssName : "";
   }
-  return X(
+  return $(
     () => e.state.sortQuery,
     (c) => {
       if (c) {
-        const u = e.state.sortQuery.split(",")[0], d = e.state.sortQuery.split(",")[1];
-        if (t.value && u && d) {
-          const h = d === "desc" ? "descending" : "ascending";
+        const d = e.state.sortQuery.split(",")[0], u = e.state.sortQuery.split(",")[1];
+        if (t.value && d && u) {
+          const h = u === "desc" ? "descending" : "ascending";
           setTimeout(() => {
             var f;
-            (f = t.value) == null || f.sort(u, h);
+            (f = t.value) == null || f.sort(d, h);
           });
         }
       }
     }
   ), {
     tableRef: t,
-    onRowClick: n,
-    onDbRowClick: l,
-    onSelectionChange: r,
-    onSortChange: i,
-    handleRowClassName: a,
-    handleHeaderCellClassName: s
+    onRowClick: o,
+    onDbRowClick: i,
+    onSelectionChange: l,
+    onSortChange: a,
+    handleRowClassName: s,
+    handleHeaderCellClassName: r
   };
 }
-function Be(e, t) {
-  const o = () => {
-    t.data && (e.state.items = t.data, e.state.rows = t.data.map((i) => new ve(new xe(i), e)));
-  }, n = j(() => {
-    var i;
-    const a = Object.values(e.fieldColumns).find(
-      (s) => s.model.appDEFieldId === e.model.minorSortAppDEFieldId
+function Le(e, t) {
+  const n = () => {
+    t.data && (e.state.items = t.data, e.state.rows = t.data.map(
+      (a) => new Ce(new be(a), e)
+    ));
+  }, o = F(() => {
+    var a;
+    const s = Object.values(e.fieldColumns).find(
+      (r) => r.model.appDEFieldId === e.model.minorSortAppDEFieldId
     );
     return {
-      prop: a == null ? void 0 : a.model.codeName,
-      order: ((i = e.model.minorSortDir) == null ? void 0 : i.toLowerCase()) === "desc" ? "descending" : "ascending"
+      prop: s == null ? void 0 : s.model.codeName,
+      order: ((a = e.model.minorSortDir) == null ? void 0 : a.toLowerCase()) === "desc" ? "descending" : "ascending"
     };
   });
   e.evt.on("onCreated", async () => {
-    t.isSimple && (o(), e.state.isLoaded = !0);
-  }), X(
+    t.isSimple && (n(), e.state.isLoaded = !0);
+  }), $(
     () => t.data,
     () => {
-      t.isSimple && o();
+      t.isSimple && n();
     },
     {
       deep: !0
     }
   );
-  const l = j(() => {
-    const { state: i } = e;
+  const i = F(() => {
+    const { state: a } = e;
     if (e.model.enableGroup) {
-      const a = [];
-      return i.groups.forEach((s) => {
-        if (!s.children.length)
+      const s = [];
+      return a.groups.forEach((r) => {
+        if (!r.children.length)
           return;
-        const c = [...s.children], u = c.shift();
-        a.push({
-          srfkey: (u == null ? void 0 : u.srfkey) || s.caption,
+        const c = [...r.children], d = c.shift();
+        s.push({
+          srfkey: (d == null ? void 0 : d.srfkey) || r.caption,
           isGroupData: !0,
-          caption: s.caption,
-          first: u,
+          caption: r.caption,
+          first: d,
           children: c
         });
-      }), a;
+      }), s;
     }
-    return i.rows.map((a) => a.data);
-  }), r = j(() => {
+    return a.rows.map((s) => s.data);
+  }), l = F(() => {
     if (e.isMultistageHeader)
       return e.model.degridColumns || [];
-    const i = [];
-    return e.state.columnStates.forEach((a) => {
-      var s, c;
-      if (a.hidden)
+    const a = [];
+    return e.state.columnStates.forEach((s) => {
+      var r, c;
+      if (s.hidden)
         return;
-      const u = ((s = e.fieldColumns[a.key]) == null ? void 0 : s.model) || ((c = e.uaColumns[a.key]) == null ? void 0 : c.model);
-      u && i.push(u);
-    }), i;
+      const d = ((r = e.fieldColumns[s.key]) == null ? void 0 : r.model) || ((c = e.uaColumns[s.key]) == null ? void 0 : c.model);
+      d && a.push(d);
+    }), a;
   });
-  return { tableData: l, renderColumns: r, defaultSort: n, summaryMethod: ({
-    columns: i
-  }) => i.map((a, s) => s === 0 ? e.aggTitle : e.state.aggResult[a.property]) };
-}
-const G = (e) => {
-  e.stopPropagation();
-}, K = async (e, t, o, n) => {
-  o.grid.setSelection([n.data]), await o.onActionClick(e, n, t);
-};
-function le(e) {
-  return e.split("-")[0];
-}
-function ze(e) {
-  return e.split("-")[1];
-}
-function Ae(e) {
-  return e === "x" ? "y" : "x";
-}
-function Oe(e) {
-  return e === "y" ? "height" : "width";
-}
-function ie(e) {
-  return ["top", "bottom"].includes(le(e)) ? "y" : "x";
-}
-function Me(e) {
-  return Ae(ie(e));
-}
-function ae(e) {
-  const {
-    x: t,
-    y: o,
-    width: n,
-    height: l
-  } = e;
   return {
-    width: n,
-    height: l,
-    top: o,
-    left: t,
-    right: t + n,
-    bottom: o + l,
-    x: t,
-    y: o
+    tableData: i,
+    renderColumns: l,
+    defaultSort: o,
+    summaryMethod: ({ columns: a }) => a.map(
+      (s, r) => r === 0 ? e.aggTitle : e.state.aggResult[s.property]
+    )
   };
 }
-function Z(e, t, o) {
-  let {
-    reference: n,
-    floating: l
-  } = e;
-  const r = ie(t), i = Me(t), a = Oe(i), s = le(t), c = r === "y", u = n.x + n.width / 2 - l.width / 2, d = n.y + n.height / 2 - l.height / 2, h = n[a] / 2 - l[a] / 2;
+const M = (e) => {
+  e.stopPropagation();
+}, K = async (e, t, n, o) => {
+  n.grid.setSelection([o.data]), await n.onActionClick(e, o, t);
+};
+function ie(e) {
+  return e.split("-")[0];
+}
+function Pe(e) {
+  return e.split("-")[1];
+}
+function Ne(e) {
+  return e === "x" ? "y" : "x";
+}
+function Ae(e) {
+  return e === "y" ? "height" : "width";
+}
+function ae(e) {
+  return ["top", "bottom"].includes(ie(e)) ? "y" : "x";
+}
+function Be(e) {
+  return Ne(ae(e));
+}
+function se(e) {
+  const { x: t, y: n, width: o, height: i } = e;
+  return {
+    width: o,
+    height: i,
+    top: n,
+    left: t,
+    right: t + o,
+    bottom: n + i,
+    x: t,
+    y: n
+  };
+}
+function Z(e, t, n) {
+  let { reference: o, floating: i } = e;
+  const l = ae(t), a = Be(t), s = Ae(a), r = ie(t), c = l === "y", d = o.x + o.width / 2 - i.width / 2, u = o.y + o.height / 2 - i.height / 2, h = o[s] / 2 - i[s] / 2;
   let f;
-  switch (s) {
+  switch (r) {
     case "top":
       f = {
-        x: u,
-        y: n.y - l.height
+        x: d,
+        y: o.y - i.height
       };
       break;
     case "bottom":
       f = {
-        x: u,
-        y: n.y + n.height
+        x: d,
+        y: o.y + o.height
       };
       break;
     case "right":
       f = {
-        x: n.x + n.width,
-        y: d
+        x: o.x + o.width,
+        y: u
       };
       break;
     case "left":
       f = {
-        x: n.x - l.width,
-        y: d
+        x: o.x - i.width,
+        y: u
       };
       break;
     default:
       f = {
-        x: n.x,
-        y: n.y
+        x: o.x,
+        y: o.y
       };
   }
-  switch (ze(t)) {
+  switch (Pe(t)) {
     case "start":
-      f[i] -= h * (o && c ? -1 : 1);
+      f[a] -= h * (n && c ? -1 : 1);
       break;
     case "end":
-      f[i] += h * (o && c ? -1 : 1);
+      f[a] += h * (n && c ? -1 : 1);
       break;
   }
   return f;
 }
-const Ge = async (e, t, o) => {
+const Ge = async (e, t, n) => {
   const {
-    placement: n = "bottom",
-    strategy: l = "absolute",
-    middleware: r = [],
-    platform: i
-  } = o, a = r.filter(Boolean), s = await (i.isRTL == null ? void 0 : i.isRTL(t));
-  let c = await i.getElementRects({
+    placement: o = "bottom",
+    strategy: i = "absolute",
+    middleware: l = [],
+    platform: a
+  } = n, s = l.filter(Boolean), r = await (a.isRTL == null ? void 0 : a.isRTL(t));
+  let c = await a.getElementRects({
     reference: e,
     floating: t,
-    strategy: l
-  }), {
-    x: u,
-    y: d
-  } = Z(c, n, s), h = n, f = {}, m = 0;
-  for (let p = 0; p < a.length; p++) {
-    const {
-      name: R,
-      fn: E
-    } = a[p], {
+    strategy: i
+  }), { x: d, y: u } = Z(c, o, r), h = o, f = {}, m = 0;
+  for (let p = 0; p < s.length; p++) {
+    const { name: R, fn: E } = s[p], {
       x: S,
       y: w,
       data: D,
       reset: y
     } = await E({
-      x: u,
-      y: d,
-      initialPlacement: n,
+      x: d,
+      y: u,
+      initialPlacement: o,
       placement: h,
-      strategy: l,
+      strategy: i,
       middlewareData: f,
       rects: c,
-      platform: i,
+      platform: a,
       elements: {
         reference: e,
         floating: t
       }
     });
-    u = S != null ? S : u, d = w != null ? w : d, f = {
+    d = S != null ? S : d, u = w != null ? w : u, f = {
       ...f,
       [R]: {
         ...f[R],
         ...D
       }
-    }, y && m <= 50 && (m++, typeof y == "object" && (y.placement && (h = y.placement), y.rects && (c = y.rects === !0 ? await i.getElementRects({
+    }, y && m <= 50 && (m++, typeof y == "object" && (y.placement && (h = y.placement), y.rects && (c = y.rects === !0 ? await a.getElementRects({
       reference: e,
       floating: t,
-      strategy: l
-    }) : y.rects), {
-      x: u,
-      y: d
-    } = Z(c, h, s)), p = -1);
+      strategy: i
+    }) : y.rects), { x: d, y: u } = Z(c, h, r)), p = -1);
   }
   return {
-    x: u,
-    y: d,
+    x: d,
+    y: u,
     placement: h,
-    strategy: l,
+    strategy: i,
     middlewareData: f
   };
-}, ee = Math.min, A = Math.max, H = Math.round, L = (e) => ({
+}, ee = Math.min, G = Math.max, H = Math.round, L = (e) => ({
   x: e,
   y: e
 });
 function P(e) {
-  return re(e) ? (e.nodeName || "").toLowerCase() : "#document";
+  return le(e) ? (e.nodeName || "").toLowerCase() : "#document";
 }
-function C(e) {
+function b(e) {
   var t;
   return (e == null || (t = e.ownerDocument) == null ? void 0 : t.defaultView) || window;
 }
 function N(e) {
   var t;
-  return (t = (re(e) ? e.ownerDocument : e.document) || window.document) == null ? void 0 : t.documentElement;
+  return (t = (le(e) ? e.ownerDocument : e.document) || window.document) == null ? void 0 : t.documentElement;
 }
-function re(e) {
-  return e instanceof Node || e instanceof C(e).Node;
+function le(e) {
+  return e instanceof Node || e instanceof b(e).Node;
 }
 function T(e) {
-  return e instanceof Element || e instanceof C(e).Element;
+  return e instanceof Element || e instanceof b(e).Element;
 }
 function x(e) {
-  return e instanceof HTMLElement || e instanceof C(e).HTMLElement;
+  return e instanceof HTMLElement || e instanceof b(e).HTMLElement;
 }
 function te(e) {
-  return typeof ShadowRoot > "u" ? !1 : e instanceof ShadowRoot || e instanceof C(e).ShadowRoot;
+  return typeof ShadowRoot > "u" ? !1 : e instanceof ShadowRoot || e instanceof b(e).ShadowRoot;
 }
-function M(e) {
-  const {
-    overflow: t,
-    overflowX: o,
-    overflowY: n,
-    display: l
-  } = v(e);
-  return /auto|scroll|overlay|hidden|clip/.test(t + n + o) && !["inline", "contents"].includes(l);
+function O(e) {
+  const { overflow: t, overflowX: n, overflowY: o, display: i } = v(e);
+  return /auto|scroll|overlay|hidden|clip/.test(t + o + n) && !["inline", "contents"].includes(i);
 }
-function He(e) {
+function ze(e) {
   return ["table", "td", "th"].includes(P(e));
 }
-function $(e) {
-  const t = J(), o = v(e);
-  return o.transform !== "none" || o.perspective !== "none" || (o.containerType ? o.containerType !== "normal" : !1) || !t && (o.backdropFilter ? o.backdropFilter !== "none" : !1) || !t && (o.filter ? o.filter !== "none" : !1) || ["transform", "perspective", "filter"].some((n) => (o.willChange || "").includes(n)) || ["paint", "layout", "strict", "content"].some((n) => (o.contain || "").includes(n));
+function Y(e) {
+  const t = J(), n = v(e);
+  return n.transform !== "none" || n.perspective !== "none" || (n.containerType ? n.containerType !== "normal" : !1) || !t && (n.backdropFilter ? n.backdropFilter !== "none" : !1) || !t && (n.filter ? n.filter !== "none" : !1) || ["transform", "perspective", "filter"].some(
+    (o) => (n.willChange || "").includes(o)
+  ) || ["paint", "layout", "strict", "content"].some(
+    (o) => (n.contain || "").includes(o)
+  );
 }
-function Ie(e) {
-  let t = z(e);
+function Oe(e) {
+  let t = B(e);
   for (; x(t) && !I(t); ) {
-    if ($(t))
+    if (Y(t))
       return t;
-    t = z(t);
+    t = B(t);
   }
   return null;
 }
@@ -356,7 +349,7 @@ function I(e) {
   return ["html", "body", "#document"].includes(P(e));
 }
 function v(e) {
-  return C(e).getComputedStyle(e);
+  return b(e).getComputedStyle(e);
 }
 function _(e) {
   return T(e) ? {
@@ -367,7 +360,7 @@ function _(e) {
     scrollTop: e.pageYOffset
   };
 }
-function z(e) {
+function B(e) {
   if (P(e) === "html")
     return e;
   const t = (
@@ -379,427 +372,438 @@ function z(e) {
   );
   return te(t) ? t.host : t;
 }
-function se(e) {
-  const t = z(e);
-  return I(t) ? e.ownerDocument ? e.ownerDocument.body : e.body : x(t) && M(t) ? t : se(t);
+function re(e) {
+  const t = B(e);
+  return I(t) ? e.ownerDocument ? e.ownerDocument.body : e.body : x(t) && O(t) ? t : re(t);
 }
-function Y(e, t, o) {
-  var n;
-  t === void 0 && (t = []), o === void 0 && (o = !0);
-  const l = se(e), r = l === ((n = e.ownerDocument) == null ? void 0 : n.body), i = C(l);
-  return r ? t.concat(i, i.visualViewport || [], M(l) ? l : [], i.frameElement && o ? Y(i.frameElement) : []) : t.concat(l, Y(l, [], o));
+function X(e, t, n) {
+  var o;
+  t === void 0 && (t = []), n === void 0 && (n = !0);
+  const i = re(e), l = i === ((o = e.ownerDocument) == null ? void 0 : o.body), a = b(i);
+  return l ? t.concat(
+    a,
+    a.visualViewport || [],
+    O(i) ? i : [],
+    a.frameElement && n ? X(a.frameElement) : []
+  ) : t.concat(i, X(i, [], n));
 }
 function ce(e) {
   const t = v(e);
-  let o = parseFloat(t.width) || 0, n = parseFloat(t.height) || 0;
-  const l = x(e), r = l ? e.offsetWidth : o, i = l ? e.offsetHeight : n, a = H(o) !== r || H(n) !== i;
-  return a && (o = r, n = i), {
-    width: o,
-    height: n,
-    $: a
+  let n = parseFloat(t.width) || 0, o = parseFloat(t.height) || 0;
+  const i = x(e), l = i ? e.offsetWidth : n, a = i ? e.offsetHeight : o, s = H(n) !== l || H(o) !== a;
+  return s && (n = l, o = a), {
+    width: n,
+    height: o,
+    $: s
   };
 }
-function ue(e) {
+function de(e) {
   return T(e) ? e : e.contextElement;
 }
-function B(e) {
-  const t = ue(e);
+function A(e) {
+  const t = de(e);
   if (!x(t))
     return L(1);
-  const o = t.getBoundingClientRect(), {
-    width: n,
-    height: l,
-    $: r
-  } = ce(t);
-  let i = (r ? H(o.width) : o.width) / n, a = (r ? H(o.height) : o.height) / l;
-  return (!i || !Number.isFinite(i)) && (i = 1), (!a || !Number.isFinite(a)) && (a = 1), {
-    x: i,
-    y: a
-  };
-}
-const _e = /* @__PURE__ */ L(0);
-function de(e) {
-  const t = C(e);
-  return !J() || !t.visualViewport ? _e : {
-    x: t.visualViewport.offsetLeft,
-    y: t.visualViewport.offsetTop
-  };
-}
-function Fe(e, t, o) {
-  return t === void 0 && (t = !1), !o || t && o !== C(e) ? !1 : t;
-}
-function O(e, t, o, n) {
-  t === void 0 && (t = !1), o === void 0 && (o = !1);
-  const l = e.getBoundingClientRect(), r = ue(e);
-  let i = L(1);
-  t && (n ? T(n) && (i = B(n)) : i = B(e));
-  const a = Fe(r, o, n) ? de(r) : L(0);
-  let s = (l.left + a.x) / i.x, c = (l.top + a.y) / i.y, u = l.width / i.x, d = l.height / i.y;
-  if (r) {
-    const h = C(r), f = n && T(n) ? C(n) : n;
-    let m = h.frameElement;
-    for (; m && n && f !== h; ) {
-      const p = B(m), R = m.getBoundingClientRect(), E = v(m), S = R.left + (m.clientLeft + parseFloat(E.paddingLeft)) * p.x, w = R.top + (m.clientTop + parseFloat(E.paddingTop)) * p.y;
-      s *= p.x, c *= p.y, u *= p.x, d *= p.y, s += S, c += w, m = C(m).frameElement;
-    }
-  }
-  return ae({
-    width: u,
-    height: d,
-    x: s,
-    y: c
-  });
-}
-function Ve(e) {
-  let {
-    rect: t,
-    offsetParent: o,
-    strategy: n
-  } = e;
-  const l = x(o), r = N(o);
-  if (o === r)
-    return t;
-  let i = {
-    scrollLeft: 0,
-    scrollTop: 0
-  }, a = L(1);
-  const s = L(0);
-  if ((l || !l && n !== "fixed") && ((P(o) !== "body" || M(r)) && (i = _(o)), x(o))) {
-    const c = O(o);
-    a = B(o), s.x = c.x + o.clientLeft, s.y = c.y + o.clientTop;
-  }
-  return {
-    width: t.width * a.x,
-    height: t.height * a.y,
-    x: t.x * a.x - i.scrollLeft * a.x + s.x,
-    y: t.y * a.y - i.scrollTop * a.y + s.y
-  };
-}
-function je(e) {
-  return Array.from(e.getClientRects());
-}
-function fe(e) {
-  return O(N(e)).left + _(e).scrollLeft;
-}
-function We(e) {
-  const t = N(e), o = _(e), n = e.ownerDocument.body, l = A(t.scrollWidth, t.clientWidth, n.scrollWidth, n.clientWidth), r = A(t.scrollHeight, t.clientHeight, n.scrollHeight, n.clientHeight);
-  let i = -o.scrollLeft + fe(e);
-  const a = -o.scrollTop;
-  return v(n).direction === "rtl" && (i += A(t.clientWidth, n.clientWidth) - l), {
-    width: l,
-    height: r,
-    x: i,
-    y: a
-  };
-}
-function qe(e, t) {
-  const o = C(e), n = N(e), l = o.visualViewport;
-  let r = n.clientWidth, i = n.clientHeight, a = 0, s = 0;
-  if (l) {
-    r = l.width, i = l.height;
-    const c = J();
-    (!c || c && t === "fixed") && (a = l.offsetLeft, s = l.offsetTop);
-  }
-  return {
-    width: r,
-    height: i,
+  const n = t.getBoundingClientRect(), { width: o, height: i, $: l } = ce(t);
+  let a = (l ? H(n.width) : n.width) / o, s = (l ? H(n.height) : n.height) / i;
+  return (!a || !Number.isFinite(a)) && (a = 1), (!s || !Number.isFinite(s)) && (s = 1), {
     x: a,
     y: s
   };
 }
-function Ue(e, t) {
-  const o = O(e, !0, t === "fixed"), n = o.top + e.clientTop, l = o.left + e.clientLeft, r = x(e) ? B(e) : L(1), i = e.clientWidth * r.x, a = e.clientHeight * r.y, s = l * r.x, c = n * r.y;
-  return {
-    width: i,
-    height: a,
-    x: s,
+const Me = /* @__PURE__ */ L(0);
+function ue(e) {
+  const t = b(e);
+  return !J() || !t.visualViewport ? Me : {
+    x: t.visualViewport.offsetLeft,
+    y: t.visualViewport.offsetTop
+  };
+}
+function He(e, t, n) {
+  return t === void 0 && (t = !1), !n || t && n !== b(e) ? !1 : t;
+}
+function z(e, t, n, o) {
+  t === void 0 && (t = !1), n === void 0 && (n = !1);
+  const i = e.getBoundingClientRect(), l = de(e);
+  let a = L(1);
+  t && (o ? T(o) && (a = A(o)) : a = A(e));
+  const s = He(l, n, o) ? ue(l) : L(0);
+  let r = (i.left + s.x) / a.x, c = (i.top + s.y) / a.y, d = i.width / a.x, u = i.height / a.y;
+  if (l) {
+    const h = b(l), f = o && T(o) ? b(o) : o;
+    let m = h.frameElement;
+    for (; m && o && f !== h; ) {
+      const p = A(m), R = m.getBoundingClientRect(), E = v(m), S = R.left + (m.clientLeft + parseFloat(E.paddingLeft)) * p.x, w = R.top + (m.clientTop + parseFloat(E.paddingTop)) * p.y;
+      r *= p.x, c *= p.y, d *= p.x, u *= p.y, r += S, c += w, m = b(m).frameElement;
+    }
+  }
+  return se({
+    width: d,
+    height: u,
+    x: r,
     y: c
-  };
+  });
 }
-function oe(e, t, o) {
-  let n;
-  if (t === "viewport")
-    n = qe(e, o);
-  else if (t === "document")
-    n = We(N(e));
-  else if (T(t))
-    n = Ue(t, o);
-  else {
-    const l = de(e);
-    n = {
-      ...t,
-      x: t.x - l.x,
-      y: t.y - l.y
-    };
-  }
-  return ae(n);
-}
-function he(e, t) {
-  const o = z(e);
-  return o === t || !T(o) || I(o) ? !1 : v(o).position === "fixed" || he(o, t);
-}
-function Qe(e, t) {
-  const o = t.get(e);
-  if (o)
-    return o;
-  let n = Y(e, [], !1).filter((a) => T(a) && P(a) !== "body"), l = null;
-  const r = v(e).position === "fixed";
-  let i = r ? z(e) : e;
-  for (; T(i) && !I(i); ) {
-    const a = v(i), s = $(i);
-    !s && a.position === "fixed" && (l = null), (r ? !s && !l : !s && a.position === "static" && l && ["absolute", "fixed"].includes(l.position) || M(i) && !s && he(e, i)) ? n = n.filter((c) => c !== i) : l = a, i = z(i);
-  }
-  return t.set(e, n), n;
-}
-function Xe(e) {
-  let {
-    element: t,
-    boundary: o,
-    rootBoundary: n,
-    strategy: l
-  } = e;
-  const r = [...o === "clippingAncestors" ? Qe(t, this._c) : [].concat(o), n], i = r[0], a = r.reduce((s, c) => {
-    const u = oe(t, c, l);
-    return s.top = A(u.top, s.top), s.right = ee(u.right, s.right), s.bottom = ee(u.bottom, s.bottom), s.left = A(u.left, s.left), s;
-  }, oe(t, i, l));
-  return {
-    width: a.right - a.left,
-    height: a.bottom - a.top,
-    x: a.left,
-    y: a.top
-  };
-}
-function Ye(e) {
-  return ce(e);
-}
-function $e(e, t, o) {
-  const n = x(t), l = N(t), r = o === "fixed", i = O(e, !0, r, t);
+function Ie(e) {
+  let { rect: t, offsetParent: n, strategy: o } = e;
+  const i = x(n), l = N(n);
+  if (n === l)
+    return t;
   let a = {
     scrollLeft: 0,
     scrollTop: 0
-  };
-  const s = L(0);
-  if (n || !n && !r)
-    if ((P(t) !== "body" || M(l)) && (a = _(t)), n) {
-      const c = O(t, !0, r, t);
-      s.x = c.x + t.clientLeft, s.y = c.y + t.clientTop;
-    } else
-      l && (s.x = fe(l));
+  }, s = L(1);
+  const r = L(0);
+  if ((i || !i && o !== "fixed") && ((P(n) !== "body" || O(l)) && (a = _(n)), x(n))) {
+    const c = z(n);
+    s = A(n), r.x = c.x + n.clientLeft, r.y = c.y + n.clientTop;
+  }
   return {
-    x: i.left + a.scrollLeft - s.x,
-    y: i.top + a.scrollTop - s.y,
-    width: i.width,
-    height: i.height
+    width: t.width * s.x,
+    height: t.height * s.y,
+    x: t.x * s.x - a.scrollLeft * s.x + r.x,
+    y: t.y * s.y - a.scrollTop * s.y + r.y
   };
 }
-function ne(e, t) {
+function _e(e) {
+  return Array.from(e.getClientRects());
+}
+function fe(e) {
+  return z(N(e)).left + _(e).scrollLeft;
+}
+function Ve(e) {
+  const t = N(e), n = _(e), o = e.ownerDocument.body, i = G(t.scrollWidth, t.clientWidth, o.scrollWidth, o.clientWidth), l = G(t.scrollHeight, t.clientHeight, o.scrollHeight, o.clientHeight);
+  let a = -n.scrollLeft + fe(e);
+  const s = -n.scrollTop;
+  return v(o).direction === "rtl" && (a += G(t.clientWidth, o.clientWidth) - i), {
+    width: i,
+    height: l,
+    x: a,
+    y: s
+  };
+}
+function Fe(e, t) {
+  const n = b(e), o = N(e), i = n.visualViewport;
+  let l = o.clientWidth, a = o.clientHeight, s = 0, r = 0;
+  if (i) {
+    l = i.width, a = i.height;
+    const c = J();
+    (!c || c && t === "fixed") && (s = i.offsetLeft, r = i.offsetTop);
+  }
+  return {
+    width: l,
+    height: a,
+    x: s,
+    y: r
+  };
+}
+function We(e, t) {
+  const n = z(e, !0, t === "fixed"), o = n.top + e.clientTop, i = n.left + e.clientLeft, l = x(e) ? A(e) : L(1), a = e.clientWidth * l.x, s = e.clientHeight * l.y, r = i * l.x, c = o * l.y;
+  return {
+    width: a,
+    height: s,
+    x: r,
+    y: c
+  };
+}
+function ne(e, t, n) {
+  let o;
+  if (t === "viewport")
+    o = Fe(e, n);
+  else if (t === "document")
+    o = Ve(N(e));
+  else if (T(t))
+    o = We(t, n);
+  else {
+    const i = ue(e);
+    o = {
+      ...t,
+      x: t.x - i.x,
+      y: t.y - i.y
+    };
+  }
+  return se(o);
+}
+function he(e, t) {
+  const n = B(e);
+  return n === t || !T(n) || I(n) ? !1 : v(n).position === "fixed" || he(n, t);
+}
+function je(e, t) {
+  const n = t.get(e);
+  if (n)
+    return n;
+  let o = X(e, [], !1).filter((s) => T(s) && P(s) !== "body"), i = null;
+  const l = v(e).position === "fixed";
+  let a = l ? B(e) : e;
+  for (; T(a) && !I(a); ) {
+    const s = v(a), r = Y(a);
+    !r && s.position === "fixed" && (i = null), (l ? !r && !i : !r && s.position === "static" && i && ["absolute", "fixed"].includes(i.position) || O(a) && !r && he(e, a)) ? o = o.filter((c) => c !== a) : i = s, a = B(a);
+  }
+  return t.set(e, o), o;
+}
+function qe(e) {
+  let { element: t, boundary: n, rootBoundary: o, strategy: i } = e;
+  const l = [...n === "clippingAncestors" ? je(t, this._c) : [].concat(n), o], a = l[0], s = l.reduce(
+    (r, c) => {
+      const d = ne(t, c, i);
+      return r.top = G(d.top, r.top), r.right = ee(d.right, r.right), r.bottom = ee(d.bottom, r.bottom), r.left = G(d.left, r.left), r;
+    },
+    ne(t, a, i)
+  );
+  return {
+    width: s.right - s.left,
+    height: s.bottom - s.top,
+    x: s.left,
+    y: s.top
+  };
+}
+function Ue(e) {
+  return ce(e);
+}
+function Qe(e, t, n) {
+  const o = x(t), i = N(t), l = n === "fixed", a = z(e, !0, l, t);
+  let s = {
+    scrollLeft: 0,
+    scrollTop: 0
+  };
+  const r = L(0);
+  if (o || !o && !l)
+    if ((P(t) !== "body" || O(i)) && (s = _(t)), o) {
+      const c = z(t, !0, l, t);
+      r.x = c.x + t.clientLeft, r.y = c.y + t.clientTop;
+    } else
+      i && (r.x = fe(i));
+  return {
+    x: a.left + s.scrollLeft - r.x,
+    y: a.top + s.scrollTop - r.y,
+    width: a.width,
+    height: a.height
+  };
+}
+function oe(e, t) {
   return !x(e) || v(e).position === "fixed" ? null : t ? t(e) : e.offsetParent;
 }
 function me(e, t) {
-  const o = C(e);
+  const n = b(e);
   if (!x(e))
-    return o;
-  let n = ne(e, t);
-  for (; n && He(n) && v(n).position === "static"; )
-    n = ne(n, t);
-  return n && (P(n) === "html" || P(n) === "body" && v(n).position === "static" && !$(n)) ? o : n || Ie(e) || o;
+    return n;
+  let o = oe(e, t);
+  for (; o && ze(o) && v(o).position === "static"; )
+    o = oe(o, t);
+  return o && (P(o) === "html" || P(o) === "body" && v(o).position === "static" && !Y(o)) ? n : o || Oe(e) || n;
 }
-const Je = async function(e) {
-  let {
-    reference: t,
-    floating: o,
-    strategy: n
-  } = e;
-  const l = this.getOffsetParent || me, r = this.getDimensions;
+const $e = async function(e) {
+  let { reference: t, floating: n, strategy: o } = e;
+  const i = this.getOffsetParent || me, l = this.getDimensions;
   return {
-    reference: $e(t, await l(o), n),
+    reference: Qe(t, await i(n), o),
     floating: {
       x: 0,
       y: 0,
-      ...await r(o)
+      ...await l(n)
     }
   };
 };
-function Ke(e) {
+function Xe(e) {
   return v(e).direction === "rtl";
 }
-const Ze = {
-  convertOffsetParentRelativeRectToViewportRelativeRect: Ve,
+const Ye = {
+  convertOffsetParentRelativeRectToViewportRelativeRect: Ie,
   getDocumentElement: N,
-  getClippingRect: Xe,
+  getClippingRect: qe,
   getOffsetParent: me,
-  getElementRects: Je,
-  getClientRects: je,
-  getDimensions: Ye,
-  getScale: B,
+  getElementRects: $e,
+  getClientRects: _e,
+  getDimensions: Ue,
+  getScale: A,
   isElement: T,
-  isRTL: Ke
-}, et = (e, t, o) => {
-  const n = /* @__PURE__ */ new Map(), l = {
-    platform: Ze,
-    ...o
-  }, r = {
-    ...l.platform,
-    _c: n
+  isRTL: Xe
+}, Je = (e, t, n) => {
+  const o = /* @__PURE__ */ new Map(), i = {
+    platform: Ye,
+    ...n
+  }, l = {
+    ...i.platform,
+    _c: o
   };
   return Ge(e, t, {
-    ...l,
-    platform: r
+    ...i,
+    platform: l
   });
 };
-function tt(e, t) {
-  let o;
-  const n = Q(!1), l = Q(), r = Se({}), i = (d) => {
+function Ke(e, t) {
+  let n;
+  const o = Q(!1), i = Q(), l = Re({}), a = (u) => {
     if (!e.value)
-      throw new W("找不到表格组件引用");
+      throw new j("找不到表格组件引用");
     const h = e.value.$el;
     let f = ".el-table__row";
-    d.data.srfkey && (f += ".id-".concat(d.data.srfkey));
+    u.data.srfkey && (f += ".id-".concat(u.data.srfkey));
     const m = h.querySelector(f);
     if (!m)
-      throw new W("找不到对应的表格行dom元素");
+      throw new j("找不到对应的表格行dom元素");
     return m;
-  }, a = async (d) => {
-    const h = i(d);
-    if (!o)
-      throw new W("拿不到pop组件的实例");
-    const f = o.$el, {
-      x: m,
-      y: p
-    } = await et(h, f, {
+  }, s = async (u) => {
+    const h = a(u);
+    if (!n)
+      throw new j("拿不到pop组件的实例");
+    const f = n.$el, { x: m, y: p } = await Je(h, f, {
       placement: "bottom"
     });
-    Object.assign(r, {
+    Object.assign(l, {
       top: "".concat(p, "px"),
       left: "".concat(m, "px")
-    }), l.value = d, n.value = !0;
-  }, s = async () => {
-    l.value && t.switchRowEdit(l.value, !1, !0);
+    }), i.value = u, o.value = !0;
+  }, r = async () => {
+    i.value && t.switchRowEdit(i.value, !1, !0);
   }, c = async () => {
-    l.value && t.switchRowEdit(l.value, !1, !1);
-  }, u = () => {
-    const d = n.value && t.state.rows[t.state.rows.length - 1].showRowEdit;
-    return [g("div", {
-      class: "row-edit-popover__placeholder",
-      style: {
-        display: d ? "block" : "none"
-      }
-    }, null), g(b("iBizRowEditPopover"), {
-      ref: (h) => {
-        o = h;
-      },
-      style: r,
-      show: n.value,
-      onConfirm: s,
-      onCancel: c
-    }, null)];
+    i.value && t.switchRowEdit(i.value, !1, !1);
+  }, d = () => {
+    const u = o.value && t.state.rows[t.state.rows.length - 1].showRowEdit;
+    return [
+      g(
+        "div",
+        {
+          class: "row-edit-popover__placeholder",
+          style: {
+            display: u ? "block" : "none"
+          }
+        },
+        null
+      ),
+      g(
+        C("iBizRowEditPopover"),
+        {
+          ref: (h) => {
+            n = h;
+          },
+          style: l,
+          show: o.value,
+          onConfirm: r,
+          onCancel: c
+        },
+        null
+      )
+    ];
   };
-  return t.evt.on("onRowEditChange", (d) => {
-    d.row.showRowEdit ? setTimeout(() => {
-      a(d.row);
-    }, 0) : (l.value = void 0, n.value = !1, Object.assign(r, {
+  return t.evt.on("onRowEditChange", (u) => {
+    u.row.showRowEdit ? setTimeout(() => {
+      s(u.row);
+    }, 0) : (i.value = void 0, o.value = !1, Object.assign(l, {
       top: void 0,
       left: void 0
     }));
   }), {
-    renderPopover: u
+    renderPopover: d
   };
 }
-class ot extends Ce {
-  /**
-   * 添加附件
-   *
-   * @memberof AttachGridController
-   */
-  async addAttachMent(t) {
-    const { appDataEntityId: o } = this.model;
-    o && (await ibiz.hub.getApp(this.context.srfappid).deService.exec(o, "create", this.context, t), await this.load({ isInitialLoad: !1 }), await this.evt.emit("onSaveSuccess", void 0));
-  }
-}
-function nt(e, t, o, n) {
-  var l;
+function Ze(e, t, n, o) {
+  var i;
   if (t.hideDefault)
     return null;
-  const {
-    codeName: r,
-    width: i
-  } = t, a = e.columns[r], s = e.state.columnStates.find((d) => d.key === r), c = a.isAdaptiveColumn || !e.hasAdaptiveColumn && n === o.length - 1 ? "min-width" : "width";
-  let u = "";
-  return t.columnType === "UAGRIDCOLUMN" && (u = "attachment-ua-column"), g(b("el-table-column"), De({
-    label: t.caption,
-    prop: r,
-    "class-name": u,
-    "label-class-name": u
-  }, {
-    [c]: i
-  }, {
-    fixed: s.fixed,
-    sortable: t.enableSort ? "custom" : !1,
-    align: ((l = t.align) == null ? void 0 : l.toLowerCase()) || "center"
-  }), {
-    default: ({
-      row: d
-    }) => {
-      var h, f;
-      let m = d;
-      d.isGroupData && (m = d.first);
-      const p = e.findRowState(m);
-      if (p) {
-        if (t.columnType === "UAGRIDCOLUMN") {
-          const E = U("grid-ua-column"), S = U("attachment-grid"), w = ((h = a.model.deuiactionGroup) == null ? void 0 : h.uiactionGroupDetails) || [], D = w.filter((k) => k.actionLevel !== 250), y = w.filter((k) => k.actionLevel === 250);
-          return g("div", {
-            class: [E.b(), (f = a.model.cellSysCss) == null ? void 0 : f.cssName]
-          }, [y.length && g(b("iBizActionToolbar"), {
-            onDblclick: G,
-            onClick: G,
-            "action-details": y,
-            "actions-state": p.uaColStates[a.model.codeName],
-            popperClass: S.e("popper"),
-            onActionClick: (k, F) => {
-              K(k, F, a, p);
-            }
-          }, null), D.length && g(b("iBizActionToolbar"), {
-            onDblclick: G,
-            onClick: G,
-            mode: "dropdown",
-            caption: "· · ·",
-            "action-details": D,
-            popperClass: S.e("popper"),
-            "actions-state": p.uaColStates[a.model.codeName],
-            onActionClick: (k, F) => {
-              K(k, F, a, p);
-            }
-          }, null)]);
-        }
-        const R = b(e.providers[r].component);
-        return ke(R, {
-          controller: a,
-          row: p,
-          key: m.tempsrfkey + r
-        });
+  const { codeName: l, width: a } = t, s = e.columns[l], r = e.state.columnStates.find((u) => u.key === l), c = s.isAdaptiveColumn || !e.hasAdaptiveColumn && o === n.length - 1 ? "min-width" : "width";
+  let d = "";
+  return t.columnType === "UAGRIDCOLUMN" && (d = "attachment-ua-column"), g(
+    C("el-table-column"),
+    Se(
+      {
+        label: t.caption,
+        prop: l,
+        "class-name": d,
+        "label-class-name": d
+      },
+      {
+        [c]: a
+      },
+      {
+        fixed: r.fixed,
+        sortable: t.enableSort ? "custom" : !1,
+        align: ((i = t.align) == null ? void 0 : i.toLowerCase()) || "center"
       }
-      return null;
+    ),
+    {
+      default: ({ row: u }) => {
+        var h, f;
+        let m = u;
+        u.isGroupData && (m = u.first);
+        const p = e.findRowState(m);
+        if (p) {
+          if (t.columnType === "UAGRIDCOLUMN") {
+            const E = U("grid-ua-column"), S = U("attachment-grid"), w = ((h = s.model.deuiactionGroup) == null ? void 0 : h.uiactionGroupDetails) || [], D = w.filter((k) => k.actionLevel !== 250), y = w.filter((k) => k.actionLevel === 250);
+            return g(
+              "div",
+              {
+                class: [
+                  E.b(),
+                  (f = s.model.cellSysCss) == null ? void 0 : f.cssName
+                ]
+              },
+              [
+                y.length && g(
+                  C("iBizActionToolbar"),
+                  {
+                    onDblclick: M,
+                    onClick: M,
+                    "action-details": y,
+                    "actions-state": p.uaColStates[s.model.codeName],
+                    popperClass: S.e("popper"),
+                    onActionClick: (k, V) => {
+                      K(k, V, s, p);
+                    }
+                  },
+                  null
+                ),
+                D.length && g(
+                  C("iBizActionToolbar"),
+                  {
+                    onDblclick: M,
+                    onClick: M,
+                    mode: "dropdown",
+                    caption: "· · ·",
+                    "action-details": D,
+                    popperClass: S.e("popper"),
+                    "actions-state": p.uaColStates[s.model.codeName],
+                    onActionClick: (k, V) => {
+                      K(k, V, s, p);
+                    }
+                  },
+                  null
+                )
+              ]
+            );
+          }
+          const R = C(e.providers[l].component);
+          return u(R, {
+            controller: s,
+            row: p,
+            key: m.tempsrfkey + l
+          });
+        }
+        return null;
+      }
     }
-  });
+  );
 }
-function pe(e, t, o, n) {
-  var l, r;
+function pe(e, t, n, o) {
+  var i, l;
   if (t.columnType === "GROUPGRIDCOLUMN") {
-    const i = ((l = t.degridColumns) == null ? void 0 : l.filter((c) => !c.hideDefault)) || [], {
-      width: a
-    } = t, s = ((r = t.align) == null ? void 0 : r.toLowerCase()) || "center";
-    return g(b("el-table-column"), {
-      prop: t.codeName,
-      label: t.caption,
-      "min-width": a,
-      align: s
-    }, {
-      default: () => i.map((c, u) => pe(e, c, o, u))
-    });
+    const a = ((i = t.degridColumns) == null ? void 0 : i.filter((c) => !c.hideDefault)) || [], { width: s } = t, r = ((l = t.align) == null ? void 0 : l.toLowerCase()) || "center";
+    return g(
+      C("el-table-column"),
+      {
+        prop: t.codeName,
+        label: t.caption,
+        "min-width": s,
+        align: r
+      },
+      {
+        default: () => a.map((c, d) => pe(e, c, n, d))
+      }
+    );
   }
-  return nt(e, t, o, n);
+  return Ze(e, t, n, o);
 }
-const q = /* @__PURE__ */ Re({
+const q = De({
   name: "AttachmentGridControl",
   props: {
     modelData: {
@@ -851,34 +855,46 @@ const q = /* @__PURE__ */ Re({
     }
   },
   setup(e) {
-    const t = we((...w) => new ot(...w)), o = U("control-".concat(t.model.controlType.toLowerCase())), {
-      tableRef: n,
-      onRowClick: l,
-      onDbRowClick: r,
-      onSelectionChange: i,
-      onSortChange: a,
-      handleRowClassName: s,
+    const t = ge(
+      (...w) => new ke(...w)
+    ), n = U(
+      "control-".concat(t.model.controlType.toLowerCase())
+    ), {
+      tableRef: o,
+      onRowClick: i,
+      onDbRowClick: l,
+      onSelectionChange: a,
+      onSortChange: s,
+      handleRowClassName: r,
       handleHeaderCellClassName: c
-    } = Ne(t), {
-      onPageChange: u,
-      onPageRefresh: d,
+    } = Ee(t), {
+      onPageChange: d,
+      onPageRefresh: u,
       onPageSizeChange: h
-    } = Pe(t), f = () => {
+    } = Te(t), f = () => {
       var w;
-      const {
-        isLoaded: D
-      } = t.state;
+      const { isLoaded: D } = t.state;
       if (D) {
-        const y = (w = t.model.controls) == null ? void 0 : w.find((k) => k.name === "".concat(t.model.name, "_quicktoolbar"));
-        return y ? g(b("iBizToolbarControl"), {
-          modelData: y,
-          context: t.context,
-          params: t.params,
-          class: o.b("quick-toolbar")
-        }, null) : g(b("iBizNoData"), {
-          text: t.model.emptyText,
-          emptyTextLanguageRes: t.model.emptyTextLanguageRes
-        }, null);
+        const y = (w = t.model.controls) == null ? void 0 : w.find(
+          (k) => k.name === "".concat(t.model.name, "_quicktoolbar")
+        );
+        return y ? g(
+          C("iBizToolbarControl"),
+          {
+            modelData: y,
+            context: t.context,
+            params: t.params,
+            class: n.b("quick-toolbar")
+          },
+          null
+        ) : g(
+          C("iBizNoData"),
+          {
+            text: t.model.emptyText,
+            emptyTextLanguageRes: t.model.emptyTextLanguageRes
+          },
+          null
+        );
       }
       return null;
     }, {
@@ -886,23 +902,24 @@ const q = /* @__PURE__ */ Re({
       renderColumns: p,
       defaultSort: R,
       summaryMethod: E
-    } = Be(t, e), {
-      renderPopover: S
-    } = tt(n, t);
+    } = Le(t, e), { renderPopover: S } = Ke(
+      o,
+      t
+    );
     return {
       c: t,
-      ns: o,
-      tableRef: n,
+      ns: n,
+      tableRef: o,
       tableData: m,
       renderColumns: p,
-      onDbRowClick: r,
-      onRowClick: l,
-      onSelectionChange: i,
-      onSortChange: a,
-      onPageChange: u,
+      onDbRowClick: l,
+      onRowClick: i,
+      onSelectionChange: a,
+      onSortChange: s,
+      onPageChange: d,
       onPageSizeChange: h,
-      onPageRefresh: d,
-      handleRowClassName: s,
+      onPageRefresh: u,
+      handleRowClassName: r,
       handleHeaderCellClassName: c,
       renderNoData: f,
       summaryMethod: E,
@@ -913,100 +930,167 @@ const q = /* @__PURE__ */ Re({
       },
       renderBatchToolBar: () => {
         var w;
-        const D = (w = t.model.controls) == null ? void 0 : w.find((y) => y.name === "".concat(t.model.name, "_batchtoolbar"));
+        const D = (w = t.model.controls) == null ? void 0 : w.find(
+          (y) => y.name === "".concat(t.model.name, "_batchtoolbar")
+        );
         if (!(!D || t.state.singleSelect))
-          return g("div", {
-            class: [o.b("batch-toolbar"), o.is("show", t.state.selectedData.length > 0)]
-          }, [g("div", {
-            class: o.b("batch-toolbar-content")
-          }, [g("div", {
-            class: o.b("batch-toolbar-text")
-          }, [V("已选中"), t.state.selectedData.length, V("项")]), g("div", {
-            class: o.b("batch-toolbar-separator")
-          }, [V("|")]), g(b("iBizToolbarControl"), {
-            modelData: D,
-            context: t.context,
-            params: t.params,
-            class: o.b("batch-toolbar-items")
-          }, null)])]);
+          return g(
+            "div",
+            {
+              class: [
+                n.b("batch-toolbar"),
+                n.is("show", t.state.selectedData.length > 0)
+              ]
+            },
+            [
+              g(
+                "div",
+                {
+                  class: n.b("batch-toolbar-content")
+                },
+                [
+                  g(
+                    "div",
+                    {
+                      class: n.b("batch-toolbar-text")
+                    },
+                    [
+                      W("已选中"),
+                      t.state.selectedData.length,
+                      W("项")
+                    ]
+                  ),
+                  g(
+                    "div",
+                    {
+                      class: n.b("batch-toolbar-separator")
+                    },
+                    [W("|")]
+                  ),
+                  g(
+                    C("iBizToolbarControl"),
+                    {
+                      modelData: D,
+                      context: t.context,
+                      params: t.params,
+                      class: n.b("batch-toolbar-items")
+                    },
+                    null
+                  )
+                ]
+              )
+            ]
+          );
       }
     };
   },
   render() {
     if (!this.c.state.isLoaded)
       return;
-    const {
-      state: e
-    } = this.c, {
-      hideHeader: t,
-      enablePagingBar: o
-    } = this.c.model;
-    return g(b("iBizControlBase"), {
-      class: [this.ns.is("show-header", !t), this.ns.is("enable-page", o), this.ns.is("enable-group", this.c.model.enableGroup)],
-      controller: this.c
-    }, {
-      default: () => [g(b("el-table"), {
-        ref: "tableRef",
-        class: [this.ns.e("table"), this.ns.is("attachment", !0)],
-        "default-sort": this.defaultSort,
-        border: !0,
-        "show-header": !t,
-        "show-summary": this.c.enableAgg,
-        "summary-method": this.summaryMethod,
-        "highlight-current-row": e.singleSelect,
-        "row-class-name": this.handleRowClassName,
-        "header-cell-class-name": this.handleHeaderCellClassName,
-        "row-key": "tempsrfkey",
-        data: this.tableData,
-        onRowClick: this.onRowClick,
-        onRowDblclick: this.onDbRowClick,
-        onSelectionChange: this.onSelectionChange,
-        onSortChange: this.onSortChange,
-        "tooltip-effect": "light"
-      }, {
-        empty: this.renderNoData,
-        default: () => [!e.singleSelect && g(b("el-table-column"), {
-          "class-name": this.ns.e("selection"),
-          type: "selection",
-          width: "55"
-        }, null), this.renderColumns.map((n, l) => pe(this.c, n, this.renderColumns, l))],
-        append: () => this.renderPopover()
-      }), o && g(b("iBizPagination"), {
-        total: e.total,
-        curPage: e.curPage,
-        size: e.size,
-        onChange: this.onPageChange,
-        onPageSizeChange: this.onPageSizeChange,
-        onPageRefresh: this.onPageRefresh
-      }, null), this.c.model.enableCustomized && !t && g("div", {
-        class: this.ns.b("setting-box")
-      }, [g(b("iBizGridSetting"), {
-        columnStates: e.columnStates,
+    const { state: e } = this.c, { hideHeader: t, enablePagingBar: n } = this.c.model;
+    return g(
+      C("iBizControlBase"),
+      {
+        class: [
+          this.ns.is("show-header", !t),
+          this.ns.is("enable-page", n),
+          this.ns.is("enable-group", this.c.model.enableGroup)
+        ],
         controller: this.c
-      }, null)]), this.renderBatchToolBar()]
-    });
-  }
-});
-class lt {
-  constructor() {
-    Le(this, "component", "AttachmentGridControl");
-  }
-}
-const it = ge(
-  q,
-  (e) => {
-    e.component(q.name, q), ye(
-      "".concat(be.GRID, "_RENDER_ATTACHMENT_GRID"),
-      () => new lt()
+      },
+      {
+        default: () => [
+          g(
+            C("el-table"),
+            {
+              ref: "tableRef",
+              class: [this.ns.e("table"), this.ns.is("attachment", !0)],
+              "default-sort": this.defaultSort,
+              border: !0,
+              "show-header": !t,
+              "show-summary": this.c.enableAgg,
+              "summary-method": this.summaryMethod,
+              "highlight-current-row": e.singleSelect,
+              "row-class-name": this.handleRowClassName,
+              "header-cell-class-name": this.handleHeaderCellClassName,
+              "row-key": "tempsrfkey",
+              data: this.tableData,
+              onRowClick: this.onRowClick,
+              onRowDblclick: this.onDbRowClick,
+              onSelectionChange: this.onSelectionChange,
+              onSortChange: this.onSortChange,
+              "tooltip-effect": "light"
+            },
+            {
+              empty: this.renderNoData,
+              default: () => [
+                !e.singleSelect && g(
+                  C("el-table-column"),
+                  {
+                    "class-name": this.ns.e("selection"),
+                    type: "selection",
+                    width: "55"
+                  },
+                  null
+                ),
+                this.renderColumns.map(
+                  (o, i) => pe(this.c, o, this.renderColumns, i)
+                )
+              ],
+              append: () => this.renderPopover()
+            }
+          ),
+          n && g(
+            C("iBizPagination"),
+            {
+              total: e.total,
+              curPage: e.curPage,
+              size: e.size,
+              onChange: this.onPageChange,
+              onPageSizeChange: this.onPageSizeChange,
+              onPageRefresh: this.onPageRefresh
+            },
+            null
+          ),
+          this.c.model.enableCustomized && !t && g(
+            "div",
+            {
+              class: this.ns.b("setting-box")
+            },
+            [
+              g(
+                C("iBizGridSetting"),
+                {
+                  columnStates: e.columnStates,
+                  controller: this.c
+                },
+                null
+              )
+            ]
+          ),
+          this.renderBatchToolBar()
+        ]
+      }
     );
   }
-), ut = {
+});
+class et {
+  constructor() {
+    this.component = "AttachmentGridControl";
+  }
+}
+const tt = we(q, (e) => {
+  e.component(q.name, q), ve(
+    "".concat(xe.GRID, "_RENDER_ATTACHMENT_GRID"),
+    () => new et()
+  );
+}), st = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(e) {
-    e.use(it);
+    e.use(tt);
   }
 };
 export {
-  it as IBizAttachmentGridControl,
-  ut as default
+  tt as IBizAttachmentGridControl,
+  st as default
 };
