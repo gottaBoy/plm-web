@@ -5,6 +5,8 @@ import path from 'path';
 const targetDir = path.resolve(__dirname, '../../../public/plugins/@ibiz-template-plm/list-tree@0.0.3-alpha.225');
 
 export default defineConfig({
+  root: __dirname,
+  publicDir: false,
   plugins: [libcss()],
   build: {
     outDir: path.join(targetDir, 'dist'),
@@ -29,6 +31,7 @@ export default defineConfig({
         '@ibiz-template/model-helper',
         '@ibiz/model-core',
         'cherry-markdown',
+        '@imengyu/vue3-context-menu',
       ],
       output: {
         assetFileNames: 'assets/[name][extname]',

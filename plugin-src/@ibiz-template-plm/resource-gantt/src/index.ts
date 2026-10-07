@@ -10,6 +10,25 @@ import p from "dayjs";
 import { isObject as De } from "lodash-es";
 import { ModelError as _e, RuntimeError as vt, awaitTimeout as xe } from "@ibiz-template/core";
 import { isNotNil as Ie } from "ramda";
+const resolveContextMenuApi = (module) => {
+  let candidate = module;
+  const visited = new Set();
+  while (candidate && (typeof candidate === "object" || typeof candidate === "function") && !visited.has(candidate)) {
+    visited.add(candidate);
+    if (typeof candidate.showContextMenu === "function")
+      return candidate;
+    if (candidate.default && candidate.default !== candidate) {
+      candidate = candidate.default;
+      continue;
+    }
+    if (candidate.v && candidate.v !== candidate) {
+      candidate = candidate.v;
+      continue;
+    }
+    break;
+  }
+  throw new Error("ResourceGantt: context-menu runtime has no showContextMenu export");
+};
 function Se(n, e, t) {
   const o = p(n), s = p(e), a = p(t);
   if (!(o instanceof p) || !(s instanceof p) || !(a instanceof p))
@@ -1167,7 +1186,7 @@ const We = /* @__PURE__ */ H({
     }, d = () => {
       e("headSearch", i.value);
     }, m = (I) => {
-      I.preventDefault(), I.stopPropagation(), a.value = !1, e("headSearch", "");
+      I.preventDefault(), I.stopPropagation(), i.value = "", a.value = !1, e("headSearch", "");
     }, f = (I, A) => {
       A.stopPropagation(), a.value = !0;
     }, h = async (I, A) => {
@@ -1930,7 +1949,7 @@ const nt = /* @__PURE__ */ H({
     let Q;
     e.evt.on("onMounted", () => {
       Object.values(e.contextMenus).length > 0 && (() => import("@imengyu/vue3-context-menu"))().then((g) => {
-        Q = g.default, Q.default && !Q.showContextMenu && (Q = Q.default);
+        Q = resolveContextMenuApi(g);
       });
     });
     const Yt = async (l, g) => {

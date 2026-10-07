@@ -29,6 +29,7 @@ export default defineConfig({
         '@ibiz-template/model-helper',
         '@ibiz/model-core',
         'cherry-markdown',
+        '@imengyu/vue3-context-menu',
         /^@ibiz-template(?:-[^/]+)?(?:\/[^/]+)?$/,
       ],
       output: {

@@ -256,17 +256,52 @@ async function normalizeCss(distDir) {
   }
 }
 
+async function normalizePublishedAliases(distDir, packageJson) {
+  if (packageJson.system === 'dist/index.system.min.js') {
+    await cp(
+      path.join(distDir, 'index.legacy.js'),
+      path.join(distDir, 'index.system.min.js'),
+      { force: true },
+    );
+  }
+  if (packageJson.styles?.includes('dist/index.min.css')) {
+    await cp(
+      path.join(distDir, 'style.css'),
+      path.join(distDir, 'index.min.css'),
+      { force: true },
+    );
+  }
+}
+
 async function clearGeneratedDist(distDir) {
   if (!existsSync(distDir)) {
     return;
   }
+  // Remove generated bundles and known host-application leftovers while
+  // preserving package-owned resources such as types and images.
   const entries = await readdir(distDir, { withFileTypes: true });
   for (const entry of entries) {
+    const entryPath = path.join(distDir, entry.name);
     if (entry.isFile()) {
-      await rm(path.join(distDir, entry.name), { force: true });
+      await rm(entryPath, { force: true });
+      continue;
+    }
+    if (forbiddenPluginOutputDirs.includes(entry.name)) {
+      await rm(entryPath, { recursive: true, force: true });
     }
   }
-  await rm(path.join(distDir, 'assets', 'style.css'), { force: true });
+  const assetsDir = path.join(distDir, 'assets');
+  if (existsSync(assetsDir)) {
+    const assetEntries = await readdir(assetsDir, { withFileTypes: true });
+    for (const entry of assetEntries) {
+      if (entry.name === 'style.css' || forbiddenPluginAssetDirs.includes(entry.name)) {
+        await rm(path.join(assetsDir, entry.name), {
+          recursive: entry.isDirectory(),
+          force: true,
+        });
+      }
+    }
+  }
 }
 
 async function normalizeLegacyFiles(distDir) {
@@ -358,6 +393,7 @@ async function buildVitePlugin(plugin, packageJson) {
     });
     await normalizeLegacyFiles(stagingDist);
     await normalizeCss(stagingDist);
+    await normalizePublishedAliases(stagingDist, packageJson);
     await assertFreshOutputs(plugin, packageJson, stagingDist);
     await clearGeneratedDist(expectedDist);
     await mkdir(expectedDist, { recursive: true });
@@ -564,6 +600,7 @@ export {
   loadRuntimePlugins,
   clearGeneratedDist,
   normalizeLegacyFiles,
+  normalizePublishedAliases,
   parsePackageRef,
   resolveConfiguredOutDir,
 };

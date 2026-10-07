@@ -88,6 +88,7 @@ export const PersonelSelect = defineComponent({
     const renderCount = ref(0);
     let renderCountTimer: number | undefined;
     const contentHeight = ref(295);
+    let loadVersion = 0;
 
     const showFormDefaultContent = computed(
       () => !!(props.controlParams && props.controlParams.editmode === 'hover'),
@@ -122,17 +123,45 @@ export const PersonelSelect = defineComponent({
       const keys: string[] = [];
       departments.value = [];
       const normalize = (value: unknown): IData | null => {
-        const item = clone(value) as IData;
-        if (c.selfFillMap?.user_id && c.selfFillMap?.user_name) {
-          Object.assign(item, {
-            id: (value as IData)[c.selfFillMap.user_id],
-            name: (value as IData)[c.selfFillMap.user_name],
-          });
+        if (typeof value !== 'object' || value === null) {
+          const index = selected.length;
+          const ids = String(props.data?.[c.valueItem] ?? '').split(c.separator);
+          const token = ids[index] || String(value);
+          const id =
+            c.isAddSymbol && token.startsWith("'") && token.endsWith("'")
+              ? token.slice(1, -1)
+              : token;
+          return {
+            id,
+            name: String(value),
+            [c.keyName]: id,
+            [c.textName]: String(value),
+          };
         }
-        if (c.selfFillMap?.user_title) {
-          Object.assign(item, {
-            title: (value as IData)[c.selfFillMap.user_title],
-          });
+        const data = value as IData;
+        const isObjectValue = c.valueType === 'OBJECT' || c.valueType === 'OBJECTS';
+        const item = clone(
+          isObjectValue && c.objectValueField && data[c.objectValueField]
+            ? data[c.objectValueField]
+            : data,
+        ) as IData;
+        const idField = isObjectValue && c.objectIdField
+          ? c.objectIdField
+          : c.selfFillMap?.user_id;
+        const nameField = isObjectValue && c.objectNameField
+          ? c.objectNameField
+          : c.selfFillMap?.user_name;
+        const id = (idField && data[idField]) ?? item.id ?? item[c.keyName];
+        const name = (nameField && data[nameField]) ?? item.name ?? item[c.textName];
+        Object.assign(item, {
+          id,
+          name,
+          [c.keyName]: id,
+          [c.textName]: name,
+        });
+        const titleField = c.selfFillMap?.user_title;
+        if (titleField && data[titleField] !== undefined) {
+          item.title = data[titleField];
         }
         return item;
       };
@@ -146,46 +175,62 @@ export const PersonelSelect = defineComponent({
           }
         });
       } else if (values !== null && values !== undefined && values !== '') {
-        const item = normalize(values);
-        if (item) {
-          selected.push(item);
-          keys.push(String(item.id));
-        }
+        const list = c.multiple && typeof values === 'string'
+          ? values.split(c.separator)
+          : [values];
+        list.forEach(value => {
+          const item = normalize(value);
+          if (item) {
+            selected.push(item);
+            keys.push(String(item.id));
+          }
+        });
       }
       selectedItems.value = selected;
       selectedValues.value = keys;
-      valueText.value = selected.map(item => item.name).join(',');
+      valueText.value = selected.map(item => item.name).join(c.separator);
     };
 
     const load = async (reset = false): Promise<void> => {
+      if (loading.value && !reset) return;
       if (reset) {
+        loadVersion += 1;
         c.resetState();
         items.value = [];
       }
+      const version = loadVersion;
+      const tab = activeTab.value;
+      const query = searchValue.value;
       loading.value = true;
       try {
         const res = await c.loadMore(
           props.data,
-          activeTab.value,
-          searchValue.value
-            ? { query: searchValue.value }
+          tab,
+          query
+            ? { query }
             : {},
         );
-        if (res?.data) {
+        if (res?.data && version === loadVersion &&
+          tab === activeTab.value && query === searchValue.value) {
           items.value = reset ? res.data : items.value.concat(res.data);
         }
       } finally {
-        loading.value = false;
+        if (version === loadVersion) loading.value = false;
       }
     };
 
     const onClear = (event: Event) => {
       event.stopPropagation();
-      emit('change', null, c.name);
+      c.dataItems.forEach(item => emit('change', null, item.id));
+      if (c.valueItem) emit('change', null, c.valueItem);
+      emit('change', null);
       emit('infoTextChange', '');
+      initSelectedItems(null);
+      popoverVisible.value = false;
+      setEditable(false);
     };
 
-    const selectItem = (item: IData) => {
+    const selectItem = async (item: IData) => {
       if (c.multiple) {
         const index = selectedValues.value.findIndex(
           value => value === String(item.id),
@@ -197,31 +242,39 @@ export const PersonelSelect = defineComponent({
           selectedValues.value.push(String(item.id));
           selectedItems.value.push(item);
         }
-        let value = selectedItems.value.map(data => data[c.keyName]);
-        if (c.valueType === 'OBJECTS') {
-          value = selectedItems.value.map(data => c.handleObjectParams(data));
-        }
-        let emitValue: unknown = value;
-        if (c.valueType !== 'OBJECTS') {
-          emitValue = value.join(c.separator);
-          if (c.isAddSymbol) {
-            emitValue = value.map(v => `'${v}'`).join(c.separator);
-          }
-        }
-        emit('change', emitValue, c.name);
-        emit('infoTextChange', selectedItems.value.map(v => v.name).join(','));
-        return;
+      } else {
+        selectedItems.value = [item];
+        selectedValues.value = [String(item.id)];
       }
 
-      let value: unknown = item[c.keyName];
+      const selected = selectedItems.value;
+      const fillItems = await c.calcFillDataItems(selected);
+      fillItems.forEach(field => emit('change', field.value, field.id));
+      if (c.valueItem) {
+        const ids = selected.map(data => data.id);
+        let value: unknown = c.multiple ? ids.join(c.separator) : ids[0];
+        if (c.multiple && c.isAddSymbol) {
+          value = ids.map(id => `'${id}'`).join(c.separator);
+        }
+        emit('change', value, c.valueItem);
+      }
+      valueText.value = selected.map(data => data.name).join(c.separator);
+      let value: unknown = valueText.value;
       if (c.valueType === 'OBJECTS') {
+        value = selected.map(data => c.handleObjectParams(data));
+      } else if (c.valueType === 'OBJECT') {
         value = c.handleObjectParams(item);
       }
-      emit('change', value, c.name);
-      emit('infoTextChange', item.name);
+      emit('change', value);
+      emit('infoTextChange', valueText.value);
+      if (!c.multiple) {
+        popoverVisible.value = false;
+        setEditable(false);
+      }
     };
 
     const onPopShow = async () => {
+      setEditable(true);
       if (c.isShowTab && !departments.value.length && c.defaultSelCurUser) {
         await c.initCurrentOperator(props.data, {});
       }
@@ -232,6 +285,7 @@ export const PersonelSelect = defineComponent({
 
     const onPageHide = () => {
       searchValue.value = '';
+      setEditable(false);
     };
 
     const setEditable = (flag: boolean) => {
@@ -260,8 +314,8 @@ export const PersonelSelect = defineComponent({
     };
 
     watch(
-      () => props.value,
-      value => {
+      [() => props.value, () => props.data?.[c.valueItem]],
+      ([value]) => {
         initSelectedItems(value);
         refValue.value = value ? String(value) : '';
         startRenderCount();

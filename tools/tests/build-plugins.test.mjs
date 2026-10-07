@@ -4,6 +4,7 @@ import {
   access,
   mkdtemp,
   mkdir,
+  readFile,
   rm,
   stat,
   writeFile,
@@ -19,6 +20,7 @@ import {
   clearGeneratedDist,
   getPackageOutputs,
   normalizeLegacyFiles,
+  normalizePublishedAliases,
   parsePackageRef,
   resolveConfiguredOutDir,
 } from '../build-plugins.mjs';
@@ -59,6 +61,28 @@ test('getPackageOutputs deduplicates module and main entries', () => {
     }),
     ['dist/index.js', 'dist/index.legacy.js', 'dist/style.css'],
   );
+});
+
+test('published SystemJS and CSS aliases are generated from fresh build outputs', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'ibiz-plugin-alias-'));
+  try {
+    await writeFile(path.join(directory, 'index.legacy.js'), 'System.register([], () => ({}));');
+    await writeFile(path.join(directory, 'style.css'), '.logic-tree {}');
+    await normalizePublishedAliases(directory, {
+      system: 'dist/index.system.min.js',
+      styles: ['dist/index.min.css'],
+    });
+    assert.equal(
+      await readFile(path.join(directory, 'index.system.min.js'), 'utf8'),
+      'System.register([], () => ({}));',
+    );
+    assert.equal(
+      await readFile(path.join(directory, 'index.min.css'), 'utf8'),
+      '.logic-tree {}',
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 test('collectRuntimeExports ignores type-only exports', () => {
@@ -161,6 +185,14 @@ test('clearGeneratedDist removes generated root files but preserves package asse
   try {
     await mkdir(path.join(distRoot, 'types'), { recursive: true });
     await mkdir(path.join(distRoot, 'assets', 'images'), { recursive: true });
+    for (const directory of ['environments', 'extras', 'model', 'plugins']) {
+      await mkdir(path.join(distRoot, directory), { recursive: true });
+      await writeFile(path.join(distRoot, directory, 'stale.json'), '{}');
+    }
+    for (const directory of ['css', 'font-awesome-4.7.0', 'iconfont', 'ionicons']) {
+      await mkdir(path.join(distRoot, 'assets', directory), { recursive: true });
+      await writeFile(path.join(distRoot, 'assets', directory, 'stale.css'), '.stale {}');
+    }
     await writeFile(path.join(distRoot, 'index.legacy.js'), 'legacy;');
     await writeFile(path.join(distRoot, 'stale-chunk.js'), 'stale;');
     await writeFile(path.join(distRoot, 'types', 'index.d.ts'), 'export {};');
@@ -175,6 +207,12 @@ test('clearGeneratedDist removes generated root files but preserves package asse
     await assert.rejects(stat(path.join(distRoot, 'index.legacy.js')));
     await assert.rejects(stat(path.join(distRoot, 'stale-chunk.js')));
     await assert.rejects(stat(path.join(distRoot, 'assets', 'style.css')));
+    for (const directory of ['environments', 'extras', 'model', 'plugins']) {
+      await assert.rejects(stat(path.join(distRoot, directory)));
+    }
+    for (const directory of ['css', 'font-awesome-4.7.0', 'iconfont', 'ionicons']) {
+      await assert.rejects(stat(path.join(distRoot, 'assets', directory)));
+    }
     await stat(path.join(distRoot, 'types', 'index.d.ts'));
     await stat(path.join(distRoot, 'assets', 'images', 'keep.png'));
   } finally {

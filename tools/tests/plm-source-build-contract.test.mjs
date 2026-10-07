@@ -20,6 +20,14 @@ const viteConfig = readFileSync(
   path.join(ROOT, 'vite.config.ts'),
   'utf8',
 );
+const authGuard = readFileSync(
+  path.join(ROOT, 'src/guard/auth-guard/auth-guard.ts'),
+  'utf8',
+);
+const runtimeCompat = readFileSync(
+  path.join(ROOT, 'src/runtime/plm-runtime-compat.ts'),
+  'utf8',
+);
 const versionChecker = readFileSync(
   path.join(ROOT, 'tools/check-local-ibiz-versions.mjs'),
   'utf8',
@@ -117,6 +125,16 @@ test('Vite build contract copies local assets and rewrites generated extras', ()
     vitePlugin,
     /await Promise\.all\(\s*componentPackages\.map\(async pkg => \{/,
     'component SystemJS assets must be copied before the build completes',
+  );
+  assert.match(
+    vitePlugin,
+    /async configResolved\(\)/,
+    'development runtime asset copy must be awaitable',
+  );
+  assert.match(
+    vitePlugin,
+    /const cpDir = join\(__dirname, 'extras\/@vue\/runtime-core\/3\.3\.8\/\*\*'\);[\s\S]*?await cpy\(cpDir, outDir\);/,
+    'development runtime asset copy must finish before the dev server continues',
   );
   assert.match(vitePlugin, /function copyLocalSystemPlugin/);
   assert.match(vitePlugin, /dist\/extras\/js/);
@@ -229,5 +247,89 @@ test('committed fallback import map matches local source-build versions', () => 
         `${plugin.name}@${version} missing public fallback ${fileName}`,
       );
     }
+  }
+});
+
+test('PLM patches only the shared runtime theme query endpoint', () => {
+  assert.match(
+    authGuard,
+    /installPlmRuntimeCompatibility\(app\)/,
+    'runtime compatibility must be installed before app hooks run',
+  );
+  assert.match(
+    runtimeCompat,
+    /LEGACY_VIEW_THEME_QUERY_PATH[\s\S]*?CURRENT_VIEW_THEME_QUERY_PATH/,
+  );
+  assert.match(
+    runtimeCompat,
+    /url === LEGACY_VIEW_THEME_QUERY_PATH/,
+    'the compatibility layer must use an exact path match',
+  );
+  assert.match(
+    runtimeCompat,
+    /originalPost\.call\(net, rewritePlmRuntimeRequestPath\(url\), \.\.\.args\)/,
+    'the compatibility layer must preserve post arguments and return value',
+  );
+  assert.match(
+    runtimeCompat,
+    /const patchedNets = new WeakSet<object>\(\)/,
+    'the compatibility layer must be idempotent per app network instance',
+  );
+});
+
+test('PLM local plugin builds use the ibiz-app-hub Corepack pnpm', () => {
+  const localPluginBuild = readFileSync(
+    path.join(ROOT, 'tools/build-local-ibiz-plugins.mjs'),
+    'utf8',
+  );
+  assert.match(
+    localPluginBuild,
+    /const corepack = process\.platform === 'win32' \? 'corepack\.cmd' : 'corepack'/,
+    'local plugin builds must invoke Corepack rather than the caller pnpm',
+  );
+  assert.match(
+    localPluginBuild,
+    /corepack,\s*\[\s*'pnpm',\s*'--filter'/,
+    'Corepack must select pnpm from the ibiz-app-hub workspace',
+  );
+});
+
+test('PLM Vue SystemJS runtime and PLM plugins expose defineComponent', () => {
+  const vueSystem = readFileSync(
+    path.join(
+      ROOT,
+      'public/extras/js/vue/3.3.8/vue.runtime.global.system.prod.js',
+    ),
+    'utf8',
+  );
+  assert.match(vueSystem, /defineComponent:/);
+
+  for (const plugin of [
+    [
+      'list-tree',
+      '0.0.3-alpha.225',
+      /System\.register\("ListTree"[\s\S]*?defineComponent/,
+    ],
+    [
+      'tab-exp-select',
+      '0.0.3-dev.254',
+      /System\.register\("TabExpSelect"[\s\S]*?defineComponent/,
+    ],
+    [
+      'breadcrumb-nav-pos',
+      '0.0.3-alpha.247',
+      /System\.register\("BreadcrumbNavPos"[\s\S]*?defineComponent/,
+    ],
+  ]) {
+    const [name, version, pattern] = plugin;
+    const bundle = readFileSync(
+      path.join(
+        ROOT,
+        'public/plugins/@ibiz-template-plm',
+        `${name}@${version}/dist/index.legacy.js`,
+      ),
+      'utf8',
+    );
+    assert.match(bundle, pattern, `${name}@${version}`);
   }
 });

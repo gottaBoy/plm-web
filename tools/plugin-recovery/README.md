@@ -2,17 +2,17 @@
 
 ## 当前范围
 
-- `runtime-plugins.txt`: 当前 `src/publish/model/app/app.ts` 直接引用的插件，共 66 个。
-- `all-plugins.txt`: `public/plugins` 中所有插件目录，共 131 个；其中 65 个未被当前模型直接引用，暂不处理。
-- `inventory.tsv`: 66 个运行时插件的源码、类型、source map、体积、License、gitHead 盘点。
+- `runtime-plugins.txt`: 当前 PLM 模型直接引用的插件，共 73 个。
+- `all-plugins.txt`: `public/plugins` 中所有插件目录，共 131 个；其中 58 个未被当前模型直接引用，暂不处理。
+- `inventory.tsv`: 73 个运行时插件的源码、类型、source map、体积、License、gitHead 盘点。
 
 ## 盘点结果
 
-- 66 个运行时插件中，只有 `@ibiz-template-plugins/cron-editor@0.0.1-dev.4` 自带 `src`。
-- 其余 65 个均没有原始 `src`，但都有 `.d.ts` 类型声明；除 `lucky-sheet-editor` 外没有 source map。
-- 所有运行时插件均声明 MIT License，并带有 `gitHead`，可作为后续向上游仓库溯源的线索。
-- 第一批不建议处理未引用旧版本，优先保证当前运行时 66 个可源码构建。
-- 当前恢复结果：66/66 个运行时插件均已恢复到 `plugin-src`；其中 `cron-editor` 为上游原始源码，`person-select` 加本批 8 个插件共 9 个为拆分式源码，其余 56 个为 bundle 级源码（可编辑、可构建，部分局部变量仍为压缩名）。
+- 73 个发布插件中，只有 `@ibiz-template-plugins/cron-editor@0.0.1-dev.4` 保留上游原始 `src`。
+- 其余 72 个发布包没有上游原始 `src`，但都有 `.d.ts` 类型声明；除 `lucky-sheet-editor` 外没有 source map。
+- 运行时插件均声明 MIT License；`gitHead` 是可用时的上游溯源线索，`cron-editor` 当前清单的 `gitHead` 为空，不能声称所有插件都带有该字段。
+- 第一批不建议处理未引用旧版本，优先保证当前运行时 73 个可源码构建。
+- 当前恢复结果：73/73 个运行时插件均已恢复到 `plugin-src`；其中 `cron-editor` 为上游原始源码，`person-select` 加本批 8 个插件共 9 个为拆分式源码，其余 63 个为 bundle 级源码（可编辑、可构建，部分局部变量仍为压缩名）。
 
 ## 分类策略
 

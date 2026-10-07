@@ -9,6 +9,24 @@ import { createUUID as O } from "qx-util";
 import { debounce as P } from "lodash-es";
 import { RuntimeError as S } from "@ibiz-template/core";
 import { clone as _e, isNil as ve } from "ramda";
+const resolveContextMenuApi = (module) => {
+  let candidate = module;
+  const visited = new Set();
+  while (candidate && (typeof candidate === "object" || typeof candidate === "function") && !visited.has(candidate)) {
+    visited.add(candidate);
+    if (typeof candidate.showContextMenu === "function")
+      return candidate;
+    if (candidate.default && candidate.default !== candidate) {
+      candidate = candidate.default;
+      continue;
+    }
+    if (candidate.v && candidate.v !== candidate) {
+      candidate = candidate.v;
+      continue;
+    }
+    break;
+  }
+};
 class Ce extends le {
   /**
    * 树节点点击事件
@@ -245,7 +263,7 @@ const D = /* @__PURE__ */ fe({
     let v;
     t.evt.on("onMounted", () => {
       Object.values(t.contextMenus).length > 0 && (() => import("@imengyu/vue3-context-menu"))().then((n) => {
-        v = n.default, v.default && !v.showContextMenu && (v = v.default);
+        v = resolveContextMenuApi(n);
       });
     });
     const L = (e, n) => {
@@ -298,7 +316,7 @@ const D = /* @__PURE__ */ fe({
         return;
       await i.calcButtonState(e._deData || (e.srfkey ? e : void 0), o.appDataEntityId);
       const h = i.state.buttonsState, l = L(i.model.detoolbarItems, "popper"), N = K(l, e, n, h);
-      N.length && v.showContextMenu({
+      N.length && v?.showContextMenu({
         x: n.x,
         y: n.y,
         customClass: s.b("context-menu"),

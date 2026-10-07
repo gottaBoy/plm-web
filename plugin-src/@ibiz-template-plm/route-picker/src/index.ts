@@ -298,6 +298,8 @@ const M = /* @__PURE__ */ Ee({
       N !== F && N(), E.value && E.value.removeEventListener("keydown", L);
     });
     const k = (t) => {
+      if (c.value.length === 0)
+        return;
       let i = c.value.findIndex((a) => a[e.keyName] === y.value[e.keyName]);
       switch (t) {
         case "up":
@@ -307,7 +309,7 @@ const M = /* @__PURE__ */ Ee({
           i++, i === c.value.length && (i = 0), y.value = c.value[i];
           break;
         case "enter":
-          D(y.value, !1);
+          i >= 0 && D(c.value[i], !1);
           break;
       }
     }, _ = async (t, i = !1) => {

@@ -38,6 +38,14 @@ export class PersonelSelectController extends EditorController<IPicker> {
 
   depttotal = 0;
 
+  private userLoad?: Promise<IHttpResponse | undefined>;
+
+  private deptLoad?: Promise<IHttpResponse | undefined>;
+
+  private userLoadVersion = 0;
+
+  private deptLoadVersion = 0;
+
   size = 20;
 
   multiple = false;
@@ -341,6 +349,8 @@ export class PersonelSelectController extends EditorController<IPicker> {
   }
 
   resetUserState(): void {
+    this.userLoadVersion += 1;
+    this.userLoad = undefined;
     this.total = 0;
     this.currentNumber = -1;
     this.page = 0;
@@ -348,6 +358,8 @@ export class PersonelSelectController extends EditorController<IPicker> {
   }
 
   resetDeptState(): void {
+    this.deptLoadVersion += 1;
+    this.deptLoad = undefined;
     this.deptpage = 0;
     this.depttotal = 0;
     this.deptcurrentNumber = -1;
@@ -359,30 +371,44 @@ export class PersonelSelectController extends EditorController<IPicker> {
     tag: 'user' | 'department',
     params: IParams = {},
   ): Promise<IHttpResponse | undefined> {
-    if (tag === 'user' && this.currentNumber < this.total) {
-      const res = await this.getServiceData(tag, data, params);
-      if (!res) return undefined;
-      this.page += 1;
-      if (this.currentNumber < 0) this.currentNumber += 1;
-      this.currentNumber += this.size;
-      this.total =
-        (res.total ? Number(res.total) : Number(res.headers['x-total'])) || 0;
-      this.applyFilterMap(res.data, this.userFilterMap);
+    const isUser = tag === 'user';
+    const pending = isUser ? this.userLoad : this.deptLoad;
+    if (pending) return pending;
+    const hasMore = isUser
+      ? this.currentNumber < this.total
+      : this.deptcurrentNumber < this.depttotal;
+    if (!hasMore) return undefined;
+    const version = isUser ? this.userLoadVersion : this.deptLoadVersion;
+    const request = this.getServiceData(tag, data, params).then(res => {
+      // Reset searches and tab changes must not advance the new list's page.
+      if (!res || version !== (isUser ? this.userLoadVersion : this.deptLoadVersion)) {
+        return undefined;
+      }
+      if (isUser) {
+        this.page += 1;
+        if (this.currentNumber < 0) this.currentNumber += 1;
+        this.currentNumber += this.size;
+        this.total =
+          (res.total ? Number(res.total) : Number(res.headers['x-total'])) || 0;
+        this.applyFilterMap(res.data, this.userFilterMap);
+      } else {
+        this.deptpage += 1;
+        if (this.deptcurrentNumber < 0) this.deptcurrentNumber += 1;
+        this.deptcurrentNumber += this.size;
+        this.depttotal =
+          (res.total ? Number(res.total) : Number(res.headers['x-total'])) || 0;
+        this.applyFilterMap(res.data, this.deptFilterMap);
+      }
       return res;
+    });
+    if (isUser) this.userLoad = request;
+    else this.deptLoad = request;
+    try {
+      return await request;
+    } finally {
+      if (isUser && this.userLoad === request) this.userLoad = undefined;
+      if (!isUser && this.deptLoad === request) this.deptLoad = undefined;
     }
-
-    if (tag === 'department' && this.deptcurrentNumber < this.depttotal) {
-      const res = await this.getServiceData(tag, data, params);
-      if (!res) return undefined;
-      this.deptpage += 1;
-      if (this.deptcurrentNumber < 0) this.deptcurrentNumber += 1;
-      this.deptcurrentNumber += this.size;
-      this.depttotal =
-        (res.total ? Number(res.total) : Number(res.headers['x-total'])) || 0;
-      this.applyFilterMap(res.data, this.deptFilterMap);
-      return res;
-    }
-    return undefined;
   }
 
   protected applyFilterMap(items: IData[], filterMap: IData): void {
@@ -466,7 +492,10 @@ export class PersonelSelectController extends EditorController<IPicker> {
     if (this.sort && !Object.is(this.sort, '')) {
       Object.assign(requestParams, { sort: this.sort });
     }
-    Object.assign(requestParams, { size: this.size });
+    Object.assign(requestParams, {
+      page: tag === 'user' ? this.page : this.deptpage,
+      size: this.size,
+    });
     if (query) Object.assign(requestParams, query);
     const finalParams = params || mergeDeepLeft(publicParams, requestParams);
 

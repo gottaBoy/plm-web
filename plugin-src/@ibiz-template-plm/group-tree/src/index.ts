@@ -9,6 +9,24 @@ import { createUUID as se } from "qx-util";
 import { debounce as de } from "lodash-es";
 import { RuntimeError as P, RuntimeModelError as re, recursiveIterate as Ke } from "@ibiz-template/core";
 import { isNil as le } from "ramda";
+const resolveContextMenuApi = (module) => {
+  let candidate = module;
+  const visited = new Set();
+  while (candidate && (typeof candidate === "object" || typeof candidate === "function") && !visited.has(candidate)) {
+    visited.add(candidate);
+    if (typeof candidate.showContextMenu === "function")
+      return candidate;
+    if (candidate.default && candidate.default !== candidate) {
+      candidate = candidate.default;
+      continue;
+    }
+    if (candidate.v && candidate.v !== candidate) {
+      candidate = candidate.v;
+      continue;
+    }
+    break;
+  }
+};
 function E(e, m) {
   const n = m.state.items.find((o) => o._id === e);
   return n || m.state.items.find((o) => o._uuid === e);
@@ -603,7 +621,7 @@ const V = /* @__PURE__ */ Te({
     let T;
     e.evt.on("onMounted", () => {
       Object.values(e.contextMenus).length > 0 && (() => import("@imengyu/vue3-context-menu"))().then((i) => {
-        T = i.default, T.default && !T.showContextMenu && (T = T.default);
+        T = resolveContextMenuApi(i);
       });
     });
     const ce = I("IBizRawItem"), O = I("IBizIcon"), G = (t, i, r, u) => {
@@ -653,7 +671,7 @@ const V = /* @__PURE__ */ Te({
                 disabled: te.disabled,
                 clickableWhenHasChildren: !0,
                 onClick: () => {
-                  T.closeContextMenu(), e.doUIAction(b.uiactionId, i, r, b.appId);
+                  T?.closeContextMenu?.(), e.doUIAction(b.uiactionId, i, r, b.appId);
                 }
               };
             });
@@ -683,7 +701,7 @@ const V = /* @__PURE__ */ Te({
         return;
       await u.calcButtonState(t._deData || (t.srfkey ? t : void 0), r.appDataEntityId);
       const p = u.state.buttonsState, c = G(u.model.detoolbarItems, t, i, p);
-      c.length && T.showContextMenu({
+      c.length && T?.showContextMenu?.({
         x: i.x,
         y: i.y,
         customClass: o.b("context-menu"),

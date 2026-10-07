@@ -13,6 +13,15 @@ const runtimePluginFile = path.join(
   'plugin-recovery',
   'runtime-plugins.txt',
 );
+const modelFile = path.join(
+  rootDir,
+  '..',
+  'plm',
+  'model',
+  'PSSYSAPPS',
+  'plmweb',
+  'PSSYSAPP.simple.json',
+);
 const sourceRoot = path.join(rootDir, 'plugin-src');
 const publicRoot = path.join(rootDir, 'public', 'plugins');
 
@@ -59,6 +68,22 @@ function parsePluginRef(ref) {
     name: ref.slice(slash + 1, at),
     version: ref.slice(at + 1),
   };
+}
+
+function collectModelPluginRefs(value, refs = new Set()) {
+  if (typeof value === 'string') {
+    const match = /^@ibiz-template[^/]*\/[^@/]+@\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(
+      value,
+    );
+    if (match) refs.add(value);
+    return refs;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectModelPluginRefs(item, refs));
+  } else if (value && typeof value === 'object') {
+    Object.values(value).forEach((item) => collectModelPluginRefs(item, refs));
+  }
+  return refs;
 }
 
 const appPackage = readJson(packageFile);
@@ -109,6 +134,28 @@ const pluginLines = readFileSync(runtimePluginFile, 'utf8')
   .split(/\r?\n/)
   .map((line) => line.trim())
   .filter(Boolean);
+
+if (new Set(pluginLines).size !== pluginLines.length) {
+  fail('runtime plugin ledger contains duplicate references');
+}
+
+if (!existsSync(modelFile)) {
+  fail(`PLM model file is missing: ${modelFile}`);
+} else {
+  const modelRefs = [...collectModelPluginRefs(readJson(modelFile))].sort();
+  const listedRefs = [...new Set(pluginLines)].sort();
+  const listed = new Set(listedRefs);
+  const model = new Set(modelRefs);
+  for (const ref of modelRefs) {
+    if (!listed.has(ref)) fail(`model pins plugin missing from runtime ledger: ${ref}`);
+  }
+  for (const ref of listedRefs) {
+    if (!model.has(ref)) fail(`runtime ledger contains plugin not pinned by model: ${ref}`);
+  }
+  console.log(
+    `[ibiz:versions] model/runtime plugin set ${modelRefs.length}/${listedRefs.length}`,
+  );
+}
 
 for (const line of pluginLines) {
   const plugin = parsePluginRef(line);

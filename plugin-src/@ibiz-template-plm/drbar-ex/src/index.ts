@@ -82,6 +82,12 @@ class lt extends F {
    */
   setRouter(t) {
     this.router = t;
+    // A custom provider may initialize the controller before the Vue setup
+    // function gets a chance to inject the router. Retry counter setup once
+    // the controller is already created in that case.
+    if (this.state.isCreated && !this.counter && this.model.appCounterRefs?.[0]) {
+      void this.initCounter();
+    }
   }
   /**
    * 路由层级
@@ -278,10 +284,11 @@ class lt extends F {
     const e = (i = this.model.dedrctrlItems) == null ? void 0 : i.find(
       (c) => c.dedrbarGroupId === t
     );
-    e ? (this.setVisible("navPos"), this.openNavPosView(e, s)) : (this.setVisible("form"), this.routeDepth && this.router.push(this.state.drBarItems[0].fullPath)), this.state.selectedItem = t, this.state.defaultItem = t;
+    e ? (this.setVisible("navPos"), this.openNavPosView(e, s)) : (this.setVisible("form"), this.routeDepth && this.router?.push(this.state.drBarItems[0].fullPath)), this.state.selectedItem = t, this.state.defaultItem = t;
     const r = this.context.srfuserid;
-    if (r) {
-      const c = D(this.router.currentRoute.value);
+    const currentRoute = this.router?.currentRoute?.value;
+    if (r && currentRoute) {
+      const c = D(currentRoute);
       if (this.routeDepth && c.pathNodes[this.routeDepth - 2]) {
         c.pathNodes = c.pathNodes.slice(0, this.routeDepth - 1);
         const n = N(c).split("/");
@@ -359,8 +366,9 @@ class lt extends F {
     const { drBarItems: t } = this.state;
     let s = ((r = t[0].children) == null ? void 0 : r[0].tag) || t[0].tag;
     const a = this.context.srfuserid;
-    if (a) {
-      const i = D(this.router.currentRoute.value);
+    const currentRoute = this.router?.currentRoute?.value;
+    if (a && currentRoute) {
+      const i = D(currentRoute);
       if (this.routeDepth && i.pathNodes[this.routeDepth - 2]) {
         i.pathNodes = i.pathNodes.slice(0, this.routeDepth - 1);
         const u = N(i).split("/");
@@ -372,8 +380,8 @@ class lt extends F {
         }
       }
     }
-    const e = D(this.router.currentRoute.value);
-    if (this.routeDepth && e.pathNodes[this.routeDepth - 1]) {
+    const e = currentRoute ? D(currentRoute) : void 0;
+    if (e && this.routeDepth && e.pathNodes[this.routeDepth - 1]) {
       const i = e.pathNodes[this.routeDepth - 1];
       i && i.srfnav && (s = i.srfnav);
     }
@@ -407,8 +415,9 @@ class lt extends F {
    */
   async initCounter() {
     const { appCounterRefs: t } = this.model, s = t == null ? void 0 : t[0];
-    if (s) {
-      const a = D(this.router.currentRoute.value);
+    const currentRoute = this.router?.currentRoute?.value;
+    if (s && currentRoute) {
+      const a = D(currentRoute);
       this.routeDepth && (a.pathNodes = a.pathNodes.slice(0, this.routeDepth - 1));
       const e = N(a);
       this.counter = await Q.getCounterByRef(
@@ -516,6 +525,9 @@ function ht(o) {
   const l = o.view.modal.routeDepth;
   if (l) {
     const t = T();
+    if (!t) {
+      return;
+    }
     let s;
     et(({
       currentKey: a,
@@ -567,7 +579,13 @@ const E = /* @__PURE__ */ rt({
     }
   },
   setup() {
-    const o = Z((...n) => new lt(...n)), l = tt("control-".concat(o.model.controlType.toLowerCase(), "-ex")), t = nt(), s = V(), a = it({}), {
+    const t = nt(), o = Z((...n) => {
+      const r = new lt(...n);
+      r.setRouter(t);
+      return r;
+    });
+    o.setRouter(t);
+    const l = tt("control-".concat(o.model.controlType.toLowerCase(), "-ex")), s = V(), a = it({}), {
       visibleItems: e,
       moreItems: r
     } = ct(o, s, a), i = (n) => {
@@ -578,11 +596,12 @@ const E = /* @__PURE__ */ rt({
     }), O(() => {
       var n;
       (n = o.counter) == null || n.offChange(i);
-    }), o.setRouter(t);
+    });
     const c = T();
-    return ht(o), M(() => t.currentRoute.value, (n, C) => {
+    const currentRoute = t?.currentRoute;
+    return ht(o), currentRoute && M(() => currentRoute.value, (n, C) => {
       var h, f;
-      if (o.routeDepth && o.navPos) {
+      if (o.routeDepth && o.navPos && n && C) {
         const {
           pathNodes: m
         } = D(n), {
@@ -613,7 +632,7 @@ const E = /* @__PURE__ */ rt({
           return;
         const h = (f = o.model.dedrctrlItems) == null ? void 0 : f.find((v) => v.dedrbarGroupId === n);
         if (h) {
-          const g = (m = D(c).pathNodes[o.routeDepth]) == null ? void 0 : m.viewName, I = (p = h.appViewId) == null ? void 0 : p.split(".")[1];
+          const g = c ? (m = D(c).pathNodes[o.routeDepth]) == null ? void 0 : m.viewName : void 0, I = (p = h.appViewId) == null ? void 0 : p.split(".")[1];
           if (I && g && I === g)
             return;
         }

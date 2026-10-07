@@ -18,7 +18,10 @@ const requiredDistFiles = [
   'style.css',
   'polyfills.legacy.js',
 ];
-const pnpm = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
+// plm-web and ibiz-app-hub intentionally have different pnpm majors.
+// Run through Corepack from the source workspace so the source package's
+// packageManager declaration, rather than the caller's cwd, selects pnpm.
+const corepack = process.platform === 'win32' ? 'corepack.cmd' : 'corepack';
 
 if (!existsSync(path.join(sourceRoot, 'pnpm-workspace.yaml'))) {
   throw new Error(`Local ibiz-app-hub workspace not found: ${sourceRoot}`);
@@ -33,8 +36,8 @@ for (const packageName of plugins) {
 
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   const result = spawnSync(
-    pnpm,
-    ['--filter', packageName, 'run', 'build'],
+    corepack,
+    ['pnpm', '--filter', packageName, 'run', 'build'],
     {
       cwd: sourceRoot,
       env: process.env,

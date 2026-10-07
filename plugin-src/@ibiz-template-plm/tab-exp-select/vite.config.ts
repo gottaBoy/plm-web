@@ -5,6 +5,8 @@ import path from 'path';
 const targetDir = path.resolve(__dirname, '../../../public/plugins/@ibiz-template-plm/tab-exp-select@0.0.3-dev.254');
 
 export default defineConfig({
+  root: __dirname,
+  publicDir: false,
   plugins: [libcss()],
   build: {
     outDir: path.join(targetDir, 'dist'),
@@ -18,6 +20,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
+        'vue-router',
         'element-plus',
         'ramda',
         'qx-util',
