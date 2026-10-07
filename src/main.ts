@@ -1,4 +1,5 @@
-import 'vue';
+import * as Vue from 'vue';
+import * as VueRouter from 'vue-router';
 // import { IApiAppHubService } from '@ibiz-template/runtime';
 // import { AppHooks } from '@ibiz-template/vue3-util';
 import { runApp } from '@ibiz-template/vue3-components';
@@ -9,6 +10,15 @@ import ComponentsRegister from './components';
 import { StaticAuthGuard } from './guard';
 import { userRoutes } from './router';
 import '@/publish/sys.css';
+
+// SystemJS plugins must use the host's Vue and router instances so their
+// composables can read the same component and route injection context.
+if (typeof System !== 'undefined') {
+  const vueUrl = System.resolve('vue');
+  System.set(vueUrl, Vue);
+  const routerUrl = System.resolve('vue-router');
+  System.set(routerUrl, VueRouter);
+}
 
 // AppHooks.appResorceInited.tap((ctx: IApiAppHubService) => {
 //   ctx.microAppConfigCenter.registerMicroApps([

@@ -2,6 +2,7 @@ import { AuthGuard } from '@ibiz-template/vue3-components';
 import { AppHooks } from '@ibiz-template/vue3-util';
 import { ModelLoader } from '@/model/model-loader';
 import { initViewConfig } from '@/publish/model/view-config';
+import { installPlmRuntimeCompatibility } from '@/runtime/plm-runtime-compat';
 
 export class StaticAuthGuard extends AuthGuard {
   hasModelInit: boolean = false;
@@ -26,6 +27,7 @@ export class StaticAuthGuard extends AuthGuard {
       ibiz.hub.registerModelLoaderProvider(new ModelLoader());
       await initViewConfig();
       const app = await ibiz.hub.getAppAsync(ibiz.env.appId);
+      installPlmRuntimeCompatibility(app);
       await AppHooks.initedApp.call({ context, app });
       const appModel = app.model;
       await this.initEnvironment(appModel);

@@ -304,7 +304,7 @@ function IBizVitePlugin(): Plugin[] {
   const devP: Plugin = {
     name: 'iBizSys:System:Dev',
     apply: 'serve',
-    configResolved() {
+    async configResolved() {
       const baseModule = resolve(__dirname, '../node_modules');
       if (!existsSync(baseModule)) {
         return;
@@ -315,7 +315,7 @@ function IBizVitePlugin(): Plugin[] {
         baseModule,
         '.pnpm/@vue+runtime-core@3.3.8/node_modules/@vue/runtime-core/dist',
       );
-      cpy(cpDir, outDir);
+      await cpy(cpDir, outDir);
     },
     configureServer(server) {
       server.middlewares.use(
