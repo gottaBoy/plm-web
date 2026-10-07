@@ -21,3 +21,24 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const viewModel = props.model;
 </script>
+
+<style lang="scss">
+@media (max-width: 767px) {
+  .ibiz-view--insight_view_management_tab_exp_view {
+    .ibiz-panel-container--view_header > .ibiz-row {
+      flex-wrap: wrap;
+
+      > .ibiz-col {
+        flex: 1 1 100%;
+        min-width: 0;
+      }
+    }
+
+    .ibiz-panel-container--view_tabexppanel,
+    .ibiz-panel-container--container2 {
+      width: 100%;
+      margin-right: 0 !important;
+    }
+  }
+}
+</style>

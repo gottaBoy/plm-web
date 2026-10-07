@@ -6856,3 +6856,187 @@ padding-bottom: 0px;
     cursor: pointer;
 }
 /***    END:系统样式表    ***/
+
+/* Keep management form dismiss controls reachable in constrained viewports. */
+.ibiz-modal:has(.ibiz-view--workload_type_quick_create_view),
+.ibiz-modal:has(.ibiz-view--extend_print_templ_quick_cfg_view) {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+}
+
+.ibiz-modal:has(.ibiz-view--workload_type_quick_create_view) .el-dialog__header .el-dialog__headerbtn,
+.ibiz-modal:has(.ibiz-view--extend_print_templ_quick_cfg_view) .el-dialog__header .el-dialog__headerbtn {
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+.ibiz-modal:has(.ibiz-view--workload_type_quick_create_view) .el-dialog__headerbtn .el-dialog__close,
+.ibiz-modal:has(.ibiz-view--extend_print_templ_quick_cfg_view) .el-dialog__headerbtn .el-dialog__close {
+  color: var(--ibiz-color-text-2);
+}
+
+@media (max-width: 767px) {
+  /* Preserve relationship navigation below the product picker on narrow screens. */
+  .ibiz-view--product_index_view .ibiz-col:has(> .ibiz-panel-container--view_drbar) {
+    height: 90px !important;
+  }
+
+  .ibiz-view--product_index_view .ibiz-panel-container--view_drbar {
+    height: 90px;
+  }
+
+  .ibiz-view--product_index_view .ibiz-panel-container--view_drbar > .ibiz-row {
+    flex-direction: column !important;
+    overflow: hidden;
+  }
+
+  .ibiz-view--product_index_view .ibiz-panel-container--view_drbar > .ibiz-row > .ibiz-col {
+    flex: 0 0 40px;
+    width: 100% !important;
+    height: 40px !important;
+    min-width: 0;
+  }
+
+  .ibiz-view--product_index_view .ibiz-panel-container--view_drbar > .ibiz-row > .ibiz-col:has(> .ibiz-panel-ctrl-pos--drbar) {
+    flex-basis: 49px;
+    height: 49px !important;
+  }
+
+  /* Settings navigation must not consume the mobile data viewport. */
+  .ibiz-view--management_setting_view .ibiz-split-container--container_h_split {
+    min-height: 520px;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-split-container--container_h_split > .ibiz-split-wrapper > .ibiz-split--horizontal {
+    flex-direction: column;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-split-container--container_h_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-pane--left {
+    flex: 0 0 144px;
+    width: 100% !important;
+    min-width: 0;
+    overflow: auto;
+    border-bottom: 1px solid var(--ibiz-color-border);
+  }
+
+  .ibiz-view--management_setting_view .ibiz-split-container--container_h_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-pane--right {
+    flex: 1 1 auto;
+    width: 100% !important;
+    min-width: 0;
+    min-height: 300px;
+    padding-left: 0;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-split-container--container_h_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-trigger-con {
+    display: none;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-container--container1 > .ibiz-row > .ibiz-spacing-left--innersmall {
+    padding-left: 0;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header {
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header > .ibiz-row {
+    flex-direction: column !important;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header > .ibiz-row > .ibiz-col {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header .ibiz-panel-container--view_header_right > .ibiz-row {
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header .ibiz-panel-container--view_header_right > .ibiz-row > .ibiz-col:has(> .ibiz-panel-container--view_searchbar) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ibiz-view--management_setting_view .ibiz-panel-view-header .ibiz-panel-container--view_header_right > .ibiz-row > .ibiz-col:has(> .ibiz-panel-container--view_toolbar) {
+    flex: 0 0 108px;
+    width: 108px;
+    min-width: 108px;
+  }
+
+  .ibiz-view--product_setting_view .ibiz-panel-container--view_content > .ibiz-row:has(> .ibiz-col > .ibiz-panel-container--view_drbar) {
+    flex-direction: column !important;
+  }
+
+  .ibiz-view--product_setting_view .ibiz-panel-container--view_content > .ibiz-row > .ibiz-col:has(> .ibiz-panel-container--view_drbar) {
+    flex: 0 0 144px;
+    width: 100% !important;
+    height: 144px !important;
+    min-width: 0;
+    overflow: auto;
+    border-bottom: 1px solid var(--ibiz-color-border);
+  }
+
+  .ibiz-view--product_setting_view .ibiz-panel-container--view_content > .ibiz-row > .ibiz-col:has(> .ibiz-panel-container--view_exp_content) {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    min-height: 300px;
+  }
+
+  /* Keep tree navigation separate from the active view on narrow screens. */
+  .ibiz-split-container--view_exp_split {
+    min-height: 520px;
+  }
+
+  .ibiz-split-container--view_exp_split > .ibiz-split-wrapper > .ibiz-split--horizontal {
+    flex-direction: column;
+  }
+
+  .ibiz-split-container--view_exp_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-pane--left {
+    flex: 0 0 140px;
+    width: 100% !important;
+    min-width: 0;
+    overflow: auto;
+    border-bottom: 1px solid var(--ibiz-color-border);
+  }
+
+  .ibiz-split-container--view_exp_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-pane--right {
+    flex: 1 1 auto;
+    width: 100% !important;
+    min-width: 0;
+    min-height: 300px;
+    padding-left: 0;
+  }
+
+  .ibiz-split-container--view_exp_split > .ibiz-split-wrapper > .ibiz-split--horizontal > .ibiz-split-trigger-con {
+    display: none;
+  }
+
+  .ibiz-split-container--view_exp_split .ibiz-control-treeexpbar {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .ibiz-panel-view-header:has(.ibiz-panel-ctrl-pos--tabexppanel) {
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .ibiz-panel-view-header > .ibiz-row:has(.ibiz-panel-ctrl-pos--tabexppanel) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ibiz-panel-view-header > .ibiz-row:has(.ibiz-panel-ctrl-pos--tabexppanel) > .ibiz-col {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+}
