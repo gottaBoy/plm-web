@@ -1,119 +1,73 @@
-import './style.css';
-var U = Object.defineProperty;
-var Y = (e, i, r) => i in e ? U(e, i, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[i] = r;
-var f = (e, i, r) => (Y(e, typeof i != "symbol" ? i + "" : i, r), r);
-import { GridFieldEditColumnController as J, getDeACMode as K, GridRowState as Q, registerGridColumnProvider as W } from "@ibiz-template/runtime";
-import { useClickOutside as X, useNamespace as Z, withInstall as ee } from "@ibiz-template/vue3-util";
-import { computed as n, reactive as C, defineComponent as te, ref as g, createVNode as s, resolveComponent as E, isVNode as oe } from "vue";
-import { RuntimeModelError as ie, RuntimeError as re } from "@ibiz-template/core";
-import { mergeDeepLeft as ne, isNil as ae } from "ramda";
-function de(e, i) {
-  const r = e.controller, t = n(() => e.row.editColStates[r.fieldName].disabled), l = n(() => e.row.editColStates[r.fieldName].readonly), a = n(() => !!e.row.errors[r.fieldName]), c = n(
-    () => e.row.editColStates[r.fieldName].editable
-  ), u = (I) => {
-    e.row.editColStates[r.fieldName].editable = I;
-  }, m = n(() => !t.value && !l.value && !a.value), h = n(() => a.value || m.value && c.value), p = n(() => !h.value), b = !1, N = n(() => !a.value), x = n(() => m.value && !c.value), D = n(() => m.value || h.value);
+import './assets/style.css';
+import { registerGridColumnProvider as H, GridRowState as $, GridFieldEditColumnController as J, getDeACMode as K } from "@ibiz-template/runtime";
+import { withInstall as Q, useNamespace as W, useClickOutside as X } from "@ibiz-template/vue3-util";
+import { defineComponent as Z, ref as g, computed as r, createVNode as s, resolveComponent as N, isVNode as ee, reactive as b } from "vue";
+import { RuntimeModelError as te, RuntimeError as oe } from "@ibiz-template/core";
+import { isNil as ae, mergeDeepLeft as ie } from "ramda";
+var re = Object.defineProperty, de = (e, o, i) => o in e ? re(e, o, { enumerable: !0, configurable: !0, writable: !0, value: i }) : e[o] = i, u = (e, o, i) => (de(e, typeof o != "symbol" ? o + "" : o, i), i);
+function le(e, o) {
+  const i = e.controller, t = r(() => e.row.editColStates[i.fieldName].disabled), n = r(() => e.row.editColStates[i.fieldName].readonly), d = r(() => !!e.row.errors[i.fieldName]), p = r(
+    () => e.row.editColStates[i.fieldName].editable
+  ), m = (I) => {
+    e.row.editColStates[i.fieldName].editable = I;
+  }, c = r(() => !t.value && !n.value && !d.value), f = r(() => d.value || c.value && p.value), h = r(() => !f.value), M = !1, y = r(() => !d.value), E = r(() => c.value && !p.value), x = r(() => c.value || f.value);
   let w;
-  const M = () => {
-    u(!0), w = X(i, async (I) => {
-      u(!1), w.stop();
+  const C = () => {
+    m(!0), w = X(o, async (I) => {
+      m(!1), w.stop();
     });
-  }, S = () => {
-    w && w.stop(), ibiz.log.debug("".concat(r.fieldName, "属性编辑器focus事件"));
-  }, A = () => {
-    ibiz.log.debug("".concat(r.fieldName, "属性编辑器blur事件")), u(!1), ibiz.config.grid.editSaveMode === "cell-blur" && r.grid.save(e.row.data);
-  }, P = C({
-    showEditMask: x,
-    stopPropagation: D,
-    onMaskClick: M
-  }), R = C({
-    autoFocus: N,
-    disabled: b,
-    readonly: p,
-    onBlur: A,
-    onFocus: S
+  }, D = () => {
+    w && w.stop(), ibiz.log.debug("".concat(i.fieldName, "属性编辑器focus事件"));
+  }, P = () => {
+    ibiz.log.debug("".concat(i.fieldName, "属性编辑器blur事件")), m(!1), ibiz.config.grid.editSaveMode === "cell-blur" && i.grid.save(e.row.data);
+  }, S = b({
+    showEditMask: E,
+    stopPropagation: x,
+    onMaskClick: C
+  }), A = b({
+    autoFocus: y,
+    disabled: M,
+    readonly: h,
+    onBlur: P,
+    onFocus: D
   });
   return {
-    gridEditItemProps: P,
-    editorProps: R
+    gridEditItemProps: S,
+    editorProps: A
   };
 }
-function se(e, i) {
-  const r = e.controller, t = n(() => e.row.editColStates[r.fieldName].disabled), l = n(() => e.row.editColStates[r.fieldName].readonly), a = n(
-    () => e.row.editColStates[r.fieldName].editable
-  ), c = n(() => l.value || !a.value), u = n(() => a.value && t.value), m = n(() => a.value), h = C({
-    stopPropagation: m
-  }), p = C({
-    disabled: u,
-    readonly: c
+function se(e, o) {
+  const i = e.controller, t = r(() => e.row.editColStates[i.fieldName].disabled), n = r(() => e.row.editColStates[i.fieldName].readonly), d = r(
+    () => e.row.editColStates[i.fieldName].editable
+  ), p = r(() => n.value || !d.value), m = r(() => d.value && t.value), c = r(() => d.value), f = b({
+    stopPropagation: c
+  }), h = b({
+    disabled: m,
+    readonly: p
+  });
+  return {
+    gridEditItemProps: f,
+    editorProps: h
+  };
+}
+function ne(e, o) {
+  const i = e.controller, t = r(() => e.row.editColStates[i.fieldName].disabled), n = r(() => e.row.editColStates[i.fieldName].readonly), d = r(() => e.controller.grid.state.rowEditOpen), p = r(() => n.value || !d.value), m = r(() => d.value && t.value), c = r(() => d.value), f = () => {
+    i.grid.save(e.row.data);
+  }, h = b({
+    stopPropagation: c
+  }), M = b({
+    disabled: m,
+    readonly: p,
+    onBlur: f
   });
   return {
     gridEditItemProps: h,
-    editorProps: p
+    editorProps: M
   };
 }
-function le(e, i) {
-  const r = e.controller, t = n(() => e.row.editColStates[r.fieldName].disabled), l = n(() => e.row.editColStates[r.fieldName].readonly), a = n(() => e.controller.grid.state.rowEditOpen), c = n(() => l.value || !a.value), u = n(() => a.value && t.value), m = n(() => a.value), h = () => {
-    r.grid.save(e.row.data);
-  }, p = C({
-    stopPropagation: m
-  }), b = C({
-    disabled: u,
-    readonly: c,
-    onBlur: h
-  });
-  return {
-    gridEditItemProps: p,
-    editorProps: b
-  };
-}
-class G extends J {
+class V extends J {
   constructor() {
-    super(...arguments);
-    /**
-     * 左侧绘制映射属性
-     */
-    f(this, "leftMapField", "from");
-    /**
-     * 右侧绘制映射属性
-     */
-    f(this, "rightMapField", "to");
-    /**
-     * listMap属性
-     */
-    f(this, "listMapField", "srflistmapfield");
-    /**
-     * 主键属性名称
-     */
-    f(this, "keyName", "srfkey");
-    /**
-     * 主文本属性名称
-     */
-    f(this, "textName", "srfmajortext");
-    /**
-     * 数据集codeName
-     */
-    f(this, "interfaceName", "");
-    /**
-     * 自填模式sort排序
-     */
-    f(this, "sort", "");
-    /**
-     * 实体自填模式模型
-     */
-    f(this, "deACMode");
-    /**
-     * 自填数据项集合（已排除了value和text)
-     */
-    f(this, "dataItems", []);
-    /**
-     * 编辑器模型
-     */
-    f(this, "editorModel", {});
-    /**
-     * 编辑器只读
-     */
-    f(this, "editorReadonly", !1);
+    super(...arguments), u(this, "leftMapField", "from"), u(this, "rightMapField", "to"), u(this, "listMapField", "srflistmapfield"), u(this, "keyName", "srfkey"), u(this, "textName", "srfmajortext"), u(this, "interfaceName", ""), u(this, "sort", ""), u(this, "deACMode"), u(this, "dataItems", []), u(this, "editorModel", {}), u(this, "editorReadonly", !1);
   }
   /**
    * 初始化方法，生成表格编辑项控制器
@@ -123,16 +77,16 @@ class G extends J {
    */
   async onInit() {
     await super.onInit();
-    const { enableRowEdit: r } = this.model;
-    if (r && (this.editorModel = this.editItem.editor || {}, this.initParams(), this.editorModel.appDataEntityId && (this.editorModel.appDEDataSetId && (this.interfaceName = this.editorModel.appDEDataSetId), this.editorModel.appDEACModeId && (this.deACMode = await K(
+    const { enableRowEdit: o } = this.model;
+    if (o && (this.editorModel = this.editItem.editor || {}, this.initParams(), this.editorModel.appDataEntityId && (this.editorModel.appDEDataSetId && (this.interfaceName = this.editorModel.appDEDataSetId), this.editorModel.appDEACModeId && (this.deACMode = await K(
       this.editorModel.appDEACModeId,
       this.editorModel.appDataEntityId,
       this.context.srfappid
     ), this.deACMode)))) {
-      const { minorSortAppDEFieldId: t, minorSortDir: l } = this.deACMode;
-      t && l && (this.sort = "".concat(t.toLowerCase(), ",").concat(l.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
-        (a) => {
-          a.id !== "value" && a.id !== "text" && this.dataItems.push(a);
+      const { minorSortAppDEFieldId: i, minorSortDir: t } = this.deACMode;
+      i && t && (this.sort = "".concat(i.toLowerCase(), ",").concat(t.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach(
+        (n) => {
+          n.id !== "value" && n.id !== "text" && this.dataItems.push(n);
         }
       ));
     }
@@ -156,38 +110,38 @@ class G extends J {
    * @param {IParams} tempParam 临时视图参数
    * @returns {*}  {Promise<IHttpResponse<IData[]>>}
    */
-  async getServiceData(r, t) {
-    const { context: l, params: a } = this.handlePublicParams(
-      r,
+  async getServiceData(o, i) {
+    const { context: t, params: n } = this.handlePublicParams(
+      o,
       this.context,
       this.params
-    ), c = {};
-    this.sort && !Object.is(this.sort, "") && Object.assign(c, { sort: this.sort }), t && Object.assign(c, t), Object.assign(c, {
+    ), d = {};
+    this.sort && !Object.is(this.sort, "") && Object.assign(d, { sort: this.sort }), i && Object.assign(d, i), Object.assign(d, {
       size: 1e3
     });
-    const u = ne(a, c);
+    const p = ie(n, d);
     if (this.interfaceName)
       return await ibiz.hub.getApp(this.context.srfappid).deService.exec(
         this.editorModel.appDataEntityId,
         this.interfaceName,
-        l,
-        u
+        t,
+        p
       );
-    throw new ie(this.model, "请配置实体和实体数据集");
+    throw new te(this.model, "请配置实体和实体数据集");
   }
 }
-function V(e) {
-  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !oe(e);
+function j(e) {
+  return typeof e == "function" || Object.prototype.toString.call(e) === "[object Object]" && !ee(e);
 }
-const k = /* @__PURE__ */ te({
+const O = /* @__PURE__ */ Z({
   name: "IBizGridChangeVersionColumn",
   props: {
     controller: {
-      type: G,
+      type: V,
       required: !0
     },
     row: {
-      type: Q,
+      type: $,
       required: !0
     },
     attrs: {
@@ -196,90 +150,90 @@ const k = /* @__PURE__ */ te({
     }
   },
   setup(e) {
-    const i = Z("grid-change-version-column"), r = g(), t = e.controller, l = g([]), a = g(!1), c = g(!1), u = g(!1), m = n(() => e.row.data[t.fieldName] || []), h = (o, d) => (o || []).findIndex((y) => y[t.listMapField] === d), p = n(() => h(e.row.data[t.fieldName], t.leftMapField)), b = n(() => h(e.row.data[t.fieldName], t.rightMapField)), N = async (o, d) => {
-      ibiz.log.debug("".concat(t.fieldName, "值变更"), o), await t.setRowValue(e.row, o, d);
-    }, x = () => {
+    const o = W("grid-change-version-column"), i = g(), t = e.controller, n = g([]), d = g(!1), p = g(!1), m = g(!1), c = r(() => e.row.data[t.fieldName] || []), f = (a, l) => (a || []).findIndex((v) => v[t.listMapField] === l), h = r(() => f(e.row.data[t.fieldName], t.leftMapField)), M = r(() => f(e.row.data[t.fieldName], t.rightMapField)), y = async (a, l) => {
+      ibiz.log.debug("".concat(t.fieldName, "值变更"), a), await t.setRowValue(e.row, a, l);
+    }, E = () => {
       switch (ibiz.config.grid.editShowMode) {
         case "cell":
-          return de(e, r);
+          return le(e, i);
         case "row":
           return se(e);
         case "all":
-          return le(e);
+          return ne(e);
         default:
-          throw new re("".concat(ibiz.config.grid.editShowMode, "暂未支持"));
+          throw new oe("".concat(ibiz.config.grid.editShowMode, "暂未支持"));
       }
     }, {
-      gridEditItemProps: D,
+      gridEditItemProps: x,
       editorProps: w
-    } = x(), M = g(void 0), S = (o) => {
-      M.value = o;
-    }, A = n(() => {
+    } = E(), C = g(void 0), D = (a) => {
+      C.value = a;
+    }, P = r(() => {
       if (w.readonly) {
-        if (ae(M.value)) {
-          const o = e.row.data[t.fieldName];
-          return t.formatValue(o);
+        if (ae(C.value)) {
+          const a = e.row.data[t.fieldName];
+          return t.formatValue(a);
         }
-        return M.value;
+        return C.value;
       }
-    }), P = () => s(E("iBizNoData"), {
+    }), S = () => s(N("iBizNoData"), {
       text: "暂无数据"
-    }, null), R = (o) => {
-      t.editorReadonly || o.stopPropagation();
-    }, I = async (o, d) => {
-      const v = [...m.value];
-      v[p.value] = o, Object.assign(v[p.value], {
-        ...o,
+    }, null), A = (a) => {
+      t.editorReadonly || a.stopPropagation();
+    }, I = async (a, l) => {
+      const v = [...c.value];
+      v[h.value] = a, Object.assign(v[h.value], {
+        ...a,
         [t.listMapField]: t.leftMapField
-      }), await N(v, t.fieldName), e.controller.triggerAction(e.row, d);
-    }, j = async () => {
-      if (u.value = !0, t.editorModel.appDataEntityId) {
-        const o = m.value[p.value], d = await t.getServiceData(o, {});
-        d && (l.value = d.data, c.value = !0), u.value = !1;
+      }), await y(v, t.fieldName), e.controller.triggerAction(e.row, l);
+    }, B = async () => {
+      if (m.value = !0, t.editorModel.appDataEntityId) {
+        const a = c.value[h.value], l = await t.getServiceData(a, {});
+        l && (n.value = l.data, p.value = !0), m.value = !1;
       }
-    }, L = (o) => {
-      a.value = o, !c.value && o && j();
-    }, F = (o, d) => s("div", {
-      title: d ? o : "",
-      class: [i.b("span-item")]
-    }, [o]), B = (o) => {
-      const d = o ? o[t.textName] : "", v = d.length > 3;
-      return s(E("el-dropdown"), {
+    }, G = (a) => {
+      d.value = a, !p.value && a && B();
+    }, R = (a, l) => s("div", {
+      title: l ? a : "",
+      class: [o.b("span-item")]
+    }, [a]), L = (a) => {
+      const l = a ? a[t.textName] : "", v = l.length > 3;
+      return s(N("el-dropdown"), {
         trigger: "click",
         placement: "bottom-start",
-        loading: u.value,
-        "popper-class": [i.b("dropdown-popper")],
-        onVisibleChange: L
+        loading: m.value,
+        "popper-class": [o.b("dropdown-popper")],
+        onVisibleChange: G
       }, {
         default: () => s("div", {
-          class: [i.b("dropdown"), i.is("dropdown-expand", a.value)]
-        }, [F(d, v), s("svg", {
+          class: [o.b("dropdown"), o.is("dropdown-expand", d.value)]
+        }, [R(l, v), s("svg", {
           xmlns: "http://www.w3.org/2000/svg",
           viewBox: "0 0 1024 1024",
           width: "1em",
           height: "1em",
-          class: [i.be("dropdown", "icon"), i.is("dropdown-icon-expand", a.value)],
+          class: [o.be("dropdown", "icon"), o.is("dropdown-icon-expand", d.value)],
           "data-v-2b52e528": ""
         }, [s("path", {
           d: "M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z"
         }, null)])]),
-        dropdown: () => s(E("el-dropdown-menu"), null, {
-          default: () => l.value.length > 0 ? l.value.map((y) => {
-            let O;
-            const z = y[t.textName] || "", T = z.length > 16;
-            return s(E("el-dropdown-item"), {
-              class: [y[t.keyName] === o[t.keyName] ? i.be("dropdown-popper", "active") : ""],
-              onClick: (H) => I(y, H)
-            }, V(O = F(z, T)) ? O : {
-              default: () => [O]
+        dropdown: () => s(N("el-dropdown-menu"), null, {
+          default: () => n.value.length > 0 ? n.value.map((F) => {
+            let z;
+            const k = F[t.textName] || "", U = k.length > 16;
+            return s(N("el-dropdown-item"), {
+              class: [F[t.keyName] === a[t.keyName] ? o.be("dropdown-popper", "active") : ""],
+              onClick: (Y) => I(F, Y)
+            }, j(z = R(k, U)) ? z : {
+              default: () => [z]
             });
-          }) : P()
+          }) : S()
         })
       });
-    }, _ = (o) => s("div", {
-      class: i.be("content", "left")
-    }, [B(o)]), $ = () => s("div", {
-      class: i.be("content", "center")
+    }, q = (a) => s("div", {
+      class: o.be("content", "left")
+    }, [L(a)]), _ = () => s("div", {
+      class: o.be("content", "center")
     }, [s("svg", {
       viewBox: "0 0 16 16",
       xmlns: "http://www.w3.org/2000/svg",
@@ -293,64 +247,64 @@ const k = /* @__PURE__ */ te({
     }, [s("path", {
       d: "M7.3 4.403l-2.789 2.98a.7.7 0 0 1-1.022-.956L7.45 2.194a.698.698 0 0 1 1.085-.067l3.97 4.323a.7.7 0 1 1-1.031.947L8.7 4.375v8.892c0 .456-.309.833-.7.833-.392 0-.7-.377-.7-.833V4.403z",
       transform: "rotate(90 7.995 8)"
-    }, null)])])]), q = (o) => {
-      const d = o ? o[t.textName] : "", v = d.length > 9;
+    }, null)])])]), T = (a) => {
+      const l = a ? a[t.textName] : "", v = l.length > 9;
       return s("div", {
-        class: i.be("content", "right")
-      }, [F(d, v)]);
+        class: o.be("content", "right")
+      }, [R(l, v)]);
     };
     return {
-      ns: i,
+      ns: o,
       c: t,
-      componentRef: r,
-      tooltip: A,
-      rowDataChange: N,
-      onInfoTextChange: S,
-      gridEditItemProps: D,
+      componentRef: i,
+      tooltip: P,
+      rowDataChange: y,
+      onInfoTextChange: D,
+      gridEditItemProps: x,
       renderContent: () => {
-        const o = m.value[p.value], d = m.value[b.value];
+        const a = c.value[h.value], l = c.value[M.value];
         return s("div", {
-          class: [i.b("content"), t.editorReadonly ? i.bm("content", "editor-readonly") : ""],
-          onClick: R
-        }, [o && _(o), o && d && $(), d && q(d)]);
+          class: [o.b("content"), t.editorReadonly ? o.bm("content", "editor-readonly") : ""],
+          onClick: A
+        }, [a && q(a), a && l && _(), l && T(l)]);
       }
     };
   },
   render() {
-    var i;
-    let e;
-    return s(E("iBizGridEditItem"), {
+    var e;
+    let o;
+    return s(N("iBizGridEditItem"), {
       ref: "componentRef",
       required: !this.c.editItem.allowEmpty,
       error: this.row.errors[this.c.fieldName],
       overflowMode: this.controller.grid.overflowMode,
-      class: [this.ns, this.ns.m(this.c.grid.overflowMode), (i = this.controller.model.cellSysCss) == null ? void 0 : i.cssName],
+      class: [this.ns, this.ns.m(this.c.grid.overflowMode), (e = this.controller.model.cellSysCss) == null ? void 0 : e.cssName],
       ...this.gridEditItemProps,
       showEditMask: !1
-    }, V(e = this.renderContent()) ? e : {
-      default: () => [e]
+    }, j(o = this.renderContent()) ? o : {
+      default: () => [o]
     });
   }
 });
 class ce {
   constructor() {
-    f(this, "component", "IBizGridChangeVersionColumn");
+    u(this, "component", "IBizGridChangeVersionColumn");
   }
-  async createController(i, r) {
-    const t = new G(i, r);
+  async createController(o, i) {
+    const t = new V(o, i);
     return await t.init(), t;
   }
 }
-const ge = ee(
-  k,
+const ve = Q(
+  O,
   function(e) {
-    e.component(k.name, k), W(
+    e.component(O.name, O), H(
       "GRID_COLRENDER_COLUMN_CHANGE_VERSION",
       () => new ce()
     );
   }
 );
 export {
-  ge as IBizGridChangeVersionColumn,
-  ge as default
+  ve as IBizGridChangeVersionColumn,
+  ve as default
 };

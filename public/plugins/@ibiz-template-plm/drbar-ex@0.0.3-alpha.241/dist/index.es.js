@@ -1,33 +1,10 @@
 import './assets/style.css';
-import { registerControlProvider as X, ControlController as J, Srfuf as Q, calcItemVisibleByCounter as k, calcItemVisible as Y, calcNavParams as Z, hasSubRoute as z, CounterService as F } from "@ibiz-template/runtime";
-import { withInstall as tt, route2routePath as w, routePath2string as R, useControlController as et, useNamespace as st, getNestedRoutePath as L, onRouteChange as at } from "@ibiz-template/vue3-util";
-import { inject as _, defineComponent as ot, ref as M, reactive as rt, onUnmounted as G, watch as N, createVNode as u, resolveComponent as b, computed as it, watchEffect as nt } from "vue";
-/*!
-  * vue-router v4.2.5
-  * (c) 2023 Eduardo San Martin Morote
-  * @license MIT
-  */
-var A;
-(function(a) {
-  a.pop = "pop", a.push = "push";
-})(A || (A = {}));
-var O;
-(function(a) {
-  a.back = "back", a.forward = "forward", a.unknown = "";
-})(O || (O = {}));
-var j;
-(function(a) {
-  a[a.aborted = 4] = "aborted", a[a.cancelled = 8] = "cancelled", a[a.duplicated = 16] = "duplicated";
-})(j || (j = {}));
-const lt = Symbol(""), ct = Symbol("");
-function ut() {
-  return _(lt);
-}
-function q() {
-  return _(ct);
-}
-var ht = Object.defineProperty, dt = (a, t, r) => t in a ? ht(a, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : a[t] = r, S = (a, t, r) => (dt(a, typeof t != "symbol" ? t + "" : t, r), r);
-class pt extends J {
+import { registerControlProvider as W, ControlController as K, Srfuf as $, calcItemVisibleByCounter as z, calcItemVisible as H, calcNavParams as X, hasSubRoute as k, CounterService as F } from "@ibiz-template/runtime";
+import { withInstall as J, route2routePath as C, routePath2string as x, useControlController as Q, useNamespace as Y, getNestedRoutePath as A, onRouteChange as Z } from "@ibiz-template/vue3-util";
+import { defineComponent as tt, ref as N, reactive as et, onUnmounted as L, watch as M, createVNode as m, resolveComponent as b, computed as st, watchEffect as at } from "vue";
+import { useRouter as it, useRoute as O } from "vue-router";
+var ot = Object.defineProperty, rt = (n, t, a) => t in n ? ot(n, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : n[t] = a, S = (n, t, a) => (rt(n, typeof t != "symbol" ? t + "" : t, a), a);
+class nt extends K {
   constructor() {
     super(...arguments), S(this, "router"), S(this, "storagePrefix", "DR_BAR_SELECTED_ITEM"), S(this, "counter");
   }
@@ -59,7 +36,7 @@ class pt extends J {
    * @type {boolean}
    */
   get isCreate() {
-    return this.getData()[0].srfuf !== Q.UPDATE;
+    return this.getData()[0].srfuf !== $.UPDATE;
   }
   /**
    * 获取数据
@@ -78,7 +55,8 @@ class pt extends J {
    * @memberof DRTabController
    */
   setRouter(t) {
-    this.router = t;
+    var a;
+    this.router = t, this.state.isCreated && !this.counter && ((a = this.model.appCounterRefs) != null && a[0]) && this.initCounter();
   }
   /**
    * 路由层级
@@ -125,23 +103,23 @@ class pt extends J {
    * @param {IData} [_data]
    * @param {boolean} [reset=true]
    */
-  calcItemStateByCounter(t, r = !0) {
+  calcItemStateByCounter(t, a = !0) {
     if (this.state.activated && (this.state.drBarItems.forEach((e) => {
-      var o;
-      if ((o = e.children) != null && o.length)
+      var i;
+      if ((i = e.children) != null && i.length)
         e.children.forEach((s) => {
-          const i = k(s, this.counter);
-          i !== void 0 && (s.visible = i);
+          const o = z(s, this.counter);
+          o !== void 0 && (s.visible = o);
         }), e.visible = e.children.some((s) => s.visible);
       else {
-        const s = k(e, this.counter);
+        const s = z(e, this.counter);
         s !== void 0 && (e.visible = s);
       }
-    }), this.state.selectedItem && r)) {
-      const { visible: e, defaultVisibleItem: o } = this.getItemVisibleState(
+    }), this.state.selectedItem && a)) {
+      const { visible: e, defaultVisibleItem: i } = this.getItemVisibleState(
         this.state.selectedItem
       );
-      !e && o && this.handleSelectChange(o.tag);
+      !e && i && this.handleSelectChange(i.tag);
     }
   }
   /**
@@ -156,16 +134,16 @@ class pt extends J {
    *   }}
    */
   getItemVisibleState(t) {
-    let r = !0, e;
-    return this.state.drBarItems.forEach((o) => {
-      if (o.children) {
-        e || (e = o.children.find((i) => i.visible));
-        const s = o.children.find((i) => i.tag === t);
-        s && (r = !!s.visible);
+    let a = !0, e;
+    return this.state.drBarItems.forEach((i) => {
+      if (i.children) {
+        e || (e = i.children.find((o) => o.visible));
+        const s = i.children.find((o) => o.tag === t);
+        s && (a = !!s.visible);
       } else
-        !e && o.visible && (e = o), o.tag === t && (r = !!o.visible);
+        !e && i.visible && (e = i), i.tag === t && (a = !!i.visible);
     }), {
-      visible: r,
+      visible: a,
       defaultVisibleItem: e
     };
   }
@@ -178,15 +156,15 @@ class pt extends J {
    * @return {*}  {Promise<void>}
    */
   async calcPermitted(t) {
-    var r;
+    var a;
     let e = !0;
-    const o = (r = this.getData()) != null && r.length ? this.getData()[0] : void 0, s = await Y(
+    const i = (a = this.getData()) != null && a.length ? this.getData()[0] : void 0, s = await H(
       t,
       this.context,
       this.params,
       this.model.appDataEntityId,
       this.model.appId,
-      o
+      i
     );
     s !== void 0 && (e = s), t.visible = e;
   }
@@ -200,8 +178,8 @@ class pt extends J {
   async calcDrBarItemsState() {
     await Promise.all(
       this.state.drBarItems.map(async (t) => {
-        var r;
-        (r = t.children) != null && r.length ? (await Promise.all(
+        var a;
+        (a = t.children) != null && a.length ? (await Promise.all(
           t.children.map(async (e) => {
             await this.calcPermitted(e);
           })
@@ -217,8 +195,8 @@ class pt extends J {
    */
   async onMounted() {
     await super.onMounted(), this.form ? this.form.evt.on("onLoadSuccess", async (t) => {
-      var r;
-      const e = (r = t.data) == null ? void 0 : r[0];
+      var a;
+      const e = (a = t.data) == null ? void 0 : a[0];
       this.view.state.srfactiveviewdata = e, e && e.srfreadonly && (this.view.context.srfreadonly = !0), await this.calcDrBarItemsState(), this.doDefaultSelect();
     }) : await this.calcDrBarItemsState(), this.form.state.isLoaded && this.doDefaultSelect();
   }
@@ -228,36 +206,36 @@ class pt extends J {
    * @memberof DRBarExController
    */
   initDRBarItems() {
-    const { dedrctrlItems: t, dedrbarGroups: r } = this.model, e = [];
-    r && t && r.forEach((o) => {
+    const { dedrctrlItems: t, dedrbarGroups: a } = this.model, e = [];
+    a && t && a.forEach((i) => {
       const s = t.filter(
-        (i) => i.dedrbarGroupId === o.id
+        (o) => o.dedrbarGroupId === i.id
       );
       if (s.length > 0) {
-        let i = o.caption;
-        o.capLanguageRes && (i = ibiz.i18n.t(
-          o.capLanguageRes.lanResTag,
-          o.caption
+        let o = i.caption;
+        i.capLanguageRes && (o = ibiz.i18n.t(
+          i.capLanguageRes.lanResTag,
+          i.caption
         ));
         const {
-          enableMode: n,
-          dataAccessAction: h,
+          enableMode: h,
+          dataAccessAction: d,
           testAppDELogicId: l,
-          testScriptCode: v,
-          counterId: g,
-          counterMode: c
+          testScriptCode: r,
+          counterId: c,
+          counterMode: u
         } = s[0] || {};
         e.push({
-          tag: o.id,
-          caption: i,
-          sysImage: o.sysImage,
+          tag: i.id,
+          caption: o,
+          sysImage: i.sysImage,
           visible: !1,
-          enableMode: n,
-          dataAccessAction: h,
+          enableMode: h,
+          dataAccessAction: d,
           testAppDELogicId: l,
-          testScriptCode: v,
-          counterId: g,
-          counterMode: c
+          testScriptCode: r,
+          counterId: c,
+          counterMode: u
         });
       }
     }), this.state.drBarItems = e;
@@ -268,22 +246,23 @@ class pt extends J {
    * @param {string} key
    * @memberof DRBarExController
    */
-  handleSelectChange(t, r = !1) {
+  handleSelectChange(t, a = !1) {
+    var h, d, l;
     var e;
-    if (!this.state.drBarItems.find((i) => i.tag === t))
+    if (!this.state.drBarItems.find((r) => r.tag === t))
       return;
-    const o = (e = this.model.dedrctrlItems) == null ? void 0 : e.find(
-      (i) => i.dedrbarGroupId === t
+    const i = (e = this.model.dedrctrlItems) == null ? void 0 : e.find(
+      (r) => r.dedrbarGroupId === t
     );
-    o ? (this.setVisible("navPos"), this.openNavPosView(o, r)) : (this.setVisible("form"), this.routeDepth && this.router.push(this.state.drBarItems[0].fullPath)), this.state.selectedItem = t, this.state.defaultItem = t;
-    const s = this.context.srfuserid;
-    if (s) {
-      const i = w(this.router.currentRoute.value);
-      if (this.routeDepth && i.pathNodes[this.routeDepth - 2]) {
-        i.pathNodes = i.pathNodes.slice(0, this.routeDepth - 1);
-        const n = R(i).split("/");
-        n && n.length && localStorage.setItem(
-          "".concat(this.storagePrefix, "_").concat(s, "_").concat(n[n.length - 1]),
+    i ? (this.setVisible("navPos"), this.openNavPosView(i, a)) : (this.setVisible("form"), this.routeDepth && ((h = this.router) == null || h.push(this.state.drBarItems[0].fullPath))), this.state.selectedItem = t, this.state.defaultItem = t;
+    const s = this.context.srfuserid, o = (l = (d = this.router) == null ? void 0 : d.currentRoute) == null ? void 0 : l.value;
+    if (s && o) {
+      const r = C(o);
+      if (this.routeDepth && r.pathNodes[this.routeDepth - 2]) {
+        r.pathNodes = r.pathNodes.slice(0, this.routeDepth - 1);
+        const c = x(r).split("/");
+        c && c.length && localStorage.setItem(
+          "".concat(this.storagePrefix, "_").concat(s, "_").concat(c[c.length - 1]),
           t
         );
       }
@@ -296,10 +275,10 @@ class pt extends J {
    * @memberof DRBarExController
    */
   setVisible(t) {
-    var r;
+    var a;
     if (this.state.hideEditItem)
       return;
-    const e = (r = this.view.layoutPanel) == null ? void 0 : r.panelItems.view_form;
+    const e = (a = this.view.layoutPanel) == null ? void 0 : a.panelItems.view_form;
     t === "form" ? (e && (e.state.visible = !0, e.state.keepAlive = !0), this.navPos && (this.navPos.state.visible = !1, this.navPos.state.keepAlive = !0)) : (e && (e.state.visible = !1, e.state.keepAlive = !0), this.navPos && (this.navPos.state.visible = !0, this.navPos.state.keepAlive = !0));
   }
   /**
@@ -310,15 +289,15 @@ class pt extends J {
    * @memberof DRBarExController
    */
   prepareParams(t) {
-    const { navigateContexts: r, navigateParams: e } = t, o = {
-      navContexts: r,
+    const { navigateContexts: a, navigateParams: e } = t, i = {
+      navContexts: a,
       navParams: e
     }, s = {
       context: this.context,
       params: this.params,
       data: this.getData()[0]
-    }, { resultContext: i, resultParams: n } = Z(o, s), h = Object.assign(this.context.clone(), i), l = { ...this.params, ...n };
-    return { context: h, params: l };
+    }, { resultContext: o, resultParams: h } = X(i, s), d = Object.assign(this.context.clone(), o), l = { ...this.params, ...h };
+    return { context: d, params: l };
   }
   /**
    * 打开导航占位视图
@@ -326,17 +305,17 @@ class pt extends J {
    * @param {IDEDRBarItem} drBarItem 关系项
    * @memberof DRBarExController
    */
-  async openNavPosView(t, r = !1) {
+  async openNavPosView(t, a = !1) {
     var e;
-    const { context: o, params: s } = this.prepareParams(t);
-    Object.assign(o, {
+    const { context: i, params: s } = this.prepareParams(t);
+    Object.assign(i, {
       srfdefaulttoroutedepth: this.routeDepth + 1
-    }), o.currentSrfNav = t.dedrbarGroupId, this.state.srfnav = t.dedrbarGroupId, (e = this.navPos) == null || e.openView({
+    }), i.currentSrfNav = t.dedrbarGroupId, this.state.srfnav = t.dedrbarGroupId, (e = this.navPos) == null || e.openView({
       key: t.id,
-      context: o,
+      context: i,
       params: s,
       viewId: t.appViewId,
-      isRoutePushed: r
+      isRoutePushed: a
     });
   }
   /**
@@ -346,6 +325,7 @@ class pt extends J {
    * @return {*}  {void}
    */
   doDefaultSelect() {
+    var h, d;
     var t;
     if (!this.state.hideEditItem && !this.state.srfnav)
       return;
@@ -353,32 +333,32 @@ class pt extends J {
       this.state.defaultItem = this.model.uniqueTag;
       return;
     }
-    const { drBarItems: r } = this.state;
-    let e = ((t = r[0].children) == null ? void 0 : t[0].tag) || r[0].tag;
-    const o = this.context.srfuserid;
-    if (o) {
-      const i = w(this.router.currentRoute.value);
-      if (this.routeDepth && i.pathNodes[this.routeDepth - 2]) {
-        i.pathNodes = i.pathNodes.slice(0, this.routeDepth - 1);
-        const n = R(i).split("/");
-        if (n && n.length) {
-          const h = localStorage.getItem(
-            "".concat(this.storagePrefix, "_").concat(o, "_").concat(n[n.length - 1])
+    const { drBarItems: a } = this.state;
+    let e = ((t = a[0].children) == null ? void 0 : t[0].tag) || a[0].tag;
+    const i = this.context.srfuserid, s = (d = (h = this.router) == null ? void 0 : h.currentRoute) == null ? void 0 : d.value;
+    if (i && s) {
+      const l = C(s);
+      if (this.routeDepth && l.pathNodes[this.routeDepth - 2]) {
+        l.pathNodes = l.pathNodes.slice(0, this.routeDepth - 1);
+        const r = x(l).split("/");
+        if (r && r.length) {
+          const c = localStorage.getItem(
+            "".concat(this.storagePrefix, "_").concat(i, "_").concat(r[r.length - 1])
           );
-          h && (e = h);
+          c && (e = c);
         }
       }
     }
-    const s = w(this.router.currentRoute.value);
-    if (this.routeDepth && s.pathNodes[this.routeDepth - 1]) {
-      const i = s.pathNodes[this.routeDepth - 1];
-      i && i.srfnav && (e = i.srfnav);
+    const o = s ? C(s) : void 0;
+    if (o && this.routeDepth && o.pathNodes[this.routeDepth - 1]) {
+      const l = o.pathNodes[this.routeDepth - 1];
+      l && l.srfnav && (e = l.srfnav);
     }
     if (e) {
       if (this.state.selectedItem && this.state.selectedItem === e)
         return;
-      const i = !!this.routeDepth && z(this.routeDepth), { visible: n, defaultVisibleItem: h } = this.getItemVisibleState(e);
-      !n && h ? (e = h.tag, this.handleSelectChange(e)) : this.handleSelectChange(e, i), this.state.defaultItem = e;
+      const l = !!this.routeDepth && k(this.routeDepth), { visible: r, defaultVisibleItem: c } = this.getItemVisibleState(e);
+      !r && c ? (e = c.tag, this.handleSelectChange(e)) : this.handleSelectChange(e, l), this.state.defaultItem = e;
     }
   }
   /**
@@ -388,8 +368,8 @@ class pt extends J {
   async onRouterChange(t) {
     if (this.state.srfnav !== t.srfnav && t.srfnav) {
       this.state.srfnav = t.srfnav;
-      const r = !!this.routeDepth && z(this.routeDepth);
-      this.handleSelectChange(t.srfnav, r), this.force(() => {
+      const a = !!this.routeDepth && k(this.routeDepth);
+      this.handleSelectChange(t.srfnav, a), this.force(() => {
         this.state.defaultItem = t.srfnav;
       });
     }
@@ -403,15 +383,16 @@ class pt extends J {
    * @return {*}  {Promise<void>}
    */
   async initCounter() {
-    const { appCounterRefs: t } = this.model, r = t == null ? void 0 : t[0];
-    if (r) {
-      const e = w(this.router.currentRoute.value);
-      this.routeDepth && (e.pathNodes = e.pathNodes.slice(0, this.routeDepth - 1));
-      const o = R(e);
+    var i, s;
+    const { appCounterRefs: t } = this.model, a = t == null ? void 0 : t[0], e = (s = (i = this.router) == null ? void 0 : i.currentRoute) == null ? void 0 : s.value;
+    if (a && e) {
+      const o = C(e);
+      this.routeDepth && (o.pathNodes = o.pathNodes.slice(0, this.routeDepth - 1));
+      const h = x(o);
       this.counter = await F.getCounterByRef(
-        r,
+        a,
         this.context,
-        o ? { srfcustomtag: o, ...this.params } : { ...this.params }
+        h ? { srfcustomtag: h, ...this.params } : { ...this.params }
       ), this.calcItemStateByCounter = this.calcItemStateByCounter.bind(this), this.counter.onChange(this.calcItemStateByCounter);
     }
   }
@@ -428,111 +409,113 @@ class pt extends J {
   }
 }
 const P = "ibiz";
-function mt(a, t, r) {
-  let e = null, o = 0;
-  const s = M([]), i = M([]), n = it(() => a.state.drBarItems.find(
-    (c) => c.tag === a.state.defaultItem
-  )), h = (c, m = {}) => {
-    let d = 0;
-    const p = document.createElement("div"), f = document.createElement("div");
-    return f.innerHTML = c, Object.assign(f.style, m), Object.assign(p.style, {
+function lt(n, t, a) {
+  let e = null, i = 0;
+  const s = N([]), o = N([]), h = st(() => n.state.drBarItems.find(
+    (u) => u.tag === n.state.defaultItem
+  )), d = (u, v = {}) => {
+    let f = 0;
+    const p = document.createElement("div"), g = document.createElement("div");
+    return g.innerHTML = u, Object.assign(g.style, v), Object.assign(p.style, {
       width: "auto",
       position: "absolute",
       left: "-9999px"
-    }), p.appendChild(f), document.body.appendChild(p), d = p.offsetWidth, document.body.removeChild(p), d;
+    }), p.appendChild(g), document.body.appendChild(p), f = p.offsetWidth, document.body.removeChild(p), f;
   }, l = () => {
-    const { drBarItems: c, showMore: m, defaultItem: d } = a.state;
-    if (!t.value || !m || c.length === 0) {
-      s.value = c, i.value = [];
+    const { drBarItems: u, showMore: v, defaultItem: f } = n.state;
+    if (!t.value || !v || u.length === 0) {
+      s.value = u, o.value = [];
       return;
     }
     let p = !1;
-    const f = t.value.$el.offsetWidth;
-    let C = 0;
-    s.value = [], i.value = [], c.forEach((I, V) => {
+    const g = t.value.$el.offsetWidth;
+    let w = 0;
+    s.value = [], o.value = [], u.forEach((I, V) => {
       if (I.visible) {
-        const T = I.caption || "", D = I.counterId ? r[I.counterId] : null, B = "var(--".concat(P, "-font-size-header-6)");
+        const _ = I.caption || "", D = I.counterId ? a[I.counterId] : null, B = "var(--".concat(P, "-font-size-header-6)");
         if (D != null && !(!D && D !== 0) && !(I.counterMode === 1 && D <= 0)) {
-          const $ = {
+          const q = {
             marginLeft: "var(--".concat(P, "-spacing-tight)"),
             padding: "0 var(--".concat(P, "-spacing-extra-tight)"),
             minWidth: "20px",
             fontSize: "var(--".concat(P, "-font-size-small)")
-          }, H = h(String(D), $);
-          C += H;
+          }, U = d(String(D), q);
+          w += U;
         }
-        const K = h(T, {
+        const j = d(_, {
           padding: V === 0 ? "0 20px 0 0" : "0 20px",
           fontSize: B
         });
-        C += K;
-        const U = {
+        w += j;
+        const T = {
           padding: "0 0 0 20px",
           fontSize: B
         };
-        let y = h("^", {
+        let y = d("^", {
           minWidth: "16px",
           fontSize: B
         });
         y = y > 16 ? y : 16;
-        let x = "更多";
-        !p && n.value && (x = n.value.caption || x);
-        const W = h("".concat(x, " "), U) + y;
-        V === c.length - 1 && C < f ? s.value.push(I) : C + W > f ? i.value.push(I) : (s.value.push(I), p || (p = I.tag === d));
+        let R = "更多";
+        !p && h.value && (R = h.value.caption || R);
+        const G = d("".concat(R, " "), T) + y;
+        V === u.length - 1 && w < g ? s.value.push(I) : w + G > g ? o.value.push(I) : (s.value.push(I), p || (p = I.tag === f));
       }
     });
-  }, v = () => {
+  }, r = () => {
     if (window.ResizeObserver) {
-      const c = t.value.$el;
-      c && (e = new ResizeObserver((m) => {
-        const { width: d } = m[0].contentRect;
-        d !== o && (l(), o = d);
-      }), e.observe(c));
+      const u = t.value.$el;
+      u && (e = new ResizeObserver((v) => {
+        const { width: f } = v[0].contentRect;
+        f !== i && (l(), i = f);
+      }), e.observe(u));
     }
   };
-  N(
-    () => a.state.drBarItems,
+  M(
+    () => n.state.drBarItems,
     () => {
       l();
     },
     { deep: !0 }
-  ), N(
-    () => a.state.defaultItem,
+  ), M(
+    () => n.state.defaultItem,
     () => {
       l();
     }
   );
-  const g = nt(() => {
-    t.value && v();
+  const c = at(() => {
+    t.value && r();
   });
-  return G(() => {
-    e && e.disconnect(), g();
-  }), { visibleItems: s, moreItems: i };
+  return L(() => {
+    e && e.disconnect(), c();
+  }), { visibleItems: s, moreItems: o };
 }
-function ft(a) {
-  const t = a.view.modal.routeDepth;
+function ct(n) {
+  const t = n.view.modal.routeDepth;
   if (t) {
-    const r = q();
+    const a = O();
+    if (!a)
+      return;
     let e;
-    at(({
-      currentKey: o,
+    Z(({
+      currentKey: i,
       fullPath: s
     }) => {
       if (!e)
-        e = o;
-      else if (e === o) {
-        const i = w(r), {
-          srfnav: n
-        } = i.pathNodes[t - 1];
-        a.onRouterChange({
-          srfnav: n || "",
+        e = i;
+      else if (e === i) {
+        const o = C(a), {
+          srfnav: h
+        } = o.pathNodes[t - 1];
+        n.onRouterChange({
+          srfnav: h || "",
           path: s
         });
       }
     }, t);
   }
 }
-const E = /* @__PURE__ */ ot({
+const E = /* @__PURE__ */ tt({
   name: "IBizDRBarExControl",
   props: {
     modelData: {
@@ -564,95 +547,100 @@ const E = /* @__PURE__ */ ot({
     }
   },
   setup() {
-    const a = et((...l) => new pt(...l)), t = st("control-".concat(a.model.controlType.toLowerCase(), "-ex")), r = ut(), e = M(), o = rt({}), {
+    const n = it(), t = Q((...r) => {
+      const c = new nt(...r);
+      return c.setRouter(n), c;
+    });
+    t.setRouter(n);
+    const a = Y("control-".concat(t.model.controlType.toLowerCase(), "-ex")), e = N(), i = et({}), {
       visibleItems: s,
-      moreItems: i
-    } = mt(a, e, o), n = (l) => {
-      Object.assign(o, l);
+      moreItems: o
+    } = lt(t, e, i), h = (r) => {
+      Object.assign(i, r);
     };
-    a.evt.on("onCreated", () => {
-      a.counter && a.counter.onChange(n, !0);
-    }), G(() => {
-      var l;
-      (l = a.counter) == null || l.offChange(n);
-    }), a.setRouter(r);
-    const h = q();
-    return ft(a), N(() => r.currentRoute.value, (l, v) => {
-      var g, c;
-      if (a.routeDepth && a.navPos) {
+    t.evt.on("onCreated", () => {
+      t.counter && t.counter.onChange(h, !0);
+    }), L(() => {
+      var r;
+      (r = t.counter) == null || r.offChange(h);
+    });
+    const d = O(), l = n == null ? void 0 : n.currentRoute;
+    return ct(t), l && M(() => l.value, (r, c) => {
+      var u, v;
+      if (t.routeDepth && t.navPos && r && c) {
         const {
-          pathNodes: m
-        } = w(l), {
-          pathNodes: d
-        } = w(v), p = L(v, a.routeDepth + 1), f = L(h, a.routeDepth + 1);
-        if (p === f)
+          pathNodes: f
+        } = C(r), {
+          pathNodes: p
+        } = C(c), g = A(c, t.routeDepth + 1), w = A(d, t.routeDepth + 1);
+        if (g === w)
           return;
-        const C = ((g = m[a.routeDepth + 1]) == null ? void 0 : g.viewName) === "route-modal" || ((c = d[a.routeDepth + 1]) == null ? void 0 : c.viewName) === "route-modal";
-        f && !C && a.navPos.openView({
-          key: f,
+        const I = ((u = f[t.routeDepth + 1]) == null ? void 0 : u.viewName) === "route-modal" || ((v = p[t.routeDepth + 1]) == null ? void 0 : v.viewName) === "route-modal";
+        w && !I && t.navPos.openView({
+          key: w,
           isRoutePushed: !1,
-          context: a.context.clone(),
+          context: t.context.clone(),
           params: {
-            ...a.params
+            ...t.params
           }
         });
       }
     }), {
-      c: a,
-      ns: t,
-      moreItems: i,
+      c: t,
+      ns: a,
+      moreItems: o,
       controlRef: e,
       visibleItems: s,
-      counterData: o,
-      handleSelect: (l) => {
-        var v, g, c;
-        if (!a.state.drBarItems.find((d) => d.tag === l))
+      counterData: i,
+      handleSelect: (r) => {
+        var c, u, v;
+        if (!t.state.drBarItems.find((p) => p.tag === r))
           return;
-        const m = (v = a.model.dedrctrlItems) == null ? void 0 : v.find((d) => d.dedrbarGroupId === l);
-        if (m) {
-          const d = (g = w(h).pathNodes[a.routeDepth]) == null ? void 0 : g.viewName, p = (c = m.appViewId) == null ? void 0 : c.split(".")[1];
-          if (p && d && p === d)
+        const f = (c = t.model.dedrctrlItems) == null ? void 0 : c.find((p) => p.dedrbarGroupId === r);
+        if (f) {
+          const p = d ? (u = C(d).pathNodes[t.routeDepth]) == null ? void 0 : u.viewName : void 0, g = (v = f.appViewId) == null ? void 0 : v.split(".")[1];
+          if (g && p && g === p)
             return;
         }
-        a.handleSelectChange(l);
+        t.handleSelectChange(r);
       }
     };
   },
   render() {
     const {
-      isCreated: a,
+      isCreated: n,
       defaultItem: t,
-      isCalculatedPermission: r
-    } = this.c.state, e = this.moreItems.find((s) => s.tag === t) || {}, o = u(b("el-dropdown"), {
+      isCalculatedPermission: a
+    } = this.c.state, e = this.moreItems.find((s) => s.tag === t) || {}, i = m(b("el-dropdown"), {
       trigger: "click",
       class: this.ns.b("more-dropdown"),
       "popper-class": this.ns.b("more-dropdown-popper")
     }, {
-      default: () => u("div", {
+      default: () => m("div", {
         class: this.ns.be("more-dropdown", "link"),
         onClick: (s) => s.stopPropagation()
-      }, [u("span", null, [e.caption ? "".concat(e.caption, " ") : "更多 "]), u("svg", {
+      }, [m("span", null, [e.caption ? "".concat(e.caption, " ") : "更多 "]), m("svg", {
         viewBox: "0 0 16 16",
         xmlns: "http://www.w3.org/2000/svg",
         height: "1em",
         width: "1em"
-      }, [u("g", {
+      }, [m("g", {
         "stroke-width": "1",
         "fill-rule": "evenodd"
-      }, [u("path", {
+      }, [m("path", {
         d: "M7.978 11.997l-.005.006L2.3 6.33l.83-.831 4.848 4.848L12.826 5.5l.83.83-5.673 5.673-.005-.006z"
       }, null)])])]),
-      dropdown: () => u(b("el-dropdown-menu"), null, {
-        default: () => this.moreItems.map((s) => u(b("el-dropdown-item"), {
+      dropdown: () => m(b("el-dropdown-menu"), null, {
+        default: () => this.moreItems.map((s) => m(b("el-dropdown-item"), {
           class: [t === s.tag ? this.ns.be("more-dropdown-popper", "current") : ""],
           onClick: () => this.handleSelect(s.tag)
         }, {
-          default: () => [u("span", {
+          default: () => [m("span", {
             class: [this.ns.be("more-dropdown-popper", "label")]
-          }, [u("span", {
+          }, [m("span", {
             class: this.ns.bem("more-dropdown-popper", "label", "text"),
             title: s.caption || ""
-          }, [s.caption || ""]), s.counterId && this.counterData[s.counterId] != null && u(b("iBizBadge"), {
+          }, [s.caption || ""]), s.counterId && this.counterData[s.counterId] != null && m(b("iBizBadge"), {
             class: this.ns.bem("more-dropdown-popper", "label", "counter"),
             value: this.counterData[s.counterId],
             counterMode: s.counterMode
@@ -660,61 +648,61 @@ const E = /* @__PURE__ */ ot({
         }))
       })
     });
-    return u(b("iBizControlBase"), {
+    return m(b("iBizControlBase"), {
       ref: "controlRef",
       controller: this.c,
       class: [this.ns.b(), this.ns.is("more", this.c.state.showMore), this.moreItems.length > 0 ? this.ns.b("more") : ""]
     }, {
-      default: () => [a && r && !!t && u(b("el-tabs"), {
+      default: () => [n && a && !!t && m(b("el-tabs"), {
         modelValue: t,
-        onTabClick: (s, i) => {
+        onTabClick: (s, o) => {
           this.handleSelect(s.paneName);
         }
       }, {
         default: () => [this.visibleItems.map((s) => {
           if (s.visible)
-            return u(b("el-tab-pane"), {
+            return m(b("el-tab-pane"), {
               label: s.caption,
               name: s.tag
             }, {
-              label: () => u("span", {
+              label: () => m("span", {
                 class: this.ns.b("pane-label")
-              }, [u("span", {
+              }, [m("span", {
                 class: this.ns.be("pane-label", "text")
-              }, [s.caption || ""]), s.counterId && this.counterData[s.counterId] != null && u(b("iBizBadge"), {
+              }, [s.caption || ""]), s.counterId && this.counterData[s.counterId] != null && m(b("iBizBadge"), {
                 class: this.ns.be("pane-label", "counter"),
                 value: this.counterData[s.counterId],
                 counterMode: s.counterMode
               }, null)])
             });
-        }), this.moreItems.length > 0 && u(b("el-tab-pane"), {
+        }), this.moreItems.length > 0 && m(b("el-tab-pane"), {
           label: "",
           name: e.tag
         }, {
-          label: () => o
+          label: () => i
         })]
       })]
     });
   }
 });
-class vt {
+class ht {
   constructor() {
     S(this, "component", "IBizDRBarExControl");
   }
 }
-const gt = tt(
+const ut = J(
   E,
-  function(a) {
-    a.component(E.name, E), X("CUSTOM_DRBAR_EX", () => new vt());
+  function(n) {
+    n.component(E.name, E), W("CUSTOM_DRBAR_EX", () => new ht());
   }
-), Ct = {
+), vt = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-  install(a) {
-    a.use(gt);
+  install(n) {
+    n.use(ut);
   }
 };
 export {
-  pt as DRBarExController,
-  gt as IBizDRBarExControl,
-  Ct as default
+  nt as DRBarExController,
+  ut as IBizDRBarExControl,
+  vt as default
 };

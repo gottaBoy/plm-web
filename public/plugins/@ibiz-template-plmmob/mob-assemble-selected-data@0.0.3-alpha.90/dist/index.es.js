@@ -1,93 +1,93 @@
-import { FrontUIActionProvider as h, OpenAppViewCommand as E, registerUIActionProvider as k } from "@ibiz-template/runtime";
-import { ModelError as x, RuntimeModelError as T, StringUtil as b } from "@ibiz-template/core";
-class D extends h {
-  async execAction(e, r) {
-    const { context: t, params: c, data: o, event: p, noWaitRoute: A, view: w } = r;
-    let a = {};
-    switch (e.frontProcessType) {
+import { registerUIActionProvider as h, FrontUIActionProvider as P, OpenAppViewCommand as E } from "@ibiz-template/runtime";
+import { ModelError as k, RuntimeModelError as T, StringUtil as x } from "@ibiz-template/core";
+class D extends P {
+  async execAction(t, a) {
+    const { context: e, params: d, data: c, event: f, noWaitRoute: p, view: w } = a;
+    let i = {};
+    switch (t.frontProcessType) {
       case "OPENHTMLPAGE": {
-        const i = b.fill(e.htmlPageUrl, t, o == null ? void 0 : o[0]);
-        window.open(i, "_blank");
+        const n = x.fill(t.htmlPageUrl, e, c == null ? void 0 : c[0]);
+        window.open(n, "_blank");
         break;
       }
       case "TOP":
       case "WIZARD": {
-        const i = e.frontAppViewId;
-        if (!i)
+        const n = t.frontAppViewId;
+        if (!n)
           throw new T(
-            e,
+            t,
             ibiz.i18n.t("runtime.uiAction.noConfiguredopenView")
           );
-        const { resultContext: f, resultParams: d } = await this.handleParams(
-          e,
+        const { resultContext: u, resultParams: s } = await this.handleParams(
           t,
-          o,
-          c
+          e,
+          c,
+          d
         ), l = this.handleSelectedData(w);
-        l && l.length && (d.selecteddata = JSON.stringify(l));
-        const P = this.handleViewOptionParams(d), s = await ibiz.commands.execute(
+        l && l.length && (s.selecteddata = JSON.stringify(l));
+        const A = this.handleViewOptionParams(s), r = await ibiz.commands.execute(
           E.TAG,
-          i,
-          f,
-          d,
-          { event: p, noWaitRoute: A, ...P }
+          n,
+          u,
+          s,
+          { event: f, noWaitRoute: p, ...A }
         );
-        s != null && s.ok || (a.cancel = !0), s != null && s.ok && s.data && (Array.isArray(s.data) ? a.data = s.data.map((n) => {
-          var u;
-          return typeof n == "object" && (((u = n.getOrigin) == null ? void 0 : u.call(n)) || n._deData) || n;
-        }) : a.data = s.data, a.nextContext = f, a.nextParams = { ...c, ...d });
+        r != null && r.ok || (i.cancel = !0), r != null && r.ok && r.data && (Array.isArray(r.data) ? i.data = r.data.map((o) => {
+          var m;
+          return typeof o == "object" && (((m = o.getOrigin) == null ? void 0 : m.call(o)) || o._deData) || o;
+        }) : i.data = r.data, i.nextContext = u, i.nextParams = { ...d, ...s });
         break;
       }
       case "PRINT":
-        await this.executePrint(e, r);
+        await this.executePrint(t, a);
         break;
       case "DATAIMP":
-        a = await this.executeDataImport(e, r);
+        i = await this.executeDataImport(t, a);
         break;
       case "DATAEXP":
-        await this.executeDataExport(e, r);
+        await this.executeDataExport(t, a);
         break;
       case "OTHER":
-        a = await this.doOther(e, r);
+        i = await this.doOther(t, a);
         break;
       case "EDITFORM":
-        a = await this.openEditForm(e, r);
+        i = await this.openEditForm(t, a);
         break;
       case "QUICKEDIT":
-        a = await this.openQuickEdit(e, r);
+        i = await this.openQuickEdit(t, a);
         break;
       default:
-        throw new x(
-          e,
+        throw new k(
+          t,
           ibiz.i18n.t("runtime.uiAction.frontProcessingModes", {
-            frontProcessType: e.frontProcessType
+            frontProcessType: t.frontProcessType
           })
         );
     }
-    return a;
+    return i;
   }
   /**
    * 处理选中数据
    *
    * @memberof AssembleSelectedDataProvider
    */
-  handleSelectedData(e) {
-    let r = [];
-    if (e) {
-      const t = e.getController("mdctrl");
-      t && (r = t.state.items || []);
+  handleSelectedData(t) {
+    let a = [];
+    if (t) {
+      const e = t.getController("mdctrl");
+      e && (a = e.state.items || []);
     }
-    return r.map((t) => ({
-      srfkey: t.user_id || t[t.srfkeyfield],
-      _id: t.user_id || t[t.srfkeyfield],
+    return a.map((e) => ({
+      srfkey: e.user_id || e[e.srfkeyfield],
+      _id: e.user_id || e[e.srfkeyfield],
       // 传给树的时候需要这个字段
-      srfmajortext: t[t.srfmajorfield]
+      srfmajortext: e[e.srfmajorfield]
     }));
   }
 }
 const O = {
   install() {
-    k(
+    h(
       "DEUIACTION_ASSEMBLE_SELECTED_DATA",
       () => new D()
     );

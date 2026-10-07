@@ -1,87 +1,85 @@
-import './style.css';
-var R = Object.defineProperty;
-var U = (e, n, r) => n in e ? R(e, n, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[n] = r;
-var h = (e, n, r) => (U(e, typeof n != "symbol" ? n + "" : n, r), r);
-import { GridFieldColumnController as I, GridRowState as A, registerGridColumnProvider as G } from "@ibiz-template/runtime";
+import './assets/style.css';
+import { registerGridColumnProvider as N, GridFieldColumnController as C, GridRowState as y } from "@ibiz-template/runtime";
 import { defineComponent as O, computed as m, createVNode as c } from "vue";
-import { useNamespace as g } from "@ibiz-template/vue3-util";
-const p = /* @__PURE__ */ O({
+import { useNamespace as h } from "@ibiz-template/vue3-util";
+var P = Object.defineProperty, x = (e, o, r) => o in e ? P(e, o, { enumerable: !0, configurable: !0, writable: !0, value: r }) : e[o] = r, E = (e, o, r) => (x(e, typeof o != "symbol" ? o + "" : o, r), r);
+const b = /* @__PURE__ */ O({
   name: "IBizGridPersonalInfoColumn",
   props: {
     controller: {
-      type: I,
+      type: C,
       required: !0
     },
     row: {
-      type: A,
+      type: y,
       required: !0
     }
   },
   setup(e) {
-    const n = g("grid-field-column"), r = g("grid-personal-info-column"), o = e.controller, d = {
+    const o = h("grid-field-column"), r = h("grid-personal-info-column"), l = e.controller, u = {
       id: "assignee_id",
       name: "assignee_name"
     };
-    let f = "ROWFIELD", v = "---";
+    let v = "ROWFIELD", p = "---";
     const {
       userParam: a
-    } = o.model;
+    } = l.model;
     if (a) {
       if (a.USERFILTERMAP)
         try {
           const t = JSON.parse(a.USERFILTERMAP);
-          Object.assign(d, t);
+          Object.assign(u, t);
         } catch (t) {
           ibiz.log.error(t);
         }
-      a.datasource && (f = a.datasource), a.placeholder !== void 0 && (v = a.placeholder);
+      a.datasource && (v = a.datasource), a.placeholder !== void 0 && (p = a.placeholder);
     }
-    const b = (t) => {
+    const g = (t) => {
       e.controller.hasAction && (t.stopPropagation(), e.controller.triggerAction(e.row, t));
-    }, u = m(() => {
+    }, d = m(() => {
       let t = e.row.data[e.controller.fieldName] || {};
-      return f === "ROWDATA" && (t = e.row.data), t;
-    }), l = m(() => u.value[d.name] || ""), C = m(() => u.value[d.id] || ""), w = () => {
-      const t = o.codeListItems;
+      return v === "ROWDATA" && (t = e.row.data), t;
+    }), n = m(() => d.value[u.name] || ""), f = m(() => d.value[u.id] || ""), w = () => {
+      const t = l.codeListItems;
       if (!t || t.length === 0)
         return "";
-      const s = t.find((i) => i.value && C.value && i.value === C.value || i.text && l.value && i.text === l.value) || {};
+      const s = t.find((i) => i.value && f.value && i.value === f.value || i.text && n.value && i.text === n.value) || {};
       if (s.data && s.data.iconurl) {
         const i = JSON.parse(s.data.iconurl);
         if (i.length > 0) {
           const {
-            downloadUrl: N
-          } = ibiz.util.file.calcFileUpDownUrl(o.context, o.params, e.row.data, {});
-          return N.replace("%fileId%", i[0].id);
+            downloadUrl: I
+          } = ibiz.util.file.calcFileUpDownUrl(l.context, l.params, e.row.data, {});
+          return I.replace("%fileId%", i[0].id);
         }
       }
       return "";
-    }, P = () => {
-      var s;
-      const t = w();
-      return t ? c("img", {
+    }, R = () => {
+      var t;
+      const s = w();
+      return s ? c("img", {
         class: r.bem("content", "head-sculpture", "avatar-icon"),
-        src: t,
+        src: s,
         alt: ""
-      }, null) : ((s = ibiz.util.text) == null ? void 0 : s.abbreviation(l.value)) || "";
+      }, null) : ((t = ibiz.util.text) == null ? void 0 : t.abbreviation(n.value)) || "";
     };
     return {
-      ns: n,
+      ns: o,
       ns2: r,
-      c: o,
-      fieldValue: u,
-      onCellClick: b,
+      c: l,
+      fieldValue: d,
+      onCellClick: g,
       renderContent: () => {
         var t;
-        return l.value ? c("div", {
+        return n.value ? c("div", {
           class: r.b("content")
         }, [c("div", {
           class: r.be("content", "head-sculpture"),
-          style: "background-color:".concat((t = ibiz.util.text) == null ? void 0 : t.stringToHexColor(l.value))
-        }, [P()]), l.value ? c("div", {
+          style: "background-color:".concat((t = ibiz.util.text) == null ? void 0 : t.stringToHexColor(n.value))
+        }, [R()]), n.value ? c("div", {
           class: r.be("content", "tip"),
-          title: l.value
-        }, [l.value]) : null]) : v;
+          title: n.value
+        }, [n.value]) : null]) : p;
       }
     };
   },
@@ -93,24 +91,24 @@ const p = /* @__PURE__ */ O({
     }, [this.renderContent()]);
   }
 });
-class x {
+class k {
   constructor() {
-    h(this, "component", "IBizGridPersonalInfoColumn");
+    E(this, "component", "IBizGridPersonalInfoColumn");
   }
-  async createController(n, r) {
-    const o = new I(n, r);
-    return await o.init(), o;
+  async createController(o, r) {
+    const l = new C(o, r);
+    return await l.init(), l;
   }
 }
-const k = {
+const S = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
   install(e) {
-    e.component(p.name, p), G(
+    e.component(b.name, b), N(
       "GRID_COLRENDER_PERSONAL_INFO_COLUMN",
-      () => new x()
+      () => new k()
     );
   }
 };
 export {
-  k as default
+  S as default
 };

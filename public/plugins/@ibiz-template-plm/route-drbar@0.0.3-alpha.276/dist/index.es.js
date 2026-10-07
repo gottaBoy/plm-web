@@ -1,34 +1,11 @@
 import './assets/style.css';
-import { registerControlProvider as k, hasSubRoute as P, ControlController as A, Srfuf as E, calcItemVisibleByCounter as R, calcItemVisible as M, OpenAppViewCommand as N, calcNavParams as O, CounterService as j } from "@ibiz-template/runtime";
-import { withInstall as z, useControlController as L, useNamespace as _, getNestedRoutePath as I, route2routePath as C, routePath2string as q } from "@ibiz-template/vue3-util";
-import { inject as U, defineComponent as G, reactive as J, onUnmounted as K, watch as D, createVNode as m, resolveComponent as g, createTextVNode as W, isVNode as Y } from "vue";
-import { isNil as X } from "ramda";
-/*!
-  * vue-router v4.2.5
-  * (c) 2023 Eduardo San Martin Morote
-  * @license MIT
-  */
-var T;
-(function(s) {
-  s.pop = "pop", s.push = "push";
-})(T || (T = {}));
-var x;
-(function(s) {
-  s.back = "back", s.forward = "forward", s.unknown = "";
-})(x || (x = {}));
-var V;
-(function(s) {
-  s[s.aborted = 4] = "aborted", s[s.cancelled = 8] = "cancelled", s[s.duplicated = 16] = "duplicated";
-})(V || (V = {}));
-const tt = Symbol(""), et = Symbol("");
-function F() {
-  return U(tt);
-}
-function H() {
-  return U(et);
-}
-var at = Object.defineProperty, st = (s, t, a) => t in s ? at(s, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : s[t] = a, b = (s, t, a) => (st(s, typeof t != "symbol" ? t + "" : t, a), a);
-class it extends A {
+import { registerControlProvider as T, hasSubRoute as P, ControlController as x, Srfuf as V, calcItemVisibleByCounter as N, calcItemVisible as A, OpenAppViewCommand as R, calcNavParams as E, CounterService as k } from "@ibiz-template/runtime";
+import { withInstall as M, useControlController as O, useNamespace as j, getNestedRoutePath as I, route2routePath as C, routePath2string as z } from "@ibiz-template/vue3-util";
+import { defineComponent as L, reactive as _, onUnmounted as q, watch as D, createVNode as m, resolveComponent as g, createTextVNode as Q, isVNode as U } from "vue";
+import { useRouter as F, useRoute as G } from "vue-router";
+import { isNil as Z } from "ramda";
+var $ = Object.defineProperty, K = (n, t, a) => t in n ? $(n, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : n[t] = a, b = (n, t, a) => (K(n, typeof t != "symbol" ? t + "" : t, a), a);
+class W extends x {
   constructor() {
     super(...arguments), b(this, "counter"), b(this, "router"), b(this, "routeItems", []), b(this, "enableBack", !1), b(this, "viewId", "");
   }
@@ -70,7 +47,7 @@ class it extends A {
    * @type {boolean}
    */
   get isCreate() {
-    return this.getData()[0].srfuf !== E.UPDATE;
+    return this.getData()[0].srfuf !== V.UPDATE;
   }
   /**
    * 获取数据
@@ -129,21 +106,21 @@ class it extends A {
    */
   calcItemStateByCounter(t, a = !0) {
     if (this.state.drBarItems.forEach((e) => {
-      var i;
-      if ((i = e.children) != null && i.length)
-        e.children.forEach((n) => {
-          const r = R(n, this.counter);
-          r !== void 0 && (n.visible = r);
-        }), e.visible = e.children.some((n) => n.visible);
+      var s;
+      if ((s = e.children) != null && s.length)
+        e.children.forEach((i) => {
+          const r = N(i, this.counter);
+          r !== void 0 && (i.visible = r);
+        }), e.visible = e.children.some((i) => i.visible);
       else {
-        const n = R(e, this.counter);
-        n !== void 0 && (e.visible = n);
+        const i = N(e, this.counter);
+        i !== void 0 && (e.visible = i);
       }
     }), this.state.selectedItem && a) {
-      const { visible: e, defaultVisibleItem: i } = this.getItemVisibleState(
+      const { visible: e, defaultVisibleItem: s } = this.getItemVisibleState(
         this.state.selectedItem
       );
-      !e && i && this.handleSelectChange(i.tag);
+      !e && s && this.handleSelectChange(s.tag);
     }
   }
   /**
@@ -159,13 +136,13 @@ class it extends A {
    */
   getItemVisibleState(t) {
     let a = !0, e;
-    return this.state.drBarItems.forEach((i) => {
-      if (i.children) {
-        e || (e = i.children.find((r) => r.visible));
-        const n = i.children.find((r) => r.tag === t);
-        n && (a = !!n.visible);
+    return this.state.drBarItems.forEach((s) => {
+      if (s.children) {
+        e || (e = s.children.find((r) => r.visible));
+        const i = s.children.find((r) => r.tag === t);
+        i && (a = !!i.visible);
       } else
-        !e && i.visible && (e = i), i.tag === t && (a = !!i.visible);
+        !e && s.visible && (e = s), s.tag === t && (a = !!s.visible);
     }), {
       visible: a,
       defaultVisibleItem: e
@@ -180,15 +157,15 @@ class it extends A {
   async calcPermitted(t) {
     var a;
     let e = !0;
-    const i = (a = this.getData()) != null && a.length ? this.getData()[0] : void 0, n = await M(
+    const s = (a = this.getData()) != null && a.length ? this.getData()[0] : void 0, i = await A(
       t,
       this.context,
       this.params,
       this.model.appDataEntityId,
       this.model.appId,
-      i
+      s
     );
-    n !== void 0 && (e = n), t.visible = e;
+    i !== void 0 && (e = i), t.visible = e;
   }
   /**
    * 计算是否展示
@@ -218,8 +195,8 @@ class it extends A {
     var t;
     await super.onMounted(), this.form ? (this.form.evt.on("onLoadSuccess", async (a) => {
       var e;
-      const i = (e = a.data) == null ? void 0 : e[0];
-      this.view.state.srfactiveviewdata = i, i && i.srfreadonly && (this.view.context.srfreadonly = !0), await this.calcDrBarItemsState(), this.doDefaultSelect();
+      const s = (e = a.data) == null ? void 0 : e[0];
+      this.view.state.srfactiveviewdata = s, s && s.srfreadonly && (this.view.context.srfreadonly = !0), await this.calcDrBarItemsState(), this.doDefaultSelect();
     }), this.form.evt.on("onLoadDraftSuccess", async () => {
       await this.calcDrBarItemsState(), this.doDefaultSelect();
     })) : (await this.calcDrBarItemsState(), this.doDefaultSelect()), (t = this.form) != null && t.state.isLoaded && this.doDefaultSelect();
@@ -254,15 +231,15 @@ class it extends A {
     const { dedrctrlItems: t, dedrbarGroups: a } = this.model, e = [];
     if (!this.state.hideEditItem) {
       const {
-        editItemCaption: n,
+        editItemCaption: i,
         editItemCapLanguageRes: r,
         editItemSysImage: l,
         uniqueTag: u
       } = this.model;
-      let c = n;
+      let c = i;
       r && (c = ibiz.i18n.t(
         r.lanResTag,
-        n
+        i
       )), e.push({
         tag: u,
         caption: c,
@@ -271,47 +248,47 @@ class it extends A {
         fullPath: this.router.currentRoute.value.fullPath
       }), this.state.defaultItem = u;
     }
-    const i = (n) => {
-      let r = n.caption;
-      n.capLanguageRes && (r = ibiz.i18n.t(n.capLanguageRes.lanResTag, n.caption));
-      const { enableMode: l, testAppDELogicId: u, testScriptCode: c, counterMode: p } = n;
+    const s = (i) => {
+      let r = i.caption;
+      i.capLanguageRes && (r = ibiz.i18n.t(i.capLanguageRes.lanResTag, i.caption));
+      const { enableMode: l, testAppDELogicId: u, testScriptCode: c, counterMode: p } = i;
       return {
-        tag: n.id,
+        tag: i.id,
         caption: r,
-        sysImage: n.sysImage,
+        sysImage: i.sysImage,
         disabled: !1,
-        counterId: n.counterId,
+        counterId: i.counterId,
         visible: !1,
         // 默认不显示
-        dataAccessAction: n.dataAccessAction || void 0,
+        dataAccessAction: i.dataAccessAction || void 0,
         enableMode: l,
         testAppDELogicId: u,
         testScriptCode: c,
         counterMode: p
       };
     };
-    a && t && (a.length === 1 ? t.forEach((n) => {
-      e.push(i(n));
-    }) : a.forEach((n) => {
+    a && t && (a.length === 1 ? t.forEach((i) => {
+      e.push(s(i));
+    }) : a.forEach((i) => {
       var r;
       const l = t.filter(
-        (u) => u.dedrbarGroupId === n.id
+        (u) => u.dedrbarGroupId === i.id
       );
       if (l.length > 1 || ((r = this.controlParams) == null ? void 0 : r.singleitemgroup) === "true" && l.length === 1) {
-        let u = n.caption;
-        n.capLanguageRes && (u = ibiz.i18n.t(
-          n.capLanguageRes.lanResTag,
-          n.caption
+        let u = i.caption;
+        i.capLanguageRes && (u = ibiz.i18n.t(
+          i.capLanguageRes.lanResTag,
+          i.caption
         )), e.push({
-          tag: n.id,
+          tag: i.id,
           caption: u,
-          sysImage: n.sysImage,
+          sysImage: i.sysImage,
           visible: !1,
           // 默认不显示
-          children: l.map((c) => i(c))
+          children: l.map((c) => s(c))
         });
       } else
-        l.length === 1 && e.push(i(l[0]));
+        l.length === 1 && e.push(s(l[0]));
     })), this.state.drBarItems = e;
   }
   /**
@@ -324,7 +301,7 @@ class it extends A {
     if (!this.viewId)
       return;
     const t = this.context.clone(), a = { ...this.params };
-    ibiz.commands.execute(N.TAG, this.viewId, t, a);
+    ibiz.commands.execute(R.TAG, this.viewId, t, a);
   }
   /**
    * 处理选中改变
@@ -336,27 +313,27 @@ class it extends A {
     var e;
     if (this.state.selectedItem === t)
       return;
-    const i = (e = this.model.dedrctrlItems) == null ? void 0 : e.find((n) => n.id === t);
-    if (i && this.routeItems.includes(t)) {
-      const { context: n, params: r } = this.prepareParams(i);
-      Object.assign(n, {
+    const s = (e = this.model.dedrctrlItems) == null ? void 0 : e.find((i) => i.id === t);
+    if (s && this.routeItems.includes(t)) {
+      const { context: i, params: r } = this.prepareParams(s);
+      Object.assign(i, {
         srfdefaulttoroutedepth: this.routeDepth
       }), ibiz.commands.execute(
-        N.TAG,
-        i.appViewId,
-        n,
+        R.TAG,
+        s.appViewId,
+        i,
         r
       );
       return;
     }
-    if (i)
-      this.setVisible("navPos"), this.openNavPosView(i, a);
+    if (s)
+      this.setVisible("navPos"), this.openNavPosView(s, a);
     else if (this.setVisible("form"), this.routeDepth) {
-      const n = I(
+      const i = I(
         this.router.currentRoute.value,
         this.routeDepth
       );
-      this.router.push(n);
+      this.router.push(i);
     }
     this.state.selectedItem = t;
   }
@@ -381,14 +358,14 @@ class it extends A {
    * @memberof DRBarController
    */
   prepareParams(t) {
-    const { navigateContexts: a, navigateParams: e } = t, i = {
+    const { navigateContexts: a, navigateParams: e } = t, s = {
       navContexts: a,
       navParams: e
-    }, n = {
+    }, i = {
       context: this.context,
       params: this.params,
       data: this.getData()[0]
-    }, { resultContext: r, resultParams: l } = O(i, n), u = Object.assign(this.context.clone(), r), c = { ...this.params, ...l };
+    }, { resultContext: r, resultParams: l } = E(s, i), u = Object.assign(this.context.clone(), r), c = { ...this.params, ...l };
     return { context: u, params: c };
   }
   /**
@@ -399,11 +376,11 @@ class it extends A {
    */
   async openNavPosView(t, a = !1) {
     var e;
-    const { context: i, params: n } = this.prepareParams(t);
-    i.currentSrfNav = t.id, this.state.srfnav = t.id, (e = this.navPos) == null || e.openView({
+    const { context: s, params: i } = this.prepareParams(t);
+    s.currentSrfNav = t.id, this.state.srfnav = t.id, (e = this.navPos) == null || e.openView({
       key: t.id,
-      context: i,
-      params: n,
+      context: s,
+      params: i,
       viewId: t.appViewId,
       isRoutePushed: a
     });
@@ -425,11 +402,11 @@ class it extends A {
       this.state.defaultItem = this.model.uniqueTag;
       return;
     }
-    const { drBarItems: i } = this.state;
-    let n = ((a = i[0].children) == null ? void 0 : a[0].tag) || i[0].tag;
-    if (this.routeDepth && this.state.srfnav && (n = this.state.srfnav), n) {
-      const r = !!this.routeDepth && P(this.routeDepth), { visible: l, defaultVisibleItem: u } = this.getItemVisibleState(n);
-      !l && u ? (n = u.tag, this.handleSelectChange(n)) : this.handleSelectChange(n, r);
+    const { drBarItems: s } = this.state;
+    let i = ((a = s[0].children) == null ? void 0 : a[0].tag) || s[0].tag;
+    if (this.routeDepth && this.state.srfnav && (i = this.state.srfnav), i) {
+      const r = !!this.routeDepth && P(this.routeDepth), { visible: l, defaultVisibleItem: u } = this.getItemVisibleState(i);
+      !l && u ? (i = u.tag, this.handleSelectChange(i)) : this.handleSelectChange(i, r);
     }
   }
   /**
@@ -444,11 +421,11 @@ class it extends A {
     if (a) {
       const e = C(this.router.currentRoute.value);
       this.routeDepth && (e.pathNodes = e.pathNodes.slice(0, this.routeDepth - 1));
-      const i = q(e);
-      this.counter = await j.getCounterByRef(
+      const s = z(e);
+      this.counter = await k.getCounterByRef(
         a,
         this.context,
-        i ? { srfcustomtag: i, ...this.params } : { ...this.params }
+        s ? { srfcustomtag: s, ...this.params } : { ...this.params }
       ), this.calcItemStateByCounter = this.calcItemStateByCounter.bind(this), this.counter.onChange(this.calcItemStateByCounter);
     }
   }
@@ -464,7 +441,7 @@ class it extends A {
     await super.onDestroyed(), this.counter && (this.counter.offChange(this.calcItemStateByCounter), this.counter.destroy());
   }
 }
-const nt = () => m("svg", {
+const X = () => m("svg", {
   viewBox: "0 0 16 16",
   xmlns: "http://www.w3.org/2000/svg",
   height: "1em",
@@ -479,10 +456,10 @@ const nt = () => m("svg", {
   d: "M7.4 4.15L4.438 7.315a.6.6 0 0 1-.876-.82l3.97-4.243a.598.598 0 0 1 .93-.057l3.97 4.323a.6.6 0 1 1-.885.812L8.6 4.118v9.149c0 .404-.269.733-.6.733-.332 0-.6-.329-.6-.733V4.15z",
   transform: "rotate(-90 7.995 8)"
 }, null)])]);
-function ot(s) {
-  return typeof s == "function" || Object.prototype.toString.call(s) === "[object Object]" && !Y(s);
+function tt(n) {
+  return typeof n == "function" || Object.prototype.toString.call(n) === "[object Object]" && !U(n);
 }
-const S = /* @__PURE__ */ G({
+const S = /* @__PURE__ */ L({
   name: "IBizRouteDrBarControl",
   props: {
     modelData: {
@@ -513,23 +490,23 @@ const S = /* @__PURE__ */ G({
       default: void 0
     }
   },
-  setup(s) {
-    const t = L((...o) => new it(...o)), a = _("route-drbar-control"), e = F(), i = J({}), n = (o) => {
-      Object.assign(i, o);
+  setup(n) {
+    const t = O((...o) => new W(...o)), a = j("route-drbar-control"), e = F(), s = _({}), i = (o) => {
+      Object.assign(s, o);
     };
     t.evt.on("onCreated", () => {
-      t.counter && t.counter.onChange(n, !0);
-    }), K(() => {
+      t.counter && t.counter.onChange(i, !0);
+    }), q(() => {
       var o;
-      (o = t.counter) == null || o.offChange(n);
+      (o = t.counter) == null || o.offChange(i);
     }), t.setRouter(e);
     const r = (o) => {
       t.handleSelectChange(o);
-    }, l = H();
+    }, l = G();
     let u = "";
     const c = [];
     D(() => t.state.isCreated, (o, v) => {
-      if (s.showMode !== "horizontal") {
+      if (n.showMode !== "horizontal") {
         const {
           drBarItems: d
         } = t.state;
@@ -554,7 +531,7 @@ const S = /* @__PURE__ */ G({
       if (o.visible) {
         if (o.children) {
           let v = "";
-          if (s.showMode === "horizontal" && o.tag !== t.state.selectedItem) {
+          if (n.showMode === "horizontal" && o.tag !== t.state.selectedItem) {
             const d = o.children.find((h) => h.tag === t.state.selectedItem);
             d && (v = "-".concat(d.caption));
           }
@@ -578,9 +555,9 @@ const S = /* @__PURE__ */ G({
           default: () => [m(g("iBizIcon"), {
             class: a.e("icon"),
             icon: o.sysImage
-          }, null), m("span", null, [o.caption]), o.counterId && i[o.counterId] != null && m(g("iBizBadge"), {
+          }, null), m("span", null, [o.caption]), o.counterId && s[o.counterId] != null && m(g("iBizBadge"), {
             class: a.e("counter"),
-            value: i[o.counterId],
+            value: s[o.counterId],
             counterMode: o.counterMode
           }, null)]
         });
@@ -595,13 +572,13 @@ const S = /* @__PURE__ */ G({
     };
   },
   render() {
-    let s;
+    let n;
     const {
       isCreated: t,
       drBarItems: a,
       selectedItem: e,
-      defaultItem: i,
-      isCalculatedPermission: n
+      defaultItem: s,
+      isCalculatedPermission: i
     } = this.c.state;
     return m(g("iBizControlBase"), {
       controller: this.c,
@@ -609,35 +586,35 @@ const S = /* @__PURE__ */ G({
     }, {
       default: () => {
         var r, l;
-        return [t && n && [this.c.enableBack && this.c.viewId && m("div", {
+        return [t && i && [this.c.enableBack && this.c.viewId && m("div", {
           class: this.ns.b("back-btn"),
           onClick: this.c.handleBack.bind(this.c)
         }, [m("div", {
           class: this.ns.be("back-btn", "icon")
-        }, [nt()]), m("div", {
+        }, [X()]), m("div", {
           class: this.ns.be("back-btn", "text")
-        }, [W("返回")])]), m(g("el-menu"), {
+        }, [Q("返回")])]), m(g("el-menu"), {
           class: [this.ns.e("menu"), !((l = (r = a[0]) == null ? void 0 : r.children) != null && l.length) && this.ns.em("menu", "signal")],
           mode: this.showMode,
-          "default-active": e || i,
+          "default-active": e || s,
           onSelect: this.handleSelect,
           "default-openeds": this.opens
-        }, ot(s = a.map((u) => this.renderMenuItems(u))) ? s : {
-          default: () => [s]
+        }, tt(n = a.map((u) => this.renderMenuItems(u))) ? n : {
+          default: () => [n]
         })]];
       }
     });
   }
 });
-class rt {
+class et {
   constructor() {
     b(this, "component", "IBizRouteDrBarControl");
   }
 }
-const lt = z(S, function(s) {
-  s.component(S.name, S), k("CUSTOM_ROUTE_DRBAR", () => new rt());
+const at = M(S, function(n) {
+  n.component(S.name, S), T("CUSTOM_ROUTE_DRBAR", () => new et());
 });
-class ct extends A {
+class st extends x {
   constructor() {
     super(...arguments), b(this, "counter"), b(this, "router");
   }
@@ -716,7 +693,7 @@ class ct extends A {
    */
   calcItemStateByCounter() {
     if (this.state.drTabPages.forEach((t) => {
-      const a = R(t, this.counter);
+      const a = N(t, this.counter);
       a !== void 0 && (t.hidden = !a);
     }), this.state.activeName) {
       const { visible: t, defaultVisibleItem: a } = this.getItemVisibleState(
@@ -738,8 +715,8 @@ class ct extends A {
    */
   getItemVisibleState(t) {
     let a = !0, e;
-    return this.state.drTabPages.forEach((i) => {
-      !e && !i.hidden && (e = i), i.tag === t && (a = !i.hidden);
+    return this.state.drTabPages.forEach((s) => {
+      !e && !s.hidden && (e = s), s.tag === t && (a = !s.hidden);
     }), {
       visible: a,
       defaultVisibleItem: e
@@ -756,15 +733,15 @@ class ct extends A {
   async calcPermitted(t) {
     var a;
     let e = !0;
-    const i = (a = this.getData()) != null && a.length ? this.getData()[0] : void 0, n = await M(
+    const s = (a = this.getData()) != null && a.length ? this.getData()[0] : void 0, i = await A(
       t,
       this.context,
       this.params,
       this.model.appDataEntityId,
       this.model.appId,
-      i
+      s
     );
-    n !== void 0 && (e = n), t.hidden = !e;
+    i !== void 0 && (e = i), t.hidden = !e;
   }
   /**
    * 计算项状态
@@ -803,7 +780,7 @@ class ct extends A {
    * @memberof DRTabController
    */
   handleFormChange() {
-    const t = this.getData()[0].srfuf !== E.UPDATE;
+    const t = this.getData()[0].srfuf !== V.UPDATE;
     this.setDRTabPagesState(this.state.drTabPages, t);
   }
   /**
@@ -826,15 +803,15 @@ class ct extends A {
   initDRTabPages() {
     var t, a, e;
     const {
-      editItemCaption: i,
-      editItemCapLanguageRes: n,
+      editItemCaption: s,
+      editItemCapLanguageRes: i,
       hideEditItem: r,
       editItemSysImage: l,
       uniqueTag: u,
       dedrtabPages: c
     } = this.model, p = [];
-    let o = i;
-    n && (o = ibiz.i18n.t(n.lanResTag, i)), r ? this.state.defaultName = (c == null ? void 0 : c[0].id) || "" : (p.push({
+    let o = s;
+    i && (o = ibiz.i18n.t(i.lanResTag, s)), r ? this.state.defaultName = (c == null ? void 0 : c[0].id) || "" : (p.push({
       tag: u,
       caption: o,
       hidden: !!r,
@@ -847,9 +824,9 @@ class ct extends A {
       const {
         enableMode: w,
         dataAccessAction: y,
-        testAppDELogicId: Q,
-        testScriptCode: Z,
-        counterMode: $
+        testAppDELogicId: J,
+        testScriptCode: Y,
+        counterMode: H
       } = h;
       p.push({
         tag: h.id,
@@ -860,9 +837,9 @@ class ct extends A {
         counterId: h.counterId,
         dataAccessAction: y,
         enableMode: w,
-        testAppDELogicId: Q,
-        testScriptCode: Z,
-        counterMode: $
+        testAppDELogicId: J,
+        testScriptCode: Y,
+        counterMode: H
       });
     }), this.state.drTabPages = p, this.view.state.srfnav ? this.state.activeName = this.view.state.srfnav : this.state.activeName = p[0].tag;
     const v = !!this.routeDepth && P(this.routeDepth), d = (t = this.model.dedrtabPages) == null ? void 0 : t.find(
@@ -890,10 +867,10 @@ class ct extends A {
    */
   handleTabChange(t = !1, a) {
     var e;
-    const { activeName: i } = this.state, n = (e = this.model.dedrtabPages) == null ? void 0 : e.find(
-      (r) => r.id === i
+    const { activeName: s } = this.state, i = (e = this.model.dedrtabPages) == null ? void 0 : e.find(
+      (r) => r.id === s
     );
-    n ? (this.setVisible("navPos"), this.openNavPosView(n, t, a)) : (this.setVisible("form"), this.routeDepth && this.state.drTabPages[0] && this.router.push(this.state.drTabPages[0].fullPath));
+    i ? (this.setVisible("navPos"), this.openNavPosView(i, t, a)) : (this.setVisible("form"), this.routeDepth && this.state.drTabPages[0] && this.router.push(this.state.drTabPages[0].fullPath));
   }
   /**
    * 设置显示状态
@@ -914,14 +891,14 @@ class ct extends A {
    * @memberof DRTabController
    */
   prepareParams(t) {
-    const { navigateContexts: a, navigateParams: e } = t, i = {
+    const { navigateContexts: a, navigateParams: e } = t, s = {
       navContexts: a,
       navParams: e
-    }, n = {
+    }, i = {
       context: this.context,
       params: this.params,
       data: this.getData()[0]
-    }, { resultContext: r, resultParams: l } = O(i, n), u = Object.assign(this.context.clone(), r, {
+    }, { resultContext: r, resultParams: l } = E(s, i), u = Object.assign(this.context.clone(), r, {
       currentSrfNav: t.id
     }), c = { ...this.params, ...l };
     return { context: u, params: c };
@@ -936,11 +913,11 @@ class ct extends A {
    * @return {*}  {Promise<void>}
    */
   async openNavPosView(t, a = !1, e) {
-    var i;
-    const { context: n, params: r } = this.prepareParams(t);
-    (i = this.navPos) == null || i.openView({
+    var s;
+    const { context: i, params: r } = this.prepareParams(t);
+    (s = this.navPos) == null || s.openView({
       key: e || t.id,
-      context: n,
+      context: i,
       params: r,
       viewId: t.appViewId,
       isRoutePushed: a
@@ -958,11 +935,11 @@ class ct extends A {
     if (a) {
       const e = C(this.router.currentRoute.value);
       this.routeDepth && (e.pathNodes = e.pathNodes.slice(0, this.routeDepth - 1));
-      const i = q(e);
-      this.counter = await j.getCounterByRef(
+      const s = z(e);
+      this.counter = await k.getCounterByRef(
         a,
         this.context,
-        i ? { srfcustomtag: i, ...this.params } : { ...this.params }
+        s ? { srfcustomtag: s, ...this.params } : { ...this.params }
       ), this.calcItemStateByCounter = this.calcItemStateByCounter.bind(this), this.counter.onChange(this.calcItemStateByCounter);
     }
   }
@@ -978,10 +955,10 @@ class ct extends A {
     await super.onDestroyed(), this.counter && (this.counter.offChange(this.calcItemStateByCounter), this.counter.destroy());
   }
 }
-function ht(s) {
-  return typeof s == "function" || Object.prototype.toString.call(s) === "[object Object]" && !Y(s);
+function it(n) {
+  return typeof n == "function" || Object.prototype.toString.call(n) === "[object Object]" && !U(n);
 }
-const B = /* @__PURE__ */ G({
+const B = /* @__PURE__ */ L({
   name: "IBizRouteDrTabControl",
   props: {
     modelData: {
@@ -1001,75 +978,75 @@ const B = /* @__PURE__ */ G({
     }
   },
   setup() {
-    const s = L((...c) => new ct(...c)), t = _("route-drtab-control"), a = F(), e = J({}), i = (c) => {
+    const n = O((...c) => new st(...c)), t = j("route-drtab-control"), a = F(), e = _({}), s = (c) => {
       Object.assign(e, c);
     };
-    s.evt.on("onCreated", () => {
-      s.counter && s.counter.onChange(i, !0);
-    }), K(() => {
+    n.evt.on("onCreated", () => {
+      n.counter && n.counter.onChange(s, !0);
+    }), q(() => {
       var c;
-      (c = s.counter) == null || c.offChange(i);
-    }), s.setRouter(a);
-    const n = () => {
-      s.handleTabChange();
+      (c = n.counter) == null || c.offChange(s);
+    }), n.setRouter(a);
+    const i = () => {
+      n.handleTabChange();
     }, r = (c) => {
       var p, o, v;
-      const d = (p = s.model.dedrtabPages) == null ? void 0 : p.find((h) => h.id === c.paneName);
+      const d = (p = n.model.dedrtabPages) == null ? void 0 : p.find((h) => h.id === c.paneName);
       if (d) {
-        const h = (o = C(l).pathNodes[s.routeDepth]) == null ? void 0 : o.viewName, f = (v = d.appViewId) == null ? void 0 : v.split(".")[1];
+        const h = (o = C(l).pathNodes[n.routeDepth]) == null ? void 0 : o.viewName, f = (v = d.appViewId) == null ? void 0 : v.split(".")[1];
         if (f && h && f === h)
           return;
       }
-      s.state.activeName = c.paneName, s.handleTabChange();
-    }, l = H();
+      n.state.activeName = c.paneName, n.handleTabChange();
+    }, l = G();
     let u = "";
-    return s.routeDepth && (u = I(l, s.routeDepth)), D(() => a.currentRoute.value, (c, p) => {
+    return n.routeDepth && (u = I(l, n.routeDepth)), D(() => a.currentRoute.value, (c, p) => {
       var o, v;
-      if (s.routeDepth && s.navPos) {
+      if (n.routeDepth && n.navPos) {
         const {
           pathNodes: d
         } = C(c), {
           pathNodes: h
-        } = C(p), f = I(p, s.routeDepth + 1), w = I(l, s.routeDepth + 1);
+        } = C(p), f = I(p, n.routeDepth + 1), w = I(l, n.routeDepth + 1);
         if (f === w)
           return;
-        const y = ((o = d[s.routeDepth + 1]) == null ? void 0 : o.viewName) === "route-modal" || ((v = h[s.routeDepth + 1]) == null ? void 0 : v.viewName) === "route-modal";
-        w && !y && s.navPos.openView({
+        const y = ((o = d[n.routeDepth + 1]) == null ? void 0 : o.viewName) === "route-modal" || ((v = h[n.routeDepth + 1]) == null ? void 0 : v.viewName) === "route-modal";
+        w && !y && n.navPos.openView({
           key: w,
           isRoutePushed: !0,
-          context: s.context.clone(),
+          context: n.context.clone(),
           params: {
-            ...s.params
+            ...n.params
           }
         });
       }
     }), D(() => l.fullPath, (c, p) => {
       if (c !== p) {
-        const o = s.routeDepth;
-        if (o && I(l, s.routeDepth) === u) {
+        const o = n.routeDepth;
+        if (o && I(l, n.routeDepth) === u) {
           const v = C(l), {
             srfnav: d
-          } = v.pathNodes[o - 1], h = !!s.routeDepth && P(s.routeDepth);
-          if (d && s.state.activeName && s.state.activeName !== d)
-            s.state.activeName = d, s.handleTabChange(h);
+          } = v.pathNodes[o - 1], h = !!n.routeDepth && P(n.routeDepth);
+          if (d && n.state.activeName && n.state.activeName !== d)
+            n.state.activeName = d, n.handleTabChange(h);
           else if (!d) {
-            const f = !!s.routeDepth && !P(s.routeDepth);
-            (s.state.activeName !== s.state.defaultName || f) && (s.state.activeName = s.state.defaultName, s.handleTabChange(h));
+            const f = !!n.routeDepth && !P(n.routeDepth);
+            (n.state.activeName !== n.state.defaultName || f) && (n.state.activeName = n.state.defaultName, n.handleTabChange(h));
           }
         }
       }
     }, {
       immediate: !0
     }), {
-      c: s,
+      c: n,
       ns: t,
       counterData: e,
-      handleTabChange: n,
+      handleTabChange: i,
       handleTabClick: r
     };
   },
   render() {
-    let s;
+    let n;
     const {
       isCreated: t,
       drTabPages: a,
@@ -1082,42 +1059,42 @@ const B = /* @__PURE__ */ G({
       default: () => [t && e && m(g("el-tabs"), {
         modelValue: this.c.state.activeName,
         onTabClick: this.handleTabClick
-      }, ht(s = a.map((i) => {
-        const n = i.counterId ? this.counterData[i.counterId] : void 0;
-        return i.hidden ? null : m(g("el-tab-pane"), {
+      }, it(n = a.map((s) => {
+        const i = s.counterId ? this.counterData[s.counterId] : void 0;
+        return s.hidden ? null : m(g("el-tab-pane"), {
           class: this.ns.e("tab-item"),
-          label: i.caption + n,
-          disabled: i.disabled,
-          name: i.tag
+          label: s.caption + i,
+          disabled: s.disabled,
+          name: s.tag
         }, {
           label: () => m("span", {
             class: this.ns.b("label")
           }, [m("span", {
             class: this.ns.be("label", "text")
-          }, [i.caption]), !X(n) && m(g("iBizBadge"), {
+          }, [s.caption]), !Z(i) && m(g("iBizBadge"), {
             class: this.ns.e("counter"),
-            value: n,
-            counterMode: i.counterMode
+            value: i,
+            counterMode: s.counterMode
           }, null)])
         });
-      })) ? s : {
-        default: () => [s]
+      })) ? n : {
+        default: () => [n]
       })]
     });
   }
 });
-class ut {
+class nt {
   constructor() {
     b(this, "component", "IBizRouteDrTabControl");
   }
 }
-const dt = z(B, function(s) {
-  s.component(B.name, B), k("CUSTOM_ROUTE_DRTAB", () => new ut());
-}), gt = {
-  install(s) {
-    s.use(lt), s.use(dt);
+const ot = M(B, function(n) {
+  n.component(B.name, B), T("CUSTOM_ROUTE_DRTAB", () => new nt());
+}), dt = {
+  install(n) {
+    n.use(at), n.use(ot);
   }
 };
 export {
-  gt as default
+  dt as default
 };

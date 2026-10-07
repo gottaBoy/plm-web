@@ -4,8 +4,9 @@
   "description": "ibiz full-dynamic-vue 模板项目扩展插件示例",
   "author": "chitanda",
   "license": "MIT",
-  "main": "lib/index.cjs",
-  "module": "es/index.mjs",
+  "type": "module",
+  "main": "dist/index.es.js",
+  "module": "dist/index.es.js",
   "types": "es/index.d.ts",
   "system": "dist/index.system.min.js",
   "styles": [
@@ -23,9 +24,9 @@
     "registry": "http://172.16.240.221:8081/repository/local/"
   },
   "scripts": {
-    "dev": "ibiz-temp build -w",
+    "dev": "vite build --watch",
     "lint": "vue-tsc --noEmit && eslint 'src/**/*.tsx' 'src/**/*.ts'",
-    "build": "ibiz-temp build -c && vue-tsc --declaration --emitDeclarationOnly",
+    "build": "vite build",
     "preview": "vite preview",
     "publish:next": "npm run build && npm publish --access public --tag=next --registry=http://172.16.240.221:8081/repository/local/",
     "publish:dev": "npm run build && npm publish --access public --tag=dev --registry=http://172.16.240.221:8081/repository/local/",

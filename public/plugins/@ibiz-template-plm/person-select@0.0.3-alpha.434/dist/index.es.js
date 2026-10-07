@@ -1,25 +1,25 @@
 import './assets/style.css';
-import { EditorController as he, getDeACMode as ue, UIActionUtil as pe, OpenAppViewCommand as J, registerEditorProvider as me } from "@ibiz-template/runtime";
-import { useNamespace as N, getDataPickerProps as fe, getEditorEmits as ve, renderString as ge, withInstall as be } from "@ibiz-template/vue3-util";
-import { defineComponent as Z, ref as u, onMounted as Y, watch as D, createVNode as o, computed as we, nextTick as Ee, onBeforeUnmount as Pe, resolveComponent as k, createTextVNode as P } from "vue";
-import { isArray as ye } from "lodash-es";
-import { clone as G, mergeDeepLeft as Te } from "ramda";
-import { RuntimeModelError as j } from "@ibiz-template/core";
+import { EditorController as Ne, getDeACMode as Ce, UIActionUtil as Me, OpenAppViewCommand as he, registerEditorProvider as xe } from "@ibiz-template/runtime";
+import { useNamespace as x, getDataPickerProps as Oe, getEditorEmits as Fe, renderString as De, withInstall as Ue } from "@ibiz-template/vue3-util";
+import { defineComponent as pe, ref as h, onMounted as me, watch as L, createVNode as o, computed as Le, nextTick as je, onBeforeUnmount as Ve, resolveComponent as _, createTextVNode as y } from "vue";
+import { isArray as ke } from "lodash-es";
+import { clone as fe, mergeDeepLeft as Re } from "ramda";
+import { RuntimeModelError as $ } from "@ibiz-template/core";
 import { notNilEmpty as U } from "qx-util";
-class Se {
+class Be {
   /**
    * 计算多选场景下可绘制的选中项数量。
    */
   static calcSelItemRenderNum(i, t) {
     let a = -1;
     if (t && (i == null ? void 0 : i.length) > 0) {
-      const e = (t == null ? void 0 : t.offsetWidth) || 0, r = window.getComputedStyle(t), d = parseInt(r.marginLeft, 10), n = parseInt(r.marginRight, 10), h = parseInt(r.paddingLeft, 10), y = parseInt(r.paddingRight, 10), b = d + n + h + y, g = 32, v = 8, w = (g + v) * i.length;
-      e - b - w < 0 && (a = Math.floor((e - b) / (g + v)), a = Math.max(a - 1, 0));
+      const e = (t == null ? void 0 : t.offsetWidth) || 0, l = window.getComputedStyle(t), u = parseInt(l.marginLeft, 10), n = parseInt(l.marginRight, 10), p = parseInt(l.paddingLeft, 10), I = parseInt(l.paddingRight, 10), f = u + n + p + I, g = 32, v = 8, b = (g + v) * i.length;
+      e - f - b < 0 && (a = Math.floor((e - f) / (g + v)), a = Math.max(a - 1, 0));
     }
     return a;
   }
 }
-const Ae = /* @__PURE__ */ Z({
+const ze = /* @__PURE__ */ pe({
   name: "VirtualList",
   props: {
     items: {
@@ -36,31 +36,31 @@ const Ae = /* @__PURE__ */ Z({
     }
   },
   emits: ["scrollEvent"],
-  setup(l, {
+  setup(r, {
     emit: i
   }) {
-    const t = N("virtual-list"), a = u(36), e = u(), r = u([]), d = u(0);
-    let n = 0, h = 0, y = 0;
-    const b = () => {
-      h = Math.floor(n / l.itemHeight), y = h + l.showNum, r.value = l.items.slice(h, y), d.value = n - n % l.itemHeight;
+    const t = x("virtual-list"), a = h(36), e = h(), l = h([]), u = h(0);
+    let n = 0, p = 0, I = 0;
+    const f = () => {
+      p = Math.floor(n / r.itemHeight), I = p + r.showNum, l.value = r.items.slice(p, I), u.value = n - n % r.itemHeight;
     }, g = () => {
-      n = e.value.scrollTop, b(), i("scrollEvent", a.value, n);
+      n = e.value.scrollTop, f(), i("scrollEvent", a.value, n);
     };
-    return Y(() => {
+    return me(() => {
       setTimeout(() => {
-        b();
+        f();
       }, 1e3);
-    }), D(() => l.items, () => {
-      a.value = l.itemHeight * l.items.length, b();
+    }), L(() => r.items, () => {
+      a.value = r.itemHeight * r.items.length, f();
     }, {
       immediate: !0,
       deep: !0
     }), {
       ns: t,
       contentHeight: a,
-      showList: r,
+      showList: l,
       contentBox: e,
-      top: d,
+      top: u,
       onScroll: g
     };
   },
@@ -75,18 +75,18 @@ const Ae = /* @__PURE__ */ Z({
     }, [o("div", {
       class: this.ns.e("content"),
       style: "top:".concat(this.top, "px;")
-    }, [this.showList.map((l, i) => o("div", {
+    }, [this.showList.map((r, i) => o("div", {
       key: i,
       class: this.ns.m("item")
     }, [this.$slots.default ? this.$slots.default({
-      ...l,
+      ...r,
       index: i
-    }) : l.name]))])])]);
+    }) : r.name]))])])]);
   }
-}), R = /* @__PURE__ */ Z({
+}), H = /* @__PURE__ */ pe({
   name: "PersonelSelect",
   props: {
-    ...fe(),
+    ...Oe(),
     controller: {
       type: Object,
       required: !0
@@ -114,170 +114,184 @@ const Ae = /* @__PURE__ */ Z({
       required: !0
     }
   },
-  emits: ve(),
-  setup(l, {
+  emits: Fe(),
+  setup(r, {
     emit: i
   }) {
-    const t = N("picker-dropdown"), a = N("personel-select"), e = l.controller, r = e.valueType === "OBJECTS" && (l.overflowMode === "ellipsis" || !!e.defaultAttentionValue), d = u(""), n = u([]), h = u([]), y = u(null), b = u(""), g = u(!1);
-    u(!1);
-    const v = u(""), w = u([]), C = u("user"), B = u([]), Q = u(!1);
-    u(!1), u(!1);
-    const _ = u(!1);
-    u("");
-    const ee = u(), L = u();
-    let A;
-    const te = u(), T = u(0);
-    let I;
-    const F = u(295), ie = we(() => !!(l.controlParams && l.controlParams.editmode === "hover")), M = () => {
+    const t = x("picker-dropdown"), a = x("personel-select"), e = r.controller, l = e.valueType === "OBJECTS" && (r.overflowMode === "ellipsis" || !!e.defaultAttentionValue), u = h(""), n = h([]), p = h([]), I = h(null), f = h(""), g = h(!1);
+    h(!1);
+    const v = h(""), b = h([]), O = h("user"), W = h([]), j = h(!1);
+    h(!1), h(!1);
+    const K = h(!1);
+    h("");
+    const ve = h(), V = h();
+    let N;
+    const ge = h(), S = h(0);
+    let C;
+    const k = h(295), be = Le(() => !!(r.controlParams && r.controlParams.editmode === "hover")), F = () => {
       let s = 295;
-      if (L.value) {
-        const c = L.value.getBoundingClientRect(), f = 16, E = e.enableBottomButton ? 464 : 415, m = E - s, p = c.top < E + f, O = window.innerHeight - c.bottom < E + f;
-        if (p && O) {
-          const x = window.innerHeight - c.bottom - f - m;
-          s = Math.max(50, Math.min(Math.floor(x), 295));
+      if (V.value) {
+        const d = V.value.getBoundingClientRect(), w = 16, P = e.enableBottomButton ? 464 : 415, c = P - s, m = d.top < P + w, E = window.innerHeight - d.bottom < P + w;
+        if (m && E) {
+          const T = window.innerHeight - d.bottom - w - c;
+          s = Math.max(50, Math.min(Math.floor(T), 295));
         }
       }
-      F.value = s;
-    }, se = (s) => /^https?:|^data:image|(\.png$|\.svg|\.jpg|\.png|\.gif|\.psd|\.tif|\.bmp|\.jpeg)$/.test(s), z = (s) => {
-      const c = [], f = [];
-      B.value = [];
-      const E = (m) => {
-        var O, x, q;
-        const p = G(m);
-        return (O = e.selfFillMap) != null && O.user_id && ((x = e.selfFillMap) != null && x.user_name) && Object.assign(p, {
-          id: m[e.selfFillMap.user_id],
-          name: m[e.selfFillMap.user_name]
-        }), (q = e.selfFillMap) != null && q.user_title && Object.assign(p, {
-          title: m[e.selfFillMap.user_title]
-        }), p;
-      };
-      if (ye(s))
-        s.forEach((m) => {
-          const p = E(m);
-          p && (c.push(p), f.push(String(p.id)));
+      k.value = s;
+    }, we = (s) => /^https?:|^data:image|(\.png$|\.svg|\.jpg|\.png|\.gif|\.psd|\.tif|\.bmp|\.jpeg)$/.test(s), R = (s) => {
+      const d = [], w = [];
+      W.value = [];
+      const P = (c) => {
+        var ie, se, ae, le, oe, re, ne, de, ce;
+        if (typeof c != "object" || c === null) {
+          const Ae = d.length, D = String((se = (ie = r.data) == null ? void 0 : ie[e.valueItem]) != null ? se : "").split(e.separator)[Ae] || String(c), ue = e.isAddSymbol && D.startsWith("'") && D.endsWith("'") ? D.slice(1, -1) : D;
+          return {
+            id: ue,
+            name: String(c),
+            [e.keyName]: ue,
+            [e.textName]: String(c)
+          };
+        }
+        const m = c, E = e.valueType === "OBJECT" || e.valueType === "OBJECTS", T = fe(E && e.objectValueField && m[e.objectValueField] ? m[e.objectValueField] : m), G = E && e.objectIdField ? e.objectIdField : (ae = e.selfFillMap) == null ? void 0 : ae.user_id, Q = E && e.objectNameField ? e.objectNameField : (le = e.selfFillMap) == null ? void 0 : le.user_name, ee = (re = (oe = G && m[G]) != null ? oe : T.id) != null ? re : T[e.keyName], te = (de = (ne = Q && m[Q]) != null ? ne : T.name) != null ? de : T[e.textName];
+        Object.assign(T, {
+          id: ee,
+          name: te,
+          [e.keyName]: ee,
+          [e.textName]: te
         });
-      else if (s != null && s !== "") {
-        const m = E(s);
-        m && (c.push(m), f.push(String(m.id)));
-      }
-      h.value = c, w.value = f, b.value = c.map((m) => m.name).join(",");
-    }, S = async (s = !1) => {
+        const z = (ce = e.selfFillMap) == null ? void 0 : ce.user_title;
+        return z && m[z] !== void 0 && (T.title = m[z]), T;
+      };
+      ke(s) ? s.forEach((c) => {
+        const m = P(c);
+        m && (d.push(m), w.push(String(m.id)));
+      }) : s != null && s !== "" && (e.multiple && typeof s == "string" ? s.split(e.separator) : [s]).forEach((m) => {
+        const E = P(m);
+        E && (d.push(E), w.push(String(E.id)));
+      }), p.value = d, b.value = w, f.value = d.map((c) => c.name).join(e.separator);
+    }, A = async (s = !1) => {
       s && (e.resetState(), n.value = []), g.value = !0;
       try {
-        const c = await e.loadMore(l.data, C.value, v.value ? {
+        const d = await e.loadMore(r.data, O.value, v.value ? {
           query: v.value
         } : {});
-        c != null && c.data && (n.value = s ? c.data : n.value.concat(c.data));
+        d != null && d.data && (n.value = s ? d.data : n.value.concat(d.data));
       } finally {
         g.value = !1;
       }
-    }, $ = (s) => {
-      s.stopPropagation(), i("change", null, e.name), i("infoTextChange", "");
-    }, H = (s) => {
+    }, X = (s) => {
+      s.stopPropagation(), e.dataItems.forEach((d) => i("change", null, d.id)), e.valueItem && i("change", null, e.valueItem), i("change", null), i("infoTextChange", ""), R(null), j.value = !1, M(!1);
+    }, q = async (s) => {
       if (e.multiple) {
-        const f = w.value.findIndex((p) => p === String(s.id));
-        f >= 0 ? (w.value.splice(f, 1), h.value.splice(f, 1)) : (w.value.push(String(s.id)), h.value.push(s));
-        let E = h.value.map((p) => p[e.keyName]);
-        e.valueType === "OBJECTS" && (E = h.value.map((p) => e.handleObjectParams(p)));
-        let m = E;
-        e.valueType !== "OBJECTS" && (m = E.join(e.separator), e.isAddSymbol && (m = E.map((p) => "'".concat(p, "'")).join(e.separator))), i("change", m, e.name), i("infoTextChange", h.value.map((p) => p.name).join(","));
-        return;
+        const c = b.value.findIndex((m) => m === String(s.id));
+        c >= 0 ? (b.value.splice(c, 1), p.value.splice(c, 1)) : (b.value.push(String(s.id)), p.value.push(s));
+      } else
+        p.value = [s], b.value = [String(s.id)];
+      const d = p.value;
+      if ((await e.calcFillDataItems(d)).forEach((c) => i("change", c.value, c.id)), e.valueItem) {
+        const c = d.map((E) => E.id);
+        let m = e.multiple ? c.join(e.separator) : c[0];
+        e.multiple && e.isAddSymbol && (m = c.map((E) => "'".concat(E, "'")).join(e.separator)), i("change", m, e.valueItem);
       }
-      let c = s[e.keyName];
-      e.valueType === "OBJECTS" && (c = e.handleObjectParams(s)), i("change", c, e.name), i("infoTextChange", s.name);
-    }, ae = async () => {
-      e.isShowTab && !B.value.length && e.defaultSelCurUser && await e.initCurrentOperator(l.data, {}), n.value.length || await S(!0);
-    }, re = () => {
-      v.value = "";
-    }, oe = (s) => {
-      _.value = s, i(s ? "focus" : "blur");
-    }, le = (s) => {
-      l.disabled && s.stopPropagation();
-    }, W = () => {
-      I && window.clearTimeout(I), I = window.setTimeout(() => {
-        T.value = Se.calcSelItemRenderNum(w.value, te.value);
+      f.value = d.map((c) => c.name).join(e.separator);
+      let P = f.value;
+      e.valueType === "OBJECTS" ? P = d.map((c) => e.handleObjectParams(c)) : e.valueType === "OBJECT" && (P = e.handleObjectParams(s)), i("change", P), i("infoTextChange", f.value), e.multiple || (j.value = !1, M(!1));
+    }, Ee = async () => {
+      M(!0), e.isShowTab && !W.value.length && e.defaultSelCurUser && await e.initCurrentOperator(r.data, {}), n.value.length || await A(!0);
+    }, Pe = () => {
+      v.value = "", M(!1);
+    }, M = (s) => {
+      K.value = s, i(s ? "focus" : "blur");
+    }, ye = (s) => {
+      r.disabled && s.stopPropagation();
+    }, J = () => {
+      C && window.clearTimeout(C), C = window.setTimeout(() => {
+        S.value = Be.calcSelItemRenderNum(b.value, ge.value);
       }, 500);
     };
-    D(() => l.value, (s) => {
-      z(s), d.value = s ? String(s) : "", W();
+    L([() => r.value, () => {
+      var s;
+      return (s = r.data) == null ? void 0 : s[e.valueItem];
+    }], ([s]) => {
+      R(s), u.value = s ? String(s) : "", J();
     }, {
       immediate: !0,
       deep: !0
-    }), D(v, () => {
-      A && window.clearTimeout(A), A = window.setTimeout(() => {
-        S(!0);
+    }), L(v, () => {
+      N && window.clearTimeout(N), N = window.setTimeout(() => {
+        A(!0);
       }, 500);
-    }), D(w, () => {
-      W();
-    }), Y(() => {
-      Ee(() => {
-        z(l.value);
-      }), window.addEventListener("resize", M), M();
-    }), Pe(() => {
-      window.removeEventListener("resize", M), A && window.clearTimeout(A), I && window.clearTimeout(I);
+    }), L(b, () => {
+      J();
+    }), me(() => {
+      je(() => {
+        R(r.value);
+      }), window.addEventListener("resize", F), F();
+    }), Ve(() => {
+      window.removeEventListener("resize", F), N && window.clearTimeout(N), C && window.clearTimeout(C);
     });
-    const V = (s) => {
-      var f;
-      const c = e.getUserPictureUrl(s[e.keyName], s[e.textName]);
-      return c && se(c) ? o("img", {
+    const B = (s) => {
+      var w;
+      const d = e.getUserPictureUrl(s[e.keyName], s[e.textName]);
+      return d && we(d) ? o("img", {
         class: t.e("list-avatar"),
-        src: c
-      }, null) : o("span", null, [(f = s.name) == null ? void 0 : f.slice(0, 1)]);
-    }, ne = (s, c) => o("div", {
+        src: d
+      }, null) : o("span", null, [(w = s.name) == null ? void 0 : w.slice(0, 1)]);
+    }, Ie = (s, d) => o("div", {
       class: t.e("multiple-item")
     }, [o("div", {
       class: t.e("multiple-item-textimg")
-    }, [V(s), e.isShowNameText() && o("span", null, [s.name])]), !l.disabled && !l.readonly && o("span", {
+    }, [B(s), e.isShowNameText() && o("span", null, [s.name])]), !r.disabled && !r.readonly && o("span", {
       class: t.e("multiple-item-close"),
-      onClick: (f) => {
-        f.stopPropagation(), H(s);
+      onClick: (w) => {
+        w.stopPropagation(), q(s);
       }
-    }, [P("×")])]), de = () => {
+    }, [y("×")])]), Te = () => {
       if (!e.multiple)
         return o("div", {
           class: t.e("select-value")
         }, [o("div", {
           class: t.e("select-value-textimg")
-        }, [h.value.length ? V(h.value[0]) : o("span", null, [P("+")])]), e.isShowNameText() && o("div", {
+        }, [p.value.length ? B(p.value[0]) : o("span", null, [y("+")])]), e.isShowNameText() && o("div", {
           class: t.e("select-value-text")
-        }, [ge(b.value)]), !l.disabled && !l.readonly && h.value.length ? o("span", {
+        }, [De(f.value)]), !r.disabled && !r.readonly && p.value.length ? o("span", {
           class: t.e("select-value-close"),
-          onClick: $
-        }, [P("×")]) : null]);
-      const s = T.value >= 0 && r ? h.value.slice(0, T.value) : h.value;
+          onClick: X
+        }, [y("×")]) : null]);
+      const s = S.value >= 0 && l ? p.value.slice(0, S.value) : p.value;
       return o("div", {
-        class: [t.e("select-value-multiple"), r && T.value >= 0 ? t.e("select-value-multiple-hidden") : ""]
-      }, [s.map(ne), r && T.value >= 0 && h.value.length > T.value && o("div", {
+        class: [t.e("select-value-multiple"), l && S.value >= 0 ? t.e("select-value-multiple-hidden") : ""]
+      }, [s.map(Ie), l && S.value >= 0 && p.value.length > S.value && o("div", {
         class: a.e("multiple-ellipsis-default")
-      }, [P("…")])]);
-    }, K = (s = !1) => s ? o("div", null, [P("暂无数据")]) : o("div", {
+      }, [y("…")])]);
+    }, Z = (s = !1) => s ? o("div", null, [y("暂无数据")]) : o("div", {
       class: t.e("no-select-value")
-    }, [o("span", null, [P("+")])]), ce = () => g.value ? o("div", {
+    }, [o("span", null, [y("+")])]), Se = () => g.value ? o("div", {
       class: t.e("loadmore")
-    }, [P("加载中...")]) : n.value.length ? o(Ae, {
+    }, [y("加载中...")]) : n.value.length ? o(ze, {
       items: n.value,
       itemHeight: 36,
       showNum: 20,
-      onScrollEvent: async (s, c) => {
-        s - c - F.value < 40 && await S(!1);
+      onScrollEvent: async (s, d) => {
+        s - d - k.value < 40 && await A(!1);
       }
     }, {
       default: (s) => o("div", {
-        class: [t.e("personel-list-item"), w.value.includes(String(s.id)) ? "is-selected" : ""],
-        onClick: () => H(s)
+        class: [t.e("personel-list-item"), b.value.includes(String(s.id)) ? "is-selected" : ""],
+        onClick: () => q(s)
       }, [o("div", {
         class: t.e("personel-list-text")
       }, [o("div", {
         class: t.e("personel-list-text-img")
-      }, [V(s)]), o("span", null, [s.name]), s.title && o("span", {
+      }, [B(s)]), o("span", null, [s.name]), s.title && o("span", {
         class: t.e("personel-list-title-label")
       }, [s.title])])])
-    }) : K(!0), X = () => {
-      const s = k("ElInput");
+    }) : Z(!0), Y = () => {
+      const s = _("ElInput");
       return o(s, {
         modelValue: v.value,
-        "onUpdate:modelValue": (c) => {
-          v.value = c;
+        "onUpdate:modelValue": (d) => {
+          v.value = d;
         },
         placeholder: "搜索",
         clearable: !0
@@ -289,59 +303,59 @@ const Ae = /* @__PURE__ */ Z({
       ns2: a,
       items: n,
       loading: g,
-      refValue: d,
-      curValue: y,
-      valueText: b,
-      isEditable: _,
-      popoverRef: ee,
-      modelVisible: Q,
-      personelSelRef: L,
-      showFormDefaultContent: ie,
-      load: S,
-      onClear: $,
-      onPopShow: ae,
-      onPageHide: re,
-      calcHeight: M,
-      handleClick: le,
-      setEditable: oe,
+      refValue: u,
+      curValue: I,
+      valueText: f,
+      isEditable: K,
+      popoverRef: ve,
+      modelVisible: j,
+      personelSelRef: V,
+      showFormDefaultContent: be,
+      load: A,
+      onClear: X,
+      onPopShow: Ee,
+      onPageHide: Pe,
+      calcHeight: F,
+      handleClick: ye,
+      setEditable: M,
       renderDropModal: () => {
-        const s = k("ElPopover");
+        const s = _("ElPopover");
         return o("div", {
           class: t.e("select-modal"),
-          style: "height:".concat(F.value, "px;")
+          style: "height:".concat(k.value, "px;")
         }, [o("div", {
           class: [t.e("select"), e.isShowTab ? "" : t.is("no-solider-tab")]
         }, [e.isShowTab && o("div", {
           class: t.e("select-state")
         }, [o("div", {
-          class: [t.e("select-state-select-slider"), C.value === "user" ? "is-left" : "is-right"]
+          class: [t.e("select-state-select-slider"), O.value === "user" ? "is-left" : "is-right"]
         }, null), o("div", {
           class: t.e("select-state-select-personel"),
           onClick: () => {
-            C.value = "user", S(!0);
+            O.value = "user", A(!0);
           }
-        }, [P("人员")]), o("div", {
+        }, [y("人员")]), o("div", {
           class: t.e("select-state-select-department"),
           onClick: () => {
-            C.value = "department", S(!0);
+            O.value = "department", A(!0);
           }
-        }, [P("部门")])])]), o("div", {
+        }, [y("部门")])])]), o("div", {
           class: t.e("select-modal-search-input")
-        }, [X()]), o("div", {
+        }, [Y()]), o("div", {
           class: [t.e("personel-list-user"), e.isShowTab ? "" : t.is("no-solider-tab")]
-        }, [ce()]), e.enableBottomButton && o("div", {
+        }, [Se()]), e.enableBottomButton && o("div", {
           class: t.e("select-modal-bottom")
         }, [o(s, null, {
-          default: () => [P("确定")]
+          default: () => [y("确定")]
         })])]);
       },
-      renderReadState: de,
-      renderSelectInput: X,
-      renderNoSelectValue: K
+      renderReadState: Te,
+      renderSelectInput: Y,
+      renderNoSelectValue: Z
     };
   },
   render() {
-    const l = k("ElPopover"), i = N("picker-dropdown"), t = N("personel-select"), a = o(l, {
+    const r = _("ElPopover"), i = x("picker-dropdown"), t = x("personel-select"), a = o(r, {
       ref: "popoverRef",
       visible: this.modelVisible,
       "onUpdate:visible": (e) => {
@@ -365,7 +379,7 @@ const Ae = /* @__PURE__ */ Z({
     }, [this.readonly || this.disabled ? this.renderReadState() : a]);
   }
 });
-class Ie extends he {
+class _e extends Ne {
   constructor() {
     super(...arguments), this.operatorMap = /* @__PURE__ */ new Map(), this.total = 0, this.currentNumber = -1, this.page = 0, this.deptpage = 0, this.deptcurrentNumber = -1, this.depttotal = 0, this.size = 20, this.multiple = !1, this.isAddSymbol = !1, this.separator = ",", this.pickupView = null, this.linkView = null, this.userFilterMap = {
       id: "id",
@@ -384,15 +398,15 @@ class Ie extends he {
     }, this.sysOperatorCodeListTag = "", this.defaultAttentionValue = "", this.showNameText = !0, this.showNameTip = !1, this.suffix = "", this.clearFilter = !1, this.userAuthEntity = "", this.deptAuthEntity = "", this.enableBottomButton = !1;
   }
   async onInit() {
-    var t, a, e, r;
-    if (await super.onInit(), this.initDefaultAttribute(), this.valueItem = ((t = this.model.valueItemName) == null ? void 0 : t.toLowerCase()) || "", this.initParams(), await this.getOperatorUserList(), this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await ue(
+    var t, a, e, l;
+    if (await super.onInit(), this.initDefaultAttribute(), this.valueItem = ((t = this.model.valueItemName) == null ? void 0 : t.toLowerCase()) || "", this.initParams(), await this.getOperatorUserList(), this.model.appDataEntityId && (this.model.appDEDataSetId && (this.interfaceName = this.model.appDEDataSetId), this.model.appDEACModeId && (this.deACMode = await Ce(
       this.model.appDEACModeId,
       this.model.appDataEntityId,
       this.context.srfappid
     )), this.deACMode)) {
-      const { minorSortAppDEFieldId: d, minorSortDir: n } = this.deACMode;
-      d && n && (this.sort = "".concat(d.toLowerCase(), ",").concat(n.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach((h) => {
-        h.id !== "value" && h.id !== "text" && this.dataItems.push(h);
+      const { minorSortAppDEFieldId: u, minorSortDir: n } = this.deACMode;
+      u && n && (this.sort = "".concat(u.toLowerCase(), ",").concat(n.toLowerCase())), this.deACMode.textAppDEFieldId && (this.textName = this.deACMode.textAppDEFieldId), this.deACMode.valueAppDEFieldId && (this.keyName = this.deACMode.valueAppDEFieldId), this.deACMode.deacmodeDataItems && (this.dataItems = [], this.deACMode.deacmodeDataItems.forEach((p) => {
+        p.id !== "value" && p.id !== "text" && this.dataItems.push(p);
       }));
     }
     const i = [
@@ -400,7 +414,7 @@ class Ie extends he {
       "PICKEREX_DROPDOWNVIEW_LINK",
       "PICKUPVIEW"
     ];
-    this.model.editorType && i.includes(this.model.editorType) && this.initPickupViewParams(), this.objectIdField = (a = this.model.objectIdField) == null ? void 0 : a.toLowerCase(), this.objectNameField = (e = this.model.objectNameField) == null ? void 0 : e.toLowerCase(), this.objectValueField = (r = this.model.objectValueField) == null ? void 0 : r.toLowerCase();
+    this.model.editorType && i.includes(this.model.editorType) && this.initPickupViewParams(), this.objectIdField = (a = this.model.objectIdField) == null ? void 0 : a.toLowerCase(), this.objectNameField = (e = this.model.objectNameField) == null ? void 0 : e.toLowerCase(), this.objectValueField = (l = this.model.objectValueField) == null ? void 0 : l.toLowerCase();
   }
   initDefaultAttribute() {
     this.model.valueType && (this.valueType = this.model.valueType);
@@ -476,7 +490,7 @@ class Ie extends he {
       }
     );
     e && e.data && e.data.length > 0 && (this.currentOperator = e.data.find(
-      (r) => r[this.deptFilterMap.id] === a
+      (l) => l[this.deptFilterMap.id] === a
     ));
   }
   resetState() {
@@ -506,15 +520,15 @@ class Ie extends he {
     });
   }
   async onActionClick(i, t, a) {
-    const e = i.uiactionId, r = this.parent;
-    let d = {};
-    r.form ? d = r.form.ctx.view : r.grid && (d = r.grid.ctx.view), await pe.execAndResolved(
+    const e = i.uiactionId, l = this.parent;
+    let u = {};
+    l.form ? u = l.form.ctx.view : l.grid && (u = l.grid.ctx.view), await Me.execAndResolved(
       e,
       {
         context: this.context,
         params: this.params,
         data: t,
-        view: d,
+        view: u,
         event: a
       },
       i.appId
@@ -523,23 +537,23 @@ class Ie extends he {
   fill(i = "", t, a, e) {
     if (U(i)) {
       if (U(t)) {
-        const r = i.match(this.contextReg);
-        r == null || r.forEach((d) => {
-          const n = d.slice(10, d.length - 1);
+        const l = i.match(this.contextReg);
+        l == null || l.forEach((u) => {
+          const n = u.slice(10, u.length - 1);
           i = i.replace("${context.".concat(n, "}"), t[n] || "");
         });
       }
       if (U(a)) {
-        const r = i.match(this.paramsReg);
-        r == null || r.forEach((d) => {
-          const n = d.slice(9, d.length - 1);
+        const l = i.match(this.paramsReg);
+        l == null || l.forEach((u) => {
+          const n = u.slice(9, u.length - 1);
           i = i.replace("${params.".concat(n, "}"), a[n] || "");
         });
       }
       if (U(e)) {
-        const r = i.match(this.dataReg);
-        r == null || r.forEach((d) => {
-          const n = d.slice(7, d.length - 1);
+        const l = i.match(this.dataReg);
+        l == null || l.forEach((u) => {
+          const n = u.slice(7, u.length - 1);
           i = i.replace("${data.".concat(n, "}"), e[n] || "");
         });
       }
@@ -547,25 +561,25 @@ class Ie extends he {
     return i;
   }
   async getServiceData(i, t, a, e) {
-    const { context: r, params: d } = this.handlePublicParams(
+    const { context: l, params: u } = this.handlePublicParams(
       t,
       this.context,
       this.params
     ), n = {};
     this.sort && !Object.is(this.sort, "") && Object.assign(n, { sort: this.sort }), Object.assign(n, { size: this.size }), a && Object.assign(n, a);
-    const h = e || Te(d, n), y = this.fill(this.userUrl, r, d, t).replaceAll(
+    const p = e || Re(u, n), I = this.fill(this.userUrl, l, u, t).replaceAll(
       "//",
       "/"
-    ), b = this.fill(this.deptUrl, r, d, t).replaceAll(
+    ), f = this.fill(this.deptUrl, l, u, t).replaceAll(
       "//",
       "/"
     );
-    this.copyUserUrl = y, this.copyDeptUrl = b;
+    this.copyUserUrl = I, this.copyDeptUrl = f;
     let g = "", v = "post";
-    const w = {};
-    if (i === "user" ? (g = y, v = this.userMethod.toLowerCase()) : (g = b, v = this.deptMethod.toLowerCase()), v === "get" ? Object.assign(w, { method: v, params: h }) : Object.assign(w, { method: v, data: h }), g)
-      return await ibiz.net.request(g, w);
-    throw new j(this.model, "请配置数据接口地址");
+    const b = {};
+    if (i === "user" ? (g = I, v = this.userMethod.toLowerCase()) : (g = f, v = this.deptMethod.toLowerCase()), v === "get" ? Object.assign(b, { method: v, params: p }) : Object.assign(b, { method: v, data: p }), g)
+      return await ibiz.net.request(g, b);
+    throw new $(this.model, "请配置数据接口地址");
   }
   async openPickUpView(i, t) {
     await this.initPickupViewParams();
@@ -575,17 +589,17 @@ class Ie extends he {
       this.params
     );
     if (t && (e.selectedData = t), !this.pickupView)
-      throw new j(this.model, "请配置数据选择视图");
-    const r = await ibiz.commands.execute(
-      J.TAG,
+      throw new $(this.model, "请配置数据选择视图");
+    const l = await ibiz.commands.execute(
+      he.TAG,
       this.pickupView.id,
       a,
       e,
       { openMode: "POPUPMODAL" }
     );
-    if (r && r.ok && r.data)
-      return r.data;
-    ibiz.log.debug("模态取消或关闭异常", r);
+    if (l && l.ok && l.data)
+      return l.data;
+    ibiz.log.debug("模态取消或关闭异常", l);
   }
   async openLinkView(i) {
     const t = this.context.clone();
@@ -594,12 +608,12 @@ class Ie extends he {
       i,
       t,
       this.params
-    ), { linkAppViewId: r } = this.model;
-    if (!r)
-      throw new j(this.model, "请配置数据链接视图");
+    ), { linkAppViewId: l } = this.model;
+    if (!l)
+      throw new $(this.model, "请配置数据链接视图");
     return ibiz.commands.execute(
-      J.TAG,
-      r,
+      he.TAG,
+      l,
       a,
       e
     );
@@ -622,7 +636,7 @@ class Ie extends he {
     }), this.objectNameField && Object.assign(t, {
       [this.objectNameField]: i[this.textName]
     }), this.objectValueField && Object.assign(t, {
-      [this.objectValueField]: G(i)
+      [this.objectValueField]: fe(i)
     }), t;
   }
   async getOperatorUserList() {
@@ -646,34 +660,34 @@ class Ie extends he {
       return "";
     let a = {};
     return this.operatorMap.get(i) ? a = this.operatorMap.get(i) : Array.from(this.operatorMap.entries()).find((e) => {
-      const r = e[1] || {};
-      return r.text && t && r.text === t ? (a = r, !0) : !1;
+      const l = e[1] || {};
+      return l.text && t && l.text === t ? (a = l, !0) : !1;
     }), a.data && a.data.iconurl ? a.data.iconurl : "";
   }
 }
-class Ne {
+class $e {
   constructor() {
     this.component = "PersonelSelect", this.formEditor = "PersonelSelect", this.gridEditor = "PersonelSelect";
   }
   async createController(i, t) {
-    const a = new Ie(
+    const a = new _e(
       i,
       t
     );
     return await a.init(), a;
   }
 }
-const Ce = be(R, (l) => {
-  l.component(R.name, R), me(
+const He = Ue(H, (r) => {
+  r.component(H.name, H), xe(
     "EDITOR_CUSTOMSTYLE_PERSON_SELECT",
-    () => new Ne()
+    () => new $e()
   );
-}), ke = {
-  install(l) {
-    l.use(Ce);
+}), et = {
+  install(r) {
+    r.use(He);
   }
 };
 export {
-  Ce as IBizPersonelSelect,
-  ke as default
+  He as IBizPersonelSelect,
+  et as default
 };
