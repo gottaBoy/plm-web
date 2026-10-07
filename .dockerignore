@@ -1,0 +1,7 @@
+*
+!Dockerfile.plmweb
+!nginx-local.conf
+!start.sh
+!environment.config
+!dist/
+!dist/**
