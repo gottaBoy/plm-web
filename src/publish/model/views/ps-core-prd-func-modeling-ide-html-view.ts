@@ -1,5 +1,7 @@
+import { getModelingWebUrl } from '../modeling-url';
+
 export default {
-  htmlUrl: 'https://plm.ibizlab.cn/modeling/index.html',
+  htmlUrl: getModelingWebUrl(),
   loadDefault: true,
   deviewCodeName: 'modeling_ide_html_view',
   deviewId: '8468de075e6edae81c72acad020eab1e',

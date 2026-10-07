@@ -1017,7 +1017,34 @@ export default {
           id: 'end1',
         },
         {
-          code: "ibiz.hub.getApp(context.srfappid).deService.exec(\r\n    'plmweb.product_member',\r\n    'Create',\r\n    context,\r\n    uiLogic.user,\r\n);",
+          code: `const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;
+const service = await serviceUtil.getService(context, 'plmweb.product_member');
+// Serialize reloads against this temporary cache, then check the actual member.
+const previous = service.productDefaultMemberInitialization || Promise.resolve();
+const pending = previous.catch(() => {}).then(async function() {
+    const productId = context.product || uiLogic.user.product_id || '';
+    const exists = service.local.getList().some(item =>
+        item.user_id === uiLogic.user.user_id &&
+        (item.product_id || '') === productId
+    );
+    if (!exists) {
+        const member = { ...uiLogic.user };
+        // Wizard drafts may not yet have a runtime parent relation to attach.
+        if (productId) {
+            member.product_id = productId;
+        }
+        await serviceUtil.exec('plmweb.product_member', 'Create', context, member);
+    }
+});
+service.productDefaultMemberInitialization = pending;
+try {
+    await pending;
+} finally {
+    if (service.productDefaultMemberInitialization === pending) {
+        delete service.productDefaultMemberInitialization;
+    }
+}
+`,
           codeName: 'RAWJSCODE1',
           leftPos: 649,
           logicNodeType: 'RAWJSCODE',

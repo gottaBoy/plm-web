@@ -8,6 +8,7 @@ window.Environment = {
   baseUrl: 'ibizplm__plmweb',
   mockDcSystemId: 'ibizplm',
   appId: 'ibizplm__plmweb',
+  modelingWebUrl: 'http://127.0.0.1:32003/modeldesign/',
   dev: false,
   logLevel: 'ERROR',
   BaseUrl: '/api',

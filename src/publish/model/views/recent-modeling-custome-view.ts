@@ -1,3 +1,6 @@
+const modelingWebUrl =
+  "(window.Environment?.modelingWebUrl || 'http://127.0.0.1:32003/modeldesign/').replace(/\\/+$/, '') + '/';";
+
 export default {
   deviewCodeName: 'modeling_custome_view',
   deviewId: '1b798b9bb94ee8a72046784f81b32642',
@@ -38,7 +41,7 @@ export default {
         logicTrigger: 'VIEWEVENT',
         logicType: 'SCRIPT',
         scriptCode:
-          "console.log('进行跳转')\r\nwindow.open('http://plm.ibizlab.cn/modeling/start/', '_self');",
+          `console.log('进行跳转')\r\nwindow.open(${modelingWebUrl}, '_self');`,
         builtinLogic: true,
         name: 'LOGIC',
         id: 'logic',

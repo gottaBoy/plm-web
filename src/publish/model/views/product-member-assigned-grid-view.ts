@@ -30,38 +30,55 @@ export default {
     },
     {
       logicTrigger: 'CUSTOM',
-      logicType: 'APPUILOGIC',
-      builtinAppUILogic: {
-        actionAfterWizard: 'DEFAULT',
-        batchAddAppViews: [
-          {
-            openMode: 'POPUPMODAL',
-            refMode: 'USER',
-            refAppViewId: 'plmweb.user_choose_mpick_up_view',
-          },
-        ],
-        newDataAppView: {
-          openMode: 'POPUPMODAL',
-          refAppViewId: 'plmweb.product_member_edit_view',
-        },
-        enableBatchAdd: true,
-        appDataEntityId: 'plmweb.product_member',
-        appUILogicRefViews: [
-          {
-            openMode: 'POPUPMODAL',
-            refAppViewId: 'plmweb.product_member_edit_view',
-          },
-          {
-            openMode: 'POPUPMODAL',
-            refMode: 'USER',
-            refAppViewId: 'plmweb.user_choose_mpick_up_view',
-          },
-        ],
-        builtinLogic: true,
-        logicType: 'PREDEFINED',
-        viewLogicType: 'APP_NEWDATA',
-        id: '新建数据',
-      },
+      logicType: 'SCRIPT',
+      scriptCode: `const result = await ibiz.commands.execute(
+    'ibiz.app-view.open',
+    'plmweb.user_choose_mpick_up_view',
+    context.clone(),
+    { srfuf: 0 },
+    { ctx: view.getCtx(), openMode: 'POPUPMODAL' }
+);
+if (!result?.ok || !result.data?.length) {
+    return result;
+}
+const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;
+const service = await serviceUtil.getService(context, 'plmweb.product_member');
+// Share the default-member lock so initialization and repeated additions agree.
+const previous = service.productDefaultMemberInitialization || Promise.resolve();
+const pending = previous.catch(() => {}).then(async function() {
+    const productId = context.product || '';
+    const users = new Set(service.local.getList().filter(item =>
+        (item.product_id || '') === productId
+    ).map(item => item.user_id));
+    const members = [];
+    for (const selected of result.data) {
+        const userId = selected.srfkey || selected.id;
+        if (!userId) {
+            throw new Error('Selected product member has no user ID');
+        }
+        if (!users.has(userId)) {
+            users.add(userId);
+            const member = { user_id: userId, name: selected.display_name };
+            if (productId) {
+                member.product_id = productId;
+            }
+            members.push(member);
+        }
+    }
+    if (members.length) {
+        await serviceUtil.exec('plmweb.product_member', 'Create', context, members);
+    }
+});
+service.productDefaultMemberInitialization = pending;
+try {
+    await pending;
+} finally {
+    if (service.productDefaultMemberInitialization === pending) {
+        delete service.productDefaultMemberInitialization;
+    }
+}
+return result;
+`,
       builtinLogic: true,
       id: 'newdata',
     },

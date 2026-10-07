@@ -3581,7 +3581,23 @@ export default {
           id: 'end1',
         },
         {
-          code: "return (async function() { \r\n    // 获取所有临时数据\r\n    const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;\r\n    const service = await serviceUtil.getService(context, 'plmweb.product_member');\r\n    const list = service.local.getList();\r\n    // 遍历临时数据删除\r\n    list.forEach(item => {\r\n        service.local.delete(context, item.id);\r\n    })\r\n    } \r\n)();\r\n",
+          code: `const view = uiLogic.view;
+// The first form reloads on retreat; only a new wizard clears stale members.
+if (!view.productMemberTempInitialization) {
+    view.productMemberTempInitialization = (async function() {
+        const serviceUtil = ibiz.hub.getApp(context.srfappid).deService;
+        const service = await serviceUtil.getService(context, 'plmweb.product_member');
+        const list = service.local.getList();
+        await Promise.all(list.map(item => service.local.delete(context, item.id)));
+    })();
+}
+try {
+    await view.productMemberTempInitialization;
+} catch (error) {
+    delete view.productMemberTempInitialization;
+    throw error;
+}
+`,
           codeName: 'RAWJSCODE1',
           leftPos: 433,
           logicNodeType: 'RAWJSCODE',
