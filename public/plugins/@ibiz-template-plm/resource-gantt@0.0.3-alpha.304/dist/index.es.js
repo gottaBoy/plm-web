@@ -1471,7 +1471,7 @@ const zt = /* @__PURE__ */ re({
     }, u = () => {
       t("headSearch", i.value);
     }, f = (T) => {
-      T.preventDefault(), T.stopPropagation(), n.value = !1, t("headSearch", "");
+      T.preventDefault(), T.stopPropagation(), i.value = "", n.value = !1, t("headSearch", "");
     }, h = (T, P) => {
       P.stopPropagation(), n.value = !0;
     }, g = async (T, P) => {
