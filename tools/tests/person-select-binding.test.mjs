@@ -233,6 +233,17 @@ test('user POST pagination sends consecutive pages and returns distinct members 
   }
 });
 
+test('default empty load params still send pagination and public params', async () => {
+  const { controller, calls } = serviceFixture();
+  await controller.loadMore({}, 'user');
+  assert.deepEqual(calls[0].config.data, {
+    sort: 'name,asc',
+    page: 0,
+    size: 2,
+    n_status_eq: 'active',
+  });
+});
+
 test('department GET pages are independent from user pages and reset with a new search', async () => {
   const { controller, calls } = serviceFixture();
   await controller.loadMore({}, 'department');

@@ -497,7 +497,10 @@ export class PersonelSelectController extends EditorController<IPicker> {
       size: this.size,
     });
     if (query) Object.assign(requestParams, query);
-    const finalParams = params || mergeDeepLeft(publicParams, requestParams);
+    const finalParams =
+      params && Object.keys(params).length > 0
+        ? params
+        : mergeDeepLeft(publicParams, requestParams);
 
     const userUrl = this.fill(this.userUrl, context, publicParams, data).replaceAll(
       '//',
