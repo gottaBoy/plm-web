@@ -1,5 +1,5 @@
 const modelingWebUrl =
-  "(window.Environment?.modelingWebUrl || 'http://127.0.0.1:32003/modeldesign/').replace(/\\/+$/, '') + '/';";
+  "(window.Environment?.modelingWebUrl || 'http://127.0.0.1:32009/modeldesign/#/psdevslnsys=28F7326A-7C72-4C2D-A497-A16372ABBADC/modelingindex/-').replace(/\\/+$/, '');";
 
 export default {
   deviewCodeName: 'modeling_custome_view',
