@@ -16,6 +16,10 @@ const vitePlugin = readFileSync(
   path.join(ROOT, 'vite-plugins/ibiz-vite-plugin.ts'),
   'utf8',
 );
+const localDeployer = readFileSync(
+  path.join(ROOT, 'tools/deploy-local.mjs'),
+  'utf8',
+);
 const viteConfig = readFileSync(
   path.join(ROOT, 'vite.config.ts'),
   'utf8',
@@ -94,6 +98,26 @@ test('PLM build has a local source-plugin build precondition', () => {
     packageJson.scripts.build,
     /^node tools\/build-local-ibiz-plugins\.mjs && node build\/set-version\.js && /,
     'PLM build must explicitly build local source plugins before Vite',
+  );
+});
+
+test('local deployment restarts the bind-mounted static-file container', () => {
+  assert.equal(
+    packageJson.scripts['deploy:local'],
+    'node tools/deploy-local.mjs',
+  );
+  assert.match(
+    localDeployer,
+    /await execFile\('docker', \['restart', options\.container\]\)/,
+  );
+  assert.match(
+    localDeployer,
+    /'inspect',\s*\n\s*'--format',\s*\n\s*'\{\{\.State\.Health\.Status\}\}'/,
+  );
+  assert.match(
+    localDeployer,
+    /Container serves stale bytes/,
+    'deployment must detect bytes left in the container by an old start',
   );
 });
 

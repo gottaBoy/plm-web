@@ -191,6 +191,22 @@ SystemJS 引入 `public/extras` 底包，两套运行时会同时存在，部分
 
 如果后端不在本机，将上述环境变量替换为对应机器的 IP 或域名后，再启动开发或预览服务。
 
+### 本地容器部署
+
+若使用 `plmweb` 容器运行生产构建，不要只执行 `pnpm build`。容器启动脚本
+`/start.sh` 只在启动时把 bind mount 的 `dist/` 与 `public/plugins/` 复制到
+`/dist/`，因此源码和插件重建后必须重启容器，否则 HTTP 服务仍会返回旧字节。
+
+推荐使用统一下发命令，它会按顺序重建插件、重建主应用、重启 `plmweb`、等待
+Docker 健康检查，并校验 `public/`、`dist/` 与容器 HTTP 返回的插件哈希一致：
+
+```bash
+pnpm deploy:local --plugin @ibiz-template-plm/person-select@0.0.3-alpha.434
+```
+
+可重复传入 `--plugin`，或用逗号分隔多个插件引用。若只重启并校验现有构建产物，
+使用 `pnpm deploy:local --no-build`。
+
 ## 本地开发
 
 ### 代码获取

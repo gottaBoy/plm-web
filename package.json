@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "node tools/build-local-ibiz-plugins.mjs && node build/set-version.js && node --max_old_space_size=12288 node_modules/vite/bin/vite.js build",
+    "deploy:local": "node tools/deploy-local.mjs",
     "preview": "vite preview",
     "plugins:build": "node tools/build-plugins.mjs build",
     "plugins:build:local": "node tools/build-local-ibiz-plugins.mjs",
