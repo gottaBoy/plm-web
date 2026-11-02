@@ -10,6 +10,7 @@ import ComponentsRegister from './components';
 import { StaticAuthGuard } from './guard';
 import { userRoutes } from './router';
 import '@/publish/sys.css';
+import './runtime/router-shell.css';
 
 // SystemJS plugins must use the host's Vue and router instances so their
 // composables can read the same component and route injection context.
