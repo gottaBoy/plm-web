@@ -1,0 +1,64 @@
+.plm-language-switch {
+  width: 100%;
+  height: 36px;
+  min-width: 0;
+  padding: 0 16px;
+}
+
+.plm-language-switch .el-dropdown {
+  display: block;
+  width: 100%;
+}
+
+.plm-language-switch__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.plm-language-switch__button span {
+  flex: 1;
+  text-align: left;
+}
+
+.plm-language-switch__button ion-icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.plm-language-sidebar .plm-language-switch__button {
+  color: var(--ibiz-color-primary-light-default, #fff);
+}
+
+.plm-language-switch.is-collapsed {
+  padding: 0 8px;
+}
+
+.plm-language-switch.is-collapsed .plm-language-switch__button {
+  justify-content: center;
+  padding: 0;
+}
+
+.plm-language-switch.is-collapsed
+  .plm-language-switch__button
+  ion-icon:last-child {
+  display: none;
+}
+
+.plm-language-login {
+  margin-bottom: 12px;
+}
+
+.plm-language-login .plm-language-switch {
+  padding: 0;
+}

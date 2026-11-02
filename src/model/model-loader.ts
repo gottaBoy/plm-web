@@ -16,7 +16,6 @@ import {
   ModelLoaderProvider,
 } from '@ibiz-template/runtime';
 import { kebabCase } from 'lodash-es';
-import { clone } from 'ramda';
 import {
   getAppDataEntityModel,
   getAppViewModel,
@@ -24,6 +23,7 @@ import {
   registerCodeList,
 } from '@/publish/model';
 import { mergeUIActions } from './merge-ui-action';
+import { addPlmLanguageControl, localizePlmModel } from '@/locale/model-locale';
 
 /**
  * 模型加载适配器
@@ -136,7 +136,13 @@ export class ModelLoader implements ModelLoaderProvider {
         }
       }
     } else {
-      await registerCodeList(appService.codeList);
+      const localized = Object.create(appService.codeList);
+      localized.setCodeList = (model: IAppCodeList): void => {
+        appService.codeList.setCodeList(
+          localizePlmModel(model, ibiz.i18n.getLang()),
+        );
+      };
+      await registerCodeList(localized);
     }
     // 注册应用实体名隐射
     if (appSourceModel && appSourceModel.allPSAppDataEntities) {
@@ -367,7 +373,7 @@ export class ModelLoader implements ModelLoaderProvider {
   async getApp(appId: string): Promise<IApplication> {
     if (!appId || appId === ibiz.env.appId) {
       const app = await getAppModel();
-      return mergeUIActions(app);
+      return localizePlmModel(mergeUIActions(app), ibiz.i18n.getLang());
     }
     const microAppConfig = ibiz.hub.microAppConfigCenter.getMicroApp(appId);
     const module = await System.import(
@@ -387,10 +393,10 @@ export class ModelLoader implements ModelLoaderProvider {
   async getAppView(appId: string, codeName: string): Promise<IAppView> {
     if (appId === ibiz.env.appId) {
       const viewModel = await getAppViewModel(codeName);
-      const dsl = clone(viewModel);
+      const dsl = localizePlmModel(viewModel, ibiz.i18n.getLang());
       this.deepFillSubAppId(dsl, appId);
       this.calcAppViewSubAppModel(dsl);
-      return dsl;
+      return addPlmLanguageControl(dsl);
     }
     const microAppConfig = ibiz.hub.microAppConfigCenter.getMicroApp(appId);
     const module = await System.import(
@@ -411,7 +417,10 @@ export class ModelLoader implements ModelLoaderProvider {
    */
   async getAppDataEntity(appId: string, id: string): Promise<IAppDataEntity> {
     if (!appId || appId === ibiz.env.appId) {
-      const appDataEntity = await getAppDataEntityModel(id);
+      const appDataEntity = localizePlmModel(
+        await getAppDataEntityModel(id),
+        ibiz.i18n.getLang(),
+      );
       this.deepFillSubAppId(appDataEntity, ibiz.env.appId);
       return appDataEntity;
     }
