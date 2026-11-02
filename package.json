@@ -17,6 +17,7 @@
     "plugin:types:baseline": "node tools/ts-harness/index.mjs --baseline",
     "plugin:regression": "node tools/plugin-regression.mjs",
     "plugin:harness:test": "node --test tools/tests/*.test.mjs",
+    "locale:audit": "node tools/audit-model-locale.mjs",
     "ibiz:versions:check": "node tools/check-local-ibiz-versions.mjs",
     "lint": "eslint 'src/**/*.tsx' 'src/**/*.ts' 'src/**/*.vue'",
     "lint:style": "stylelint 'src/**/*.scss'",

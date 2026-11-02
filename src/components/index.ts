@@ -12,12 +12,18 @@ import {
   registerLanguageSwitch,
 } from './language-switch/language-switch';
 import { normalizePlmLanguage } from '@/locale/model-locale';
+import { installPlmLayoutLocale } from '@/locale/layout-locale';
 
 export { IBizViewShell };
 
 export default {
   install(v: App): void {
     const language = normalizePlmLanguage(ibiz.i18n.getLang());
+    installPlmLayoutLocale(
+      ibiz.util.layoutPanel,
+      () => ibiz.env.appId,
+      () => ibiz.i18n.getLang(),
+    );
     dayjs.locale(language === 'en' ? 'en' : 'zh-cn');
     provideGlobalConfig(
       {

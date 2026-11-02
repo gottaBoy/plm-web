@@ -2,7 +2,7 @@ import english from './en.json';
 
 export type PlmLanguage = 'zh-CN' | 'en';
 const labels: Record<string, string> = english;
-const displayKeys = new Set([
+export const displayKeys = new Set([
   'caption',
   'text',
   'title',
@@ -45,6 +45,14 @@ export function localizePlmModel<T>(model: T, language: string): T {
     let translated = value;
     if (displayKeys.has(key) && typeof value === 'string') {
       translated = translatePlmLabel(value, language);
+    } else if (key === 'appDEFields' && Array.isArray(value)) {
+      translated = value.map(field => {
+        const localized = localizePlmModel(field, language);
+        if (field && typeof field.logicName === 'string') {
+          localized.logicName = translatePlmLabel(field.logicName, language);
+        }
+        return localized;
+      });
     } else if (typeof value === 'object') {
       translated = localizePlmModel(value, language);
     }

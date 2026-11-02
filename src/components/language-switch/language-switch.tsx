@@ -37,7 +37,16 @@ export const PlmLanguageSwitch = defineComponent({
           { 'is-collapsed': this.collapsed },
         ]}
       >
-        <el-dropdown trigger='click' onCommand={this.change}>
+        <el-dropdown
+          trigger='click'
+          placement={
+            this.controller.containerClass.includes('plm-language-login')
+              ? 'bottom-end'
+              : 'bottom-start'
+          }
+          popperClass='plm-language-menu'
+          onCommand={this.change}
+        >
           {{
             default: (): VNode => (
               <button
@@ -48,24 +57,34 @@ export const PlmLanguageSwitch = defineComponent({
               >
                 <ion-icon name='globe-outline' aria-hidden='true' />
                 {!this.collapsed && (
-                  <span>{this.language === 'en' ? 'English' : '中文'}</span>
+                  <span class='plm-language-switch__label'>
+                    {this.language === 'en' ? 'English' : '中文'}
+                  </span>
                 )}
-                <ion-icon name='chevron-down-outline' aria-hidden='true' />
+                <ion-icon
+                  class='plm-language-switch__chevron'
+                  name='chevron-down-outline'
+                  aria-hidden='true'
+                />
               </button>
             ),
             dropdown: (): VNode => (
               <el-dropdown-menu>
                 <el-dropdown-item
                   command='zh-CN'
-                  disabled={this.language === 'zh-CN'}
+                  class={{ 'is-current': this.language === 'zh-CN' }}
+                  aria-current={this.language === 'zh-CN' ? 'true' : undefined}
                 >
-                  中文
+                  <span lang='zh-CN'>中文</span>
+                  <ion-icon name='checkmark-outline' aria-hidden='true' />
                 </el-dropdown-item>
                 <el-dropdown-item
                   command='en'
-                  disabled={this.language === 'en'}
+                  class={{ 'is-current': this.language === 'en' }}
+                  aria-current={this.language === 'en' ? 'true' : undefined}
                 >
-                  English
+                  <span lang='en'>English</span>
+                  <ion-icon name='checkmark-outline' aria-hidden='true' />
                 </el-dropdown-item>
               </el-dropdown-menu>
             ),

@@ -1,4 +1,7 @@
 .plm-language-switch {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
   width: 100%;
   height: 36px;
   min-width: 0;
@@ -6,28 +9,47 @@
 }
 
 .plm-language-switch .el-dropdown {
-  display: block;
-  width: 100%;
+  display: inline-flex;
+  max-width: 100%;
+  color: inherit;
 }
 
 .plm-language-switch__button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 112px;
+  max-width: 100%;
   height: 32px;
   padding: 0 8px;
-  border: 1px solid currentColor;
-  border-radius: 4px;
-  color: inherit;
+  border: 0;
+  border-radius: 6px;
+  color: var(--el-text-color-regular, #606266);
   background: transparent;
   font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
-.plm-language-switch__button span {
+.plm-language-switch__button:hover,
+.plm-language-switch__button[aria-expanded='true'] {
+  background: var(--el-fill-color-light, #f5f7fa);
+}
+
+.plm-language-switch__button:focus-visible {
+  outline: 2px solid var(--el-color-primary, #409eff);
+  outline-offset: 2px;
+}
+
+.plm-language-switch__label {
   flex: 1;
   text-align: left;
+  white-space: nowrap;
 }
 
 .plm-language-switch__button ion-icon {
@@ -36,29 +58,118 @@
   height: 16px;
 }
 
+.plm-language-switch__button .plm-language-switch__chevron {
+  flex-basis: 12px;
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+  transition: transform 0.15s ease;
+}
+
+.plm-language-switch__button[aria-expanded='true']
+  .plm-language-switch__chevron {
+  transform: rotate(180deg);
+}
+
 .plm-language-sidebar .plm-language-switch__button {
   color: var(--ibiz-color-primary-light-default, #fff);
 }
 
-.plm-language-switch.is-collapsed {
-  padding: 0 8px;
+.plm-language-sidebar .plm-language-switch__button:hover,
+.plm-language-sidebar .plm-language-switch__button[aria-expanded='true'] {
+  background: rgb(255 255 255 / 12%);
 }
 
-.plm-language-switch.is-collapsed .plm-language-switch__button {
+.plm-language-sidebar .plm-language-switch__button:focus-visible {
+  outline-color: currentColor;
+}
+
+.plm-language-switch.is-collapsed {
   justify-content: center;
   padding: 0;
 }
 
-.plm-language-switch.is-collapsed
-  .plm-language-switch__button
-  ion-icon:last-child {
+.plm-language-switch.is-collapsed .plm-language-switch__button {
+  width: 32px;
+  padding: 0;
+}
+
+.plm-language-switch.is-collapsed .plm-language-switch__chevron {
   display: none;
 }
 
-.plm-language-login {
+.plm-language-switch.plm-language-login {
+  justify-content: flex-end;
+  padding: 0 8px;
   margin-bottom: 12px;
 }
 
-.plm-language-login .plm-language-switch {
-  padding: 0;
+.plm-language-menu.el-popper {
+  overflow: hidden;
+  border: 1px solid var(--el-border-color-light, #e4e7ed);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+}
+
+/* Override the shared theme's sidebar-colored dropdown descendants locally. */
+.plm-language-menu.el-popper.el-dropdown__popper.is-light
+  .el-scrollbar
+  .el-dropdown__list {
+  background: var(--el-bg-color-overlay, #fff);
+}
+
+.plm-language-menu.el-popper.el-dropdown__popper.is-light
+  .el-scrollbar
+  .el-dropdown-menu {
+  box-sizing: border-box;
+  width: 160px;
+  padding: 4px;
+  background: var(--el-bg-color-overlay, #fff);
+}
+
+.plm-language-menu.el-popper.el-dropdown__popper.is-light
+  .el-scrollbar
+  .el-dropdown__list
+  .el-dropdown-menu__item {
+  display: flex;
+  gap: 16px;
+  box-sizing: border-box;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 4px;
+  color: var(--el-text-color-regular, #606266);
+  background: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.plm-language-menu .el-dropdown-menu__item span {
+  flex: 1;
+}
+
+.plm-language-menu .el-dropdown-menu__item ion-icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  visibility: hidden;
+}
+
+.plm-language-menu.el-popper.el-dropdown__popper.is-light
+  .el-scrollbar
+  .el-dropdown__list
+  .el-dropdown-menu__item:is(:hover, :focus, .is-current) {
+  color: var(--el-color-primary, #409eff);
+  background: var(--el-color-primary-light-9, #ecf5ff);
+}
+
+.plm-language-menu .el-dropdown-menu__item.is-current ion-icon {
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plm-language-switch__button,
+  .plm-language-switch__button .plm-language-switch__chevron {
+    transition: none;
+  }
 }

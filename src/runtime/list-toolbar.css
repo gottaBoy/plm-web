@@ -1,0 +1,90 @@
+@media (max-width: 767px) {
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-view-header--view_header {
+    height: auto;
+    min-height: 64px;
+    padding: 8px 0;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-view-header--view_header
+    > .ibiz-row {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-view-header--view_header
+    > .ibiz-row
+    > .ibiz-col {
+    flex: 0 0 100%;
+    min-width: 0;
+    height: auto;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-container--view_header_right
+    > .ibiz-row {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow: visible;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-container--view_header_right
+    > .ibiz-row
+    > .ibiz-col {
+    flex: 1 0 100%;
+    min-width: 0;
+    height: auto;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-panel-container--view_toolbar
+    > .ibiz-row {
+    height: auto;
+    overflow: visible;
+  }
+
+  :is(
+      .ibiz-view--product_all_grid_view,
+      .ibiz-view--project_all_grid_view,
+      .ibiz-view--library_all_grid_view,
+      .ibiz-view--space_all_grid_view
+    )
+    .ibiz-control-toolbar__item {
+    flex-shrink: 0;
+  }
+}

@@ -61,11 +61,42 @@ test('model translation preserves IDs, behavior, markup and unknown labels witho
   assert.equal(localizePlmModel(original, 'zh-CN').caption, '工作台');
 });
 
+test('entity field display names translate for quick search without changing logical behavior names', () => {
+  const source = {
+    logicName: '项目名称',
+    appDEFields: [{ id: 'name', codeName: 'name', name: 'NAME', logicName: '项目名称' },
+      { id: 'identifier', logicName: '项目标识' }],
+    appDELogics: [{ id: 'logic', logicName: '项目名称' }],
+    quickSearchAppDEFieldIds: ['identifier', 'name'],
+  };
+  const translated = localizePlmModel(source, 'en');
+  assert.equal(translated.appDEFields[0].logicName, 'Project Name');
+  assert.equal(translated.appDEFields[1].logicName, 'Project Identifier');
+  assert.equal(translated.appDEFields[0].id, 'name');
+  assert.equal(translated.appDEFields[0].name, 'NAME');
+  assert.equal(translated.logicName, '项目名称');
+  assert.equal(translated.appDELogics[0].logicName, '项目名称');
+  assert.equal(JSON.stringify(translated.quickSearchAppDEFieldIds), '["identifier","name"]');
+  assert.equal(source.appDEFields[0].logicName, '项目名称');
+});
+
 test('each primary navigation and workspace label has an explicit English translation', () => {
   for (const label of ['工作台', '产品管理', '项目管理', '测试管理', '知识管理',
     '效能度量', '协作空间', '资源管理', '自动化', '智能协同', '应用市场', '二次开发',
     '首页', '仪表盘', '工时', '概览', '最近使用', '最近访问', '登录', '记住我']) {
     assert.ok(dictionary[label], label);
+    assert.doesNotMatch(dictionary[label], /[\u4e00-\u9fff]/);
+  }
+});
+
+test('common business and configuration commands have explicit, nonempty English labels', () => {
+  for (const label of ['关联', '取消关联', '负责人标识', '选择负责人', '父工作项',
+    '产品需求', '工作项类型分组', '新建类别', '关注人', '需求类型', '版本',
+    '选择优先级', '查看明细', '已规划基线', '查看版本', '维护人',
+    '需求来源', '选择开始时间', '选择结束时间', '执行人', '严重程度',
+    '评审结果', '总登记工时', '发现', '安装', '卸载', '查看版本清单',
+    '安装特定版本', '角色配置', '工时设置', '实体打印', '新建模版']) {
+    assert.ok(dictionary[label]?.trim(), label);
     assert.doesNotMatch(dictionary[label], /[\u4e00-\u9fff]/);
   }
 });
