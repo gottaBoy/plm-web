@@ -328,6 +328,8 @@ function Nt(a, t, e) {
   return o.isAfter(s) && o.isBefore(n) || o.isSame(s) || o.isSame(n);
 }
 const $t = (a) => {
+  if (/^en(?:[-_]|$)/i.test(ibiz.i18n.getLang()))
+    return w(a).locale("en").format("ddd");
   const t = new Date(a), e = w(t).day();
   return [
     "星期日",

@@ -457,7 +457,8 @@ class Q {
     for (let j = u; !j.isAfter(g); j = j.add(1, "day"))
       z.push({
         date: j.format("YYYY-MM-DD"),
-        week: Mn[j.day()],
+        week: /^en(?:[-_]|$)/i.test(ibiz.i18n.getLang())
+          ? j.locale("en").format("ddd") : Mn[j.day()],
         isWeekend: j.day() === 6 || j.day() === 0,
         isToday: this.isDateSame(j, /* @__PURE__ */ new Date())
       });

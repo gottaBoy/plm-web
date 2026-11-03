@@ -24,6 +24,7 @@ import {
 } from '@/publish/model';
 import { mergeUIActions } from './merge-ui-action';
 import { addPlmLanguageControl, localizePlmModel } from '@/locale/model-locale';
+import { installPlmCodeListLocale } from '@/locale/codelist-locale';
 
 /**
  * 模型加载适配器
@@ -136,6 +137,7 @@ export class ModelLoader implements ModelLoaderProvider {
         }
       }
     } else {
+      installPlmCodeListLocale(appService.codeList, () => ibiz.i18n.getLang());
       const localized = Object.create(appService.codeList);
       localized.setCodeList = (model: IAppCodeList): void => {
         appService.codeList.setCodeList(

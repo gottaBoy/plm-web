@@ -36,6 +36,8 @@ function Se(n, e, t) {
   return o.isAfter(s) && o.isBefore(a) || o.isSame(s) || o.isSame(a);
 }
 const ke = (n) => {
+  if (/^en(?:[-_]|$)/i.test(ibiz.i18n.getLang()))
+    return p(n).locale("en").format("ddd");
   const e = new Date(n), t = p(e).day();
   return [
     "星期日",

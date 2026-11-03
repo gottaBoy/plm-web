@@ -210,3 +210,75 @@ Outstanding project acceptance remains explicit:
 - Backend source-package and immutable image/hash receipt revalidation do not
   replace ordinary-user, cross-library, native-editor, full source/image closure
   or clean-restart/persistence acceptance.
+
+## Runtime Locale Follow-Up
+
+The follow-up evidence is under workspace
+`.artifacts/plm-locale-review-20261103/`. This pass adds 180 explicit PLM labels
+(680 total), including validation rules, business forms, automation, insights
+and agent configuration. The static-model audit now resolves 30,981 of 48,730
+display-property occurrences, or 638 of 4,477 distinct labels. These counts
+still include internal layout captions and do not establish full translation.
+
+Resource-gantt and worklog-table plugins now format English weekdays using
+Dayjs's English locale; Chinese labels, dates and capacity calculations are
+unchanged. Both plugin distributions are rebuilt and deployed, not just their
+editable sources.
+
+Dynamic `DEMAINSTATE` code-list options are localized only when both value and
+text match an explicitly defined model option. Values, `disableSelect`,
+colors and raw source data remain unchanged. Custom states, unknown options,
+people and ordinary dynamic dictionaries are not translated by this adapter.
+Authentication/network failures still propagate.
+
+The embedded Modeling IDE is an independent origin on port 32009. PLM passes
+only the supported language in its URL, and ModelingWeb applies that preference
+before its i18n module is instantiated. Its own model-loader and default-layout
+adapters translate display metadata, not model identifiers, scripts, entity
+names returned as data, or logs. The console's controls and deployment-status
+message also follow the selected language.
+
+The candidate deployment explicitly disables MQTT and its application data has
+no topic. The console now reports the actual disabled deployment state instead
+of a false connection error. An enabled deployment with no topic, missing host
+client or rejected subscription remains an error. This does not enable live
+MQTT log delivery or prove broker authentication/authorization.
+
+The new immutable frontend candidate roots are
+`native-model-migration/locale-console-20261103` and
+`native-ai-code-runtime-assets/locale-console-20261103` under workspace
+`.artifacts/`. Existing receipts were retained, not rewritten. Only the PLM and
+candidate frontend containers were restarted; no database/business service was
+restarted. Production/native acceptance remains false.
+
+Browser coverage now includes Chinese/English embedded IDEs, disabled MQTT
+semantics, business relationship commands, plugin weekdays and dynamic state
+translation. Every primary English page also audits visible fixed buttons,
+table headings, field labels and placeholders for remaining Chinese, with
+findings attached to the test report. The first expanded run retained eight
+failures identifying missing labels in insights, collaboration, automation and
+agents; these labels were then added rather than excluded from the audit.
+
+| Final Check | Result | Evidence |
+| --- | --- | --- |
+| PLM contracts | 108 passed | `contracts-final.log` |
+| Modeling locale/embedding unit tests | 3 passed | `modeling-locale-tests.log` |
+| Modeling typecheck | Passed | `modeling-types-final.log` |
+| Console contract/browser fixtures | 56 passed | `console-tests-final.log` |
+| Candidate configuration and console contracts | 67 passed | `scripts-final.log` |
+| Initial focused browser suite | 55 passed | `focused-r2/reports/test-results.json` |
+| Final dynamic state behavior, desktop/mobile | 5 passed | `states/reports/test-results.json` |
+| Final expanded desktop/mobile suite | 148 passed, 1 failed, zero skips | `release-full/reports/test-results.json` |
+| Separate API Reference locale recheck | 3 passed, no implementation/test relaxation | `docs-recheck/reports/test-results.json` |
+| Source/build/public/candidate/HTTP artifact identity | Matched for checked delivery files | `delivery.json` |
+
+The final expanded-suite failure is the desktop API Reference loading mask.
+Its retained trace shows the local document and Docsify core loading normally,
+while several original `npmjs.ibizlab.cn` stylesheet/script requests remain
+pending. This external documentation dependency is not declared fixed by the
+locale work; the test is not skipped, relabeled as expected or replaced with
+an empty-success response. Its subsequent unmodified desktop/mobile recheck
+passed, but that does not remove the external dependency or its latency risk.
+Full documentation offline delivery is still open.
+The opt-in deep feature sweep was not run, and complete translation of all
+plugins and business metadata is not claimed.

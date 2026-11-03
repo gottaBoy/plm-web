@@ -1238,7 +1238,7 @@ class Tn {
     for (let z = h; !z.isAfter(u); z = z.add(1, "day"))
       s.push({
         date: z.format("YYYY-MM-DD"),
-        week: Jg[z.day()],
+        week: /^en(?:[-_]|$)/i.test(ibiz.i18n.getLang()) ? z.locale("en").format("ddd") : Jg[z.day()],
         isWeekend: z.day() === 6 || z.day() === 0,
         isToday: this.isDateSame(z, /* @__PURE__ */ new Date())
       });
