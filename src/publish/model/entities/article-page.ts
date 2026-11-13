@@ -2608,7 +2608,7 @@ export default {
       requestMethod: 'POST',
       requestParamType: 'ENTITY',
       requestPath: '/publish_page',
-      actionMode: 'CREATE',
+      actionMode: 'CUSTOM',
       actionType: 'REMOTE',
       dataSetType: 'REMOTE',
       id: 'publish_page',
