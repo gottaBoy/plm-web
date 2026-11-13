@@ -4168,9 +4168,11 @@ export default {
       buttonStyle: 'DEFAULT',
       caption: '共享设置',
       codeName: 'open_shared_setting_management',
+      dataAccessAction: 'SHARED',
       frontAppViewId: 'plmweb.article_page_shared_setting_view',
       frontProcessType: 'WIZARD',
       fullCodeName: 'article_page_open_shared_setting_management',
+      deopprivId: 'space__shared',
       navigateContexts: [
         {
           key: 'SPACE',
