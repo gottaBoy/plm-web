@@ -11,6 +11,7 @@ import { extname, join, resolve, sep } from 'node:path';
 import { HtmlTagDescriptor, Plugin } from 'vite';
 import cpy from 'cpy';
 import { localDocumentationPlugin } from './local-documentation';
+import { buildApiReferenceFiles } from '../../plm/doc/tools/api-reference.mjs';
 
 // 模板底包
 const templatePackages = ['core', 'runtime', 'model-helper'];
@@ -374,6 +375,9 @@ function IBizVitePlugin(): Plugin[] {
     devP,
     localDocumentationPlugin({
       sourceDirectory: resolve(__dirname, '../../plm/doc/docsify'),
+      generatedFiles: () => buildApiReferenceFiles({
+        sourceDirectory: resolve(__dirname, '../../plm/doc/docsify'),
+      }),
     }),
   ];
 }
