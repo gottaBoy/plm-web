@@ -13,15 +13,7 @@ import '@/publish/sys.css';
 import './runtime/router-shell.css';
 import './runtime/list-toolbar.css';
 import './runtime/login-layout.css';
-
-// SystemJS plugins must use the host's Vue and router instances so their
-// composables can read the same component and route injection context.
-if (typeof System !== 'undefined') {
-  const vueUrl = System.resolve('vue');
-  System.set(vueUrl, Vue);
-  const routerUrl = System.resolve('vue-router');
-  System.set(routerUrl, VueRouter);
-}
+import './runtime/wizard-layout.css';
 
 // AppHooks.appResorceInited.tap((ctx: IApiAppHubService) => {
 //   ctx.microAppConfigCenter.registerMicroApps([
@@ -33,7 +25,42 @@ if (typeof System !== 'undefined') {
 //     },
 //   ]);
 // });
-runApp([VueTextFormat, gridLayout, ComponentsRegister, UserRegister], {
-  getAuthGuard: () => new StaticAuthGuard(),
-  userRoutes,
+async function bootstrap(): Promise<void> {
+  // Some host loaders wrap System.resolve in more than one async boundary.
+  // System.set only accepts a concrete registry URL, never a Promise.
+  const resolveSystemUrl = async (name: string): Promise<string> => {
+    const resolved: unknown = System.resolve(name);
+    if (typeof resolved === 'string') {
+      return resolved;
+    }
+    if (
+      resolved &&
+      typeof (resolved as PromiseLike<unknown>).then === 'function'
+    ) {
+      const unwrapped = await resolved;
+      if (typeof unwrapped === 'string') {
+        return unwrapped;
+      }
+    }
+    throw new TypeError(`System.resolve(${name}) did not return a URL`);
+  };
+
+  if (typeof System !== 'undefined') {
+    const [vueUrl, routerUrl] = await Promise.all([
+      resolveSystemUrl('vue'),
+      resolveSystemUrl('vue-router'),
+    ]);
+    System.set(vueUrl, Vue);
+    System.set(routerUrl, VueRouter);
+  }
+  runApp([VueTextFormat, gridLayout, ComponentsRegister, UserRegister], {
+    getAuthGuard: () => new StaticAuthGuard(),
+    userRoutes,
+  });
+}
+
+bootstrap().catch(error => {
+  setTimeout(() => {
+    throw error;
+  });
 });

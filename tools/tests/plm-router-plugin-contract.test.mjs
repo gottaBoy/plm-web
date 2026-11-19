@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import ts from 'typescript';
+import vm from 'node:vm';
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -39,16 +41,46 @@ function readPluginFile(plugin, relativeFile) {
   );
 }
 
-test('host shares Vue and vue-router with SystemJS before bootstrapping', () => {
+test('host shares Vue and vue-router with SystemJS before bootstrapping', async () => {
   const main = readFileSync(path.join(ROOT, 'src', 'main.ts'), 'utf8');
   assert.match(main, /import \* as Vue from ['"]vue['"]/);
   assert.match(main, /import \* as VueRouter from ['"]vue-router['"]/);
   assert.match(main, /System\.set\(System\.resolve\('vue'\), Vue\)|System\.set\(vueUrl, Vue\)/);
   assert.match(main, /System\.set\(System\.resolve\('vue-router'\), VueRouter\)|System\.set\(routerUrl, VueRouter\)/);
-  assert.ok(
-    main.indexOf('System.set(routerUrl, VueRouter)') < main.indexOf('runApp(['),
-    'router registration must happen before runApp',
-  );
+  const ast = ts.createSourceFile('main.ts', main, ts.ScriptTarget.Latest, true);
+  const bootstrap = ast.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === 'bootstrap');
+  assert.ok(bootstrap, 'execute the real bootstrap, including module resolution');
+  const source = ts.transpileModule(`${bootstrap.getText(ast)}\nmodule.exports = bootstrap;`, {
+    compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS },
+  }).outputText;
+  for (const asyncResolve of [false, true, 'nested']) {
+    const calls = [];
+    const vue = {}, router = {};
+    const sandbox = {
+      module: { exports: {} }, Vue: vue, VueRouter: router,
+      VueTextFormat: {}, gridLayout: {}, ComponentsRegister: {}, UserRegister: {},
+      StaticAuthGuard: class {}, userRoutes: [],
+      System: {
+        resolve: name => {
+          const url = `https://host.invalid/${name}`;
+          if (asyncResolve === 'nested') return Promise.resolve(Promise.resolve(url));
+          return asyncResolve ? Promise.resolve(url) : url;
+        },
+        set: (url, namespace) => {
+          assert.equal(typeof url, 'string', 'System.set must never receive a Promise');
+          calls.push(['set', url, namespace]);
+        },
+      },
+      runApp: () => calls.push(['runApp']),
+    };
+    vm.runInNewContext(source, sandbox);
+    await sandbox.module.exports();
+    assert.deepEqual(calls, [
+      ['set', 'https://host.invalid/vue', vue],
+      ['set', 'https://host.invalid/vue-router', router],
+      ['runApp'],
+    ]);
+  }
 });
 
 test('router-dependent PLM plugins externalize vue-router in source builds', () => {
