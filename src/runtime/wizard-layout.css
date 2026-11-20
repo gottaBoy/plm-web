@@ -1,0 +1,104 @@
+@media (max-width: 767px) {
+  .ibiz-modal:has(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    ) {
+    min-width: 0;
+    max-width: calc(100vw - 16px);
+  }
+
+  :is(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    ) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :is(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    .ibiz-control-viewlayoutpanel {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  :is(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    :is(
+      .ibiz-row,
+      .ibiz-col,
+      .ibiz-control-wizardpanel,
+      .ibiz-control-wizardpanel__content,
+      .el-step
+    ) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :is(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    .el-step__title {
+    padding: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  :is(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    :is(
+      .ibiz-control-wizardpanel-header--title,
+      .template-name,
+      .template-desc,
+      .template-tips
+    ) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .ibiz-modal:has(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    .el-dialog__headerbtn {
+    top: 4px;
+    right: 4px;
+    z-index: 5;
+  }
+
+  .ibiz-modal:has(
+      .ibiz-view--product_create_wizard_view,
+      .ibiz-view--project_create_wizard_view,
+      .ibiz-view--library_create_wizard_view,
+      .ibiz-view--space_create_wizard_view
+    )
+    .el-dialog__headerbtn
+    .el-dialog__close {
+    color: var(--ibiz-color-text-2);
+  }
+}

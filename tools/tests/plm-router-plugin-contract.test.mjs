@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
@@ -11,6 +12,7 @@ const ROOT = path.resolve(
   '..',
   '..',
 );
+const require = createRequire(import.meta.url);
 
 const plugins = [
   {
@@ -26,6 +28,27 @@ const plugins = [
     version: '0.0.3-alpha.245',
   },
 ];
+
+test('bootstrap stylesheet imports resolve in a clean source checkout', () => {
+  const filename = path.join(ROOT, 'src', 'main.ts');
+  const ast = ts.createSourceFile(
+    filename,
+    readFileSync(filename, 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+  );
+  const styles = ast.statements
+    .filter(node => ts.isImportDeclaration(node) &&
+      node.moduleSpecifier.text.endsWith('.css'))
+    .map(node => node.moduleSpecifier.text);
+  assert.ok(styles.length > 0);
+  for (const name of styles) {
+    const file = name.startsWith('@/')
+      ? path.join(ROOT, 'src', name.slice(2))
+      : path.resolve(path.dirname(filename), name);
+    assert.ok(existsSync(file), `Bootstrap stylesheet is absent: ${name}`);
+  }
+});
 
 function readPluginFile(plugin, relativeFile) {
   return readFileSync(
@@ -81,6 +104,76 @@ test('host shares Vue and vue-router with SystemJS before bootstrapping', async 
       ['runApp'],
     ]);
   }
+});
+
+test('real SystemJS registry receives resolved namespaces before the application starts', async () => {
+  const { System: system, applyImportMap, setBaseUrl } = require('systemjs');
+  const registry = new system.constructor();
+  const base = 'https://plm-bootstrap.invalid/';
+  setBaseUrl(registry, base);
+  applyImportMap(registry, {
+    imports: { vue: './vue.js', 'vue-router': './vue-router.js' },
+  }, base);
+  const resolve = registry.resolve.bind(registry);
+  registry.resolve = name => Promise.resolve(resolve(name));
+  const filename = path.join(ROOT, 'src/main.ts');
+  const ast = ts.createSourceFile(filename, readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true);
+  const bootstrap = ast.statements.find(node =>
+    ts.isFunctionDeclaration(node) && node.name?.text === 'bootstrap');
+  assert.ok(bootstrap);
+  const output = ts.transpileModule(`${bootstrap.getText(ast)}\nmodule.exports = bootstrap;`, {
+    compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS },
+  }).outputText;
+  const vue = { hostVue: {} };
+  const router = { hostRouter: {} };
+  let starts = 0;
+  const sandbox = {
+    module: { exports: {} }, System: registry, Vue: vue, VueRouter: router,
+    VueTextFormat: {}, gridLayout: {}, ComponentsRegister: {}, UserRegister: {},
+    StaticAuthGuard: class {}, userRoutes: [],
+    runApp: () => {
+      assert.equal(registry.get(`${base}vue.js`).hostVue, vue.hostVue);
+      assert.equal(registry.get(`${base}vue-router.js`).hostRouter, router.hostRouter);
+      starts += 1;
+    },
+  };
+  vm.runInNewContext(output, sandbox);
+  await sandbox.module.exports();
+  assert.equal(starts, 1);
+  assert.deepEqual([...registry.entries()].map(([url]) => url).sort(),
+    [`${base}vue-router.js`, `${base}vue.js`]);
+});
+
+test('failed or non-URL SystemJS resolution cannot partially register or start the application', async () => {
+  const filename = path.join(ROOT, 'src/main.ts');
+  const ast = ts.createSourceFile(filename, readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true);
+  const bootstrap = ast.statements.find(node =>
+    ts.isFunctionDeclaration(node) && node.name?.text === 'bootstrap');
+  assert.ok(bootstrap);
+  const output = ts.transpileModule(`${bootstrap.getText(ast)}\nmodule.exports = bootstrap;`, {
+    compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS },
+  }).outputText;
+  for (const invalid of [undefined, null, false, {}, 42]) {
+    const calls = [];
+    const sandbox = {
+      module: { exports: {} }, Vue: {}, VueRouter: {},
+      System: {
+        resolve: name => name === 'vue' ? 'https://host.invalid/vue' : Promise.resolve(invalid),
+        set: () => calls.push('set'),
+      },
+      runApp: () => calls.push('start'),
+    };
+    vm.runInNewContext(output, sandbox);
+    await assert.rejects(sandbox.module.exports(), /did not return a URL/);
+    assert.deepEqual(calls, []);
+  }
+  const failure = new Error('import map failed');
+  const sandbox = {
+    module: { exports: {} },
+    System: { resolve: () => Promise.reject(failure) },
+  };
+  vm.runInNewContext(output, sandbox);
+  await assert.rejects(sandbox.module.exports(), error => error === failure);
 });
 
 test('router-dependent PLM plugins externalize vue-router in source builds', () => {
