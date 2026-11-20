@@ -18,9 +18,10 @@ export const PlmLanguageSwitch = defineComponent({
   },
   setup(props) {
     const language = normalizePlmLanguage(ibiz.i18n.getLang());
-    const collapsed = computed(
-      () => props.controller.panel.view.state.isCollapse === true,
-    );
+    const collapsed = computed(() => {
+      const { state } = props.controller.panel.view;
+      return 'isCollapse' in state && state.isCollapse === true;
+    });
     const change = (value: string): void => {
       if ((value === 'zh-CN' || value === 'en') && value !== language) {
         ibiz.i18n.setLang(value);
