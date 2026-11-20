@@ -10,6 +10,13 @@ import { fileURLToPath } from 'node:url';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const appPath = '/ibizplm-plmweb/';
+const apiPrefix = '/api/ibizplm__plmweb';
+const bootstrapRequests = new Set([
+  `GET ${apiPrefix}/appdata`,
+  `GET ${apiPrefix}/uaa/getbydcsystem/ibizplm`,
+  `POST ${apiPrefix}/v7/login`,
+  `POST ${apiPrefix}/v7/logout`,
+]);
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const mime = {
   '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript',
@@ -33,14 +40,24 @@ export async function treeInventory(root, prefix = '') {
   return files.sort((a, b) => a.path.localeCompare(b.path));
 }
 
-export function isAllowedPlmQuery(method, pathname) {
-  if (!pathname.startsWith('/api/ibizplm__plmweb/')) return false;
-  if (['GET', 'HEAD', 'OPTIONS'].includes(method)) return true;
-  if (method !== 'POST') return false;
-  return /\/fetch_[a-z0-9_]+$/.test(pathname) ||
-    pathname === '/api/ibizplm__plmweb/v7/login' ||
-    pathname === '/api/ibizplm__plmweb/v7/logout' ||
-    /^\/api\/ibizplm__plmweb\/products\/[^/]+\/product_index_addon_counter$/.test(pathname);
+function validReadRequest({ method, pathname } = {}) {
+  if (!['GET', 'POST'].includes(method) || typeof pathname !== 'string' ||
+    !pathname.startsWith(`${apiPrefix}/`) || /[%\\?#\s]/.test(pathname)) return false;
+  const segments = pathname.slice(apiPrefix.length + 1).split('/');
+  if (segments.some(segment => !/^[a-zA-Z0-9_-]+$/.test(segment))) return false;
+  if (['portal', 'uaa', 'v7', 'ibizutil', 'webhooks', 'extension'].includes(segments[0])) return false;
+  const reserved = ['getdraft', 'get_draft', 'save', 'checkkey', 'check_key',
+    'remove', 'create', 'update', 'delete'];
+  return method === 'GET'
+    ? segments.length === 2 && !reserved.includes(segments[1].toLowerCase()) &&
+      !segments[1].toLowerCase().startsWith('fetch_')
+    : segments.length >= 2 && /^fetch_[a-z0-9_]+$/.test(segments.at(-1));
+}
+
+export function isAllowedPlmQuery(method, pathname, reviewedReads = []) {
+  if (bootstrapRequests.has(`${method} ${pathname}`)) return true;
+  return reviewedReads.some(read => validReadRequest(read) &&
+    read.method === method && read.pathname === pathname);
 }
 
 async function contained(root, relative) {
@@ -138,8 +155,8 @@ export async function buildPlmHostSource(output) {
   await mkdir(destination);
   const before = await treeInventory(path.join(project, 'dist'));
   const sourceBefore = await treeInventory(path.join(project, 'src'));
-  // Load Vite through its CommonJS entry so its legacy terser worker retains
-  // a Node `require` under ESM callers (Node 24 otherwise breaks vite:terser).
+  // A file-based CLI avoids inheriting an ESM --input-type flag in the
+  // CommonJS legacy minifier worker.
   const viteCli = path.join(project, 'node_modules/vite/bin/vite.js');
   await new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [
@@ -164,8 +181,11 @@ export async function buildPlmHostSource(output) {
   console.log(`Fresh application candidate: ${destination}`);
 }
 
-export async function createPlmCandidateServer({ dist, upstream, log = () => {} }) {
+export async function createPlmCandidateServer({ dist, upstream, reviewedReads = [], log = () => {} }) {
   dist = await realpath(dist);
+  assert.ok(Array.isArray(reviewedReads) && reviewedReads.every(validReadRequest),
+    'Candidate read requests must be exact, reviewed business read paths');
+  const reads = reviewedReads.map(({ method, pathname }) => ({ method, pathname }));
   const target = new URL(upstream);
   assert.ok(target.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(target.hostname) &&
     !target.username && !target.password && target.pathname === '/' && !target.search && !target.hash,
@@ -180,19 +200,25 @@ export async function createPlmCandidateServer({ dist, upstream, log = () => {} 
       const host = new URL(`http://${request.headers.host}`);
       assert.ok(['127.0.0.1', 'localhost'].includes(host.hostname));
       assert.ok(!request.headers.origin || request.headers.origin === host.origin);
+      assert.ok(request.url.startsWith('/') && !request.url.startsWith('//') &&
+        !/[\\#]/.test(request.url));
       url = new URL(request.url, 'http://candidate.invalid');
       assert.equal(url.origin, 'http://candidate.invalid');
+      assert.equal(request.url.split('?')[0], url.pathname, 'Normalized request paths are not admitted');
     } catch {
       respond(response, 403, { code: 'CANDIDATE_ORIGIN_DENIED' });
       return;
     }
     response.once('finish', () => { void log({ method: request.method, path: url.pathname, status: response.statusCode }); });
     if (url.pathname === '/__candidate/health') {
-      respond(response, 200, { mockedRuntime: false, backendIsolated: false, explicitMutationsBlocked: true, deployed: false });
+      respond(response, 200, {
+        mockedRuntime: false, backendIsolated: false, explicitMutationsBlocked: true,
+        authenticationExceptions: true, explicitBusinessReadCount: reads.length, deployed: false,
+      });
       return;
     }
     if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/ibizutil/')) {
-      if (!isAllowedPlmQuery(request.method, url.pathname)) {
+      if (!isAllowedPlmQuery(request.method, url.pathname, reads)) {
         respond(response, 403, { code: 'CANDIDATE_READ_ONLY', message: 'Business mutations and uploads are blocked.' });
         return;
       }

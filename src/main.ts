@@ -53,8 +53,14 @@ async function bootstrap(): Promise<void> {
     System.set(vueUrl, Vue);
     System.set(routerUrl, VueRouter);
   }
-  runApp([VueTextFormat, gridLayout, ComponentsRegister, UserRegister], {
-    getAuthGuard: () => new StaticAuthGuard(),
+  let authGuard: StaticAuthGuard | undefined;
+  await runApp([VueTextFormat, gridLayout, ComponentsRegister, UserRegister], {
+    getAuthGuard: () => {
+      authGuard = new StaticAuthGuard();
+      return authGuard;
+    },
+    getLoginRedirect: (returnUrl: string) =>
+      authGuard?.getLoginRedirect(returnUrl),
     userRoutes,
   });
 }

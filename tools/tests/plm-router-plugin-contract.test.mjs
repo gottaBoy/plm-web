@@ -176,6 +176,39 @@ test('failed or non-URL SystemJS resolution cannot partially register or start t
   await assert.rejects(sandbox.module.exports(), error => error === failure);
 });
 
+test('PLM explicitly connects its same custom guard to pre-login redirection', async () => {
+  const filename = path.join(ROOT, 'src/main.ts');
+  const ast = ts.createSourceFile(filename, readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true);
+  const bootstrap = ast.statements.find(node =>
+    ts.isFunctionDeclaration(node) && node.name?.text === 'bootstrap');
+  const source = ts.transpileModule(`${bootstrap.getText(ast)}\nmodule.exports = bootstrap;`, {
+    compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS },
+  }).outputText;
+  let created = 0;
+  let selected;
+  const sandbox = {
+    module: { exports: {} },
+    VueTextFormat: {}, gridLayout: {}, ComponentsRegister: {}, UserRegister: {},
+    userRoutes: [],
+    StaticAuthGuard: class {
+      constructor() { created += 1; }
+      getLoginRedirect(url) {
+        assert.equal(this, selected, 'use the actual custom guard, not another instance');
+        return { path: '/login', query: { ru: url } };
+      }
+    },
+    runApp: async (_plugins, options) => {
+      assert.equal(created, 0, 'the host initializes core before constructing the guard');
+      selected = options.getAuthGuard();
+      assert.equal(created, 1);
+      assert.deepEqual(options.getLoginRedirect('/-/index/-').query, { ru: '/-/index/-' });
+    },
+  };
+  vm.runInNewContext(source, sandbox);
+  await sandbox.module.exports();
+  assert.equal(created, 1);
+});
+
 test('router-dependent PLM plugins externalize vue-router in source builds', () => {
   for (const plugin of plugins) {
     const config = readFileSync(
