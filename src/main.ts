@@ -12,6 +12,7 @@ import { userRoutes } from './router';
 import '@/publish/sys.css';
 import './runtime/router-shell.css';
 import './runtime/list-toolbar.css';
+import './runtime/view-theme-layout.css';
 import './runtime/login-layout.css';
 import './runtime/wizard-layout.css';
 

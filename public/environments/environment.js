@@ -13,7 +13,7 @@ window.Environment = {
   logLevel: 'ERROR',
   BaseUrl: '/api',
   hub: true,
-  enableMqtt: false,
+  enableMqtt: true,
   mqttUrl: '/portal/mqtt/mqtt',
   enableAnonymous: false,
   anonymousUser: '',
