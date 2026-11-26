@@ -17,6 +17,7 @@ import {
 
 import { renderTextPhoto, stringToHexColor } from './comment-list.utils';
 import { CommentListComtroller } from './comment-list.controller';
+import { commentListText, formatCommentTime } from './comment-list.locale';
 
 type CommentItem = IData & {
   id?: string;
@@ -115,7 +116,10 @@ const CommentList = defineComponent({
           d = s;
         if (c) {
           const { label: h, iconurl: f } = c.data;
-          (d = h), f ? (o = renderAvatarImage(f)) : (o = renderTextPhoto(h));
+          (d = h),
+            f && !failedAvatars.value.includes(f)
+              ? (o = renderAvatarImage(f))
+              : (o = renderTextPhoto(h));
         } else o = renderTextPhoto(s);
         return createVNode(
           'div',
@@ -141,26 +145,6 @@ const CommentList = defineComponent({
           ],
         );
       },
-      formatCommentTime = (s: string | undefined) => {
-        if (!s) return;
-        const c = s.split(' ');
-        if (c.length === 2) {
-          const o = c[0].split('-'),
-            d = /* @__PURE__ */ new Date(),
-            h = d.getFullYear() - Number(o[0]),
-            f = d.getMonth() + 1 - Number(o[1]),
-            v = d.getDate() - Number(o[2]);
-          if (h === 0) {
-            if (f === 0) {
-              if (v === 0) return '今天 '.concat(s.slice(11, -3));
-              if (v === 1) return '昨天 '.concat(s.slice(11, -3));
-              if (v === 2) return '前天 '.concat(s.slice(11, -3));
-            }
-            return s.slice(5, -3);
-          }
-          return s.slice(0, -3);
-        }
-      },
       onEditComment = (s: CommentItem) => {
         controller.updateComment(s);
       },
@@ -183,7 +167,7 @@ const CommentList = defineComponent({
                   {
                     class: namespace.em('item', 'time'),
                   },
-                  [formatCommentTime(s.create_time)],
+                  [formatCommentTime(s.create_time, ibiz.i18n.getLang())],
                 ),
                 s.create_man === controller.context.srfuserid
                   ? createVNode('div', null, [
@@ -192,7 +176,7 @@ const CommentList = defineComponent({
                         {
                           class: namespace.em('item', 'edit'),
                           onClick: () => onEditComment(s),
-                          title: '编辑',
+                          title: commentListText('Edit', '编辑'),
                         },
                         [
                           createVNode(
@@ -210,7 +194,7 @@ const CommentList = defineComponent({
                         {
                           class: namespace.em('item', 'delicon'),
                           onClick: () => onDeleteComment(s),
-                          title: '删除',
+                          title: commentListText('Delete', '删除'),
                         },
                         [
                           createVNode(
