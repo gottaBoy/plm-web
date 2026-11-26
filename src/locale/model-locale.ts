@@ -19,6 +19,8 @@ export const displayKeys = new Set([
   'finishCaption',
   'cancelCaption',
   'ruleInfo',
+  'confirmMsg',
+  'successMsg',
 ]);
 
 export function normalizePlmLanguage(
