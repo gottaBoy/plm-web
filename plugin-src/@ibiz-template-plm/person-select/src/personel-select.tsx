@@ -21,6 +21,7 @@ import {
 import { PersonelSelectController } from './personel-select-controller';
 import { Util } from './util';
 import { VirtualList } from './virtual-list';
+import { personSelectText } from './personel-select.locale';
 
 function isVNodeLike(value: unknown): value is VNode {
   return typeof value === 'function' || (typeof value === 'object' && value !== null);
@@ -71,6 +72,7 @@ export const PersonelSelect = defineComponent({
     const curValue = ref<string | null>(null);
     const valueText = ref('');
     const loading = ref(false);
+    const loadFailed = ref(false);
     const isFocus = ref(false);
     const searchValue = ref('');
     const selectedValues = ref<string[]>([]);
@@ -202,6 +204,7 @@ export const PersonelSelect = defineComponent({
       const tab = activeTab.value;
       const query = searchValue.value;
       loading.value = true;
+      loadFailed.value = false;
       try {
         const res = await c.loadMore(
           props.data,
@@ -213,6 +216,11 @@ export const PersonelSelect = defineComponent({
         if (res?.data && version === loadVersion &&
           tab === activeTab.value && query === searchValue.value) {
           items.value = reset ? res.data : items.value.concat(res.data);
+        }
+      } catch {
+        if (version === loadVersion &&
+          tab === activeTab.value && query === searchValue.value) {
+          loadFailed.value = true;
         }
       } finally {
         if (version === loadVersion) loading.value = false;
@@ -428,7 +436,7 @@ export const PersonelSelect = defineComponent({
 
     const renderNoSelectValue = (empty = false): VNode => {
       if (empty) {
-        return <div>暂无数据</div>;
+        return <div>{personSelectText('No Data', '暂无数据')}</div>;
       }
       return (
         <div class={ns.e('no-select-value')}>
@@ -439,7 +447,17 @@ export const PersonelSelect = defineComponent({
 
     const renderPersonList = (): VNode => {
       if (loading.value) {
-        return <div class={ns.e('loadmore')}>加载中...</div>;
+        return <div class={ns.e('loadmore')}>{personSelectText('Loading...', '加载中...')}</div>;
+      }
+      if (loadFailed.value) {
+        return (
+          <div class={ns.e('loadmore')}>
+            <span role="alert">{personSelectText('Failed to load', '加载失败')}</span>
+            <button type="button" onClick={() => load(false)}>
+              {personSelectText('Retry', '重试')}
+            </button>
+          </div>
+        );
       }
       if (!items.value.length) {
         return renderNoSelectValue(true);
@@ -492,7 +510,7 @@ export const PersonelSelect = defineComponent({
           onUpdate:modelValue={(value: string) => {
             searchValue.value = value;
           }}
-          placeholder="搜索"
+          placeholder={personSelectText('Search', '搜索')}
           clearable
         />
       );
@@ -526,7 +544,7 @@ export const PersonelSelect = defineComponent({
                     void load(true);
                   }}
                 >
-                  人员
+                  {personSelectText('People', '人员')}
                 </div>
                 <div
                   class={ns.e('select-state-select-department')}
@@ -535,7 +553,7 @@ export const PersonelSelect = defineComponent({
                     void load(true);
                   }}
                 >
-                  部门
+                  {personSelectText('Departments', '部门')}
                 </div>
               </div>
             )}
@@ -553,7 +571,7 @@ export const PersonelSelect = defineComponent({
           </div>
           {c.enableBottomButton && (
             <div class={ns.e('select-modal-bottom')}>
-              <ElPopover>确定</ElPopover>
+              <ElPopover>{personSelectText('Confirm', '确定')}</ElPopover>
             </div>
           )}
         </div>

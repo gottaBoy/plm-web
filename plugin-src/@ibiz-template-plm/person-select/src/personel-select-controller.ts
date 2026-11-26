@@ -14,6 +14,7 @@ import type {
   IUIActionGroupDetail,
 } from '@ibiz/model-core';
 import type { IHttpResponse, IViewConfig } from './types';
+import { personSelectText } from './personel-select.locale';
 
 /**
  * Source recovered from the published ESM bundle.
@@ -532,7 +533,7 @@ export class PersonelSelectController extends EditorController<IPicker> {
     if (url) {
     return await ibiz.net.request(url, config) as IHttpResponse;
     }
-    throw new RuntimeModelError(this.model, '请配置数据接口地址');
+    throw new RuntimeModelError(this.model, personSelectText('Configure a data interface URL', '请配置数据接口地址'));
   }
 
   async openPickUpView(
@@ -549,7 +550,7 @@ export class PersonelSelectController extends EditorController<IPicker> {
       params.selectedData = selectedData;
     }
     if (!this.pickupView) {
-      throw new RuntimeModelError(this.model, '请配置数据选择视图');
+      throw new RuntimeModelError(this.model, personSelectText('Configure a data selection view', '请配置数据选择视图'));
     }
     const result = (await ibiz.commands.execute(
       OpenAppViewCommand.TAG,
@@ -577,7 +578,7 @@ export class PersonelSelectController extends EditorController<IPicker> {
     );
     const { linkAppViewId } = this.model;
     if (!linkAppViewId) {
-      throw new RuntimeModelError(this.model, '请配置数据链接视图');
+      throw new RuntimeModelError(this.model, personSelectText('Configure a data link view', '请配置数据链接视图'));
     }
     return ibiz.commands.execute(
       OpenAppViewCommand.TAG,
