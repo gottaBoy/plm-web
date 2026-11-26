@@ -4,7 +4,7 @@ import { normalizePlmLanguage, translatePlmLabel } from './model-locale';
 
 const installed = new WeakSet<object>();
 
-/** Localize only model-defined main-state labels, not users or custom options. */
+/** Localize exact model-defined dynamic options, never people or custom labels. */
 export function installPlmCodeListLocale(
   service: IAppService['codeList'],
   getLanguage: () => string,
@@ -30,7 +30,6 @@ export function installPlmCodeListLocale(
     if (
       normalizePlmLanguage(language) !== 'en' ||
       model?.codeListType !== 'DYNAMIC' ||
-      model.predefinedType !== 'DEMAINSTATE' ||
       !model.codeItems?.length
     ) {
       return items;
@@ -45,7 +44,15 @@ export function installPlmCodeListLocale(
             translatePlmLabel(item.text, language),
       );
       return definition
-        ? { ...item, text: translatePlmLabel(item.text, language) }
+        ? Object.create(Object.getPrototypeOf(item), {
+            ...Object.getOwnPropertyDescriptors(item),
+            text: {
+              value: translatePlmLabel(item.text, language),
+              enumerable: true,
+              configurable: true,
+              writable: true,
+            },
+          })
         : item;
     });
   };
