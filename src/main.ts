@@ -15,6 +15,7 @@ import './runtime/list-toolbar.css';
 import './runtime/view-theme-layout.css';
 import './runtime/login-layout.css';
 import './runtime/wizard-layout.css';
+import './runtime/development-layout.css';
 
 // AppHooks.appResorceInited.tap((ctx: IApiAppHubService) => {
 //   ctx.microAppConfigCenter.registerMicroApps([

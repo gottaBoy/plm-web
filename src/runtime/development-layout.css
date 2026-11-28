@@ -1,0 +1,17 @@
+@media (max-width: 767px) {
+  .second_dev_tab_style .ibiz-panel-view-header {
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .second_dev_tab_style .ibiz-panel-view-header > .ibiz-row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .second_dev_tab_style .ibiz-panel-view-header > .ibiz-row > .ibiz-col {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+}
