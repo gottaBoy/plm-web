@@ -1,12 +1,12 @@
 @media (max-width: 767px) {
   .ibiz-view--ps_core_prd_func_second_dev_tav_exp_view .ibiz-panel-view-header {
-    height: auto;
+    height: auto !important;
     flex-shrink: 0;
   }
 
   .ibiz-view--ps_core_prd_func_second_dev_tav_exp_view .ibiz-panel-view-header > .ibiz-row {
-    flex-direction: column;
-    height: auto;
+    flex-direction: column !important;
+    height: auto !important;
   }
 
   .ibiz-view--ps_core_prd_func_second_dev_tav_exp_view .ibiz-panel-view-header > .ibiz-row > .ibiz-col {
